@@ -7,6 +7,6 @@ class Application:
     def __init__(self):
         pass
 
-@app.route('/')
+@Application.app.route('/')
 def home():
     return render_template("test.html")

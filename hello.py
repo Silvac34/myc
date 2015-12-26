@@ -31,3 +31,21 @@ class Application:
 @Application.app.route('/')
 def home():
     return render_template("test.html")
+
+"""
+API
+"""
+
+# Get all signatures
+@Application.app.route('/api/meals', methods=['GET'])
+def get_all_meals():
+    return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
+
+
+####################################################################################
+
+
+if __name__ == "__main__":
+#    DevData.populate_database() #to populate the database in development environment
+    Application.app.debug = True
+    Application.app.run(host='0.0.0.0')

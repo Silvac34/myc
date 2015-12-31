@@ -54,6 +54,7 @@ sudo npm install npm -g
 install the dependencies by entering this command in the project directory within the VM
 ```
 npm install
+bower install
 ```
 
 ##Step 3 : Start Mongodb
@@ -71,6 +72,13 @@ heroku create
 git push heroku master
 ```
 
+##Step 5 : Launch the app
+enter the following command in the project directory inside the guest machine
+```
+python app/api.py
+```
+
+The app will be available at http://localhost:8081/
 
 You're good to go!!!!
 

@@ -1,23 +1,295 @@
-First you have to download vagrant at http://vagrantup.com
+#SharEat Project
+
+##Step 1 - Install Vagrant
+Download and set up vagrant http://vagrantup.com
+Make sure that it is on your PATH
+
 Once it is downloaded and on your PATH, execute the following command in
 the project's directory
 
+```
 vagrant up
+```
 
-To connect to the vagrant VM you just launched, enter the following command
+You will be able to connect to the virtual machine with the following command:
+```
 vagrant ssh
+```
+to access the shared folder (ie the project directory) from within the VM use the following
+command
+```
+cd /vagrant
+```
+
+##Step 2 - Installing Node.js and NPM
+
+#For Windows OS
+If you are hosting the virtual machine on a Windows OS machine then you will have
+to install Nodejs on the host machine. (NPM won't work if the host computer is running
+on a Windows OS. It's du to a shortcoming of Vagrant )
+
+Install Node.js and NPM globally
+Make sure you have NPM on your PATH.
+
+Once it is installed, run the following command in the project's directory and on the host computer
+```
+npm install
+```
+#For Mac and linux based OS
+from the project directory, connect to the VM with
+```
+vagrant ssh
+```
 
 Once in the VM, type the following to go to your project root directory within the VM
+```
 cd /vagrant
+```
+install Nodejs and NPM with the following commands
+```
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo npm install npm -g
+```
+install the dependencies by entering this command in the project directory within the VM
+```
+npm install
+```
 
-To start Mongodb
+##Step 3 : Start Mongodb
+Enter in the guest machine
+```
 sudo service mongod start
+```
 
+##Step 4 : Deploying to heroku
 If you want to deploy the app to heroku:
-1) Make sure you install heroku and have heroku on your PATH
-
+1) Make sure you install heroku and have heroku on your PATH (either on the host
+  or the guest machine)
+```
 heroku create
-
 git push heroku master
+```
+
 
 You're good to go!!!!
+
+## Directory Layout
+
+```
+app/                    --> all of the source files for the application
+  app.css               --> default stylesheet
+  components/           --> all app specific modules
+    version/              --> version related components
+      version.js                 --> version module declaration and basic "version" value service
+      version_test.js            --> "version" value service tests
+      version-directive.js       --> custom directive that returns the current app version
+      version-directive_test.js  --> version directive tests
+      interpolate-filter.js      --> custom interpolation filter
+      interpolate-filter_test.js --> interpolate filter tests
+  view1/                --> the view1 view template and logic
+    view1.html            --> the partial template
+    view1.js              --> the controller logic
+    view1_test.js         --> tests of the controller
+  view2/                --> the view2 view template and logic
+    view2.html            --> the partial template
+    view2.js              --> the controller logic
+    view2_test.js         --> tests of the controller
+  app.js                --> main application module
+  index.html            --> app layout file (the main html template file of the app)
+  index-async.html      --> just like index.html, but loads js files asynchronously
+karma.conf.js         --> config file for running unit tests with Karma
+e2e-tests/            --> end-to-end tests
+  protractor-conf.js    --> Protractor config file
+  scenarios.js          --> end-to-end scenarios to be run by Protractor
+```
+
+## Testing
+
+There are two kinds of tests in the angular-seed application: Unit tests and End to End tests.
+
+### Running Unit Tests
+
+The angular-seed app comes preconfigured with unit tests. These are written in
+[Jasmine][jasmine], which we run with the [Karma Test Runner][karma]. We provide a Karma
+configuration file to run them.
+
+* the configuration is found at `karma.conf.js`
+* the unit tests are found next to the code they are testing and are named as `..._test.js`.
+
+The easiest way to run the unit tests is to use the supplied npm script:
+
+```
+npm test
+```
+
+This script will start the Karma test runner to execute the unit tests. Moreover, Karma will sit and
+watch the source and test files for changes and then re-run the tests whenever any of them change.
+This is the recommended strategy; if your unit tests are being run every time you save a file then
+you receive instant feedback on any changes that break the expected code functionality.
+
+You can also ask Karma to do a single run of the tests and then exit.  This is useful if you want to
+check that a particular version of the code is operating as expected.  The project contains a
+predefined script to do this:
+
+```
+npm run test-single-run
+```
+
+
+### End to end testing
+
+The angular-seed app comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
+are run with the [Protractor][protractor] End-to-End test runner.  It uses native events and has
+special features for Angular applications.
+
+* the configuration is found at `e2e-tests/protractor-conf.js`
+* the end-to-end tests are found in `e2e-tests/scenarios.js`
+
+Protractor simulates interaction with our web app and verifies that the application responds
+correctly. Therefore, our web server needs to be serving up the application, so that Protractor
+can interact with it.
+
+```
+npm start
+```
+
+In addition, since Protractor is built upon WebDriver we need to install this.  The angular-seed
+project comes with a predefined script to do this:
+
+```
+npm run update-webdriver
+```
+
+This will download and install the latest version of the stand-alone WebDriver tool.
+
+Once you have ensured that the development web server hosting our application is up and running
+and WebDriver is updated, you can run the end-to-end tests using the supplied npm script:
+
+```
+npm run protractor
+```
+
+This script will execute the end-to-end tests against the application being hosted on the
+development server.
+
+
+## Updating Angular
+
+Previously we recommended that you merge in changes to angular-seed into your own fork of the project.
+Now that the angular framework library code and tools are acquired through package managers (npm and
+bower) you can use these tools instead to update the dependencies.
+
+You can update the tool dependencies by running:
+
+```
+npm update
+```
+
+This will find the latest versions that match the version ranges specified in the `package.json` file.
+
+You can update the Angular dependencies by running:
+
+```
+bower update
+```
+
+This will find the latest versions that match the version ranges specified in the `bower.json` file.
+
+
+## Loading Angular Asynchronously
+
+The angular-seed project supports loading the framework and application scripts asynchronously.  The
+special `index-async.html` is designed to support this style of loading.  For it to work you must
+inject a piece of Angular JavaScript into the HTML page.  The project has a predefined script to help
+do this.
+
+```
+npm run update-index-async
+```
+
+This will copy the contents of the `angular-loader.js` library file into the `index-async.html` page.
+You can run this every time you update the version of Angular that you are using.
+
+
+## Serving the Application Files
+
+While angular is client-side-only technology and it's possible to create angular webapps that
+don't require a backend server at all, we recommend serving the project files using a local
+webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
+sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
+etc to function properly when an html page is opened via `file://` scheme instead of `http://`.
+
+
+### Running the App during Development
+
+The angular-seed project comes preconfigured with a local development webserver.  It is a node.js
+tool called [http-server][http-server].  You can start this webserver with `npm start` but you may choose to
+install the tool globally:
+
+```
+sudo npm install -g http-server
+```
+
+Then you can start your own development web server to serve static files from a folder by
+running:
+
+```
+http-server -a localhost -p 8000
+```
+
+Alternatively, you can choose to configure your own webserver, such as apache or nginx. Just
+configure your server to serve the files under the `app/` directory.
+
+
+### Running the App in Production
+
+This really depends on how complex your app is and the overall infrastructure of your system, but
+the general rule is that all you need in production are all the files under the `app/` directory.
+Everything else should be omitted.
+
+Angular apps are really just a bunch of static html, css and js files that just need to be hosted
+somewhere they can be accessed by browsers.
+
+If your Angular app is talking to the backend server via xhr or other means, you need to figure
+out what is the best way to host the static files to comply with the same origin policy if
+applicable. Usually this is done by hosting the files by the backend server or through
+reverse-proxying the backend server(s) and webserver(s).
+
+
+## Continuous Integration
+
+### Travis CI
+
+[Travis CI][travis] is a continuous integration service, which can monitor GitHub for new commits
+to your repository and execute scripts such as building the app or running tests. The angular-seed
+project contains a Travis configuration file, `.travis.yml`, which will cause Travis to run your
+tests when you push to GitHub.
+
+You will need to enable the integration between Travis and GitHub. See the Travis website for more
+instruction on how to do this.
+
+### CloudBees
+
+CloudBees have provided a CI/deployment setup:
+
+<a href="https://grandcentral.cloudbees.com/?CB_clickstart=https://raw.github.com/CloudBees-community/angular-js-clickstart/master/clickstart.json">
+<img src="https://d3ko533tu1ozfq.cloudfront.net/clickstart/deployInstantly.png"/></a>
+
+If you run this, you will get a cloned version of this repo to start working on in a private git repo,
+along with a CI service (in Jenkins) hosted that will run unit and end to end tests in both Firefox and Chrome.
+
+
+## Contact
+
+For more information on AngularJS please check out http://angularjs.org/
+
+[git]: http://git-scm.com/
+[bower]: http://bower.io
+[npm]: https://www.npmjs.org/
+[node]: http://nodejs.org
+[protractor]: https://github.com/angular/protractor
+[jasmine]: http://jasmine.github.io
+[karma]: http://karma-runner.github.io
+[travis]: https://travis-ci.org/
+[http-server]: https://github.com/nodeapps/http-server

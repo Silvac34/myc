@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import json
 import DevData
 from flask import Flask, Response, render_template, request
 from pymongo import MongoClient, cursor
@@ -31,10 +31,12 @@ class Application:
                     o["_id"] = str(o["_id"]["$oid"])
         return o
 
+#@Application.app.route('/')
+#def home():
+#    return render_template("test.html")
 @Application.app.route('/')
 def home():
-    return render_template("test.html")
-
+    return render_template("index.html")
 """
 API
 """
@@ -49,6 +51,6 @@ def get_all_meals():
 
 
 if __name__ == "__main__":
-#    DevData.populate_database() #to populate the database in development environment
+    DevData.populate_database() #to populate the database in development environment
     Application.app.debug = True
     Application.app.run(host='0.0.0.0')

@@ -1,6 +1,8 @@
+cd /vagrant
 #To install Node.js wich is necessary to use NPM
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
+##curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+##sudo apt-get install -y nodejs
+##sudo npm install
 
 #To install Mongodb
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -11,6 +13,5 @@ sudo apt-get install -y mongodb-org
 #To install all the Python dependencies
 sudo apt-get update
 sudo apt-get install -y python-pip
-cd /vagrant
 sudo pip install flask
 sudo pip install pymongo

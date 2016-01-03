@@ -15,5 +15,11 @@ angular.module('myApp.view1', ['ngRoute'])
       $http.get('/api/meals').success(function (data) {
           $scope.meals = data;
       })
+}
 
-}}]);
+  $scope.createMeal = function () {
+    $http.post('/api/meal');
+    $scope.loadMeals();
+  }
+
+}]);

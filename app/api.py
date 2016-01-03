@@ -31,21 +31,32 @@ class Application:
                     o["_id"] = str(o["_id"]["$oid"])
         return o
 
-#@Application.app.route('/')
-#def home():
-#    return render_template("test.html")
 @Application.app.route('/')
 def home():
     return render_template("index.html")
+
+
 """
 API
 """
 
-# Get all signatures
+# Get all meals
 @Application.app.route('/api/meals', methods=['GET'])
 def get_all_meals():
     return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
 
+# Insert one meal
+@Application.app.route('/api/meal', methods=["POST"])
+def insert_one_meal():
+#    if request.data == "" or request.data == "{}" or request.data is None:
+#        return ""
+    new_meal = {
+    "date":"test",
+    "location": "test1",
+    "label":"test2"
+    }
+    id_inserted = Application.db.meals.insert(new_meal)
+    return Response(dumps(Application.preprocess_id(Application.db.meals.find_one({"_id": ObjectId(id_inserted)}))), status=200)
 
 ####################################################################################
 

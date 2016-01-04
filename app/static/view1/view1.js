@@ -22,6 +22,10 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.loadMeals();
   }
 
+$scope.updateMeal = function (meal){
+    $http.put('/api/meal',meal)
+  }
+
   $scope.deleteMeal = function(meal_id){
     $http.delete('/api/meal/'+ meal_id).success(function(){
       for (var i in $scope.meals)

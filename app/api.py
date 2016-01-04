@@ -53,10 +53,18 @@ def insert_one_meal():
     id_inserted = Application.db.meals.insert(json.loads(request.data))
     return Response(dumps(Application.preprocess_id(Application.db.meals.find_one({"_id": ObjectId(id_inserted)}))), status=200)
 
-# Delete one meal
+# Delete one meal from ID
 @Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
 def delete_meal(meal_id):
     Application.db.meals.remove({"_id": ObjectId(meal_id)})
+    return ""
+
+# Update one meal from ID
+@Application.app.route("/api/meal/<meal_id>", methods=['PUT'])
+def update_one_meal(meal_id):
+    if request.data == "" or request.data == "{}" or request.data is None:
+        return ""
+    Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":json.loads(request.data)})
     return ""
 
 ####################################################################################

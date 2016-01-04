@@ -78,7 +78,7 @@ enter the following command in the project directory inside the guest machine
 python app/api.py
 ```
 
-The app will be available at http://localhost:8081/
+The app will be available at http://localhost:1234/
 
 You're good to go!!!!
 

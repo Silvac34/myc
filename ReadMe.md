@@ -63,16 +63,13 @@ Enter in the guest machine
 sudo service mongod start
 ```
 
-##Step 4 : Deploying to heroku
-If you want to deploy the app to heroku:
-1) Make sure you install heroku and have heroku on your PATH (either on the host
-  or the guest machine)
+If you want to populate the database, you sould enter the following command in
+your project directory
 ```
-heroku create
-git push heroku master
+python app/DevData.py
 ```
 
-##Step 5 : Launch the app
+##Step 4 : Launch the app
 enter the following command in the project directory inside the guest machine
 ```
 python app/api.py
@@ -81,6 +78,8 @@ python app/api.py
 The app will be available at http://localhost:1234/
 
 You're good to go!!!!
+
+
 
 ## Directory Layout
 

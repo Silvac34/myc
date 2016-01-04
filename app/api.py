@@ -48,20 +48,21 @@ def get_all_meals():
 # Insert one meal
 @Application.app.route('/api/meal', methods=["POST"])
 def insert_one_meal():
-#    if request.data == "" or request.data == "{}" or request.data is None:
-#        return ""
-    new_meal = {
-    "date":"test",
-    "location": "test1",
-    "label":"test2"
-    }
-    id_inserted = Application.db.meals.insert(new_meal)
+    if request.data == "" or request.data == "{}" or request.data is None:
+        return ""
+#    new_meal = {
+#    "date":"test",
+#    "location": "test1",
+#    "label":"test2"
+#    }
+    #new_meal = request.data
+    id_inserted = Application.db.meals.insert(json.loads(request.data))
     return Response(dumps(Application.preprocess_id(Application.db.meals.find_one({"_id": ObjectId(id_inserted)}))), status=200)
 
 ####################################################################################
 
 
 if __name__ == "__main__":
-    DevData.populate_database() #to populate the database in development environment
+    #DevData.populate_database() #to populate the database in development environment
     Application.app.debug = True
     Application.app.run(host='0.0.0.0')

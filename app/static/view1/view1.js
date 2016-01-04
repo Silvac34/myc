@@ -12,14 +12,16 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', ['$scope', '$http',function($scope, $http) {
 
   $scope.loadMeals = function () {
-      $http.get('/api/meals').success(function (data) {
-          $scope.meals = data;
-      })
-}
+    $http.get('/api/meals').success(function (data) {
+      $scope.meals = data;
+    })
+  }
 
-  $scope.createMeal = function () {
-    $http.post('/api/meal');
+  $scope.createMeal = function (meal) {
+    $http.post('/api/meal',meal);
     $scope.loadMeals();
   }
+
+  $scope.loadMeals();
 
 }]);

@@ -14,6 +14,7 @@ sudo apt-get install -y mongodb-org
 sudo apt-get update
 sudo apt-get install -y python-pip
 sudo pip install flask
+sudo pip install gunicorn
 sudo pip install pymongo
 
 #install heroku

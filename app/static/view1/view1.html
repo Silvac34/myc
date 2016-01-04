@@ -80,11 +80,11 @@
           </thead>
           <tbody>
             <tr ng-repeat="meal in meals">
-              <!--<td ng-model="nbMeals = nbMeals + 1">{{nbMeals}}</td>-->
               <td>{{$index}}</td>
               <td>{{meal.label}}</td>
               <td>{{meal.date}}</td>
               <td>{{meal.location}}</td>
+              <td><button type="button" class="btn btn-danger" ng-click="deleteMeal(meal._id)">Supprimer le repas</button></td>
             </tr>
           </tbody>
         </table>

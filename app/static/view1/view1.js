@@ -22,6 +22,17 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.loadMeals();
   }
 
+  $scope.deleteMeal = function(meal_id){
+    $http.delete('/api/meal/'+ meal_id).success(function(){
+      for (var i in $scope.meals)
+      {if ($scope.meals[i]._id == meal_id)
+        {$scope.meals.splice(i, 1);
+          break;
+          alert($scope.meals[i].label)}
+        }});
+
+      }
+
   $scope.loadMeals();
 
 }]);

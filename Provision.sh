@@ -15,3 +15,6 @@ sudo apt-get update
 sudo apt-get install -y python-pip
 sudo pip install flask
 sudo pip install pymongo
+
+#install heroku
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh

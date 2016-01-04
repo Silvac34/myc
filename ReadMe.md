@@ -80,7 +80,6 @@ The app will be available at http://localhost:1234/
 You're good to go!!!!
 
 
-
 ## Directory Layout
 
 ```

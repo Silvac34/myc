@@ -79,6 +79,15 @@ The app will be available at http://localhost:1234/
 
 You're good to go!!!!
 
+heroku
+
+heroku ps:scale web=1
+
+heroku buildpacks:set heroku/python
+heroku buildpacks:add --index 2 heroku/nodejs
+
+heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git
+
 
 ## Directory Layout
 

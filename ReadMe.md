@@ -80,16 +80,40 @@ The app will be available at http://localhost:1234/
 You're good to go!!!!
 
 ##Extra step : Deploy the app to Heroku
+
+#First deployment
+
 You first have to create a Heroku account
 
+Then enter the following command in your project's directory (on your guest machine)
+```
 heroku login
+```
+Heroku will ask you about your credential
 
+You then have to enter the following command to create an Heroku app, and provide it
+with the proper environment (buildpacks)
+```
 heroku create
+```
+```
 heroku buildpacks:set heroku/python
 heroku buildpacks:add --index 2 heroku/nodejs
+```
+Once all this is done you'll be able to deploy the app to Heroku
 
-heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git
+#Deploy the app
+From the your project Directory, and within your guest machine enter this command:
+```
+git push heroku master
+```
+The app shall compile and launch
+
+Sometimes you have to enter the following command :
+```
 heroku ps:scale web=1
+```
+
 
 ## Directory Layout
 

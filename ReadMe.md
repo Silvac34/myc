@@ -79,15 +79,17 @@ The app will be available at http://localhost:1234/
 
 You're good to go!!!!
 
-heroku
+##Extra step : Deploy the app to Heroku
+You first have to create a Heroku account
 
-heroku ps:scale web=1
+heroku login
 
+heroku create
 heroku buildpacks:set heroku/python
 heroku buildpacks:add --index 2 heroku/nodejs
 
 heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git
-
+heroku ps:scale web=1
 
 ## Directory Layout
 

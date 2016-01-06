@@ -115,6 +115,7 @@ Then get your database as a service URI :
 ```
 heroku config | grep MONGOLAB_URI
 ```
+test
 and paste it in the api.py file in the mongolab_uri=""
 
 #Deploy the app

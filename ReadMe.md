@@ -26,7 +26,7 @@ cd /vagrant
 #For Windows OS
 If you are hosting the virtual machine on a Windows OS machine then you will have
 to install Nodejs on the host machine. (NPM won't work if the host computer is running
-on a Windows OS. It's du to a shortcoming of Vagrant )
+on a Windows OS. It's due to a shortcoming of Vagrant )
 
 Install Node.js and NPM globally
 Make sure you have NPM on your PATH.
@@ -105,6 +105,7 @@ you'll have to register your credit card information.
 ```
 heroku addons:create mongolab:sandbox
 ```
+If you want to connect to
 heroku config | grep MONGOLAB_URI
 
 mongodb://heroku_dnnkp4sr:6s6svorb6cdq990q4i0kaoar1t@ds039185.mongolab.com:39185/heroku_dnnkp4sr

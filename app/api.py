@@ -6,9 +6,18 @@ from pymongo import MongoClient, cursor
 from bson import ObjectId
 from bson.json_util import dumps
 
+mongolab_uri= "mongodb://heroku_dnnkp4sr:6s6svorb6cdq990q4i0kaoar1t@ds039185.mongolab.com:39185/heroku_dnnkp4sr"
+
 class Application:
     app = Flask(__name__)
-    db = MongoClient('localhost')['Shrt']
+    client = MongoClient(mongolab_uri,
+                         connectTimeoutMS=30000,
+                         socketTimeoutMS=None,
+                         socketKeepAlive=True)
+
+    db = client.get_default_database()
+#    print db.collection_names()
+#    db = MongoClient('localhost')['Shrt']
 
     def __init__(self):
         pass

@@ -69,7 +69,7 @@ your project directory
 python app/DevData.py
 ```
 
-##Step 4 : Launch the app
+##Step 4 : Launch the app in your dev environment
 enter the following command in the project directory inside the guest machine
 ```
 python app/api.py
@@ -100,6 +100,15 @@ heroku create
 heroku buildpacks:set heroku/python
 heroku buildpacks:add --index 2 heroku/nodejs
 ```
+You then need to add the mongolab add-on. Unfortunately, even though it's free,
+you'll have to register your credit card information.
+```
+heroku addons:create mongolab:sandbox
+```
+heroku config | grep MONGOLAB_URI
+
+mongodb://heroku_dnnkp4sr:6s6svorb6cdq990q4i0kaoar1t@ds039185.mongolab.com:39185/heroku_dnnkp4sr
+
 Once all this is done you'll be able to deploy the app to Heroku
 
 #Deploy the app

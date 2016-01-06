@@ -13,7 +13,7 @@ class Application:
     client = MongoClient(mongolab_uri,
                          connectTimeoutMS=30000,
                          socketTimeoutMS=None,
-                         socketKeepAlive=True)['Shrt']
+                         socketKeepAlive=True)
 
     db = client.get_default_database()
 #    db = MongoClient('localhost')['Shrt']

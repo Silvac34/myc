@@ -100,17 +100,21 @@ heroku create
 heroku buildpacks:set heroku/python
 heroku buildpacks:add --index 2 heroku/nodejs
 ```
-You then need to add the mongolab add-on. Unfortunately, even though it's free,
+Once all this is done you'll be able to deploy the app to Heroku
+
+#If you want to connect it with your own database as a service
+
+You first have to add the mongolab add-on. Unfortunately, even though it's free,
 you'll have to register your credit card information.
 ```
 heroku addons:create mongolab:sandbox
 ```
-If you want to connect to
+
+Then get your database as a service URI :
+```
 heroku config | grep MONGOLAB_URI
-
-mongodb://heroku_dnnkp4sr:6s6svorb6cdq990q4i0kaoar1t@ds039185.mongolab.com:39185/heroku_dnnkp4sr
-
-Once all this is done you'll be able to deploy the app to Heroku
+```
+and paste it in the api.py file in the mongolab_uri=""
 
 #Deploy the app
 From the your project Directory, and within your guest machine enter this command:

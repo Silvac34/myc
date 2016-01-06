@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 import json
 import DevData
+import os
 from flask import Flask, Response, render_template, request
 from pymongo import MongoClient, cursor
 from bson import ObjectId
 from bson.json_util import dumps
-
-MONGOLAB_URI= "mongodb://heroku_dnnkp4sr:6s6svorb6cdq990q4i0kaoar1t@ds039185.mongolab.com:39185/heroku_dnnkp4sr"
+import config
 
 class Application:
     app = Flask(__name__)
-    client = MongoClient(MONGOLAB_URI,
-                         connectTimeoutMS=30000,
-                         socketTimeoutMS=None,
-                         socketKeepAlive=True)
+    app.config.from_object(os.environ['APP_SETTINGS'])
 
+    client = MongoClient(app.config['MONGOLAB_URI'],
+                            connectTimeoutMS=30000,
+                            socketTimeoutMS=None,
+                            socketKeepAlive=True)
     db = client.get_default_database()
-#    db = MongoClient('localhost')['Shrt']
 
     def __init__(self):
         pass
@@ -80,5 +80,5 @@ def update_one_meal(meal_id):
 
 if __name__ == "__main__":
     #DevData.populate_database() #to populate the database in development environment
-    Application.app.debug = True
+    #Application.app.debug = True
     Application.app.run(host='0.0.0.0')

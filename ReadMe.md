@@ -1,4 +1,4 @@
-#SharEat Project
+###SharEat Project
 
 ##Step 1 - Install Vagrant
 Download and set up vagrant http://vagrantup.com
@@ -79,9 +79,9 @@ The app will be available at http://localhost:1234/
 
 You're good to go!!!!
 
-##Extra step : Deploy the app to Heroku
+##Extra step : Deploy the app to the staging and the Production Environments
 
-#First deployment
+#First deployment - Setting up the staging environments
 
 You first have to create a Heroku account
 
@@ -91,45 +91,77 @@ heroku login
 ```
 Heroku will ask you about your credential
 
+We are first going to create the staging environment.
+
 You then have to enter the following command to create an Heroku app, and provide it
 with the proper environment (buildpacks)
-```
-heroku create
-```
-```
-heroku buildpacks:set heroku/python
-heroku buildpacks:add --index 2 heroku/nodejs
-```
-Once all this is done you'll be able to deploy the app to Heroku with a predefined
-database
 
-#If you want to connect it with your own database as a service
-
-You first have to add the mongolab add-on. Unfortunately, even though it's free,
+```
+heroku create shareat123-stage
+heroku buildpacks:set heroku/python --app shareat123-stage
+heroku buildpacks:add --index 2 heroku/nodejs --app shareat123-stage
+```
+The following command set the environment variable so that we know that we are
+in the staging environment
+```
+heroku config:set APP_SETTINGS=config.StagingConfig --app shareat123-stage
+```
+You will then have to add the mongolab add-on. Unfortunately, even though it's free,
 you'll have to register your credit card information.
 ```
-heroku addons:create mongolab:sandbox
+heroku addons:create mongolab:sandbox --app shareat123-stage
 ```
-
 Then get your database as a service URI :
 ```
-heroku config | grep MONGOLAB_URI
+heroku config | grep MONGOLAB_URI --app shareat123-stage
 ```
-test
-and paste it in the api.py file in the mongolab_uri=""
+You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
+file
+
+#First deployment - Setting up the production environments
+
+Same thing as for the staging environment
+
+You then have to enter the following command to create an Heroku app, and provide it
+with the proper environment (buildpacks)
+
+```
+heroku create shareat123-prod
+heroku buildpacks:set heroku/python --app shareat123-prod
+heroku buildpacks:add --index 2 heroku/nodejs --app shareat123-prod
+```
+The following command set the environment variable so that we know that we are
+in the staging environment
+```
+heroku config:set APP_SETTINGS=config.ProductionConfig --app shareat123-prod
+```
+You will then have to add the mongolab add-on
+```
+heroku addons:create mongolab:sandbox --app shareat123-prod
+```
+Then get your database as a service URI :
+```
+heroku config | grep MONGOLAB_URI --app shareat123-prod
+```
+You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
+file
 
 #Deploy the app
-From the your project Directory, and within your guest machine enter this command:
+From your project directory
+To deploy the app to the staging environment:
 ```
-git push heroku master
+git remote add stage git@heroku.com:shareat123-stage.git
+git push stage master
 ```
-The app shall compile and launch
+Your app will be available at https://shareat123-stage.herokuapp.com
 
-Sometimes you have to enter the following command :
-```
-heroku ps:scale web=1
-```
 
+To deploy the app to the production environment
+```
+git remote add prod git@heroku.com:shareat123-prod.git
+git push prod master
+```
+Your app will be available at https://shareat123-prod.herokuapp.com
 
 ## Directory Layout
 

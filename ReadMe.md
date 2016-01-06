@@ -113,7 +113,7 @@ heroku addons:create mongolab:sandbox --app shareat123-stage
 ```
 Then get your database as a service URI :
 ```
-heroku config | grep MONGOLAB_URI --app shareat123-stage
+heroku config --app shareat123-stage | grep MONGOLAB_URI
 ```
 You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
 file
@@ -141,7 +141,7 @@ heroku addons:create mongolab:sandbox --app shareat123-prod
 ```
 Then get your database as a service URI :
 ```
-heroku config | grep MONGOLAB_URI --app shareat123-prod
+heroku config --app shareat123-prod| grep MONGOLAB_URI
 ```
 You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
 file

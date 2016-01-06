@@ -13,10 +13,9 @@ class Application:
     client = MongoClient(mongolab_uri,
                          connectTimeoutMS=30000,
                          socketTimeoutMS=None,
-                         socketKeepAlive=True)
+                         socketKeepAlive=True)['Shrt']
 
     db = client.get_default_database()
-#    print db.collection_names()
 #    db = MongoClient('localhost')['Shrt']
 
     def __init__(self):

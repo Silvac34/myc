@@ -100,7 +100,8 @@ heroku create
 heroku buildpacks:set heroku/python
 heroku buildpacks:add --index 2 heroku/nodejs
 ```
-Once all this is done you'll be able to deploy the app to Heroku
+Once all this is done you'll be able to deploy the app to Heroku with a predefined
+database
 
 #If you want to connect it with your own database as a service
 

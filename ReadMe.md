@@ -163,6 +163,21 @@ git push prod master
 ```
 Your app will be available at https://shareat123-prod.herokuapp.com
 
+##Development Workflow :
+
+#Git repository and branches :
+- Master : La dernière version stable du code (le code aura été testé sur l’environnement de staging).
+- Prod : Le code déployé dans l’environnement de production
+- DevKev :  Branche de dev de Kevin. Il ne fusionnera cette branche avec le Master qu’après avoir tester le code sur l’environnement de staging.
+- DevDim :  Branche de dev de Dimitri. Il ne fusionnera cette branche avec le Master qu’après avoir tester le code sur l’environnement de staging.
+# Development and commit workflow :
+
+-	Je développe une fonctionnalité sur ma branche DevKev
+-	Une fois qu’elle marche je la teste sur l’environnement de staging
+-	Je mets à jour ma branche avec le master git merge master et je gère les éventuels conflits
+-	Enfin je fusionne mon travaille avec le master git merge DevKev
+
+
 ## Directory Layout
 
 ```

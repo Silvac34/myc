@@ -22,3 +22,5 @@ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 #To set the environment variable that says that it is a development environment
 echo "export APP_SETTINGS=DevelopmentConfig" >> ~/.profile
+
+#export HTTP_PROXY=http://fr-proxy.groupinfra.com:3128

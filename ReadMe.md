@@ -151,7 +151,7 @@ From your project directory
 To deploy the app to the staging environment:
 ```
 git remote add stage git@heroku.com:shareat123-stage.git
-git push stage master
+git push stage DevKev master
 ```
 Your app will be available at https://shareat123-stage.herokuapp.com
 

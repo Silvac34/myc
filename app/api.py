@@ -46,6 +46,10 @@ class Application:
 @Application.app.route('/')
 def home():
     return render_template("index.html")
+@Application.app.route('/fb')
+def fb():
+    return render_template("fb.html")
+
 
 
 """

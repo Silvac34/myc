@@ -6,14 +6,16 @@ from flask import Flask, Response, render_template, request
 from pymongo import MongoClient, cursor
 from bson import ObjectId
 from bson.json_util import dumps
-import config
+import configure
+
+
 
 class Application:
     app = Flask(__name__)
-    app.config.from_object(os.environ.get('APP_SETTINGS')) #ne marche pas avec gunicorn
-
-    print(os.environ.get('APP_SETTINGSSS'))
-    #app.config.from_object(config.DevelopmentConfig)
+    #Load the environment's configuration (depends on the environment variable APP_SETTINGS)
+    configEnv = getattr(configure, os.environ.get('APP_SETTINGS'))()
+    app.config.from_object(configEnv)
+    #To add the database. The database depends on the environment
     client = MongoClient(app.config['MONGOLAB_URI'],
                             connectTimeoutMS=30000,
                             socketTimeoutMS=None,

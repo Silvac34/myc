@@ -1,4 +1,4 @@
-
+#Contains the project environments' configuration
 class Config(object):
     DEBUG = False
     TESTING = False

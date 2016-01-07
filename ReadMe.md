@@ -104,7 +104,7 @@ heroku buildpacks:add --index 2 heroku/nodejs --app shareat123-stage
 The following command set the environment variable so that we know that we are
 in the staging environment
 ```
-heroku config:set APP_SETTINGS=config.StagingConfig --app shareat123-stage
+heroku config:set APP_SETTINGS=StagingConfig --app shareat123-stage
 ```
 You will then have to add the mongolab add-on. Unfortunately, even though it's free,
 you'll have to register your credit card information.
@@ -133,7 +133,7 @@ heroku buildpacks:add --index 2 heroku/nodejs --app shareat123-prod
 The following command set the environment variable so that we know that we are
 in the staging environment
 ```
-heroku config:set APP_SETTINGS=config.ProductionConfig --app shareat123-prod
+heroku config:set APP_SETTINGS=ProductionConfig --app shareat123-prod
 ```
 You will then have to add the mongolab add-on
 ```

@@ -10,8 +10,10 @@ import config
 
 class Application:
     app = Flask(__name__)
-    app.config.from_object(os.environ['APP_SETTINGS'])
+    app.config.from_object(os.environ.get('APP_SETTINGS')) #ne marche pas avec gunicorn
 
+    print(os.environ.get('APP_SETTINGSSS'))
+    #app.config.from_object(config.DevelopmentConfig)
     client = MongoClient(app.config['MONGOLAB_URI'],
                             connectTimeoutMS=30000,
                             socketTimeoutMS=None,

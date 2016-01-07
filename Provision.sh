@@ -21,4 +21,5 @@ sudo pip install pymongo
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 #To set the environment variable that says that it is a development environment
+#echo "export APP_SETTINGS=config.DevelopmentConfig" >> ~/.profile
 echo "export APP_SETTINGS=config.DevelopmentConfig" >> ~/.profile

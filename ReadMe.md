@@ -147,6 +147,7 @@ You will have to paste this URI in the MONGOLAB_URI variable inside the config.p
 file
 
 #Deploy the app
+
 From your project directory
 To deploy the app to the staging environment:
 ```

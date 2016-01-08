@@ -175,9 +175,17 @@ Your app will be available at https://shareat123-prod.herokuapp.com
 
 -	Je développe une fonctionnalité sur ma branche DevKev
 -	Une fois qu’elle marche je la teste sur l’environnement de staging
--	Je mets à jour ma branche avec le master git merge master et je gère les éventuels conflits
--	Enfin je fusionne mon travaille avec le master git merge DevKev
-
+```
+git push stage DevKev:master
+```
+-	Je mets à jour ma branche avec le master et je gère les éventuels conflits
+```
+git merge master
+```
+-	Enfin je fusionne mon travaille avec le master
+```
+git merge DevKev
+```
 
 ## Directory Layout
 

@@ -21,7 +21,7 @@ class TestAPI(unittest.TestCase):
                                 connectTimeoutMS=30000,
                                 socketTimeoutMS=None,
                                 socketKeepAlive=True)
-        Application.db = client.test
+        Application.db = client
 
     def tearDown(self):
         Application.db.meals.drop()

@@ -23,27 +23,10 @@ class TestAPI(unittest.TestCase):
         client = MongoClient('localhost')
         client.drop_database('Shrt_test')
 
-    def test_preprocess_id(self):
-        o1 = {"_id": ObjectId("54e62c53f99210d7ec385497")}
-        o1 = Application.preprocess_id(o1)
-        o2 = {"_id": "54e62c53f99210d7ec385497"}
-        o2 = Application.preprocess_id(o2)
-        id_inserted = Application.db.meals.insert({"test": "test"})
-        id_inserted2 = Application.db.meals.insert({"test": "test2"})
-        t = Application.db.meals.find()
-        t = Application.preprocess_id(t)
-        self.assertEqual("54e62c53f99210d7ec385497", o1["_id"])
-        self.assertEqual("54e62c53f99210d7ec385497", o2["_id"])
-        self.assertEqual("{\"_id\": \"54e62c53f99210d7ec385497\"}", dumps(o1))
-        self.assertEqual(str(id_inserted), t[0]["_id"])
-        self.assertEqual(str(id_inserted2), t[1]["_id"])
-        self.assertEqual([], Application.preprocess_id([]))
-        self.assertEqual("null", Application.preprocess_id("null"))
-
     def test_insert_meal(self):
         resp = self.client.post("/api/meal", data="{\"super\":\"toto\"}")
         self.assertEqual("200 OK", resp.status)
-        inserted = dumps(Application.preprocess_id(Application.db.meals.find_one({"super": "toto"})))
+        inserted = dumps(Application.db.meals.find_one({"super": "toto"}))
         self.assertEqual(inserted, resp.data)
 
     def test_insert_empty_meal(self):
@@ -75,6 +58,29 @@ class TestAPI(unittest.TestCase):
         resp2 = self.client.delete("/api/meal/"+str(me2['_id']))
         self.assertEqual("202 ACCEPTED", resp2.status)
         self.assertEqual(resp2.data, '0 meal deleted')
+        self.assertEqual(me, Application.db.meals.find_one())
+
+    def test_update_one_meal(self):
+        Application.db.meals.insert({"test_update": "test"})
+        me =Application.db.meals.find_one()
+        resp1 = self.client.put("/api/meal/"+str(me['_id']),data="{\"test_update\":\"toto\"}")
+        me2 = Application.db.meals.find_one()
+        me['test_update']="toto"
+        self.assertEqual(me2,me)
+        self.assertEqual("200 OK", resp1.status)
+        self.assertEqual(resp1.data, '1 meal modified')
+        #When the meal don't exist
+        me2 =copy.copy(me)
+        me2['_id']=ObjectId(str(me['_id'])[:-3]+'123')
+        resp2 = self.client.put("/api/meal/"+str(me2['_id']),data="{\"test_update\":\"toto22\"}")
+        self.assertEqual("202 ACCEPTED", resp2.status)
+        self.assertEqual(resp2.data, '0 meal modified')
+        self.assertEqual(me, Application.db.meals.find_one())
+        self.assertEqual(None, Application.db.meals.find_one({"_id":me2['_id']}))
+        #When their is no data
+        resp3 = self.client.put("/api/meal/"+str(me['_id']),data="")
+        self.assertEqual("202 ACCEPTED", resp3.status)
+        self.assertEqual(resp3.data, '0 meal modified')
         self.assertEqual(me, Application.db.meals.find_one())
 
 

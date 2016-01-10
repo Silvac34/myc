@@ -25,23 +25,6 @@ class Application:
     def __init__(self):
         pass
 
-    @classmethod
-    def preprocess_id(cls, o):
-        if o is None or o == "" or o == "null":
-            return o
-        if isinstance(o, cursor.Cursor):
-            o = json.loads(dumps(o))
-        if isinstance(o, list):
-            for i in range(len(o)):
-                o[i] = Application.preprocess_id(o[i])
-            return o
-        if o["_id"]:
-            if isinstance(o["_id"], ObjectId):
-                o["_id"] = str(o["_id"])
-            else:
-                if isinstance(o["_id"], dict):
-                    o["_id"] = str(o["_id"]["$oid"])
-        return o
 
 @Application.app.route('/')
 def home():
@@ -50,8 +33,6 @@ def home():
 def fb():
     return render_template("fb.html")
 
-
-
 """
 API
 """
@@ -59,7 +40,7 @@ API
 # Get all meals
 @Application.app.route('/api/meals', methods=['GET'])
 def get_all_meals():
-    return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
+    return Response(dumps(Application.db.meals.find()), status=200)
 
 # Insert one meal
 @Application.app.route('/api/meal', methods=["POST"])
@@ -68,7 +49,7 @@ def insert_one_meal():
         return ""
     else:
         id_inserted = Application.db.meals.insert(json.loads(request.data))
-        return Response(dumps(Application.preprocess_id(Application.db.meals.find_one({"_id": ObjectId(id_inserted)}))), status=200)
+        return Response(dumps(Application.db.meals.find_one({"_id": ObjectId(id_inserted)})), status=200)
 
 # Delete one meal from ID
 @Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
@@ -83,10 +64,12 @@ def delete_meal(meal_id):
 @Application.app.route("/api/meal/<meal_id>", methods=['PUT'])
 def update_one_meal(meal_id):
     if request.data == "" or request.data == "{}" or request.data is None:
-        return ""
-    Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":json.loads(request.data)})
-    return ""
-
+        return Response('0 meal modified',status=202)
+    result = Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":json.loads(request.data)})
+    if result.matched_count == 1 :
+        return Response(str(result.matched_count) + ' meal modified',status=200)
+    if result.matched_count == 0 :
+        return Response(str(result.matched_count) + ' meal modified',status=202)
 ####################################################################################
 
 

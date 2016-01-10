@@ -21,10 +21,16 @@ class TestAPI(unittest.TestCase):
                                 connectTimeoutMS=30000,
                                 socketTimeoutMS=None,
                                 socketKeepAlive=True)
-        Application.db = client
+        #Application.db = client.get_default_database()
+        Application.db = client.get_database('Shrt_test')
 
     def tearDown(self):
-        Application.db.meals.drop()
+        #Application.db.meals.drop()
+        client = MongoClient(Application.app.config['MONGOLAB_URI'],
+                                        connectTimeoutMS=30000,
+                                        socketTimeoutMS=None,
+                                        socketKeepAlive=True)
+        client.drop_database('Shrt_test')
 
     def test_preprocess_id(self):
         o1 = {"_id": ObjectId("54e62c53f99210d7ec385497")}

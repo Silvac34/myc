@@ -1,4 +1,4 @@
-###SharEat Project
+#SharEat Project
 
 ##Step 1 - Install Vagrant
 Download and set up vagrant http://vagrantup.com
@@ -23,7 +23,7 @@ cd /vagrant
 
 ##Step 2 - Installing Node.js and NPM
 
-#For Windows OS
+###For Windows OS
 If you are hosting the virtual machine on a Windows OS machine then you will have
 to install Nodejs on the host machine. (NPM won't work if the host computer is running
 on a Windows OS. It's due to a shortcoming of Vagrant )
@@ -35,7 +35,7 @@ Once it is installed, run the following command in the project's directory and o
 ```
 npm install
 ```
-#For Mac and linux based OS
+###For Mac and linux based OS
 from the project directory, connect to the VM with
 ```
 vagrant ssh
@@ -81,7 +81,7 @@ You're good to go!!!!
 
 ##Extra step : Deploy the app to the staging and the Production Environments
 
-#First deployment - Setting up the staging environments
+###First deployment - Setting up the staging environments
 
 You first have to create a Heroku account
 
@@ -118,7 +118,7 @@ heroku config --app shareat123-stage | grep MONGOLAB_URI
 You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
 file
 
-#First deployment - Setting up the production environments
+###First deployment - Setting up the production environments
 
 Same thing as for the staging environment
 
@@ -146,7 +146,7 @@ heroku config --app shareat123-prod| grep MONGOLAB_URI
 You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
 file
 
-#Deploy the app
+###Deploy the app
 
 From your project directory
 To deploy the app to the staging environment:
@@ -166,12 +166,12 @@ Your app will be available at https://shareat123-prod.herokuapp.com
 
 ##Development Workflow :
 
-#Git repository and branches :
+###Git repository and branches :
 - Master : La dernière version stable du code (le code aura été testé sur l’environnement de staging).
 - Prod : Le code déployé dans l’environnement de production
 - DevKev :  Branche de dev de Kevin. Il ne fusionnera cette branche avec le Master qu’après avoir tester le code sur l’environnement de staging.
 - DevDim :  Branche de dev de Dimitri. Il ne fusionnera cette branche avec le Master qu’après avoir tester le code sur l’environnement de staging.
-# Development and commit workflow :
+### Development and commit workflow :
 
 -	Je développe une fonctionnalité sur ma branche DevKev
 -	Une fois qu’elle marche je la teste sur l’environnement de staging
@@ -221,7 +221,16 @@ e2e-tests/            --> end-to-end tests
 
 There are two kinds of tests in the angular-seed application: Unit tests and End to End tests.
 
-### Running Unit Tests
+### Running Unit Tests For the Back-End
+The tests use python unittest
+
+Enter the following command in your project directory on the guest machine
+```
+python test/backend_tests/test.py
+```
+For now, the test can only be executed in the development environment
+
+### Running Unit Tests For the Front-End
 
 The angular-seed app comes preconfigured with unit tests. These are written in
 [Jasmine][jasmine], which we run with the [Karma Test Runner][karma]. We provide a Karma

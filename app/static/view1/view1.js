@@ -23,11 +23,11 @@ angular.module('myApp.view1', ['ngRoute'])
   }
 
 $scope.updateMeal = function (meal){
-    $http.put('/api/meal',meal)
+    $http.put('/api/meal/'+ meal._id,meal)
   }
 
   $scope.deleteMeal = function(meal_id){
-    $http.delete('/api/meal/'+ meal_id).success(function(){
+  $http.delete('/api/meal/'+ meal_id).success(function(){
       for (var i in $scope.meals)
       {if ($scope.meals[i]._id == meal_id)
         {$scope.meals.splice(i, 1);

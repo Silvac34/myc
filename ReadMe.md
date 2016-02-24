@@ -93,7 +93,7 @@ Heroku will ask you about your credential
 
 We are first going to create the staging environment.
 
-You then have to enter the following command to create an Heroku app, and provide it
+You have to enter the following command to create an Heroku app, and provide it
 with the proper environment (buildpacks)
 
 ```
@@ -115,7 +115,7 @@ Then get your database as a service URI :
 ```
 heroku config --app shareat123-stage | grep MONGOLAB_URI
 ```
-You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
+You will have to paste this URI in the MONGOLAB_URI variable inside the configure.py
 file
 
 ###First deployment - Setting up the production environments

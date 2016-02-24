@@ -184,7 +184,17 @@ git merge master
 ```
 -	Enfin je fusionne mon travaille avec le master
 ```
+git checkout master
 git merge DevKev
+```
+Et je le partage
+```
+git push origin master
+```
+
+Je peux partager ma branche avec le cloud à n'importe quel moment:
+```
+git pull origin NomBranch
 ```
 
 ## Directory Layout

@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.viewCreateMeal', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'static/view1/view1.html',
-    controller: 'View1Ctrl'
+  $routeProvider.when('/create_meal', {
+    templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
+    controller: 'ViewCreateMealCtrl'
   });
 }])
 
-.controller('View1Ctrl', ['$scope', '$http',function($scope, $http) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http',function($scope, $http) {
 
   $scope.loadMeals = function () {
     $http.get('/api/meals').success(function (data) {

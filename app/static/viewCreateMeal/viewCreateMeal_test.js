@@ -1,10 +1,10 @@
 'use strict';
 
-describe('myApp.view1 module', function() {
+describe('myApp.viewCreateMeal module', function() {
 
-  beforeEach(module('myApp.view1'));
+  beforeEach(module('myApp.viewCreateMeal'));
 
-  describe('View1Ctrl', function(){
+  describe('ViewCreateMealCtrl', function(){
     var $httpBackend, $rootScope, createController;
     beforeEach(inject(function($injector){
       //set up the mock backend service
@@ -14,7 +14,7 @@ describe('myApp.view1 module', function() {
       // The $controller service is used to create instances of controllers
       var $controller = $injector.get('$controller');
       createController = function() {
-        return $controller('View1Ctrl', {'$scope' : $rootScope });
+        return $controller('ViewCreateMealCtrl', {'$scope' : $rootScope });
       }
 
     }));

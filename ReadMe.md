@@ -201,30 +201,45 @@ git pull origin NomBranch
 
 ```
 app/                    --> all of the source files for the application
-  app.css               --> default stylesheet
-  components/           --> all app specific modules
-    version/              --> version related components
-      version.js                 --> version module declaration and basic "version" value service
-      version_test.js            --> "version" value service tests
-      version-directive.js       --> custom directive that returns the current app version
-      version-directive_test.js  --> version directive tests
-      interpolate-filter.js      --> custom interpolation filter
-      interpolate-filter_test.js --> interpolate filter tests
-  view1/                --> the view1 view template and logic
-    view1.html            --> the partial template
-    view1.js              --> the controller logic
-    view1_test.js         --> tests of the controller
-  view2/                --> the view2 view template and logic
-    view2.html            --> the partial template
-    view2.js              --> the controller logic
-    view2_test.js         --> tests of the controller
-  app.js                --> main application module
-  index.html            --> app layout file (the main html template file of the app)
-  index-async.html      --> just like index.html, but loads js files asynchronously
+  static/
+    components/           --> all app specific modules
+      version/              --> version related components
+        version.js                 --> version module declaration and basic "version" value service
+        version_test.js            --> "version" value service tests
+        version-directive.js       --> custom directive that returns the current app version
+        version-directive_test.js  --> version directive tests
+        interpolate-filter.js      --> custom interpolation filter
+        interpolate-filter_test.js --> interpolate filter tests
+    css/                            --> all the app's stylesheets
+    viewCreateMeal/                --> the Create meal view template and logic
+      viewCreateMeal.html            --> the partial template
+      viewCreateMeal.js              --> the controller logic
+      viewCreateMeal_test.js         --> tests of the controller
+    viewFbLogin/                --> the facebook login view template and logic
+    viewMeals/                --> the visualisation of meals view template and logic
+    view_test/                --> Juste to keep as a template. Is not used in the app
+    app.js                --> main application module
+  templates/
+    index.html            --> app layout file (the main html template file of the app)
+    index-async.html      --> just like index.html, but loads js files asynchronously
+  _init_.py               --> to create a python module
+  api.py                  --> Python Flask Web App file
+  configure.py            --> holds the configuration settings depending on the environment
+  DevData.py              --> File used to populate the database with mock data (juste for dev purpose)
+test/
+  backend_tests/
+    test.py               --> Unit test for the backend part of the App (Python Flask)
+  e2e-tests/            --> end-to-end tests (NOT YET)
+    protractor-conf.js    --> Protractor config file
+    scenarios.js          --> end-to-end scenarios to be run by Protractor
 karma.conf.js         --> config file for running unit tests with Karma
-e2e-tests/            --> end-to-end tests
-  protractor-conf.js    --> Protractor config file
-  scenarios.js          --> end-to-end scenarios to be run by Protractor
+.gitignore            --> Files to ignore in git
+bower.json            --> bower dependencies
+package.json            --> NPM dependencies
+Procfile              --> File needed for heroku
+Provision.sh          --> File to provision the vagrant VM
+requirements.txt      --> File to declare Python dependencies
+Vagrantfile           --> File to configure the vagrant VM
 ```
 
 ## Testing
@@ -269,7 +284,7 @@ npm run test-single-run
 ```
 
 
-### End to end testing
+### End to end testing (Not used Yet)
 
 The angular-seed app comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
 are run with the [Protractor][protractor] End-to-End test runner.  It uses native events and has

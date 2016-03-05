@@ -2,14 +2,12 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
+  'ui.router',
   'myApp.viewCreateMeal',
   'myApp.viewMeals',
   'myApp.viewMyMeals',
   'myApp.viewFbLogin'
 ]).
-config(['$routeProvider', function($routeProvider) {
-//  $routeProvider.when('/view_fblogin',{redirectTo: '/view_fblogin'})
-//  $routeProvider.when('/view2',{redirectTo: '/view2'})
-  $routeProvider.otherwise({redirectTo: '/view_meals'});
+config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/view_meals');
 }]);

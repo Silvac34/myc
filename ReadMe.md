@@ -217,6 +217,7 @@ app/                    --> all of the source files for the application
       viewCreateMeal_test.js         --> tests of the controller
     viewFbLogin/                --> the facebook login view template and logic
     viewMeals/                --> the visualisation of meals view template and logic
+    viewMyMeals               -->So the user can see and manage the meals he is attending
     view_test/                --> Juste to keep as a template. Is not used in the app
     app.js                --> main application module
   templates/
@@ -226,6 +227,7 @@ app/                    --> all of the source files for the application
   api.py                  --> Python Flask Web App file
   configure.py            --> holds the configuration settings depending on the environment
   DevData.py              --> File used to populate the database with mock data (juste for dev purpose)
+  DatataModel_example_file.json    --> It is not used in the app, it is here to illustrate the app's data model
 test/
   backend_tests/
     test.py               --> Unit test for the backend part of the App (Python Flask)

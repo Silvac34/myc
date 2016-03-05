@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../static/css/app.css">
   <link rel="stylesheet" href="../static/css/bootstrap.css">
   <script src="../static/bower_components/angular/angular.js"></script>
-  <script src="../static/bower_components/angular-route/angular-route.js"></script>
+  <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="../static/app.js"></script>
   <script src="../static/viewCreateMeal/viewCreateMeal.js"></script>
   <script src="../static/viewMeals/viewMeals.js"></script>
@@ -27,13 +27,13 @@
 
 
   <ul class="menu">
-    <li><a href="#/create_meal">Create a Meal</a></li>
-    <li><a href="#/view_meals">Suscribe to a Meal</a></li>
-    <li><a href="#/my_meals">My Meals</a></li>
+    <li><a ui-sref="create_meal">Create a Meal</a></li>
+    <li><a ui-sref="view_meals">Suscribe to a Meal</a></li>
+    <li><a ui-sref="my_meals">My Meals</a></li>
   </ul>
 
 
-  <div ng-view></div>
+  <div ui-view></div>
 
 </body>
 </html>

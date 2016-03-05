@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('myApp.viewFbLogin', ['ngRoute'])
+angular.module('myApp.viewFbLogin', ['ui.router'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/viewFbLogin', {
-    templateUrl: 'static/viewFbLogin/viewFbLogin.html',
-    controller: 'ViewFblogin'
-  });
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'static/viewFbLogin/viewFbLogin.html',
+        controller: 'ViewFblogin'
+      })
 }])
 
 .controller('ViewFbLogin', [function() {

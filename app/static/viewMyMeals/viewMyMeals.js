@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('myApp.viewMyMeals', ['ngRoute'])
+angular.module('myApp.viewMyMeals', ['ui.router'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/my_meals', {
-    templateUrl: 'static/viewMyMeals/viewMyMeals.html',
-    controller: 'ViewMyMealsCtrl'
-  });
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+      .state('my_meals', {
+        url: '/my_meals',
+        templateUrl: 'static/viewMyMeals/viewMyMeals.html',
+        controller: 'ViewMyMealsCtrl'
+      })
 }])
 
 .controller('ViewMyMealsCtrl', ['$scope','$http',function($scope,$http) {

@@ -1,5 +1,31 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class="col-md-5">
+  <div class="page-header">
+    <h1 id="tables">Liste des repas</h1>
+  </div>
+
+  <div class="bs-component">
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom du repas</th>
+          <th>Date</th>
+          <th>Localisation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="meal in meals" ng-click="$parent.editedMeal = meal">
+          <td>{{$index}}</td>
+          <td>{{meal.label}}</td>
+          <td>{{meal.date}}</td>
+          <td>{{meal.location}}</td>
+          <td>{{meal._id}}</td>
+          <td><button type="button" class="btn btn-danger" ng-click="deleteMeal(meal._id)">Supprimer le repas</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      edited : {{editedMeal.label}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "meals":[{"_id":"01202102002","location":"chez moi", "date": "ddmmyyyy",
+    "label":"repas sympa entre amis", "description":"Nous alons manger des raviolis",
+    "start_time":"1205", "end_time":"2330","admin":[{"_id":"010212023"}], "desired_guests":{
+      "cooks":"5", "cook_helps":"3","washers":"4"},"attending_guests":{
+        "cooks":[{"_id":"010200120"}], "cook_helps":[{"_id":"010200121"}]}
+      }
+    ],
+"users":[{}]
+  }

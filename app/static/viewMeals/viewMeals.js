@@ -4,12 +4,14 @@ angular.module('myApp.viewMeals', ['ui.router'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider
+/*  $stateProvider
       .state('view_meals', {
         url: '/view_meals',
         templateUrl: 'static/viewMeals/viewMeals.html',
-        controller: 'ViewMealsCtrl'
-      })
+        //controller: 'ViewMealsCtrl'
+        controller: 'ViewMealsCtrl',
+        data: {requiredLogin: true}
+      })*/
 }])
 
 .controller('ViewMealsCtrl', ['$scope','$http',function($scope,$http) {
@@ -21,5 +23,16 @@ angular.module('myApp.viewMeals', ['ui.router'])
   }
 
 $scope.loadMeals();
+
+$scope.getUserInfo = function() {
+  $http.get('/user')
+    .then(function (response) {
+      $scope.user = response.data;
+    })
+    .catch(function (response) {
+      console.log("getUserInfo error", response);
+    })
+}
+$scope.getUserInfo();
 
 }]);

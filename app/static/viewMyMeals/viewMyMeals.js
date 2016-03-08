@@ -4,12 +4,12 @@ angular.module('myApp.viewMyMeals', ['ui.router'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider
+  /*$stateProvider
       .state('my_meals', {
         url: '/my_meals',
         templateUrl: 'static/viewMyMeals/viewMyMeals.html',
         controller: 'ViewMyMealsCtrl'
-      })
+      })*/
 }])
 
 .controller('ViewMyMealsCtrl', ['$scope','$http',function($scope,$http) {
@@ -27,5 +27,6 @@ angular.module('myApp.viewMyMeals', ['ui.router'])
           alert($scope.meals[i].label)}
         }});
       }
+
 
 }]);

@@ -2,7 +2,11 @@
 import json
 import DevData
 import os
-from flask import Flask, Response, render_template, request
+import requests
+import jwt
+from jwt import DecodeError, ExpiredSignature
+from datetime import datetime, timedelta
+from flask import Flask, Response, render_template, request, jsonify
 from pymongo import MongoClient, cursor
 from bson import ObjectId
 from bson.json_util import dumps
@@ -43,12 +47,113 @@ class Application:
                     o["_id"] = str(o["_id"]["$oid"])
         return o
 
+class User:
+    def __init__(self,email,password=None,facebook_id=None):
+    #def __init__(self,email,password):
+        self.em=email
+        self.pa=password
+        self.facebook_id = facebook_id
+        #Checks if this user already exist in db. And retreives its _id
+        if Application.db.users.find_one({"email": email}) is None and password is not None:
+            Application.db.users.insert({"email":email,"password":password})
+        elif Application.db.users.find_one({"email": email}) is None and facebook_id is not None:
+            Application.db.users.insert({"email":email,"facebook_id":facebook_id})
+        self._id = str(Application.db.users.find_one({"email": email})["_id"])
+    def token(self):
+        payload = {
+            'sub': self._id,
+            'iat': datetime.utcnow(),
+            'exp': datetime.utcnow() + timedelta(days=14)
+        }
+        token = jwt.encode(payload, Application.app.config['TOKEN_SECRET'])
+        return token.decode('unicode_escape')
+
+
+@Application.app.route('/users', methods=['GET'])
+def get_all_users():
+    return Response(dumps(Application.preprocess_id(Application.db.users.find())), status=200)
+
+@Application.app.route('/user')
+def user_info():
+    # the token is put in the Authorization header
+    if not request.headers.get('Authorization'):
+        return jsonify(error='Authorization header missing'), 401
+    # this header looks like this: “Authorization: Bearer {token}”
+    token = request.headers.get('Authorization').split()[1]
+    try:
+        payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+    except DecodeError:
+        return jsonify(error='Invalid token'), 401
+    except ExpiredSignature:
+        return jsonify(error='Expired token'), 401
+    else:
+        user_id = payload['sub']
+        user = Application.db.users.find_one({"_id": ObjectId(user_id)})
+        if user is None:
+            return jsonify(error='Should not happen ...'), 500
+        #return jsonify(id=user._id, email=user.email), 200
+        return jsonify(_id=str(user["_id"]),email=user["email"]), 200
+    return jsonify(error="never reach here..."), 500
+
+
+@Application.app.route('/auth/facebook', methods=['POST'])
+def auth_facebook():
+    access_token_url = 'https://graph.facebook.com/v2.3/oauth/access_token'
+    graph_api_url = 'https://graph.facebook.com/v2.5/me?fields=id,email'
+    params = {
+        'client_id': request.json['clientId'],
+        'redirect_uri': request.json['redirectUri'],
+        'client_secret': Application.app.config['FACEBOOK_SECRET'],
+        'code': request.json['code']
+    }
+    # Exchange authorization code for access token.
+    r = requests.get(access_token_url, params=params)
+    # use json.loads instead of urlparse.parse_qsl
+    access_token = json.loads(r.text)
+
+    # Step 2. Retrieve information about the current user.
+    r = requests.get(graph_api_url, params=access_token)
+    profile = json.loads(r.text)
+
+    # Step 3. Create a new account or return an existing one.
+    #user = Application.db.users.find_one({"facebook_id": profile['id']})
+    user = User(facebook_id=profile['id'], email=profile['email'])
+    #if user:
+    #    return jsonify(token=user.token())
+
+    #u = User(facebook_id=profile['id'], email=profile['email'])
+    #db.session.add(u)
+    #db.session.commit()
+    return jsonify(token=user.token())
+
+@Application.app.route('/auth/signup', methods=['POST'])
+def signup():
+    data = json.loads(request.data)
+    email = data["email"]
+    password = data["password"]
+    user = User(email=email, password=password)
+    return jsonify(token=user.token())
+
+@Application.app.route('/auth/login', methods=['POST'])
+def login():
+    data = json.loads(request.data)
+    email = data["email"]
+    password = data["password"]
+    user = Application.db.users.find_one({"email":email})
+    if not user:
+        return jsonify(error="No such user"), 404
+    if user["password"] == password:
+        return jsonify(token=User(email).token()), 200
+    else:
+        return jsonify(error="Wrong email or password"), 400
+
+
 @Application.app.route('/')
 def home():
     return render_template("index.html")
-@Application.app.route('/fb')
-def fb():
-    return render_template("fb.html")
+#@Application.app.route('/fb')
+#def fb():
+#    return render_template("fb.html")
 
 """
 API

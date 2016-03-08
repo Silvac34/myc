@@ -21,6 +21,8 @@ class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
     MONGOLAB_URI= 'mongodb://localhost/Shrt'
+    TOKEN_SECRET= 'very_secret'
+    FACEBOOK_SECRET= 'f97f2cc3e469c9675b9d5b9f0b57ba21'
 
 
 class TestingConfig(Config):

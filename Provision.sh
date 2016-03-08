@@ -13,9 +13,7 @@ sudo apt-get install -y mongodb-org
 #To install all the Python dependencies
 sudo apt-get update
 sudo apt-get install -y python-pip
-sudo pip install flask
-sudo pip install gunicorn
-sudo pip install pymongo
+pip install -r requirements.txt
 
 #install heroku
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh

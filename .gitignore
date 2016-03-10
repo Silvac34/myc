@@ -8,3 +8,4 @@ tmp
 .vagrant
 *.pyc
 .bundle/
+.c9

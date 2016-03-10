@@ -16,8 +16,11 @@ class TestAPI(unittest.TestCase):
     def setUp(self):
         Application.app.config['TESTING'] = True
         self.client = Application.app.test_client()
-        client = MongoClient('localhost')
-        Application.db = client.get_database('Shrt_test')
+        client = MongoClient(Application.app.config['MONGOLAB_URI_TEST'],
+                            connectTimeoutMS=30000,
+                            socketTimeoutMS=None,
+                            socketKeepAlive=True)
+        Application.db = client.get_default_database()
 
     def tearDown(self):
         client = MongoClient('localhost')

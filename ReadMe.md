@@ -1,16 +1,16 @@
 #SharEat Project
 
-##Step 1 - Install Vagrant
+##Step 1 - Provide a ubuntu based environment
+
+### If you're using Vagrant
 Download and set up vagrant http://vagrantup.com
 Make sure that it is on your PATH
 
 Once it is downloaded and on your PATH, execute the following command in
 the project's directory
-
 ```
 vagrant up
 ```
-
 You will be able to connect to the virtual machine with the following command:
 ```
 vagrant ssh
@@ -21,61 +21,46 @@ command
 cd /vagrant
 ```
 
-##Step 2 - Installing Node.js and NPM
+##Step2 - Provision the environment
+Once you have an Ubuntu environment set up, enter the following command
+from your project's root directory
+```
+chmod +x ./Provision.sh
+./Provision.sh
+```
+It will provision the development environment with everything it needs: it's
+our development stack
+When a new module is added, it is safe to enter
+```
+./Provision.sh
+```
+to make sure that the development stack contains everything it should
 
-###For Windows OS
-If you are hosting the virtual machine on a Windows OS machine then you will have
-to install Nodejs on the host machine. (NPM won't work if the host computer is running
-on a Windows OS. It's due to a shortcoming of Vagrant )
+##Step3 - Set up environment configuration
+In order for the app to run prorely, it is necessary to define an 
+environment variable that will be used to set the environment's configuration
 
-Install Node.js and NPM globally
-Make sure you have NPM on your PATH.
+For example: to set the environment variable that says that will load the DevelopmentConfig configuration
+```
+echo "export APP_SETTINGS=DevelopmentConfig" >> ~/.profile
+```
+The list of configuration is available in ./configure.py
 
-Once it is installed, run the following command in the project's directory and on the host computer
-```
-npm install
-```
-###For Mac and linux based OS
-from the project directory, connect to the VM with
-```
-vagrant ssh
-```
+If you want to use a database as a service such as Mlab, change the MONGOLAB_URI variable
 
-Once in the VM, type the following to go to your project root directory within the VM
-```
-cd /vagrant
-```
-install Nodejs and NPM with the following commands
-```
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install npm -g
-```
-install the dependencies by entering this command in the project directory within the VM
-```
-npm install
-bower install
-```
+You 'll need to restart your VM in order for this command to be fully
+taken into account
 
-##Step 3 : Start Mongodb
-Enter in the guest machine
-```
-sudo service mongod start
-```
-
-If you want to populate the database, you sould enter the following command in
-your project directory
-```
-python app/DevData.py
-```
 
 ##Step 4 : Launch the app in your dev environment
 enter the following command in the project directory inside the guest machine
 ```
 python app/api.py
 ```
-
+If you are using vagrant:
 The app will be available at http://localhost:1234/
+
+If not, the port used by the server is 8080
 
 You're good to go!!!!
 
@@ -85,7 +70,7 @@ You're good to go!!!!
 
 You first have to create a Heroku account
 
-Then enter the following command in your project's directory (on your guest machine)
+Then enter the following command in your project's directory
 ```
 heroku login
 ```
@@ -106,17 +91,6 @@ in the staging environment
 ```
 heroku config:set APP_SETTINGS=StagingConfig --app shareat123-stage
 ```
-You will then have to add the mongolab add-on. Unfortunately, even though it's free,
-you'll have to register your credit card information.
-```
-heroku addons:create mongolab:sandbox --app shareat123-stage
-```
-Then get your database as a service URI :
-```
-heroku config --app shareat123-stage | grep MONGOLAB_URI
-```
-You will have to paste this URI in the MONGOLAB_URI variable inside the configure.py
-file
 
 ###First deployment - Setting up the production environments
 
@@ -135,16 +109,6 @@ in the staging environment
 ```
 heroku config:set APP_SETTINGS=ProductionConfig --app shareat123-prod
 ```
-You will then have to add the mongolab add-on
-```
-heroku addons:create mongolab:sandbox --app shareat123-prod
-```
-Then get your database as a service URI :
-```
-heroku config --app shareat123-prod| grep MONGOLAB_URI
-```
-You will have to paste this URI in the MONGOLAB_URI variable inside the config.py
-file
 
 ###Deploy the app
 

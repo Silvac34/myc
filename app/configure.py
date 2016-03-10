@@ -8,22 +8,30 @@ class Config(object):
 
 class ProductionConfig(Config):
     DEBUG = False
-    MONGOLAB_URI= 'mongodb://heroku_vknn5pq1:50c48g7502ntf36121kr3lsdjl@ds039115.mongolab.com:39115/heroku_vknn5pq1'
+    #We use MLab as a database as a service
+    MONGOLAB_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat_prod'
 
 
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    MONGOLAB_URI= 'mongodb://heroku_vq02xq85:phef1orvvvjfa82fneb4ejq0hk@ds039195.mongolab.com:39195/heroku_vq02xq85'
+    MONGOLAB_URI= 'mongodb://shareat:kmaillet230191@ds019498.mlab.com:19498/shareat_stage'
 
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    MONGOLAB_URI= 'mongodb://localhost/Shrt'
+    MONGOLAB_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat-dev_dim'
+    TOKEN_SECRET= 'very_secret'
+    #FACEBOOK_SECRET= 'f97f2cc3e469c9675b9d5b9f0b57ba21'
+
+class DevelopmentKev(Config):
+    DEVELOPMENT = True
+    DEBUG = True
+    MONGOLAB_URI= 'mongodb://shareat:kmaillet230191@ds019498.mlab.com:19498/shareat_dev'
+    MONGOLAB_URI_TEST = 'mongodb://shareat:kmaillet230191@ds055872.mlab.com:55872/shareat_dev_test'
     TOKEN_SECRET= 'very_secret'
     FACEBOOK_SECRET= 'f97f2cc3e469c9675b9d5b9f0b57ba21'
-
 
 class TestingConfig(Config):
     TESTING = True

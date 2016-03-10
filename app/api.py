@@ -204,4 +204,4 @@ def update_one_meal(meal_id):
 if __name__ == "__main__":
     #DevData.populate_database() #to populate the database in development environment
     #Application.app.debug = True
-    Application.app.run(host='0.0.0.0')
+    Application.app.run(host='0.0.0.0', port=8080)

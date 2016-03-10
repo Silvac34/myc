@@ -29,20 +29,22 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider',function($stat
   .state('create_meal', {
     url: '/create_meal',
     templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
-    controller: 'ViewCreateMealCtrl'
+    controller: 'ViewCreateMealCtrl',
+    data: {requiredLogin: true}
   })
   $stateProvider
   .state('my_meals', {
     url: '/my_meals',
     templateUrl: 'static/viewMyMeals/viewMyMeals.html',
-    controller: 'ViewMyMealsCtrl'
+    controller: 'ViewMyMealsCtrl',
+    data: {requiredLogin: true}
   })
-  $urlRouterProvider.otherwise('/view_meals');
+  $urlRouterProvider.otherwise('view_meals');
 
   $authProvider.facebook({
       clientId: '1533480140278594',
       // by default, the redirect URI is http://localhost:5000
-      redirectUri: 'http://localhost:1234/'
+      redirectUri: 'https://ide.c9.io/kevin_maillet/shareat'
     });
 
 }]);

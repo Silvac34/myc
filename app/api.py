@@ -46,10 +46,26 @@ class Application:
                 if isinstance(o["_id"], dict):
                     o["_id"] = str(o["_id"]["$oid"])
         return o
+        
+    @classmethod
+    def is_authentificated(self,request):
+        # the token is put in the Authorization header
+        if not request.headers.get('Authorization'):
+            return jsonify(error='Authorization header missing'), 401
+        # this header looks like this: “Authorization: Bearer {token}”
+        token = request.headers.get('Authorization').split()[1]
+        try:
+            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+        except DecodeError:
+            return jsonify(error='Invalid token'), 401
+        except ExpiredSignature:
+            return jsonify(error='Expired token'), 401
+        else:
+            return True
+        
 
 class User:
     def __init__(self,email,password=None,facebook_id=None):
-    #def __init__(self,email,password):
         self.em=email
         self.pa=password
         self.facebook_id = facebook_id
@@ -69,32 +85,14 @@ class User:
         return token.decode('unicode_escape')
 
 
-@Application.app.route('/users', methods=['GET'])
-def get_all_users():
-    return Response(dumps(Application.preprocess_id(Application.db.users.find())), status=200)
+@Application.app.route('/')
+def home():
+    return render_template("index.html")
+    
 
-@Application.app.route('/user')
-def user_info():
-    # the token is put in the Authorization header
-    if not request.headers.get('Authorization'):
-        return jsonify(error='Authorization header missing'), 401
-    # this header looks like this: “Authorization: Bearer {token}”
-    token = request.headers.get('Authorization').split()[1]
-    try:
-        payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-    except DecodeError:
-        return jsonify(error='Invalid token'), 401
-    except ExpiredSignature:
-        return jsonify(error='Expired token'), 401
-    else:
-        user_id = payload['sub']
-        user = Application.db.users.find_one({"_id": ObjectId(user_id)})
-        if user is None:
-            return jsonify(error='Should not happen ...'), 500
-        #return jsonify(id=user._id, email=user.email), 200
-        return jsonify(_id=str(user["_id"]),email=user["email"]), 200
-    return jsonify(error="never reach here..."), 500
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+LOGIN API
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 @Application.app.route('/auth/facebook', methods=['POST'])
 def auth_facebook():
@@ -110,20 +108,11 @@ def auth_facebook():
     r = requests.get(access_token_url, params=params)
     # use json.loads instead of urlparse.parse_qsl
     access_token = json.loads(r.text)
-
     # Step 2. Retrieve information about the current user.
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
-
     # Step 3. Create a new account or return an existing one.
-    #user = Application.db.users.find_one({"facebook_id": profile['id']})
     user = User(facebook_id=profile['id'], email=profile['email'])
-    #if user:
-    #    return jsonify(token=user.token())
-
-    #u = User(facebook_id=profile['id'], email=profile['email'])
-    #db.session.add(u)
-    #db.session.commit()
     return jsonify(token=user.token())
 
 @Application.app.route('/auth/signup', methods=['POST'])
@@ -148,16 +137,9 @@ def login():
         return jsonify(error="Wrong email or password"), 400
 
 
-@Application.app.route('/')
-def home():
-    return render_template("index.html")
-#@Application.app.route('/fb')
-#def fb():
-#    return render_template("fb.html")
-
-"""
-API
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+PUBLIC API
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # Get all meals
 @Application.app.route('/api/meals', methods=['GET'])
@@ -198,6 +180,39 @@ def update_one_meal(meal_id):
         return Response(str(result.matched_count) + ' meals modified',status=200)
     if result.matched_count == 0 :
         return Response(str(result.matched_count) +' meals modified',status=202)
+        
+    
+    
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+PRIVATE API
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+@Application.app.route('/user')
+def user_info():
+    # the token is put in the Authorization header
+    #if not request.headers.get('Authorization'):
+    #    return jsonify(error='Authorization header missing'), 401
+    # this header looks like this: “Authorization: Bearer {token}”
+    #token = request.headers.get('Authorization').split()[1]
+    #try:
+    #    payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+    #except DecodeError:
+    #    return jsonify(error='Invalid token'), 401
+    #except ExpiredSignature:
+    #    return jsonify(error='Expired token'), 401
+    #else:
+    authResponse = Application.is_authentificated(request)
+    if authResponse is not True:
+        return authResponse
+    else:
+        user_id = payload['sub']
+        user = Application.db.users.find_one({"_id": ObjectId(user_id)})
+        if user is None:
+            return jsonify(error='Should not happen ...'), 500
+        #return jsonify(id=user._id, email=user.email), 200
+        return jsonify(_id=str(user["_id"]),email=user["email"]), 200
+    return jsonify(error="never reach here..."), 500
+
 ####################################################################################
 
 

@@ -3,13 +3,6 @@
 angular.module('myApp.viewLogin', ['ui.router', 'satellizer'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-
-  /*$stateProvider
-  .state('login', {
-  url: '/login',
-  templateUrl: 'static/viewLogin/viewLogin.html',
-  controller: 'ViewLoginCtrl'
-})*/
 }])
 
 .controller('ViewLoginCtrl', ['$scope', '$auth', '$state',function($scope,$auth,$state  ) {

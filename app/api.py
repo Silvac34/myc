@@ -25,6 +25,7 @@ class Application:
                             socketTimeoutMS=None,
                             socketKeepAlive=True)
     db = client.get_default_database()
+    
 
     def __init__(self):
         pass
@@ -61,6 +62,8 @@ class Application:
         except ExpiredSignature:
             return jsonify(error='Expired token'), 401
         else:
+            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+            self.user_id = payload['sub']
             return True
         
 
@@ -187,29 +190,15 @@ def update_one_meal(meal_id):
 PRIVATE API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-@Application.app.route('/user')
+@Application.app.route('/api/user')
 def user_info():
-    # the token is put in the Authorization header
-    #if not request.headers.get('Authorization'):
-    #    return jsonify(error='Authorization header missing'), 401
-    # this header looks like this: “Authorization: Bearer {token}”
-    #token = request.headers.get('Authorization').split()[1]
-    #try:
-    #    payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-    #except DecodeError:
-    #    return jsonify(error='Invalid token'), 401
-    #except ExpiredSignature:
-    #    return jsonify(error='Expired token'), 401
-    #else:
     authResponse = Application.is_authentificated(request)
     if authResponse is not True:
         return authResponse
     else:
-        user_id = payload['sub']
-        user = Application.db.users.find_one({"_id": ObjectId(user_id)})
+        user = Application.db.users.find_one({"_id": ObjectId(Application.user_id)})
         if user is None:
             return jsonify(error='Should not happen ...'), 500
-        #return jsonify(id=user._id, email=user.email), 200
         return jsonify(_id=str(user["_id"]),email=user["email"]), 200
     return jsonify(error="never reach here..."), 500
 

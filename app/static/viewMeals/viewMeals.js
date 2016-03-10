@@ -25,7 +25,7 @@ angular.module('myApp.viewMeals', ['ui.router'])
 $scope.loadMeals();
 
 $scope.getUserInfo = function() {
-  $http.get('/user')
+  $http.get('/api/user')
     .then(function (response) {
       $scope.user = response.data;
     })

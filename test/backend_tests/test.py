@@ -23,8 +23,9 @@ class TestAPI(unittest.TestCase):
         Application.db = client.get_default_database()
 
     def tearDown(self):
-        client = MongoClient('localhost')
-        client.drop_database('Shrt_test')
+        client = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
+        Application.db = client.get_default_database()
+        Application.db.drop_collection("meals")
 
     def test_insert_meal(self):
         resp = self.client.post("/api/meal", data="{\"super\":\"toto\"}")

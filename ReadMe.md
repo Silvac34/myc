@@ -111,6 +111,15 @@ heroku config:set APP_SETTINGS=ProductionConfig --app shareat123-prod
 ```
 
 ###Deploy the app
+#### If you've never been connected via ssh with heroku
+If you don't have a ssh key:
+```
+ssh-keygen -t rsa
+```
+Then add this new key to heroku
+```
+heroku keys:add
+```
 
 From your project directory
 To deploy the app to the staging environment:

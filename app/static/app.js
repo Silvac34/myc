@@ -12,7 +12,6 @@ var app = angular.module('myApp', [
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
 
-
   $stateProvider
     .state('login', {
       url: '/login',
@@ -53,10 +52,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($s
     // by default, the redirect URI is http://localhost:5000
     redirectUri: 'https://shareat-kevin-maillet.c9users.io/'
   });
-
-
-
-
 
 }]);
 

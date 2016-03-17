@@ -2,6 +2,7 @@
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
+  'config',
   'ui.router',
   'satellizer',
   'myApp.viewCreateMeal',
@@ -10,7 +11,7 @@ var app = angular.module('myApp', [
   'myApp.viewLogin'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($stateProvider, $urlRouterProvider, $authProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider','ENV', function($stateProvider, $urlRouterProvider, $authProvider,ENV) {
 
   $stateProvider
     .state('login', {
@@ -48,9 +49,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', function($s
   $urlRouterProvider.otherwise('view_meals');
 
   $authProvider.facebook({
-    clientId: '1533480140278594',
-    // by default, the redirect URI is http://localhost:5000
-    redirectUri: 'https://shareat-kevin-maillet.c9users.io/'
+    clientId: ENV.fbClientID,
+    redirectUri: ENV.fbRedirectURI  
   });
 
 }]);

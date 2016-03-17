@@ -51,6 +51,11 @@ If you want to use a database as a service such as Mlab, change the MONGOLAB_URI
 You 'll need to restart your VM in order for this command to be fully
 taken into account
 
+Then set up the front-end configuration that is relevant to your environment
+You'll find the NameOfYourEnv in the Gruntfile.js 
+```
+grunt NameOfYourEnv 
+```
 
 ##Step 4 : Launch the app in your dev environment
 enter the following command in the project directory inside the guest machine
@@ -193,6 +198,7 @@ app/                    --> all of the source files for the application
     viewMyMeals               -->So the user can see and manage the meals he is attending
     view_test/                --> Juste to keep as a template. Is not used in the app
     app.js                --> main application module
+    config.js             --> holds the front end configuration (it depends on the environment)
   templates/
     index.html            --> app layout file (the main html template file of the app)
     index-async.html      --> just like index.html, but loads js files asynchronously

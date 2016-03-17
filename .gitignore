@@ -9,3 +9,4 @@ tmp
 *.pyc
 .bundle/
 .c9
+config.js

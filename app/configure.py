@@ -21,7 +21,6 @@ class StagingConfig(Config):
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET= 'f97f2cc3e469c9675b9d5b9f0b57ba21'
 
-
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True

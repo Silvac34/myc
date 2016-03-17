@@ -93,8 +93,8 @@ module.exports = function(grunt) {
             prod: {
                 options: {
                     remote: 'prod',
-                    branch: 'master',
-                    force: 'true'
+                    branch: 'master'
+                    
                 }
             }
 

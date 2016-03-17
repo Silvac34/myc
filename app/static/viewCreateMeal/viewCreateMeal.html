@@ -3,36 +3,62 @@
     <div class="col-md-7">
       <form class="form-horizontal">
         <fieldset>
-          <legend>Ajouter un Repas</legend>
+          <legend>Proponer una cena</legend>
           <div class="form-group">
-            <label for="inputLabel" class="col-md-2 control-label">Nom du repas</label>
+            <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="inputLabel" ng-model="editedMeal.label">
+              <select class="form-control" id="inputTown" ng-model="editedMeal.Town">
+                <option>Santiago</option>
+                <option>Concepción</option>
+                <option>Valparaíso</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
-            <label for="inputDate" class="col-md-2 control-label">Date du repas</label>
+            <label for="inputMenu" class="col-md-2 control-label">¿Cual será el menu?</label>
             <div class="col-md-10">
-              <input type="date" class="form-control" id="inputDate" ng-model="editedMeal.date">
+              <textarea class="form-control" rows="3" id="inputMenu" ng-model="editedMeal.menu"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="inputVeggies" class="col-md-2 control-label">¿Hay una alternativa para los vegetarianos?</label>
+              <div class="col-md-10">
+                <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span> 
+                <select class="form-control" id="inputVeggies" ng-model="editedMeal.veggies">
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="inputTime" class="col-md-2 control-label">¿fecha/hora de llegada de los invitados?</label>
+            <div class="col-md-10">
+              <input type="datetime-local" class="form-control" id="inputTime" ng-model="editedMeal.time">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputTime" class="col-md-2 control-label">Heure du repas</label>
-            <div class="col-md-10">
-              <input type="time" class="form-control" id="inputTime" ng-model="editedMeal.time">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputLocation" class="col-md-2 control-label">Emplacement du repas</label>
+            <label for="inputLocation" class="col-md-2 control-label">¿Cual es la dirección exacta para venir a la cena?</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="inputLocation" ng-model="editedMeal.location">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputDescription" class="col-md-2 control-label">Description du repas</label>
+            <label for="inputLocationApprox" class="col-md-2 control-label">¿Qué punto de referencia podemos publicar en facebook para ubicar donde se tiene que ir?</label>
             <div class="col-md-10">
-              <textarea class="form-control" rows="3" id="inputDescription" ng-model="editedMeal.description"></textarea>
-              <span class="help-block">N'hésitez pas à préciser la liste des ingrédients du repas</span>
+              <span class="help-block">Ejemplo : "Metro Manuel Montt"</span></span>
+              <input type="text" class="form-control" id="inputLocationApprox" ng-model="editedMeal.locationapprox">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputLocationApprox" class="col-md-2 control-label">¿Qué punto de referencia podemos publicar en facebook para ubicar donde se tiene que ir?</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="inputLocationApprox" ng-model="editedMeal.locationapprox">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputnbParticipants" class="col-md-2 control-label">¿Cuantas personas quieres que participarán a tu cena?</label>
+            <div class="col-md-10">
+              <input type="number" class="form-control" id="inputnbParticipants" ng-model="editedMeal.nbParticipants"></input>
+              <span class="help-block">(Incluyendote)</span>
             </div>
           </div>
           <div class="form-group">

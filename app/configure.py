@@ -11,6 +11,7 @@ class ProductionConfig(Config):
     #We use MLab as a database as a service
     MONGOLAB_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat_prod'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
+    FACEBOOK_SECRET='5c9c6aae00e33c0daec661d2095d0d6a'
 
 
 class StagingConfig(Config):

@@ -3,6 +3,7 @@ module.exports = function(grunt) {
     // Load the ng-constant grunt task
     grunt.loadNpmTasks('grunt-ng-constant');
     grunt.loadNpmTasks('grunt-git');
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
 
@@ -36,7 +37,18 @@ module.exports = function(grunt) {
                 constants: {
                     ENV: grunt.file.readJSON('app/config/production.json')
                 }
-            }
+            },
+            
+            stage: {
+                constants: {
+                    ENV: grunt.file.readJSON('app/config/stage.json')
+                }
+            },
+            devDim: {
+                constants: {
+                    ENV: grunt.file.readJSON('app/config/devDim.json')
+                }
+            },
         },
 
         gitcheckout: {
@@ -92,34 +104,71 @@ module.exports = function(grunt) {
             },
             prod: {
                 options: {
-                    remote: 'prod'
-                    //branch: 'master'
-                    
+                    remote: 'prod',
+                    branch: 'master'
+
                 }
             }
 
         },
 
 
+        shell: {
+            PushProdBuild: {
+                command: 'git push --force prod buildingAndDeploy:master',
+                options: {
+                }
+            },
+            PushStageBuild: {
+                command: 'git push --force stage buildingAndDeploy:master',
+                options: {
+                }
+            }
+        },
+
+
     });
 
 
-
-    // Grunt task to run your local development server
     grunt.registerTask('devKev', [
-        // This will generate the module file for development
+        // This will generate the configuration file for the environment
         'ngconstant:devKev'
     ]);
+    grunt.registerTask('devDim', [
+        // This will generate the configuration file for the environment
+        'ngconstant:devDim'
+    ]);
+    
 
     // Grunt task to build your source code for deployment to production
     grunt.registerTask('Prod', [
         // This will generate the module file for production
-        'gitcheckout:branchDeploy', 'ngconstant:production', 'gitadd:Conf', 'gitcommit:Conf', 'gitpush:prod'
+        'gitcheckout:branchDeploy', 'ngconstant:production', 'gitadd:Conf', 'gitcommit:Conf', 'shell:PushProdBuild'
+    ]);
+    
+    grunt.registerTask('Stage', [
+        // This will generate the module file for production
+        'gitcheckout:branchDeploy', 'ngconstant:stage', 'gitadd:Conf', 'gitcommit:Conf', 'shell:PushStageBuild'
     ]);
 
     grunt.registerTask('ProdKev', [
         // This will generate the module file for production
-        'Prod', 'gitcheckout:DevKev','devKev'
+        'Prod', 'gitcheckout:DevKev', 'devKev'
+    ]);
+    
+    grunt.registerTask('StageKev', [
+        // This will generate the module file for production
+        'Stage', 'gitcheckout:DevKev', 'devKev'
+    ]);
+    
+    grunt.registerTask('ProdDim', [
+        // This will generate the module file for production
+        'Prod', 'gitcheckout:DevDim', 'devDim'
+    ]);
+    
+    grunt.registerTask('StageDim', [
+        // This will generate the module file for production
+        'Stage', 'gitcheckout:DevDim', 'devDim'
     ]);
 
 

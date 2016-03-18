@@ -226,6 +226,7 @@ test/
   e2e-tests/            --> end-to-end tests (NOT YET)
     protractor-conf.js    --> Protractor config file
     scenarios.js          --> end-to-end scenarios to be run by Protractor
+Gruntfile.js             --> Contains the instruction for Grunt automated tasks
 karma.conf.js         --> config file for running unit tests with Karma
 .gitignore            --> Files to ignore in git
 bower.json            --> bower dependencies

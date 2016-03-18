@@ -54,7 +54,8 @@ taken into account
 
 ### Client side 
 The environment configuration for the front-end are in the folder app/config
-From this configuration, we will program grunt to generate a module config.js that holds the configuration 
+From this configuration, we will program grunt to generate a module config.js that holds the configuration
+The following command generate config.js
 ```
 grunt NameOfYourEnv 
 ```
@@ -136,7 +137,7 @@ To deploy the app to the staging environment:
 git remote add stage git@heroku.com:shareat123-stage.git
 grunt StageDim
 ```
-The grunt command build the app with the staging configuration, push it to the staging
+The grunt command build the app of the current branch with the staging configuration, push it to the staging
 environment and reinitialise the config.js file for the DevDim environment. These 
 actions are defined in the Gruntfile.js
 
@@ -148,7 +149,7 @@ To deploy the app to the production environment
 git remote add prod git@heroku.com:shareat123-prod.git
 grunt ProdDim
 ```
-The grunt command build the app with the production configuration, push it to the production
+The grunt command build the app of the current branch with the production configuration, push it to the production
 environment and reinitialise the config.js file for the DevDim environment. These 
 actions are defined in the Gruntfile.js
 

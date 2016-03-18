@@ -1,4 +1,4 @@
-#SharEat Project test
+#SharEat Project
 
 ##Step 1 - Provide a ubuntu based environment
 

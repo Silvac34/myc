@@ -142,32 +142,30 @@ module.exports = function(grunt) {
 
     // Grunt task to build your source code for deployment to production
     grunt.registerTask('Prod', [
-        // This will generate the module file for production
         'gitcheckout:branchDeploy', 'ngconstant:production', 'gitadd:Conf', 'gitcommit:Conf', 'shell:PushProdBuild'
     ]);
     
     grunt.registerTask('Stage', [
-        // This will generate the module file for production
         'gitcheckout:branchDeploy', 'ngconstant:stage', 'gitadd:Conf', 'gitcommit:Conf', 'shell:PushStageBuild'
     ]);
 
     grunt.registerTask('ProdKev', [
-        // This will generate the module file for production
+        // This will build and deploy the app to prod and reset config for devKev environment
         'Prod', 'gitcheckout:DevKev', 'devKev'
     ]);
     
     grunt.registerTask('StageKev', [
-        // This will generate the module file for production
+        // This will build and deploy the app to stage and reset config for devKev environment
         'Stage', 'gitcheckout:DevKev', 'devKev'
     ]);
     
     grunt.registerTask('ProdDim', [
-        // This will generate the module file for production
+        // This will build and deploy the app to prod and reset config for devDim environment
         'Prod', 'gitcheckout:DevDim', 'devDim'
     ]);
     
     grunt.registerTask('StageDim', [
-        // This will generate the module file for production
+        // This will build and deploy the app to stage and reset config for devDim environment
         'Stage', 'gitcheckout:DevDim', 'devDim'
     ]);
 

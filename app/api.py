@@ -117,26 +117,26 @@ def auth_facebook():
     user = User(facebook_id=profile['id'], email=profile['email'])
     return jsonify(token=user.token())
 
-@Application.app.route('/auth/signup', methods=['POST'])
-def signup():
-    data = json.loads(request.data)
-    email = data["email"]
-    password = data["password"]
-    user = User(email=email, password=password)
-    return jsonify(token=user.token())
+#@Application.app.route('/auth/signup', methods=['POST'])
+#def signup():
+#    data = json.loads(request.data)
+#    email = data["email"]
+#    password = data["password"]
+#    user = User(email=email, password=password)
+#    return jsonify(token=user.token())
 
-@Application.app.route('/auth/login', methods=['POST'])
-def login():
-    data = json.loads(request.data)
-    email = data["email"]
-    password = data["password"]
-    user = Application.db.users.find_one({"email":email})
-    if not user:
-        return jsonify(error="No such user"), 404
-    if user["password"] == password:
-        return jsonify(token=User(email).token()), 200
-    else:
-        return jsonify(error="Wrong email or password"), 400
+#@Application.app.route('/auth/login', methods=['POST'])
+#def login():
+#    data = json.loads(request.data)
+#    email = data["email"]
+#    password = data["password"]
+#    user = Application.db.users.find_one({"email":email})
+#    if not user:
+#        return jsonify(error="No such user"), 404
+#    if user["password"] == password:
+#        return jsonify(token=User(email).token()), 200
+#    else:
+#        return jsonify(error="Wrong email or password"), 400
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

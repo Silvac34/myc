@@ -12,19 +12,30 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
       })*/
 }])
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http',function($scope, $http) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', function($scope, $http) {
 
-  $scope.createMeal = function (meal) {
-    $http.post('/api/meal',meal);
-  }
+    $scope.createMeal = function(meal) {
+            $http.post('/api/meal', meal);
+        },
 
-}])
 
-.controller('HelpTypeController', ['$scope', function($scope) {
-      $scope.checkboxHelpType = {
-       value1 : true,
-       value2 : true,
-       value3 : true,
-       value4 : true
-     };
-    }]);
+    $scope.checkboxHelpType = {
+        buying: false,
+        cooking: false,
+        cleaning: false,
+        notHelping: false
+
+    },
+    
+    $scope.excludingHelp = function(){
+        $scope.checkboxHelpType.buying= false,
+        $scope.checkboxHelpType.cooking= false,
+        $scope.checkboxHelpType.cleaning= false
+    },
+    
+    $scope.includingHelp = function(){
+        $scope.checkboxHelpType.notHelping= false
+    }
+    
+    $scope.choices = [{option: "Si"}, {option: "No"}];
+}]);

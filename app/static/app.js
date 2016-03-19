@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ui.router',
+  //'ngAnimate',
   'satellizer',
   'myApp.viewCreateMeal',
   'myApp.viewMeals',
@@ -39,6 +40,22 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider',function($stat
     controller: 'ViewMyMealsCtrl',
     data: {requiredLogin: true}
   })
+  /*$stateProvider
+  .state('create_meal.diner', {
+    url: '/diner',
+    templateUrl: 'create_meal-diner.html'
+  })      
+  $stateProvider
+  .state('create_meal.profile', {
+    url: '/profile',
+    templateUrl: 'create_meal-profile.html'
+  })      
+  $stateProvider
+    .state('create_meal.payment', {
+      url: '/payment',
+      templateUrl: 'create_meal-payment.html'
+    });
+    */
   $urlRouterProvider.otherwise('view_meals');
 
   $authProvider.facebook({
@@ -65,3 +82,16 @@ app.run(function ($rootScope, $state, $auth) {
     }
   });
 });
+
+/*app.controller('ViewCreateMealCtrl', function($scope) {
+    
+    // we will store all of our form data in this object
+    $scope.formData = {};
+    
+    // function to process the form
+    $scope.processForm = function() {
+        alert('awesome!');
+    };
+    
+});
+*/

@@ -7,7 +7,7 @@
           <div class="form-group">
             <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
             <div class="col-md-10">
-              <select class="form-control" id="inputTown" ng-model="editedMeal.Town">
+              <select class="form-control" id="inputTown" ng-model="editedMeal.Town" value="Santiago">
                 <option>Santiago</option>
                 <option>Concepción</option>
                 <option>Valparaíso</option>
@@ -32,7 +32,7 @@
           <div class="form-group">
             <label for="inputTime" class="col-md-2 control-label">¿fecha/hora de llegada de los invitados?</label>
             <div class="col-md-10">
-              <input type="datetime-local" class="form-control" id="inputTime" ng-model="editedMeal.time">
+              <input type="datetime" class="form-control" id="inputTime" ng-model="editedMeal.time">
             </div>
           </div>
           <div class="form-group">
@@ -44,8 +44,7 @@
           <div class="form-group">
             <label for="inputLocationApprox" class="col-md-2 control-label">¿Qué punto de referencia podemos publicar en facebook para ubicar donde se tiene que ir?</label>
             <div class="col-md-10">
-              <span class="help-block">Ejemplo : "Metro Manuel Montt"</span></span>
-              <input type="text" class="form-control" id="inputLocationApprox" ng-model="editedMeal.locationapprox">
+              <input type="text" class="form-control" id="inputLocationApprox" ng-model="editedMeal.locationapprox" placeholder="ej : Metro Manuel Montt">
             </div>
           </div>
           <div class="form-group">
@@ -69,17 +68,15 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="selecthelpType" class="col-md-2 control-label">Te gustaría ayuda para ...</label>
+            <label class="col-md-2 control-label">Te gustaría ayuda para ...</label><br>
             <div class="col-md-10">
-              <span class="help-block">OJO, pasa algunas veces donde no hay voluntarios para hacer las compras</span>  
-              <select class="form-control" id="selecthelpType" ng-model="editedMeal.helpType">
-                <option>hacer las compras</option>
-                <option>ayudar para la cocina</option>
-                <option>lavar la loza</option>
-                <option>nada! Solo quiero venir como invitado =)</option>
-              </select>
-            </div>
+              <input type="checkbox" id="buying" ng-model="checkboxHelpType.value1"><label>Hacer las compras</label><br/>
+              <input type="checkbox" id="cooking" ng-model="checkboxHelpType.value2"><label>Ayudar para la cocina</label><br/>
+              <input type="checkbox" id="cleaning" ng-model="checkboxHelpType.value3"><label>Lavar la loza</label><br/>
+              <input type="checkbox" id="nothelping" ng-model="checkboxHelpType.value4"><label>Nada! Solo quiero venir como invitado =)</label>
+             </div>
           </div>
+   
           <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
               <button type="reset" class="btn btn-default">Annuler</button>

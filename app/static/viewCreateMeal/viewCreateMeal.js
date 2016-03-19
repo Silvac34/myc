@@ -18,4 +18,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     $http.post('/api/meal',meal);
   }
 
-}]);
+}])
+
+.controller('HelpTypeController', ['$scope', function($scope) {
+      $scope.checkboxHelpType = {
+       value1 : true,
+       value2 : true,
+       value3 : true,
+       value4 : true
+     };
+    }]);

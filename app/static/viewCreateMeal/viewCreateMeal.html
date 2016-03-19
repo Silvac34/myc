@@ -25,7 +25,7 @@
             <div class="col-md-10">
               <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span> 
               <label ng-repeat="choice in choices">
-                <input type="radio" id="inputVeggies" ng-model="$parent.option" value="{{choice.option}}"> {{choice.option}}
+                <input type="radio" id="inputVeggies" ng-model="$parent.option" value="{{choice.option}}" ng-checked="{{choice.default_option}}"> {{choice.option}}
               </label>
             </div>
           </div>

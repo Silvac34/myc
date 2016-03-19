@@ -36,6 +36,5 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     $scope.includingHelp = function(){
         $scope.checkboxHelpType.notHelping= false
     }
-    
-    $scope.choices = [{option: "Si"}, {option: "No"}];
+    $scope.choices = [{option: "Si", default_option: false}, {option: "No",  default_option: true}];
 }]);

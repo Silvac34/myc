@@ -201,7 +201,9 @@ def insert_one_meal():
         if request.data == "" or request.data == "{}" or request.data is None:
             return ""
         else:
-            id_inserted = Application.db.meals.insert(json.loads(request.data))
+            new_meal = json.loads(request.data)
+            new_meal["admin"] = Application.user_id
+            id_inserted = Application.db.meals.insert(new_meal)
             inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
             return Response(dumps(Application.preprocess_id(inserted)), status=200)
 

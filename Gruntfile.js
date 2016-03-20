@@ -161,12 +161,12 @@ module.exports = function(grunt) {
     
     grunt.registerTask('ProdDim', [
         // This will build and deploy the app to prod and reset config for devDim environment
-        'Prod', 'gitcheckout:DevDim', 'devDim'
+        'Prod', 'gitcheckout:master', 'devDim'
     ]);
     
     grunt.registerTask('StageDim', [
         // This will build and deploy the app to stage and reset config for devDim environment
-        'Stage', 'gitcheckout:DevDim', 'devDim'
+        'Stage', 'gitcheckout:master', 'devDim'
     ]);
 
 

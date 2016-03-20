@@ -12,6 +12,7 @@
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
     "satellizer": "~0.14.0",
-    "bootstrap-social": "^4.12.0"
+    "bootstrap-social": "^4.12.0",
+    "font-awesome": "^4.5.0"
   }
 }

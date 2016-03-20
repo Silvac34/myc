@@ -110,6 +110,53 @@
              </div>
           </div>
    
+           <!-->if buying = true<!-->
+          <div class="form-group">
+            <label for="inputIngredient" class="col-md-2 control-label">¿Cual es la lista de los ingredientes que necesitas ?</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="inputIngredient" ng-model="editedMeal.ingredient"></input>
+              <span class="help-block">Para tener una idea de este montó, puedes ir<a href="https://web.cornershopapp.com"> acá</a> </span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="inputTimeBuying" class="col-md-2 control-label">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
+            <div class="col-md-10">
+              <input type="datetime-local" class="form-control" id="inputTimeBuying" ng-model="editedMeal.timeBuying">
+            </div>
+          </div>
+   
+         <!-->if cooking = true<!-->
+         
+          <div class="form-group">
+            <label for="inputTimeCooking" class="col-md-2 control-label">¿Cuando deben venir la gente para ayudarte a cocinar?</label>
+            <div class="col-md-10">
+              <input type="datetime-local" class="form-control" id="inputTimeCooking" ng-model="editedMeal.timeCooking">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="inputNbCooker" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
+            <div class="col-md-10">
+              <span class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</span> 
+              <label ng-repeat="nbCooker in nbCookers">
+                <input type="radio" id="inputNbCooker" ng-model="$parent.number_cooker" value="{{nbCooker.number_cooker}}" ng-checked="{{nbCooker.default_option}}"> {{nbCooker.number_cooker}}
+              </label>
+            </div>
+          </div>
+          
+          <!-->if cleaning = true<!-->
+          
+          <div class="form-group">
+            <label for="inputNbCleaner" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte con la loza ?</label>
+            <div class="col-md-10">
+              <span class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</span> 
+              <label ng-repeat="nbCleaner in nbCleaners">
+                <input type="radio" id="inputNbCleaner" ng-model="$parent.number_cleaner" value="{{nbCleaner.number_cleaner}}" ng-checked="{{nbCleaner.default_option}}"> {{nbCleaner.number_cleaner}}
+              </label>
+            </div>
+          </div>
+   
           <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
               <button type="reset" class="btn btn-default">Annuler</button>

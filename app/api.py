@@ -148,16 +148,6 @@ PUBLIC API
 def get_all_meals():
     return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
 
-# Insert one meal
-@Application.app.route('/api/meal', methods=["POST"])
-def insert_one_meal():
-    if request.data == "" or request.data == "{}" or request.data is None:
-        return ""
-    else:
-        id_inserted = Application.db.meals.insert(json.loads(request.data))
-        inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
-        return Response(dumps(Application.preprocess_id(inserted)), status=200)
-
 # Delete one meal from ID
 @Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
 def delete_meal(meal_id):
@@ -188,8 +178,8 @@ def update_one_meal(meal_id):
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 PRIVATE API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-@Application.app.route('/api/user')
+#Get current user
+@Application.app.route('/api/user', methods=["GET"])
 def user_info():
     authResponse = Application.is_authentificated(request)
     if authResponse is not True:
@@ -200,6 +190,21 @@ def user_info():
             return jsonify(error='Should not happen ...'), 500
         return jsonify(_id=str(user["_id"]),email=user["email"]), 200
     return jsonify(error="never reach here..."), 500
+
+# Insert one meal
+@Application.app.route('/api/meal', methods=["POST"])
+def insert_one_meal():
+    authResponse = Application.is_authentificated(request)
+    if authResponse is not True:
+        return authResponse
+    else:
+        if request.data == "" or request.data == "{}" or request.data is None:
+            return ""
+        else:
+            id_inserted = Application.db.meals.insert(json.loads(request.data))
+            inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
+            return Response(dumps(Application.preprocess_id(inserted)), status=200)
+
 
 ####################################################################################
 

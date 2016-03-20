@@ -71,3 +71,12 @@ app.run(function($rootScope, $state, $auth) {
       }
     });
 });
+
+app.controller('AppCtrl', ['$scope', '$auth', '$state',function($scope,$auth,$state  ) {
+  $scope.logout= function (){
+    $auth.logout();
+    $state.go('login');
+  }
+  
+  
+}])

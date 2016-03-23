@@ -50,7 +50,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider','ENV', funct
 
   $authProvider.facebook({
     clientId: ENV.fbClientID,
-    redirectUri: ENV.fbRedirectURI  
+    redirectUri: ENV.fbRedirectURI,
+    scope:['email']
   });
 
 }]);

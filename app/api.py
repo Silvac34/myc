@@ -99,7 +99,7 @@ LOGIN API
 @Application.app.route('/auth/facebook', methods=['POST'])
 def auth_facebook():
     access_token_url = 'https://graph.facebook.com/v2.3/oauth/access_token'
-    graph_api_url = 'https://graph.facebook.com/v2.5/me?fields=id,email'
+    graph_api_url = 'https://graph.facebook.com/v2.5/me?fields=id,email,last_name,first_name,link, gender,picture'
     params = {
         'client_id': request.json['clientId'],
         'redirect_uri': request.json['redirectUri'],
@@ -115,6 +115,11 @@ def auth_facebook():
     profile = json.loads(r.text)
     # Step 3. Create a new account or return an existing one.
     user = User(facebook_id=profile['id'], email=profile['email'])
+    #Store data from facebook
+    fbID = profile['id']
+    if 'id' in profile:
+        del profile['id']
+    Application.db.users.update_one({"facebook_id":fbID}, {"$set":profile})
     return jsonify(token=user.token())
 
 #@Application.app.route('/auth/signup', methods=['POST'])

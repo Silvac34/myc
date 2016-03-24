@@ -1,114 +1,38 @@
 <!-- form.html -->
-<!--><div class="row">
+<div class="row">
 <div class="col-sm-8 col-sm-offset-2">
 
     <div id="form-container">
 
         <div class="page-header text-center">
-            <h2>Let's Be Friends</h2>
+            <h2>Proponer una cena</h2>
             
             <!-- the links to our nested states using relative paths -->
             <!-- add the active class if the state matches our ui-sref -->
-            <!--<div id="status-buttons" class="text-center">
-                <a ui-sref-active="active" ui-sref=".profile"><span>1</span> Profile</a>
-                <a ui-sref-active="active" ui-sref=".interests"><span>2</span> Interests</a>
+            <div id="status-buttons" class="text-center">
+                <a ui-sref-active="active" ui-sref=".diner"><span>1</span> Diner</a>
+                <a ui-sref-active="active" ui-sref=".profile"><span>2</span> Profile</a>
                 <a ui-sref-active="active" ui-sref=".payment"><span>3</span> Payment</a>
             </div>
         </div>
         
         <!-- use ng-submit to catch the form submission and use our Angular function -->
-        <!--<form id="signup-form" ng-submit="processForm()">
+        <form id="signup-form" ng-submit="processForm()">
 
             <!-- our nested state views will be injected here -->
-            <!--<div id="form-views" ui-view></div>
+            <div id="form-views" ui-view></div>
         </form>
 
     </div>
 
-    <!-- show our formData as it is being typed -->
-    <!--<pre>
-        {{ formData }}
+    <!-- show our editedMeal as it is being typed -->
+    <pre>
+        {{ editedMeal }}
     </pre>
 
 </div>
-</div><!-->
+</div>
 
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-7">
-      <form class="form-horizontal">
-        <fieldset>
-          <legend>Proponer una cena</legend>
-          <div class="form-group">
-            <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
-            <div class="col-md-10">
-              <select class="form-control" id="inputTown" ng-model="editedMeal.town" value="Santiago">
-                <option>Santiago</option>
-                <option>Concepción</option>
-                <option>Valparaíso</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputMenu" class="col-md-2 control-label">¿Cual será el menu?</label>
-            <div class="col-md-10">
-              <textarea class="form-control" rows="3" id="inputMenu" ng-model="editedMeal.menu"></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label for="inputVeggies" class="col-md-2 control-label">¿Hay una alternativa para los vegetarianos?</label>
-            <div class="col-md-10">
-              <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span> 
-              <label ng-repeat="choice in choices">
-                <input type="radio" id="inputVeggies" ng-model="$parent.option" value="{{choice.option}}" ng-checked="{{choice.default_option}}"> {{choice.option}}
-              </label>
-            </div>
-          </div>
-           
-          <div class="form-group">
-            <label for="inputTime" class="col-md-2 control-label">¿fecha/hora de llegada de los invitados?</label>
-            <div class="col-md-10">
-              <input type="datetime-local" class="form-control" id="inputTime" ng-model="editedMeal.time">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputLocation" class="col-md-2 control-label">¿Cual es la dirección exacta para venir a la cena?</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="inputLocation" ng-model="editedMeal.location">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputLocationApprox" class="col-md-2 control-label">¿Qué punto de referencia podemos publicar en facebook para ubicar donde se tiene que ir?</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="inputLocationApprox" ng-model="editedMeal.locationApprox">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputNbParticipants" class="col-md-2 control-label">¿Cuantas personas quieres que participarán a tu cena?</label>
-            <div class="col-md-10">
-              <input type="number" class="form-control" id="inputNbParticipants" ng-model="editedMeal.nbParticipants"></input>
-              <span class="help-block">(Incluyendote)</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputPrice" class="col-md-2 control-label">¿Cual es el montó de las compras?</label>
-            <div class="col-md-10">
-              <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price"></input>
-              <span class="help-block">Mejor estimar más que menos / Para tener una idea de este montó, puedes ir <a href="https://web.cornershopapp.com"> acá</a> </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Te gustaría ayuda para ...</label><br>
-            <div class="col-md-10">
-              <input type="checkbox" id="buying" ng-model="checkboxHelpType.buying" ng-change="includingHelp()"><label>Hacer las compras</label><br/>
-              <input type="checkbox" id="cooking" ng-model="checkboxHelpType.cooking" ng-change="includingHelp()"><label>Ayudar para la cocina</label><br/>
-              <input type="checkbox" id="cleaning" ng-model="checkboxHelpType.cleaning" ng-change="includingHelp()"><label>Lavar la loza</label><br/>
-              <input type="checkbox" id="nothelping" ng-model="checkboxHelpType.notHelping" ng-change="excludingHelp()"><label>Nada! Solo quiero venir como invitado =)</label>
-             </div>
-          </div>
    
            <!-->if buying = true<!-->
           <div class="form-group">

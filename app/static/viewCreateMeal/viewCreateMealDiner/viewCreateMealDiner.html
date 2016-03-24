@@ -1,0 +1,25 @@
+<!-- form-diner.html -->
+<div class="form-group">
+  <label for="inputMenu" class="col-md-2 control-label">¿Cual será el menu?</label>
+  <div class="col-md-10">
+    <textarea class="form-control" rows="3" id="inputMenu" ng-model="editedMeal.menu"></textarea>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="inputVeggies" class="col-md-2 control-label">¿Hay una alternativa para los vegetarianos?</label>
+  <div class="col-md-10">
+    <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span>
+    <label ng-repeat="choice in choices">
+      <input type="radio" id="inputVeggies" ng-model="$parent.option" value="{{choice.option}}" ng-checked="{{choice.default_option}}"> {{choice.option}}
+    </label>
+  </div>
+</div>
+
+<div class="form-group row">
+<div class="col-xs-6 col-xs-offset-3">
+    <a ui-sref="form.interests" class="btn btn-block btn-info">
+    Seguir <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div>
+</div>

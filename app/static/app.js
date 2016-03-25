@@ -26,11 +26,11 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider',function($stat
     controller: 'ViewMealsCtrl',
     data: {requiredLogin: true}
   })
-  $urlRouterProvider.when('/create_meal', '/create_meal/diner');
+  //$urlRouterProvider.when('/create_meal', '/create_meal/diner');
   $stateProvider
     .state('create_meal', {
       url: '/create_meal',
-      abstract: true,
+      //abstract: true,
       templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
       controller: 'ViewCreateMealCtrl',
       data: {

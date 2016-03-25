@@ -26,13 +26,22 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider',function($stat
     controller: 'ViewMealsCtrl',
     data: {requiredLogin: true}
   })
+  $urlRouterProvider.when('/create_meal', '/create_meal/diner');
   $stateProvider
-  .state('create_meal', {
-    url: '/create_meal',
-    templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
-    controller: 'ViewCreateMealCtrl',
-    data: {requiredLogin: true}
-  })
+    .state('create_meal', {
+      url: '/create_meal',
+      abstract: true,
+      templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
+      controller: 'ViewCreateMealCtrl',
+      data: {
+        requiredLogin: true
+      }
+    })
+  $stateProvider
+    .state('create_meal.diner', {
+      url: '/diner',
+      templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html'
+    })
   $stateProvider
   .state('my_meals', {
     url: '/my_meals',
@@ -40,11 +49,6 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider',function($stat
     controller: 'ViewMyMealsCtrl',
     data: {requiredLogin: true}
   })
-  $stateProvider
-  .state('create_meal.diner', {
-    url: '/diner',
-    templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html'
-  })      
   $stateProvider
   .state('create_meal.profile', {
     url: '/profile',

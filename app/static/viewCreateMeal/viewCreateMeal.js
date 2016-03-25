@@ -10,6 +10,22 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
         templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
         controller: 'ViewCreateMealCtrl'
       })*/
+    $urlRouterProvider.when('/create_meal', '/create_meal/diner');  
+    $stateProvider
+        .state('create_meal.diner', {
+            url: '/diner',
+            templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html'
+        })
+  $stateProvider
+  .state('create_meal.profile', {
+    url: '/profile',
+    templateUrl: 'static/viewCreateMeal/viewCreateMealProfile/viewCreateMealProfile.html'
+  })      
+  $stateProvider
+    .state('create_meal.payment', {
+      url: '/payment',
+      templateUrl: 'static/viewCreateMeal/viewCreateMealPayment/viewCreateMealPayment.html'
+    });
 }])
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', function($scope, $http) {

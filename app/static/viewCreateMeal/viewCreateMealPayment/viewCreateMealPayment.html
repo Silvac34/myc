@@ -6,6 +6,7 @@
     <span class="help-block">Mejor estimar más que menos / Para tener una idea de este montó, puedes ir <a href="https://web.cornershopapp.com"> acá</a> </span>
   </div>
 </div>
+
 <div class="form-group">
   <label for="inputNbParticipants" class="col-md-2 control-label">¿Cuantas personas quieres que participarán a tu cena?</label>
   <div class="col-md-10">
@@ -13,6 +14,7 @@
     <span class="help-block">(Incluyendote)</span>
   </div>
 </div>
+
 <div class="form-group">
   <label class="col-md-2 control-label">Te gustaría ayuda para ...</label>
   <br>
@@ -20,20 +22,70 @@
     <input type="checkbox" id="buying" ng-model="checkboxHelpType.buying" ng-change="includingHelp()">
     <label>Hacer las compras</label>
     <br/>
+
+    <span ng-if="checkboxHelpType.buying" class="animate-if">
+      <div class="form-group">
+        <label for="inputIngredient" class="col-md-2 control-label">¿Cual es la lista de los ingredientes que necesitas ?</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="inputIngredient" ng-model="editedMeal.ingredient"></input>
+          <span class="help-block">Para tener una idea de este montó, puedes ir<a href="https://web.cornershopapp.com"> acá</a> </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputTimeBuying" class="col-md-2 control-label">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
+        <div class="col-md-10">
+          <input type="datetime-local" class="form-control" id="inputTimeBuying" ng-model="editedMeal.timeBuying">
+        </div>
+      </div>
+    </span>
+
     <input type="checkbox" id="cooking" ng-model="checkboxHelpType.cooking" ng-change="includingHelp()">
     <label>Ayudar para la cocina</label>
     <br/>
+    <span ng-if="checkboxHelpType.cooking" class="animate-if">
+    <div class="form-group">
+      <label for="inputTimeCooking" class="col-md-2 control-label">¿Cuando deben venir la gente para ayudarte a cocinar?</label>
+      <div class="col-md-10">
+        <input type="datetime-local" class="form-control" id="inputTimeCooking" ng-model="editedMeal.timeCooking">
+      </div>
+    </div>   
+    
+    <div class="form-group">
+      <label for="inputNbCooker" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
+      <div class="col-md-10">
+        <span class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</span>
+        <label ng-repeat="nbCooker in nbCookers">
+          <input type="radio" id="inputNbCooker" ng-model="$parent.number_cooker" value="{{nbCooker.number_cooker}}" ng-checked="{{nbCooker.default_option}}"> {{nbCooker.number_cooker}}
+        </label>
+      </div>
+    </div>
+    </span>
+    
     <input type="checkbox" id="cleaning" ng-model="checkboxHelpType.cleaning" ng-change="includingHelp()">
     <label>Lavar la loza</label>
     <br/>
+    <span ng-if="checkboxHelpType.cleaning" class="animate-if">
+    <div class="form-group">
+      <label for="inputNbCleaner" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte con la loza ?</label>
+      <div class="col-md-10">
+        <span class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</span>
+        <label ng-repeat="nbCleaner in nbCleaners">
+          <input type="radio" id="inputNbCleaner" ng-model="$parent.number_cleaner" value="{{nbCleaner.number_cleaner}}" ng-checked="{{nbCleaner.default_option}}"> {{nbCleaner.number_cleaner}}
+        </label>
+      </div>
+    </div>
+    </span>
+    
     <input type="checkbox" id="nothelping" ng-model="checkboxHelpType.notHelping" ng-change="excludingHelp()">
     <label>Nada! Solo quiero venir como invitado =)</label>
-  </div>
+    </div>
 </div>
+    
+
 <div class="form-group">
   <div class="col-md-10 col-md-offset-2">
-    <button type="reset" class="btn btn-default">Annuler</button>
-    <button type="submit" class="btn btn-primary" ng-click="createMeal(editedMeal)">Créer un nouveau Repas</button>
+    <button type="reset" class="btn btn-default">Cancelar</button>
+    <button type="submit" class="btn btn-primary" ng-click="createMeal(editedMeal)">Crear la cena</button>
   </div>
 </div>
-        

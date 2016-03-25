@@ -10,9 +10,9 @@
             <!-- the links to our nested states using relative paths -->
             <!-- add the active class if the state matches our ui-sref -->
             <div id="status-buttons" class="text-center">
-                <a ui-sref-active="active" ui-sref="create_meal.diner"><span>1</span> Diner</a>
-                <a ui-sref-active="active" ui-sref="create_meal.profile"><span>2</span> Profile</a>
-                <a ui-sref-active="active" ui-sref="create_meal.payment"><span>3</span> Payment</a>
+                <a ui-sref-active="active" ui-sref="create_meal.diner"><span class="badge">1</span> Qué</a>
+                <a ui-sref-active="active" ui-sref="create_meal.profile"><span class="badge">2</span> Donde y cuando</a>
+                <a ui-sref-active="active" ui-sref="create_meal.payment"><span class="badge">3</span> Comó</a>
             </div>
         </div>
         
@@ -25,70 +25,5 @@
 
     </div>
 
-    <!-- show our editedMeal as it is being typed -->
-    <pre>
-        {{ editedMeal }}
-    </pre>
-
 </div>
-</div>
-
-   
-           <!-->if buying = true<!-->
-          <div class="form-group">
-            <label for="inputIngredient" class="col-md-2 control-label">¿Cual es la lista de los ingredientes que necesitas ?</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="inputIngredient" ng-model="editedMeal.ingredient"></input>
-              <span class="help-block">Para tener una idea de este montó, puedes ir<a href="https://web.cornershopapp.com"> acá</a> </span>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="inputTimeBuying" class="col-md-2 control-label">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
-            <div class="col-md-10">
-              <input type="datetime-local" class="form-control" id="inputTimeBuying" ng-model="editedMeal.timeBuying">
-            </div>
-          </div>
-   
-         <!-->if cooking = true<!-->
-         
-          <div class="form-group">
-            <label for="inputTimeCooking" class="col-md-2 control-label">¿Cuando deben venir la gente para ayudarte a cocinar?</label>
-            <div class="col-md-10">
-              <input type="datetime-local" class="form-control" id="inputTimeCooking" ng-model="editedMeal.timeCooking">
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="inputNbCooker" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
-            <div class="col-md-10">
-              <span class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</span> 
-              <label ng-repeat="nbCooker in nbCookers">
-                <input type="radio" id="inputNbCooker" ng-model="$parent.number_cooker" value="{{nbCooker.number_cooker}}" ng-checked="{{nbCooker.default_option}}"> {{nbCooker.number_cooker}}
-              </label>
-            </div>
-          </div>
-          
-          <!-->if cleaning = true<!-->
-          
-          <div class="form-group">
-            <label for="inputNbCleaner" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte con la loza ?</label>
-            <div class="col-md-10">
-              <span class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</span> 
-              <label ng-repeat="nbCleaner in nbCleaners">
-                <input type="radio" id="inputNbCleaner" ng-model="$parent.number_cleaner" value="{{nbCleaner.number_cleaner}}" ng-checked="{{nbCleaner.default_option}}"> {{nbCleaner.number_cleaner}}
-              </label>
-            </div>
-          </div>
-   
-          <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
-              <button type="reset" class="btn btn-default">Annuler</button>
-              <button type="submit" class="btn btn-primary" ng-click="createMeal(editedMeal)">Créer un nouveau Repas</button>
-            </div>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div>
 </div>

@@ -9,9 +9,13 @@
 <div class="form-group">
   <label for="inputVeggies" class="col-md-2 control-label">¿Hay una alternativa para los vegetarianos?</label>
   <div class="col-md-10">
-    <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span>
-      <input type="radio" class="form-control" id="inputVeggies_yes" ng-value="true" ng-model="editedMeal.veggies"> Sí
-      <input type="radio" class="form-control" id="inputVeggies_no" ng-value="false" ng-model="editedMeal.veggies"> No
+    <div class="radio">
+      <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span>
+      <label>
+        <input type="radio" id="inputVeggies_yes" name="veggiesRadio" ng-value=true ng-model="editedMeal.veggies"> Sí</label>
+      <label>
+        <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No</label>
+    </div>
   </div>
 </div>
 

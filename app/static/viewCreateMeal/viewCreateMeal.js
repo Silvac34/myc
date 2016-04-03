@@ -43,11 +43,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
 
   //initialize the buyers model
   $scope.buyers = $scope.buyers || {
-      time: ""
+      delivery: "",
+      ingredient: ""
     },
 
     $scope.cooks = $scope.cooks || {
-      nbCooks: ""
+      nbCooks: "",
+      timeCooking: "",
     },
 
     $scope.cleaners = $scope.cleaners || {

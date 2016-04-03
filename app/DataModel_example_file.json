@@ -21,16 +21,32 @@
     "nbParticipants": 5, //number
     "price": 5, //number
     
-    "buying": true, //boolean
-      "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon", //text
-      "delivery": "20:00 10/11/2012" //datetime-local
+    "helpBuying": true, //boolean
+      "buyers": [{
+          "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon"
+        }, //text
+        {
+          "delivery": "20:00 10/11/2012"
+        } //datetime-local
+      ],
       
-    "cooking": true, //boolean
-      "timeCooking": "21:00 10/11/2012" //datetime-local
-      "number_cooker": 2, //number
+    "helpCooking": true, //boolean
+      "cookers": [{
+          "timeCooking": "21:00 10/11/2012"
+
+        }, //datetime-local]
+        {
+          "nbCookers": 2
+
+        } //number
+      ],
+     
       
-    "cleaning": false, //boolean
-      "number_cleaner": 2, //number
+    "helpCleaning": false, //boolean
+      "cleaners":[{
+        "nbCleaners": 2
+      }],//number
+      
       
     "notHelping": false, //boolean
     

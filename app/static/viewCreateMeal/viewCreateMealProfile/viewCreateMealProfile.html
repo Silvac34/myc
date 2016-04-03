@@ -1,14 +1,12 @@
 <!-- form-profile.html -->
-<div ng-controller="ViewCreateMealProfileCtrl">
-  <div class="form-group">
-    <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
-    <div class="col-md-10">
-      <select class="form-control" id="inputTown" ng-model="editedMeal.town" value="Santiago">
-        <option>Santiago</option>
-        <option>Concepción</option>
-        <option>Valparaíso</option>
-      </select>
-    </div>
+<div class="form-group">
+  <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
+  <div class="col-md-10">
+    <select class="form-control" id="inputTown" ng-model="editedMeal.town">
+      <option>Santiago</option>
+      <option>Concepción</option>
+      <option>Valparaíso</option>
+    </select>
   </div>
 
   <div class="form-group">

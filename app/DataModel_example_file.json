@@ -18,7 +18,7 @@
 // viewCreateMealPayment.html
 
     "price": 20000, //number
-    "number_participants": 5, //number
+    "nbParticipants": 5, //number
     "price": 5, //number
     
     "buying": true, //boolean

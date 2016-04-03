@@ -8,17 +8,20 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
   $stateProvider
     .state('create_meal.diner', {
       url: '/diner',
-      templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html'
+      templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html',
+      controller: 'ViewCreateMealCtrl'
     })
   $stateProvider
     .state('create_meal.profile', {
       url: '/profile',
-      templateUrl: 'static/viewCreateMeal/viewCreateMealProfile/viewCreateMealProfile.html'
+      templateUrl: 'static/viewCreateMeal/viewCreateMealProfile/viewCreateMealProfile.html',
+      controller: 'ViewCreateMealCtrl'
     })
   $stateProvider
     .state('create_meal.payment', {
       url: '/payment',
-      templateUrl: 'static/viewCreateMeal/viewCreateMealPayment/viewCreateMealPayment.html'
+      templateUrl: 'static/viewCreateMeal/viewCreateMealPayment/viewCreateMealPayment.html',
+      controller: 'ViewCreateMealCtrl'
     });
 }])
 
@@ -29,7 +32,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     },
 
 
-    $scope.checkboxHelpType = {
+    $scope.editedMeal = {
       buying: false,
       cooking: false,
       cleaning: false,
@@ -38,13 +41,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     },
 
     $scope.excludingHelp = function() {
-      $scope.checkboxHelpType.buying = false,
-        $scope.checkboxHelpType.cooking = false,
-        $scope.checkboxHelpType.cleaning = false
+      $scope.editedMeal.buying = false,
+        $scope.editedMeal.cooking = false,
+        $scope.editedMeal.cleaning = false
     },
 
     $scope.includingHelp = function() {
-      $scope.checkboxHelpType.notHelping = false
+      $scope.editedMeal.notHelping = false
     }
 
   ////ngrepeat for the cooking question
@@ -88,4 +91,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     default_option: false
   }];
 
-}]);
+}])
+
+.controller('ViewCreateMealProfileCtrl', ['$scope', '$http', function($scope, $http) {
+  $scope
+}]);  

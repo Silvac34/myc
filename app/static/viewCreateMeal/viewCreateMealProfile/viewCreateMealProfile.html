@@ -1,40 +1,42 @@
 <!-- form-profile.html -->
-<div class="form-group">
-  <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
-  <div class="col-md-10">
-    <select class="form-control" id="inputTown" ng-model="editedMeal.town" value="Santiago">
-      <option>Santiago</option>
-      <option>Concepción</option>
-      <option>Valparaíso</option>
-    </select>
+<div ng-controller="ViewCreateMealProfileCtrl">
+  <div class="form-group">
+    <label for="inputTown" class="col-md-2 control-label">¿En que ciudad quieres publicar una cena?</label>
+    <div class="col-md-10">
+      <select class="form-control" id="inputTown" ng-model="editedMeal.town" value="Santiago">
+        <option>Santiago</option>
+        <option>Concepción</option>
+        <option>Valparaíso</option>
+      </select>
+    </div>
   </div>
-</div>
 
-<div class="form-group">
-  <label for="inputLocation" class="col-md-2 control-label">¿Cual es la dirección exacta para venir a la cena?</label>
-  <div class="col-md-10">
-    <input type="text" class="form-control" id="inputLocation" ng-model="editedMeal.location">
+  <div class="form-group">
+    <label for="inputAdress" class="col-md-2 control-label">¿Cual es la dirección exacta para venir a la cena?</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" id="inputAdress" ng-model="editedMeal.adress">
+    </div>
   </div>
-</div>
 
-<div class="form-group">
-  <label for="inputLocationApprox" class="col-md-2 control-label">¿Qué punto de referencia podemos publicar en facebook para ubicar donde se tiene que ir?</label>
-  <div class="col-md-10">
-    <input type="text" class="form-control" id="inputLocationApprox" ng-model="editedMeal.locationApprox">
+  <div class="form-group">
+    <label for="inputAdressApprox" class="col-md-2 control-label">¿Qué punto de referencia podemos publicar en facebook para ubicar donde se tiene que ir?</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" id="inputLAdressApprox" ng-model="editedMeal.adressApprox">
+    </div>
   </div>
-</div>
 
-<div class="form-group">
-  <label for="inputTime" class="col-md-2 control-label">¿fecha/hora de llegada de los invitados?</label>
-  <div class="col-md-10">
-    <input type="datetime-local" class="form-control" id="inputTime" ng-model="editedMeal.time">
+  <div class="form-group">
+    <label for="inputTime" class="col-md-2 control-label">¿fecha/hora de llegada de los invitados?</label>
+    <div class="col-md-10">
+      <input type="datetime-local" class="form-control" id="inputTime" ng-model="editedMeal.time">
+    </div>
   </div>
-</div>
 
-<div class="form-group row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <a ui-sref="create_meal.payment" class="btn btn-primary btn-lg">
+  <div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <a ui-sref="create_meal.payment" class="btn btn-primary btn-lg">
     Seguir
     </a>
+    </div>
   </div>
 </div>

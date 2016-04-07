@@ -193,7 +193,8 @@ def user_info():
         user = Application.db.users.find_one({"_id": ObjectId(Application.user_id)})
         if user is None:
             return jsonify(error='Should not happen ...'), 500
-        return jsonify(_id=str(user["_id"]),email=user["email"]), 200
+        #return jsonify(_id=str(user["_id"]),email=user["email"]), 200
+        return dumps(Application.preprocess_id(user)), 200
     return jsonify(error="never reach here..."), 500
 
 # Insert one meal

@@ -3,15 +3,17 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'config',
+  'ui.bootstrap',
   'ui.router',
   'satellizer',
   'myApp.viewCreateMeal',
   'myApp.viewMeals',
   'myApp.viewMyMeals',
-  'myApp.viewLogin'
+  'myApp.viewLogin',
+  'userServices'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider','ENV', function($stateProvider, $urlRouterProvider, $authProvider,ENV) {
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
 
   $stateProvider
     .state('login', {
@@ -51,7 +53,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider','ENV', funct
   $authProvider.facebook({
     clientId: ENV.fbClientID,
     redirectUri: ENV.fbRedirectURI,
-    scope:['email']
+    scope: ['email']
   });
 
 }]);
@@ -73,11 +75,24 @@ app.run(function($rootScope, $state, $auth) {
     });
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state',function($scope,$auth,$state  ) {
-  $scope.logout= function (){
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
+  $scope.logout = function() {
     $auth.logout();
     $state.go('login');
-  }
+  },
+
+  $scope.isAuthenticated = function() {
+    return $auth.isAuthenticated()
+  },
   
-  
+  $scope.getUserProfile = function() {
+    if ($auth.isAuthenticated()) {
+      userServices.getUserInfo().then(function(data) {
+        $scope.user = data;
+      });
+    }
+  };
+
+  $scope.getUserProfile();
+
 }])

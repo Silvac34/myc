@@ -11,60 +11,41 @@
 // viewCreateMealProfile.html
 
     "town":"paris" //text
-    "adress":"12 rue de la liberté, 13ème, paris" //text
-    "adressApprox":"Metro Nation" //text
+    "address":"12 rue de la liberté, 13ème, paris" //text
+    "addressApprox":"Metro Nation" //text
     "time":"20:30 10/11/2012" //datetime-local
 
 // viewCreateMealPayment.html
 
     "price": 20000, //number
     "nbParticipants": 5, //number
-    "price": 5, //number
     
-    "helpBuying": true, //boolean
-      "buyers": [{
+    
+    "requiredHelpers": 
+      [{"buyers": [{
           "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon"
         }, //text
         {
-          "delivery": "20:00 10/11/2012"
-        } //datetime-local
-      ],
+          "deliveryTime": "20:00 10/11/2012" //datetime-local
+        }]
+      }, 
+      {"cooks": [{
+            "timeCooking": "21:00 10/11/2012" //datetime-local]
+          }, 
+          {
+            "nbCooks": 2//number
+          }]
+      },
+      {"cleaners": 
+        [{
+          "nbCleaners": 2 //number  
+        }]
+      }],
       
-    "helpCooking": true, //boolean
-      "cookers": [{
-          "timeCooking": "21:00 10/11/2012"
-
-        }, //datetime-local]
-        {
-          "nbCookers": 2
-
-        } //number
-      ],
-     
-      
-    "helpCleaning": false, //boolean
-      "cleaners":[{
-        "nbCleaners": 2
-      }],//number
-      
-      
-    "notHelping": false, //boolean
     
     
     
-    "label":"repas sympa entre amis", 
-    "description":"Nous alons manger des raviolis",
-    "start_time":"1205", 
-    "end_time":"2330",
-    "admin":[{"_id":"010212023"}], 
-    "desired_guests":{
-      "cooks":"5", 
-      "cook_helps":"3",
-      "washers":"4"},
-    "attending_guests":{
-        "cooks":[{"_id":"010200120"}], "cook_helps":[{"_id":"010200121"}]}
-      }
-    ],
-    
-"users":[{}]
+    "admin":[{"_id":"010212023"  //string
+      }] 
+    ]
   }

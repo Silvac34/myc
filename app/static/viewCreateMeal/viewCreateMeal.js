@@ -32,24 +32,29 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
+    menu: "",
     veggies: false,
     town: "Santiago",
-    requiredHelpers:[],
-    helpBuying: false,
+    requiredHelpers:[]
+  }, 
+  
+  $scope.helpBox = $scope.helpBox || {
+    helpBuying: false, 
     helpCooking: false,
     helpCleaning: false,
     notHelping: true
-  };
+  }
+  
 
   //initialize the buyers model
   $scope.buyers = $scope.buyers || {
-      delivery: "",
+      deliveryTime: "",
       ingredient: ""
     },
 
     $scope.cooks = $scope.cooks || {
       nbCooks: "",
-      timeCooking: "",
+      timeCooking: ""
     },
 
     $scope.cleaners = $scope.cleaners || {
@@ -63,70 +68,29 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     }
 
   $scope.excludingHelp = function() {
-    $scope.editedMeal.helpBuying = false,
-      $scope.editedMeal.helpCooking = false,
-      $scope.editedMeal.helpCleaning = false
+    $scope.helpBox.helpBuying = false,
+      $scope.helpBox.helpCooking = false,
+      $scope.helpBox.helpCleaning = false
   }
 
 
 
   $scope.createMeal = function() {
-    if ($scope.editedMeal.helpBuying == true) {
+    if ($scope.helpBox.helpBuying == true) {
       //$scope.editedMeal.requiredHelpers.buyers = $scope.buyers
       $scope.editedMeal.requiredHelpers.push({"buyers":$scope.buyers})
     }
-    if ($scope.editedMeal.helpCooking == true) {
+    if ($scope.helpBox.helpCooking == true) {
       $scope.editedMeal.requiredHelpers.push({"cooks":$scope.cooks})
     }
-    if ($scope.editedMeal.helpCleaning == true) {
+    if ($scope.helpBox.helpCleaning == true) {
       $scope.editedMeal.requiredHelpers.push({"cleaners":$scope.cleaners})
     }
-    $http.post('/api/meal', meal);
+    $http.post('/api/meal', $scope.editedMeal);
     
     //TODO : rediriger vers page du repas
   }
 
-
-  ////ngrepeat for the cooking question
-  /*  $scope.nbCookers = [{
-      number_cooker: "0",
-      default_option: true
-    }, {
-      number_cooker: "1",
-      default_option: false
-    }, {
-      number_cooker: "2",
-      default_option: false
-    }, {
-      number_cooker: "3",
-      default_option: false
-    }, {
-      number_cooker: "4",
-      default_option: false
-    }, {
-      number_cooker: "5",
-      default_option: false
-    }];
-  //ngrepeat for the cleaning question
-  $scope.nbCleaners = [{
-    number_cleaner: "0",
-    default_option: true
-  }, {
-    number_cleaner: "1",
-    default_option: false
-  }, {
-    number_cleaner: "2",
-    default_option: false
-  }, {
-    number_cleaner: "3",
-    default_option: false
-  }, {
-    number_cleaner: "4",
-    default_option: false
-  }, {
-    number_cleaner: "5",
-    default_option: false
-  }];*/
 
 }])
 

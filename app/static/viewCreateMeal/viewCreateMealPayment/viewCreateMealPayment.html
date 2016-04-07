@@ -19,11 +19,11 @@
   <label class="col-md-2 control-label">Te gustaría ayuda para ...</label>
   <br>
   <div class="col-md-10">
-    <input type="checkbox" id="helpBuyers" ng-model="editedMeal.helpBuying" ng-change="includingHelp()">
+    <input type="checkbox" id="helpBuyers" ng-model="helpBox.helpBuying" ng-change="includingHelp()">
     <label>Hacer las compras</label>
     <br/>
 
-    <span ng-if="editedMeal.helpBuying" class="animate-if">
+    <span ng-if="helpBox.helpBuying" class="animate-if">
       <div class="form-group">
         <label for="inputIngredient" class="col-md-2 control-label">¿Cual es la lista de los ingredientes que necesitas ?</label>
         <div class="col-md-10">
@@ -33,18 +33,18 @@
       </div>
 
       <div class="form-group">
-        <label for="inputDelivery" class="col-md-2 control-label">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
+        <label for="inputDeliveryTime" class="col-md-2 control-label">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
         <div class="col-md-10">
-          <input type="datetime-local" class="form-control" id="inputDelivery" ng-model="buyers.delivery">
+          <input type="datetime-local" class="form-control" id="inputDeliveryTime" ng-model="buyers.deliveryTime">
         </div>
       </div>
     </span>
 
-    <input type="checkbox" id="cooking" ng-model="editedMeal.helpCooking" ng-change="includingHelp()">
+    <input type="checkbox" id="cooking" ng-model="helpBox.helpCooking" ng-change="includingHelp()">
     <label>Ayudar para la cocina</label>
     <br/>
     
-    <span ng-if="editedMeal.helpCooking" class="animate-if">
+    <span ng-if="helpBox.helpCooking" class="animate-if">
       <div class="form-group">
         <label for="inputTimeCooking" class="col-md-2 control-label">¿Cuando deben venir la gente para ayudarte a cocinar?</label>
         <div class="col-md-10">
@@ -53,7 +53,7 @@
       </div>   
     
       <div class="form-group">
-        <label for="inputNbCooker" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
+        <label for="inputNbCook" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
         <div class="col-md-10">
           <span class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</span>
           <input type="number" class="form-control" min ="0" ng-model="cooks.nbCooks"/>
@@ -61,10 +61,10 @@
       </div>
     </span>
 
-<input type="checkbox" id="cleaning" ng-model="editedMeal.helpCleaning" ng-change="includingHelp()">
+<input type="checkbox" id="cleaning" ng-model="helpBox.helpCleaning" ng-change="includingHelp()">
 <label>Lavar la loza</label>
 <br/>
-<span ng-if="editedMeal.helpCleaning" class="animate-if">
+<span ng-if="helpBox.helpCleaning" class="animate-if">
     <div class="form-group">
       <label for="inputNbCleaner" class="col-md-2 control-label">¿Cuantos personas al máximo pueden inscribirse para ayudarte con la loza ?</label>
       <div class="col-md-10">
@@ -74,7 +74,7 @@
 </div>
 </span>
 
-<input type="checkbox" id="nothelping" ng-model="editedMeal.notHelping" ng-change="excludingHelp()">
+<input type="checkbox" id="nothelping" ng-model="helpBox.notHelping" ng-change="excludingHelp()">
 <label>Nada! Solo quiero venir como invitado =)</label>
 </div>
 </div>

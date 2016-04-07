@@ -5,6 +5,7 @@ var app = angular.module('myApp', [
   'config',
   'ui.bootstrap',
   'ui.router',
+  'ngAnimate',
   'satellizer',
   'myApp.viewCreateMeal',
   'myApp.viewMeals',

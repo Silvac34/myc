@@ -11,11 +11,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../static/css/app.css">
   <link rel="stylesheet" href="../static/css/bootstrap.css">
+  <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
   <script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="../static/bower_components/satellizer/satellizer.min.js"></script>
   <script src="../static/bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="../static/app.js"></script>
+  <script src="../static/config.js"></script>
   <script src="../static/viewCreateMeal/viewCreateMeal.js"></script>
   <script src="../static/viewMeals/viewMeals.js"></script>
   <script src="../static/viewMyMeals/viewMyMeals.js"></script>
@@ -26,40 +29,14 @@
   
 </head>
 <body>
-
-
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">SharEat</a></a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li><a ui-sref="create_meal">Proponer una cena</a></li>
-        <li><a ui-sref="view_meals">Inscribirse a una cena</a></li>
-        <li><a ui-sref="my_meals">Mis cenas</a></li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar">
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button></button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Log Out</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+<div ng-controller="AppCtrl">
+  <ul class="menu">
+    <li><a ui-sref="create_meal">Create a Meal</a></li>
+    <li><a ui-sref="view_meals">Suscribe to a Meal</a></li>
+    <li><a ui-sref="my_meals">My Meals</a></li>
+    <li><a  ng-click="logout()" class="btn btn-danger">Logout</a></li>
+  </ul>
+</div>
 
   <div ui-view></div>
 

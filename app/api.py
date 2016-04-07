@@ -25,6 +25,7 @@ class Application:
                             socketTimeoutMS=None,
                             socketKeepAlive=True)
     db = client.get_default_database()
+    
 
     def __init__(self):
         pass
@@ -46,8 +47,24 @@ class Application:
                 if isinstance(o["_id"], dict):
                     o["_id"] = str(o["_id"]["$oid"])
         return o
-        
 
+    @classmethod
+    def is_authentificated(self,request):
+        # the token is put in the Authorization header
+        if not request.headers.get('Authorization'):
+            return jsonify(error='Authorization header missing'), 401
+        # this header looks like this: “Authorization: Bearer {token}”
+        token = request.headers.get('Authorization').split()[1]
+        try:
+            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+        except DecodeError:
+            return jsonify(error='Invalid token'), 401
+        except ExpiredSignature:
+            return jsonify(error='Expired token'), 401
+        else:
+            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+            self.user_id = payload['sub']
+            return True
 
 class User:
     def __init__(self,email,password=None,facebook_id=None):
@@ -100,26 +117,26 @@ def auth_facebook():
     user = User(facebook_id=profile['id'], email=profile['email'])
     return jsonify(token=user.token())
 
-@Application.app.route('/auth/signup', methods=['POST'])
-def signup():
-    data = json.loads(request.data)
-    email = data["email"]
-    password = data["password"]
-    user = User(email=email, password=password)
-    return jsonify(token=user.token())
+#@Application.app.route('/auth/signup', methods=['POST'])
+#def signup():
+#    data = json.loads(request.data)
+#    email = data["email"]
+#    password = data["password"]
+#    user = User(email=email, password=password)
+#    return jsonify(token=user.token())
 
-@Application.app.route('/auth/login', methods=['POST'])
-def login():
-    data = json.loads(request.data)
-    email = data["email"]
-    password = data["password"]
-    user = Application.db.users.find_one({"email":email})
-    if not user:
-        return jsonify(error="No such user"), 404
-    if user["password"] == password:
-        return jsonify(token=User(email).token()), 200
-    else:
-        return jsonify(error="Wrong email or password"), 400
+#@Application.app.route('/auth/login', methods=['POST'])
+#def login():
+#    data = json.loads(request.data)
+#    email = data["email"]
+#    password = data["password"]
+#    user = Application.db.users.find_one({"email":email})
+#    if not user:
+#        return jsonify(error="No such user"), 404
+#    if user["password"] == password:
+#        return jsonify(token=User(email).token()), 200
+#    else:
+#        return jsonify(error="Wrong email or password"), 400
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -130,16 +147,6 @@ PUBLIC API
 @Application.app.route('/api/meals', methods=['GET'])
 def get_all_meals():
     return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
-
-# Insert one meal
-@Application.app.route('/api/meal', methods=["POST"])
-def insert_one_meal():
-    if request.data == "" or request.data == "{}" or request.data is None:
-        return ""
-    else:
-        id_inserted = Application.db.meals.insert(json.loads(request.data))
-        inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
-        return Response(dumps(Application.preprocess_id(inserted)), status=200)
 
 # Delete one meal from ID
 @Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
@@ -171,6 +178,34 @@ def update_one_meal(meal_id):
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 PRIVATE API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#Get current user
+@Application.app.route('/api/user', methods=["GET"])
+def user_info():
+    authResponse = Application.is_authentificated(request)
+    if authResponse is not True:
+        return authResponse
+    else:
+        user = Application.db.users.find_one({"_id": ObjectId(Application.user_id)})
+        if user is None:
+            return jsonify(error='Should not happen ...'), 500
+        return jsonify(_id=str(user["_id"]),email=user["email"]), 200
+    return jsonify(error="never reach here..."), 500
+
+# Insert one meal
+@Application.app.route('/api/meal', methods=["POST"])
+def insert_one_meal():
+    authResponse = Application.is_authentificated(request)
+    if authResponse is not True:
+        return authResponse
+    else:
+        if request.data == "" or request.data == "{}" or request.data is None:
+            return ""
+        else:
+            new_meal = json.loads(request.data)
+            new_meal["admin"] = Application.user_id
+            id_inserted = Application.db.meals.insert(new_meal)
+            inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
+            return Response(dumps(Application.preprocess_id(inserted)), status=200)
 
 
 ####################################################################################

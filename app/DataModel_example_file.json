@@ -49,3 +49,23 @@
       }] 
     ]
   }
+  
+  
+  {
+    "users": [{
+        "_id": "11272323009876" //string , 
+        "email": "maillet.kevin91@gmail.com" //email,
+        "facebook_id": "11278668909876" //string,
+        "picture": {
+          "data": {
+            "url": "https://scontent.3d9&oe=5774CB92", //URL
+            "is_silhouette": false
+          }
+        },
+        "first_name": "Kevin",
+        "last_name": "Marteau",
+        "gender": "male",
+        "link": "https://www.facebook.com/app_scoped_user_id/10539797267/" //url
+      }
+
+    }]

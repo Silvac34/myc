@@ -135,3 +135,9 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/*Profile pic */
+.profilePic {
+    margin-bottom: -9px;
+    margin-top: -9px;
+    width: 40px;
+}

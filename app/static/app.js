@@ -95,5 +95,6 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
   };
 
   $scope.getUserProfile();
+  $scope.navbarCollapsed = true;
 
 }])

@@ -34,40 +34,43 @@
 <body>
 
   <div ng-controller="AppCtrl">
-    <ul class="menu">
-      <li><a ui-sref="create_meal">Create a Meal</a></li>
-      <li><a ui-sref="view_meals">Suscribe to a Meal</a></li>
-      <li><a ui-sref="my_meals">My Meals</a></li>
-      <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
-    </ul>
 
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="../" class="navbar-brand">Shareat</a>
+    <div class="bs-component">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">Shareat</a>
+          </div>
+
+          <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
+            <ul class="nav navbar-nav">
+              <li><a ui-sref="create_meal">Create a Meal</a></li>
+              <li><a ui-sref="view_meals">Suscribe to a Meal</a></li>
+              <li><a ui-sref="my_meals">My Meals</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li ng-if="isAuthenticated()" uib-dropdown class="dropdown">
+                <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.last_name}}'}} <span class="caret"></span></a>
+                <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
+                  <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
+                </ul>
+              </li>
+              <li ng-if="!isAuthenticated()"><a ui-sref="login" class="btn btn-success"> Sign In</a></li>
+            </ul>
+
+          </div>
         </div>
-
-        <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li><a ui-sref="create_meal">Create a Meal</a></li>
-            <li><a ui-sref="view_meals">Suscribe to a Meal</a></li>
-            <li><a ui-sref="my_meals">My Meals</a></li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li ng-if="isAuthenticated()" uib-dropdown class="dropdown">
-              <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">{{'{{user.last_name}}'}} <span class="caret"></span></a>
-              <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
-                <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
-              </ul>
-            </li>
-            <li ng-if="!isAuthenticated()"><a ui-sref="login" class="btn btn-success"> Sign In</a></li>
-          </ul>
-
-
-        </div>
-      </div>
+      </nav>
     </div>
+
 
 
     <div ui-view></div>

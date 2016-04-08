@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import json
-import DevData
 import os
 import requests
 import jwt
@@ -218,6 +217,5 @@ def insert_one_meal():
 
 
 if __name__ == "__main__":
-    #DevData.populate_database() #to populate the database in development environment
     #Application.app.debug = True
     Application.app.run(host='0.0.0.0', port=8080)

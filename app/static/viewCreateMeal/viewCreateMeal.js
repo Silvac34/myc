@@ -61,12 +61,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
       nbCleaners: ""
     },
 
-
-
-    $scope.includingHelp = function() {
-      $scope.editedMeal.notHelping = false
-    }
-
   $scope.excludingHelp = function() {
     $scope.helpBox.helpBuying = false,
       $scope.helpBox.helpCooking = false,

@@ -147,11 +147,6 @@ def auth_facebook():
 PUBLIC API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# Get all meals
-@Application.app.route('/api/meals', methods=['GET'])
-def get_all_meals():
-    return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
-
 # Delete one meal from ID
 @Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
 def delete_meal(meal_id):
@@ -211,6 +206,15 @@ def insert_one_meal():
             id_inserted = Application.db.meals.insert(new_meal)
             inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
             return Response(dumps(Application.preprocess_id(inserted)), status=200)
+
+# Get all meals
+@Application.app.route('/api/meals', methods=['GET'])
+def get_all_meals():
+    authResponse = Application.is_authentificated(request)
+    if authResponse is not True:
+        return authResponse
+    else:
+        return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
 
 
 ####################################################################################

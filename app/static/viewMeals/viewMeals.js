@@ -4,14 +4,6 @@ angular.module('myApp.viewMeals', ['ui.router'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
-/*  $stateProvider
-      .state('view_meals', {
-        url: '/view_meals',
-        templateUrl: 'static/viewMeals/viewMeals.html',
-        //controller: 'ViewMealsCtrl'
-        controller: 'ViewMealsCtrl',
-        data: {requiredLogin: true}
-      })*/
 }])
 
 .controller('ViewMealsCtrl', ['$scope','$http',function($scope,$http) {

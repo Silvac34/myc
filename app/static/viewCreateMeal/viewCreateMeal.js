@@ -35,8 +35,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     menu: "",
     veggies: false,
     town: "Santiago",
-    requiredHelpers:[]
+    detailedInfo : {"requiredHelpers":[]}
   }, 
+
   
   $scope.helpBox = $scope.helpBox || {
     helpBuying: false, 
@@ -64,7 +65,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
 
 
     $scope.includingHelp = function() {
-      $scope.editedMeal.notHelping = false
+      $scope.helpBox.notHelping = false
     }
 
   $scope.excludingHelp = function() {
@@ -77,14 +78,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
 
   $scope.createMeal = function() {
     if ($scope.helpBox.helpBuying == true) {
-      //$scope.editedMeal.requiredHelpers.buyers = $scope.buyers
-      $scope.editedMeal.requiredHelpers.push({"buyers":$scope.buyers})
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"buyers":$scope.buyers})
     }
     if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.requiredHelpers.push({"cooks":$scope.cooks})
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cooks":$scope.cooks})
     }
     if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.requiredHelpers.push({"cleaners":$scope.cleaners})
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners})
     }
     $http.post('/api/meal', $scope.editedMeal);
     

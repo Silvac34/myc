@@ -11,7 +11,6 @@
 // viewCreateMealProfile.html
 
     "town":"paris" //text
-    "address":"12 rue de la liberté, 13ème, paris" //text
     "addressApprox":"Metro Nation" //text
     "time":"20:30 10/11/2012" //datetime-local
 
@@ -20,33 +19,37 @@
     "price": 20000, //number
     "nbParticipants": 5, //number
     
+    "admin":[{"_id":"010212023"  //string
+      }],
     
-    "requiredHelpers": 
-      [{"buyers": [{
-          "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon"
-        }, //text
-        {
-          "deliveryTime": "20:00 10/11/2012" //datetime-local
-        }]
-      }, 
-      {"cooks": [{
-            "timeCooking": "21:00 10/11/2012" //datetime-local]
+    "detailedInfo":{[
+      
+        "requiredHelpers": 
+        [{"buyers": [{
+            "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon" //text
           }, 
           {
-            "nbCooks": 2//number
+            "deliveryTime": "20:00 10/11/2012" //datetime-local
           }]
-      },
-      {"cleaners": 
-        [{
-          "nbCleaners": 2 //number  
+        }, 
+        {"cooks": [{
+              "timeCooking": "21:00 10/11/2012" //datetime-local]
+            }, 
+            {
+              "nbCooks": 2//number
+            }]
+        },
+        {"cleaners": 
+          [{
+            "nbCleaners": 2 //number  
+          }]
         }]
-      }],
+    ]},
       
-    
-    
-    
-    "admin":[{"_id":"010212023"  //string
-      }] 
+      "privateInfo":{[
+        "address":"12 rue de la liberté, 13ème, paris" //text
+      ]}
+      
     ]
   }
   

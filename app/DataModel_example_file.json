@@ -17,7 +17,8 @@
 // viewCreateMealPayment.html
 
     "price": 20000, //number
-    "nbParticipants": 5, //number
+    "nbGuests": 5, //integer
+    "nbRemainingPlaces":2, //integer
     
     "admin":[{"_id":"010212023"  //string
       }],
@@ -36,12 +37,12 @@
               "timeCooking": "21:00 10/11/2012" //datetime-local]
             }, 
             {
-              "nbCooks": 2//number
+              "nbCooks": 2//integer
             }]
         },
         {"cleaners": 
           [{
-            "nbCleaners": 2 //number  
+            "nbCleaners": 2 //integer  
           }]
         }]
     ]},

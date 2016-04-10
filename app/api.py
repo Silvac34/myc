@@ -207,14 +207,14 @@ def insert_one_meal():
             inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
             return Response(dumps(Application.preprocess_id(inserted)), status=200)
 
-# Get all meals
+# Get all meals- Show public and undetailed information
 @Application.app.route('/api/meals', methods=['GET'])
 def get_all_meals():
     authResponse = Application.is_authentificated(request)
     if authResponse is not True:
         return authResponse
     else:
-        return Response(dumps(Application.preprocess_id(Application.db.meals.find())), status=200)
+        return Response(dumps(Application.preprocess_id(Application.db.meals.find({},{"detailedInfo":0,"privateInfo":0}))), status=200)
 
 
 ####################################################################################

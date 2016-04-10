@@ -1,28 +1,32 @@
 <!-- form.html -->
 <div class="row">
-<div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-sm-offset-2">
 
-    <div id="form-container">
+        <div id="form-container">
 
-        <div class="page-header text-center">
-            <h2>Proponer una cena</h2>
+            <div class="page-header text-center">
+                <h2>Proponer una cena</h2>
 
-            
-            <!-- the links to our nested states using relative paths -->
-            <!-- add the active class if the state matches our ui-sref -->
-            <div id="status-buttons" class="text-center">
-                <a ui-sref-active="active" ui-sref="create_meal.diner"><span class="badge">1</span> Qué</a>
-                <a ui-sref-active="active" ui-sref="create_meal.profile"><span class="badge">2</span> Donde y cuando</a>
-                <a ui-sref-active="active" ui-sref="create_meal.payment"><span class="badge">3</span> Comó</a>
+
+                <!-- the links to our nested states using relative paths -->
+                <!-- add the active class if the state matches our ui-sref -->
+                <div id="status-buttons" class="text-center">
+                    <a ui-sref-active="active" ui-sref="create_meal.diner"><span class="badge">1</span> Qué</a>
+                    <a ui-sref-active="active" ui-sref="create_meal.profile"><span class="badge">2</span> Donde y cuando</a>
+                    <a ui-sref-active="active" ui-sref="create_meal.payment"><span class="badge">3</span> Comó</a>
+                </div>
             </div>
-        </div>
-        
-        <!-- use ng-submit to catch the form submission and use our Angular function -->
-        <form id="signup-form" ng-submit="processForm()" novalidate>
 
-            <!-- our nested state views will be injected here -->
-            <div id="form-view" ui-view></div>
+            <!-- use ng-submit to catch the form submission and use our Angular function -->
+            <form id="signup-form" ng-submit="processForm()" novalidate>
+
+                <!-- our nested state views will be injected here -->
+                <div ng-if="animation.is_animated && animation.next_page" id="form-views-right" ui-view></div>
+                <div ng-if="animation.is_animated && animation.last_page" id="form-views-left" ui-view></div>
+                <div ng-if="animation.is_not_animated && animation.next_page" ui-view></div>
             
-        </form>
-        
+            </form>
+
+        </div>
+    </div>
 </div>

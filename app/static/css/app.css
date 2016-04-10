@@ -32,27 +32,50 @@
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views             { width:auto; }
+#form-views-right             { width:auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
-#form-views.ng-enter,
-#form-views.ng-leave      { position:absolute; left:30px; right:30px;
+#form-views-right.ng-enter,
+#form-views-right.ng-leave      { position:absolute; left:30px; right:30px;
+    transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
+}
+
+#form-views-left             { width:auto; }
+
+/* basic styling for entering and leaving */
+/* left and right added to ensure full width */
+#form-views-left.ng-enter,
+#form-views-left.ng-leave      { position:absolute; left:30px; right:30px;
     transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
 }
     
-/* enter animation */
-#form-views.ng-enter            { 
+/* right enter animation */
+#form-views-right.ng-enter            { 
     -webkit-animation:slideInRight 0.5s both ease;
     -moz-animation:slideInRight 0.5s both ease;
     animation:slideInRight 0.5s both ease; 
 }
 
-/* leave animation */
-#form-views.ng-leave            { 
+/* right leave animation */
+#form-views-right.ng-leave            { 
     -webkit-animation:slideOutLeft 0.5s both ease;
     -moz-animation:slideOutLeft 0.5s both ease;
     animation:slideOutLeft 0.5s both ease;   
+}
+
+/* left enter animation */
+#form-views-left.ng-enter            { 
+    -webkit-animation:slideInLeft 0.5s both ease;
+    -moz-animation:slideInLeft 0.5s both ease;
+    animation:slideInLeft 0.5s both ease; 
+}
+
+/* left leave animation */
+#form-views-left.ng-leave            { 
+    -webkit-animation:slideOutRight 0.5s both ease;
+    -moz-animation:slideOutRight 0.5s both ease;
+    animation:slideOutRight 0.5s both ease;   
 }
 
 /* ANIMATIONS

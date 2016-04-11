@@ -52,14 +52,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router'])
     last_page: false
   },
   
-  $scope.change_animation_type = function() {
-      $scope.animation.is_animated = true;
-      $scope.animation.is_not_animated = false;
-  },
   
   $scope.change_animation_to_the_right = function() {
       $scope.animation.next_page = true;
       $scope.animation.last_page = false;
+      $scope.animation.is_animated = true;
+      $scope.animation.is_not_animated = false;
   },
   
   $scope.change_animation_to_the_left = function() {

@@ -23,7 +23,7 @@
                 <!-- our nested state views will be injected here -->
                 <div ng-if="animation.is_animated && animation.next_page" id="form-views-right" ui-view></div>
                 <div ng-if="animation.is_animated && animation.last_page" id="form-views-left" ui-view></div>
-                <div ng-if="animation.is_not_animated && animation.next_page" ui-view></div>
+                <div ng-if="animation.is_not_animated" ui-view></div>
             
             </form>
 

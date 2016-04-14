@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewMeals', ['ui.router'])
+angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 

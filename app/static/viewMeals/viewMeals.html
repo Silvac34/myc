@@ -2,28 +2,45 @@
   <div class="page-header">
     <h1 id="tables">Liste des repas</h1>
   </div>
-  <div class="bs-component">
-    <table class="table table-striped table-hover ">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nom du repas</th>
-          <th>Date</th>
-          <th>Localisation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="meal in meals" ng-click="$parent.editedMeal = meal">
-          <td>{{$index}}</td>
-          <td>{{meal.label}}</td>
-          <td>{{meal.date}}</td>
-          <td>{{meal.location}}</td>
-          <td>{{meal._id}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container">
+    <div class="row" ng-repeat="meal in meals">
+      <div class="col-md-10">
+        <div class="list-group">
+          <a class="list-group-item">
+            <div class="row">
+              <div class="col-md-9 col-md-offset-1">
+                <img ng-src="/static/sources/menu.png"></img> {{meal.menu}}
+              </div>
+              <div class="col-md-2">
+                <div ng-if="meal.nbGuests">
+                  A partir de {{meal.price/meal.nbGuests}} €
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-1">
+                <div ng-if="meal.veggies">
+                  <img ng-src="/static/sources/vegetarian.png" alt="vegetarian"></img>
+                </div>
+              </div>
+              <div class="col-md-4 col-md-offset-1">
+                <img ng-src="/static/sources/location.png"></img> {{meal.addressApprox}}
+              </div>
+              <div class="col-md-3">
+                <img ng-src="/static/sources/calendar.png"></img>
+                {{meal.time | date:'HH:mm'}}
+                </br>
+                {{meal.time | date:'dd/MM/yyyy'}}
+              </div>
+
+
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
-  
+
   <div>{{meals | json}}</div>
 </div>
-

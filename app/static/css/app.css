@@ -32,50 +32,42 @@
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views-right             { width:auto; }
 
-/* basic styling for entering and leaving */
-/* left and right added to ensure full width */
-#form-views-right.ng-enter,
-#form-views-right.ng-leave      { position:absolute; left:30px; right:30px;
+.form-view-animation { width:auto; }
+/*
+.form-view-animation.ng-enter,
+.form-view-animation.ng-leave      { position:absolute; left:30px; right:30px;
     transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
 }
+*/
 
-#form-views-left             { width:auto; }
-
-/* basic styling for entering and leaving */
-/* left and right added to ensure full width */
-#form-views-left.ng-enter,
-#form-views-left.ng-leave      { position:absolute; left:30px; right:30px;
-    transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
-}
-    
-/* right enter animation */
-#form-views-right.ng-enter            { 
+/* right enter animation 
+.form-view-animation.ng-enter            { 
     -webkit-animation:slideInRight 0.5s both ease;
     -moz-animation:slideInRight 0.5s both ease;
     animation:slideInRight 0.5s both ease; 
 }
 
-/* right leave animation */
-#form-views-right.ng-leave            { 
+/* right leave animation 
+    .form-view-animation.ng-leave            { 
     -webkit-animation:slideOutLeft 0.5s both ease;
     -moz-animation:slideOutLeft 0.5s both ease;
     animation:slideOutLeft 0.5s both ease;   
+}*/
+
+.form-view-animation.ng-enter, .form-view-animation.ng-leave, .form-view-animation.ng-anchor {
+  transition:0.5s linear all;
+  position:relative;
+}
+.form-view-animation.ng-enter {
+  transform:translateX(200%);
 }
 
-/* left enter animation */
-#form-views-left.ng-enter            { 
-    -webkit-animation:slideInLeft 0.5s both ease;
-    -moz-animation:slideInLeft 0.5s both ease;
-    animation:slideInLeft 0.5s both ease; 
+.form-view-animation.ng-enter.ng-enter-active, .form-view-animation.ng-leave {
+  transform:translateX(0%);
 }
-
-/* left leave animation */
-#form-views-left.ng-leave            { 
-    -webkit-animation:slideOutRight 0.5s both ease;
-    -moz-animation:slideOutRight 0.5s both ease;
-    animation:slideOutRight 0.5s both ease;   
+.form-view-animation.ng-leave.ng-leave-active {
+  transform:translateX(-200%);
 }
 
 /* ANIMATIONS

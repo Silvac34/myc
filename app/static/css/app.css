@@ -40,7 +40,6 @@
 #form-views-left.ng-enter
 { position:absolute;transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
 }
-*/
 
 /* right enter animation */
 #form-views-right.ng-enter { 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
+angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 

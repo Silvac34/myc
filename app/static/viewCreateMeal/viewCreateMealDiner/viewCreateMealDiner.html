@@ -1,8 +1,11 @@
 <!-- form-diner.html -->
 <div class="form-group slide">
-  <label for="inputMenu" class="col-md-2 control-label">¿Cúal será el menu?</label>
+  <label for="inputMenu" class="col-md-2 control-label">¿Cúal será el menu?*</label>
   <div class="col-md-10">
     <textarea class="form-control" rows="3" id="inputMenu" ng-model="editedMeal.menu" required></textarea>
+    <div ng-messages="editedMeal.menu" style="color:red" role="alert">
+      <div ng-message="required">¡Olvidaste el menu!</div>
+    </div>
   </div>
 </div>
 

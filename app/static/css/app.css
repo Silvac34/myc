@@ -32,77 +32,73 @@
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views-right             { width:auto; }
+#form-views-right,#form-views-left     { width:auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
 #form-views-right.ng-enter,
-#form-views-right.ng-leave      { position:absolute; left:30px; right:30px;
-    transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
+#form-views-left.ng-enter
+{ position:absolute;transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
 }
 
-#form-views-left             { width:auto; }
-
-/* basic styling for entering and leaving */
-/* left and right added to ensure full width */
-#form-views-left.ng-enter,
-#form-views-left.ng-leave      { position:absolute; left:30px; right:30px;
-    transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
-}
-    
 /* right enter animation */
-#form-views-right.ng-enter            { 
-    -webkit-animation:slideInRight 0.5s both ease;
-    -moz-animation:slideInRight 0.5s both ease;
-    animation:slideInRight 0.5s both ease; 
+#form-views-right.ng-enter { 
+    transform: translateX(100%);
 }
 
-/* right leave animation */
-#form-views-right.ng-leave            { 
-    -webkit-animation:slideOutLeft 0.5s both ease;
-    -moz-animation:slideOutLeft 0.5s both ease;
-    animation:slideOutLeft 0.5s both ease;   
+#form-views-right.ng-enter.ng-enter-active {
+  transform: translateX(0);
+}
+
+#form-views-right.ng-leave.ng-leave-active { 
+    transform: translateX(-100%);
 }
 
 /* left enter animation */
 #form-views-left.ng-enter            { 
-    -webkit-animation:slideInLeft 0.5s both ease;
-    -moz-animation:slideInLeft 0.5s both ease;
-    animation:slideInLeft 0.5s both ease; 
+    transform: translateX(-100%);
 }
 
-/* left leave animation */
-#form-views-left.ng-leave            { 
-    -webkit-animation:slideOutRight 0.5s both ease;
-    -moz-animation:slideOutRight 0.5s both ease;
-    animation:slideOutRight 0.5s both ease;   
+#form-views-left.ng-leave, #form-views-left.ng-enter.ng-enter-active {
+  transform: translateX(0);
 }
+
+#form-views-left.ng-leave.ng-leave-active { 
+    transform: translateX(100%);
+}
+
+
+
+
+
+
 
 /* ANIMATIONS
 ============================================================================= */
 /* slide out to the left */
-@keyframes slideOutLeft {
+@keyframes slideLeft {
     to      { transform: translateX(-200%); }
 }
-@-moz-keyframes slideOutLeft {  
+@-moz-keyframes slideLeft {  
     to      { -moz-transform: translateX(-200%); }
 }
-@-webkit-keyframes slideOutLeft {
+@-webkit-keyframes slideLeft {
     to      { -webkit-transform: translateX(-200%); }
 }
 
-/* slide in from the right */
-@keyframes slideInRight {
-    from    { transform:translateX(200%); }
-    to      { transform: translateX(0); }
+@keyframes slideRight {
+    to      { transform: translateX(200%); }
 }
-@-moz-keyframes slideInRight {
-    from    { -moz-transform:translateX(200%); }
-    to      { -moz-transform: translateX(0); }
+@-moz-keyframes slideRight {  
+    to      { -moz-transform: translateX(200%); }
 }
-@-webkit-keyframes slideInRight {
-    from    { -webkit-transform:translateX(200%); }
-    to      { -webkit-transform: translateX(0); }
+@-webkit-keyframes slideRight {
+    to      { -webkit-transform: translateX(200%); }
+}
+
+@keyframes fade_out {
+  from { opacity:1; }
+  to { opacity:0; }
 }
 
 /* apparition of help questions */

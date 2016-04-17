@@ -14,18 +14,18 @@
       <label for="veggiesRadio" class="radio">
         <input type="radio" id="inputVeggies_yes" name="veggiesRadio" ng-value=true ng-model="editedMeal.veggies"> Sí
       </label>
-    </div>
-    <div class="radio">
-      <label for="veggiesRadio" class="radio">
-        <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No
-      </label>
+      <div class="radio">
+        <label for="veggiesRadio" class="radio">
+          <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No
+        </label>
+      </div>
     </div>
     <p class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</p>
   </div>
+</div>
 
-  <div class="form-group">
-    <div style="text-align:center">
-      <button ui-sref="create_meal.profile" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Seguir</button>
-    </div>
+<div class="form-group">
+  <div class="text-center">
+    <button ui-sref="create_meal.profile" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Seguir</button>
   </div>
 </div>

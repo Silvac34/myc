@@ -205,6 +205,7 @@ def insert_one_meal():
             new_meal["admin"] = Application.user_id
             new_meal["privateInfo"]["users"]= [{"_id":Application.user_id,"role":"admin"}]
             new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
+            new_meal["creationDate"] = datetime.now()
             id_inserted = Application.db.meals.insert(new_meal)
             inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
             return Response(dumps(Application.preprocess_id(inserted)), status=200)

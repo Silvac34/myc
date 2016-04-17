@@ -13,6 +13,16 @@ angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar'])
       $scope.meals = data;
     })
   }
+  
+  //$scope.order = function(predicate) {
+    //$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false; //Pour changer l'ordre
+  //  $scope.predicate = predicate;
+  //};
+  
+  $scope.reverse = false;
+  $scope.predicate = 'creationDate'
+  
+
 
 $scope.loadMeals();
 

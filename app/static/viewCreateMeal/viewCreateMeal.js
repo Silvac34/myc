@@ -63,6 +63,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
   $scope.change_animation_to_the_left = function() {
       $scope.animation.next_page = false;
       $scope.animation.last_page = true;
+      $scope.animation.is_animated = true;
+      $scope.animation.is_not_animated = false;
   },
 
   //initialize the buyers model
@@ -86,6 +88,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
       $scope.helpBox.helpCleaning = false
   }
 
+  $scope.includingHelp = function() {
+    $scope.helpBox.notHelping = false
+  }
 
 
   $scope.createMeal = function() {

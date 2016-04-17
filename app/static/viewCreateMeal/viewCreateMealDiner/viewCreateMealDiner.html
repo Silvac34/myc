@@ -1,29 +1,31 @@
 <!-- form-diner.html -->
-<div class="form-group slide">
-  <label for="inputMenu" class="col-md-2 control-label">¿Cúal será el menu?*</label>
-  <div class="col-md-10">
-    <textarea class="form-control" rows="3" id="inputMenu" ng-model="editedMeal.menu" required></textarea>
-    <div ng-messages="editedMeal.menu" style="color:red" role="alert">
-      <div ng-message="required">¡Olvidaste el menu!</div>
+<div class="col-xs-12">
+  <div class="form-group">
+    <h4 for="inputMenu">¿Cúal será el menu? *</h4>
+    <textarea class="form-control" id="inputMenu" ng-model="editedMeal.menu" required></textarea>
+    <div ng-messages="editedMeal.menu.$error" style="color:red" role="alert">
+      <div ng-message="required">¡Olvidaste el menu! {{ menu}}</div>
     </div>
   </div>
-</div>
 
-<div class="form-group">
-  <label for="inputVeggies" class="col-md-2 control-label">¿Hay una alternativa para los vegetarianos?</label>
-  <div class="col-md-10">
+  <div class="form-group">
+    <h4 for="inputVeggies">¿Hay una alternativa para los vegetarianos?</h4>
     <div class="radio">
-      <span class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</span>
-      <label>
-        <input type="radio" id="inputVeggies_yes" name="veggiesRadio" ng-value=true ng-model="editedMeal.veggies"> Sí</label>
-      <label>
-        <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No</label>
+      <label for="veggiesRadio" class="radio">
+        <input type="radio" id="inputVeggies_yes" name="veggiesRadio" ng-value=true ng-model="editedMeal.veggies"> Sí
+      </label>
     </div>
+    <div class="radio">
+      <label for="veggiesRadio" class="radio">
+        <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No
+      </label>
+    </div>
+    <p class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</p>
   </div>
-</div>
 
-<div class="form-group row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <button ui-sref="create_meal.profile" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Seguir</button>
+  <div class="form-group">
+    <div style="text-align:center">
+      <button ui-sref="create_meal.profile" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Seguir</button>
+    </div>
   </div>
 </div>

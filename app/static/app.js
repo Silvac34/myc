@@ -17,6 +17,12 @@ var app = angular.module('myApp', [
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
 
   $stateProvider
+    .state('welcome', {
+      url: '/welcome',
+      templateUrl: 'static/welcome/welcome.html',
+      controller: 'WelcomeCtrl'
+    })
+  $stateProvider
     .state('login', {
       url: '/login',
       templateUrl: 'static/viewLogin/viewLogin.html',
@@ -49,7 +55,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
         requiredLogin: true
       }
     })
-  $urlRouterProvider.otherwise('view_meals');
+  $urlRouterProvider.otherwise('welcome');
 
   $authProvider.facebook({
     clientId: ENV.fbClientID,

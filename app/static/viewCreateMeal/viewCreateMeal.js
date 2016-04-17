@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
+angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -33,7 +33,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
-    menu: "",
     veggies: false,
     town: "Santiago",
     requiredHelpers:[]

@@ -47,14 +47,11 @@
 
     <input type="checkbox" id="nothelping" ng-model="helpBox.notHelping" ng-change="excludingHelp()"> Nada! Solo quiero venir como invitado =)
   </div>
+</div>
 
-  <div class="form-group">
-    <div class="text-center">
-      <button ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Crear la cena</button>
-    </div>
-    <div class="pull-left">
-      <button ui-sref="create_meal.profile" class="btn btn-primary btn-xs" ng-click="change_animation_to_the_left()">Volver</button>
-      </button>
-    </div>
+<div class="form-group">
+  <div class="pager">
+    <li><a ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Publicar la cena</a></li>
+    <li class="previous"><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_left()">Volver</a></li>
   </div>
 </div>

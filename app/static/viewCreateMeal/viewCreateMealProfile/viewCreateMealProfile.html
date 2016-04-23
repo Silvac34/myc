@@ -23,8 +23,18 @@
 
   <div class="form-group">
     <h4 for="inputTime">¿fecha/hora de llegada de los invitados?</h4>
-    <input type="datetime-local" class="form-control" id="inputTime" ng-model="editedMeal.time" required>
+    <div class="col-xs-4">
+      <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="editedMeal.time" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+      </p>
+    </div>
   </div>
+
+
+
 </div>
 
 <div class="pager">

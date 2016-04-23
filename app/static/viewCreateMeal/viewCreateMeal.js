@@ -11,14 +11,14 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
       url: '/diner',
       templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html',
       controller: 'ViewCreateMealCtrl'
-    })
+    }),
   $stateProvider
     .state('create_meal.profile', {
       parent: 'create_meal',
       url: '/profile',
       templateUrl: 'static/viewCreateMeal/viewCreateMealProfile/viewCreateMealProfile.html',
       controller: 'ViewCreateMealCtrl'
-    })
+    }),
   $stateProvider
     .state('create_meal.payment', {
       parent: 'create_meal',
@@ -35,8 +35,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
   $scope.editedMeal = $scope.editedMeal || {
     veggies: false,
     town: "Santiago",
-    requiredHelpers:[]
+    requiredHelpers:[],
+    time: predefined_date
   }, 
+  
+  
   
   $scope.helpBox = $scope.helpBox || {
     helpBuying: false, 
@@ -85,60 +88,77 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
   $scope.excludingHelp = function() {
     $scope.helpBox.helpBuying = false,
       $scope.helpBox.helpCooking = false,
-      $scope.helpBox.helpCleaning = false
-  }
+      $scope.helpBox.helpCleaning = false;
+  },
 
   $scope.includingHelp = function() {
-    $scope.helpBox.notHelping = false
-  }
+    $scope.helpBox.notHelping = false;
+  },
 
 
   $scope.createMeal = function() {
     if ($scope.helpBox.helpBuying == true) {
       //$scope.editedMeal.requiredHelpers.buyers = $scope.buyers
-      $scope.editedMeal.requiredHelpers.push({"buyers":$scope.buyers})
+      $scope.editedMeal.requiredHelpers.push({"buyers":$scope.buyers});
     }
     if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.requiredHelpers.push({"cooks":$scope.cooks})
+      $scope.editedMeal.requiredHelpers.push({"cooks":$scope.cooks});
     }
     if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.requiredHelpers.push({"cleaners":$scope.cleaners})
+      $scope.editedMeal.requiredHelpers.push({"cleaners":$scope.cleaners});
     }
     $http.post('/api/meal', $scope.editedMeal);
     
     //TODO : rediriger vers page du repas
-  }
-
+  },
+  
+  //required for the calendar toolbar (datamodel : editedMeal.date)
+  
   $scope.dateOptions = {
     formatYear: 'yy',
     maxDate: new Date(2020, 5, 22),
     minDate: new Date(),
     startingDay: 1
-  }
+  },
   
   $scope.today = function() {
-    $scope.dt = new Date();
+    $scope.editedMeal.date = new Date();
   };
   $scope.today();
 
   $scope.clear = function() {
-    $scope.dt = null;
+    $scope.editedMeal.date = null;
   };
   
-  $scope.open1 = function() {
-    $scope.popup1.opened = true;
+  $scope.date_open = function() {
+    $scope.date_popup.opened = true;
   };
   
-  $scope.popup1 = {
+  $scope.date_popup = {
     opened: false
   };
   
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-  $scope.altInputFormats = ['M!/d!/yyyy'];
+  $scope.date_formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.date_format = $scope.date_formats[0];
+  $scope.altInputDateFormats = ['M!/d!/yyyy'];
+
+  //required for the calendar toolbar (datamodel : editedMeal.time)
+  
+  $scope.hstep = 1;
+  $scope.mstep = 15;
+  
+  $scope.clear = function() {
+    $scope.editedMeal.time = null;
+  };
 
 }])
 
+  
 .controller('ViewCreateMealProfileCtrl', ['$scope', '$http', function($scope, $http) {
-  $scope
+  $scope;
 }]);  
+
+var predefined_date = new Date();
+predefined_date.setDate(predefined_date.getDate() + 2);
+predefined_date.setHours(20);
+predefined_date.setMinutes(30);

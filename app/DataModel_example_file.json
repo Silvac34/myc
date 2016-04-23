@@ -13,7 +13,7 @@
     "town":"paris" //text
     "address":"12 rue de la liberté, 13ème, paris" //text
     "addressApprox":"Metro Nation" //text
-    "time":"20:30 10/11/2012" //datetime-local
+    "date":"2016-04-29T23:02:50.908Z" //text
 
 // viewCreateMealPayment.html
 

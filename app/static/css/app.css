@@ -173,3 +173,12 @@ body {
     margin-top: -9px;
     width: 40px;
 }
+
+/* Inserting images in placeholders */
+
+#search_calendar {
+    background-image: url(/static/sources/calendar.png);
+    background-repeat: no-repeat;
+    text-indent: 20px;
+    color: #808080;
+}

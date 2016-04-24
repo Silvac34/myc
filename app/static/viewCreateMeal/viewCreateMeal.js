@@ -36,7 +36,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
     veggies: false,
     town: "Santiago",
     requiredHelpers:[],
-    time: predefined_date
+    time: predefined_date,
   }, 
   
   
@@ -120,14 +120,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
     minDate: new Date(),
     startingDay: 1
   },
-  
-  $scope.today = function() {
-    $scope.editedMeal.date = new Date();
-  };
-  $scope.today();
+
 
   $scope.clear = function() {
-    $scope.editedMeal.date = null;
+    $scope.editedMeal.time = null;
   };
   
   $scope.date_open = function() {
@@ -144,19 +140,18 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate'])
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
   
-  $scope.hstep = 1;
+  $scope.ismeridian = false;
   $scope.mstep = 15;
-  
-  $scope.clear = function() {
-    $scope.editedMeal.time = null;
-  };
 
+  
 }])
 
   
 .controller('ViewCreateMealProfileCtrl', ['$scope', '$http', function($scope, $http) {
   $scope;
 }]);  
+
+
 
 var predefined_date = new Date();
 predefined_date.setDate(predefined_date.getDate() + 2);

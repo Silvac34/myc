@@ -1,37 +1,45 @@
 <!-- form-profile.html -->
-<div class="col-xs-12">
-  <div class="form-group">
-    <h4 for="inputTown">¿En que ciudad quieres publicar una cena?</h4>
-    <select class="form-control" id="inputTown" ng-model="editedMeal.town">
-      <option>Santiago</option>
-      <option>Concepción</option>
-      <option>Valparaíso</option>
-    </select>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <h4 for="inputTown">¿En que ciudad quieres publicar una cena?</h4>
+      <select class="form-control" id="inputTown" ng-model="editedMeal.town">
+        <option>Santiago</option>
+        <option>Concepción</option>
+        <option>Valparaíso</option>
+      </select>
+    </div>
   </div>
-
-  <div class="form-group">
-    <h4 for="inputAdress">¿Cual es la dirección exacta para venir a la cena?</h4>
-    <input type="text" class="form-control" id="inputAddress" ng-model="editedMeal.address" required>
-    <div ng-messages="editedMeal.address.$error" ng-message="required" class="text-warning" ng-if="next=false">Se necesita tu direccion</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <h4 for="inputAdress">¿Cual es la dirección exacta para venir a la cena?</h4>
+      <input type="text" class="form-control" id="inputAddress" ng-model="editedMeal.address" required>
+      <div ng-messages="editedMeal.address.$error" ng-message="required" class="text-warning" ng-if="next=false">Se necesita tu direccion</div>
+    </div>
   </div>
-
-
-  <div class="form-group">
-    <h4 for="inputAdressApprox">¿Qué punto de referencia podemos publicar para ubicar donde se tiene que ir?</h4>
-    <input type="text" class="form-control" id="inputLAdressApprox" ng-model="editedMeal.addressApprox" required>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <h4 for="inputAdressApprox">¿Qué punto de referencia podemos publicar para ubicar donde se tiene que ir?</h4>
+      <input type="text" class="form-control" id="inputLAdressApprox" ng-model="editedMeal.addressApprox" required>
+    </div>
   </div>
-
+</div>
+<div class="row">
   <div class="form-group">
-    <h4 for="inputTime">¿fecha/hora de llegada de los invitados?</h4>
+    <div class="col-xs-12">
+      <h4 for="inputTime">¿fecha/hora de llegada de los invitados?</h4>
+    </div>
     <div class="form-inline">
-      <div class="row">
-        <div class="col-xs-4">
-          <input type="text" class="form-control" id="search_calendar" uib-datepicker-popup="{{date_format}}" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
-          placeholder="Fecha" />
-          <div class="col-xs-4">
-            <uib-timepicker ng-model="editedMeal.time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-          </div>
-        </div>
+      <div class="col-xs-4">
+        <input type="text" class="form-control" id="search_calendar" uib-datepicker-popup="{{date_format}}" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
+        placeholder="Fecha" />
+      </div>
+      <div class="col-xs-4">
+        <uib-timepicker ng-model="editedMeal.time" class="form-control" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
       </div>
     </div>
   </div>
@@ -39,7 +47,9 @@
 
 
 
-<div class="pager">
-  <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()">Seguir</a></li>
-  <li class="previous"><a ui-sref="create_meal.diner" ng-click="change_animation_to_the_left()">Volver</a></li>
+<div class="row">
+  <div class="pager">
+    <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()">Seguir</a></li>
+    <li class="previous"><a ui-sref="create_meal.diner" ng-click="change_animation_to_the_left()">Volver</a></li>
+  </div>
 </div>

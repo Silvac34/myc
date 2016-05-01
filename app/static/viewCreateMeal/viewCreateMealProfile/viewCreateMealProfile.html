@@ -77,7 +77,7 @@
 
 <div class="row">
   <div class="pager">
-    <li><a ui-sref="create_meal.profile" ng-if="form_create_meal.inputAddress.$invalid || form_create_meal.inputAddressApprox.$invalid"  ng-click="form_create_meal.inputAddress.$dirty=true" ng-click="form_create_meal.inputAddressApprox.$dirty=true">Seguir</a></li>
+    <li><a ui-sref="create_meal.profile" ng-if="form_create_meal.inputAddress.$invalid || form_create_meal.inputAddressApprox.$invalid"  ng-click="form_create_meal.inputAddress.$dirty=true;form_create_meal.inputAddressApprox.$dirty=true">Seguir</a></li>
     <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputAddress.$valid && form_create_meal.inputAddressApprox.$valid">Seguir</a></li>
     <li class="previous"><a ui-sref="create_meal.diner" ng-click="change_animation_to_the_left()">Volver</a></li>
   </div>

@@ -1,57 +1,164 @@
 <!-- form-payment.html -->
-<div class="col-xs-12">
-  <div class="form-group">
-    <h4 for="inputPrice">¿Cual es el montó de las compras?</h4>
-    <input type="number" class="form-control" id="inputPrice" min="0" ng-model="editedMeal.price"></input>
-    <span class="help-block">Mejor estimar más que menos / Para tener una idea de este montó, puedes ir <a href="https://web.cornershopapp.com"> acá</a> </span>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <h4 for="inputPrice">¿Cual es el montó de las compras? *</h4>
+    </div>
   </div>
-
-  <div class="form-group">
-    <h4 for="inputNumber_participants">¿Cuantas personas quieres que participarán a tu cena?</h4>
-    <input type="number" class="form-control" id="inputNbParticipants" min="1" ng-model="editedMeal.nbParticipants"></input>
-    <span class="help-block">(Incluyendote)</span>
+</div>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="form-group">
+      <input type="number" class="form-control" id="inputPrice" name="inputPrice" min="0" ng-model="editedMeal.price" required></input>
+    </div>
   </div>
+  <div class="col-xs-4">
+    <div ng-messages="form_create_meal.inputPrice.$error" role="alert" ng-if="form_create_meal.inputPrice.$dirty">
+      <div ng-message="required" class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>¡Upss te falta eso!</strong>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-5">
+    <div class="form-group">
+      <span class="help-block">Mejor estimar más que menos ;)</span>
+    </div>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <h4 for="inputNumber_participants">¿Cuantas personas quieres que participarán a tu cena? *</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="form-group">
+      <input type="number" class="form-control" id="inputNbParticipants" name="inputNbParticipants" min="1" ng-model="editedMeal.nbParticipants" required></input>
+      <span class="help-block">(Incluyendote)</span>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <div ng-messages="form_create_meal.inputNbParticipants.$error" role="alert" ng-if="form_create_meal.inputNbParticipants.$dirty">
+      <div ng-message="required" class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>¡Olvidaste rellenar este campo!</strong>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="form-group">
-    <h4>Te gustaría ayuda para ...</h4>
-
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <h4>Te gustaría ayuda para ...</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
     <input type="checkbox" id="helpBuyers" ng-model="helpBox.helpBuying" ng-change="includingHelp()"> Hacer las compras
     <br/>
-    <div ng-if="helpBox.helpBuying" class="animate-if">
+  </div>
+</div>
+
+<div ng-if="helpBox.helpBuying" class="animate-if">
+  <div class="row">
+    <div class="col-xs-12">
       <label for="inputIngredient">¿Cual es la lista de los ingredientes que necesitas ?</label>
-      <input type="text" class="form-control" id="inputIngredient" ng-model="buyers.ingredient"></input>
-      <span class="help-block">Para tener una idea de este montó, puedes ir<a href="https://web.cornershopapp.com"> acá</a></span>
-
-      <label for="inputDeliveryTime">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
-      <input type="datetime-local" class="form-control" id="inputDeliveryTime" ng-model="buyers.deliveryTime">
+      <input type="text" class="form-control" rows="3" id="inputIngredient" ng-model="buyers.ingredient"></input>
+      <span class="help-block"><a href="https://web.cornershopapp.com"> Acá</a>, puedes encontrar los ingredientes de cada supermercado</span>
     </div>
-
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <label for="inputDeliveryTime">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="form-inline">
+          <uib-timepicker ng-model="buyers.deliveryTime" show-meridian="ismeridian"></uib-timepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
     <input type="checkbox" id="cooking" ng-model="helpBox.helpCooking" ng-change="includingHelp()"> Ayudar para la cocina
     <br/>
-    <div ng-if="helpBox.helpCooking" class="animate-if">
-      <label for="inputTimeCooking">¿Cuando deben venir la gente para ayudarte a cocinar?</label>
-      <input type="datetime-local" class="form-control" id="inputTimeCooking" ng-model="cooks.timeCooking">
-      <label for="inputNbCook">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
-      <input type="number" class="form-control" min="0" ng-model="cooks.nbCooks" />
-      <span class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</span>
+  </div>
+</div>
+<div ng-if="helpBox.helpCooking" class="animate-if">
+  <div class="row">
+    <div class="col-xs-12">
+      <label for="inputTimeCooking">¿A que hora esperas la gente para ayudarte a cocinar?</label>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="form-inline">
+          <uib-timepicker ng-model="cooks.timeCooking" show-meridian="ismeridian"></uib-timepicker>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-xs-12">
+      <label for="inputNbCook">¿Cuantos personas al máximo pueden inscribirse para ayudarte a cocinar?</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <input type="number" class="form-control" min="0" ng-model="cooks.nbCooks" />
+    </div>
+    <div class="col-xs-6">
+      <div class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
     <input type="checkbox" id="cleaning" ng-model="helpBox.helpCleaning" ng-change="includingHelp()"> Lavar la loza
     <br/>
-    <div ng-if="helpBox.helpCleaning" class="animate-if">
+  </div>
+</div>
+<div ng-if="helpBox.helpCleaning" class="animate-if">
+  <div class="row">
+    <div class="col-xs-12">
       <label for="inputNbCleaner">¿Cuantos personas al máximo pueden inscribirse para ayudarte con la loza ?</label>
-      <span class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
       <input type="number" class="form-control" min="0" ng-model="cleaners.nbCleaners" />
     </div>
-
+    <div class="col-xs-6">
+      <div class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
     <input type="checkbox" id="nothelping" ng-model="helpBox.notHelping" ng-change="excludingHelp()"> No necesito ayuda =)
   </div>
 </div>
 
-<div class="form-group">
-  <div class="pager">
-    <li><a ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()">Publicar la cena</a></li>
-    <li class="previous"><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_left()">Volver</a></li>
+<div class="row">
+  <div class="form-group">
+    <div class="pager">
+      <li><a ui-sref="create_meal.payment" class="btn btn-primary btn-lg" ng-if="form_create_meal.inputNbParticipants.$invalid || form_create_meal.inputPrice.$invalid" ng-click="form_create_meal.inputPrice.$dirty=true;form_create_meal.inputNbParticipants.$dirty=true">Publicar la cena</a></li>
+      <li><a ui-sref="view_meals" ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputPrice.$dirty.$valid && form_create_meal.inputNbParticipants.$dirty.$valid">Publicar la cena</a></li>
+      <li class="previous"><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_left()">Volver</a></li>
+    </div>
   </div>
 </div>

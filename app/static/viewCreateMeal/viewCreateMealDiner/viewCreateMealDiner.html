@@ -2,12 +2,9 @@
 <div class="col-xs-12">
   <div class="form-group">
     <h4 for="inputMenu">¿Cúal será el menu? *</h4>
-    <textarea class="form-control" id="inputMenu" ng-model="editedMeal.menu" required></textarea>
-    <div ng-messages="editedMeal.menu.$error" style="color:red" role="alert">
-      <div ng-message="required">¡Olvidaste el menu! {{ menu}}</div>
-    </div>
+    <textarea class="form-control" id="inputMenu" name="inputMenu" ng-model="editedMeal.menu" required></textarea>
+    <div ng-if="form_create_meal.inputMenu.$error" style="color:red" role="alert">¡Olvidaste el menu!</div>
   </div>
-
   <div class="form-group">
     <h4 for="inputVeggies">¿Hay una alternativa para los vegetarianos?</h4>
     <div class="radio">
@@ -25,5 +22,5 @@
 </div>
 
 <div class="pager">
-    <li><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_right()">Seguir</a></li>
+  <li><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_right()">Seguir</a></li>
 </div>

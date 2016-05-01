@@ -32,26 +32,32 @@
 <div class="row">
   <div class="form-group">
     <div class="col-xs-12">
-      <h4 for="inputTime">¿fecha/hora de llegada de los invitados?</h4>
+      <h4 for="inputTime">¿Cuando quieres hacer la cena?</h4>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-3">
-      <div class="form-group">
-        <div class="form-inline">
-          <div class="input-group">
-            <input type="text" class="form-control" id="search_calendar" uib-datepicker-popup="{{date_format}}" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
-            placeholder="Fecha" />
-          </div>
-        </div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="form-group">
+      <div class="form-inline">
+        <input type="text" class="form-control" id="search_calendar" uib-datepicker-popup="{{date_format}}" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
+        placeholder="Fecha" />
       </div>
     </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-        <div class="form-inline">
-            <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-          </div>
-        </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+    <div class="col-xs-12">
+      <h4 for="inputTime">¿A que hora?</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="form-group">
+      <div class="form-inline">
+        <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
       </div>
     </div>
   </div>

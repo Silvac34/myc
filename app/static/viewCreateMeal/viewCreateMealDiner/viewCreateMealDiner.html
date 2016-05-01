@@ -3,24 +3,30 @@
   <div class="form-group">
     <h4 for="inputMenu">¿Cúal será el menu? *</h4>
     <textarea class="form-control" id="inputMenu" name="inputMenu" ng-model="editedMeal.menu" required></textarea>
-    <div ng-if="form_create_meal.inputMenu.$error" style="color:red" role="alert">¡Olvidaste el menu!</div>
-  </div>
-  <div class="form-group">
-    <h4 for="inputVeggies">¿Hay una alternativa para los vegetarianos?</h4>
-    <div class="radio">
-      <label for="veggiesRadio" class="radio">
-        <input type="radio" id="inputVeggies_yes" name="veggiesRadio" ng-value=true ng-model="editedMeal.veggies"> Sí
-      </label>
-      <div class="radio">
-        <label for="veggiesRadio" class="radio">
-          <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No
-        </label>
+    <div ng-messages="form_create_meal.inputMenu.$error" role="alert" ng-if="form_create_meal.inputMenu.$dirty">
+      <div ng-message="required" class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>¡Olvidaste el menu!</strong>
       </div>
     </div>
-    <p class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</p>
+    <div class="form-group">
+      <h4 for="inputVeggies">¿Hay una alternativa para los vegetarianos?</h4>
+      <div class="radio">
+        <label for="veggiesRadio" class="radio">
+          <input type="radio" id="inputVeggies_yes" name="veggiesRadio" ng-value=true ng-model="editedMeal.veggies"> Sí
+        </label>
+        <div class="radio">
+          <label for="veggiesRadio" class="radio">
+            <input type="radio" id="inputVeggies_no" name="veggiesRadio" ng-value=false ng-model="editedMeal.veggies"> No
+          </label>
+        </div>
+      </div>
+      <p class="help-block">Ejemplo : si se hacen empanadas (puede ser que hay algunas con carne y otras sin)</p>
+    </div>
   </div>
-</div>
 
-<div class="pager">
-  <li><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_right()">Seguir</a></li>
-</div>
+
+  <div class="pager">
+    <li><a ng-if="form_create_meal.inputMenu.$invalid" ng-click="form_create_meal.inputMenu.$dirty=true">Seguir</a></li>
+    <li><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputMenu.$valid">Seguir</a></li>
+  </div>

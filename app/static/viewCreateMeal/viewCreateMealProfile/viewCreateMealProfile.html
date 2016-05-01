@@ -14,17 +14,28 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
-      <h4 for="inputAdress">¿Cual es la dirección exacta para venir a la cena?</h4>
-      <input type="text" class="form-control" id="inputAddress" ng-model="editedMeal.address" required>
-      <div ng-messages="editedMeal.address.$error" ng-message="required" class="text-warning" ng-if="next=false">Se necesita tu direccion</div>
+      <h4 for="inputAdress">¿Cual es la dirección exacta para venir a la cena? *</h4>
+      <input type="text" class="form-control" id="inputAddress" name="inputAddress" ng-model="editedMeal.address" required>
+      <div ng-messages="form_create_meal.inputAddress.$error" role="alert" ng-if="form_create_meal.inputAddress.$dirty">
+        <div ng-message="required" class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>¡Se necesita tu dirección para que los invitados puedan llegar!</strong>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
-      <h4 for="inputAdressApprox">¿Qué punto de referencia podemos publicar para ubicar donde se tiene que ir?</h4>
-      <input type="text" class="form-control" id="inputLAdressApprox" ng-model="editedMeal.addressApprox" required>
+      <h4 for="inputAdressApprox">¿Qué punto de referencia podemos publicar para ubicar donde se tiene que ir? *</h4>
+      <input type="text" class="form-control" id="inputAdressApprox" name="inputAddressApprox" ng-model="editedMeal.addressApprox" required>
+          <div ng-messages="form_create_meal.inputAddressApprox.$error" role="alert" ng-if="form_create_meal.inputAddressApprox.$dirty">
+        <div ng-message="required" class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>¡Lo necesitamos para publicar la cena!</strong>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -66,7 +77,8 @@
 
 <div class="row">
   <div class="pager">
-    <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()">Seguir</a></li>
+    <li><a ui-sref="create_meal.profile" ng-if="form_create_meal.inputAddress.$invalid || form_create_meal.inputAddressApprox.$invalid"  ng-click="form_create_meal.inputAddress.$dirty=true" ng-click="form_create_meal.inputAddressApprox.$dirty=true">Seguir</a></li>
+    <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputAddress.$valid && form_create_meal.inputAddressApprox.$valid">Seguir</a></li>
     <li class="previous"><a ui-sref="create_meal.diner" ng-click="change_animation_to_the_left()">Volver</a></li>
   </div>
 </div>

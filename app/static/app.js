@@ -83,14 +83,14 @@ app.run(function($rootScope, $state, $auth) {
     });
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', '$window', function($scope, $auth, $state, userServices, $window) {
   $scope.logout = function() {
     $auth.logout();
     $state.go('login');
   },
 
   $scope.isAuthenticated = function() {
-    return $auth.isAuthenticated()
+    return $auth.isAuthenticated();
   },
   
   $scope.getUserProfile = function() {
@@ -100,8 +100,20 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
       });
     }
   };
+  
 
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;
+  
 
-}])
+  $window.navigator.geolocation.getCurrentPosition(function(position){
+            console.log(position);
+            var lat = position.coords.latitude;
+            $scope.$apply(function(){
+              $scope.lat = lat; 
+              
+            });
+            
+});
+
+}]);

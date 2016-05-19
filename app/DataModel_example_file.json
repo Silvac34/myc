@@ -18,7 +18,7 @@
 // viewCreateMealPayment.html
 
     "price": 20000, //number
-    "nbParticipants": 5, //number
+    "nbGuests": 5, //number
     
     
     "requiredHelpers": 

@@ -32,19 +32,19 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="form-group">
-      <h4 for="inputNumber_participants">¿Cuantas personas quieres que participarán a tu cena? *</h4>
+      <h4 for="inputNumber_guests">¿Cuantas personas quieres que participarán a tu cena? *</h4>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-3">
     <div class="form-group">
-      <input type="number" class="form-control" id="inputNbParticipants" name="inputNbParticipants" min="1" ng-model="editedMeal.nbParticipants" required></input>
+      <input type="number" class="form-control" id="inputnbGuests" name="inputnbGuests" min="1" ng-model="editedMeal.nbGuests" required></input>
       <span class="help-block">(Incluyendote)</span>
     </div>
   </div>
   <div class="col-xs-4">
-    <div ng-messages="form_create_meal.inputNbParticipants.$error" role="alert" ng-if="form_create_meal.inputNbParticipants.$dirty">
+    <div ng-messages="form_create_meal.inputnbGuests.$error" role="alert" ng-if="form_create_meal.inputnbGuests.$dirty">
       <div ng-message="required" class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>¡Olvidaste rellenar este campo!</strong>
@@ -71,7 +71,7 @@
   <div class="row">
     <div class="col-xs-12">
       <label for="inputIngredient">¿Cual es la lista de los ingredientes que necesitas ?</label>
-      <input type="text" class="form-control" rows="3" id="inputIngredient" ng-model="buyers.ingredient"></input>
+      <input type="text" class="form-control" rows="3" id="inputIngredient" ng-model="editedMeal.detailedInfo.requiredHelpers.buyers.ingredient"></input>
       <span class="help-block"><a href="https://web.cornershopapp.com"> Acá</a>, puedes encontrar los ingredientes de cada supermercado</span>
     </div>
   </div>
@@ -84,7 +84,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <div class="form-inline">
-          <uib-timepicker ng-model="buyers.deliveryTime" show-meridian="ismeridian"></uib-timepicker>
+          <uib-timepicker ng-model="editedMeal.detailedInfo.requiredHelpers.buyers.deliveryTime" show-meridian="ismeridian"></uib-timepicker>
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <div class="form-inline">
-          <uib-timepicker ng-model="cooks.timeCooking" show-meridian="ismeridian"></uib-timepicker>
+          <uib-timepicker ng-model="editedMeal.detailedInfo.requiredHelpers.cooks.timeCooking" show-meridian="ismeridian"></uib-timepicker>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@
   </div>
   <div class="row">
     <div class="col-xs-2">
-      <input type="number" class="form-control" min="0" ng-model="cooks.nbCooks" />
+      <input type="number" class="form-control" min="0" ng-model="editedMeal.detailedInfo.requiredHelpers.cooks.nbCooks" />
     </div>
     <div class="col-xs-6">
       <div class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</div>
@@ -128,7 +128,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <input type="checkbox" id="cleaning" ng-model="helpBox.helpCleaning" ng-change="includingHelp()"> Lavar la loza
+    <input type="checkbox" id="cleaning" ng-model="editedMeal.detailedInfo.requiredHelpers.helpBox.helpCleaning" ng-change="includingHelp()"> Lavar la loza
     <br/>
   </div>
 </div>
@@ -140,7 +140,7 @@
   </div>
   <div class="row">
     <div class="col-xs-2">
-      <input type="number" class="form-control" min="0" ng-model="cleaners.nbCleaners" />
+      <input type="number" class="form-control" min="0" ng-model="editedMeal.detailedInfo.requiredHelpers.cleaners.nbCleaners" />
     </div>
     <div class="col-xs-6">
       <div class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</div>
@@ -156,8 +156,8 @@
 <div class="row">
   <div class="form-group">
     <div class="pager">
-      <li><a ui-sref="create_meal.payment" class="btn btn-primary btn-lg" ng-if="form_create_meal.inputNbParticipants.$invalid || form_create_meal.inputPrice.$invalid" ng-click="form_create_meal.inputPrice.$dirty=true;form_create_meal.inputNbParticipants.$dirty=true">Publicar la cena</a></li>
-      <li><a ui-sref="view_meals" ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputPrice.$dirty.$valid && form_create_meal.inputNbParticipants.$dirty.$valid">Publicar la cena</a></li>
+      <li><a ui-sref="create_meal.payment" class="btn btn-primary btn-lg" ng-if="form_create_meal.inputnbGuests.$invalid || form_create_meal.inputPrice.$invalid" ng-click="form_create_meal.inputPrice.$dirty=true;form_create_meal.inputnbGuests.$dirty=true">Publicar la cena</a></li>
+      <li><a ui-sref="view_meals" ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputPrice.$dirty.$valid && form_create_meal.inputnbGuests.$dirty.$valid">Publicar la cena</a></li>
       <li class="previous"><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_left()">Volver</a></li>
     </div>
   </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
+angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ngResource',])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -97,18 +97,18 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
 
  $scope.createMeal = function() {
     if ($scope.helpBox.helpBuying == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"buyers":$scope.buyers})
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"buyers":$scope.buyers});
     }
     if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cooks":$scope.cooks})
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cooks":$scope.cooks});
     }
     if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners})
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners});
     }
     $http.post('/api/meal', $scope.editedMeal);
     
     //TODO : rediriger vers page du repas
-  }
+  };
   
   //required for the calendar toolbar (datamodel : editedMeal.date)
   
@@ -140,14 +140,38 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
   
   $scope.ismeridian = false;
   $scope.mstep = 15;
+  
+  /* var latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
+    return position.coords.latitude + "," + position.coords.longitude;
+  });
+
+  var google_map_api_key = "AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA";
+  var google_map_api_link = "json?latlng="+latlng+"&key="+google_map_api_key;
+  var address = $resource("https://maps.googleapis.com/maps/api/geocode/:google_map_api_link", {google_map_api_link: '@google_map_api_link'});
+  address.get({google_map_api_link:123}, function(user) {
+  user.abc = true;
+  user.$save();
+});
+  
+  var locationFactory = function($resource) {
+    return $resource("https://maps.googleapis.com/maps/api/geocode/json?:latlng.&key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA", {
+      latlng: '@latlng'
+    }, {
+      'get': {
+        method: 'GET'
+      },
+    });
+  };
+  
+  var userFactory = function($resource){
+	return $resource('/api/user/:slug', { slug : '@slug' }, 
+		{
+			'update' : { method:'PUT' },
+		});
+};*/
 
   
-}])
-
-  
-.controller('ViewCreateMealProfileCtrl', ['$scope', '$http', function($scope, $http) {
-  $scope;
-}]);  
+}]);
 
 
 

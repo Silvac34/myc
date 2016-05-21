@@ -5,7 +5,6 @@ var app = angular.module('myApp', [
   'config',
   'ui.bootstrap',
   'ui.router',
-  'ngResource',
   'satellizer',
   'myApp.viewCreateMeal',
   'myApp.viewMeals',
@@ -104,27 +103,5 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', '$window
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;
   
-
-  var latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
-    return position.coords.latitude + "," + position.coords.longitude;
-  });
-
- /* var google_map_api_key = "AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA";
-  var google_map_api_link = "json?latlng="+latlng+"&key="+google_map_api_key;
-  var address = $resource("https://maps.googleapis.com/maps/api/geocode/:google_map_api_link", {google_map_api_link: '@google_map_api_link'});
-  address.get({google_map_api_link:123}, function(user) {
-  user.abc = true;
-  user.$save();
-});
-  
- /¨ var locationFactory = function($resource) {
-    return $resource("https://maps.googleapis.com/maps/api/geocode/:google_map_api_link", {
-      google_map_api_link: '@google_map_api_link'
-    }, {
-      'get': {
-        method: 'GET'
-      },
-    });
-  };*/
 
 }]);

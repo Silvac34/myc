@@ -71,7 +71,7 @@
   <div class="row">
     <div class="col-xs-12">
       <label for="inputIngredient">¿Cual es la lista de los ingredientes que necesitas ?</label>
-      <input type="text" class="form-control" rows="3" id="inputIngredient" ng-model="editedMeal.detailedInfo.requiredHelpers.buyers.ingredient"></input>
+      <input type="text" class="form-control" rows="3" id="inputIngredient" ng-model="buyers.ingredient"></input>
       <span class="help-block"><a href="https://web.cornershopapp.com"> Acá</a>, puedes encontrar los ingredientes de cada supermercado</span>
     </div>
   </div>
@@ -84,7 +84,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <div class="form-inline">
-          <uib-timepicker ng-model="editedMeal.detailedInfo.requiredHelpers.buyers.deliveryTime" show-meridian="ismeridian"></uib-timepicker>
+          <uib-timepicker ng-model="buyers.deliveryTime" show-meridian="ismeridian"></uib-timepicker>
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <div class="form-inline">
-          <uib-timepicker ng-model="editedMeal.detailedInfo.requiredHelpers.cooks.timeCooking" show-meridian="ismeridian"></uib-timepicker>
+          <uib-timepicker ng-model="cooks.timeCooking" show-meridian="ismeridian"></uib-timepicker>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@
   </div>
   <div class="row">
     <div class="col-xs-2">
-      <input type="number" class="form-control" min="0" ng-model="editedMeal.detailedInfo.requiredHelpers.cooks.nbCooks" />
+      <input type="number" class="form-control" min="0" ng-model="cooks.nbCooks" />
     </div>
     <div class="col-xs-6">
       <div class="help-block">Por ejemplo, yo necesito 3 ayudas para cocinar, entonces son 3 personas que se pueden inscribir max para ayudarme a cocinar</div>
@@ -128,7 +128,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <input type="checkbox" id="cleaning" ng-model="editedMeal.detailedInfo.requiredHelpers.helpBox.helpCleaning" ng-change="includingHelp()"> Lavar la loza
+    <input type="checkbox" id="cleaning" ng-model="helpBox.helpCleaning" ng-change="includingHelp()"> Lavar la loza
     <br/>
   </div>
 </div>
@@ -140,7 +140,7 @@
   </div>
   <div class="row">
     <div class="col-xs-2">
-      <input type="number" class="form-control" min="0" ng-model="editedMeal.detailedInfo.requiredHelpers.cleaners.nbCleaners" />
+      <input type="number" class="form-control" min="0" ng-model="cleaners.nbCleaners" />
     </div>
     <div class="col-xs-6">
       <div class="help-block">Por ejemplo, con 2 personas lavando la loza, no se van a aburrir y además, será mucho más rápido</div>

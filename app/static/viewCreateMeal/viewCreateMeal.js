@@ -84,11 +84,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
     $scope.cleaners = $scope.cleaners || {
       nbCleaners: ""
     },
-
   $scope.excludingHelp = function() {
     $scope.helpBox.helpBuying = false,
-      $scope.helpBox.helpCooking = false,
-      $scope.helpBox.helpCleaning = false;
+    $scope.helpBox.helpCooking = false,
+    $scope.helpBox.helpCleaning = false;
   },
 
   $scope.includingHelp = function() {
@@ -96,21 +95,20 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages'])
   },
 
 
-  $scope.createMeal = function() {
+ $scope.createMeal = function() {
     if ($scope.helpBox.helpBuying == true) {
-      //$scope.editedMeal.requiredHelpers.buyers = $scope.buyers
-      $scope.editedMeal.requiredHelpers.push({"buyers":$scope.buyers});
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"buyers":$scope.buyers})
     }
     if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.requiredHelpers.push({"cooks":$scope.cooks});
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cooks":$scope.cooks})
     }
     if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.requiredHelpers.push({"cleaners":$scope.cleaners});
+      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners})
     }
     $http.post('/api/meal', $scope.editedMeal);
     
     //TODO : rediriger vers page du repas
-  },
+  }
   
   //required for the calendar toolbar (datamodel : editedMeal.date)
   

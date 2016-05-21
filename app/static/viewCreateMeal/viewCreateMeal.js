@@ -29,14 +29,14 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 }])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$window', '$resource', function($scope, $http, $window, $resource) {
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
     veggies: false,
     town: "Santiago",
     requiredHelpers:[],
-    time: predefined_date,
+    time: predefined_date
   }, 
   
   
@@ -46,7 +46,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     helpCooking: false,
     helpCleaning: false,
     notHelping: true
-  }
+  },
  
    $scope.animation = $scope.animation || {
     is_animated: false,
@@ -141,39 +141,38 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   $scope.ismeridian = false;
   $scope.mstep = 15;
   
-   var latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
-    return position.coords.latitude + "," + position.coords.longitude;
-  });
-  /*
-  var google_map_api_key = "AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA";
-  var google_map_api_link = "json?latlng="+latlng+"&key="+google_map_api_key;
-  var address = $resource("https://maps.googleapis.com/maps/api/geocode/:google_map_api_link", {google_map_api_link: '@google_map_api_link'});
-  address.get({google_map_api_link:123}, function(user) {
-  user.abc = true;
-  user.$save();
-});
-  */
-  var locationFactory = function($resource) {
-    return $resource("https://maps.googleapis.com/maps/api/geocode/:verb", 
-    {verb:'json', someParam: '@latlng', key:'key'}, 
-    {'get': { method: 'GET',
-      },
-    });
+  // asking to the customer if he wants to be geolocated, by default no ==> is_geolocated = false
+  
+  $scope.is_geolocated = true;
+  
+  $scope.geolocalisation_google = function() {
+    if ($scope.is_geolocated == true) {
+      var get_latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
+        return position.coords.latitude + "," + position.coords.longitude;
+      });
+
+      $scope.editedMeal.privateInfo.latlng = get_latlng;
+    }
   };
   
-  var userFactory = function($resource){
-	return $resource('/api/user/:slug', { slug : '@slug' }, 
-		{
-			'update' : { method:'PUT' },
-		});
-};
-
+  $scope.geolocation = {};
+  
+  var locationFactory = $resource("https://maps.googleapis.com/maps/api/geocode/:verb", 
+    {verb:'json', someParam: '@latlng', key:'AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA'}, 
+    {'get': { method: 'GET', params: 'editedMeal.privateInfo'}
+    });
+  
+  $scope.geolocation = locationFactory.get();
   
 }]);
-
 
 
 var predefined_date = new Date();
 predefined_date.setDate(predefined_date.getDate() + 2);
 predefined_date.setHours(20);
 predefined_date.setMinutes(30);
+
+
+  
+  
+  

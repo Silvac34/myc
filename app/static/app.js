@@ -81,7 +81,7 @@ app.run(function($rootScope, $state, $auth) {
     });
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', '$window', function($scope, $auth, $state, userServices, $window) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
   $scope.logout = function() {
     $auth.logout();
     $state.go('login');

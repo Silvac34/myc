@@ -29,7 +29,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 }])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
@@ -141,10 +141,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   $scope.ismeridian = false;
   $scope.mstep = 15;
   
-  /* var latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
+   var latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
     return position.coords.latitude + "," + position.coords.longitude;
   });
-
+  /*
   var google_map_api_key = "AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA";
   var google_map_api_link = "json?latlng="+latlng+"&key="+google_map_api_key;
   var address = $resource("https://maps.googleapis.com/maps/api/geocode/:google_map_api_link", {google_map_api_link: '@google_map_api_link'});
@@ -152,13 +152,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   user.abc = true;
   user.$save();
 });
-  
+  */
   var locationFactory = function($resource) {
-    return $resource("https://maps.googleapis.com/maps/api/geocode/json?:latlng.&key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA", {
-      latlng: '@latlng'
-    }, {
-      'get': {
-        method: 'GET'
+    return $resource("https://maps.googleapis.com/maps/api/geocode/:verb", 
+    {verb:'json', someParam: '@latlng', key:'key'}, 
+    {'get': { method: 'GET',
       },
     });
   };
@@ -168,7 +166,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 		{
 			'update' : { method:'PUT' },
 		});
-};*/
+};
 
   
 }]);

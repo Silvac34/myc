@@ -49,6 +49,7 @@
       
       "privateInfo":{[
         "address":"12 rue de la liberté, 13ème, paris", //string
+        "latlng" :"-33,487 , 44,4948", //string 
         "users":[{
           "_id":"1213212312","role":["admin","cooks","cleaner","buyer"]
         }]

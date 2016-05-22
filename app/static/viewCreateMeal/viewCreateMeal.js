@@ -35,11 +35,34 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   $scope.editedMeal = $scope.editedMeal || {
     veggies: false,
     town: "Santiago",
-    requiredHelpers:[],
-    time: predefined_date
+    time: predefined_date,
+    detailedInfo : {"requiredHelpers":[]},
+    privateInfo : {"latlng":""}
+
   }, 
   
-  
+  //enable to get the lat and lng to insert into google map API
+  $window.navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+
+    $scope.$apply(function() {
+      $scope.editedMeal.privateInfo.latlng = lat + "," + lng;
+      
+      var locationFactory = $resource("https://maps.googleapis.com/maps/api/geocode/:verb", {
+        verb: 'json'
+      });
+       
+      $scope.geolocation = locationFactory.get({
+        latlng: $scope.editedMeal.privateInfo.latlng,
+        key: 'AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA'
+      }, function() {
+        
+      $scope.editedMeal.privateInfo.address = results.address_components[1].long_name;
+});
+      console.log($scope.geolocation);
+    });
+  });
   
   $scope.helpBox = $scope.helpBox || {
     helpBuying: false, 
@@ -143,26 +166,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   
   // asking to the customer if he wants to be geolocated, by default no ==> is_geolocated = false
   
-  $scope.is_geolocated = true;
-  
-  $scope.geolocalisation_google = function() {
-    if ($scope.is_geolocated == true) {
-      var get_latlng = $window.navigator.geolocation.getCurrentPosition(function(position) {
-        return position.coords.latitude + "," + position.coords.longitude;
-      });
-
-      $scope.editedMeal.privateInfo.latlng = get_latlng;
-    }
-  };
-  
   $scope.geolocation = {};
   
-  var locationFactory = $resource("https://maps.googleapis.com/maps/api/geocode/:verb", 
-    {verb:'json', someParam: '@latlng', key:'AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA'}, 
-    {'get': { method: 'GET', params: 'editedMeal.privateInfo'}
-    });
-  
-  $scope.geolocation = locationFactory.get();
+
+
   
 }]);
 

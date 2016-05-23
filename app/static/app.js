@@ -10,6 +10,7 @@ var app = angular.module('myApp', [
   'myApp.viewMeals',
   'myApp.viewMyMeals',
   'myApp.viewLogin',
+  'myApp.welcome',
   'userServices'
 ]);
 

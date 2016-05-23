@@ -157,7 +157,7 @@
   <div class="form-group">
     <div class="pager">
       <li><a ui-sref="create_meal.payment" class="btn btn-primary btn-lg" ng-if="form_create_meal.inputnbGuests.$invalid || form_create_meal.inputPrice.$invalid" ng-click="form_create_meal.inputPrice.$dirty=true;form_create_meal.inputnbGuests.$dirty=true">Publicar la cena</a></li>
-      <li><a ui-sref="view_meals" ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputPrice.$dirty.$valid && form_create_meal.inputnbGuests.$dirty.$valid">Publicar la cena</a></li>
+      <li><a ui-sref="view_meals" ng-click="createMeal()" class="btn btn-primary btn-lg" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputPrice.$valid && form_create_meal.inputnbGuests.$valid">Publicar la cena</a></li>
       <li class="previous"><a ui-sref="create_meal.profile" ng-click="change_animation_to_the_left()">Volver</a></li>
     </div>
   </div>

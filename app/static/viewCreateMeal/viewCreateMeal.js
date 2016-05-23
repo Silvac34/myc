@@ -35,14 +35,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   $scope.editedMeal = $scope.editedMeal || {
     veggies: false,
     town: "Santiago",
-<<<<<<< HEAD
     time: predefined_date,
     detailedInfo : {"requiredHelpers":[]},
     privateInfo : {"latlng":""}
 
-=======
-    detailedInfo : {"requiredHelpers":[]}
->>>>>>> master
   }, 
 
   

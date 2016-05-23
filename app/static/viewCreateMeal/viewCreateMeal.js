@@ -35,11 +35,16 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   $scope.editedMeal = $scope.editedMeal || {
     veggies: false,
     town: "Santiago",
+<<<<<<< HEAD
     time: predefined_date,
     detailedInfo : {"requiredHelpers":[]},
     privateInfo : {"latlng":""}
 
+=======
+    detailedInfo : {"requiredHelpers":[]}
+>>>>>>> master
   }, 
+
   
   //enable to get the lat and lng to insert into google map API
   $window.navigator.geolocation.getCurrentPosition(function(position) {
@@ -107,6 +112,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     $scope.cleaners = $scope.cleaners || {
       nbCleaners: ""
     },
+
   $scope.excludingHelp = function() {
     $scope.helpBox.helpBuying = false,
     $scope.helpBox.helpCooking = false,

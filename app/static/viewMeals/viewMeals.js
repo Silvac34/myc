@@ -1,17 +1,9 @@
 'use strict';
 
-angular.module('myApp.viewMeals', ['ui.router'])
+angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
-/*  $stateProvider
-      .state('view_meals', {
-        url: '/view_meals',
-        templateUrl: 'static/viewMeals/viewMeals.html',
-        //controller: 'ViewMealsCtrl'
-        controller: 'ViewMealsCtrl',
-        data: {requiredLogin: true}
-      })*/
 }])
 
 .controller('ViewMealsCtrl', ['$scope','$http',function($scope,$http) {

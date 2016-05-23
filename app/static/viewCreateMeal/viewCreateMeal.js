@@ -42,28 +42,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   }, 
 
   
-  //enable to get the lat and lng to insert into google map API
-  $window.navigator.geolocation.getCurrentPosition(function(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-
-    $scope.$apply(function() {
-      $scope.editedMeal.privateInfo.latlng = lat + "," + lng;
-      
-      var locationFactory = $resource("https://maps.googleapis.com/maps/api/geocode/:verb", {
-        verb: 'json'
-      });
-       
-      $scope.geolocation = locationFactory.get({
-        latlng: $scope.editedMeal.privateInfo.latlng,
-        key: 'AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA'
-      }, function() {
-        
-      $scope.editedMeal.privateInfo.address = results.address_components[1].long_name;
-});
-      console.log($scope.geolocation);
-    });
-  });
+  
   
   $scope.helpBox = $scope.helpBox || {
     helpBuying: false, 

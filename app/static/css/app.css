@@ -32,53 +32,85 @@
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views             { width:auto; }
+#form-views-right,#form-views-left     { width:auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
-#form-views.ng-enter,
-#form-views.ng-leave      { position:absolute; left:30px; right:30px;
-    transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
-}
-    
-/* enter animation */
-#form-views.ng-enter            { 
-    -webkit-animation:slideInRight 0.5s both ease;
-    -moz-animation:slideInRight 0.5s both ease;
-    animation:slideInRight 0.5s both ease; 
+#form-views-right.ng-enter,
+#form-views-left.ng-enter
+{ position:absolute;transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
 }
 
-/* leave animation */
-#form-views.ng-leave            { 
-    -webkit-animation:slideOutLeft 0.5s both ease;
-    -moz-animation:slideOutLeft 0.5s both ease;
-    animation:slideOutLeft 0.5s both ease;   
+/* right enter animation */
+#form-views-right.ng-enter { 
+    transform: translateX(100%);
 }
+
+#form-views-right.ng-enter.ng-enter-active {
+  transform: translateX(0);
+}
+
+#form-views-right.ng-leave.ng-leave-active { 
+    transform: translateX(-100%);
+}
+
+/* left enter animation */
+#form-views-left.ng-enter            { 
+    transform: translateX(-100%);
+}
+
+#form-views-left.ng-leave, #form-views-left.ng-enter.ng-enter-active {
+  transform: translateX(0);
+}
+
+#form-views-left.ng-leave.ng-leave-active { 
+    transform: translateX(100%);
+}
+
+
+
+
+
+
 
 /* ANIMATIONS
 ============================================================================= */
 /* slide out to the left */
-@keyframes slideOutLeft {
+@keyframes slideLeft {
     to      { transform: translateX(-200%); }
 }
-@-moz-keyframes slideOutLeft {  
+@-moz-keyframes slideLeft {  
     to      { -moz-transform: translateX(-200%); }
 }
-@-webkit-keyframes slideOutLeft {
+@-webkit-keyframes slideLeft {
     to      { -webkit-transform: translateX(-200%); }
 }
 
-/* slide in from the right */
-@keyframes slideInRight {
-    from    { transform:translateX(200%); }
+@keyframes slideRight {
+    to      { transform: translateX(200%); }
+}
+@-moz-keyframes slideRight {  
+    to      { -moz-transform: translateX(200%); }
+}
+@-webkit-keyframes slideRight {
+    to      { -webkit-transform: translateX(200%); }
+}
+
+@keyframes fade_out {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@keyframes slideInLeft {
+    from    { transform:translateX(-200%); }
     to      { transform: translateX(0); }
 }
-@-moz-keyframes slideInRight {
-    from    { -moz-transform:translateX(200%); }
+@-moz-keyframes slideInLeft {
+    from    { -moz-transform:translateX(-200%); }
     to      { -moz-transform: translateX(0); }
 }
-@-webkit-keyframes slideInRight {
-    from    { -webkit-transform:translateX(200%); }
+@-webkit-keyframes slideInLeft {
+    from    { -webkit-transform:translateX(-200%); }
     to      { -webkit-transform: translateX(0); }
 }
 
@@ -140,4 +172,15 @@ body {
     margin-bottom: -9px;
     margin-top: -9px;
     width: 40px;
+}
+
+/* Inserting images in placeholders */
+
+#search_calendar {
+    background-image: url(/static/sources/calendar_with_clock.png);
+    background-repeat: no-repeat;
+    text-indent: 20px;
+    color: #808080;
+    margin-top: 38px;
+    margin-left:20px;
 }

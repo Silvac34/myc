@@ -50,6 +50,10 @@
       
       "privateInfo":{[
         "address":"12 rue de la liberté, 13ème, paris", //string
+<<<<<<< HEAD
+        "latlng" :"-33,487 , 44,4948", //string 
+=======
+>>>>>>> master
         "users":[{
           "_id":"1213212312","role":["admin","cooks","cleaner","buyer"]
         }]
@@ -76,5 +80,4 @@
         "gender": "male",
         "link": "https://www.facebook.com/app_scoped_user_id/10539797267/" //url
       }
-
-    }]
+  }]

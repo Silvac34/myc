@@ -5,17 +5,23 @@ var app = angular.module('myApp', [
   'config',
   'ui.bootstrap',
   'ui.router',
-  'ngAnimate',
   'satellizer',
   'myApp.viewCreateMeal',
   'myApp.viewMeals',
   'myApp.viewMyMeals',
   'myApp.viewLogin',
+  'myApp.welcome',
   'userServices'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
 
+  $stateProvider
+    .state('welcome', {
+      url: '/welcome',
+      templateUrl: 'static/welcome/welcome.html',
+      controller: 'WelcomeCtrl'
+    })
   $stateProvider
     .state('login', {
       url: '/login',
@@ -49,7 +55,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
         requiredLogin: true
       }
     })
-  $urlRouterProvider.otherwise('view_meals');
+  $urlRouterProvider.otherwise('welcome');
 
   $authProvider.facebook({
     clientId: ENV.fbClientID,
@@ -83,7 +89,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
   },
 
   $scope.isAuthenticated = function() {
-    return $auth.isAuthenticated()
+    return $auth.isAuthenticated();
   },
   
   $scope.getUserProfile = function() {
@@ -93,8 +99,10 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
       });
     }
   };
+  
 
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;
+  
 
-}])
+}]);

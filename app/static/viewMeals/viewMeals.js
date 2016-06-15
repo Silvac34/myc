@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar'])
+angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar','ui.bootstrap'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
@@ -14,17 +14,10 @@ angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar'])
     })
   }
   
-  //$scope.order = function(predicate) {
-    //$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false; //Pour changer l'ordre
-  //  $scope.predicate = predicate;
-  //};
-  
   $scope.reverse = false;
-  $scope.predicate = 'creationDate'
-  
+  $scope.SortOrder='asc';
 
-
-$scope.loadMeals();
+  $scope.loadMeals();
 
 
 }]);

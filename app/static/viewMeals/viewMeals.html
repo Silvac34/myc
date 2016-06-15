@@ -1,72 +1,75 @@
-<div>
-  <div class="page-header">
-    <h1 id="tables">Liste des repas</h1>
-  </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 col-md-offset-1">
-        Buscar :
-        <input ng-model="query">
-      </div>
-      <div class="col-md-5 col-md-offset-1">
-
-        <div class="row">
-          <label class="col-md-2" for="sortDropdown">Ordenar por :</label>
-          <div uib-dropdown class="col-md-3" id "sortDropdown">
-          
-            <select name="" ng-model="predicate">
-              <option value="creationDate">Fecha de creación</option>
-              <option value="time">Fecha de la cena</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="row" ng-repeat="meal in meals | filter:query | orderBy:predicate:reverse">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="list-group">
-          <a class="list-group-item">
-            <div class="row">
-              <div class="col-md-9 col-md-offset-1">
-                <img ng-src="/static/sources/menu.png"></img> {{meal.menu}}
-              </div>
-              <div class="col-md-2">
-                <div ng-if="meal.nbGuests">
-                  A partir de {{meal.price/meal.nbGuests | currency :'$' :2}} 
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-1">
-                <div ng-if="meal.veggies">
-                  <img ng-src="/static/sources/vegetarian.png" alt="vegetarian"></img>
-                </div>
-              </div>
-              <div class="col-md-4 col-md-offset-1">
-                <img ng-src="/static/sources/location.png"></img> {{meal.addressApprox}}
-              </div>
-              <div class="col-md-3">
-                <img ng-src="/static/sources/calendar.png"></img>
-                {{meal.time | date:'HH:mm'}}
-                </br>
-                {{meal.time | date:'dd/MM/yyyy'}}
-              </div>
-              <div class="col-md-1 col-md-offset-1">
-                <div ng-style="getStyle()" style="position:relative;width:50px;height : 50px">
-                  <div ng-style="getStyle()" style="position: absolute;top: 33%;left: 25%;font-size: small;">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
-                  <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"></div>
-                </div>
-              </div>
-
-
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div>{{meals | json}}</div>
+<div class="page-header">
+  <h1 id="tables">Liste des repas</h1>
 </div>
+<div class="container">
+  
+  <div class="row">
+    <div class="meal-search-sort col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9">
+      <span class="meal-search-title-count">Trier par</span>
+      <div class="btn-group" uib-dropdown>
+        <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
+        <ul uib-dropdown-menu class="dropdown-menu sort-menu" data-toggle="dropdown">
+          <li class="asc">
+            <a class="meal-search-sort-link" ng-click="SortOrder='asc'; reverse = false">Trie horaire Croissant</a>
+          </li>
+          <li class="desc">
+            <a class="meal-search-sort-link" ng-click="SortOrder='desc';reverse = true">Trie horaire décroissant</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" ng-repeat="meal in meals | orderBy:'time':reverse ">
+    <div class="col-sm-12">
+      <div class="list-group">
+        <a class="list-group-item">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-1">
+              <img ng-src="/static/sources/menu.png"></img> {{meal.menu}}
+            </div>
+            <div class="col-sm-2 hidden-xs">
+              <div ng-if="meal.nbGuests">
+                A partir de {{meal.price/meal.nbGuests}} €
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1">
+              <div ng-if="meal.veggies">
+                <img ng-src="/static/sources/vegetarian.png" alt="vegetarian"></img>
+              </div>
+            </div>
+            <div class="col-sm-4 col-sm-offset-1">
+              <img ng-src="/static/sources/location.png"></img> {{meal.addressApprox}}
+            </div>
+            <div class="col-sm-2 col-xs-6">
+              <img ng-src="/static/sources/calendar.png"></img>
+              {{meal.time | date:'dd/MM/yyyy'}}
+            </div>
+            <div class="col-sm-2 col-xs-6">
+              <img src="/static/sources/clock.png"></img>
+              {{meal.time | date:'HH:mm'}}
+            </div>
+            <div class="col-xs-6 visible-xs-block">
+              <div ng-if="meal.nbGuests">
+                A partir de : </br>{{meal.price/meal.nbGuests}} €
+              </div>
+            </div>
+            <div class="col-sm-1 col-xs-6">
+              <div ng-style="getStyle()" style="position:relative;width:50px;height : 50px">
+                <div ng-style="getStyle()" style="position: absolute;top: 33%;left: 25%;font-size: small;">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"></div>
+              </div>
+            </div>
+
+
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div>{{meals | json}}</div>

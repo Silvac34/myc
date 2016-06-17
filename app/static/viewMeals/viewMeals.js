@@ -4,7 +4,15 @@ angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar','
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
+  $stateProvider
+    .state('view_meals.filterMobile', {
+      parent: 'view_meals',
+      url: '',
+      templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
+      controller: 'ViewMealsCtrl'
+    })
 }])
+
 
 .controller('ViewMealsCtrl', ['$scope','$http',function($scope,$http) {
 

@@ -1,0 +1,11 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+.filter-mobile {
+  position: fixed;
+  bottom: 0;
+  width: 90%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  left:5%
+}
+

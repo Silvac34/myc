@@ -1,8 +1,8 @@
 <div class="page-header">
   <h1 id="tables">Liste des repas</h1>
 </div>
+
 <div class="container">
-  
   <div class="row">
     <div class="meal-search-sort col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9">
       <span class="meal-search-title-count">Trier par</span>
@@ -72,4 +72,8 @@
 
 </div>
 
-<div>{{meals | json}}</div>
+<div class="visible-xs-block">
+      <a href="" ui-sref="view_meals.filterMobile" class="btn btn-primary btn-lg filter-mobile col-centered">Filtres</a>
+</div>
+
+<div ui-view></div>

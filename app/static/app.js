@@ -34,7 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
       data: {
-        requiredLogin: true
+        //requiredLogin: true
       }
     })
   $stateProvider

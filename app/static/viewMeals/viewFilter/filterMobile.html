@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <label class="control-label filter-label col-xs-12">Choisir les jours de la semaine</label>
+        <div class="filter-date-checkbox text-center" ng-repeat="box in ['Mo','Tu','We','Th','Fr','Sa','Su']">
+            <label><input type="checkbox"></br>{{box}}</label>
+        </div>
+
+        <label class="control-label filter-label col-xs-12">Choisir une période</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="dateFilterMin.value" is-open="dateFilterMin.opened" close-text="Close" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" class="form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="dateFilterMax.value" is-open="dateFilterMax.opened" close-text="Close" />
+        </div>
+    </div>
+
+    <div class="row" style ="margin-top:20px;">
+            <a class="col-xs-offset-2 col-xs-4 btn btn-success btn-lg">Réinitialiser</a>
+            <a class="col-xs-4 btn btn-primary btn-lg">Appliquer</a>
+    </div>
+
+
+
+
+</div>

@@ -72,8 +72,8 @@
 
 </div>
 
-<div class="visible-xs-block">
-      <a href="" ui-sref="view_meals.filterMobile" class="btn btn-primary btn-lg filter-mobile col-centered">Filtres</a>
+
+<div class="visible-xs-block" ng-controller=" ModalFilterCtrl">
+      <a class="btn btn-primary btn-lg filter-mobile" ng-click="open()">Filtres</a>
 </div>
 
-<div ui-view></div>

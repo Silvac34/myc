@@ -279,15 +279,3 @@ body {
 }
 /*------------------------------------------------------------------------------------------------------------------------- */
 
-
-
-/* Inserting images in placeholders */
-
-#search_calendar {
-    background-image: url(/static/sources/calendar_with_clock.png);
-    background-repeat: no-repeat;
-    text-indent: 20px;
-    color: #808080;
-    margin-top: 38px;
-    margin-left:20px;
-}

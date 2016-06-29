@@ -17,17 +17,18 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
 
 .controller('ViewMealsCtrl', ['$scope','$http','viewMealsFilterService','$state','$uibModal', '$log',function($scope,$http,viewMealsFilterService,$state, $uibModal, $log) {
 
-  /*$scope.loadMeals = function () {
+  $scope.loadMeals = function () {
     $http.get('/api/meals').success(function (data) {
       $scope.meals = data;
     });
-  },*/
-
+  },
+/*
 $scope.loadMeals = function () {
 $http.get('static/fakeBackend/mealsFakeBackend.json').success(function(data) {
     $scope.meals = data;
 });
 },
+*/
 
   $scope.filter = function(){
     return viewMealsFilterService.get();
@@ -126,8 +127,6 @@ modViewMeals.service('viewMealsFilterService', function() {
   };
 });
 
-
-
 modViewMeals.filter('dateRange', function() {
   return function(items, from, to) {
     var filtered = [];
@@ -137,7 +136,6 @@ modViewMeals.filter('dateRange', function() {
     if (from == null && to == null) {
       return items;
     }
-
     if (to == null) {
       for (var i = 0; i < items.length; ++i) {
         var itemTime = new Date(items[i].time);

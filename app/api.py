@@ -5,10 +5,11 @@ import requests
 import jwt
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
-from flask import Flask, Response, render_template, request, jsonify
+from flask import Flask,g , Response, render_template, request, jsonify
 from pymongo import MongoClient, cursor
 from bson import ObjectId
 from bson.json_util import dumps
+from functools import wraps
 import configure
 
 
@@ -47,37 +48,26 @@ class Application:
                     o["_id"] = str(o["_id"]["$oid"])
         return o
 
-    @classmethod
-    def is_authentificated(self,request):
-        # the token is put in the Authorization header
-        if not request.headers.get('Authorization'):
-            return {'status':False,'error':(jsonify(error='Authorization header missing'), 401)}
-        # this header looks like this: “Authorization: Bearer {token}”
-        token = request.headers.get('Authorization').split()[1]
-        try:
-            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-        except DecodeError:
-            return {'status':False,'error':(jsonify(error='Invalid token'), 401)}
-        except ExpiredSignature:
-            return {'status':False,'error':(jsonify(error='Expired token'), 401)}
-        else:
-            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-            return {'status':True,'id':payload['sub']}
-
 class User:
-    def __init__(self,email=None,password=None,facebook_id=None):
-        self.em=email
-        self.pa=password
+    def __init__(self,email=None,password=None,facebook_id=None,_id=None):
         self.facebook_id = facebook_id
-        #Checks if this user already exist in db. And retreives its _id
-        #if Application.db.users.find_one({"email": email}) is None and password is not None:
-        #    Application.db.users.insert({"email":email,"password":password})
-        #elif Application.db.users.find_one({"email": email}) is None and facebook_id is not None:
-        #    Application.db.users.insert({"email":email,"facebook_id":facebook_id})
-        if Application.db.users.find_one({"facebook_id":facebook_id}) is None:
-            Application.db.users.insert({"facebook_id":facebook_id})
-        #self._id = str(Application.db.users.find_one({"email": email})["_id"])
-        self._id = str(Application.db.users.find_one({"facebook_id":facebook_id})["_id"])
+        self._id = _id
+        self.createUserIfNew()
+        
+    def createUserIfNew(self):
+        if self._id:
+            print('logged')
+        elif self.facebook_id:
+            if Application.db.users.find_one({"facebook_id":self.facebook_id}) is None:
+                Application.db.users.insert({"facebook_id":self.facebook_id})
+            self._id = str(Application.db.users.find_one({"facebook_id":self.facebook_id})["_id"])
+        
+    def getUserInfo(self):
+        return Application.db.users.find_one({"_id": ObjectId(self._id)})
+    
+    def updateUser(self,information):
+        Application.db.users.update_one({"_id":self._id}, {"$set":information})
+        
     def token(self):
         payload = {
             'sub': self._id,
@@ -87,6 +77,35 @@ class User:
         token = jwt.encode(payload, Application.app.config['TOKEN_SECRET'])
         return token.decode('unicode_escape')
 
+
+def login_required(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        if not request.headers.get('Authorization'):
+            
+            response = jsonify(message='Missing authorization header')
+            response.status_code = 401
+            return response
+
+        try:
+            token = request.headers.get('Authorization').split()[1]
+            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
+        except DecodeError:
+            response = jsonify(message='Token is invalid')
+            response.status_code = 401
+            return response
+        except ExpiredSignature:
+            response = jsonify(message='Token has expired')
+            response.status_code = 401
+            return response
+
+        g.user_id = payload['sub']
+
+        return func(*args, **kwargs)
+
+    return decorated_function
+    
+    
 
 @Application.app.route('/')
 def home():
@@ -120,29 +139,8 @@ def auth_facebook():
     fbID = profile['id']
     if 'id' in profile:
         del profile['id']
-    Application.db.users.update_one({"facebook_id":fbID}, {"$set":profile})
+    user.updateUser(profile)
     return jsonify(token=user.token())
-
-#@Application.app.route('/auth/signup', methods=['POST'])
-#def signup():
-#    data = json.loads(request.data)
-#    email = data["email"]
-#    password = data["password"]
-#    user = User(email=email, password=password)
-#    return jsonify(token=user.token())
-
-#@Application.app.route('/auth/login', methods=['POST'])
-#def login():
-#    data = json.loads(request.data)
-#    email = data["email"]
-#    password = data["password"]
-#    user = Application.db.users.find_one({"email":email})
-#    if not user:
-#        return jsonify(error="No such user"), 404
-#    if user["password"] == password:
-#        return jsonify(token=User(email).token()), 200
-#    else:
-#        return jsonify(error="Wrong email or password"), 400
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,47 +179,35 @@ PRIVATE API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #Get current user
 @Application.app.route('/api/user', methods=["GET"])
+@login_required
 def user_info():
-    authResponse = Application.is_authentificated(request)
-    #print authResponse
-    #if True == False:
-    if authResponse['status'] is not True:
-        return authResponse['error']
-    else:
-        user = Application.db.users.find_one({"_id": ObjectId(authResponse['id'])})
-        if user is None:
-            return jsonify(error='Should not happen ...'), 500
-        #return jsonify(_id=str(user["_id"]),email=user["email"]), 200
-        return dumps(Application.preprocess_id(user)), 200
-    return jsonify(error="never reach here..."), 500
+    user = User(_id=g.user_id).getUserInfo()
+    if user is None:
+        return jsonify(error='Should not happen ...'), 500
+    return dumps(Application.preprocess_id(user)), 200
+    
 
 # Insert one meal
 @Application.app.route('/api/meal', methods=["POST"])
+@login_required
 def insert_one_meal():
-    authResponse = Application.is_authentificated(request)
-    if authResponse['status'] is not True:
-        return authResponse['error']
+    if request.data == "" or request.data == "{}" or request.data is None:
+        return ""
     else:
-        if request.data == "" or request.data == "{}" or request.data is None:
-            return ""
-        else:
-            new_meal = json.loads(request.data)
-            new_meal["admin"] = authResponse['id']
-            new_meal["privateInfo"]["users"]= [{"_id":authResponse['id'],"role":"admin"}]
-            new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
-            new_meal["creationDate"] = datetime.now()
-            id_inserted = Application.db.meals.insert(new_meal)
-            inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
-            return Response(dumps(Application.preprocess_id(inserted)), status=200)
+        new_meal = json.loads(request.data)
+        new_meal["admin"] = g.user_id
+        new_meal["privateInfo"]["users"]= [{"_id":g.user_id,"role":"admin"}]
+        new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
+        new_meal["creationDate"] = datetime.now()
+        id_inserted = Application.db.meals.insert(new_meal)
+        inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
+        return Response(dumps(Application.preprocess_id(inserted)), status=200)
 
 # Get all meals- Show public and undetailed information
 @Application.app.route('/api/meals', methods=['GET'])
+@login_required
 def get_all_meals():
-    authResponse = Application.is_authentificated(request)
-    if authResponse['status'] is not True:
-        return authResponse['error']
-    else:
-        return Response(dumps(Application.preprocess_id(Application.db.meals.find({},{"detailedInfo":0,"privateInfo":0}))), status=200)
+    return Response(dumps(Application.preprocess_id(Application.db.meals.find({},{"detailedInfo":0,"privateInfo":0}))), status=200)
 
 
 ####################################################################################

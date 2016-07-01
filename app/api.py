@@ -58,15 +58,15 @@ class User:
         if self._id:
             print('logged')
         elif self.facebook_id:
-            if Application.db.users.find_one({"facebook_id":self.facebook_id}) is None:
-                Application.db.users.insert({"facebook_id":self.facebook_id})
-            self._id = str(Application.db.users.find_one({"facebook_id":self.facebook_id})["_id"])
+            if Application.db.users.find_one({"privateInformation.facebook_id":self.facebook_id}) is None:
+                Application.db.users.insert({"privateInformation" : {"facebook_id":self.facebook_id}})
+            self._id = str(Application.db.users.find_one({"privateInformation.facebook_id":self.facebook_id})["_id"])
         
     def getUserInfo(self):
         return Application.db.users.find_one({"_id": ObjectId(self._id)})
     
     def updateUser(self,information):
-        Application.db.users.update_one({"_id":self._id}, {"$set":information})
+        Application.db.users.update_one({"_id":ObjectId(self._id)}, {"$set":information})
         
     def token(self):
         payload = {
@@ -136,10 +136,14 @@ def auth_facebook():
     # Step 3. Create a new account or return an existing one.
     user = User(facebook_id=profile['id'])
     #Store data from facebook
-    fbID = profile['id']
-    if 'id' in profile:
-        del profile['id']
-    user.updateUser(profile)
+    userInfo = {}
+    userInfo["picture"]=profile["picture"]
+    userInfo["first_name"]=profile["first_name"]
+    userInfo["last_name"]=profile["last_name"]
+    userInfo["gender"]=profile["gender"]
+    user.updateUser(userInfo)
+    userInfo = {"privateInformation.email" : profile["email"],"privateInformation.link" : profile["link"] }
+    user.updateUser(userInfo)
     return jsonify(token=user.token())
 
 

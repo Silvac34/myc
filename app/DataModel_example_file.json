@@ -1,80 +1,72 @@
 {
-  "meals":[
-    {
-    "_id":"01202102002",
+  "meals": [{
+    "_id": "01202102002",
 
-// viewCreateMealDiner.html
+    // viewCreateMealDiner.html
 
-    "menu":"tartiflette + dessert crumble", // string
+    "menu": "tartiflette + dessert crumble", // string
     "veggies": false, //boolean
+    // viewCreateMealProfile.html
+    "town": "paris", //string
+    "addressApprox": "Metro Nation", //string
+    "time": "20:30 10/11/2012", //datetime-local
+    "creationDate": "20:30 10/11/2012", //datetime-local
 
-// viewCreateMealProfile.html
-
-    "town":"paris" //string
-    "addressApprox":"Metro Nation" //string
-    "time":"20:30 10/11/2012" //datetime-local
-    "creationDate": "20:30 10/11/2012" //datetime-local
-
-// viewCreateMealPayment.html
+    // viewCreateMealPayment.html
 
     "price": 20000, //number
     "nbGuests": 5, //integer
-    "nbRemainingPlaces":2, //integer
-    
-    "admin":[{"_id":"010212023"  //string
-      }],
-    
-    "detailedInfo":{[
-      
-        "requiredHelpers": 
-        [{"buyers": [{
-            "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon" //string
-          }, 
-          {
-            "deliveryTime": "20:00 10/11/2012" //datetime-local
-          }]
-        }, 
-        {"cooks": [{
-              "timeCooking": "21:00 10/11/2012" //datetime-local]
-            }, 
-            {
-              "nbCooks": 2//integer
-            }]
+    "nbRemainingPlaces": 2, //integer
+    "admin": {
+      "_id": "010212023" //string
+    },
+
+    "detailedInfo": {
+      "requiredHelpers": {
+        "buyers": {
+          "ingredient": "1,5kg de patates, 400g de lardon, 1 roblochon, 2 oignon", //string
+          "deliveryTime": "20:00 10/11/2012", //datetime-local
         },
-        {"cleaners": 
-          [{
-            "nbCleaners": 2 //integer  
-          }]
-        }]
-    ]},
-      
-      "privateInfo":{[
-        "address":"12 rue de la liberté, 13ème, paris", //string
-        "latlng" :"-33,487 , 44,4948", //string 
-        "users":[{
-          "_id":"1213212312","role":["admin","cooks","cleaner","buyer"]
-        }]
-        
-      ]}
-      
-    ]
-  }
-  
-  
-  {
-    "users": [{
-        "_id": "11272323009876" //string , 
-        "email": "maillet.kevin91@gmail.com" //email,
-        "facebook_id": "11278668909876" //string,
-        "picture": {
-          "data": {
-            "url": "https://scontent.3d9&oe=5774CB92", //URL
-            "is_silhouette": false
-          }
+        "cooks": {
+          "timeCooking": "21:00 10/11/2012", //datetime-local]
+          "nbCooks": 2 //integer
         },
-        "first_name": "Kevin",
-        "last_name": "Marteau",
-        "gender": "male",
-        "link": "https://www.facebook.com/app_scoped_user_id/10539797267/" //url
+        "cleaners": {
+          "nbCleaners": 2 //integer  
+        }
       }
+    },
+
+    "privateInfo": {
+      "address": "12 rue de la liberté, 13ème, paris", //string
+      "latlng": "-33,487 , 44,4948", //string 
+      "users": [{
+        "_id": "1213212312",
+        "role": ["admin", "cooks", "cleaner", "buyer"]
+      }]
+    }
+    
   }]
+} 
+
+
+{
+  "users": [{
+    "_id": "11272323009876" //string , 
+    "picture": {
+      "data": {
+        "url": "https://scontent.3d9&oe=5774CB92", //URL
+        "is_silhouette": false
+      }
+    },
+    "first_name": "Kevin",
+    "last_name": "Marteau",
+    "gender": "male",
+
+    "privateInformation": {
+      "email": "maillet.kevin91@gmail.com" //email,
+      "facebook_id": "11278668909876" //string,
+      "link": "https://www.facebook.com/app_scoped_user_id/10539797267/" //url 
+    }
+  }]
+}

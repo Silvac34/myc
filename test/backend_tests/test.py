@@ -19,7 +19,6 @@ class BasicTest(unittest.TestCase):
         Application.app.config['TESTING'] = True
         self.client = Application.app.test_client()
         client = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
-        #Application.db = client.test_database
         Application.db = client.get_default_database()
 
     def tearDown(self):

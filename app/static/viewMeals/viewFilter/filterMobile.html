@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <label class="control-label filter-label col-xs-12">Choisir les jours de la semaine</label>
+        <div class="filter-date-checkbox-mobile text-center" ng-repeat="day in filter.weekDays">
+            <label><input type="checkbox" ng-model=day.selected></br>{{day.label}}</label>
+        </div>
+        <label class="control-label filter-label col-xs-12">Choisir une période</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" class="form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" />
+        </div>
+    </div>
+
+    <div class="row" style ="margin-top:20px; margin-bottom: 20px;">
+        <a class="col-xs-offset-4 col-xs-4 btn btn-success btn-lg" ng-click="clearFilters()">Réinitialiser</a>
+            <!--<a class="col-xs-offset-2 col-xs-4 btn btn-success btn-lg" ng-click="clearFilters()">Réinitialiser</a>
+            <a class="col-xs-4 btn btn-primary btn-lg" ng-click="applyFilters()">Appliquer</a>-->
+    </div>
+</div>

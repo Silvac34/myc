@@ -29,7 +29,36 @@
       <div class="row" ng-repeat="meal in meals | orderBy:'time':reverse | dateRange:filter().dateFilterMin.value:filter().dateFilterMax.value | fWeekDays:filter().weekDays">
         <div class="col-sm-12">
           <div class="list-group">
-            <a class="list-group-item">
+            <a class="list-group-item list-group-meal">
+              <div class="hidden-xs col-sm-3">
+                information profile organisateur
+              </div>
+              <div class="col-xs-12 col-sm-9">
+                  <div class="row">
+                    <div class="col-xs-8">
+                      <label class="meal-menu-label">{{meal.menu}}</label> </br>
+                      <div class="meal-label meal-location">{{meal.town}} - {{meal.addressApprox}}</div>
+                      <div class="row">
+                        <div class="col-xs-6">
+                          <div class="meal-label meal-date">{{meal.time |date:'dd/MM/yyyy'}} </div> 
+                        </div>
+                        <div class="col-xs-offset-2 col-xs-4">
+                          <div class="meal-label meal-time">{{meal.time |date:'HH:mm'}} </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="meal-price">{{meal.price/meal.nbGuests | currency : ""}} €</div> 
+                      <div class="meal-label meal-price-label">par pers</div>
+                      <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
+                        <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                        <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0">                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              
+              <!--
               <div class="row">
                 <div class="col-sm-9 col-sm-offset-1">
                   <img ng-src="/static/sources/menu.png"></img> {{meal.menu}}
@@ -59,7 +88,7 @@
                 </div>
                 <div class="col-xs-6 visible-xs-block">
                   <div ng-if="meal.nbGuests">
-                    A partir de : </br>{{meal.price/meal.nbGuests}} €
+                    A partir de : </br>{{meal.price/meal.nbGuests | currency : ""}} € 
                   </div>
                 </div>
                 <div class="col-sm-1 col-xs-6">
@@ -68,9 +97,10 @@
                     <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"></div>
                   </div>
                 </div>
-
-
               </div>
+              -->
+              
+              
             </a>
           </div>
         </div>

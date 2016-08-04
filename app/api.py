@@ -58,12 +58,15 @@ class User:
         if self._id:
             print('logged')
         elif self.facebook_id:
-            if Application.db.users.find_one({"privateInformation.facebook_id":self.facebook_id}) is None:
-                Application.db.users.insert({"privateInformation" : {"facebook_id":self.facebook_id}})
-            self._id = str(Application.db.users.find_one({"privateInformation.facebook_id":self.facebook_id})["_id"])
+            if Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
+                Application.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
+            self._id = str(Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
         
     def getUserInfo(self):
         return Application.db.users.find_one({"_id": ObjectId(self._id)})
+    
+    def getUserPublicInfo(self):
+        return Application.db.users.find_one({"_id": ObjectId(self._id)},{"privateInfo":0})
     
     def updateUser(self,information):
         Application.db.users.update_one({"_id":ObjectId(self._id)}, {"$set":information})
@@ -142,7 +145,7 @@ def auth_facebook():
     userInfo["last_name"]=profile["last_name"]
     userInfo["gender"]=profile["gender"]
     user.updateUser(userInfo)
-    userInfo = {"privateInformation.email" : profile["email"],"privateInformation.link" : profile["link"] }
+    userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
     user.updateUser(userInfo)
     return jsonify(token=user.token())
 
@@ -152,29 +155,29 @@ PUBLIC API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # Delete one meal from ID
-@Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
-def delete_meal(meal_id):
-    result = Application.db.meals.delete_one({"_id": ObjectId(meal_id)})
-    if result.deleted_count == 1 :
-        return Response(str(result.deleted_count) + ' meal deleted',status=200)
-    elif result.deleted_count == 0 :
-        return Response(str(result.deleted_count) + ' meal deleted',status=202)
+#@Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
+#def delete_meal(meal_id):
+#    result = Application.db.meals.delete_one({"_id": ObjectId(meal_id)})
+#    if result.deleted_count == 1 :
+#        return Response(str(result.deleted_count) + ' meal deleted',status=200)
+#    elif result.deleted_count == 0 :
+#        return Response(str(result.deleted_count) + ' meal deleted',status=202)
 
 # Update one meal from ID
-@Application.app.route("/api/meal/<meal_id>", methods=['PUT'])
-def update_one_meal(meal_id):
-    if request.data == "" or request.data == "{}" or request.data is None:
-        return Response('0 meals modified',status=202)
-    #To delete the existing _id if there is one
-    updateData = json.loads(request.data)
-    if '_id' in updateData:
-        del updateData['_id']
-    #Update the meal
-    result = Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":updateData})
-    if result.matched_count == 1 :
-        return Response(str(result.matched_count) + ' meals modified',status=200)
-    if result.matched_count == 0 :
-        return Response(str(result.matched_count) +' meals modified',status=202)
+#@Application.app.route("/api/meal/<meal_id>", methods=['PUT'])
+#def update_one_meal(meal_id):
+#    if request.data == "" or request.data == "{}" or request.data is None:
+#        return Response('0 meals modified',status=202)
+#    #To delete the existing _id if there is one
+#    updateData = json.loads(request.data)
+#    if '_id' in updateData:
+#        del updateData['_id']
+#    #Update the meal
+#    result = Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":updateData})
+#    if result.matched_count == 1 :
+#        return Response(str(result.matched_count) + ' meals modified',status=200)
+#    if result.matched_count == 0 :
+#        return Response(str(result.matched_count) +' meals modified',status=202)
         
     
     
@@ -211,7 +214,12 @@ def insert_one_meal():
 @Application.app.route('/api/meals', methods=['GET'])
 @login_required
 def get_all_meals():
-    return Response(dumps(Application.preprocess_id(Application.db.meals.find({},{"detailedInfo":0,"privateInfo":0}))), status=200)
+    meals = Application.db.meals.find({},{"detailedInfo":0,"privateInfo":0})
+    enrichedMeals = []
+    for meal in meals:
+        meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
+        enrichedMeals.append(meal)
+    return Response(dumps(Application.preprocess_id(enrichedMeals)), status=200)
 
 
 ####################################################################################

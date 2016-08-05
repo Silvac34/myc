@@ -1,5 +1,119 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class="page-header">
+  <h1 id="tables">Liste de mes repas à venir</h1>
+</div>
+
+<div class="container">
+
+    <div class="col-sm-9 col-xs-12">
+      <div class="row" ng-repeat="meal in meals | "> <!-- mettre un filtre par authentification pour qu'apparaissent uniquement les repas de la personne + un filtre par date antérieure à la date d'auj -->
+        <div class="col-sm-12">
+          <div class="list-group">
+            <a class="list-group-item">
+              <div class="row">
+                <div class="col-sm-9 col-sm-offset-1">
+                  <img ng-src="/static/sources/menu.png"></img> {{meal.menu}}
+                </div>
+                <div class="col-sm-2 hidden-xs">
+                  <div ng-if="meal.nbGuests">
+                    A partir de {{meal.price/meal.nbGuests}} €
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-1">
+                  <div ng-if="meal.veggies">
+                    <img ng-src="/static/sources/vegetarian.png" alt="vegetarian"></img>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-sm-offset-1">
+                  <img ng-src="/static/sources/location.png"></img> {{meal.addressApprox}}
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                  <img ng-src="/static/sources/calendar.png"></img>
+                  {{meal.time | date:'dd/MM/yyyy'}}
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                  <img src="/static/sources/clock.png"></img>
+                  {{meal.time | date:'HH:mm'}}
+                </div>
+                <div class="col-xs-6 visible-xs-block">
+                  <div ng-if="meal.nbGuests">
+                    A partir de : </br>{{meal.price/meal.nbGuests}} €
+                  </div>
+                </div>
+                <div class="col-sm-1 col-xs-6">
+                  <div ng-style="getStyle()" style="position:relative;width:50px;height : 50px">
+                    <div ng-style="getStyle()" style="position: absolute;top: 33%;left: 25%;font-size: small;">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                    <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"></div>
+                  </div>
+                </div>
+
+
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-header">
+  <h1 id="tables">Liste de mes repas passés</h1>
+</div>
+
+<div class="container">
+
+    <div class="col-sm-9 col-xs-12">
+      <div class="row" ng-repeat="meal in meals | "> <!-- mettre un filtre par authentification pour qu'apparaissent uniquement les repas de la personne + un filtre par date postérieure à la date d'auj -->
+        <div class="col-sm-12">
+          <div class="list-group">
+            <a class="list-group-item">
+              <div class="row">
+                <div class="col-sm-9 col-sm-offset-1">
+                  <img ng-src="/static/sources/menu.png"></img> {{meal.menu}}
+                </div>
+                <div class="col-sm-2 hidden-xs">
+                  <div ng-if="meal.nbGuests">
+                    A partir de {{meal.price/meal.nbGuests}} €
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-1">
+                  <div ng-if="meal.veggies">
+                    <img ng-src="/static/sources/vegetarian.png" alt="vegetarian"></img>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-sm-offset-1">
+                  <img ng-src="/static/sources/location.png"></img> {{meal.addressApprox}}
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                  <img ng-src="/static/sources/calendar.png"></img>
+                  {{meal.time | date:'dd/MM/yyyy'}}
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                  <img src="/static/sources/clock.png"></img>
+                  {{meal.time | date:'HH:mm'}}
+                </div>
+                <div class="col-xs-6 visible-xs-block">
+                  <div ng-if="meal.nbGuests">
+                    A partir de : </br>{{meal.price/meal.nbGuests}} €
+                  </div>
+                </div>
+                <div class="col-sm-1 col-xs-6">
+                  <div ng-style="getStyle()" style="position:relative;width:50px;height : 50px">
+                    <div ng-style="getStyle()" style="position: absolute;top: 33%;left: 25%;font-size: small;">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                    <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"></div>
+                  </div>
+                </div>
+
+
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

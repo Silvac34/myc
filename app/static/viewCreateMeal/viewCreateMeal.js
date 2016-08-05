@@ -113,7 +113,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     //TODO : rediriger vers page du repas
   };
   
-  //required for the calendar toolbar (datamodel : editedMeal.date)
+  //required for the calendar toolbar (datamodel : editedMeal.time)
   
   $scope.dateOptions = {
     formatYear: 'yy',

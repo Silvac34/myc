@@ -51,31 +51,33 @@ class Application:
     def is_authentificated(self,request):
         # the token is put in the Authorization header
         if not request.headers.get('Authorization'):
-            return jsonify(error='Authorization header missing'), 401
+            return {'status':False,'error':(jsonify(error='Authorization header missing'), 401)}
         # this header looks like this: “Authorization: Bearer {token}”
         token = request.headers.get('Authorization').split()[1]
         try:
             payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
         except DecodeError:
-            return jsonify(error='Invalid token'), 401
+            return {'status':False,'error':(jsonify(error='Invalid token'), 401)}
         except ExpiredSignature:
-            return jsonify(error='Expired token'), 401
+            return {'status':False,'error':(jsonify(error='Expired token'), 401)}
         else:
             payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-            self.user_id = payload['sub']
-            return True
+            return {'status':True,'id':payload['sub']}
 
 class User:
-    def __init__(self,email,password=None,facebook_id=None):
+    def __init__(self,email=None,password=None,facebook_id=None):
         self.em=email
         self.pa=password
         self.facebook_id = facebook_id
         #Checks if this user already exist in db. And retreives its _id
-        if Application.db.users.find_one({"email": email}) is None and password is not None:
-            Application.db.users.insert({"email":email,"password":password})
-        elif Application.db.users.find_one({"email": email}) is None and facebook_id is not None:
-            Application.db.users.insert({"email":email,"facebook_id":facebook_id})
-        self._id = str(Application.db.users.find_one({"email": email})["_id"])
+        #if Application.db.users.find_one({"email": email}) is None and password is not None:
+        #    Application.db.users.insert({"email":email,"password":password})
+        #elif Application.db.users.find_one({"email": email}) is None and facebook_id is not None:
+        #    Application.db.users.insert({"email":email,"facebook_id":facebook_id})
+        if Application.db.users.find_one({"facebook_id":facebook_id}) is None:
+            Application.db.users.insert({"facebook_id":facebook_id})
+        #self._id = str(Application.db.users.find_one({"email": email})["_id"])
+        self._id = str(Application.db.users.find_one({"facebook_id":facebook_id})["_id"])
     def token(self):
         payload = {
             'sub': self._id,
@@ -113,7 +115,7 @@ def auth_facebook():
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
     # Step 3. Create a new account or return an existing one.
-    user = User(facebook_id=profile['id'], email=profile['email'])
+    user = User(facebook_id=profile['id'])
     #Store data from facebook
     fbID = profile['id']
     if 'id' in profile:
@@ -181,10 +183,12 @@ PRIVATE API
 @Application.app.route('/api/user', methods=["GET"])
 def user_info():
     authResponse = Application.is_authentificated(request)
-    if authResponse is not True:
-        return authResponse
+    #print authResponse
+    #if True == False:
+    if authResponse['status'] is not True:
+        return authResponse['error']
     else:
-        user = Application.db.users.find_one({"_id": ObjectId(Application.user_id)})
+        user = Application.db.users.find_one({"_id": ObjectId(authResponse['id'])})
         if user is None:
             return jsonify(error='Should not happen ...'), 500
         #return jsonify(_id=str(user["_id"]),email=user["email"]), 200
@@ -195,16 +199,17 @@ def user_info():
 @Application.app.route('/api/meal', methods=["POST"])
 def insert_one_meal():
     authResponse = Application.is_authentificated(request)
-    if authResponse is not True:
-        return authResponse
+    if authResponse['status'] is not True:
+        return authResponse['error']
     else:
         if request.data == "" or request.data == "{}" or request.data is None:
             return ""
         else:
             new_meal = json.loads(request.data)
-            new_meal["admin"] = Application.user_id
-            new_meal["privateInfo"]["users"]= [{"_id":Application.user_id,"role":"admin"}]
+            new_meal["admin"] = authResponse['id']
+            new_meal["privateInfo"]["users"]= [{"_id":authResponse['id'],"role":"admin"}]
             new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
+            new_meal["creationDate"] = datetime.now()
             id_inserted = Application.db.meals.insert(new_meal)
             inserted = Application.db.meals.find_one({"_id": ObjectId(id_inserted)})
             return Response(dumps(Application.preprocess_id(inserted)), status=200)
@@ -213,8 +218,8 @@ def insert_one_meal():
 @Application.app.route('/api/meals', methods=['GET'])
 def get_all_meals():
     authResponse = Application.is_authentificated(request)
-    if authResponse is not True:
-        return authResponse
+    if authResponse['status'] is not True:
+        return authResponse['error']
     else:
         return Response(dumps(Application.preprocess_id(Application.db.meals.find({},{"detailedInfo":0,"privateInfo":0}))), status=200)
 

@@ -40,7 +40,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     privateInfo : {"latlng":""}
 
   }, 
-
   
   
   
@@ -148,9 +147,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   // asking to the customer if he wants to be geolocated, by default no ==> is_geolocated = false
   
   $scope.geolocation = {};
-  
-
-
   
 }]);
 

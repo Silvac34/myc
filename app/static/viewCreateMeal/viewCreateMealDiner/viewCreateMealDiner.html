@@ -1,7 +1,12 @@
 <!-- form-diner.html -->
+<div class="progress progress-striped active">
+  <div class="progress-bar" style="width: 33%">¿Qué?</div>
+  <div class="progress-bar progress-bar-info" style="width: 33%">¿Dónde y Cuándo?</div>
+  <div class="progress-bar progress-bar-info" style="width: 34%">¿Comó?</div>
+</div>
 <div class="col-xs-12">
   <div class="form-group">
-    <h4 for="inputMenu">¿Cúal será el menu? *</h4>
+    <h4 for="inputMenu">¿Cúal será el menu?</h4>
     <textarea class="form-control" id="inputMenu" name="inputMenu" ng-model="editedMeal.menu" required></textarea>
     <div ng-messages="form_create_meal.inputMenu.$error" role="alert" ng-if="form_create_meal.inputMenu.$dirty">
       <div ng-message="required" class="alert alert-dismissible alert-danger">

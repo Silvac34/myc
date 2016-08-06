@@ -10,3 +10,4 @@ tmp
 .bundle/
 .c9
 config.js
+app/static/fakeBackend/

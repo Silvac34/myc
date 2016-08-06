@@ -17,11 +17,13 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
 
 .controller('ViewMealsCtrl', ['$scope','$http','viewMealsFilterService','$state','$uibModal', '$log',function($scope,$http,viewMealsFilterService,$state, $uibModal, $log) {
 
+
   $scope.loadMeals = function () {
     $http.get('/api/meals').success(function (data) {
       $scope.meals = data;
     });
   },
+
 /*
 $scope.loadMeals = function () {
 $http.get('static/fakeBackend/mealsFakeBackend.json').success(function(data) {

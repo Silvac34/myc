@@ -138,12 +138,6 @@
   opacity:1;
 }
 
-body {
-    
-    
-    background:#333;
-}
-
 .form_bg {
     background-color:#eee;
     color:#666;
@@ -276,6 +270,57 @@ body {
     background: #0FAAF0 url("/static/sources/icones sort/menu_asc_hover.png") no-repeat 50% 50%;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px
+}
+
+/* ng-repeat meal in meals */
+
+.list-group-meal{
+    display: inline-block;
+    width: 100%;
+}
+
+.meal-menu-label{
+    font-size: 16px;
+    padding-left: 22px;
+    height: 25px;
+    background: url("/static/sources/menu.png") no-repeat 0;
+    margin-bottom: 27px;
+}
+
+.meal-label{
+    font-size: 12px;
+    color: rgba(56, 52, 52, 0.45);
+    padding-left: 29px;
+    padding-top: 7px;
+    max-width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.meal-location {
+    background: url("/static/sources/location.png") no-repeat 0;
+}
+
+.meal-date{
+    background: url("/static/sources/calendar.png") no-repeat;
+}
+
+.meal-time{
+    background: url("/static/sources/clock.png") no-repeat;
+}
+
+.meal-price{
+    font-size: 20px;
+    font-weight: 700;
+    color: #3EA93E;
+    text-align: right;
+}
+
+.meal-price-label{
+    text-align: right;
+    padding-top: 0;
+    padding-left: 0;
+    margin-bottom:-5px;
 }
 /*------------------------------------------------------------------------------------------------------------------------- */
 

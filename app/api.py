@@ -220,6 +220,14 @@ def get_all_meals():
         meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
         enrichedMeals.append(meal)
     return Response(dumps(Application.preprocess_id(enrichedMeals)), status=200)
+    
+# Get the meal's detailed and public information
+@Application.app.route('/api/meal/<meal_id>', methods=['GET'])
+@login_required
+def get_meal_detailed_info(meal_id):
+    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)},{"privateInfo":0})
+    meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
+    return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 
 ####################################################################################

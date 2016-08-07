@@ -12,6 +12,7 @@ from bson import ObjectId, json_util
 from bson.json_util import dumps
 from app.api import Application, User
 from app import configure
+import subprocess
 
 
 
@@ -21,6 +22,9 @@ class TestData:
         self.jsonNewMeal2Data = "{\"town\": \"Santiago\",\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredHelpers\": []},\"privateInfo\" :{\"address\": \"30 avenue de Trudaine 75009\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
         self.adminUser = User(facebook_id ="0123456789")
         self.adminUser.updateUser({"privateInfo": {"facebook_id": "0123456789","link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/","email": "maillet.kevin91@gmail.com"},"picture": {"data": {"url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529","is_silhouette": "false"}},"first_name": "Kevin","last_name": "Marteau","gender": "male"})
+        #nouveau jeux de données, ancien à supprimer
+        self.jsonMealDetailedData1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529\",\"is_silhouette\": \"false\"}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredHelpers\": []},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        
 
 class BasicAPITest(unittest.TestCase):
     def setUp(self):
@@ -30,8 +34,8 @@ class BasicAPITest(unittest.TestCase):
         Application.db = mClient.get_default_database()
 
     def tearDown(self):
-        Application.db.drop_collection('meals')
-        Application.db.drop_collection('users')
+        Application.db.meals.delete_many({})
+        Application.db.users.delete_many({})
 
     def test_unauthentificatedUser(self):
         resp = self.client.post("/api/meals", data="{\"super\":\"toto\"}")
@@ -68,8 +72,8 @@ class TestAuthManageMealAPI(unittest.TestCase):
         self.client.post("/api/meals", data=TestData().jsonNewMeal2Data, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
 
     def tearDown(self):
-        Application.db.drop_collection('meals')
-        Application.db.drop_collection('users')
+        Application.db.meals.delete_many({})
+        Application.db.users.delete_many({})
         
     def test_get_all_meals(self):
         resp2 = self.client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
@@ -84,6 +88,35 @@ class TestAuthManageMealAPI(unittest.TestCase):
         #Assert
         self.assertEqual(2, len(resp2))
         self.assertItemsEqual(resp2[0],Application.preprocess_id(mealsAPITest)[0])
+
+class TestAuthMealAPI(unittest.TestCase):
+
+    def setUp(self):
+        self.maxDiff = None
+        Application.app.config['TESTING'] = True
+        self.client = Application.app.test_client()
+        mClient = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
+        Application.db = mClient.get_default_database()
+        #populate the database with test data
+        #subprocess.call(["mongoimport", "-h=ds055872.mlab.com:55872", "-d=shareat_dev_test","-c=meals", "-u=shareat", "-p=kmaillet230191","--file=../testData/meals_testData.json"])
+        #subprocess.call(["mongoimport", "-h=ds055872.mlab.com:55872", "-d=shareat_dev_test","-c=users", "-u=shareat", "-p=kmaillet230191","--file=../testData/users_testData.json"])
+        Application.db.meals.insert({"_id": ObjectId("111111111111111111111111"),"town": "Santiago","admin":"111111111111111111111111","menu": "Jolie piece de boeuf","price": 100,"detailedInfo": {"requiredHelpers": []},"privateInfo" :{"address": "30 avenue de Trudaine 75009"},"nbGuests": 10,"veggies": False ,"time": "2016-11-20T17:00:00.000Z","addressApprox": "Métro Anvers L2"})
+        Application.db.meals.insert({"_id": ObjectId("111111111111111111111112"),"town": "Santiago","admin":"111111111111111111111111","menu": "Soupions de légumes avec cassolette de veau","price": 60,"detailedInfo": {"requiredHelpers": []},"privateInfo" :{"address": "3 impasse marie - blanche 75018"},"nbGuests": 10,"veggies": False,"time": "2017-12-20T17:00:00.000Z","addressApprox": "Métro Blanche L2"})
+        Application.db.users.insert({"_id": ObjectId("111111111111111111111111"),"privateInfo": {"facebook_id": "0123456789","link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/","email": "maillet.kevin91@gmail.com"},"picture": {"data": {"url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529","is_silhouette": "false"}},"first_name": "Kevin","last_name": "Marteau","gender": "male"})
+
+    def tearDown(self):
+        #Application.db.drop_collection('meals')
+        #Application.db.drop_collection('users')
+        Application.db.meals.delete_many({})
+        Application.db.users.delete_many({})
+        
+
+    def test_get_detailed_info(self):
+        resp = self.client.get("/api/meal/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        self.assertEqual("200 OK", resp.status)
+        resp = json.loads(resp.data)
+        expected = json.loads(TestData().jsonMealDetailedData1)
+        self.assertItemsEqual(resp,expected)
 
     #def test_delete_one_meal(self):
     #    Application.db.meals.insert({"test_remove": "test"})

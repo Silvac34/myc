@@ -272,7 +272,12 @@
     border-bottom-right-radius: 0px
 }
 
-/* ng-repeat meal in meals */
+/* View Meals */
+
+.list-meal {
+    overflow-y: scroll;
+    height: 70vh;
+}
 
 .list-group-meal{
     display: inline-block;
@@ -321,6 +326,17 @@
     padding-top: 0;
     padding-left: 0;
     margin-bottom:-5px;
+}
+
+.meal-admin{
+    transform: translateY(70%);
+    padding-right: 0px;
+}
+
+.meal-admin-name{
+    margin-top: 15px;
+    font-size: 12px;
+    font-weight: bold;
 }
 /*------------------------------------------------------------------------------------------------------------------------- */
 

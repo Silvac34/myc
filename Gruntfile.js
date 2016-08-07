@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 
     });
 
-
+// Create Front End Configuration file for the environment --------------------------------------------------------------------------------------------------
     grunt.registerTask('devKev', [
         // This will generate the configuration file for the environment
         'ngconstant:devKev'
@@ -140,7 +140,7 @@ module.exports = function(grunt) {
     ]);
     
 
-    // Grunt task to build your source code for deployment to production
+// Grunt task to build your source code for deployment to production ------------------------------------------------------------------------------------
     grunt.registerTask('Prod', [
         'gitcheckout:branchDeploy', 'ngconstant:production', 'gitadd:Conf', 'gitcommit:Conf', 'shell:PushProdBuild'
     ]);

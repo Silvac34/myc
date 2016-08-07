@@ -31,7 +31,7 @@ describe('myApp.viewCreateMeal module', function() {
       })
 
       it('should test that createMeal method works', function() {
-      $httpBackend.expectPOST('/api/meal', {_id:"01789",location:"labas"}).respond(200, '');
+      $httpBackend.expectPOST('/api/meals', {_id:"01789",location:"labas"}).respond(200, '');
       $rootScope.createMeal({_id:"01789",location:"labas"});
       $httpBackend.flush();
       });

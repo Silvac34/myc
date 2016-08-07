@@ -34,11 +34,11 @@ class BasicAPITest(unittest.TestCase):
         Application.db.drop_collection('users')
 
     def test_unauthentificatedUser(self):
-        resp = self.client.post("/api/meal", data="{\"super\":\"toto\"}")
+        resp = self.client.post("/api/meals", data="{\"super\":\"toto\"}")
         self.assertEqual("401 UNAUTHORIZED", resp.status)
 
     def test_insert_meal(self):
-        resp = self.client.post("/api/meal", data=TestData().jsonNewMealData, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        resp = self.client.post("/api/meals", data=TestData().jsonNewMealData, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
         self.assertEqual("200 OK", resp.status)
         coucou = Application.db.meals.find_one()
         self.assertEqual(json.dumps(Application.preprocess_id(coucou),default=json_util.default), resp.data)
@@ -52,7 +52,7 @@ class BasicAPITest(unittest.TestCase):
         self.assertItemsEqual(coucou, testMeal)
 
     def test_insert_empty_meal(self):
-        resp = self.client.post("/api/meal",data="",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        resp = self.client.post("/api/meals",data="",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
         self.assertEqual("", resp.data)
 
 class TestAuthManageMealAPI(unittest.TestCase):
@@ -64,8 +64,8 @@ class TestAuthManageMealAPI(unittest.TestCase):
         mClient = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
         Application.db = mClient.get_default_database()
         #put one meal in the database
-        self.client.post("/api/meal", data=TestData().jsonNewMealData, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
-        self.client.post("/api/meal", data=TestData().jsonNewMeal2Data, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        self.client.post("/api/meals", data=TestData().jsonNewMealData, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        self.client.post("/api/meals", data=TestData().jsonNewMeal2Data, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
 
     def tearDown(self):
         Application.db.drop_collection('meals')

@@ -195,7 +195,7 @@ def user_info():
     
 
 # Insert one meal
-@Application.app.route('/api/meal', methods=["POST"])
+@Application.app.route('/api/meals', methods=["POST"])
 @login_required
 def insert_one_meal():
     if request.data == "" or request.data == "{}" or request.data is None:

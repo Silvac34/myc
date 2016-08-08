@@ -108,7 +108,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     if ($scope.helpBox.helpCleaning == true) {
       $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners});
     }
-    $http.post('/api/meal', $scope.editedMeal);
+    $http.post('/api/meals', $scope.editedMeal);
     
     //TODO : rediriger vers page du repas
   };

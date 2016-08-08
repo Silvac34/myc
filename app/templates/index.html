@@ -63,7 +63,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown">
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.last_name}}'}} <span class="caret"></span></a>
+                  <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
                   <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
                 </ul>

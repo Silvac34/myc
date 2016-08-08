@@ -24,14 +24,6 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
     });
   },
 
-/*
-$scope.loadMeals = function () {
-$http.get('static/fakeBackend/mealsFakeBackend.json').success(function(data) {
-    $scope.meals = data;
-});
-},
-*/
-
   $scope.filter = function(){
     return viewMealsFilterService.get();
   },

@@ -13,5 +13,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   
   $scope.loadMealInfo(meal_id)
   
+  $scope.accordionOneAtATime=true;
+  
 }]);
 

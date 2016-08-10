@@ -9,7 +9,7 @@
                         <div class="col-xs-12">
                             <div class="meal-label meal-location">{{meal.town}} - {{meal.addressApprox}}</div>
                         </div>
-                    </div>    
+                    </div>
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="meal-label meal-date">{{meal.time |date:'dd/MM/yyyy'}} </div>
@@ -31,25 +31,59 @@
         </div>
     </div>
     <div class="row meal-dtld-group">
+        <div class="meal-label meal-dtld-group-label"> Je m'inscris : </div>
+        <uib-accordion close-others="accordionOneAtATime">
+            <div style="overflow:auto">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cook">
+                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1">
+                    <uib-accordion-heading>
+                        <div class="meal-dtld-helpers-label"> J'aide à faire la cuisine
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
+                            <span class="pull-right meal-dtld-helpers-places">0/2</span>
+                            <div class="pull-right meal-dtld-helpers-price">40 €</div>
+                        </div>
+                    </uib-accordion-heading>
+                    <div class="meal-dtld-helpers-description">Aider à faire la cuisine est quelque chose de bien, pour cela le cuisinier à besoin que vous soyez là à 9h</div>
+                </div>
+            </div>
+            <div style="overflow:auto">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cleaner">
+                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2">
+                    <uib-accordion-heading>
+                        <div class="meal-dtld-helpers-label"> J'aide à faire la vaisselle
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
+                            <span class="pull-right meal-dtld-helpers-places">1/1</span>
+                            <div class="pull-right meal-dtld-helpers-price">41 €</div>
+                        </div>
+                    </uib-accordion-heading>
+                    <div class="meal-dtld-helpers-description">Bravo, vous êtes un chevalier de l'éponge à gratter double face !</div>
+                </div>
+            </div>
+            <div style="overflow:auto">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="guest">
+                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3">
+                    <uib-accordion-heading>
+
+                        <div class="meal-dtld-helpers-label"> Je viens comme je suis ...
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
+                            <span class="pull-right meal-dtld-helpers-places">0/2</span>
+                            <div class="pull-right meal-dtld-helpers-price">46 €</div>
+                        </div>
+                    </uib-accordion-heading>
+                    <div class="meal-dtld-helpers-description">... et c'est comme ça qu'on vous préfère !</div>
+                </div>
+            </div>
+        </uib-accordion>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-primary">Envoyer une demande</a>
+    </div>
+    
+    <div class="row meal-dtld-group">
         <div class="meal-label meal-dtld-group-label">Ce repas est organisé par : </div>
         <div clas="meal-dtld-admin-wrapper">
-            <img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />    
+            <img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
             <div class="meal-admin-name meal-dtld-admin-name">{{meal.admin.first_name}} </br> {{meal.admin.last_name}}</div>
         </div>
     </div>
-    <div class="row meal-dtld-group">
-        <div class="meal-label meal-dtld-group-label"> Je m'inscris : </div>
-        <div class="col-xs-4">
-            <div class="text-center">test1</div>
-        </div>
-        <div class="col-xs-4">
-            <div class="text-center">test2</div>
-        </div>
-        <div class="col-xs-4">
-            <div class="text-center">test3</div>
-        </div>
-    </div>
-    
-    
-    
 </div>

@@ -36,7 +36,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     veggies: false,
     town: "Santiago",
     time: predefined_date,
-    detailedInfo : {"requiredHelpers":[]},
+    detailedInfo : {"requiredGuests":{}},
     privateInfo : {"latlng":""}
 
   }, 
@@ -79,12 +79,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     },
 
     $scope.cooks = $scope.cooks || {
-      nbCooks: "",
+      nbRquCooks: "",
       timeCooking: ""
     },
 
     $scope.cleaners = $scope.cleaners || {
-      nbCleaners: ""
+      nbRquCleaners: ""
     },
 
   $scope.excludingHelp = function() {
@@ -100,13 +100,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 
  $scope.createMeal = function() {
     if ($scope.helpBox.helpBuying == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"buyers":$scope.buyers});
+      $scope.editedMeal.detailedInfo.requiredGuests["buyers"] = $scope.buyers;
     }
     if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cooks":$scope.cooks});
+      $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.cooks;
     }
     if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners});
+      $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.cleaners;
     }
     $http.post('/api/meals', $scope.editedMeal);
     

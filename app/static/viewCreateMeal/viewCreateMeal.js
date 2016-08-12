@@ -36,9 +36,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     veggies: false,
     town: "Santiago",
     time: predefined_date,
-    detailedInfo : {"requiredGuests":{}},
-    privateInfo : {"latlng":""}
-
+    detailedInfo : {"requiredGuests":{}}
   }, 
   
   

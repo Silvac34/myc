@@ -86,7 +86,6 @@
     "price": 50,
     "nbRemainingPlaces": 4,
     "privateInfo": {
-        "latlng": "",
         "users": [{
             "_id": "577946eb4403f92b93425e6a",
             "role": "admin"
@@ -113,7 +112,6 @@
     "price": 50,
     "nbRemainingPlaces": 4,
     "privateInfo": {
-        "latlng": "",
         "users": [{
             "_id": "5776d0824403f974b97caf89",
             "role": "admin"
@@ -140,7 +138,6 @@
     "price": 76,
     "nbRemainingPlaces": 9,
     "privateInfo": {
-        "latlng": "",
         "users": [{
             "_id": "5776d0824403f974b97caf89",
             "role": "admin"

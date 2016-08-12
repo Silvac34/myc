@@ -2,15 +2,15 @@
 <div class="progress progress-striped active">
   <div class="progress-bar" style="width: 33%">¿Qué?</div>
   <div class="progress-bar progress-bar-info" style="width: 33%">¿Dónde y Cuándo?</div>
-  <div class="progress-bar progress-bar-info" style="width: 34%">¿Comó?</div>
+  <div class="progress-bar progress-bar-info" style="width: 34%">¿Cómo?</div>
 </div>
 
 <form class="form-horizontal">
   <fieldset>
     <div class="row">
       <div class="form-group">
-        <label for="inputMenu" class="col-sm-1 col-xs-2 control-label">Menu</label>
-        <div class="col-xs-10 col-sm-11">
+        <label for="inputMenu" class="col-xs-2 control-label">Menu</label>
+        <div class="col-xs-10">
           <textarea class="form-control" id="inputMenu" placeholder="Ingresa tu menu" name="inputMenu" ng-model="editedMeal.menu" required></textarea>
           <div ng-messages="form_create_meal.inputMenu.$error" role="alert" ng-if="form_create_meal.inputMenu.$dirty">
             <div ng-message="required" class="alert alert-dismissible alert-danger">
@@ -23,9 +23,9 @@
     </div>
     <div class="row">
       <div class="form-group">
-        <label for="inputVeggies" class="col-xs-2 col-sm-1 control-label"></img></label>
+        <label for="inputVeggies" class="col-xs-2 control-label"></img></label>
         <div class="checkbox">
-          <label class="col-xs-6 col-sm-6">
+          <label class="col-xs-10">
             <input type="checkbox" ng-model="editedMeal.veggies"> Menu Vegetariano <img src="/static/sources/vegetarian.png" ng-if="editedMeal.veggies">
           </label>
         </div>

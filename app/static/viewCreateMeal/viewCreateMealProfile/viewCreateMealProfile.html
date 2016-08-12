@@ -9,96 +9,110 @@
   <fieldset>
     <div class="row">
       <div class="form-group">
-        <label for="inputTown" class="col-xs-2 control-label">Ciudad</label>
-        <div class="col-xs-10">
+        <label for="inputTown" class="col-sm-2 control-label">Ciudad</label>
+        <div class="col-sm-10">
           <select class="form-control" id="inputTown" ng-model="editedMeal.town">
-        <option>Santiago</option>
-        <option>Concepción</option>
-        <option>Valparaíso</option>
-        </select>
-          <br>
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="form-group">
-                <h4 for="inputTown">¿En que ciudad quieres publicar una cena?</h4>
-                <select class="form-control" id="inputTown" ng-model="editedMeal.town">
-        <option>Santiago</option>
-        <option>Concepción</option>
-        <option>Valparaíso</option>
-      </select>
-              </div>
+          <option>Santiago</option>
+          <option>Concepción</option>
+          <option>Valparaíso</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="inputAddress" class="col-sm-2 control-label">Dirección</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="inputAddressStreet" name="inputAddressStreet" placeholder="Calle" ng-model="editedMeal.privateInfo.address_street" required>
+          <div ng-messages="form_create_meal.inputAddressStreet.$error" role="alert" ng-if="form_create_meal.inputAddressStreet.$dirty">
+            <div ng-message="required" class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Campo obligatorio</strong>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="form-group">
-                <h4 for="inputAdress">¿Cual es la dirección exacta para venir a la cena? *</h4>
-                <input type="text" class="form-control" id="inputAddress" name="inputAddress" ng-model="editedMeal.privateInfo.address" required>
-                <div ng-messages="form_create_meal.inputAddress.$error" role="alert" ng-if="form_create_meal.inputAddress.$dirty">
-                  <div ng-message="required" class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>¡Se necesita tu dirección para que los invitados puedan llegar!</strong>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div class="col-sm-2 col-xs-4">
+          <input type="number" class="form-control" id="inputAddressNumber" name="inputAddressNumber" placeholder="n°" ng-model="editedMeal.privateInfo.address_number" required>
+          <div ng-messages="form_create_meal.inputAddressNumber.$error" role="alert" ng-if="form_create_meal.inputAddressNumber.$dirty">
+            <div ng-message="required" class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <p>Campo obligatorio</p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="form-group">
-                <h4 for="inputAdressApprox">¿Qué punto de referencia podemos publicar para ubicar donde se tiene que ir? *</h4>
-                <input type="text" class="form-control" id="inputAdressApprox" name="inputAddressApprox" ng-model="editedMeal.addressApprox" required>
-                <div ng-messages="form_create_meal.inputAddressApprox.$error" role="alert" ng-if="form_create_meal.inputAddressApprox.$dirty">
-                  <div ng-message="required" class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>¡Lo necesitamos para publicar la cena!</strong>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div class="col-sm-3 col-xs-8">
+          <input type="text" class="form-control" id="inputAddressComplement" placeholder="Complemento" ng-model="editedMeal.privateInfo.address_complement">
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="form-group">
+          <h4 for="inputAdress">¿Cual es la dirección exacta para venir a la cena? *</h4>
+          <input type="text" class="form-control" id="inputAddress" name="inputAddress" ng-model="editedMeal.privateInfo.address" required>
+          <div ng-messages="form_create_meal.inputAddress.$error" role="alert" ng-if="form_create_meal.inputAddress.$dirty">
+            <div ng-message="required" class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>¡Se necesita tu dirección para que los invitados puedan llegar!</strong>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <h4 for="inputAdressApprox">¿Qué punto de referencia podemos publicar para ubicar donde se tiene que ir? *</h4>
+          <input type="text" class="form-control" id="inputAdressApprox" name="inputAddressApprox" ng-model="editedMeal.addressApprox" required>
+          <div ng-messages="form_create_meal.inputAddressApprox.$error" role="alert" ng-if="form_create_meal.inputAddressApprox.$dirty">
+            <div ng-message="required" class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>¡Lo necesitamos para publicar la cena!</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="form-group">
-              <div class="col-xs-12">
-                <h4 for="inputTime">¿Cuando quieres hacer la cena?</h4>
-              </div>
-            </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-xs-12">
+          <h4 for="inputTime">¿Cuando quieres hacer la cena?</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <div class="form-inline">
+            <input type="text" class="form-control search_calendar" uib-datepicker-popup="{{date_format}}" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
+              placeholder="Fecha" />
           </div>
-          <div class="row">
-            <div class="col-xs-6">
-              <div class="form-group">
-                <div class="form-inline">
-                  <input type="text" class="form-control search_calendar" uib-datepicker-popup="{{date_format}}" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
-                    placeholder="Fecha" />
-                </div>
-              </div>
-            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-xs-12">
+          <h4 for="inputTime">¿A que hora?</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="form-group">
+          <div class="form-inline">
+            <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
           </div>
-          <div class="row">
-            <div class="form-group">
-              <div class="col-xs-12">
-                <h4 for="inputTime">¿A que hora?</h4>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">
-              <div class="form-group">
-                <div class="form-inline">
-                  <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
   </fieldset>
 </form>
 
 
 <div class="row">
   <div class="pager">
-    <li><a ui-sref="create_meal.profile" ng-if="form_create_meal.inputAddress.$invalid || form_create_meal.inputAddressApprox.$invalid" ng-click="form_create_meal.inputAddress.$dirty=true;form_create_meal.inputAddressApprox.$dirty=true">Seguir</a></li>
-    <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputAddress.$valid && form_create_meal.inputAddressApprox.$valid">Seguir</a></li>
+    <li><a ui-sref="create_meal.profile" ng-if="form_create_meal.inputAddressStreet.$invalid || form_create_meal.inputAddressNumber.$invalid || form_create_meal.inputAddressApprox.$invalid" ng-click="form_create_meal.inputAddressStreet.$dirty=true;form_create_meal.inputAddressNumber.$dirty=true;form_create_meal.inputAddressApprox.$dirty=true">Seguir</a></li>
+    <li><a ui-sref="create_meal.payment" ng-click="change_animation_to_the_right()" ng-if="form_create_meal.inputAddressStreet.$valid && form_create_meal.inputAddressNumber.$valid && form_create_meal.inputAddressApprox.$valid">Seguir</a></li>
     <li class="previous"><a ui-sref="create_meal.diner" ng-click="change_animation_to_the_left()">Volver</a></li>
   </div>
 </div>

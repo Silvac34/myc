@@ -5,7 +5,7 @@
         <div id="form-container">
 
             <div class="page-header text-center">
-                <h2>Proponer una cena</h2>
+                <h2>Proponer una cena</h2>{{first_next_page}}
             </div>
 
             <!-- use ng-submit to catch the form submission and use our Angular function -->
@@ -14,7 +14,7 @@
                 <!-- our nested state views will be injected here -->
                 <div ng-if="animation.is_animated && animation.next_page" id="form-views-right" ui-view></div>
                 <div ng-if="animation.is_animated && animation.last_page" id="form-views-left" ui-view></div>
-                <div ng-if="animation.is_not_animated && animation.next_page" ui-view></div>
+                <div ng-if="animation.is_not_animated && animation.first_next_page" id="form-views-first-right" ui-view></div>
             </form>
         </div>
     </div>

@@ -53,13 +53,15 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
    $scope.animation = $scope.animation || {
     is_animated: false,
     is_not_animated: true,
-    next_page: true,
-    last_page: false
+    next_page: false,
+    last_page: false,
+    first_next_page: true
   },
   
   
   $scope.change_animation_to_the_right = function() {
       $scope.animation.next_page = true;
+      $scope.animation.first_next_page = false;
       $scope.animation.last_page = false;
       $scope.animation.is_animated = true;
       $scope.animation.is_not_animated = false;
@@ -67,6 +69,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   
   $scope.change_animation_to_the_left = function() {
       $scope.animation.next_page = false;
+      $scope.animation.first_next_page = false;
       $scope.animation.last_page = true;
       $scope.animation.is_animated = true;
       $scope.animation.is_not_animated = false;

@@ -40,7 +40,7 @@
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views-right,#form-views-left     { width:auto; }
+#form-views-right,#form-views-left, #form-views-first-right    { width:auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
@@ -54,11 +54,23 @@
     transform: translateX(100%);
 }
 
-#form-views-right.ng-enter.ng-enter-active {
+#form-views-right.ng-enter-active { 
+    transform: translateX(0);
+}
+
+#form-views-right.ng-leave {
   transform: translateX(0);
 }
 
 #form-views-right.ng-leave.ng-leave-active { 
+    transform: translateX(-100%);
+}
+
+#form-views-first-right.ng-leave {
+    transform: translateX(0);
+}
+
+#form-views-first-right.ng-leave.ng-leave-active {
     transform: translateX(-100%);
 }
 

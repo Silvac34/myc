@@ -65,36 +65,7 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12">
-    <input type="checkbox" id="helpBuyers" ng-model="helpBox.helpBuying" ng-change="includingHelp()"> Hacer las compras
-    <br/>
-  </div>
-</div>
 
-<div ng-if="helpBox.helpBuying" class="animate-if">
-  <div class="row">
-    <div class="col-xs-12">
-      <label for="inputIngredient">¿Cual es la lista de los ingredientes que necesitas ?</label>
-      <input type="text" class="form-control" rows="3" id="inputIngredient" ng-model="buyers.ingredient"></input>
-      <span class="help-block"><a href="https://web.cornershopapp.com"> Acá</a>, puedes encontrar los ingredientes de cada supermercado</span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <label for="inputDeliveryTime">¿Cuando te gustaría que sean entregadas donde tu domicilio ?</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3">
-      <div class="form-group">
-        <div class="form-inline">
-          <uib-timepicker ng-model="buyers.deliveryTime" show-meridian="ismeridian"></uib-timepicker>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="row">
   <div class="col-xs-12">
     <input type="checkbox" id="cooking" ng-model="helpBox.helpCooking" ng-change="includingHelp()"> Ayudar para la cocina

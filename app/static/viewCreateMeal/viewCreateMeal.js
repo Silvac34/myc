@@ -42,7 +42,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
   
   
   $scope.helpBox = $scope.helpBox || {
-    helpBuying: false, 
     helpCooking: false,
     helpCleaning: false,
     notHelping: true
@@ -70,12 +69,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
       $scope.animation.is_not_animated = false;
   },
 
-  //initialize the buyers model
-  $scope.buyers = $scope.buyers || {
-      deliveryTime: "",
-      ingredient: ""
-    },
-
+  //initialize the models
     $scope.cooks = $scope.cooks || {
       nbRquCooks: "",
       timeCooking: ""
@@ -86,7 +80,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     },
 
   $scope.excludingHelp = function() {
-    $scope.helpBox.helpBuying = false,
     $scope.helpBox.helpCooking = false,
     $scope.helpBox.helpCleaning = false;
   },
@@ -97,9 +90,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 
 
  $scope.createMeal = function() {
-    if ($scope.helpBox.helpBuying == true) {
-      $scope.editedMeal.detailedInfo.requiredGuests["buyers"] = $scope.buyers;
-    }
     if ($scope.helpBox.helpCooking == true) {
       $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.cooks;
     }

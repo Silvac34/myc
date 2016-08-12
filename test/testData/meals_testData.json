@@ -146,10 +146,6 @@
     },
     "detailedInfo": {
         "requiredGuests": {
-            "buyers": {
-                "ingredient": "Beurre,  poissons",
-                "deliveryTime": "2016-07-13T17:00:23.947Z"
-            },
             "cooks": {
                 "nbRquCooks": 3,
                 "timeCooking": "2016-07-13T18:00:39.303Z"

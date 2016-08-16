@@ -210,10 +210,14 @@ def insert_one_meal():
             new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]+1
             new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - 1
             ####
-        else : #lorsque l'admin ne demande pas d'aide cuisine, vu qu'il est automatiquement cook
+        else : #lorsque l'admin ne demande pas d'aide cuisine et vu qu'il est automatiquement cook
             new_meal["detailedInfo"]["requiredGuests"] ={"cooks":{"nbRquCooks":1,"nbRemainingPlaces":0}}
+        nbRquCleaners = 0 #to initialize the variable
         if "cleaners" in new_meal["detailedInfo"]["requiredGuests"] :
             new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
+            nbRquCleaners = new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
+        nbRquSimpleGuests = new_meal["nbGuests"] - new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - nbRquCleaners
+        new_meal["detailedInfo"]["requiredGuests"].update ({"simpleGuests":{"nbRquSimpleGuests":nbRquSimpleGuests,"nbRemainingPlaces":nbRquSimpleGuests}})
         new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
         new_meal["creationDate"] = datetime.now()
         id_inserted = Application.db.meals.insert(new_meal)

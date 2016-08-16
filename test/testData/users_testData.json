@@ -1,4 +1,4 @@
-{
+[{
     "_id": {
         "$oid": "111111111111111111111111"
     },
@@ -16,7 +16,7 @@
     "first_name": "Jennifer",
     "last_name": "TestosUser",
     "gender": "female"
-} {
+}, {
     "_id": {
         "$oid": "5776d0824403f974b97caf89"
     },
@@ -34,7 +34,7 @@
     "first_name": "Kevin",
     "last_name": "Marteau",
     "gender": "male"
-} {
+}, {
     "_id": {
         "$oid": "577946eb4403f92b93425e6a"
     },
@@ -52,4 +52,4 @@
     "first_name": "Dimitri",
     "last_name": "Odyssound",
     "gender": "male"
-}
+}]

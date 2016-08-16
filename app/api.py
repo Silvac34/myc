@@ -55,9 +55,10 @@ class User:
         self.createUserIfNew()
         
     def createUserIfNew(self):
-        if self._id:
-            print('logged')
-        elif self.facebook_id:
+        #if self._id:
+        #   print('logged')
+        #elif self.facebook_id:
+        if self.facebook_id:
             if Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
                 Application.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
             self._id = str(Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
@@ -203,7 +204,16 @@ def insert_one_meal():
     else:
         new_meal = json.loads(request.data)
         new_meal["admin"] = g.user_id
-        new_meal["privateInfo"]["users"]= [{"_id":g.user_id,"role":"admin"}]
+        new_meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin","cook"]}]
+        if "cooks" in new_meal["detailedInfo"]["requiredGuests"] :
+            #L'admin est systématiquement cook, du coup:
+            new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]+1
+            new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - 1
+            ####
+        else : #lorsque l'admin ne demande pas d'aide cuisine, vu qu'il est automatiquement cook
+            new_meal["detailedInfo"]["requiredGuests"] ={"cooks":{"nbRquCooks":1,"nbRemainingPlaces":0}}
+        if "cleaners" in new_meal["detailedInfo"]["requiredGuests"] :
+            new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
         new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
         new_meal["creationDate"] = datetime.now()
         id_inserted = Application.db.meals.insert(new_meal)

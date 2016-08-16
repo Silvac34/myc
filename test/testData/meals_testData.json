@@ -1,165 +1,205 @@
-{
-    "_id": {
-        "$oid": "5713b41a4403f909baafb511"
-    },
-    "town": "Santiago",
-    "admin": "5776d0824403f974b97caf89",
-    "menu": "Soupions de légumes avec cassolette de veau",
-    "price": 60,
-    "nbRemainingPlaces": 9,
-    "privateInfo": {
-        "users": [{
-            "_id": "5776d0824403f974b97caf89",
-            "role": "admin"
-        }],
-        "address": "3 impasse marie - blanche 75018"
-    },
-    "detailedInfo": {
-        "requiredGuests": {}
-    },
-    "nbGuests": 10,
-    "veggies": false,
-    "time": "2017-12-20T17:00:00.000Z",
-    "addressApprox": "Métro Blanche L2",
-    "creationDate": {
-        "$date": "2016-04-17T16:04:42.306Z"
-    }
-} {
-    "_id": {
-        "$oid": "5713b4544403f909baafb512"
-    },
-    "town": "Santiago",
-    "admin": "5776d0824403f974b97caf89",
-    "menu": "Blanquette de veau",
-    "price": 70,
-    "nbRemainingPlaces": 19,
-    "privateInfo": {
-        "users": [{
-            "_id": "5776d0824403f974b97caf89",
-            "role": "admin"
-        }],
-        "address": "2 avenue de trudaine 75009"
-    },
-    "detailedInfo": {
-        "requiredGuests": {}
-    },
-    "nbGuests": 20,
-    "veggies": false,
-    "time": "2017-10-20T16:00:00.000Z",
-    "addressApprox": "Métro AnversL2",
-    "creationDate": {
-        "$date": "2016-04-17T16:05:40.515Z"
-    }
-} {
-    "_id": {
-        "$oid": "5713b6494403f909baafb513"
-    },
-    "town": "Santiago",
-    "admin": "577946eb4403f92b93425e6a",
-    "menu": "Hachi-parmentier de canard",
-    "price": 70,
-    "nbRemainingPlaces": 5,
-    "privateInfo": {
-        "users": [{
-            "_id": "577946eb4403f92b93425e6a",
-            "role": "admin"
-        }],
-        "address": "37 rue du général foy 75008"
-    },
-    "detailedInfo": {
-        "requiredGuests": {}
-    },
-    "nbGuests": 6,
-    "veggies": true,
-    "time": "2016-07-22T20:00:00.000Z",
-    "addressApprox": "Métro Villier L2",
-    "creationDate": {
-        "$date": "2016-04-17T16:14:01.531Z"
-    }
-} {
-    "_id": {
-        "$oid": "57759dcc4403f9234e4c7e2b"
-    },
-    "town": "Santiago",
-    "admin": "577946eb4403f92b93425e6a",
-    "menu": "Mozarella Burrata et petits légumes grillés",
-    "price": 50,
-    "nbRemainingPlaces": 4,
-    "privateInfo": {
-        "users": [{
-            "_id": "577946eb4403f92b93425e6a",
-            "role": "admin"
-        }],
-        "address": "37 rue lepic"
-    },
-    "detailedInfo": {
-        "requiredGuests": {}
-    },
-    "nbGuests": 5,
-    "veggies": true,
-    "time": "2016-07-14T18:30:51.753Z",
-    "addressApprox": "Lepic-Abesses",
-    "creationDate": {
-        "$date": "2016-06-30T22:31:40.558Z"
-    }
-} {
-    "_id": {
-        "$oid": "578654e64403f908ba2fbd21"
-    },
-    "town": "Santiago",
-    "admin": "5776d0824403f974b97caf89",
-    "menu": "Poisson pané",
-    "price": 50,
-    "nbRemainingPlaces": 4,
-    "privateInfo": {
-        "users": [{
-            "_id": "5776d0824403f974b97caf89",
-            "role": "admin"
-        }],
-        "address": "3 impasse Marie-blanche"
-    },
-    "detailedInfo": {
-        "requiredGuests": {}
-    },
-    "nbGuests": 5,
-    "veggies": false,
-    "time": "2016-07-15T18:30:27.913Z",
-    "addressApprox": "Rue Oberkampf",
-    "creationDate": {
-        "$date": "2016-07-13T14:49:10.667Z"
-    }
-} {
-    "_id": {
-        "$oid": "57865c1a4403f908ba2fbd22"
-    },
-    "town": "Santiago",
-    "admin": "5776d0824403f974b97caf89",
-    "menu": "Beurre blanc",
-    "price": 76,
-    "nbRemainingPlaces": 9,
-    "privateInfo": {
-        "users": [{
-            "_id": "5776d0824403f974b97caf89",
-            "role": "admin"
-        }],
-        "address": "4 rue du temple"
-    },
-    "detailedInfo": {
-        "requiredGuests": {
-            "cooks": {
-                "nbRquCooks": 3,
-                "timeCooking": "2016-07-13T18:00:39.303Z"
+[
+
+    {
+        "price": 100,
+        "nbGuests": 10,
+        "veggies": false,
+        "town": "Santiago",
+        "admin": "111111111111111111111111",
+        "menu": "Jolie piece de boeuf",
+        "nbRemainingPlaces": 9,
+        "privateInfo": {
+            "address": "30 avenue de Trudaine 75009",
+            "users": [{
+                    "_id": "111111111111111111111111",
+                    "role": ["admin", "cook" ]
+                    }]
+
             },
-            "cleaners": {
-                "nbRquCleaners": 1
+            "detailedInfo": {
+                "requiredGuests": {
+                    "cooks": {
+                        "nbRemainingPlaces": 2,
+                        "nbRquCooks": 3,
+                        "timeCooking": "2016-07-13T18:00:39.303Z"
+                    },
+                    "cleaners": {
+                        "nbRemainingPlaces": 1,
+                        "nbRquCleaners": 1
+                    }
+                }
+            },
+            "time": "2016-11-20T17:00:00.000Z",
+            "addressApprox": "Métro Anvers L2",
+            "_id": {
+                "$oid": "111111111111111111111111"
             }
-        }
-    },
-    "nbGuests": 10,
-    "veggies": false,
-    "time": "2016-07-16T18:30:19.264Z",
-    "addressApprox": "Métro saint Michel",
-    "creationDate": {
-        "$date": "2016-07-13T15:19:54.220Z"
-    }
-}
+        },
+
+
+        {
+            "price": 60,
+            "nbGuests": 10,
+            "veggies": false,
+            "town": "Santiago",
+            "admin": "111111111111111111111111",
+            "menu": "Soupions de légumes avec cassolette de veau",
+            "nbRemainingPlaces": 9,
+            "privateInfo": {
+                "address": "3 impasse marie - blanche 75018",
+                "users": [{
+                        "_id": "111111111111111111111111",
+                        "role": ["admin", "cook"]
+                        }]
+                },
+                "detailedInfo": {
+                    "requiredGuests": {
+                        "cooks": {
+                            "nbRemainingPlaces": 0,
+                            "nbRquCooks": 1
+                        }
+                    }
+                },
+                "time": "2017-12-20T17:00:00.000Z",
+                "addressApprox": "Métro Blanche L2",
+                "_id": {
+                    "$oid": "111111111111111111111112"
+                }
+            },
+            {
+                "_id": {
+                    "$oid": "5713b6494403f909baafb513"
+                },
+                "town": "Santiago",
+                "admin": "577946eb4403f92b93425e6a",
+                "menu": "Hachi-parmentier de canard",
+                "price": 70,
+                "nbRemainingPlaces": 5,
+                "privateInfo": {
+                    "users": [{
+                        "_id": "577946eb4403f92b93425e6a",
+                        "role": ["admin", "cook"]
+                    }],
+                    "address": "37 rue du général foy 75008"
+                },
+                "detailedInfo": {
+                    "requiredGuests": {
+                        "cooks": {
+                            "nbRemainingPlaces": 2,
+                            "nbRquCooks": 3,
+                            "timeCooking": "2016-07-13T18:00:39.303Z"
+                        }
+                    }
+                },
+                "nbGuests": 6,
+                "veggies": true,
+                "time": "2016-07-22T20:00:00.000Z",
+                "addressApprox": "Métro Villier L2",
+                "creationDate": {
+                    "$date": "2016-04-17T16:14:01.531Z"
+                }
+            },
+            {
+                "_id": {
+                    "$oid": "57759dcc4403f9234e4c7e2b"
+                },
+                "town": "Santiago",
+                "admin": "577946eb4403f92b93425e6a",
+                "menu": "Mozarella Burrata et petits légumes grillés",
+                "price": 50,
+                "nbRemainingPlaces": 4,
+                "privateInfo": {
+                    "users": [{
+                        "_id": "577946eb4403f92b93425e6a",
+                        "role": ["admin", "cook"]
+                    }],
+                    "address": "37 rue lepic"
+                },
+                "detailedInfo": {
+                    "requiredGuests": {
+                        "cooks": {
+                            "nbRemainingPlaces": 2,
+                            "nbRquCooks": 3,
+                            "timeCooking": "2016-07-13T18:00:39.303Z"
+                        }
+                    }
+                },
+                "nbGuests": 5,
+                "veggies": true,
+                "time": "2016-07-14T18:30:51.753Z",
+                "addressApprox": "Lepic-Abesses",
+                "creationDate": {
+                    "$date": "2016-06-30T22:31:40.558Z"
+                }
+            },
+            {
+                "_id": {
+                    "$oid": "578654e64403f908ba2fbd21"
+                },
+                "town": "Santiago",
+                "admin": "5776d0824403f974b97caf89",
+                "menu": "Poisson pané",
+                "price": 50,
+                "nbRemainingPlaces": 4,
+                "privateInfo": {
+                    "users": [{
+                        "_id": "5776d0824403f974b97caf89",
+                        "role": ["admin", "cook"]
+                    }],
+                    "address": "3 impasse Marie-blanche"
+                },
+                "detailedInfo": {
+                    "requiredGuests": {
+                        "cooks": {
+                            "nbRemainingPlaces": 2,
+                            "nbRquCooks": 3,
+                            "timeCooking": "2016-07-13T18:00:39.303Z"
+                        }
+                    }
+                },
+                "nbGuests": 5,
+                "veggies": false,
+                "time": "2016-07-15T18:30:27.913Z",
+                "addressApprox": "Rue Oberkampf",
+                "creationDate": {
+                    "$date": "2016-07-13T14:49:10.667Z"
+                }
+            },
+            {
+                "_id": {
+                    "$oid": "57865c1a4403f908ba2fbd22"
+                },
+                "town": "Santiago",
+                "admin": "5776d0824403f974b97caf89",
+                "menu": "Beurre blanc",
+                "price": 76,
+                "nbRemainingPlaces": 9,
+                "privateInfo": {
+                    "users": [{
+                        "_id": "5776d0824403f974b97caf89",
+                        "role": ["admin", "cook"]
+                    }],
+                    "address": "4 rue du temple"
+                },
+                "detailedInfo": {
+                    "requiredGuests": {
+                        "cooks": {
+                            "nbRemainingPlaces": 2,
+                            "nbRquCooks": 3,
+                            "timeCooking": "2016-07-13T18:00:39.303Z"
+                        },
+                        "cleaners": {
+                            "nbRquCleaners": 1,
+                            "nbRemainingPlaces": 1
+                        }
+                    }
+                },
+                "nbGuests": 10,
+                "veggies": false,
+                "time": "2016-07-16T18:30:19.264Z",
+                "addressApprox": "Métro saint Michel",
+                "creationDate": {
+                    "$date": "2016-07-13T15:19:54.220Z"
+                }
+            }
+        ]

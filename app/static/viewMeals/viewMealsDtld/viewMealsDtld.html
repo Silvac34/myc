@@ -41,8 +41,8 @@
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la cuisine
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
-                            <span class="meal-dtld-helpers-places">0/2</span>
-                            <span class="meal-dtld-helpers-price">40 €</span>
+                            <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
+                            <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cooks.price}} €</span>
                         </div>
                     </uib-accordion-heading>
                     <div class="meal-dtld-helpers-description">Aider à faire la cuisine est quelque chose de bien, pour cela le cuisinier à besoin que vous soyez là à 9h</div>
@@ -54,8 +54,8 @@
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la vaisselle
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
-                            <span class="meal-dtld-helpers-places">1/1</span>
-                            <span class="meal-dtld-helpers-price">41 €</span>
+                            <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
+                            <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cleaners.price}} €</span>
                         </div>
                     </uib-accordion-heading>
                     <div class="meal-dtld-helpers-description">Bravo, vous êtes un chevalier de l'éponge à gratter double face !</div>
@@ -68,8 +68,8 @@
 
                         <div class="meal-dtld-helpers-label"> Je viens comme je suis ...
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
-                            <span class="meal-dtld-helpers-places">1/1</span>
-                            <span class="meal-dtld-helpers-price">41 €</span>
+                            <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
+                            <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price}} €</span>
                         </div>
                     </uib-accordion-heading>
                     <div class="meal-dtld-helpers-description">... et c'est comme ça qu'on vous préfère !</div>

@@ -352,3 +352,32 @@
 }
 /*------------------------------------------------------------------------------------------------------------------------- */
 
+/* form */
+
+.legend{
+    margin-left: 5px;
+}
+
+.form-calendar{
+    background: url("/static/sources/calendar_with_clock.png") no-repeat;
+    text-indent: 25px;
+    margin-top: auto;
+    background-position: 10px 7px;
+    font-size: 80%;
+}
+
+.form-clock{
+    background: url("/static/sources/clock.png") no-repeat;
+    text-indent: 25px;
+    margin-top: auto;
+    background-position: 10px 7px;
+    font-size: 80%;
+}
+
+.form-location{
+    background: url("/static/sources/location.png") no-repeat;
+    text-indent: 25px;
+    margin-top: auto;
+    background-position: 10px 5px;
+    font-size: 80%;
+}

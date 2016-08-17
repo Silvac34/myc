@@ -29,7 +29,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 }])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$window', '$resource', '$uibModal', '$log', function($scope, $http, $window, $resource, $uibModal, $log) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$resource', '$uibModal', function($scope, $http, $resource, $uibModal) {
+  //$resource will serve for geolocation with $http
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
@@ -56,23 +57,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
       next_page: false,
       last_page: false,
       first_next_page: true
-    },
-
-
-    $scope.change_animation_to_the_right = function() {
-      $scope.animation.next_page = true;
-      $scope.animation.first_next_page = false;
-      $scope.animation.last_page = false;
-      $scope.animation.is_animated = true;
-      $scope.animation.is_not_animated = false;
-    },
-
-    $scope.change_animation_to_the_left = function() {
-      $scope.animation.next_page = false;
-      $scope.animation.first_next_page = false;
-      $scope.animation.last_page = true;
-      $scope.animation.is_animated = true;
-      $scope.animation.is_not_animated = false;
     },
 
     //initialize the buyers model
@@ -144,6 +128,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     opened: false
   };
 
+  //date formats for datepicker
   $scope.date_formats = ['dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.date_format = $scope.date_formats[0];
   $scope.altInputDateFormats = ['M!/d!/yyyy'];
@@ -158,91 +143,58 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     templateUrl: 'PopoverTimepickerTemplate.html'
   };
 
-  $scope.items = ['item1', 'item2', 'item3'];
 
+  //enable animations in the modal
   $scope.animationsEnabled = true;
 
+  //modal to get the address of the meal
   $scope.openModalFormLocation = function(size) {
 
-    var modalInstanceLocation = $uibModal.open({
+    $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalLocationContent.html',
-      controller: 'FormModalLocationInstanceCtrl',
+      controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {
-        items: function() {
-          return $scope.items;
-        }
+        editedMeal: function() {
+            return $scope.editedMeal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
       }
-    });
-
-    modalInstanceLocation.result.then(function(selectedItem) {
-      $scope.selected = selectedItem;
-    }, function() {
-      $log.info('Modal dismissed at: ' + new Date());
     });
   };
 
+
+  //modal to define the price of the meal and the number of participants
   $scope.openModalFormPrice = function(size) {
 
-    var modalInstancePrice = $uibModal.open({
+    $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalPriceContent.html',
-      controller: 'FormModalPriceInstanceCtrl',
+      controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {
-        items: function() {
-          return $scope.editedMeal.price;
-        }
+        editedMeal: function() {
+            return $scope.editedMeal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
       }
     });
-
-    modalInstancePrice.result.then(function(selectedItem) {
-      $scope.selected = selectedItem;
-    });
-  };
-
-  $scope.toggleAnimation = function() {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
   };
 
 }])
 
-.controller('FormModalLocationInstanceCtrl', function($scope, $uibModalInstance, items) {
+//controller for the Location Modal
+.controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+  $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
   $scope.ok = function() {
-    $uibModalInstance.close($scope.selected.item);
-  };
+    $uibModalInstance.close();
+  }; //function to validate the modal
 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
-  };
+  }; //funcion to dismiss the modal
 })
-
-.controller('FormModalPriceInstanceCtrl', function($scope, $uibModalInstance, items) {
-
-  $scope.editedMeal = $scope.editedMeal || {
-      town: "Santiago"
-    },
-
-    $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
-
-  $scope.ok = function() {
-    $uibModalInstance.close($scope.selected.item);
-  };
-
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
 
 
 var predefined_date = new Date();

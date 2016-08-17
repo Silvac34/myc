@@ -1,8 +1,8 @@
 <div class="container-fluid">
 
     <div class="row">
+        <label class="meal-dtld-menu-label">{{meal.menu}}</label>
         <div class="col-xs-9 meal-dtld-left">
-            <label class="meal-dtld-menu-label">{{meal.menu}}</label> </br>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="row">
@@ -18,20 +18,22 @@
                             <div class="meal-label meal-time">{{meal.time |date:'HH:mm'}} </div>
                         </div>
                     </div>
-                </div>
+                </div>    
             </div>
         </div>
         <div class="col-xs-3 meal-dtld-right">
-            <div class="meal-price">{{meal.price/meal.nbGuests | currency : ""}} €</div>
-            <div class="meal-label meal-price-label">par pers</div>
-            <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
-                <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+            <div ng-style="getStyle()" class="" style="font-size: 12px; width: 100%;top:39%;position:absolute;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center; padding:inherit">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+            <div ng-style="getStyle()" style="width:67px;margin:auto">
                 <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
             </div>
         </div>
     </div>
     <div class="row meal-dtld-group">
         <div class="meal-label meal-dtld-group-label"> Je m'inscris : </div>
+        <div class = "meal-dtld-helpers-label meal-dtld-col">
+            <span class = "meal-dtld-helpers-places">Part.</span>
+            <span class = "meal-dtld-helpers-price">Prix</span>
+        </div>
         <uib-accordion close-others="accordionOneAtATime">
             <div style="overflow:auto">
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cook">
@@ -39,8 +41,8 @@
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la cuisine
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
-                            <span class="pull-right meal-dtld-helpers-places">0/2</span>
-                            <div class="pull-right meal-dtld-helpers-price">40 €</div>
+                            <span class="meal-dtld-helpers-places">0/2</span>
+                            <span class="meal-dtld-helpers-price">40 €</span>
                         </div>
                     </uib-accordion-heading>
                     <div class="meal-dtld-helpers-description">Aider à faire la cuisine est quelque chose de bien, pour cela le cuisinier à besoin que vous soyez là à 9h</div>
@@ -52,8 +54,8 @@
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la vaisselle
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
-                            <span class="pull-right meal-dtld-helpers-places">1/1</span>
-                            <div class="pull-right meal-dtld-helpers-price">41 €</div>
+                            <span class="meal-dtld-helpers-places">1/1</span>
+                            <span class="meal-dtld-helpers-price">41 €</span>
                         </div>
                     </uib-accordion-heading>
                     <div class="meal-dtld-helpers-description">Bravo, vous êtes un chevalier de l'éponge à gratter double face !</div>
@@ -66,8 +68,8 @@
 
                         <div class="meal-dtld-helpers-label"> Je viens comme je suis ...
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
-                            <span class="pull-right meal-dtld-helpers-places">0/2</span>
-                            <div class="pull-right meal-dtld-helpers-price">46 €</div>
+                            <span class="meal-dtld-helpers-places">1/1</span>
+                            <span class="meal-dtld-helpers-price">41 €</span>
                         </div>
                     </uib-accordion-heading>
                     <div class="meal-dtld-helpers-description">... et c'est comme ça qu'on vous préfère !</div>

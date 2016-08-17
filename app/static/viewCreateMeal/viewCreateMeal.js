@@ -179,6 +179,21 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     });
   };
 
+  $scope.openModalFormInscribeFriends = function(size) {
+
+    $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'formModalInscribeFriendsContent.html',
+      controller: 'FormModalInstanceCtrl',
+      size: size,
+      resolve: {
+        editedMeal: function() {
+            return $scope.editedMeal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+      }
+    });
+  };
+
 }])
 
 //controller for the Location Modal

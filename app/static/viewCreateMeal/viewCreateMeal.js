@@ -35,7 +35,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
       veggies: false,
-      town: "Santiago",
       time: predefined_date,
       detailedInfo: {
         "requiredHelpers": []
@@ -194,7 +193,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
-})
+});
 
 
 var predefined_date = new Date();

@@ -1,6 +1,7 @@
 <!-- form.html -->
 <form class="form-horizontal">
     <fieldset>
+{{editedMeal}}
         <legend>Proposer un repas</legend>
         <div class="col-xs-offset-1">
             <div class="col-xs-6">
@@ -25,8 +26,8 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input type="text" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" value="{{editedMeal.town}} - {{editedMeal.address_street}} {{editedMeal.address_number}} {{editedMeal.address_complement}}">
-
+                            <input type="text" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address_street">
+                            <input type="text" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address_street" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address_street}} {{editedMeal.privateInfo.address_number}} {{editedMeal.privateInfo.address_complement}}">
                             <script type="text/ng-template" id="formModalLocationContent.html">
                                 <div class="modal-header">
                                     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
@@ -102,8 +103,10 @@
             <div class="col-xs-offset-1 col-xs-4">
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-xs-12">
-                            <button type="button" class="btn btn-default meal-price" ng-click="openModalFormPrice()">Determiner le prix</button>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="determiner le prix" />
+                            <span class="input-group-addon">€</span>
+
 
                             <script type="text/ng-template" id="formModalPriceContent.html">
                                 <div class="modal-header">
@@ -125,9 +128,8 @@
 
                         </div>
                     </div>
-                    <div class="meal-price">
-                        {{meal.price/meal.nbGuests | currency : ""}} €
-                    </div>
+                </div>
+                <div class="row">
                     <div class="meal-label meal-price-label">
                         par pers
                     </div>
@@ -135,4 +137,5 @@
             </div>
         </div>
     </fieldset>
-</form>
+</form
+

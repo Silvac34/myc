@@ -221,8 +221,9 @@ def insert_one_meal():
             nbRquCleaners = new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"] #for simple guests
         # add simple guests information    
         nbRquSimpleGuests = new_meal["nbGuests"] - new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - nbRquCleaners
-        new_meal["detailedInfo"]["requiredGuests"].update ({"simpleGuests":{"nbRquSimpleGuests":nbRquSimpleGuests,"nbRemainingPlaces":nbRquSimpleGuests}})
-        new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price
+        if nbRquSimpleGuests > 0:
+            new_meal["detailedInfo"]["requiredGuests"].update ({"simpleGuests":{"nbRquSimpleGuests":nbRquSimpleGuests,"nbRemainingPlaces":nbRquSimpleGuests}})
+            new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price
         ##
         new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
         new_meal["creationDate"] = datetime.now()

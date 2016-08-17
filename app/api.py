@@ -203,21 +203,27 @@ def insert_one_meal():
         return ""
     else:
         new_meal = json.loads(request.data)
-        new_meal["admin"] = g.user_id
+        new_meal["admin"] = g.user_id 
         new_meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin","cook"]}]
-        if "cooks" in new_meal["detailedInfo"]["requiredGuests"] :
+        price = round(new_meal["price"] / new_meal["nbGuests"],2)
+        if "cooks" in new_meal["detailedInfo"]["requiredGuests"] : #add required Guest info
             #L'admin est systématiquement cook, du coup:
             new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]+1
             new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - 1
             ####
         else : #lorsque l'admin ne demande pas d'aide cuisine et vu qu'il est automatiquement cook
             new_meal["detailedInfo"]["requiredGuests"] ={"cooks":{"nbRquCooks":1,"nbRemainingPlaces":0}}
-        nbRquCleaners = 0 #to initialize the variable
-        if "cleaners" in new_meal["detailedInfo"]["requiredGuests"] :
+        new_meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price
+        nbRquCleaners = 0 #to initialize the variable, for simple guests
+        if "cleaners" in new_meal["detailedInfo"]["requiredGuests"] : #add required Guest info
             new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
-            nbRquCleaners = new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
+            new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price
+            nbRquCleaners = new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"] #for simple guests
+        # add simple guests information    
         nbRquSimpleGuests = new_meal["nbGuests"] - new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - nbRquCleaners
         new_meal["detailedInfo"]["requiredGuests"].update ({"simpleGuests":{"nbRquSimpleGuests":nbRquSimpleGuests,"nbRemainingPlaces":nbRquSimpleGuests}})
+        new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price
+        ##
         new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
         new_meal["creationDate"] = datetime.now()
         id_inserted = Application.db.meals.insert(new_meal)

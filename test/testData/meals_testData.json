@@ -1,5 +1,4 @@
 [
-
     {
         "price": 100,
         "nbGuests": 10,
@@ -14,23 +13,24 @@
                 "_id": "111111111111111111111111",
                 "role": ["admin", "cook"]
             }]
-
         },
         "detailedInfo": {
             "requiredGuests": {
                 "cleaners": {
                     "nbRemainingPlaces": 1,
-                    "nbRquCleaners": 1
+                    "nbRquCleaners": 1,
+                    "price":10
                 },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
-                    "timeCooking": "2016-07-13T18:00:39.303Z"
+                    "timeCooking": "2016-07-13T18:00:39.303Z",
+                    "price":10
                 },
-
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
-                    "nbRquSimpleGuests": 6
+                    "nbRquSimpleGuests": 6,
+                    "price":10
                 }
             }
         },
@@ -40,8 +40,6 @@
             "$oid": "111111111111111111111111"
         }
     },
-
-
     {
         "price": 60,
         "nbGuests": 10,
@@ -61,12 +59,13 @@
             "requiredGuests": {
                 "cooks": {
                     "nbRemainingPlaces": 0,
-                    "nbRquCooks": 1
-
+                    "nbRquCooks": 1,
+                    "price":6
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 9,
-                    "nbRquSimpleGuests": 9
+                    "nbRquSimpleGuests": 9,
+                    "price":6
                 }
             }
         },
@@ -96,11 +95,13 @@
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
-                    "timeCooking": "2016-07-13T18:00:39.303Z"
+                    "timeCooking": "2016-07-13T18:00:39.303Z",
+                    "price":11.67
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 3,
-                    "nbRquSimpleGuests": 3
+                    "nbRquSimpleGuests": 3,
+                    "price":11.67
                 }
             }
         },
@@ -132,11 +133,13 @@
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
-                    "timeCooking": "2016-07-13T18:00:39.303Z"
+                    "timeCooking": "2016-07-13T18:00:39.303Z",
+                    "price":10
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 2,
-                    "nbRquSimpleGuests": 2
+                    "nbRquSimpleGuests": 2,
+                    "price":10
                 }
             }
         },
@@ -168,11 +171,13 @@
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
-                    "timeCooking": "2016-07-13T18:00:39.303Z"
+                    "timeCooking": "2016-07-13T18:00:39.303Z",
+                    "price":10
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 2,
-                    "nbRquSimpleGuests": 2
+                    "nbRquSimpleGuests": 2,
+                    "price":10
                 }
             }
         },
@@ -204,15 +209,18 @@
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
-                    "timeCooking": "2016-07-13T18:00:39.303Z"
+                    "timeCooking": "2016-07-13T18:00:39.303Z",
+                    "price":7.6
                 },
                 "cleaners": {
                     "nbRquCleaners": 1,
-                    "nbRemainingPlaces": 1
+                    "nbRemainingPlaces": 1,
+                    "price":7.6
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
-                    "nbRquSimpleGuests": 6
+                    "nbRquSimpleGuests": 6,
+                    "price":7.6
                 }
             }
         },

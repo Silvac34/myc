@@ -9,30 +9,21 @@ import copy
 from datetime import datetime
 from pymongo import MongoClient
 from bson import ObjectId, json_util
-from bson.json_util import dumps
+from bson.json_util import dumps,loads
 from app.api import Application, User
 from app import configure
 import subprocess
 
 
-
-class TestData:
-    def __init__(self):
-        self.jsonNewMealData = "{\"town\": \"Santiago\",\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"detailedInfo\": {\"requiredHelpers\": []},\"privateInfo\" :{\"address\": \"3 impasse marie - blanche 75018\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
-        self.adminUser = User(_id="111111111111111111111111")
-        self.jsonMealPublicData1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529\",\"is_silhouette\": \"false\"}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        self.jsonMealDetailedData1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529\",\"is_silhouette\": \"false\"}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredHelpers\": []},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        self.jsonMealPublicData2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529\",\"is_silhouette\": \"false\"}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        self.jsonMealDetailedData2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529\",\"is_silhouette\": \"false\"}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredHelpers\": []},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        
-
 class BasicAPITest(unittest.TestCase):
     def setUp(self):
+        self.maxDiff = None
         Application.app.config['TESTING'] = True
         self.client = Application.app.test_client()
         mClient = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
         Application.db = mClient.get_default_database()
-        Application.db.users.insert({"_id": ObjectId("111111111111111111111111"),"privateInfo": {"facebook_id": "0123456789","link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/","email": "maillet.kevin91@gmail.com"},"picture": {"data": {"url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529","is_silhouette": "false"}},"first_name": "Kevin","last_name": "Marteau","gender": "male"})
+        Application.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
+        self.adminUser = User(_id="111111111111111111111111")
 
     def tearDown(self):
         Application.db.meals.delete_many({})
@@ -43,22 +34,29 @@ class BasicAPITest(unittest.TestCase):
         self.assertEqual("401 UNAUTHORIZED", resp.status)
 
     def test_insert_meal(self):
-        resp = self.client.post("/api/meals", data=TestData().jsonNewMealData, headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\"},\"cleaners\":{\"nbRquCleaners\":1}}},\"privateInfo\" :{\"address\": \"30 avenue de Trudaine 75009\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        resp = self.client.post("/api/meals", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("200 OK", resp.status)
-        coucou = Application.db.meals.find_one()
-        self.assertEqual(json.dumps(Application.preprocess_id(coucou),default=json_util.default), resp.data)
-        mealID = str(coucou["_id"])
-        cDate = coucou["creationDate"]
-        testMeal = {u'town': u'Santiago',u'menu': u'Soupions de l\xe9gumes avec cassolette de veau',u'nbRemainingPlaces':9 ,u'price': 60, u'privateInfo': {u'address': u'3 impasse marie - blanche 75018'}, u'detailedInfo': {u'requiredHelpers': []}, u'nbGuests': 10, u'veggies': False, u'time': u'2017-12-20T17:00:00.000Z', u'addressApprox': u'M\xe9tro Blanche L2', u'_id': '577678e94403f954d69cbd04'}
-        testMeal["_id"]= ObjectId(mealID)
-        testMeal["admin"]= ObjectId(TestData().adminUser._id)
-        testMeal["privateInfo"]["users"]=[{"_id":TestData().adminUser._id,"role":"admin"}]
-        testMeal["creationDate"] = cDate
-        self.assertItemsEqual(coucou, testMeal)
+        dbMeal = Application.db.meals.find_one()
+        self.assertEqual(json.dumps(Application.preprocess_id(dbMeal),default=json_util.default), resp.data)
+        testMeal = loads(open('../testData/meals_testData.json').read())[0]
+        testMeal["_id"]= dbMeal["_id"]
+        testMeal["creationDate"] = dbMeal["creationDate"]
+        self.assertEqual(dbMeal, testMeal)
+    
+    def test_insert_meal_without_helpers (self):
+        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"detailedInfo\": {\"requiredGuests\": {}},\"privateInfo\" :{\"address\": \"3 impasse marie - blanche 75018\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
+        resp = self.client.post("/api/meals", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        dbMeal = Application.db.meals.find_one()
+        testMeal = loads(open('../testData/meals_testData.json').read())[1]
+        testMeal["_id"]= dbMeal["_id"]
+        testMeal["creationDate"] = dbMeal["creationDate"]
+        self.assertEqual(dbMeal, testMeal)
 
     def test_insert_empty_meal(self):
-        resp = self.client.post("/api/meals",data="",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        resp = self.client.post("/api/meals",data="",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("", resp.data)
+        self.assertEqual(0,Application.db.meals.count())
 
 class TestAuthMealAPI(unittest.TestCase):
 
@@ -68,30 +66,36 @@ class TestAuthMealAPI(unittest.TestCase):
         self.client = Application.app.test_client()
         mClient = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
         Application.db = mClient.get_default_database()
-        #populate the database with test data
-        Application.db.meals.insert({"_id": ObjectId("111111111111111111111111"),"town": "Santiago","admin":"111111111111111111111111","menu": "Jolie piece de boeuf","price": 100,"detailedInfo": {"requiredHelpers": []},"privateInfo" :{"address": "30 avenue de Trudaine 75009"},"nbGuests": 10,"veggies": False ,"time": "2016-11-20T17:00:00.000Z","addressApprox": "Métro Anvers L2"})
-        Application.db.meals.insert({"_id": ObjectId("111111111111111111111112"),"town": "Santiago","admin":"111111111111111111111111","menu": "Soupions de légumes avec cassolette de veau","price": 60,"detailedInfo": {"requiredHelpers": []},"privateInfo" :{"address": "3 impasse marie - blanche 75018"},"nbGuests": 10,"veggies": False,"time": "2017-12-20T17:00:00.000Z","addressApprox": "Métro Blanche L2"})
-        Application.db.users.insert({"_id": ObjectId("111111111111111111111111"),"privateInfo": {"facebook_id": "0123456789","link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/","email": "maillet.kevin91@gmail.com"},"picture": {"data": {"url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=1663c10fca620aedc8299dcea27879ac&oe=57EB7292&__gda__=1480029556_7df38557083e1c3555bd90c18a76b529","is_silhouette": "false"}},"first_name": "Kevin","last_name": "Marteau","gender": "male"})
+        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[0])
+        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
+        Application.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
+        self.adminUser = User(_id="111111111111111111111111")
 
     def tearDown(self):
         Application.db.meals.delete_many({})
         Application.db.users.delete_many({})
         
     def test_get_all_meals(self):
-        resp = self.client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        jsonAPIExpMeal2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
+        resp = self.client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("200 OK", resp.status)
         resp = json.loads(resp.data)
-        expOutcome = json.loads(TestData().jsonMealPublicData2)
+        expOutcome1 = json.loads(jsonAPIExpMeal1)
+        expOutcome2 = json.loads(jsonAPIExpMeal2)
         self.assertEqual(2, len(resp))
-        self.assertItemsEqual(resp[1],expOutcome)
+        self.assertEquals(resp[0],expOutcome1)
+        self.assertEquals(resp[1],expOutcome2)
         
 
     def test_get_detailed_info(self):
-        resp = self.client.get("/api/meal/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(TestData().adminUser.token())})
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        resp = self.client.get("/api/meal/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("200 OK", resp.status)
         resp = json.loads(resp.data)
-        expected = json.loads(TestData().jsonMealDetailedData1)
-        self.assertItemsEqual(resp,expected)
+        expected = json.loads(jsonAPIExpMeal1)
+        self.assertEquals(resp,expected)
+        
 
     #def test_delete_one_meal(self):
     #    Application.db.meals.insert({"test_remove": "test"})

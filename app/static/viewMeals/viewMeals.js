@@ -1,6 +1,6 @@
 'use strict';
 
-var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar','ui.bootstrap'])
+var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-round-progressbar','ui.bootstrap','myApp.viewMealsDtld'])
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
   
@@ -15,20 +15,20 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
 }])
 
 
-.controller('ViewMealsCtrl', ['$scope','$http','viewMealsFilterService','$state','$uibModal', '$log',function($scope,$http,viewMealsFilterService,$state, $uibModal, $log) {
+.controller('ViewMealsCtrl', ['$scope', '$http', 'viewMealsFilterService', '$state', '$uibModal', '$log', function($scope, $http, viewMealsFilterService, $state, $uibModal, $log) {
 
 
-  $scope.loadMeals = function () {
-    $http.get('/api/meals').success(function (data) {
-      $scope.meals = data;
-    });
-  },
+  $scope.loadMeals = function() {
+      $http.get('/api/meals').then(function(response) {
+        $scope.meals = response.data;
+      });
+    },
 
-  $scope.filter = function(){
+  $scope.filter = function() {
     return viewMealsFilterService.get();
   },
-  
-  $scope.openModal = function(size) {
+
+  $scope.openModalFilter = function(size) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
@@ -41,14 +41,30 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
-  
+
+  $scope.openModalDtld = function(meal_id) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
+      controller: 'ViewMealsDtldCtrl',
+      size: "lg",
+      windowClass: 'modal-meal-window',
+      resolve: {
+        meal_id: function() {
+          return meal_id;
+        }
+      }
+    });
+  };
+
+
   $scope.reverse = false;
-  $scope.SortOrder='asc';
+  $scope.SortOrder = 'asc';
 
   $scope.loadMeals();
-  
+
   $state.go('view_meals.filterInternet');
-  
+
 }]);
 
 

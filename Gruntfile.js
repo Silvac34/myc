@@ -128,24 +128,24 @@ module.exports = function(grunt) {
                 command: [
                     'mongo ds019498.mlab.com:19498/shareat_stage -u shareat -p kmaillet230191 --eval "db.users.remove({})"',
                     'mongo ds019498.mlab.com:19498/shareat_stage -u shareat -p kmaillet230191 --eval "db.meals.remove({})"',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_stage -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_stage -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json'
+                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_stage -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json --jsonArray',
+                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_stage -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json --jsonArray'
                     ].join('&&')
             },
             InitDevKevDB: {
                 command: [
                     'mongo ds019498.mlab.com:19498/shareat_dev -u shareat -p kmaillet230191 --eval "db.users.remove({})"',
                     'mongo ds019498.mlab.com:19498/shareat_dev -u shareat -p kmaillet230191 --eval "db.meals.remove({})"',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_dev -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_dev -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json'
+                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_dev -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json --jsonArray',
+                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_dev -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json --jsonArray'
                 ].join('&&')
             },
             InitDevDimDB: {
                 command: [
                     'mongo ds055782.mlab.com:55782/shareat-dev_dim -u shareat -p kmaillet230191 --eval "db.users.remove({})"',
                     'mongo ds055782.mlab.com:55782/shareat-dev_dim -u shareat -p kmaillet230191 --eval "db.meals.remove({})"',
-                    'mongoimport -h ds055782.mlab.com:55782 -d shareat-dev_dim -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json',
-                    'mongoimport -h ds055782.mlab.com:55782 -d shareat-dev_dim -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json'
+                    'mongoimport -h ds055782.mlab.com:55782 -d shareat-dev_dim -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json --jsonArray',
+                    'mongoimport -h ds055782.mlab.com:55782 -d shareat-dev_dim -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json --jsonArray'
                 ].join('&&')
             }
         },

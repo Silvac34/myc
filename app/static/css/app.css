@@ -399,10 +399,11 @@
 
 .meal-dtld-menu-label{
     font-size: 16px;
-    /*padding-left: 22px;*/
     height: 25px;
-    /*background: url("/static/sources/menu.png") no-repeat 0;*/
-    margin-bottom: 27px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    text-align: center;
+    min-width: 100%;
 }
 
 .meal-dtld-helpers-label{
@@ -411,17 +412,31 @@
     margin-left: 15px;
 }
 
-.meal-dtld-helpers-price{
-    margin-right: 15px;
+.meal-dtld-col{
+    min-height: 17px;
+    margin-right: 30px;
+}
+
+.meal-dtld-helpers-price {
     color: #3EA93E;
+    min-width: 15%;
+    text-align: center;
+    float: right;
 }
 
 .meal-dtld-helpers-places{
-    margin-right: 5px;
+    min-width: 15%;
+    text-align: center;
+    float: right;
 }
 
 .meal-dtld-helpers-description{
     font-size: 12px;
+}
+
+.meal-dtld-helpers-description-time{
+    font-weight:bold;
+    font-size:14px;
 }
 
 
@@ -432,6 +447,11 @@
 .meal-dtld-helpers-radio{
     margin: 11.5px !important;
     position: absolute;
+}
+
+.meal-dtld-full-msg {
+    color:red;
+    margin-bottom: pxpx;
 }
     /* -----------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------------- */

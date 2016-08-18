@@ -40,58 +40,37 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="page-header">Information sur les participants</div>
-                                            <table class="table table-striped table-hover ">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Nombres espérés</th>
-                                                        <th>Nombres déjà invités</th>
-                                                        <th>Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Aides cuisine</td>
-                                                        <td>Column content</td>
-                                                        <td>Column content</td>
-                                                        <td>Column content</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Aides vaisselle</td>
-                                                        <td>Column content</td>
-                                                        <td>Column content</td>
-                                                        <td>Column content</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Invités</td>
-                                                        <td>Column content</td>
-                                                        <td>Column content</td>
-                                                        <td>Column content</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="form-group">
-                                                <label for="inputCooks" class="col-xs-10 control-label">Nombres d'aides cuisine</label>
-                                                <div class="col-xs-2">
-                                                    <input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.requiredGuests.cooks.nbRquCooks">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputCleaners" class="col-xs-10 control-label">Nombres d'aides vaisselle</label>
-                                                <div class="col-xs-2">
-                                                    <input type="number" class="form-control" id="inputCleaners" ng-model="editedMeal.requiredGuests.cleaners.nbRquCleaners">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputGuests" class="col-xs-10 control-label">Nombres d"invités</label>
-                                                <div class="col-xs-2">
-                                                    <input type="number" class="form-control" id="inputGuests" ng-model="editedMeal.requiredGuests.simpleGuests.nbRqusimpleGuests">
-                                                </div>
-                                            </div>
-
                                         </fieldset>
                                     </form>
+                                    <div class="page-header">
+                                        <h3>Information sur les participants</h3>
+                                    </div>
+                                    <table class="table table-striped table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Nombre</th>
+                                                <th>Prix par personne</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Aides cuisine</td>
+                                                <td><input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.requiredGuests.cooks.nbRquCooks"></td>
+                                                <td>{{editedMeal.requiredGuests.cooks.price}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aides vaisselle</td>
+                                                <td><input type="number" class="form-control" id="inputCleaners" ng-model="editedMeal.requiredGuests.cleaners.nbRquCleaners"></td>
+                                                <td>{{editedMeal.requiredGuests.cleaners.price}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Invités</td>
+                                                <td><input type="number" class="form-control" id="inputGuests" ng-model="editedMeal.requiredGuests.simpleGuests.nbRqusimpleGuests"></td>
+                                                <td>{{editedMeal.requiredGuests.simpleGuests.price}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
@@ -178,8 +157,8 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <input type="text" class="form-control form-calendar" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats"
-                                placeholder="Fecha" />
+                            <input type="text" class="form-control form-calendar" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
+                                close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Fecha" />
                         </div>
                     </div>
                     <div class="col-sm-offset-1 col-sm-3">

@@ -35,7 +35,7 @@
             <span class = "meal-dtld-helpers-price">Prix</span>
         </div>
         <uib-accordion close-others="accordionOneAtATime">
-            <div style="overflow:auto">
+            <div style="overflow:auto" ng-if = meal.detailedInfo.requiredGuests.cooks>
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cook">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1">
                     <uib-accordion-heading>
@@ -48,7 +48,7 @@
                     <div class="meal-dtld-helpers-description">Vous faites partie de l'équipe des cuisiniers</br>RDV chez l'organisateur à <span class ="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span></div>
                 </div>
             </div>
-            <div style="overflow:auto">
+            <div style="overflow:auto" ng-if = meal.detailedInfo.requiredGuests.cleaners>
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cleaner">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2">
                     <uib-accordion-heading>
@@ -61,7 +61,7 @@
                     <div class="meal-dtld-helpers-description">Bravo, vous êtes une belle personne !</div>
                 </div>
             </div>
-            <div style="overflow:auto">
+            <div style="overflow:auto" ng-if = meal.detailedInfo.requiredGuests.simpleGuests>
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="guest">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3">
                     <uib-accordion-heading>

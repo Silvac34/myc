@@ -78,7 +78,8 @@
         </uib-accordion>
     </div>
     <div class="text-center">
-        <a class="btn btn-primary">Envoyer une demande</a>
+        <a class="btn btn-primary" ng-if="meal.nbRemainingPlaces>0">Envoyer une demande</a>
+        <div ng-if="meal.nbRemainingPlaces<=0" class="meal-dtld-full-msg" >Oups ! Ce repas est complet </div>
     </div>
 
     <div class="row meal-dtld-group">

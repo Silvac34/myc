@@ -381,3 +381,15 @@
     background-position: 10px 5px;
     font-size: 80%;
 }
+
+#fieldset-form{
+    padding-left: 30px;
+    padding-right: 40px;
+}
+
+.form-vegetarian{
+    background: url("/static/sources/vegetarian.png") no-repeat;
+    text-indent: 25px;
+    margin-top: auto;
+    background-position: 10px 5px;
+}

@@ -18,7 +18,7 @@
                             <div class="meal-label meal-time">{{meal.time |date:'HH:mm'}} </div>
                         </div>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
         <div class="col-xs-3 meal-dtld-right">
@@ -30,14 +30,14 @@
     </div>
     <div class="row meal-dtld-group">
         <div class="meal-label meal-dtld-group-label"> Je m'inscris : </div>
-        <div class = "meal-dtld-helpers-label meal-dtld-col">
-            <span class = "meal-dtld-helpers-places">Part.</span>
-            <span class = "meal-dtld-helpers-price">Prix</span>
+        <div class="meal-dtld-helpers-label meal-dtld-col">
+            <span class="meal-dtld-helpers-places">Part.</span>
+            <span class="meal-dtld-helpers-price">Prix</span>
         </div>
         <uib-accordion close-others="accordionOneAtATime">
-            <div style="overflow:auto" ng-if = meal.detailedInfo.requiredGuests.cooks>
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cook">
-                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1">
+            <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="cook" ng-disabled="!requiredGuests.availablePlaces.cooks">
+                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1" is-disabled="!requiredGuests.availablePlaces.cooks">
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la cuisine
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
@@ -45,12 +45,12 @@
                             <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cooks.price}} €</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">Vous faites partie de l'équipe des cuisiniers</br>RDV chez l'organisateur à <span class ="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span></div>
+                    <div class="meal-dtld-helpers-description">Vous faites partie de l'équipe des cuisiniers</br>RDV chez l'organisateur à <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span></div>
                 </div>
             </div>
-            <div style="overflow:auto" ng-if = meal.detailedInfo.requiredGuests.cleaners>
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="cleaner">
-                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2">
+            <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners">
+                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2" is-disabled="!requiredGuests.availablePlaces.cleaners">
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la vaisselle
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
@@ -61,9 +61,9 @@
                     <div class="meal-dtld-helpers-description">Bravo, vous êtes une belle personne !</div>
                 </div>
             </div>
-            <div style="overflow:auto" ng-if = meal.detailedInfo.requiredGuests.simpleGuests>
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="rquRole" value="guest">
-                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3">
+            <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="guest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests">
+                <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3" is-disabled="!requiredGuests.availablePlaces.simpleGuests">
                     <uib-accordion-heading>
 
                         <div class="meal-dtld-helpers-label"> Je viens comme je suis ...
@@ -80,7 +80,7 @@
     <div class="text-center">
         <a class="btn btn-primary">Envoyer une demande</a>
     </div>
-    
+
     <div class="row meal-dtld-group">
         <div class="meal-label meal-dtld-group-label">Ce repas est organisé par : </div>
         <div clas="meal-dtld-admin-wrapper">

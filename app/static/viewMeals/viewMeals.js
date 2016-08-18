@@ -19,8 +19,8 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
 
 
   $scope.loadMeals = function() {
-      $http.get('/api/meals').success(function(data) {
-        $scope.meals = data;
+      $http.get('/api/meals').then(function(response) {
+        $scope.meals = response.data;
       });
     },
 

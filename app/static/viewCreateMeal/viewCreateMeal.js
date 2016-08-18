@@ -29,7 +29,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 }])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$window', '$resource', function($scope, $http, $window, $resource) {
+.controller('ViewCreateMealCtrl', ['$scope','$state' ,'$http', '$window', '$resource', function($scope,$state, $http, $window, $resource) {
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
@@ -96,7 +96,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
     if ($scope.helpBox.helpCleaning == true) {
       $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.cleaners;
     }
-    $http.post('/api/meals', $scope.editedMeal);
+    $http.post('/api/meals', $scope.editedMeal).then(function(){
+      $state.go('view_meals')
+    });
     
     //TODO : rediriger vers page du repas
   };

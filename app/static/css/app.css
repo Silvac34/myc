@@ -434,6 +434,11 @@
     font-size: 12px;
 }
 
+.meal-dtld-helpers-description-time{
+    font-weight:bold;
+    font-size:14px;
+}
+
 
 .meal-dtld-helpers {
     width:100%;

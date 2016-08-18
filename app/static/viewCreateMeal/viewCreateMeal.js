@@ -29,22 +29,19 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 }])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$window', '$resource', function($scope, $http, $window, $resource) {
+.controller('ViewCreateMealCtrl', ['$scope','$state' ,'$http', '$window', '$resource', function($scope,$state, $http, $window, $resource) {
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
     veggies: false,
     town: "Santiago",
     time: predefined_date,
-    detailedInfo : {"requiredHelpers":[]},
-    privateInfo : {"latlng":""}
-
+    detailedInfo : {"requiredGuests":{}}
   }, 
   
   
   
   $scope.helpBox = $scope.helpBox || {
-    helpBuying: false, 
     helpCooking: false,
     helpCleaning: false,
     notHelping: true
@@ -75,23 +72,17 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
       $scope.animation.is_not_animated = false;
   },
 
-  //initialize the buyers model
-  $scope.buyers = $scope.buyers || {
-      deliveryTime: "",
-      ingredient: ""
-    },
-
+  //initialize the models
     $scope.cooks = $scope.cooks || {
-      nbCooks: "",
+      nbRquCooks: "",
       timeCooking: ""
     },
 
     $scope.cleaners = $scope.cleaners || {
-      nbCleaners: ""
+      nbRquCleaners: ""
     },
 
   $scope.excludingHelp = function() {
-    $scope.helpBox.helpBuying = false,
     $scope.helpBox.helpCooking = false,
     $scope.helpBox.helpCleaning = false;
   },
@@ -102,16 +93,15 @@ angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ng
 
 
  $scope.createMeal = function() {
-    if ($scope.helpBox.helpBuying == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"buyers":$scope.buyers});
-    }
     if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cooks":$scope.cooks});
+      $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.cooks;
     }
     if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.detailedInfo.requiredHelpers.push({"cleaners":$scope.cleaners});
+      $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.cleaners;
     }
-    $http.post('/api/meals', $scope.editedMeal);
+    $http.post('/api/meals', $scope.editedMeal).then(function(){
+      $state.go('view_meals')
+    });
     
     //TODO : rediriger vers page du repas
   };

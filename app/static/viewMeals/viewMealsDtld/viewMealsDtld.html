@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="guest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="simpleGuest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3" is-disabled="!requiredGuests.availablePlaces.simpleGuests">
                     <uib-accordion-heading>
 

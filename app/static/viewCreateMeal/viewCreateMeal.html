@@ -1,18 +1,18 @@
 <!-- form.html -->
-<form class="form-horizontal">
+<form class="form-horizontal" name="createMealForm">
     <fieldset id="fieldset-form">
         <legend>Proposer un repas</legend>
         <div class="row">
             <div class="col-xs-6">
-                <div class="form-group">
-                    <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu"></textarea>
+                <div class="form-group" ng-class="{'has-error': createMealForm.formMenu.$invalid && createMealForm.formMenu.$dirty}">
+                    <textarea type="text" class="form-control" name="formMenu" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
                 </div>
             </div>
             <div class="col-xs-offset-1 col-xs-5">
                 <div class="row">
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" />
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" required/>
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/editedMeal.nbGuests}}" />
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
                             <span class="input-group-addon">€</span>
@@ -29,7 +29,7 @@
                                                 <label for="inputPrice" class="col-xs-6 control-label">Prix total des courses</label>
                                                 <div class="col-xs-6">
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price" />
+                                                        <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price"/>
                                                         <span class="input-group-addon">€</span>
                                                     </div>
                                                 </div>
@@ -115,10 +115,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error': createMealForm.formLocation.$invalid && createMealForm.formLocation.$dirty}">
                         <div class="col-xs-12">
-                            <input type="text" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address_street">
-                            <input type="text" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address_street" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address_street}} {{editedMeal.privateInfo.address_number}} {{editedMeal.privateInfo.address_complement}}">
+                            <input type="text" name="formLocation" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address_street">
+                            <input type="text" name="formLocation" class="form-control form-location" id="inputAddress" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address_street" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address_street}} {{editedMeal.privateInfo.address_number}} {{editedMeal.privateInfo.address_complement}}">
                             <script type="text/ng-template" id="formModalLocationContent.html">
                                 <div class="modal-header">
                                     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
@@ -206,7 +206,7 @@
         <div class="row">
             <div class="form-group">
                 <div class="pager">
-                    <li><a class="btn btn-primary btn-lg" ng-click="createMeal()">Publicar la cena</a></li>
+                    <li><a class="btn btn-primary btn-lg" ng-click="createMealForm.formMenu.$setDirty(); createMealForm.formLocation.$setDirty(); createMeal()">Publicar la cena</a></li>
                 </div>
             </div>
     </fieldset>

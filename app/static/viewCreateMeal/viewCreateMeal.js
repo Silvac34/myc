@@ -19,17 +19,18 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     },
 
 
-  $scope.createMeal = function() {
-    
-    $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
-    $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
+    $scope.createMeal = function() {
+      if ($scope.editedMeal.requiredGuests.cooks.isUndefined==true && $scope.editedMeal.requiredGuests.cleaners.isUndefined==true) {
+        $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
+        $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
 
-    $http.post('/api/meals', $scope.editedMeal).then(function(){
-      $state.go('view_meals');
-    });
+        $http.post('/api/meals', $scope.editedMeal).then(function() {
+          $state.go('view_meals');
+        });
+      }
 
-    //TODO : rediriger vers page du repas
-  };
+      //TODO : rediriger vers page du repas
+    };
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
 

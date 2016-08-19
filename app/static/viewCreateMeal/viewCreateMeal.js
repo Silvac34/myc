@@ -1,155 +1,128 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router','ngAnimate','ngMessages','ngResource',])
+angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 'ngResource'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.when('/create_meal', '/create_meal/diner');
-  $stateProvider
-    .state('create_meal.diner', {
-      parent: 'create_meal',
-      url: '/diner',
-      templateUrl: 'static/viewCreateMeal/viewCreateMealDiner/viewCreateMealDiner.html',
-      controller: 'ViewCreateMealCtrl'
-    }),
-  $stateProvider
-    .state('create_meal.profile', {
-      parent: 'create_meal',
-      url: '/profile',
-      templateUrl: 'static/viewCreateMeal/viewCreateMealProfile/viewCreateMealProfile.html',
-      controller: 'ViewCreateMealCtrl'
-    }),
-  $stateProvider
-    .state('create_meal.payment', {
-      parent: 'create_meal',
-      url: '/payment',
-      templateUrl: 'static/viewCreateMeal/viewCreateMealPayment/viewCreateMealPayment.html',
-      controller: 'ViewCreateMealCtrl'
-    });
 }])
 
-
-.controller('ViewCreateMealCtrl', ['$scope','$state' ,'$http', '$window', '$resource', function($scope,$state, $http, $window, $resource) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$resource', '$uibModal', '$state', function($scope, $http, $resource, $uibModal, $state) {
+  //$resource will serve for geolocation with $http
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
-    veggies: false,
-    town: "Santiago",
-    time: predefined_date,
-    detailedInfo : {"requiredGuests":{}}
-  }, 
-  
-  
-  
-  $scope.helpBox = $scope.helpBox || {
-    helpCooking: false,
-    helpCleaning: false,
-    notHelping: true
-  },
- 
-   $scope.animation = $scope.animation || {
-    is_animated: false,
-    is_not_animated: true,
-    next_page: false,
-    last_page: false,
-    first_next_page: true
-  },
-  
-  
-  $scope.change_animation_to_the_right = function() {
-      $scope.animation.next_page = true;
-      $scope.animation.first_next_page = false;
-      $scope.animation.last_page = false;
-      $scope.animation.is_animated = true;
-      $scope.animation.is_not_animated = false;
-  },
-  
-  $scope.change_animation_to_the_left = function() {
-      $scope.animation.next_page = false;
-      $scope.animation.first_next_page = false;
-      $scope.animation.last_page = true;
-      $scope.animation.is_animated = true;
-      $scope.animation.is_not_animated = false;
-  },
-
-  //initialize the models
-    $scope.cooks = $scope.cooks || {
-      nbRquCooks: "",
-      timeCooking: ""
+      veggies: false,
+      time: predefined_date,
+      detailedInfo: {
+        "requiredGuests": {}
+      }
     },
 
-    $scope.cleaners = $scope.cleaners || {
-      nbRquCleaners: ""
-    },
 
-  $scope.excludingHelp = function() {
-    $scope.helpBox.helpCooking = false,
-    $scope.helpBox.helpCleaning = false;
-  },
-
-  $scope.includingHelp = function() {
-    $scope.helpBox.notHelping = false;
-  },
-
-
- $scope.createMeal = function() {
-    if ($scope.helpBox.helpCooking == true) {
-      $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.cooks;
-    }
-    if ($scope.helpBox.helpCleaning == true) {
-      $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.cleaners;
-    }
-    $http.post('/api/meals', $scope.editedMeal).then(function(){
-      $state.go('view_meals')
-    });
+  $scope.createMeal = function() {
     
+    $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
+    $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
+
+    $http.post('/api/meals', $scope.editedMeal).then(function(){
+      $state.go('view_meals');
+    });
+
     //TODO : rediriger vers page du repas
   };
-  
+
   //required for the calendar toolbar (datamodel : editedMeal.time)
-  
+
   $scope.dateOptions = {
-    formatYear: 'yy',
-    maxDate: new Date(2020, 5, 22),
-    minDate: new Date(),
-    startingDay: 1
-  },
+      formatYear: 'yy',
+      maxDate: new Date(2020, 5, 22),
+      minDate: new Date(),
+      startingDay: 1
+    },
 
 
-  $scope.clear = function() {
-    $scope.editedMeal.time = null;
-  };
-  
+    $scope.clear = function() {
+      $scope.editedMeal.time = null;
+    };
+
   $scope.date_open = function() {
     $scope.date_popup.opened = true;
   };
-  
+
   $scope.date_popup = {
     opened: false
   };
-  
-  $scope.date_formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+
+  //date formats for datepicker
+  $scope.date_formats = ['dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.date_format = $scope.date_formats[0];
   $scope.altInputDateFormats = ['M!/d!/yyyy'];
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
-  
+
   $scope.ismeridian = false;
   $scope.mstep = 15;
-  
-  // asking to the customer if he wants to be geolocated, by default no ==> is_geolocated = false
-  
-  $scope.geolocation = {};
-  
-}]);
+
+  $scope.formPopoverTimepicker = {
+    title: 'Hora de la cena',
+    templateUrl: 'PopoverTimepickerTemplate.html'
+  };
+
+
+  //enable animations in the modal
+  $scope.animationsEnabled = true;
+
+  //modal to get the address of the meal
+  $scope.openModalFormLocation = function(size) {
+
+    $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'formModalLocationContent.html',
+      controller: 'FormModalInstanceCtrl',
+      size: size,
+      resolve: {
+        editedMeal: function() {
+            return $scope.editedMeal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+      }
+    });
+  };
+
+
+  //modal to define the price of the meal and the number of participants
+  $scope.openModalFormPrice = function(size) {
+
+    $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'formModalPriceContent.html',
+      controller: 'FormModalInstanceCtrl',
+      size: size,
+      resolve: {
+        editedMeal: function() {
+            return $scope.editedMeal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+      }
+    });
+  };
+
+}])
+
+//controller for the Location Modal
+.controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
+
+  $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
+
+  $scope.ok = function() {
+    $uibModalInstance.close();
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
+});
 
 
 var predefined_date = new Date();
 predefined_date.setDate(predefined_date.getDate() + 2);
 predefined_date.setHours(20);
 predefined_date.setMinutes(30);
-
-
-  
-  
-  

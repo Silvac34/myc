@@ -246,8 +246,12 @@ def get_all_meals():
 @Application.app.route('/api/meal/<meal_id>', methods=['GET'])
 @login_required
 def get_meal_detailed_info(meal_id):
-    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)},{"privateInfo":0})
+    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
+    if any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]):
+        meal["detailedInfo"].update({"subscribed" : True})
+    else: meal["detailedInfo"].update({"subscribed" : False})
+    del meal["privateInfo"]
     return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 

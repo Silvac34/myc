@@ -35,6 +35,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
           $scope.requestRole.name = "simpleGuest"
         }
       }
+      $scope.goToMeal= $scope.meal.detailedInfo.subscribed
     });
   }
   

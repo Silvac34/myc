@@ -36,7 +36,7 @@
         </div>
         <uib-accordion close-others="accordionOneAtATime">
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="cook" ng-disabled="!requiredGuests.availablePlaces.cooks">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cook" ng-disabled="!requiredGuests.availablePlaces.cooks">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1" is-disabled="!requiredGuests.availablePlaces.cooks">
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la cuisine
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2" is-disabled="!requiredGuests.availablePlaces.cleaners">
                     <uib-accordion-heading>
                         <div class="meal-dtld-helpers-label"> J'aide à faire la vaisselle
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
-                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole" value="simpleGuest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests">
+                <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="simpleGuest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3" is-disabled="!requiredGuests.availablePlaces.simpleGuests">
                     <uib-accordion-heading>
 
@@ -78,7 +78,9 @@
         </uib-accordion>
     </div>
     <div class="text-center">
-        <a class="btn btn-primary" ng-if="meal.nbRemainingPlaces>0">Envoyer une demande</a>
+        <div uib-alert ng-if="errorSubscribe.status" class="alert alert-dismissible alert-danger" close="closeAlert()">{{errorSubscribe.message}}</div>
+        <a class="btn btn-primary" ng-click = "subscribeMeal(meal._id,requestRole.name)" ng-if="meal.nbRemainingPlaces>0 && !goToMeal">Envoyer une demande</a>
+        <a class="btn btn-success" ng-if="goToMeal">Accéder à la page du repas</a>
         <div ng-if="meal.nbRemainingPlaces<=0" class="meal-dtld-full-msg" >Oups ! Ce repas est complet </div>
     </div>
 

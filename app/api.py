@@ -251,6 +251,29 @@ def get_meal_detailed_info(meal_id):
     return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 
+@Application.app.route('/api/meal/<meal_id>/subscription', methods=['POST'])
+@login_required
+def subscribe_to_meal(meal_id):
+    rquData = json.loads(request.data)
+    if not "requestRole" in rquData:
+        return Response(status=400)
+    else:
+        meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+        if meal["nbRemainingPlaces"]<=0 : 
+            return Response("Meal is full",status=400)
+        elif not rquData["requestRole"] + "s" in meal["detailedInfo"]["requiredGuests"] : #check if good request
+            return Response(status=400)
+        elif not meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"]>0 :
+            return Response("Role is full",status=400)
+        elif any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]): 
+            return Response("User already registered",status=400)
+        else :
+            meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] - 1
+            meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] - 1
+            meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]})
+            Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":meal})
+            return Response(status=200)
+
 ####################################################################################
 
 

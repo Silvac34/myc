@@ -70,6 +70,7 @@ class TestAuthMealAPI(unittest.TestCase):
         Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
         Application.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
         self.adminUser = User(_id="111111111111111111111111")
+        self.otherUser = User(_id="111111111111111111111112")
 
     def tearDown(self):
         Application.db.meals.delete_many({})
@@ -96,7 +97,49 @@ class TestAuthMealAPI(unittest.TestCase):
         expected = json.loads(jsonAPIExpMeal1)
         self.assertEquals(resp,expected)
         
+        
+    def test_subscribe_meal_ok(self):
+        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        resp = self.client.post("/api/meal/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("200 OK", resp.status)
+        testMeal = loads(open('../testData/meals_testData.json').read())[0]
+        testMeal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"] = testMeal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"] -1
+        testMeal["nbRemainingPlaces"] = testMeal["nbRemainingPlaces"] -1 
+        testMeal["privateInfo"]["users"].append ({u'_id': u'111111111111111111111112',u'role': [u'cook']}) 
+        dbMeal = Application.db.meals.find_one({"_id":ObjectId("111111111111111111111111")})
+        self.assertEqual(dbMeal, testMeal)
+        
+    def test_subscribe_meal_UserSubscribed(self):
+        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        resp = self.client.post("/api/meal/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        self.assertEqual("User already registered", resp.data)
+    
 
+    def test_subscribe_meal_fullRole(self):
+        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        self.assertEqual("Role is full", resp.data)
+            
+    def test_subscribe_meal_fullMeal(self):
+        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[2])
+        resp = self.client.post("/api/meal/111111111111111111111113/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        self.assertEqual("Meal is full", resp.data)
+            
+    def test_subscribe_meal_badRequest1(self):
+        jsonRequestData = "{\"test\": \"cook\"}"
+        resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        
+        
+    def test_subscribe_meal_badRequest2(self):
+        jsonRequestData = "{\"requestRole\": \"cookies\"}"
+        resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        
     #def test_delete_one_meal(self):
     #    Application.db.meals.insert({"test_remove": "test"})
     #    me =Application.db.meals.find_one()

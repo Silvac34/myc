@@ -175,7 +175,7 @@
                     </div>
                     <div class="col-sm-offset-1 col-sm-3">
                         <div class="form-group">
-                            <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="focus" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}" required>
+                            <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}" required>
 
                             <!-- le script permet de mettre le timepicker dans le popover -->
                             <script type="text/ng-template" id="PopoverTimepickerTemplate.html">

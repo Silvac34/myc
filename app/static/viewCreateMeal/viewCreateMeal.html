@@ -115,22 +115,23 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && editedMeal.town==undefined && createMealForm.$submitted}">
+                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && createMealForm.$submitted}">
                         <div class="col-xs-12">
-                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address" required>
-                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address}} {{editedMeal.privateInfo.address_complement}}">
-                            <script type="text/ng-template" id="formModalLocationContent.html">
-                                <div class="modal-header">
-                                    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-                                    <h3 class="modal-title">Adresse du repas</h3>
-                                </div>
+                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.addressApprox" required>
+                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
 
-                                <div class="modal-body">
-                                    <form class="form-horizontal">
+                            <script type="text/ng-template" id="formModalLocationContent.html">
+                                <form class="form-horizontal" name="locationForm">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+                                        <h3 class="modal-title">Adresse du repas</h3>
+                                    </div>
+
+                                    <div class="modal-body">
                                         <div class="row">
-                                            <div class="form-group">
+                                            <div class="form-group" ng-class="{'has-error': editedMeal.town==undefined && locationForm.$submitted}">
                                                 <div class="col-xs-8">
-                                                <select class="form-control" id="select" ng-model="editedMeal.town">
+                                                    <select class="form-control" id="select" ng-model="editedMeal.town" required>
                                                     <option value="" disabled selected>Select your city</option>
                                                     <option>Santiago</option>
                                                     <option>Concepción</option>
@@ -140,7 +141,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group">
+                                            <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && locationForm.$submitted}">
                                                 <div class="col-xs-12">
                                                     <textarea type="text" class="form-control" id="inputAddress" placeholder="Dirección" ng-model="editedMeal.privateInfo.address" required></textarea>
                                                 </div>
@@ -153,12 +154,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                                </div>
+                                        <div class="row">
+                                            <div class="form-group" ng-class="{'has-error': editedMeal.addressApprox==undefined && locationForm.$submitted}">
+                                                <div class="col-xs-12">
+                                                    <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Dirección aproximativa a publicar" ng-model="editedMeal.addressApprox" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); ok()">OK</button>
+                                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                                    </div>
+                                </form>
                             </script>
 
                         </div>
@@ -173,7 +181,8 @@
                     </div>
                     <div class="col-sm-offset-1 col-sm-3">
                         <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}">
-                            <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}" required>
+                            <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}"
+                                required>
 
                             <!-- le script permet de mettre le timepicker dans le popover -->
                             <script type="text/ng-template" id="PopoverTimepickerTemplate.html">

@@ -115,7 +115,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
   $scope.ok = function() {
-    $uibModalInstance.close();
+    if($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined){
+      $uibModalInstance.close();  
+    }
   }; //function to validate the modal
 
   $scope.cancel = function() {

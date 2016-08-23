@@ -4,16 +4,15 @@
         <legend>Proposer un repas</legend>
         <div class="row">
             <div class="col-xs-6">
-                <div class="form-group" ng-class="{'has-error': createMealForm.formMenu.$error.required && createMealForm.formMenu.$dirty};">
-                    <textarea type="text" class="form-control" name="formMenu" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
+                <div class="form-group" ng-class="{'has-error': editedMeal.menu==undefined && createMealForm.$dirty};">
+                    <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
                 </div>
             </div>
             <div class="col-xs-offset-1 col-xs-5">
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': createMealForm.formPrice.$error.required && createMealForm.formPrice.$dirty};">
+                    <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$dirty};">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="formPrice" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" ng-model="inputPriceColor" required/>
-                            <!-- ng-model="inputPriceColor" sert juste à ce que name="formPrice" soit pris en compte dans le scope -->
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" required/>
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/editedMeal.nbGuests}}" />
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
                             <span class="input-group-addon">€</span>
@@ -116,11 +115,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': createMealForm.formLocation.$invalid && createMealForm.formLocation.$dirty}">
+                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && editedMeal.town==undefined && createMealForm.$dirty}">
                         <div class="col-xs-12">
-                            <input type="text" class="form-control form-location" name="formLocation" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address_street" ng-model="inputLocationColor" required>
-                            <!-- ng-model="inputLocationColor" sert juste à ce que name="formLocation" soit pris en compte dans le scope -->
-                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address_street" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address_street}} {{editedMeal.privateInfo.address_number}} {{editedMeal.privateInfo.address_complement}}">
+                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address" required>
+                            <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address}} {{editedMeal.privateInfo.address_complement}}">
                             <script type="text/ng-template" id="formModalLocationContent.html">
                                 <div class="modal-header">
                                     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
@@ -132,11 +130,11 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-xs-8">
-                                                    <select class="form-control" id="select" ng-model="editedMeal.town">
-                                                <option value="" disabled selected>Select your city</option>
-                                                <option>Santiago</option>
-                                                <option>Concepción</option>
-                                                <option>Valparaíso</option>
+                                                <select class="form-control" id="select" ng-model="editedMeal.town">
+                                                    <option value="" disabled selected>Select your city</option>
+                                                    <option>Santiago</option>
+                                                    <option>Concepción</option>
+                                                    <option>Valparaíso</option>
                                             </select>
                                                 </div>
                                             </div>
@@ -174,12 +172,12 @@
                         </div>
                     </div>
                     <div class="col-sm-offset-1 col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$dirty}">
                             <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}" required>
 
                             <!-- le script permet de mettre le timepicker dans le popover -->
                             <script type="text/ng-template" id="PopoverTimepickerTemplate.html">
-                                <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.formTime.$dirty}">
+                                <div class="form-group">
                                     <div class="col-xs-6">
                                         <span class="input-group" ng-click="$event.stopPropagation()">
                                     <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>

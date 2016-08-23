@@ -78,7 +78,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
     $uibModal.open({
       animation: $scope.animationsEnabled,
-      templateUrl: 'formModalLocationContent.html',
+        templateUrl: 'formModalLocationContent.html',
       controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {

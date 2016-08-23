@@ -76,16 +76,16 @@
         }
     }, {
         "_id": {
-            "$oid": "5713b6494403f909baafb513"
+            "$oid": "111111111111111111111113"
         },
         "town": "Santiago",
-        "admin": "577946eb4403f92b93425e6a",
+        "admin": "111111111111111111111111",
         "menu": "Hachi-parmentier de canard",
-        "price": 70,
-        "nbRemainingPlaces": 5,
+        "price": 15,
+        "nbRemainingPlaces": 0,
         "privateInfo": {
             "users": [{
-                "_id": "577946eb4403f92b93425e6a",
+                "_id": "111111111111111111111111",
                 "role": ["admin", "cook"]
             }],
             "address": "37 rue du général foy 75008"
@@ -93,19 +93,14 @@
         "detailedInfo": {
             "requiredGuests": {
                 "cooks": {
-                    "nbRemainingPlaces": 2,
-                    "nbRquCooks": 3,
+                    "nbRemainingPlaces": 0,
+                    "nbRquCooks": 1,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":11.67
-                },
-                "simpleGuests": {
-                    "nbRemainingPlaces": 3,
-                    "nbRquSimpleGuests": 3,
-                    "price":11.67
+                    "price":15
                 }
             }
         },
-        "nbGuests": 6,
+        "nbGuests": 1,
         "veggies": true,
         "time": "2016-07-22T20:00:00.000Z",
         "addressApprox": "Métro Villier L2",

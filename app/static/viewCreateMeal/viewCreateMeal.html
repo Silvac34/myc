@@ -144,15 +144,12 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-xs-12">
-                                                    <input type="text" class="form-control" id="inputAddressStreet" placeholder="Calle" ng-model="editedMeal.privateInfo.address_street" required>
+                                                    <textarea type="text" class="form-control" id="inputAddress" placeholder="Dirección" ng-model="editedMeal.privateInfo.address" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group">
-                                                <div class="col-xs-4">
-                                                    <input type="number" class="form-control" id="inputAddressNumber" name="inputAddressNumber" placeholder="n°" ng-model="editedMeal.privateInfo.address_number" required>
-                                                </div>
                                                 <div class="col-xs-8">
                                                     <input type="text" class="form-control" id="inputAddressComplement" placeholder="Complemento" ng-model="editedMeal.privateInfo.address_complement">
                                                 </div>

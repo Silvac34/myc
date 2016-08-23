@@ -4,13 +4,13 @@
         <legend>Proposer un repas</legend>
         <div class="row">
             <div class="col-xs-6">
-                <div class="form-group" ng-class="{'has-error': editedMeal.menu==undefined && createMealForm.$dirty};">
+                <div class="form-group" ng-class="{'has-error': editedMeal.menu==undefined && createMealForm.$submitted};">
                     <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
                 </div>
             </div>
             <div class="col-xs-offset-1 col-xs-5">
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$dirty};">
+                    <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" required/>
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/editedMeal.nbGuests}}" />
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && editedMeal.town==undefined && createMealForm.$dirty}">
+                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && editedMeal.town==undefined && createMealForm.$submitted}">
                         <div class="col-xs-12">
                             <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.privateInfo.address" required>
                             <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.privateInfo.address" value="{{editedMeal.town}} - {{editedMeal.privateInfo.address}} {{editedMeal.privateInfo.address_complement}}">
@@ -166,13 +166,13 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-8">
-                        <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$dirty}">
+                        <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
                             <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
                                 close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Fecha" />
                         </div>
                     </div>
                     <div class="col-sm-offset-1 col-sm-3">
-                        <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$dirty}">
+                        <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}">
                             <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}" required>
 
                             <!-- le script permet de mettre le timepicker dans le popover -->
@@ -203,7 +203,7 @@
         <div class="row">
             <div class="form-group">
                 <div class="pager">
-                    <li><a class="btn btn-primary btn-lg" ng-click="createMealForm.formMenu.$setDirty(); createMealForm.formLocation.$setDirty(); createMealForm.formPrice.$setDirty(); createMealForm.formDate.$setDirty(); createMealForm.formTime.$setDirty(); createMeal()">Publicar la cena</a></li>
+                    <li><a class="btn btn-primary btn-lg" ng-click="createMealForm.$setSubmitted(); createMeal()">Publicar la cena</a></li>
                 </div>
             </div>
     </fieldset>

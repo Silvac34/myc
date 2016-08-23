@@ -20,7 +20,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
 
     $scope.createMeal = function() {
-      if ($scope.editedMeal.requiredGuests.cooks.isUndefined==true && $scope.editedMeal.requiredGuests.cleaners.isUndefined==true) {
+      if ($scope.editedMeal.requiredGuests != undefined) {
         $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
         $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
 

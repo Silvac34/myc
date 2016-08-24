@@ -124,7 +124,7 @@
                                 <form class="form-horizontal" name="locationForm">
                                     <div class="modal-header">
                                         <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-                                        <h3 class="modal-title">Adresse du repas</h3>
+                                        <h3 class="modal-title">Dirección de la cena</h3>
                                     </div>
 
                                     <div class="modal-body">
@@ -132,7 +132,7 @@
                                             <div class="form-group" ng-class="{'has-error': editedMeal.town==undefined && locationForm.$submitted}">
                                                 <div class="col-xs-8">
                                                     <select class="form-control" id="select" ng-model="editedMeal.town" required>
-                                                    <option value="" disabled selected>Select your city</option>
+                                                    <option value="" disabled selected>Escoge tu ciudad</option>
                                                     <option>Santiago</option>
                                                     <option>Concepción</option>
                                                     <option>Valparaíso</option>
@@ -150,7 +150,7 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-xs-8">
-                                                    <input type="text" class="form-control" id="inputAddressComplement" placeholder="Complemento" ng-model="editedMeal.privateInfo.address_complement">
+                                                    <input type="text" class="form-control" id="inputAddressComplement" placeholder="Complemento" ng-model="address_complement">
                                                 </div>
                                             </div>
                                         </div>

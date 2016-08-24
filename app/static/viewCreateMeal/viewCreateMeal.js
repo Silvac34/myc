@@ -21,9 +21,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
     $scope.createMeal = function() {
       if ($scope.editedMeal.requiredGuests != undefined) {
+
         $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
         $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
-
         $http.post('/api/meals', $scope.editedMeal).then(function() {
           $state.go('view_meals');
         });
@@ -115,8 +115,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
   $scope.ok = function() {
-    if($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined){
-      $uibModalInstance.close();  
+    if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
+      $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
+      $scope.address_complement = undefined;
+      $uibModalInstance.close();
     }
   }; //function to validate the modal
 

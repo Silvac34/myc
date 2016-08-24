@@ -19,18 +19,18 @@
                 "cleaners": {
                     "nbRemainingPlaces": 1,
                     "nbRquCleaners": 1,
-                    "price":10
+                    "price":10.0
                 },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10
+                    "price":10.0
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":10
+                    "price":10.0
                 }
             }
         },

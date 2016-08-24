@@ -13,7 +13,7 @@
                     <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" required/>
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/editedMeal.nbGuests}}" />
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1)}}" />
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
                             <span class="input-group-addon">€</span>
 
@@ -190,7 +190,7 @@
                     <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
                         <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
                         <!-- a définir si on fait apparaitre le nombre de place restante pour publier le repas ou si on fait apparaitre le nombre de place totales pour le repas -->
-                        <div round-progress responsive="true" max="meal.nbGuests" current="1" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                        <div round-progress responsive="true" max="editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
                     </div>
                 </div>
             </div>

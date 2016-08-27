@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewMyMeals', ['ui.router','angular-svg-round-progressbar','ui.bootstrap'])
+angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -37,8 +37,8 @@ angular.module('myApp.viewMyMeals', ['ui.router','angular-svg-round-progressbar'
       }
     });
   };
-  
-    $scope.openModalDtld = function(meal_id) {
+
+  $scope.openModalDtld = function(meal_id) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'static/viewMeals/viewMyMealsDtld/viewMealsDtld.html',
@@ -52,6 +52,4 @@ angular.module('myApp.viewMyMeals', ['ui.router','angular-svg-round-progressbar'
       }
     });
   };
-
-
 }]);

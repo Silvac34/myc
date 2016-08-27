@@ -18,13 +18,13 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       $http.get('/api/meals').then(function(response) {
         $scope.meals = response.data;
       });
-    },
+    }, // à changer par la fonction qui load uniquement les repas auxquels je participe
 
-    $scope.loadMeals();
+    $scope.loadMeals(); // à changer par la fonction qui load uniquement les repas auxquels je participe
 
   $scope.updateMeal = function(meal) {
-    $http.put('/api/meal/' + meal._id, meal)
-  }
+    $http.put('/api/meal/' + meal._id, meal);
+  };
 
   $scope.deleteMeal = function(meal_id) {
     $http.delete('/api/meal/' + meal_id).then(function() {
@@ -38,7 +38,8 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     });
   };
 
-  $scope.openModalDtld = function(meal_id) {
+
+  /*  $scope.openModalDtld = function(meal_id) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'static/viewMeals/viewMyMealsDtld/viewMealsDtld.html',
@@ -52,4 +53,29 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       }
     });
   };
-}]);
+*/
+
+
+}])
+
+.filter('MyMealsFiltered', function() {
+  return function(input, current) {
+    input = input || '';
+    var today = new Date();
+    var output = [];
+    for (var i = 0; i < input.length; i++) {
+      var my_meals_date = new Date(input[i].time);
+      if (current) {
+        if (my_meals_date > today) {
+          output.push(input[i]);
+        };
+      }
+      else{
+        if (my_meals_date < today) {
+          output.push(input[i]);
+        };
+      };
+    }
+    return output;
+  }
+});

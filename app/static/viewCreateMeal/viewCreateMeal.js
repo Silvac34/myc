@@ -20,13 +20,15 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
 
     $scope.createMeal = function() {
-      if ($scope.editedMeal.requiredGuests != undefined) {
+      if ($scope.editedMeal.menu != undefined) {
+        if ($scope.editedMeal.requiredGuests != undefined) {
 
-        $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
-        $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
-        $http.post('/api/meals', $scope.editedMeal).then(function() {
-          $state.go('view_meals');
-        });
+          $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
+          $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
+          $http.post('/api/meals', $scope.editedMeal).then(function() {
+            $state.go('view_meals');
+          });
+        }
       }
 
       //TODO : rediriger vers page du repas
@@ -132,7 +134,16 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
   $scope.ok = function() {
-    $uibModalInstance.close();
+    if ($scope.editedMeal.price != undefined) {
+      if (editedMeal.requiredGuests.cooks.nbRquCooks != undefined) {
+        if (editedMeal.requiredGuests.cooks.timeCooking != undefined) {
+          $uibModalInstance.close();
+        }
+      }
+      else {
+        $uibModalInstance.close();
+      }
+    }
   }; //function to validate the modal
 
   $scope.cancel = function() {

@@ -1,11 +1,10 @@
 <h1 class="page-header" id="tables">Liste de mes repas à venir</h1>
-{{today}}
 <div class="container">
   <div class="col-sm-9 col-xs-12 list-my-meal">
     <div class="row" ng-repeat="meal in meals | MyMealsFiltered:true">
       <div class="col-xs-12">
         <div class="list-group">
-          <a class="list-group-item list-group-my-meal" ng-click=openModalDtld(meal._id)>
+          <a class="list-group-item list-group-my-meal" ng-click=openModalDtldMyMeal(meal._id)>
             <div class="hidden-xs col-sm-2 my-meal-admin">
               <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
               <div class="my-meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -48,7 +47,7 @@
     <div class="row" ng-repeat="meal in meals | MyMealsFiltered:false">
       <div class="col-xs-12">
         <div class="list-group">
-          <a class="list-group-item list-group-my-meal" ng-click=openModalDtld(meal._id)>
+          <a class="list-group-item list-group-my-meal" ng-click=openModalDtldMyMeal(meal._id)>
             <div class="hidden-xs col-sm-2 my-meal-admin">
               <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
               <div class="my-meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>

@@ -12,7 +12,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       })*/
 }])
 
-.controller('ViewMyMealsCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('ViewMyMealsCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
 
   $scope.loadMeals = function() {
       $http.get('/api/meals').then(function(response) {
@@ -39,13 +39,12 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
   };
 
 
-  /*  $scope.openModalDtld = function(meal_id) {
-    var modalInstance = $uibModal.open({
+   $scope.openModalDtldMyMeal = function(meal_id) {
+    $uibModal.open({
       animation: true,
-      templateUrl: 'static/viewMeals/viewMyMealsDtld/viewMealsDtld.html',
+      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
       controller: 'ViewMyMealsDtldCtrl',
       size: "lg",
-      windowClass: 'modal-meal-window',
       resolve: {
         meal_id: function() {
           return meal_id;
@@ -53,8 +52,58 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       }
     });
   };
-*/
 
+}])
+
+.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', 'meal_id', function($scope, $http, meal_id) {
+
+  $scope.loadMealInfo = function(meal_id) {
+    $http.get('/api/meal/' + meal_id).then(function(response) {
+      $scope.meal = response.data;
+
+      /*to check wether there is available space for each rôle*/
+      if (!$scope.meal.detailedInfo.requiredGuests.cooks || $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces <= 0) {
+        $scope.requiredGuests.availablePlaces['cooks'] = false;
+      }
+      else {
+        $scope.requiredGuests.availablePlaces['cooks'] = true;
+        $scope.requestRole.name = "cook";
+      }
+      if (!$scope.meal.detailedInfo.requiredGuests.cleaners || $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces <= 0) {
+        $scope.requiredGuests.availablePlaces['cleaners'] = false;
+      }
+      else {
+        $scope.requiredGuests.availablePlaces['cleaners'] = true;
+        if (!$scope.requestRole) {
+          $scope.requestRole.name = "cleaner";
+        }
+      }
+      if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
+        $scope.requiredGuests.availablePlaces['simpleGuests'] = false;
+      }
+      else {
+        $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
+        if (!$scope.requestRole) {
+          $scope.requestRole.name = "simpleGuest";
+        }
+      }
+    });
+  };
+  
+  //Initialize variable
+  $scope.requestRole={}; 
+  $scope.requiredGuests = {
+    availablePlaces: {}
+  };
+  $scope.errorSubscribe = {"status":false};
+  
+  $scope.loadMealInfo(meal_id);
+  $scope.accordionOneAtATime = true;
+  
+  $scope.closeAlert = function(){
+    $scope.errorSubscribe.status = false;
+  };
+  
 
 }])
 
@@ -68,14 +117,14 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       if (current) {
         if (my_meals_date > today) {
           output.push(input[i]);
-        };
+        }
       }
       else{
         if (my_meals_date < today) {
           output.push(input[i]);
-        };
-      };
+        }
+      }
     }
     return output;
-  }
+  };
 });

@@ -13,82 +13,75 @@
                     <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" required/>
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/editedMeal.nbGuests}}" />
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1)}}"
+                            />
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
                             <span class="input-group-addon">€</span>
 
                             <!-- script servant pour le modal du calcul des prix -->
                             <script type="text/ng-template" id="formModalPriceContent.html">
-                                <div class="modal-header">
-                                    <h3 class="modal-title">Calcul du prix du repas</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal">
-                                        <fieldset>
+                                <form class="form-horizontal" name="priceForm">
+                                    <fieldset>
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Calcul du prix du repas</h3>
+                                        </div>
+                                        <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="inputPrice" class="col-xs-6 control-label">Prix total des courses</label>
                                                 <div class="col-xs-6">
-                                                    <div class="input-group">
+                                                    <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && priceForm.$submitted}">
                                                         <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price" />
                                                         <span class="input-group-addon">€</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="inputGuests" class="col-xs-6 control-label">Nombre total de participants</label>
-                                                <div class="col-xs-6">
-                                                    <div class="input-group">
-                                                        <input type="number" class="form-control" id="inputGuests" ng-model="editedMeal.nbGuests" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                    <div class="page-header">
-                                        <h3>Détail sur les participants</h3>
-                                    </div>
-                                    <table class="table table-striped table-hover ">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Nombre</th>
-                                                <th>Prix par personne</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Hôte</td>
-                                                <td>1 (moi)</td>
-                                                <td>Prix hôte</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Aides cuisine</td>
-                                                <td><input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.requiredGuests.cooks.nbRquCooks"></td>
-                                                <td>{{editedMeal.requiredGuests.cooks.price}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Aides vaisselle</td>
-                                                <td><input type="number" class="form-control" id="inputCleaners" ng-model="editedMeal.requiredGuests.cleaners.nbRquCleaners"></td>
-                                                <td>{{editedMeal.requiredGuests.cleaners.price}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Invités</td>
-                                                <td>content</td>
-                                                <td>{{editedMeal.requiredGuests.simpleGuests.price}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total</td>
-                                                <td>{{editedMeal.nbGuests}}</td>
-                                                <td>{{1.25 * editedMeal.price / editedMeal.nbGuests}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                                </div>
 
+                                            <div class="page-header">
+                                                <h3>Détail sur les participants</h3>
+                                            </div>
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Nombre</th>
+                                                        <th>Heure d'arrivée</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Hôte (yo)</td>
+                                                        <td>1</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Aides cuisine</td>
+                                                        <td><input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                                                        <td ng-class="{'has-error': editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined && priceForm.$submitted}"><input type="time" class="form-control" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Aides vaisselle</td>
+                                                        <td><input type="number" class="form-control" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                                                        <td><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Invités</td>
+                                                        <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                                                        <td><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total</td>
+                                                        <td>{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="button" ng-click="priceForm.$setSubmitted(); okPrice()">OK</button>
+                                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </script>
 
                         </div>
@@ -96,7 +89,7 @@
                 </div>
                 <div class="row">
                     <div class="form-meal-label form-meal-price-label">
-                        par pers
+                        ≈ par pers
                     </div>
                 </div>
             </div>
@@ -115,7 +108,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && createMealForm.$submitted}">
+                    <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
                         <div class="col-xs-12">
                             <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.addressApprox" required>
                             <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
@@ -163,7 +156,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); ok()">OK</button>
+                                        <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); okLocation()">OK</button>
                                         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                                     </div>
                                 </form>
@@ -198,13 +191,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="inputAdminPhone" placeholder="Celular" ng-model="editedMeal.privateInfo.adminPhone" uib-popover="Información privada : unicamente para los participantes" popover-trigger="mouseenter" popover-placement="bottom-left"/>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-xs-4">
-                <div class="row" ng-show="editedMeal.nbGuests">
+                <div class="row" ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks || editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">
                     <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
-                        <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.nbGuests}}</div>
+                        <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
                         <!-- a définir si on fait apparaitre le nombre de place restante pour publier le repas ou si on fait apparaitre le nombre de place totales pour le repas -->
-                        <div round-progress responsive="true" max="meal.nbGuests" current="1" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                        <div round-progress responsive="true" max="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1" color="#45ccce" bgcolor="#eaeaea" radius="30"
+                            stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
                     </div>
                 </div>
             </div>

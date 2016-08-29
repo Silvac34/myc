@@ -21,14 +21,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
-        if ($scope.editedMeal.requiredGuests != undefined) {
-
-          $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
-          $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
-          $http.post('/api/meals', $scope.editedMeal).then(function() {
-            $state.go('view_meals');
-          });
-        }
+        $http.post('/api/meals', $scope.editedMeal).then(function() {
+          $state.go('view_meals');
+        });
       }
 
       //TODO : rediriger vers page du repas
@@ -81,7 +76,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalLocationContent.html',
-      controller: 'FormModalLocationInstanceCtrl',
+      controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -98,7 +93,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalPriceContent.html',
-      controller: 'FormModalPriceInstanceCtrl',
+      controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -112,11 +107,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 }])
 
 //controller for the Location Modal
-.controller('FormModalLocationInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
+.controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
-  $scope.ok = function() {
+  $scope.okLocation = function() {
     if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
       $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
       $scope.address_complement = undefined;
@@ -124,19 +119,20 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     }
   }; //function to validate the modal
 
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  }; //funcion to dismiss the modal
-})
-
-.controller('FormModalPriceInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
-
-  $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
-
-  $scope.ok = function() {
+  $scope.okPrice = function() {
     if ($scope.editedMeal.price != undefined) {
-      if (editedMeal.requiredGuests.cooks.nbRquCooks != undefined) {
-        if (editedMeal.requiredGuests.cooks.timeCooking != undefined) {
+      if (editedMeal.detailedInfo.requiredGuests != undefined) {
+        if (editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+          if (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
+            if (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0 || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+              $uibModalInstance.close();
+            }
+            else if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
+              $uibModalInstance.close();
+            }
+          }
+        }
+        else {
           $uibModalInstance.close();
         }
       }

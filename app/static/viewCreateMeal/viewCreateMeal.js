@@ -76,7 +76,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalLocationContent.html',
-      controller: 'FormModalInstanceCtrl',
+      controller: 'FormModalLocationInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -93,7 +93,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalPriceContent.html',
-      controller: 'FormModalInstanceCtrl',
+      controller: 'FormModalPriceInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -107,7 +107,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 }])
 
 //controller for the Location Modal
-.controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
+.controller('FormModalLocationInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
@@ -140,6 +140,19 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
         $uibModalInstance.close();
       }
     }
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
+})
+
+.controller('FormModalPriceInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
+
+  $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
+
+  $scope.ok = function() {
+    $uibModalInstance.close();
   }; //function to validate the modal
 
   $scope.cancel = function() {

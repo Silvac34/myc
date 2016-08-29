@@ -210,6 +210,82 @@
     font-weight: bold;
 }
 
+/* viewMyMeals ---------------------------------------------------*/
+
+.meal-admin-phone{
+    
+}
+
+.list-my-meal {
+    overflow-y: scroll;
+    height: 70vh;
+}
+
+.list-group-my-meal{
+    display: inline-block;
+    width: 100%;
+}
+
+.my-meal-menu-label{
+    font-size: 16px;
+    padding-left: 22px;
+    height: 25px;
+    background: url("/static/sources/menu.png") no-repeat 0;
+    margin-bottom: 27px;
+}
+
+.my-meal-label{
+    font-size: 12px;
+    color: rgba(56, 52, 52, 0.45);
+    padding-left: 29px;
+    padding-top: 7px;
+    max-width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.my-meal-location {
+    background: url("/static/sources/location.png") no-repeat 0;
+    min-height: 24px;
+}
+
+.my-meal-date{
+    background: url("/static/sources/calendar.png") no-repeat;
+    min-height: 24px;
+}
+
+.my-meal-time{
+    background: url("/static/sources/clock.png") no-repeat;
+    min-height: 24px;
+}
+
+.my-meal-price{
+    font-size: 20px;
+    font-weight: 700;
+    color: #3EA93E;
+    text-align: right;
+}
+
+.my-meal-price-label{
+    text-align: right;
+    padding-top: 0;
+    padding-left: 0;
+    margin-bottom:-5px;
+}
+
+.my-meal-admin{
+    transform: translateY(70%);
+    padding-right: 0px;
+}
+.my-meal-admin-dtld-sm{
+    padding-right: 0px;
+}
+
+.my-meal-admin-name{
+    margin-top: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
 
     /* viewMealsDtld ---------------------------------------------------*/
 

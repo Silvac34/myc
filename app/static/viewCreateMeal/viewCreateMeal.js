@@ -110,6 +110,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 .controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
+<<<<<<< HEAD
 
   $scope.okLocation = function() {
     if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
@@ -145,8 +146,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
+=======
+ 
+   $scope.cancel = function() {
+     $uibModalInstance.dismiss('cancel');
+   }; //funcion to dismiss the modal});
+>>>>>>> master
 });
-
 
 var predefined_date = new Date();
 predefined_date.setDate(predefined_date.getDate() + 2);

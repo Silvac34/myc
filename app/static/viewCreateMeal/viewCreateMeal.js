@@ -20,10 +20,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
 
     $scope.createMeal = function() {
-      if ($scope.editedMeal.requiredGuests != undefined) {
-
-        $scope.editedMeal.detailedInfo.requiredGuests["cooks"] = $scope.editedMeal.requiredGuests.cooks;
-        $scope.editedMeal.detailedInfo.requiredGuests["cleaners"] = $scope.editedMeal.requiredGuests.cleaners;
+      if ($scope.editedMeal.menu != undefined) {
         $http.post('/api/meals', $scope.editedMeal).then(function() {
           $state.go('view_meals');
         });
@@ -113,10 +110,41 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 .controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
- 
-   $scope.cancel = function() {
-     $uibModalInstance.dismiss('cancel');
-   }; //funcion to dismiss the modal});
+
+  $scope.okLocation = function() {
+    if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
+      $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
+      $scope.address_complement = undefined;
+      $uibModalInstance.close();
+    }
+  }; //function to validate the modal
+
+  $scope.okPrice = function() {
+    if ($scope.editedMeal.price != undefined) {
+      if (editedMeal.detailedInfo.requiredGuests != undefined) {
+        if (editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+          if (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
+            if (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0 || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+              $uibModalInstance.close();
+            }
+            else if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
+              $uibModalInstance.close();
+            }
+          }
+        }
+        else {
+          $uibModalInstance.close();
+        }
+      }
+      else {
+        $uibModalInstance.close();
+      }
+    }
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
 });
 
 var predefined_date = new Date();

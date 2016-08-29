@@ -34,7 +34,7 @@ class BasicAPITest(unittest.TestCase):
         self.assertEqual("401 UNAUTHORIZED", resp.status)
 
     def test_insert_meal(self):
-        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\"},\"cleaners\":{\"nbRquCleaners\":1}}},\"privateInfo\" :{\"address\": \"30 avenue de Trudaine 75009\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\"},\"cleaners\":{\"nbRquCleaners\":1}}},\"privateInfo\" :{\"address\": \"30 avenue de Trudaine 75009\", \"adminPhone\":\"0601020304\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
         resp = self.client.post("/api/meals", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("200 OK", resp.status)
         dbMeal = Application.db.meals.find_one()
@@ -45,7 +45,7 @@ class BasicAPITest(unittest.TestCase):
         self.assertEqual(dbMeal, testMeal)
     
     def test_insert_meal_without_helpers (self):
-        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"detailedInfo\": {\"requiredGuests\": {}},\"privateInfo\" :{\"address\": \"3 impasse marie - blanche 75018\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
+        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"detailedInfo\": {\"requiredGuests\": {}},\"privateInfo\" :{\"address\": \"3 impasse marie - blanche 75018\",\"adminPhone\":\"0601020304\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
         resp = self.client.post("/api/meals", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         dbMeal = Application.db.meals.find_one()
         testMeal = loads(open('../testData/meals_testData.json').read())[1]

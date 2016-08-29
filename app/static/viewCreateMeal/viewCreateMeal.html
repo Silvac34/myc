@@ -13,7 +13,7 @@
                     <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="editedMeal.price" required/>
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1)}}"
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1)}}"
                             />
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
                             <span class="input-group-addon">€</span>
@@ -55,22 +55,22 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Aides cuisine</td>
-                                                        <td><input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.requiredGuests.cooks.nbRquCooks"></td>
-                                                        <td ng-class="{'has-error': editedMeal.requiredGuests.cooks.nbRquCooks != undefined && priceForm.$submitted}"><input type="time" class="form-control" id="inputTimeCooking" ng-model="editedMeal.requiredGuests.cooks.timeCooking"></td>
+                                                        <td><input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                                                        <td ng-class="{'has-error': editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined && priceForm.$submitted}"><input type="time" class="form-control" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aides vaisselle</td>
-                                                        <td><input type="number" class="form-control" id="inputCleaners" ng-model="editedMeal.requiredGuests.cleaners.nbRquCleaners"></td>
-                                                        <td><span ng-show="editedMeal.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                                                        <td><input type="number" class="form-control" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                                                        <td><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Invités</td>
-                                                        <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
-                                                        <td><span ng-show="editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                                                        <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                                                        <td><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Total</td>
-                                                        <td>{{editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
+                                                        <td>{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && createMealForm.$submitted}">
+                    <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
                         <div class="col-xs-12">
                             <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Adresse du repas" ng-hide="editedMeal.addressApprox" required>
                             <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
@@ -193,11 +193,11 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <div class="row" ng-show="editedMeal.requiredGuests.cleaners.nbRquCleaners || editedMeal.requiredGuests.cooks.nbRquCooks || editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests">
+                <div class="row" ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks || editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">
                     <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
-                        <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
+                        <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
                         <!-- a définir si on fait apparaitre le nombre de place restante pour publier le repas ou si on fait apparaitre le nombre de place totales pour le repas -->
-                        <div round-progress responsive="true" max="editedMeal.requiredGuests.cleaners.nbRquCleaners + editedMeal.requiredGuests.cooks.nbRquCooks + editedMeal.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1" color="#45ccce" bgcolor="#eaeaea" radius="30"
+                        <div round-progress responsive="true" max="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1" color="#45ccce" bgcolor="#eaeaea" radius="30"
                             stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
                     </div>
                 </div>

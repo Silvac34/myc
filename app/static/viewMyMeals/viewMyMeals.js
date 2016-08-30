@@ -15,7 +15,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 .controller('ViewMyMealsCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
 
   $scope.loadMeals = function() {
-      $http.get('/api/my_meals').then(function(response) {
+      $http.get('/api/meal/my_meals').then(function(response) {
         $scope.meals = response.data;
       });
     }, // à changer par la fonction qui load uniquement les repas auxquels je participe

@@ -252,7 +252,7 @@ def get_all_meals():
     return Response(dumps(Application.preprocess_id(enrichedMeals)), status=200)
     
 # Get all my meals
-@Application.app.route('/api/my_meals', methods=['GET'])
+@Application.app.route('/api/meal/my_meals', methods=['GET'])
 @login_required
 def get_all_my_meals():
     meals = Application.db.meals.find({"privateInfo.users._id":g.user_id },{"privateInfo.users":0,"privateInfo.adminPhone":0 })
@@ -275,6 +275,7 @@ def get_meal_detailed_info(meal_id):
     return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 
+# Subscribe to a meal
 @Application.app.route('/api/meal/<meal_id>/subscription', methods=['POST'])
 @login_required
 def subscribe_to_meal(meal_id):
@@ -297,6 +298,16 @@ def subscribe_to_meal(meal_id):
             meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]})
             Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":meal})
             return Response(status=200)
+            
+# Get the meal's private information
+@Application.app.route('/api/meal/<meal_id>/private', methods=['GET'])
+@login_required
+def get_meal_private_info(meal_id):
+    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+    if not any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]):
+        return Response("User isn't subscribed",status=403)
+    meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
+    return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 ####################################################################################
 

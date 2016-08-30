@@ -307,6 +307,8 @@ def get_meal_private_info(meal_id):
     if not any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]):
         return Response("User isn't subscribed",status=403)
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
+    for u in meal["privateInfo"]["users"]:
+        u.update(Application.preprocess_id(User(_id=u["_id"]).getUserPublicInfo()))
     return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 ####################################################################################

@@ -9,6 +9,7 @@
         "nbRemainingPlaces": 9,
         "privateInfo": {
             "address": "30 avenue de Trudaine 75009",
+            "adminPhone":"0601020304",
             "users": [{
                 "_id": "111111111111111111111111",
                 "role": ["admin", "cook"]
@@ -19,18 +20,18 @@
                 "cleaners": {
                     "nbRemainingPlaces": 1,
                     "nbRquCleaners": 1,
-                    "price":10
+                    "price":10.0
                 },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10
+                    "price":10.0
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":10
+                    "price":10.0
                 }
             }
         },
@@ -50,6 +51,7 @@
         "nbRemainingPlaces": 9,
         "privateInfo": {
             "address": "3 impasse marie - blanche 75018",
+            "adminPhone":"0601020304",
             "users": [{
                 "_id": "111111111111111111111111",
                 "role": ["admin", "cook"]
@@ -88,7 +90,9 @@
                 "_id": "111111111111111111111111",
                 "role": ["admin", "cook"]
             }],
+            "adminPhone":"0601020304",
             "address": "37 rue du général foy 75008"
+            
         },
         "detailedInfo": {
             "requiredGuests": {
@@ -121,6 +125,7 @@
                 "_id": "577946eb4403f92b93425e6a",
                 "role": ["admin", "cook"]
             }],
+            "adminPhone":"0601020304",
             "address": "37 rue lepic"
         },
         "detailedInfo": {
@@ -159,6 +164,7 @@
                 "_id": "5776d0824403f974b97caf89",
                 "role": ["admin", "cook"]
             }],
+            "adminPhone":"0601020304",
             "address": "3 impasse Marie-blanche"
         },
         "detailedInfo": {
@@ -197,6 +203,7 @@
                 "_id": "5776d0824403f974b97caf89",
                 "role": ["admin", "cook"]
             }],
+            "adminPhone":"0601020304",
             "address": "4 rue du temple"
         },
         "detailedInfo": {

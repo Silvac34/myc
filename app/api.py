@@ -11,6 +11,7 @@ from bson import ObjectId
 from bson.json_util import dumps
 from functools import wraps
 import configure
+from decimal import *
 
 
 
@@ -205,7 +206,9 @@ def insert_one_meal():
         new_meal = json.loads(request.data)
         new_meal["admin"] = g.user_id 
         new_meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin","cook"]}]
-        price = round(new_meal["price"] / new_meal["nbGuests"],2)
+        nbCooks = 0
+        nbCleaners = 0
+        nbSimpleGuests = 0
         if "cooks" in new_meal["detailedInfo"]["requiredGuests"] : #add required Guest info
             #L'admin est systématiquement cook, du coup:
             new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]=new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]+1
@@ -213,18 +216,24 @@ def insert_one_meal():
             ####
         else : #lorsque l'admin ne demande pas d'aide cuisine et vu qu'il est automatiquement cook
             new_meal["detailedInfo"]["requiredGuests"] ={"cooks":{"nbRquCooks":1,"nbRemainingPlaces":0}}
-        new_meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price
-        nbRquCleaners = 0 #to initialize the variable, for simple guests
+        nbCooks = new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]
         if "cleaners" in new_meal["detailedInfo"]["requiredGuests"] : #add required Guest info
             new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
+            nbCleaners = new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
+        if "simpleGuests" in new_meal["detailedInfo"]["requiredGuests"] : #add required Guest info
+            new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"]=new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRquSimpleGuests"]
+            nbSimpleGuests = new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRquSimpleGuests"]
+        ##### Pricer ####
+        nbGuest = nbCooks + nbCleaners + nbSimpleGuests
+        #price = Decimal(new_meal["price"] /nbGuest).quantize(Decimal('.01'), rounding=ROUND_UP)
+        price = round(new_meal["price"] /nbGuest,2)
+        new_meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price
+        if "cleaners" in new_meal["detailedInfo"]["requiredGuests"] :
             new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price
-            nbRquCleaners = new_meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"] #for simple guests
-        # add simple guests information    
-        nbRquSimpleGuests = new_meal["nbGuests"] - new_meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - nbRquCleaners
-        if nbRquSimpleGuests > 0:
-            new_meal["detailedInfo"]["requiredGuests"].update ({"simpleGuests":{"nbRquSimpleGuests":nbRquSimpleGuests,"nbRemainingPlaces":nbRquSimpleGuests}})
+        if "simpleGuests" in new_meal["detailedInfo"]["requiredGuests"] :
             new_meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price
-        ##
+        #################
+        new_meal["nbGuests"] = nbCooks + nbCleaners + nbSimpleGuests
         new_meal["nbRemainingPlaces"] = new_meal["nbGuests"] -1
         new_meal["creationDate"] = datetime.now()
         id_inserted = Application.db.meals.insert(new_meal)

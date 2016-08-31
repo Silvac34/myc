@@ -455,3 +455,40 @@
     padding-left: 0;
     margin-bottom:-5px;
 }
+
+/* viewMyMealsDtld ---------------------------------------------------*/
+
+.my-meal-dtld-left{
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+.my-meal-dtld-right{
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+.my-meal-dtld-location {
+    background: url("/static/sources/location.png") no-repeat 0;
+    min-height: 24px;
+}
+
+
+.my-meal-dtld-date{
+    background: url("/static/sources/calendar.png") no-repeat;
+    min-height: 24px;
+}
+
+.my-meal-dtld-time{
+    background: url("/static/sources/clock.png") no-repeat;
+    min-height: 24px;
+}
+
+.my-meal-dtld-menu-label{
+    font-size: 16px;
+    height: 25px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    text-align: center;
+    min-width: 100%;
+}

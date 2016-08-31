@@ -4,12 +4,12 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-  /*$stateProvider
-      .state('my_meals', {
-        url: '/my_meals',
-        templateUrl: 'static/viewMyMeals/viewMyMeals.html',
-        controller: 'ViewMyMealsCtrl'
-      })*/
+  $stateProvider
+      .state('view_my_dtld_meals', {
+        url: '/my_meals/:myMealId',
+        templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
+        controller: 'ViewMyMealsDtldCtrl'
+      })
 }])
 
 .controller('ViewMyMealsCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
@@ -55,7 +55,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 
 }])
 
-.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', 'meal_id', function($scope, $http, meal_id) {
+.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
 
   $scope.loadMealInfo = function(meal_id) {
     $http.get('/api/meal/' + meal_id).then(function(response) {
@@ -97,7 +97,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
   };
   $scope.errorSubscribe = {"status":false};
   
-  $scope.loadMealInfo(meal_id);
+  $scope.loadMealInfo($stateParams.myMealId);
   $scope.accordionOneAtATime = true;
   
   $scope.closeAlert = function(){

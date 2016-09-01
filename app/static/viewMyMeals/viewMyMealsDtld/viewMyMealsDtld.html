@@ -15,7 +15,8 @@
                         <div class="my-meal-label my-meal-dtld-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
                     </div>
                     <div class="col-sm-2">
-                        <div class="my-meal-label my-meal-dtld-time">{{meal.time |date:'HH:mm'}} </div>
+                        <div class="my-meal-label my-meal-dtld-time" ng-show="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}} </div>
+                        <div class="my-meal-label my-meal-dtld-time" ng-hide="userRole=='cook'">{{meal.time |date:'HH:mm'}} </div>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
         </div>
     </div>
     <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks">
-        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': requestRole.name=='cook'}">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cook'}">
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
@@ -61,7 +62,7 @@
         </div>
     </div>
     <div class="row" ng-if="meal.detailedInfo.requiredGuests.cleaners">
-        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': requestRole.name=='cleaner'}">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cleaner'}">
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
@@ -86,7 +87,7 @@
         </div>
     </div>
     <div class="row" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
-        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': requestRole.name=='simpleGuest'}">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='simpleGuest'}">
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">

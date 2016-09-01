@@ -169,15 +169,6 @@ def auth_facebook():
 PUBLIC API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# Delete one meal from ID
-#@Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
-#def delete_meal(meal_id):
-#    result = Application.db.meals.delete_one({"_id": ObjectId(meal_id)})
-#    if result.deleted_count == 1 :
-#        return Response(str(result.deleted_count) + ' meal deleted',status=200)
-#    elif result.deleted_count == 0 :
-#        return Response(str(result.deleted_count) + ' meal deleted',status=202)
-
 # Update one meal from ID
 #@Application.app.route("/api/meal/<meal_id>", methods=['PUT'])
 #def update_one_meal(meal_id):
@@ -344,10 +335,20 @@ def get_meal_private_info(meal_id):
         return Response("User isn't subscribed",status=403)
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
     for u in meal["privateInfo"]["users"]:
-        print(u)
         u.update(Application.preprocess_id(User(_id=u["_id"]).getUserPublicInfo()))
-        print (u)
     return Response(dumps(Application.preprocess_id(meal)), status=200)
+    
+    
+# Delete the meal
+@Application.app.route('/api/meal/<meal_id>/private', methods=['DELETE'])
+@login_required
+def delete_meal(meal_id):
+    user= User(_id=g.user_id)
+    if not user.isAdmin(meal_id=meal_id):
+        return Response("User isn't admin",status=403)
+    else: 
+        Application.db.meals.delete_one({"_id": ObjectId(meal_id)})
+        return Response(status =200)
 
 ####################################################################################
 

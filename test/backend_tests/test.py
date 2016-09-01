@@ -180,6 +180,22 @@ class TestAuthMealAPI(unittest.TestCase):
         self.assertEqual("403 FORBIDDEN", resp.status)
         self.assertEqual("User isn't subscribed", resp.data)
         
+    def test_delete_meal_ok(self):
+        resp = self.client.delete("/api/meal/111111111111111111111112/private",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        self.assertEqual("200 OK", resp.status)
+        meals = Application.db.meals.find()
+        self.assertEqual( 1,meals.count())
+        self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
+        
+    def test_delete_meal_not_admin(self):
+        resp = self.client.delete("/api/meal/111111111111111111111112/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("403 FORBIDDEN", resp.status)
+        self.assertEqual("User isn't admin", resp.data)
+        self.assertEqual( 2,Application.db.meals.find().count())
+        
+    #def test_delete_meal_dont_exist(self):
+    #   resp = self.client.delete("/api/meal/11111111111111111111111a/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        
         
         
     #def test_delete_one_meal(self):

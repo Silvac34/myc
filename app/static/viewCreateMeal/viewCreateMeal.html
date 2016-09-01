@@ -135,6 +135,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                        <div class="page-header">Información privada : visible solo de los participantes inscribidos</div>
                                             <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && locationForm.$submitted}">
                                                 <div class="col-xs-12">
                                                     <textarea type="text" class="form-control" id="inputAddress" placeholder="Dirección" ng-model="editedMeal.privateInfo.address" required></textarea>
@@ -149,9 +150,10 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                         <div class="page-header">Información publica : visible de todos</div>
                                             <div class="form-group" ng-class="{'has-error': editedMeal.addressApprox==undefined && locationForm.$submitted}">
                                                 <div class="col-xs-12">
-                                                    <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Dirección aproximativa a publicar" ng-model="editedMeal.addressApprox" required></textarea>
+                                                    <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Dirección aproximativa a publicar" ng-model="editedMeal.addressApprox" uib-popover="sirve para dar un punto de referencia : bario, sector, esquina, metro ..." popover-trigger="mouseenter" popover-placement="bottom-left" required></textarea>
                                                 </div>
                                             </div>
                                         </div>

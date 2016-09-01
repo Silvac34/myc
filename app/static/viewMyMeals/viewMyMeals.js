@@ -51,15 +51,17 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
         if ($scope.meal.privateInfo.users[i]._id == userId) {
           if ($scope.meal.privateInfo.users[i].role[0] == "admin") {
             $scope.userRole = $scope.meal.privateInfo.users[i].role[1];
+            $scope.userAdmin = true;
           }
           else {
             $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
+            $scope.userAdmin = false;
           }
         }
       }
     });
   };
-
+  
   $scope.loadMyMealInfo($stateParams.myMealId);
 
 }])

@@ -57,7 +57,7 @@
                 "role": ["admin", "cook"]
             },{
                 "_id": "111111111111111111111112",
-                "role": ["simpleGuests"]
+                "role": ["simpleGuest"]
             }]
         },
         "detailedInfo": {

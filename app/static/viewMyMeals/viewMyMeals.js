@@ -5,11 +5,11 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-      .state('view_my_dtld_meals', {
-        url: '/my_meals/:myMealId',
-        templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
-        controller: 'ViewMyMealsDtldCtrl'
-      })
+    .state('view_my_dtld_meals', {
+      url: '/my_meals/:myMealId',
+      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
+      controller: 'ViewMyMealsDtldCtrl'
+    });
 }])
 
 .controller('ViewMyMealsCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
@@ -18,9 +18,9 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       $http.get('/api/meal/my_meals').then(function(response) {
         $scope.meals = response.data;
       });
-    }, // à changer par la fonction qui load uniquement les repas auxquels je participe
+    },
 
-    $scope.loadMeals(); // à changer par la fonction qui load uniquement les repas auxquels je participe
+    $scope.loadMeals();
 
   $scope.updateMeal = function(meal) {
     $http.put('/api/meal/' + meal._id, meal);
@@ -38,72 +38,31 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     });
   };
 
-
-   $scope.openModalDtldMyMeal = function(meal_id) {
-    $uibModal.open({
-      animation: true,
-      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
-      controller: 'ViewMyMealsDtldCtrl',
-      size: "lg",
-      resolve: {
-        meal_id: function() {
-          return meal_id;
-        }
-      }
-    });
-  };
-
 }])
 
 .controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
 
-  $scope.loadMealInfo = function(meal_id) {
-    $http.get('/api/meal/' + meal_id).then(function(response) {
+  $scope.loadMyMealInfo = function(meal_id) {
+    $http.get('/api/meal/' + meal_id + '/private').then(function(response) {
       $scope.meal = response.data;
+      var userId = $scope.user._id;
 
-      /*to check wether there is available space for each rôle*/
-      if (!$scope.meal.detailedInfo.requiredGuests.cooks || $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces <= 0) {
-        $scope.requiredGuests.availablePlaces['cooks'] = false;
-      }
-      else {
-        $scope.requiredGuests.availablePlaces['cooks'] = true;
-        $scope.requestRole.name = "cook";
-      }
-      if (!$scope.meal.detailedInfo.requiredGuests.cleaners || $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces <= 0) {
-        $scope.requiredGuests.availablePlaces['cleaners'] = false;
-      }
-      else {
-        $scope.requiredGuests.availablePlaces['cleaners'] = true;
-        if (!$scope.requestRole) {
-          $scope.requestRole.name = "cleaner";
-        }
-      }
-      if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
-        $scope.requiredGuests.availablePlaces['simpleGuests'] = false;
-      }
-      else {
-        $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
-        if (!$scope.requestRole) {
-          $scope.requestRole.name = "simpleGuest";
+      for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+        if ($scope.meal.privateInfo.users[i]._id == userId) {
+          if ($scope.meal.privateInfo.users[i].role[0] == "admin") {
+            $scope.userRole = $scope.meal.privateInfo.users[i].role[1];
+            $scope.userAdmin = true;
+          }
+          else {
+            $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
+            $scope.userAdmin = false;
+          }
         }
       }
     });
   };
   
-  //Initialize variable
-  $scope.requestRole={}; 
-  $scope.requiredGuests = {
-    availablePlaces: {}
-  };
-  $scope.errorSubscribe = {"status":false};
-  
-  $scope.loadMealInfo($stateParams.myMealId);
-  $scope.accordionOneAtATime = true;
-  
-  $scope.closeAlert = function(){
-    $scope.errorSubscribe.status = false;
-  };
-  
+  $scope.loadMyMealInfo($stateParams.myMealId);
 
 }])
 
@@ -119,7 +78,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
           output.push(input[i]);
         }
       }
-      else{
+      else {
         if (my_meals_date < today) {
           output.push(input[i]);
         }

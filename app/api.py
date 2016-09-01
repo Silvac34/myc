@@ -330,7 +330,7 @@ def unsubscribe_to_meal(meal_id):
                 meal["privateInfo"]["users"].remove(u)
                 break
         for r in roles :
-            meal["detailedInfo"]["requiredGuests"][r]["nbRemainingPlaces"] +=1
+            meal["detailedInfo"]["requiredGuests"][r + "s"]["nbRemainingPlaces"] +=1
         Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":meal})
         return Response(status=200)
             
@@ -344,7 +344,9 @@ def get_meal_private_info(meal_id):
         return Response("User isn't subscribed",status=403)
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
     for u in meal["privateInfo"]["users"]:
+        print(u)
         u.update(Application.preprocess_id(User(_id=u["_id"]).getUserPublicInfo()))
+        print (u)
     return Response(dumps(Application.preprocess_id(meal)), status=200)
 
 ####################################################################################

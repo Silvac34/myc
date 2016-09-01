@@ -1,48 +1,54 @@
 /* app css stylesheet */
 
-.col-centered{
+.col-centered {
     float: none;
     margin: 0 auto;
 }
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
 }
 
 .menu:before {
-  content: "[";
+    content: "[";
 }
 
 .menu:after {
-  content: "]";
+    content: "]";
 }
 
-.menu > li {
-  display: inline;
+.menu> li {
+    display: inline;
 }
 
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+.menu> li:before {
+    content: "|";
+    padding-right: 0.3em;
 }
 
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+.menu> li:nth-child(1):before {
+    content: "";
+    padding: 0;
 }
+
 
 /*Profile pic */
+
 .profilePic {
     margin-bottom: -9px;
     margin-top: -9px;
     width: 40px;
 }
 
+
 /* View Meals -------------------------------------------------------------------------------- */
-  /* Sort */
+
+
+/* Sort */
+
 .meal-search-title-count {
     display: inline-block;
     float: left;
@@ -94,8 +100,6 @@
     background: #e6e6e6 url("/static/sources/icones sort/menu_date_asc.png") 50% 50% no-repeat
 }
 
-
-
 .meal-search-sort .sort-menu {
     min-width: 58px;
     padding: 0;
@@ -137,6 +141,7 @@
     border-bottom-right-radius: 0px
 }
 
+
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
 .list-meal {
@@ -144,12 +149,12 @@
     height: 70vh;
 }
 
-.list-group-meal{
+.list-group-meal {
     display: inline-block;
     width: 100%;
 }
 
-.meal-menu-label{
+.meal-menu-label {
     font-size: 16px;
     padding-left: 22px;
     height: 25px;
@@ -157,7 +162,7 @@
     margin-bottom: 27px;
 }
 
-.meal-label{
+.meal-label {
     font-size: 12px;
     color: rgba(56, 52, 52, 0.45);
     padding-left: 29px;
@@ -172,61 +177,61 @@
     min-height: 24px;
 }
 
-.meal-date{
-    background: url("/static/sources/calendar.png") no-repeat;
+.meal-date {
+    background: url("/static/sources/calendar_with_clock.png") no-repeat;
     min-height: 24px;
 }
 
-.meal-time{
+.meal-time {
     background: url("/static/sources/clock.png") no-repeat;
     min-height: 24px;
 }
 
-.meal-price{
+.meal-price {
     font-size: 20px;
     font-weight: 700;
     color: #3EA93E;
     text-align: right;
 }
 
-.meal-price-label{
+.meal-price-label {
     text-align: right;
     padding-top: 0;
     padding-left: 0;
-    margin-bottom:-5px;
+    margin-bottom: -5px;
 }
 
-.meal-admin{
+.meal-admin {
     transform: translateY(70%);
     padding-right: 0px;
 }
-.meal-admin-dtld-sm{
+
+.meal-admin-dtld-sm {
     padding-right: 0px;
 }
 
-.meal-admin-name{
+.meal-admin-name {
     margin-top: 15px;
     font-size: 12px;
     font-weight: bold;
 }
 
+
 /* viewMyMeals ---------------------------------------------------*/
 
-.meal-admin-phone{
-    
-}
+.meal-admin-phone {}
 
 .list-my-meal {
     overflow-y: scroll;
     height: 70vh;
 }
 
-.list-group-my-meal{
+.list-group-my-meal {
     display: inline-block;
     width: 100%;
 }
 
-.my-meal-menu-label{
+.my-meal-menu-label {
     font-size: 16px;
     padding-left: 22px;
     height: 25px;
@@ -234,7 +239,7 @@
     margin-bottom: 27px;
 }
 
-.my-meal-label{
+.my-meal-label {
     font-size: 12px;
     color: rgba(56, 52, 52, 0.45);
     padding-left: 29px;
@@ -249,48 +254,50 @@
     min-height: 24px;
 }
 
-.my-meal-date{
-    background: url("/static/sources/calendar.png") no-repeat;
+.my-meal-date {
+    background: url("/static/sources/calendar_with_clock.png") no-repeat;
     min-height: 24px;
 }
 
-.my-meal-time{
+.my-meal-time {
     background: url("/static/sources/clock.png") no-repeat;
     min-height: 24px;
 }
 
-.my-meal-price{
+.my-meal-price {
     font-size: 20px;
     font-weight: 700;
     color: #3EA93E;
     text-align: right;
 }
 
-.my-meal-price-label{
+.my-meal-price-label {
     text-align: right;
     padding-top: 0;
     padding-left: 0;
-    margin-bottom:-5px;
+    margin-bottom: -5px;
 }
 
-.my-meal-admin{
+.my-meal-admin {
     transform: translateY(70%);
     padding-right: 0px;
 }
-.my-meal-admin-dtld-sm{
+
+.my-meal-admin-dtld-sm {
     padding-right: 0px;
 }
 
-.my-meal-admin-name{
+.my-meal-admin-name {
     margin-top: 15px;
     font-size: 12px;
     font-weight: bold;
 }
 
-    /* viewMealsDtld ---------------------------------------------------*/
+
+/* viewMealsDtld ---------------------------------------------------*/
 
 @media (min-width: 768px) {
-    .modal-meal-window .modal-dialog{
+    .modal-meal-window .modal-dialog {
         top: 17%;
         left: 27.5%;
         position: fixed;
@@ -298,16 +305,15 @@
     }
 }
 
-.meal-dtld-left{
+.meal-dtld-left {
     padding-left: 5px;
     padding-right: 0px;
 }
 
-.meal-dtld-right{
+.meal-dtld-right {
     padding-left: 0px;
     padding-right: 5px;
 }
-
 
 .meal-dtld-group {
     border-top-style: groove;
@@ -316,32 +322,32 @@
     margin-top: 5px;
 }
 
-.meal-dtld-admin-name{
-    float:left;
+.meal-dtld-admin-name {
+    float: left;
 }
 
-.meal-dtld-group-label{
+.meal-dtld-group-label {
     padding-left: 5px;
     color: #555555;
     font-size: 14px;
 }
 
-.meal-dtld-admin-pic{
+.meal-dtld-admin-pic {
     margin-bottom: 5px;
     margin-top: 0px;
-    margin-left:30px;
-    margin-right:30px;
-    width:60px;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 60px;
     border-radius: 24%;
-    float:left;
+    float: left;
 }
-    
-.meal-dtld-admin-wrapper{
+
+.meal-dtld-admin-wrapper {
     width: 100%;
     overflow: auto;
 }
 
-.meal-dtld-menu-label{
+.meal-dtld-menu-label {
     font-size: 16px;
     height: 25px;
     margin-bottom: 20px;
@@ -350,13 +356,13 @@
     min-width: 100%;
 }
 
-.meal-dtld-helpers-label{
+.meal-dtld-helpers-label {
     font-size: 12px;
     font-weight: bold;
     margin-left: 15px;
 }
 
-.meal-dtld-col{
+.meal-dtld-col {
     min-height: 17px;
     margin-right: 30px;
 }
@@ -368,45 +374,49 @@
     float: right;
 }
 
-.meal-dtld-helpers-places{
+.meal-dtld-helpers-places {
     min-width: 15%;
     text-align: center;
     float: right;
 }
 
-.meal-dtld-helpers-description{
+.meal-dtld-helpers-description {
     font-size: 12px;
 }
 
-.meal-dtld-helpers-description-time{
-    font-weight:bold;
-    font-size:14px;
+.meal-dtld-helpers-description-time {
+    font-weight: bold;
+    font-size: 14px;
 }
-
 
 .meal-dtld-helpers {
-    width:100%;
+    width: 100%;
 }
 
-.meal-dtld-helpers-radio{
+.meal-dtld-helpers-radio {
     margin: 11.5px !important;
     position: absolute;
 }
 
 .meal-dtld-full-msg {
-    color:red;
+    color: red;
     margin-bottom: pxpx;
 }
-    /* -----------------------------------------------------------------*/
+
+
+/* -----------------------------------------------------------------*/
+
+
 /*------------------------------------------------------------------------------------------------------------------------- */
+
 
 /* form */
 
-.legend{
+.legend {
     margin-left: 5px;
 }
 
-.form-calendar{
+.form-calendar {
     background: url("/static/sources/calendar_with_clock.png") no-repeat;
     text-indent: 25px;
     margin-top: auto;
@@ -414,7 +424,7 @@
     font-size: 80%;
 }
 
-.form-clock{
+.form-clock {
     background: url("/static/sources/clock.png") no-repeat;
     text-indent: 25px;
     margin-top: auto;
@@ -422,7 +432,7 @@
     font-size: 80%;
 }
 
-.form-location{
+.form-location {
     background: url("/static/sources/location.png") no-repeat;
     text-indent: 25px;
     margin-top: auto;
@@ -430,40 +440,55 @@
     font-size: 80%;
 }
 
-#fieldset-form{
+#fieldset-form {
     padding-left: 30px;
     padding-right: 40px;
 }
 
-.form-vegetarian{
+.form-vegetarian {
     background: url("/static/sources/vegetarian.png") no-repeat;
     text-indent: 25px;
     margin-top: auto;
     background-position: 10px 5px;
 }
 
-.form-meal-price{
+.form-meal-price {
     font-size: 20px;
     font-weight: 700;
     color: #3EA93E;
     text-align: right;
 }
 
-.form-meal-price-label{
+.form-meal-price-label {
     text-align: right;
     padding-top: 0;
     padding-left: 0;
-    margin-bottom:-5px;
+    margin-bottom: -5px;
+}
+
+.form-btn-center {
+    width: 150px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 15px;
 }
 
 /* viewMyMealsDtld ---------------------------------------------------*/
 
-.my-meal-dtld-left{
+.my-meal-dtld-label {
+    font-size: 13px;
+    padding-left: 29px;
+    padding-top: 7px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.my-meal-dtld-left {
     padding-left: 5px;
     padding-right: 0px;
 }
 
-.my-meal-dtld-right{
+.my-meal-dtld-right {
     padding-left: 0px;
     padding-right: 5px;
 }
@@ -473,22 +498,64 @@
     min-height: 24px;
 }
 
-
-.my-meal-dtld-date{
-    background: url("/static/sources/calendar.png") no-repeat;
+.my-meal-dtld-date {
+    background: url("/static/sources/calendar_with_clock.png") no-repeat;
     min-height: 24px;
 }
 
-.my-meal-dtld-time{
+.my-meal-dtld-time {
     background: url("/static/sources/clock.png") no-repeat;
     min-height: 24px;
 }
 
-.my-meal-dtld-menu-label{
+.my-meal-dtld-menu-label {
     font-size: 16px;
     height: 25px;
     margin-bottom: 20px;
     margin-top: 5px;
     text-align: center;
     min-width: 100%;
+}
+
+.my-meal-dtld-panel {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.my-meal-dtld-panel-success {
+    border-color: #468847;
+    border-width: 2px;
+}
+
+.my-meal-dtld-profilePic {
+    width: 35px;
+    margin-right: 10px;
+}
+
+.my-meal-dtld-price {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #3EA93E;
+}
+
+.my-meal-dtld-title {
+    font-size: 20px;
+}
+
+.my-meal-dtld-guestList {
+    margin-bottom: 10px;
+}
+
+.my-meal-btn-center {
+    width: 150px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 15px;
+}
+
+.my-meal-dtld-price-guest{
+    color: #3EA93E;
+    background: url("/static/sources/banknote.png") no-repeat;
+    min-height: 24px;
 }

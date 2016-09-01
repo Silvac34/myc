@@ -144,7 +144,7 @@ class TestAuthMealAPI(unittest.TestCase):
         testMeal = loads(open('../testData/meals_testData.json').read())[1]
         testMeal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"] +=  1
         testMeal["nbRemainingPlaces"] += 1 
-        testMeal["privateInfo"]["users"].remove ({u'_id': u'111111111111111111111112',u'role': [u'simpleGuests']}) 
+        testMeal["privateInfo"]["users"].remove ({u'_id': u'111111111111111111111112',u'role': [u'simpleGuest']}) 
         dbMeal = Application.db.meals.find_one({"_id":ObjectId("111111111111111111111112")})
         self.assertEqual(dbMeal, testMeal)
         

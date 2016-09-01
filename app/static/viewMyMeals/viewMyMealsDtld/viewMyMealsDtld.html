@@ -7,16 +7,22 @@
             <div class="col-xs-12 my-meal-dtld-left">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="meal-label my-meal-dtld-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
+                        <div class="my-meal-dtld-label my-meal-dtld-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3">
-                        <div class="meal-label my-meal-dtld-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
+                    <div class="col-sm-3">
+                        <div class="my-meal-dtld-label my-meal-dtld-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
                     </div>
-                    <div class="col-xs-offset-1 col-xs-3">
-                        <div class="meal-label my-meal-dtld-time">{{meal.time |date:'HH:mm'}} </div>
+                    <div class="col-sm-2">
+                        <div class="my-meal-dtld-label my-meal-dtld-time" ng-show="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}} </div>
+                        <div class="my-meal-dtld-label my-meal-dtld-time" ng-hide="userRole=='cook'">{{meal.time |date:'HH:mm'}} </div>
                     </div>
+                </div>
+            </div>
+            <div class="row" ng-if="userAdmin==true">
+                <div class="col-xs-12">
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} par pers</div>
                 </div>
             </div>
         </div>
@@ -35,64 +41,101 @@
             </div>
         </div>
     </div>
-</div>
-<!--
-<div class="row meal-dtld-group">
-    <div class="meal-label meal-dtld-group-label"> Je m'inscris : </div>
-    <div class="meal-dtld-helpers-label meal-dtld-col">
-        <span class="meal-dtld-helpers-places">Part.</span>
-        <span class="meal-dtld-helpers-price">Prix</span>
+    <div class="row" ng-if="userAdmin==false">
+        <div class="panel panel-default my-meal-dtld-panel">
+            <div class="panel-body">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="text-primary my-meal-dtld-title">Votre hôte</div>
+                    </div>
+                    <div class="row">
+                        <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}</div>
+                        <div>{{meal.privateInfo.adminPhone}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <uib-accordion close-others="accordionOneAtATime">
-        <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
-            <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cook" ng-disabled="!requiredGuests.availablePlaces.cooks">
-            <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1" is-disabled="!requiredGuests.availablePlaces.cooks">
-                <uib-accordion-heading>
-                    <div class="meal-dtld-helpers-label"> J'aide à faire la cuisine
-                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
-                        <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
-                        <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cooks.price}} €</span>
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cook'}">
+            <div class="panel-body">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="text-primary my-meal-dtld-title">Cuisinier</div>
                     </div>
-                </uib-accordion-heading>
-                <div class="meal-dtld-helpers-description">Vous faites partie de l'équipe des cuisiniers</br>RDV chez l'organisateur à <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span></div>
+                    <div class="row" ng-if="userAdmin==false">
+                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} par pers</div>
+                    </div>
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
+                        <div ng-if="user.role[0] == 'admin' && userAdmin == true"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                        <div ng-if="user.role[0] == 'cook'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="my-meal-dtld-label my-meal-dtld-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}} </div>
+                    </div>
+                    <div class="row">
+                        Places restantes : {{meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}
+                    </div>
+                </div>
             </div>
         </div>
-        <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
-            <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners">
-            <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2" is-disabled="!requiredGuests.availablePlaces.cleaners">
-                <uib-accordion-heading>
-                    <div class="meal-dtld-helpers-label"> J'aide à faire la vaisselle
-                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
-                        <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
-                        <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cleaners.price}} €</span>
+    </div>
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.cleaners">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cleaner'}">
+            <div class="panel-body">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="text-primary my-meal-dtld-title">Aide vaisselle</div>
                     </div>
-                </uib-accordion-heading>
-                <div class="meal-dtld-helpers-description">Bravo, vous êtes une belle personne !</div>
+                    <div class="row" ng-if="userAdmin==false">
+                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} par pers</div>
+                    </div>
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
+                        <div ng-if="user.role[0] == 'cleaner'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="my-meal-dtld-label my-meal-dtld-time">{{meal.time |date:'HH:mm'}} </div>
+                    </div>
+                    <div class="row">
+                        Places restantes : {{meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}
+                    </div>
+                </div>
             </div>
         </div>
-        <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
-            <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="simpleGuest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests">
-            <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3" is-disabled="!requiredGuests.availablePlaces.simpleGuests">
-                <uib-accordion-heading>
-
-                    <div class="meal-dtld-helpers-label"> Je viens comme je suis ...
-                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
-                        <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
-                        <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price}} €</span>
+    </div>
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='simpleGuest'}">
+            <div class="panel-body">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="text-primary my-meal-dtld-title">Invité</div>
                     </div>
-                </uib-accordion-heading>
-                <div class="meal-dtld-helpers-description">... et c'est comme ça qu'on vous préfère !</div>
+                    <div class="row" ng-if="userAdmin==false">
+                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} par pers</div>
+                    </div>
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
+                        <div ng-if="user.role[0] == 'simpleGuest'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="my-meal-dtld-label my-meal-dtld-time">{{meal.time |date:'HH:mm'}} </div>
+                    </div>
+                    <div class="row">
+                        Places restantes : {{meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}
+                    </div>
+                </div>
             </div>
         </div>
-    </uib-accordion>
-</div>
-
-<div class="row meal-dtld-group">
-    <div class="meal-label meal-dtld-group-label">Ce repas est organisé par : </div>
-    <div clas="meal-dtld-admin-wrapper">
-        <img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-        <div class="meal-admin-name meal-dtld-admin-name">{{meal.admin.first_name}} </br> {{meal.admin.last_name}}</div>
+    </div>
+    <div class="row page-header">
+        CHAT A METTRE EN PLACE
+    </div>
+    <div class="row my-meal-btn-center">
+        <a href="/#/my_meals" class="btn btn-primary">Revenir aux repas</a>
     </div>
 </div>
-</div>
--->

@@ -69,7 +69,7 @@ class TestAuthMealAPI(unittest.TestCase):
         
     def test_get_all_meals(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        jsonAPIExpMeal2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
+        jsonAPIExpMeal2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 8,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
         resp = self.client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("200 OK", resp.status)
         resp = json.loads(resp.data)
@@ -138,20 +138,34 @@ class TestAuthMealAPI(unittest.TestCase):
         resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
         self.assertEqual("400 BAD REQUEST", resp.status)
         
+    def test_unsubscribe_meal_ok(self):
+        resp = self.client.post("/api/meal/111111111111111111111112/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("200 OK", resp.status)
+        testMeal = loads(open('../testData/meals_testData.json').read())[1]
+        testMeal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"] +=  1
+        testMeal["nbRemainingPlaces"] += 1 
+        testMeal["privateInfo"]["users"].remove ({u'_id': u'111111111111111111111112',u'role': [u'simpleGuests']}) 
+        dbMeal = Application.db.meals.find_one({"_id":ObjectId("111111111111111111111112")})
+        self.assertEqual(dbMeal, testMeal)
+        
+    def test_unsubscribe_meal_unsubscribed_user(self):
+        resp = self.client.post("/api/meal/111111111111111111111111/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("403 FORBIDDEN", resp.status)
+        self.assertEqual("User isn't subscribed", resp.data)
+        
+    def test_unsubscribe_meal_admin(self):
+        resp = self.client.post("/api/meal/111111111111111111111112/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        self.assertEqual("Meal's admin cannot unsubscribe", resp.data)
         
     def test_get_all_my_meals(self):
-        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[3])
-        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10.0},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10.0},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10.0}}}, \"privateInfo\":{\"address\":\"30 avenue de Trudaine 75009\"}}"
-        jsonAPIExpMeal2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\": {\"nbRemainingPlaces\": 0,\"nbRquCooks\": 1,\"price\":6},\"simpleGuests\": {\"nbRemainingPlaces\": 9,\"nbRquSimpleGuests\": 9,\"price\":6}}},\"privateInfo\":{\"address\":\"3 impasse marie - blanche 75018\"}}"
-        resp = self.client.get("/api/meal/my_meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 8,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\": {\"nbRemainingPlaces\": 0,\"nbRquCooks\": 1,\"price\":6},\"simpleGuests\": {\"nbRemainingPlaces\": 8,\"nbRquSimpleGuests\": 9,\"price\":6}}},\"privateInfo\":{\"address\":\"3 impasse marie - blanche 75018\"}}"
+        resp = self.client.get("/api/meal/my_meals",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
         self.assertEqual("200 OK", resp.status)
         resp = json.loads(resp.data)
         expOutcome1 = json.loads(jsonAPIExpMeal1)
-        expOutcome2 = json.loads(jsonAPIExpMeal2)
-        self.assertEqual(2, len(resp))
+        self.assertEqual(1, len(resp))
         self.assertEquals(resp[0],expOutcome1)
-        self.assertEquals(resp[1],expOutcome2)
-        
         
     def test_get_meal_private_info_subscribed(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\",\"privateInfo\": {\"address\": \"30 avenue de Trudaine 75009\",\"adminPhone\":\"0601020304\",\"users\": [{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\",\"role\": [\"admin\", \"cook\"]}]}}"
@@ -165,6 +179,7 @@ class TestAuthMealAPI(unittest.TestCase):
         resp = self.client.get("/api/meal/111111111111111111111111/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
         self.assertEqual("403 FORBIDDEN", resp.status)
         self.assertEqual("User isn't subscribed", resp.data)
+        
         
         
     #def test_delete_one_meal(self):

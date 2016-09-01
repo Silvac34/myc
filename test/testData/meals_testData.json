@@ -48,13 +48,16 @@
         "town": "Santiago",
         "admin": "111111111111111111111111",
         "menu": "Soupions de légumes avec cassolette de veau",
-        "nbRemainingPlaces": 9,
+        "nbRemainingPlaces": 8,
         "privateInfo": {
             "address": "3 impasse marie - blanche 75018",
             "adminPhone":"0601020304",
             "users": [{
                 "_id": "111111111111111111111111",
                 "role": ["admin", "cook"]
+            },{
+                "_id": "111111111111111111111112",
+                "role": ["simpleGuests"]
             }]
         },
         "detailedInfo": {
@@ -65,7 +68,7 @@
                     "price":6
                 },
                 "simpleGuests": {
-                    "nbRemainingPlaces": 9,
+                    "nbRemainingPlaces": 8,
                     "nbRquSimpleGuests": 9,
                     "price":6
                 }

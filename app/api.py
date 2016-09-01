@@ -56,13 +56,12 @@ class User:
         self.createUserIfNew()
         
     def createUserIfNew(self):
-        #if self._id:
-        #   print('logged')
-        #elif self.facebook_id:
+        if self._id:
+            return self
         if self.facebook_id:
             if Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
-                Application.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
-            self._id = str(Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
+                self._id= str(Application.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}}).inserted_id)
+            else: self._id = str(Application.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
         
     def getUserInfo(self):
         return Application.db.users.find_one({"_id": ObjectId(self._id)})
@@ -72,6 +71,20 @@ class User:
     
     def updateUser(self,information):
         Application.db.users.update_one({"_id":ObjectId(self._id)}, {"$set":information})
+        
+    def isSubscribed(self,meal_id=None, meal =None):
+        if meal == None:
+            meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+        if any (x["_id"] == self._id for x in meal["privateInfo"]["users"]):
+            return True
+        else: return False
+
+    def isAdmin(self,meal_id=None, meal =None):
+        if meal == None:
+            meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+        if meal["admin"] == self._id :
+            return True
+        else: return False
         
     def token(self):
         payload = {
@@ -268,7 +281,7 @@ def get_all_my_meals():
 def get_meal_detailed_info(meal_id):
     meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
-    if any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]):
+    if User(_id=g.user_id).isSubscribed(meal=meal):
         meal["detailedInfo"].update({"subscribed" : True})
     else: meal["detailedInfo"].update({"subscribed" : False})
     del meal["privateInfo"]
@@ -290,7 +303,7 @@ def subscribe_to_meal(meal_id):
             return Response(status=400)
         elif not meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"]>0 :
             return Response("Role is full",status=400)
-        elif any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]): 
+        elif User(_id=g.user_id).isSubscribed(meal=meal): 
             return Response("User already registered",status=400)
         else :
             meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] - 1
@@ -298,6 +311,29 @@ def subscribe_to_meal(meal_id):
             meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]})
             Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":meal})
             return Response(status=200)
+            
+# Unsubsribe to a meal
+@Application.app.route('/api/meal/<meal_id>/unsubscription', methods=['POST'])
+@login_required
+def unsubscribe_to_meal(meal_id):
+    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+    user = User(_id=g.user_id)
+    if not user.isSubscribed(meal=meal): 
+        return Response("User isn't subscribed",status=403)
+    elif user.isAdmin(meal=meal):
+        return Response("Meal's admin cannot unsubscribe",status=400)
+    else:
+        meal["nbRemainingPlaces"] +=  1
+        for u in meal["privateInfo"]["users"]: 
+            if u["_id"] == user._id:
+                roles = u["role"]
+                meal["privateInfo"]["users"].remove(u)
+                break
+        for r in roles :
+            meal["detailedInfo"]["requiredGuests"][r]["nbRemainingPlaces"] +=1
+        Application.db.meals.update_one({"_id":ObjectId(meal_id)}, {"$set":meal})
+        return Response(status=200)
+            
             
 # Get the meal's private information
 @Application.app.route('/api/meal/<meal_id>/private', methods=['GET'])

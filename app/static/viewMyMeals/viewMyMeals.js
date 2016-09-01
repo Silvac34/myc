@@ -58,7 +58,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 .controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
 
   $scope.loadMealInfo = function(meal_id) {
-    $http.get('/api/meal/' + meal_id).then(function(response) {
+    $http.get('/api/meal/' + meal_id + '/private').then(function(response) {
       $scope.meal = response.data;
 
       /*to check wether there is available space for each rôle*/

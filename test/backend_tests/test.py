@@ -95,6 +95,10 @@ class TestAuthMealAPI(unittest.TestCase):
         expected = json.loads(jsonAPIExpMeal1)
         self.assertEquals(resp,expected)
         
+    def test_get_detailed_info_dont_exist(self):
+        resp = self.client.get("/api/meal/11111111111111111111111a",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        self.assertEqual("404 NOT FOUND", resp.status)
+        
         
     def test_subscribe_meal_ok(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
@@ -138,6 +142,11 @@ class TestAuthMealAPI(unittest.TestCase):
         resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
         self.assertEqual("400 BAD REQUEST", resp.status)
         
+    def test_subscribe_meal_dont_exist(self):
+        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        resp = self.client.post("/api/meal/11111111111111111111111a/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("404 NOT FOUND", resp.status)
+        
     def test_unsubscribe_meal_ok(self):
         resp = self.client.post("/api/meal/111111111111111111111112/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
         self.assertEqual("200 OK", resp.status)
@@ -157,6 +166,10 @@ class TestAuthMealAPI(unittest.TestCase):
         resp = self.client.post("/api/meal/111111111111111111111112/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
         self.assertEqual("400 BAD REQUEST", resp.status)
         self.assertEqual("Meal's admin cannot unsubscribe", resp.data)
+        
+    def test_unsubscribe_meal_dont_exist(self):
+        resp = self.client.post("/api/meal/11111111111111111111111a/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        self.assertEqual("404 NOT FOUND", resp.status)
         
     def test_get_all_my_meals(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 8,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\": {\"nbRemainingPlaces\": 0,\"nbRquCooks\": 1,\"price\":6},\"simpleGuests\": {\"nbRemainingPlaces\": 8,\"nbRquSimpleGuests\": 9,\"price\":6}}},\"privateInfo\":{\"address\":\"3 impasse marie - blanche 75018\"}}"
@@ -179,7 +192,27 @@ class TestAuthMealAPI(unittest.TestCase):
         resp = self.client.get("/api/meal/111111111111111111111111/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
         self.assertEqual("403 FORBIDDEN", resp.status)
         self.assertEqual("User isn't subscribed", resp.data)
+    
+    def test_get_meal_private_info_dont_exist(self):
+        resp = self.client.get("/api/meal/11111111111111111111111a/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("404 NOT FOUND", resp.status)
         
+    def test_delete_meal_ok(self):
+        resp = self.client.delete("/api/meal/111111111111111111111112/private",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        self.assertEqual("200 OK", resp.status)
+        meals = Application.db.meals.find()
+        self.assertEqual( 1,meals.count())
+        self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
+        
+    def test_delete_meal_not_admin(self):
+        resp = self.client.delete("/api/meal/111111111111111111111112/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("403 FORBIDDEN", resp.status)
+        self.assertEqual("User isn't admin", resp.data)
+        self.assertEqual( 2,Application.db.meals.find().count())
+        
+    def test_delete_meal_dont_exist(self):
+        resp = self.client.delete("/api/meal/11111111111111111111111a/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.assertEqual("404 NOT FOUND", resp.status)
         
         
     #def test_delete_one_meal(self):

@@ -95,6 +95,21 @@ class User:
         token = jwt.encode(payload, Application.app.config['TOKEN_SECRET'])
         return token.decode('unicode_escape')
 
+class Meal:
+    def __init__(self,_id):
+        self._id = _id
+        
+    def exist(self):
+        if Application.db.meals.find_one({"_id": ObjectId(self._id)})== None:
+            return False
+        else: return True
+        
+    def getInfo(self):
+        meal = Application.db.meals.find_one({"_id": ObjectId(self._id)})
+        if meal == None:
+            return False
+        else : return meal
+
 
 def login_required(func):
     @wraps(func)
@@ -168,15 +183,6 @@ def auth_facebook():
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 PUBLIC API
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-# Delete one meal from ID
-#@Application.app.route("/api/meal/<meal_id>", methods=["DELETE"])
-#def delete_meal(meal_id):
-#    result = Application.db.meals.delete_one({"_id": ObjectId(meal_id)})
-#    if result.deleted_count == 1 :
-#        return Response(str(result.deleted_count) + ' meal deleted',status=200)
-#    elif result.deleted_count == 0 :
-#        return Response(str(result.deleted_count) + ' meal deleted',status=202)
 
 # Update one meal from ID
 #@Application.app.route("/api/meal/<meal_id>", methods=['PUT'])
@@ -279,7 +285,9 @@ def get_all_my_meals():
 @Application.app.route('/api/meal/<meal_id>', methods=['GET'])
 @login_required
 def get_meal_detailed_info(meal_id):
-    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+    meal = Meal(meal_id).getInfo()
+    if not meal:
+        return Response("Meal doesn't exist",status =404)
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
     if User(_id=g.user_id).isSubscribed(meal=meal):
         meal["detailedInfo"].update({"subscribed" : True})
@@ -296,7 +304,9 @@ def subscribe_to_meal(meal_id):
     if not "requestRole" in rquData:
         return Response(status=400)
     else:
-        meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+        meal = Meal(meal_id).getInfo()
+        if not meal:
+            return Response("Meal doesn't exist",status =404)
         if meal["nbRemainingPlaces"]<=0 : 
             return Response("Meal is full",status=400)
         elif not rquData["requestRole"] + "s" in meal["detailedInfo"]["requiredGuests"] : #check if good request
@@ -316,7 +326,9 @@ def subscribe_to_meal(meal_id):
 @Application.app.route('/api/meal/<meal_id>/unsubscription', methods=['POST'])
 @login_required
 def unsubscribe_to_meal(meal_id):
-    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+    meal = Meal(meal_id).getInfo()
+    if not meal:
+        return Response("Meal doesn't exist",status =404)
     user = User(_id=g.user_id)
     if not user.isSubscribed(meal=meal): 
         return Response("User isn't subscribed",status=403)
@@ -339,15 +351,29 @@ def unsubscribe_to_meal(meal_id):
 @Application.app.route('/api/meal/<meal_id>/private', methods=['GET'])
 @login_required
 def get_meal_private_info(meal_id):
-    meal = Application.db.meals.find_one({"_id": ObjectId(meal_id)})
+    meal = Meal(meal_id).getInfo()
+    if not meal:
+        return Response("Meal doesn't exist",status =404)
     if not any (x["_id"] == g.user_id for x in meal["privateInfo"]["users"]):
         return Response("User isn't subscribed",status=403)
     meal["admin"] = Application.preprocess_id(User(_id=meal["admin"]).getUserPublicInfo())
     for u in meal["privateInfo"]["users"]:
-        print(u)
         u.update(Application.preprocess_id(User(_id=u["_id"]).getUserPublicInfo()))
-        print (u)
     return Response(dumps(Application.preprocess_id(meal)), status=200)
+    
+    
+# Delete the meal
+@Application.app.route('/api/meal/<meal_id>/private', methods=['DELETE'])
+@login_required
+def delete_meal(meal_id):
+    if not Meal(meal_id).exist():
+        return Response("Meal doesn't exist",status =404)
+    user= User(_id=g.user_id)
+    if not user.isAdmin(meal_id=meal_id):
+        return Response("User isn't admin",status=403)
+    else: 
+        Application.db.meals.delete_one({"_id": ObjectId(meal_id)})
+        return Response(status =200)
 
 ####################################################################################
 

@@ -133,7 +133,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
               $uibModalInstance.close();
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
-              $uibModalInstance.close();
+              $uibModalInstance.close();  
             }
           }
           else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null){

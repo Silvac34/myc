@@ -40,7 +40,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 
 }])
 
-.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', function($scope, $http, $stateParams, $uibModal) {
 
   $scope.loadMyMealInfo = function(meal_id) {
     $http.get('/api/meal/' + meal_id + '/private').then(function(response) {
@@ -61,8 +61,21 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
       }
     });
   };
-  
+
   $scope.loadMyMealInfo($stateParams.myMealId);
+
+  //modalDelete
+
+  //modal to define the price of the meal and the number of participants
+  $scope.openModalDelete = function() {
+
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'formModalDelete.html',
+      controller: 'FormModalDeleteInstanceCtrl',
+      size: "sm"
+    });
+  };
 
 }])
 
@@ -86,4 +99,15 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     }
     return output;
   };
+})
+
+.controller('FormModalDeleteInstanceCtrl', function($scope, $uibModalInstance) {
+
+  $scope.ok = function() {
+    $uibModalInstance.close();
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
 });

@@ -31,7 +31,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     $uibModal.open({
       animation: true,
-      templateUrl: 'formModalDelete.html',
+      templateUrl:  '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalDeleteMyMealDtld.html',
       controller: 'FormModalDeleteInstanceCtrl',
       size: "sm"
     });

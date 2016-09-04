@@ -31,11 +31,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     $uibModal.open({
       animation: true,
-      templateUrl:  '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalDeleteMyMealDtld.html',
-      controller: 'FormModalDeleteInstanceCtrl',
+      templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalDeleteMyMealDtld.html',
+      controller: 'modalDeleteInstanceCtrl',
       size: "sm"
     });
   };
+
 
 }]);
 
@@ -61,13 +62,22 @@ modMyMealsDetailed.filter('MyMealsFiltered', function() {
   };
 });
 
-modMyMealsDetailed.controller('FormModalDeleteInstanceCtrl', function($scope, $uibModalInstance) {
+modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
 
-  $scope.ok = function() {
+  $scope.deleteMyMeal = function(meal_id) {
+    $http.delete('/api/meal/' + meal_id + '/private').then(function(response) {
+      //rajouter en fonction de la réponse un popup ?
+    });
+  };
+
+  $scope.delete = function() {
+    $scope.deleteMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
+    //$state.go('static/viewMeals/viewMeals.html');
   }; //function to validate the modal
 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
+
 });

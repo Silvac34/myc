@@ -473,6 +473,7 @@
     border-radius: 15px;
 }
 
+
 /* viewMyMealsDtld ---------------------------------------------------*/
 
 .my-meal-dtld-label {
@@ -554,8 +555,25 @@
     border-radius: 15px;
 }
 
-.my-meal-dtld-price-guest{
+.my-meal-dtld-price-guest {
     color: #3EA93E;
     background: url("/static/sources/banknote.png") no-repeat;
     min-height: 24px;
+}
+
+
+.my-meal-dtld-edit {
+        background: url("/static/sources/edit_square.png") no-repeat;
+        margin-left: -10px;
+    }
+    
+@media (max-width: 767px) {    
+    .my-meal-dtld-hidden-txt{
+        visibility: hidden;    
+    }    
+}
+
+.my-meal-dtld-delete {
+    background: url("/static/sources/delete_cross.png") no-repeat;
+    margin-left: -10px;
 }

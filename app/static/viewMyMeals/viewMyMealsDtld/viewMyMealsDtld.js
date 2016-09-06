@@ -73,7 +73,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
   $scope.delete = function() {
     $scope.deleteMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
-    //$state.go('static/viewMeals/viewMeals.html');
+    $state.go('view_meals', {reload: true, inherit: false, notify: false});
   }; //function to validate the modal
 
   $scope.cancel = function() {

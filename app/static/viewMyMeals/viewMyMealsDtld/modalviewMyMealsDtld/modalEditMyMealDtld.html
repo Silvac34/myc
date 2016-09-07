@@ -1,91 +1,30 @@
 <!-- form.html -->
-<form class="form-horizontal" name="createMealForm">
+<form class="form-horizontal">
     <fieldset id="fieldset-form">
-        <legend>Modifier le menu</legend>
-        <div class="col-xs-12">
+        <legend>Modifier le repas</legend>
+
+        <div class="page-separation size-16 text-primary">
+            Modifier le menu
+        </div>
+        <div class="form-group">
             <div class="row">
-                <div class="form-group">
-                    <textarea type="text" class="form-control" ng-class="{'form-vegetarian': modifiedMeal.veggies}" id="inputMenu" placeholder="{{meal.menu}}" ng-model="modifiedMeal.menu"></textarea>
+                <label class="col-xs-3 col-sm-2 control-label">Menu</label>
+                <div class="col-xs-9 col-sm-10">
+                    <textarea type="text" class="form-control" ng-class="{'form-vegetarian': meal.veggies}" id="inputMenu" ng-model="meal.menu"></textarea>
                     <div class="checkbox">
-                        <label><input type="checkbox" ng-model="modifiedMeal.veggies"> Alternative Vegetarienne</label>
+                        <label><input type="checkbox" ng-model="meal.veggies"> Alternative Vegetarienne</label>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <legend>Modifier le lieu du repas</legend>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-8">
-                        <select class="form-control" id="select" ng-model="modifiedMeal.town" ng-value="{{meal.town}}">
-                                <option value="" disabled selected>Escoge tu ciudad</option>
-                                <option>Santiago</option>
-                                <option>Concepción</option>
-                                <option>Valparaíso</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <textarea type="text" class="form-control" id="inputAddress" placeholder="Dirección" ng-model="modifiedMeal.privateInfo.address" required></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-8">
-                        <input type="text" class="form-control" id="inputAddressComplement" placeholder="Complemento" ng-model="address_complement">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Dirección aproximativa a publicar" ng-model="modifiedMeal.addressApprox" required></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <legend>Modifier l'heure du repas</legend>
-            </div>
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
-                    <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="modifiedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions"
-                        ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Fecha" />
-                </div>
-            </div>
-            <div class="col-sm-offset-1 col-sm-3">
-                <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}">
-                    <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{modifiedMeal.time | date:'HH:mm'}}"
-                        required>
-
-                    <!-- le script permet de mettre le timepicker dans le popover -->
-                    <script type="text/ng-template" id="PopoverTimepickerTemplate.html">
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <span class="input-group" ng-click="$event.stopPropagation()">
-                                    <uib-timepicker ng-model="modifiedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-                                </span>
-                            </div>
-                        </div>
-                    </script>
-
                 </div>
             </div>
         </div>
-        
-
         <div class="row">
-            <legend>Modifier le prix</legend>
+            <div class="page-separation size-16 text-primary">Modifier le prix</div>
         </div>
         <div class="row">
             <div class="form-group">
                 <label for="inputPrice" class="col-md-3 col-sm-4 col-xs-6 control-label">Prix total des courses</label>
                 <div class=" col-sm-2 col-xs-3 input-group">
-                    <input type="number" class="form-control" id="inputPrice" ng-model="modifiedMeal.price" placeholder="{{meal.price}}" />
+                    <input type="number" class="form-control" id="inputPrice" ng-model="meal.price" />
                     <span class="input-group-addon">€</span>
                 </div>
             </div>
@@ -108,100 +47,107 @@
                 </tr>
                 <tr>
                     <td>Aides cuisine</td>
-                    <td><input type="number" class="form-control" id="inputCooks" ng-model="modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                    <td ng-class="{'has-error': modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined && priceForm.$submitted}"><input type="time" class="form-control" id="inputTimeCooking" ng-model="modifiedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
-                    <td></td>
+                    <td><input type="number" class="form-control" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                    <td><input type="time" class="form-control" id="inputTimeCooking" ng-model="timeCooking" placeholder="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
+                    <td>{{meal.detailedInfo.requiredGuests.cooks.price}}</td>
                 </tr>
                 <tr>
                     <td>Aides vaisselle</td>
-                    <td><input type="number" class="form-control" id="inputCleaners" ng-model="modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
-                    <td><span ng-show="modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{modifiedMeal.time | date:'HH:mm'}}</span></td>
-                    <td></td>
+                    <td><input type="number" class="form-control" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                    <td><span ng-show="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{meal.time | date:'HH:mm'}}</span></td>
+                    <td>{{meal.detailedInfo.requiredGuests.cleaners.price}}</td>
                 </tr>
                 <tr>
                     <td>Invités</td>
-                    <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
-                    <td><span ng-show="modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{modifiedMeal.time | date:'HH:mm'}}</span></td>
-                    <td></td>
+                    <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                    <td><span ng-show="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{meal.time | date:'HH:mm'}}</span></td>
+                    <td>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>{{modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
+                    <td>{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks + meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
                     <td></td>
                     <td></td>
                 </tr>
             </tbody>
         </table>
-        <legend>Modifier mes informations personnelles</legend>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="page-separation size-16 text-primary">Modifier la date et l'heure du repas</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
                 <div class="form-group">
-                    <input type="number" class="form-control" id="inputAdminPhone" placeholder="Celular" ng-model="modifiedMeal.privateInfo.adminPhone" uib-popover="Información privada : unicamente para los participantes" popover-trigger="mouseenter" popover-placement="bottom-left"
+                    <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="meal.time" is-open="date_popup.opened" datepicker-options="dateOptions" close-text="Close"
+                        alt-input-formats="altInputDateFormats" placeholder="{{meal.time | date:'EEEE dd MMMM'}}" />
+                </div>
+            </div>
+            <div class="col-sm-offset-1 col-sm-3">
+                <div class="form-group">
+                    <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{meal.time | date:'HH:mm'}}">
+
+                    <!-- le script permet de mettre le timepicker dans le popover -->
+                    <script type="text/ng-template" id="PopoverTimepickerTemplate.html">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <span class="input-group" ng-click="$event.stopPropagation()">
+                                    <uib-timepicker ng-model="meal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                </span>
+                            </div>
+                        </div>
+                    </script>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="page-separation size-16 text-primary">Modifier le lieu du repas</div>
+        </div>
+        <div class="row">
+            <div class="page-separation size-14 text-info">Información publica : visible de todos</div>
+            <div class="form-group">
+                <label class="col-xs-3 col-sm-2 control-label">Ville</label>
+                <div class="col-xs-4 col-sm-3 col-md-2">
+                    <select class="form-control" id="select" ng-model="meal.town">
+                            <option>Santiago</option>
+                            <option>Concepción</option>
+                            <option>Valparaíso</option>
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-xs-3 col-sm-2 control-label">Dirección approximativa</label>
+                <div class="col-xs-9 col-sm-10">
+                    <textarea type="text" class="form-control" id="inputAddressApprox" ng-model="meal.addressApprox" uib-popover="sirve para dar un punto de referencia : bario, sector, esquina, metro ..." popover-trigger="mouseenter" popover-placement="bottom-left" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="page-separation size-14 text-info">Información privada : visible solo de los participantes inscribidos</div>
+            <div class="form-group">
+                <label class="col-xs-3 col-sm-2 control-label">Dirección exacta</label>
+                <div class="col-xs-9 col-sm-10">
+                    <textarea type="text" class="form-control" id="inputAddress" ng-model="meal.privateInfo.address"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="page-separation size-16 text-primary">Modifier mes informations personnelles</div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-xs-3 col-sm-2 control-label">Celular</label>
+                <div class="col-xs-9 col-sm-10">
+                    <input type="number" class="form-control" id="inputAdminPhone" placeholder="Celular" ng-model="meal.privateInfo.adminPhone" uib-popover="Información privada : unicamente para los participantes" popover-trigger="mouseenter" popover-placement="bottom-left"
                     />
                 </div>
             </div>
         </div>
-
-        <div class="form-group" ng-class="{'has-error': modifiedMeal.price==undefined && createMealForm.$submitted};">
-            <div class="input-group">
-                <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-hide="modifiedMeal.price" required/>
-                <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="prix du repas" ng-show="modifiedMeal.price" value="{{modifiedMeal.price/(modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1)}}"
-                />
-                <!-- a remodifier pour récupérer le prix / nombre de participants -->
-                <span class="input-group-addon">€</span>
-
-                <!-- script servant pour le modal du calcul des prix -->
-                <script type="text/ng-template" id="formModalPriceContent.html">
-                    <form class="form-horizontal" name="priceForm">
-                        <fieldset>
-                            <div class="modal-header">
-                                <h3 class="modal-title">Calcul du prix du repas</h3>
-                            </div>
-                            <div class="modal-body">
-
-                            </div>
-
-
-                            <div class="page-header">
-                                <h3>Détail sur les participants</h3>
-                            </div>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="priceForm.$setSubmitted(); okPrice()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
-            </fieldset>
-            </form>
-            </script>
-
-        </div>
-        </div>
-        </div>
-        <div class="row">
-            <div class="form-meal-label form-meal-price-label">
-                ≈ par pers
-            </div>
-        </div>
-        </div>
-        </div>
-
-        <div class="col-xs-4">
-            <div class="row" ng-show="modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks || modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">
-                <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
-                    <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
-                    <!-- a définir si on fait apparaitre le nombre de place restante pour publier le repas ou si on fait apparaitre le nombre de place totales pour le repas -->
-                    <div round-progress responsive="true" max="modifiedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + modifiedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + modifiedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1"
-                        color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
-                </div>
-            </div>
-        </div>
-        </div>
         <div class="row">
             <div class="form-group">
                 <div class="form-btn-center">
-                    <a class="btn btn-primary btn-md" ng-click="createMealForm.$setSubmitted()">Publicar la cena</a>
+                    <a class="btn btn-primary btn-md" ng-click="edit()">Actualizar la cena</a>
                 </div>
             </div>
+        </div>
     </fieldset>
 </form>

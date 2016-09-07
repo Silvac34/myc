@@ -577,3 +577,17 @@
     background: url("/static/sources/delete_cross.png") no-repeat;
     margin-left: -10px;
 }
+
+.page-separation {
+  padding-bottom: 9px;
+  margin: 0 0 10px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.size-16 {
+  font-size: 16px;
+}
+
+.size-14 {
+  font-size: 14px;
+}

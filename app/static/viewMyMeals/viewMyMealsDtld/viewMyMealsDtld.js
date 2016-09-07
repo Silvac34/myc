@@ -37,6 +37,23 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+  //modalEdit to delete a meal
+  $scope.openModalEdit = function() {
+
+    $uibModal.open({
+      animation: true,
+      templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalEditMyMealDtld.html',
+      controller: 'modalEditInstanceCtrl',
+      size: "lg",
+       resolve: {
+        meal: function() {
+            return  $scope.meal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+      }
+    });
+  };
+
+
 
 }]);
 
@@ -74,6 +91,28 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
     $scope.deleteMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
     $state.go('view_meals', {reload: true, inherit: false, notify: false});
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
+
+});
+
+modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
+
+ /* $scope.editMyMeal = function(meal_id) {
+    $http.modify('/api/meal/' + meal_id + '/private').then(function(response) {
+      //rajouter en fonction de la réponse un popup ?
+    });
+  };
+*/
+  $scope.meal = meal;
+  
+  $scope.edit = function() {
+    //$scope.editMyMeal($stateParams.myMealId); utiliser 
+    $uibModalInstance.close();
+    $state.reload();
   }; //function to validate the modal
 
   $scope.cancel = function() {

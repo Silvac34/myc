@@ -235,8 +235,16 @@
     font-size: 16px;
     padding-left: 22px;
     height: 25px;
-    background: url("/static/sources/menu.png") no-repeat 0;
     margin-bottom: 27px;
+}
+
+.my-meal-menu-vegetarian-label {
+    background: url("/static/sources/vegetarian.png") no-repeat 0;
+    font-size: 16px;
+    padding-left: 22px;
+    height: 25px;
+    margin-bottom: 27px;
+    text-indent: 5px;
 }
 
 .my-meal-label {

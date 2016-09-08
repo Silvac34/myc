@@ -30,6 +30,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+
   //modalEdit to delete a meal
   $scope.openModalEdit = function() {
 
@@ -45,8 +46,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       }
     });
   };
-
-
 
 }]);
 
@@ -88,6 +87,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
       inherit: false,
       notify: false
     });
+
   }; //function to validate the modal
 
   $scope.cancel = function() {

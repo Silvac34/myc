@@ -561,13 +561,6 @@
     margin-bottom: 10px;
 }
 
-.my-meal-btn-center {
-    width: 150px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 15px;
-}
-
 .my-meal-dtld-price-guest {
     color: #3EA93E;
     background: url("/static/sources/banknote.png") no-repeat;

@@ -33,13 +33,13 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Nombre</th>
-                    <th>Heure d'arrivée</th>
-                    <th>Prix</th>
+                    <th width="15%">Nombre</th>
+                    <th width="30%">Heure d'arrivée</th>
+                    <th width="20%">Prix</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="info">
                     <td>Hôte (yo)</td>
                     <td>1</td>
                     <td></td>
@@ -48,22 +48,33 @@
                 <tr>
                     <td>Aides cuisine</td>
                     <td><input type="number" class="form-control" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                    <td><input type="time" class="form-control" id="inputTimeCooking" ng-model="timeCooking" placeholder="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
-                    <td>{{meal.detailedInfo.requiredGuests.cooks.price}}</td>
+                    <td><input type="time" name="formTime" class="form-control" uib-popover-template="formPopoverTimepickerTimeCooking.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepickerTimeCooking.title}}" value="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
+                    <td>{{meal.detailedInfo.requiredGuests.cooks.price | currency}}</td>
                 </tr>
+                
+                <script type="text/ng-template" id="PopoverTimepickerTemplateTimeCooking.html">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <span class="input-group" ng-click="$event.stopPropagation()">
+                                <uib-timepicker ng-model="meal.detailedInfo.requiredGuests.cooks.timeCooking" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                            </span>
+                        </div>
+                    </div>
+                </script>
+
                 <tr>
                     <td>Aides vaisselle</td>
                     <td><input type="number" class="form-control" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                     <td><span ng-show="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{meal.time | date:'HH:mm'}}</span></td>
-                    <td>{{meal.detailedInfo.requiredGuests.cleaners.price}}</td>
+                    <td>{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</td>
                 </tr>
                 <tr>
                     <td>Invités</td>
                     <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                     <td><span ng-show="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{meal.time | date:'HH:mm'}}</span></td>
-                    <td>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}</td>
+                    <td>{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}}</td>
                 </tr>
-                <tr>
+                <tr class="success">
                     <td>Total</td>
                     <td>{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks + meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
                     <td></td>
@@ -83,10 +94,10 @@
             </div>
             <div class="col-sm-offset-1 col-sm-3">
                 <div class="form-group">
-                    <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{meal.time | date:'HH:mm'}}">
+                    <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepickerMM.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepickerMM.title}}" value="{{meal.time | date:'HH:mm'}}">
 
                     <!-- le script permet de mettre le timepicker dans le popover -->
-                    <script type="text/ng-template" id="PopoverTimepickerTemplate.html">
+                    <script type="text/ng-template" id="PopoverTimepickerTemplateMM.html">
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <span class="input-group" ng-click="$event.stopPropagation()">
@@ -99,6 +110,16 @@
                 </div>
             </div>
         </div>
+        <!-- le script permet de mettre le timepicker dans le popover -->
+        <script type="text/ng-template" id="PopoverTimepickerTemplateMM.html">
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <span class="input-group" ng-click="$event.stopPropagation()">
+                        <uib-timepicker ng-model="meal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                    </span>
+                </div>
+            </div>
+        </script>
         <div class="row">
             <div class="page-separation size-16 text-primary">Modifier le lieu du repas</div>
         </div>

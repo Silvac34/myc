@@ -45,9 +45,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalEditMyMealDtld.html',
       controller: 'modalEditInstanceCtrl',
       size: "lg",
-       resolve: {
+      resolve: {
         meal: function() {
-            return  $scope.meal;
+            return $scope.meal;
           } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
       }
     });
@@ -90,7 +90,11 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
   $scope.delete = function() {
     $scope.deleteMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
-    $state.go('view_meals', {reload: true, inherit: false, notify: false});
+    $state.go('view_meals', {
+      reload: true,
+      inherit: false,
+      notify: false
+    });
   }; //function to validate the modal
 
   $scope.cancel = function() {
@@ -101,14 +105,54 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
 
- /* $scope.editMyMeal = function(meal_id) {
+  /* $scope.editMyMeal = function(meal_id) {
     $http.modify('/api/meal/' + meal_id + '/private').then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };
 */
+  //required for the calendar toolbar (datamodel : editedMeal.time)
+
+  $scope.dateOptions = {
+      formatYear: 'yy',
+      maxDate: new Date(2020, 5, 22),
+      minDate: new Date(),
+      startingDay: 1
+    },
+
+    $scope.clear = function() {
+      $scope.editedMeal.time = null;
+    };
+
+  $scope.date_open = function() {
+    $scope.date_popup.opened = true;
+  };
+
+  $scope.date_popup = {
+    opened: false
+  };
+
+  //date formats for datepicker
+  $scope.date_format = 'dd-MMM-yyyy';
+  $scope.altInputDateFormats = ['M!/d!/yyyy'];
+
+  //required for the calendar toolbar (datamodel : editedMeal.time)
+
+  $scope.ismeridian = false;
+  $scope.mstep = 15;
+
+  $scope.formPopoverTimepickerMM = {
+    title: 'Hora de la cena',
+    templateUrl: 'PopoverTimepickerTemplateMM.html'
+  };
+
+  $scope.formPopoverTimepickerTimeCooking = {
+    title: 'Llegada de los que ayudan a cocinar',
+    templateUrl: 'PopoverTimepickerTemplateTimeCooking.html'
+  };
+
   $scope.meal = meal;
-  
+
   $scope.edit = function() {
     //$scope.editMyMeal($stateParams.myMealId); utiliser 
     $uibModalInstance.close();

@@ -22,7 +22,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
         $http.post('/api/meals', $scope.editedMeal).then(function() {
-          $state.go('view_meals');
+          $state.go('my_meals', {reload: true});
         });
       }
 

@@ -113,11 +113,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
   $scope.okLocation = function() {
     if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
-      if($scope.address_complement == undefined){
+      if ($scope.address_complement == undefined) {
         $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address;
       }
-      else{
-        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;  
+      else {
+        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
       }
       $scope.address_complement = undefined;
       $uibModalInstance.close();
@@ -133,10 +133,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
               $uibModalInstance.close();
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
-              $uibModalInstance.close();  
+              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time) {
+                $uibModalInstance.close();
+              }
             }
           }
-          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null){
+          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
             $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = null;
             $uibModalInstance.close();
           }

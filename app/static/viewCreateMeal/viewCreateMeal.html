@@ -13,7 +13,8 @@
                     <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-hide="editedMeal.price" required/>
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1) | currency}}"/>
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1) | currency}}"
+                            />
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
                             <span class="input-group-addon">≈ por pers</span>
 
@@ -57,7 +58,7 @@
                                                     <tr>
                                                         <td>Ayuda a la cocina</td>
                                                         <td><input type="number" class="form-control" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                                                        <td ng-class="{'has-error': editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined && priceForm.$submitted}"><input type="time" class="form-control" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
+                                                        <td ng-class="{'has-error': (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined || editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time) && priceForm.$submitted}"><input type="time" class="form-control" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Ayuda a la loza</td>
@@ -83,7 +84,7 @@
                                             <div class="row" ng-show="editedMeal.price==undefined && priceForm.$submitted">
                                                 <div class="alert alert-dismissible alert-danger">
                                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                    <strong>¡Damn!</strong> Llena bien todos los campos y prueba de nuevo.
+                                                    <strong>¡Damn!</strong> Llena bien todos los campos y prueba de nuevo. <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time">Además, los que ayudan a cocinar tienen que llegar antes de la cena.</span>
                                                 </div>
                                             </div>
                                             <button class="btn btn-primary" type="button" ng-click="priceForm.$setSubmitted(); okPrice()">OK</button>

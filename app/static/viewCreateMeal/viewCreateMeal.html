@@ -13,10 +13,9 @@
                     <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
                             <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-hide="editedMeal.price" required/>
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1)}}"
-                            />
+                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1) | currency}}"/>
                             <!-- a remodifier pour récupérer le prix / nombre de participants -->
-                            <span class="input-group-addon">€</span>
+                            <span class="input-group-addon">≈ por pers</span>
 
                             <!-- script servant pour le modal du calcul des prix -->
                             <script type="text/ng-template" id="formModalPriceContent.html">
@@ -95,11 +94,6 @@
                             </script>
 
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-meal-label form-meal-price-label">
-                        ≈ por pers
                     </div>
                 </div>
             </div>

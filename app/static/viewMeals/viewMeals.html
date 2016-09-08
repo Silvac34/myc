@@ -28,7 +28,7 @@
             <a class="list-group-item list-group-meal" ng-click=openModalDtld(meal._id)>
               <div class="hidden-xs col-sm-2 meal-admin">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}.</div>
+                <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
               </div>
               <div class="col-xs-12 col-sm-10">
                 <div class="row">
@@ -45,7 +45,7 @@
                     </div>
                   </div>
                   <div class="col-xs-4">
-                    <div class="meal-price">{{meal.price/meal.nbGuests | currency : ""}} €</div>
+                    <div class="meal-price">{{meal.price/meal.nbGuests | currency}}</div>
                     <div class="meal-label meal-price-label">par pers</div>
                     <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
                       <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>

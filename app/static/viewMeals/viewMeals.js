@@ -200,11 +200,3 @@ modViewMeals.filter('fWeekDays', function() {
     return filtered;
   }
 })
-
-.controller('modalViewMealsDtldInstanceCtrl', function($scope, $uibModalInstance) {
-
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  }; //funcion to dismiss the modal
-
-});

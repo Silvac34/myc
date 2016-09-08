@@ -20,13 +20,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-if="userAdmin==true">
+            <div class="row" ng-if="userRole!='admin'">
                 <div class="col-xs-12">
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} par pers</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} a pagar</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cleaner'">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} a pagar</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='simpleGuest'">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} a pagar</div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-2" ng-if="userAdmin==true">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-2" ng-if="userRole=='admin'">
             <div class="col-sm-6">
                 <div class="my-meal-dtld-label my-meal-dtld-edit" ng-click="openModalEdit()">
                     <span class="my-meal-dtld-hidden-txt">Modifier</span>
@@ -50,33 +52,31 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-if="userAdmin==false">
-        <div class="panel panel-default my-meal-dtld-panel">
+    <div class="row">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='admin', 'my-meal-dtld-panel-info': userRole!='admin'}">
             <div class="panel-body">
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Votre hôte</div>
                     </div>
                     <div class="row">
-                        <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}</div>
-                        <div>{{meal.privateInfo.adminPhone}}</div>
+                        <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}<span ng-if="meal.privateInfo.adminPhone"> - {{meal.privateInfo.adminPhone}}</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks">
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks.nbRquCooks!=1 && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces!=0">
         <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cook'}">
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Cuisinier</div>
                     </div>
-                    <div class="row" ng-if="userAdmin==false">
+                    <div class="row" ng-if="userRole == 'admin'">
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} par pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'admin' && userAdmin == true"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
                         <div ng-if="user.role[0] == 'cook'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Aide vaisselle</div>
                     </div>
-                    <div class="row" ng-if="userAdmin==false">
+                    <div class="row" ng-if="userRole == 'admin'">
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} par pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
@@ -123,7 +123,7 @@
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Invité</div>
                     </div>
-                    <div class="row" ng-if="userAdmin==false">
+                    <div class="row" ng-if="userRole == 'admin'">
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} par pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">

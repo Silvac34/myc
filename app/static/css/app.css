@@ -528,6 +528,11 @@
     border-width: 2px;
 }
 
+.my-meal-dtld-panel-info {
+    border-color: #3a87ad;;
+    border-width: 2px;
+}
+
 .my-meal-dtld-profilePic {
     width: 35px;
     margin-right: 10px;

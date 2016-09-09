@@ -181,7 +181,7 @@
 }
 
 .meal-date{
-    background: url("/static/sources/calendar.png") no-repeat;
+    background: url("/static/sources/calendar_with_clock.png") no-repeat;
     min-height: 24px;
 }
 

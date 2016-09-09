@@ -3,11 +3,11 @@
         <h3>Filtres</h3>
     </div>
     <div class="row">
-        <label class="control-label filter-label col-sm-12">Choisir les jours</label>
+        <label class="control-label filter-label col-sm-12">Elegir los días</label>
         <div class="filter-date-checkbox-desktop text-center col-sm-3 col-lg-1" ng-repeat="day in filter.weekDays">
             <label class="filter-label-sm"><input type="checkbox" ng-model=day.selected></br>{{day.label}}</label>
         </div>
-        <label class="control-label filter-label col-sm-12">Choisir une période</label>
+        <label class="control-label filter-label col-sm-12">Elegir un periodo</label>
         <div class="col-sm-12">
             <label class="filter-label-sm">From <input type="text" class= "form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" /></label>
         </div>

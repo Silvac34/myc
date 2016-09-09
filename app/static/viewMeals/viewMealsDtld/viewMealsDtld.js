@@ -3,7 +3,7 @@
 var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
 
 
-.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', function($scope, $http, meal_id, $uibModalInstance) {
+.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', function($scope, $http, meal_id, $uibModalInstance) {
 
   $scope.loadMealInfo = function(meal_id) {
     $http.get('/api/meal/' + meal_id).then(function(response) {

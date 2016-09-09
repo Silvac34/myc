@@ -80,7 +80,7 @@
     <div class="text-center">
         <div uib-alert ng-if="errorSubscribe.status" class="alert alert-dismissible alert-danger" close="closeAlert()">{{errorSubscribe.message}}</div>
         <a class="btn btn-primary" ng-click = "subscribeMeal(meal._id,requestRole.name)" ng-if="meal.nbRemainingPlaces>0 && !goToMeal">Envoyer une demande</a>
-        <a class="btn btn-success" ng-if="goToMeal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">Accéder à la page du repas</a>
+        <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">Accéder à la page du repas</a>
         <div ng-if="meal.nbRemainingPlaces<=0  && !goToMeal" class="meal-dtld-full-msg" >Oups ! Ce repas est complet </div>
     </div>
 

@@ -11,14 +11,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
       for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
         if ($scope.meal.privateInfo.users[i]._id == userId) {
-          if ($scope.meal.privateInfo.users[i].role[0] == "admin") {
-            $scope.userRole = $scope.meal.privateInfo.users[i].role[1];
-            $scope.userAdmin = true;
-          }
-          else {
-            $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
-            $scope.userAdmin = false;
-          }
+          $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
         }
       }
     });
@@ -37,6 +30,22 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+
+  //modalEdit to delete a meal
+  $scope.openModalEdit = function() {
+
+    $uibModal.open({
+      animation: true,
+      templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalEditMyMealDtld.html',
+      controller: 'modalEditInstanceCtrl',
+      size: "lg",
+      resolve: {
+        meal: function() {
+            return $scope.meal;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+      }
+    });
+  };
 
 }]);
 
@@ -73,7 +82,74 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
   $scope.delete = function() {
     $scope.deleteMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
-    //$state.go('static/viewMeals/viewMeals.html');
+    $state.go('view_meals', {
+      reload: true,
+      inherit: false,
+      notify: false
+    });
+
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
+
+});
+
+modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
+
+  /* $scope.editMyMeal = function(meal_id) {
+    $http.modify('/api/meal/' + meal_id + '/private').then(function(response) {
+      //rajouter en fonction de la réponse un popup ?
+    });
+  };
+*/
+  //required for the calendar toolbar (datamodel : editedMeal.time)
+
+  $scope.dateOptions = {
+      formatYear: 'yy',
+      maxDate: new Date(2020, 5, 22),
+      minDate: new Date(),
+      startingDay: 1
+    },
+
+    $scope.clear = function() {
+      $scope.editedMeal.time = null;
+    };
+
+  $scope.date_open = function() {
+    $scope.date_popup.opened = true;
+  };
+
+  $scope.date_popup = {
+    opened: false
+  };
+
+  //date formats for datepicker
+  $scope.date_format = 'dd-MMM-yyyy';
+  $scope.altInputDateFormats = ['M!/d!/yyyy'];
+
+  //required for the calendar toolbar (datamodel : editedMeal.time)
+
+  $scope.ismeridian = false;
+  $scope.mstep = 15;
+
+  $scope.formPopoverTimepickerMM = {
+    title: 'Hora de la cena',
+    templateUrl: 'PopoverTimepickerTemplateMM.html'
+  };
+
+  $scope.formPopoverTimepickerTimeCooking = {
+    title: 'Llegada de los que ayudan a cocinar',
+    templateUrl: 'PopoverTimepickerTemplateTimeCooking.html'
+  };
+
+  $scope.meal = meal;
+
+  $scope.edit = function() {
+    //$scope.editMyMeal($stateParams.myMealId); utiliser 
+    $uibModalInstance.close();
+    $state.reload();
   }; //function to validate the modal
 
   $scope.cancel = function() {

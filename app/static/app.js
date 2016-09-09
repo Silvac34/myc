@@ -55,6 +55,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
         requiredLogin: true
       }
     })
+  $stateProvider
+    .state('view_my_dtld_meals', {
+      url: '/my_meals/:myMealId',
+      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
+      controller: 'ViewMyMealsDtldCtrl'
+    });
   $urlRouterProvider.otherwise('welcome');
 
   $authProvider.facebook({

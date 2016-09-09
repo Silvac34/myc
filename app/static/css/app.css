@@ -235,8 +235,16 @@
     font-size: 16px;
     padding-left: 22px;
     height: 25px;
-    background: url("/static/sources/menu.png") no-repeat 0;
     margin-bottom: 27px;
+}
+
+.my-meal-menu-vegetarian-label {
+    background: url("/static/sources/vegetarian.png") no-repeat 0;
+    font-size: 16px;
+    padding-left: 22px;
+    height: 25px;
+    margin-bottom: 27px;
+    text-indent: 5px;
 }
 
 .my-meal-label {
@@ -265,7 +273,7 @@
 }
 
 .my-meal-price {
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 700;
     color: #3EA93E;
     text-align: right;
@@ -528,6 +536,11 @@
     border-width: 2px;
 }
 
+.my-meal-dtld-panel-info {
+    border-color: #3a87ad;;
+    border-width: 2px;
+}
+
 .my-meal-dtld-profilePic {
     width: 35px;
     margin-right: 10px;
@@ -546,13 +559,6 @@
 
 .my-meal-dtld-guestList {
     margin-bottom: 10px;
-}
-
-.my-meal-btn-center {
-    width: 150px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 15px;
 }
 
 .my-meal-dtld-price-guest {
@@ -576,4 +582,18 @@
 .my-meal-dtld-delete {
     background: url("/static/sources/delete_cross.png") no-repeat;
     margin-left: -10px;
+}
+
+.page-separation {
+  padding-bottom: 9px;
+  margin: 0 0 10px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.size-16 {
+  font-size: 16px;
+}
+
+.size-14 {
+  font-size: 14px;
 }

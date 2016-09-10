@@ -1,6 +1,5 @@
 <div class="container">
     <div class="row">
-        <button type="button" class="close" data-dismiss="alert" ng-click="cancel()">&times;</button>
         <label class="control-label filter-label col-xs-12">Choisir les jours de la semaine</label>
         <div class="filter-date-checkbox-mobile text-center" ng-repeat="day in filter.weekDays">
             <label><input type="checkbox" ng-model=day.selected></br>{{day.label}}</label>

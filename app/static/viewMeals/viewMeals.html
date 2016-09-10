@@ -1,16 +1,16 @@
 <div class="container-fluid">
   <h1 class="page-header">Lista de las cenas</h1>
   <div class="row">
-    <div class="meal-search-sort col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9">
-      <span class="meal-search-title-count">Trier par</span>
+    <div class="meal-search-sort col-xs-7 col-xs-offset-5 col-sm-3 col-sm-offset-9">
+      <span class="meal-search-title-count">Ordernar por</span>
       <div class="btn-group" uib-dropdown uib-popover="Hora de empiezo" popover-trigger="mouseenter" popover-placement="top">
         <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
         <ul uib-dropdown-menu class="dropdown-menu sort-menu" data-toggle="dropdown">
           <li class="asc">
-            <a class="meal-search-sort-link" ng-click="SortOrder='asc'; reverse = false">Trie horaire Croissant</a>
+            <a class="meal-search-sort-link" ng-click="SortOrder='asc'; reverse = false">Horario creciendo</a>
           </li>
           <li class="desc">
-            <a class="meal-search-sort-link" ng-click="SortOrder='desc';reverse = true">Trie horaire décroissant</a>
+            <a class="meal-search-sort-link" ng-click="SortOrder='desc';reverse = true">Horario decreciendo</a>
           </li>
         </ul>
       </div>
@@ -36,10 +36,10 @@
                     <label class="meal-menu-label" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">{{meal.menu}}</label> </br>
                     <div class="meal-label meal-location">{{meal.town}} - {{meal.addressApprox}}</div>
                     <div class="row">
-                      <div class="col-xs-6">
+                      <div class="col-sm-6">
                         <div class="meal-label meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
                       </div>
-                      <div class="col-xs-offset-2 col-xs-4">
+                      <div class="col-sm-offset-2 col-sm-4">
                         <div class="meal-label meal-time">{{meal.time |date:'HH:mm'}} </div>
                       </div>
                     </div>

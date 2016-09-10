@@ -68,7 +68,7 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router','angular-svg-r
 }]);
 
 
-modViewMeals.controller('filterMealCtrl', ['$scope', '$uibModalInstance', 'viewMealsFilterService', function($scope, $uibModalInstance ,viewMealsFilterService) {
+modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
 
   $scope.dateFilterMin_open = function() {
     $scope.filter.dateFilterMin.opened = true;
@@ -113,10 +113,6 @@ modViewMeals.controller('filterMealCtrl', ['$scope', '$uibModalInstance', 'viewM
     $scope.filter = appliedFilters;
     }
   },
-  
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  }; //funcion to dismiss the modal
   
   
   $scope.getFilters();

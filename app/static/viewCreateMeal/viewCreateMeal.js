@@ -18,7 +18,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
         $http.post('/api/meals', $scope.editedMeal).then(function() {
-          $state.go('my_meals', {reload: true});
+          $state.go('my_meals', {
+            reload: true
+          });
         });
       }
 
@@ -60,6 +62,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.formPopoverTimepicker = {
     title: 'Hora de la cena',
     templateUrl: 'PopoverTimepickerTemplate.html'
+  };
+
+  $scope.formPopoverTimepickerTimeCooking = {
+    title: 'Hora de la cena',
+    templateUrl: 'PopoverTimepickerTimeCookingTemplate.html'
   };
 
 

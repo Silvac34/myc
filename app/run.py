@@ -135,6 +135,7 @@ def auth_facebook():
     # Step 2. Retrieve information about the current user.
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
+    print (profile)
     # Step 3. Create a new account or return an existing one.
     user = User(facebook_id=profile['id'])
     #Store data from facebook

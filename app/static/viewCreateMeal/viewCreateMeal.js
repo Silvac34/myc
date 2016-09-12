@@ -2,10 +2,6 @@
 
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 'ngResource'])
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-
-}])
-
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$resource', '$uibModal', '$state', function($scope, $http, $resource, $uibModal, $state) {
   //$resource will serve for geolocation with $http
 
@@ -22,7 +18,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
         $http.post('/api/meals', $scope.editedMeal).then(function() {
-          $state.go('view_meals');
+          $state.go('my_meals', {
+            reload: true
+          });
         });
       }
 
@@ -66,6 +64,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     templateUrl: 'PopoverTimepickerTemplate.html'
   };
 
+  $scope.formPopoverTimepickerTimeCooking = {
+    title: 'Hora de la cena',
+    templateUrl: 'PopoverTimepickerTimeCookingTemplate.html'
+  };
+
 
   //enable animations in the modal
   $scope.animationsEnabled = true;
@@ -76,7 +79,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalLocationContent.html',
-      controller: 'FormModalLocationInstanceCtrl',
+      controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -93,7 +96,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'formModalPriceContent.html',
-      controller: 'FormModalPriceInstanceCtrl',
+      controller: 'FormModalInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -107,13 +110,18 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 }])
 
 //controller for the Location Modal
-.controller('FormModalLocationInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
+.controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
   $scope.okLocation = function() {
     if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
-      $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
+      if ($scope.address_complement == undefined) {
+        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address;
+      }
+      else {
+        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
+      }
       $scope.address_complement = undefined;
       $uibModalInstance.close();
     }
@@ -121,15 +129,21 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
   $scope.okPrice = function() {
     if ($scope.editedMeal.price != undefined) {
-      if (editedMeal.detailedInfo.requiredGuests != undefined) {
-        if (editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-          if (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
-            if (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0 || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+      if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0 || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
               $uibModalInstance.close();
             }
-            else if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
-              $uibModalInstance.close();
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
+              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time) {
+                $uibModalInstance.close();
+              }
             }
+          }
+          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+            $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = null;
+            $uibModalInstance.close();
           }
         }
         else {
@@ -140,19 +154,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
         $uibModalInstance.close();
       }
     }
-  }; //function to validate the modal
-
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  }; //funcion to dismiss the modal
-})
-
-.controller('FormModalPriceInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
-
-  $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
-
-  $scope.ok = function() {
-    $uibModalInstance.close();
   }; //function to validate the modal
 
   $scope.cancel = function() {

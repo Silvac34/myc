@@ -3,7 +3,11 @@
 var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
 
 
+<<<<<<< HEAD
 .controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$state', function($scope, $http, meal_id, $state) {
+=======
+.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', function($scope, $http, meal_id, $uibModalInstance) {
+>>>>>>> master
 
   $scope.loadMealInfo = function(meal_id) {
     $http.get('/api/meals/' + meal_id).then(function(response) {
@@ -65,7 +69,17 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   $scope.accordionOneAtATime = true;
   
   $scope.closeAlert = function(){
+<<<<<<< HEAD
     $scope.errorSubscribe.status = false
   }
+=======
+    $scope.errorSubscribe.status = false;
+  };
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
+  
+>>>>>>> master
 
 }]);

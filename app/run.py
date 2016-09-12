@@ -222,9 +222,6 @@ def pre_delete_privateMeals(request,lookup):
 def pre_patch_privateMeals(request,lookup):   
     lookup.update({"admin":g.user_id })
     
-#POST api/meals
-def before_subscribing_POST_meals(items):
-    print items
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers

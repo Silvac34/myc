@@ -2,10 +2,6 @@
 
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 'ngResource'])
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-
-}])
-
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$resource', '$uibModal', '$state', function($scope, $http, $resource, $uibModal, $state) {
   //$resource will serve for geolocation with $http
 
@@ -22,7 +18,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
         $http.post('/api/meals', $scope.editedMeal).then(function() {
-          $state.go('view_meals');
+          $state.go('my_meals', {
+            reload: true
+          });
         });
       }
 
@@ -64,6 +62,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.formPopoverTimepicker = {
     title: 'Hora de la cena',
     templateUrl: 'PopoverTimepickerTemplate.html'
+  };
+
+  $scope.formPopoverTimepickerTimeCooking = {
+    title: 'Hora de la cena',
+    templateUrl: 'PopoverTimepickerTimeCookingTemplate.html'
   };
 
 
@@ -113,11 +116,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
 
   $scope.okLocation = function() {
     if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
-      if($scope.address_complement == undefined){
+      if ($scope.address_complement == undefined) {
         $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address;
       }
-      else{
-        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;  
+      else {
+        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
       }
       $scope.address_complement = undefined;
       $uibModalInstance.close();
@@ -133,10 +136,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
               $uibModalInstance.close();
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
-              $uibModalInstance.close();
+              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time) {
+                $uibModalInstance.close();
+              }
             }
           }
-          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null){
+          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
             $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = null;
             $uibModalInstance.close();
           }

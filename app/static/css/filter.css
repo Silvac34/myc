@@ -16,7 +16,6 @@
 
 .filter-date-checkbox-desktop{
  float: left;
- 
 }
 
 .filter-label{
@@ -31,12 +30,13 @@
 }
 
 .search_calendar {
-    background-image: url(/static/sources/calendar_with_clock.png);
-    background-repeat: no-repeat;
-    text-indent: 20px;
-    margin-top: 20px;
-    margin-left:20px;
+    background: url("/static/sources/calendar_with_clock.png") no-repeat;
+    text-indent: 25px;
+    margin-top: auto;
+    background-position: 10px 7px;
+    background-color: white;
 }
+
 
 
 .filter_mobile_calendar {

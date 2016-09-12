@@ -21,13 +21,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/welcome',
       templateUrl: 'static/welcome/welcome.html',
       controller: 'WelcomeCtrl'
-    })
+    });
   $stateProvider
     .state('login', {
       url: '/login',
       templateUrl: 'static/viewLogin/viewLogin.html',
       controller: 'ViewLoginCtrl'
-    })
+    });
   $stateProvider
     .state('view_meals', {
       url: '/view_meals',
@@ -36,7 +36,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       data: {
         requiredLogin: true
       }
-    })
+    });
   $stateProvider
     .state('create_meal', {
       url: '/create_meal',
@@ -45,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       data: {
         requiredLogin: true
       }
-    })
+    });
   $stateProvider
     .state('my_meals', {
       url: '/my_meals',
@@ -54,7 +54,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       data: {
         requiredLogin: true
       }
-    })
+    });
   $urlRouterProvider.otherwise('welcome');
 
   $authProvider.facebook({

@@ -14,14 +14,11 @@ from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname 
 
-FACEBOOK_SECRET = 'f97f2cc3e469c9675b9d5b9f0b57ba21'
-TOKEN_SECRET='kmaillet230191dkohn1003dflklqksdoklc'
-
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
         try:
             token = base64.b64decode(token)
-            payload = jwt.decode(token, TOKEN_SECRET)
+            payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
             user =Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             g.user_id = ObjectId(payload['sub'])
             return user 
@@ -42,7 +39,6 @@ class Application:
     app.root_path = abspath(dirname(__file__))
     configEnv = getattr(configure, os.environ.get('APP_SETTINGS'))()
     app.config.from_object(configEnv)
-    #db=app.data.driver.db
 
 class User:
     def __init__(self,email=None,password=None,facebook_id=None,_id=None):
@@ -86,7 +82,7 @@ class User:
             'iat': datetime.utcnow(),
             'exp': datetime.utcnow() + timedelta(days=14)
         }
-        token = jwt.encode(payload, TOKEN_SECRET)
+        token = jwt.encode(payload, Application.app.config['TOKEN_SECRET'])
         return str(base64.b64encode(token))
 
 
@@ -108,7 +104,6 @@ class Meal:
 
 @Application.app.route('/')
 def homePage():
-    #return Application.app.root_path
     return render_template("index.html")
 
 
@@ -123,11 +118,9 @@ def auth_facebook():
     params = {
         'client_id': request.json['clientId'],
         'redirect_uri': request.json['redirectUri'],
-        'client_secret': FACEBOOK_SECRET,
+        'client_secret': Application.app.config['FACEBOOK_SECRET'],
         'code': request.json['code']
     }
-    print(FACEBOOK_SECRET)
-    print("ok")
     # Exchange authorization code for access token.
     r = requests.get(access_token_url, params=params)
     # use json.loads instead of urlparse.parse_qsl
@@ -135,7 +128,6 @@ def auth_facebook():
     # Step 2. Retrieve information about the current user.
     r = requests.get(graph_api_url, params=access_token)
     profile = json.loads(r.text)
-    print (profile)
     # Step 3. Create a new account or return an existing one.
     user = User(facebook_id=profile['id'])
     #Store data from facebook
@@ -173,9 +165,7 @@ def  before_returning_GET_item_meal(response):
 #POST api/meals
 def before_storing_POST_meals (items):
     for meal in items:
-        #meal["admin"] = ObjectId(g.user_id)
         meal["admin"] = g.user_id
-        #meal["privateInfo"]["users"]= [{"_id":ObjectId(g.user_id),"role": ["admin","cook"]}]
         meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin","cook"]}]
         ######### Add Guests #################
         nbCooks = 0
@@ -273,8 +263,6 @@ def subscribe_to_meal(meal_id):
             return Response("Meal doesn't exist",status =404)
         if meal["nbRemainingPlaces"]<=0 : 
             return Response("Meal is full",status=400)
-#        elif not rquData["requestRole"] + "s" in meal["detailedInfo"]["requiredGuests"] : #check if good request
-#            return Response(status=400)
         elif not meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"]>0 :
             return Response("Role is full",status=400)
         elif User(_id=g.user_id).isSubscribed(meal=meal): 

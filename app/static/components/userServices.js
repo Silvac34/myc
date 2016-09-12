@@ -6,8 +6,8 @@ angular.module('userServices', [])
 
     var userServices = {};
     userServices.getUserInfo = function() {
-        return $http.get('/api/user').then(function(result) {
-            return result.data
+        return $http.get('/api/users/private').then(function(result) {
+            return result.data['_items'][0]
         })
 
         .catch(function(result) {

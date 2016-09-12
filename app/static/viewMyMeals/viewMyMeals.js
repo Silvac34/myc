@@ -5,8 +5,8 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 .controller('ViewMyMealsCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
 
   $scope.loadMeals = function() {
-      $http.get('/api/meal/my_meals').then(function(response) {
-        $scope.meals = response.data;
+      $http.get('/api/meals/private').then(function(response) {
+        $scope.meals = response.data['_items'];
       });
     },
 

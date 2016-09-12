@@ -126,6 +126,8 @@ def auth_facebook():
         'client_secret': FACEBOOK_SECRET,
         'code': request.json['code']
     }
+    print(FACEBOOK_SECRET)
+    print("ok")
     # Exchange authorization code for access token.
     r = requests.get(access_token_url, params=params)
     # use json.loads instead of urlparse.parse_qsl

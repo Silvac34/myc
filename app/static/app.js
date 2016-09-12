@@ -54,15 +54,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       data: {
         requiredLogin: true
       }
-<<<<<<< HEAD
-    })
-  $stateProvider
-    .state('view_my_dtld_meals', {
-      url: '/my_meals/:myMealId',
-      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
-      controller: 'ViewMyMealsDtldCtrl'
-=======
->>>>>>> master
     });
   $urlRouterProvider.otherwise('welcome');
 

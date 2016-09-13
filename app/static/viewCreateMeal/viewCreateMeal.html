@@ -31,8 +31,8 @@
                                                 <label for="inputPrice" class="col-xs-6 control-label">Precio total de las compras</label>
                                                 <div class="col-xs-6">
                                                     <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && priceForm.$submitted}">
+                                                        <span class="input-group-addon">$</span>
                                                         <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price" />
-                                                        <span class="input-group-addon">€</span>
                                                     </div>
                                                 </div>
                                             </div>

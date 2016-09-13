@@ -161,9 +161,6 @@
     margin-bottom: 27px;
 }
 
-<<<<<<< HEAD
-.meal-label {
-=======
 .meal-menu-vegetarian-label {
     background: url("/static/sources/vegetarian.png") no-repeat 0;
     font-size: 16px;
@@ -174,7 +171,6 @@
 }
 
 .meal-label{
->>>>>>> master
     font-size: 12px;
     color: rgba(56, 52, 52, 0.45);
     padding-left: 29px;
@@ -189,11 +185,7 @@
     min-height: 24px;
 }
 
-<<<<<<< HEAD
-.meal-date {
-=======
 .meal-date{
->>>>>>> master
     background: url("/static/sources/calendar_with_clock.png") no-repeat;
     min-height: 24px;
 }

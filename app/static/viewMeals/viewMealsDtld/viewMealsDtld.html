@@ -44,7 +44,8 @@
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">Vengo asistir el cocinero en la preparación de la cena. </br>¡OJO! hay que llegar a las <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span> para ayudar el anfitrión</div>
+                    <div class="meal-dtld-helpers-description">Vengo asistir el cocinero en la preparación de la cena. </br>¡OJO! hay que llegar a las <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span> para ayudar el
+                        anfitrión</div>
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
@@ -80,15 +81,9 @@
     </div>
     <div class="text-center">
         <div uib-alert ng-if="errorSubscribe.status" class="alert alert-dismissible alert-danger" close="closeAlert()">{{errorSubscribe.message}}</div>
-<<<<<<< HEAD
-        <a class="btn btn-primary" ng-click = "subscribeMeal(meal._id,requestRole.name)" ng-if="meal.nbRemainingPlaces>0 && !goToMeal">Envoyer une demande</a>
-        <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">Accéder à la page du repas</a>
-        <div ng-if="meal.nbRemainingPlaces<=0  && !goToMeal" class="meal-dtld-full-msg" >Oups ! Ce repas est complet </div>
-=======
         <a class="btn btn-primary" ng-click="subscribeMeal(meal._id,requestRole.name)" ng-if="meal.nbRemainingPlaces>0 && !goToMeal">Participar</a>
-        <a class="btn btn-success" ng-if="goToMeal">Ver la cena</a>
+        <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">Ver la cena</a>
         <div ng-if="meal.nbRemainingPlaces<=0  && !goToMeal" class="meal-dtld-full-msg">Damn ! La cena ya está llena</div>
->>>>>>> master
     </div>
 
     <div class="row meal-dtld-group">

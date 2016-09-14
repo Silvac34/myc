@@ -18,6 +18,24 @@
     "gender": "female"
 }, {
     "_id": {
+        "$oid": "111111111111111111111112"
+    },
+    "privateInfo": {
+        "facebook_id": "114780772305383",
+        "email": "dorothy_wdwyhuo_testuser@tfbnw.net",
+        "link": "https://www.facebook.com/app_scoped_user_id/114780772305383/"
+    },
+    "picture": {
+        "data": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.0-1/c8.0.50.50/p50x50/14203198_138331519950308_2376614838371002464_n.jpg?oh=466312d02a6f5cd78bbe664e7831e17d&oe=58487B54",
+            "is_silhouette": false
+        }
+    },
+    "first_name": "Dorothy",
+    "last_name": "TestUser",
+    "gender": "female"
+}, {
+    "_id": {
         "$oid": "5776d0824403f974b97caf89"
     },
     "privateInfo": {

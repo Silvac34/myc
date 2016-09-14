@@ -4,14 +4,18 @@
         "nbGuests": 10,
         "veggies": false,
         "town": "Santiago",
-        "admin": "111111111111111111111111",
+        "admin": {
+            "$oid": "111111111111111111111111"
+        },
         "menu": "Jolie piece de boeuf",
         "nbRemainingPlaces": 9,
         "privateInfo": {
             "address": "30 avenue de Trudaine 75009",
             "adminPhone":"0601020304",
             "users": [{
-                "_id": "111111111111111111111111",
+                "_id": {
+                    "$oid": "111111111111111111111111"
+                },
                 "role": ["admin", "cook"]
             }]
         },
@@ -46,15 +50,24 @@
         "nbGuests": 10,
         "veggies": false,
         "town": "Santiago",
-        "admin": "111111111111111111111111",
+        "admin": {
+            "$oid": "111111111111111111111111"
+        },
         "menu": "Soupions de légumes avec cassolette de veau",
-        "nbRemainingPlaces": 9,
+        "nbRemainingPlaces": 8,
         "privateInfo": {
             "address": "3 impasse marie - blanche 75018",
             "adminPhone":"0601020304",
             "users": [{
-                "_id": "111111111111111111111111",
+                "_id": {
+                    "$oid": "111111111111111111111111"
+                },
                 "role": ["admin", "cook"]
+            },{
+                "_id":  {
+                    "$oid": "111111111111111111111112"
+                },
+                "role": ["simpleGuest"]
             }]
         },
         "detailedInfo": {
@@ -65,7 +78,7 @@
                     "price":6
                 },
                 "simpleGuests": {
-                    "nbRemainingPlaces": 9,
+                    "nbRemainingPlaces": 8,
                     "nbRquSimpleGuests": 9,
                     "price":6
                 }
@@ -81,13 +94,17 @@
             "$oid": "111111111111111111111113"
         },
         "town": "Santiago",
-        "admin": "111111111111111111111111",
+        "admin":{
+            "$oid": "111111111111111111111111"
+        },
         "menu": "Hachi-parmentier de canard",
         "price": 15,
         "nbRemainingPlaces": 0,
         "privateInfo": {
             "users": [{
-                "_id": "111111111111111111111111",
+                "_id": {
+                   "$oid": "111111111111111111111111"
+                },
                 "role": ["admin", "cook"]
             }],
             "adminPhone":"0601020304",
@@ -116,13 +133,17 @@
             "$oid": "57759dcc4403f9234e4c7e2b"
         },
         "town": "Santiago",
-        "admin": "577946eb4403f92b93425e6a",
+        "admin": {
+            "$oid": "577946eb4403f92b93425e6a"
+        },
         "menu": "Mozarella Burrata et petits légumes grillés",
         "price": 50,
         "nbRemainingPlaces": 4,
         "privateInfo": {
             "users": [{
-                "_id": "577946eb4403f92b93425e6a",
+                "_id": {
+                    "$oid": "577946eb4403f92b93425e6a"
+                },
                 "role": ["admin", "cook"]
             }],
             "adminPhone":"0601020304",
@@ -155,13 +176,17 @@
             "$oid": "578654e64403f908ba2fbd21"
         },
         "town": "Santiago",
-        "admin": "5776d0824403f974b97caf89",
+        "admin": {
+            "$oid": "5776d0824403f974b97caf89"
+        },
         "menu": "Poisson pané",
         "price": 50,
         "nbRemainingPlaces": 4,
         "privateInfo": {
             "users": [{
-                "_id": "5776d0824403f974b97caf89",
+                "_id": {
+                  "$oid": "5776d0824403f974b97caf89"
+                },
                 "role": ["admin", "cook"]
             }],
             "adminPhone":"0601020304",
@@ -194,13 +219,17 @@
             "$oid": "57865c1a4403f908ba2fbd22"
         },
         "town": "Santiago",
-        "admin": "5776d0824403f974b97caf89",
+        "admin":{
+            "$oid": "5776d0824403f974b97caf89"
+        },
         "menu": "Beurre blanc",
         "price": 76,
         "nbRemainingPlaces": 9,
         "privateInfo": {
             "users": [{
-                "_id": "5776d0824403f974b97caf89",
+                "_id":{
+                    "$oid": "5776d0824403f974b97caf89"
+                },
                 "role": ["admin", "cook"]
             }],
             "adminPhone":"0601020304",

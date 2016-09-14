@@ -65,7 +65,7 @@ You can add a new environment configuration by adding a file in app/config and b
 ##Step 4 : Launch the app in your dev environment
 enter the following command in the project directory inside the guest machine
 ```
-python app/api.py
+python app/run.py
 ```
 If you are using vagrant:
 The app will be available at http://localhost:1234/

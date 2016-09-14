@@ -3,197 +3,196 @@ import os
 import sys
 topdir = os.path.join(os.path.dirname(__file__), "../..")
 sys.path.append(topdir)
-import unittest
-import json
-import copy
-from datetime import datetime
 from pymongo import MongoClient
-from bson import ObjectId, json_util
+from app.run import Application, User
 from bson.json_util import dumps,loads
-from app.api import Application, User
-from app import configure
-import subprocess
+from bson import ObjectId
+import json
+import eve
+import unittest
+from test_settings import MONGO_URI
+from unittest import TestCase   
 
 
-class BasicAPITest(unittest.TestCase):
+
+MONGOLAB_URI_TEST = 'mongodb://shareat:kmaillet230191@ds055872.mlab.com:55872/shareat_dev_test'
+
+class BasicAPITest(TestCase):
+    
     def setUp(self):
-        self.maxDiff = None
-        Application.app.config['TESTING'] = True
-        self.client = Application.app.test_client()
-        mClient = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
-        Application.db = mClient.get_default_database()
-        Application.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
-        self.adminUser = User(_id="111111111111111111111111")
-
+	    self.maxDiff = None
+	    self.app = Application.app
+	    self.app.config['TESTING'] = True
+	    self.app.config['DEBUG'] = True
+	    self.app.config['MONGO_URI']=  MONGOLAB_URI_TEST
+	    self.test_client = self.app.test_client()
+	    self.db = MongoClient(MONGOLAB_URI_TEST).get_default_database()
+		
     def tearDown(self):
-        Application.db.meals.delete_many({})
-        Application.db.users.delete_many({})
+	    del self.app
+	    self.db.meals.delete_many({})
+	    self.db.users.delete_many({})
+	    
+    def rmAddFieldsItem(self,dictObject):
+	    del dictObject["_created"]
+	    del dictObject["_updated"]
+	    return dictObject
 
-    def test_unauthentificatedUser(self):
-        resp = self.client.post("/api/meals", data="{\"super\":\"toto\"}")
-        self.assertEqual("401 UNAUTHORIZED", resp.status)
-
-    def test_insert_meal(self):
-        jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\"},\"cleaners\":{\"nbRquCleaners\":1},\"simpleGuests\":{\"nbRquSimpleGuests\":6} }},\"privateInfo\" :{\"address\": \"30 avenue de Trudaine 75009\", \"adminPhone\":\"0601020304\"},\"nbGuests\": 10,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        resp = self.client.post("/api/meals", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
-        self.assertEqual("200 OK", resp.status)
-        dbMeal = Application.db.meals.find_one()
-        self.assertEqual(json.dumps(Application.preprocess_id(dbMeal),default=json_util.default), resp.data)
-        testMeal = loads(open('../testData/meals_testData.json').read())[0]
-        testMeal["_id"]= dbMeal["_id"]
-        testMeal["creationDate"] = dbMeal["creationDate"]
-        self.assertEqual(dbMeal, testMeal)
-
-    def test_insert_empty_meal(self):
-        resp = self.client.post("/api/meals",data="",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
-        self.assertEqual("", resp.data)
-        self.assertEqual(0,Application.db.meals.count())
-
-class TestAuthMealAPI(unittest.TestCase):
-
+    def rmAddFieldsList(self,listObj):
+        listObj= listObj['_items']
+        for i in listObj:
+            i = self.rmAddFieldsItem(i)
+        return listObj
+	    
+class APITest1(BasicAPITest):
     def setUp(self):
-        self.maxDiff = None
-        Application.app.config['TESTING'] = True
-        self.client = Application.app.test_client()
-        mClient = MongoClient(Application.app.config['MONGOLAB_URI_TEST'])
-        Application.db = mClient.get_default_database()
-        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[0])
-        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
-        Application.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
+        super(APITest1, self).setUp()
+        self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
+        self.adminUser = User(_id="111111111111111111111111")
+    
+    def tearDown(self):
+	    super(APITest1, self).tearDown()
+	    
+    def test_unauthentificatedUser(self):
+	    resp = self.test_client.post("/api/meals", data="{\"super\":\"toto\"}")
+	    self.assertEqual("401 UNAUTHORIZED", resp.status)
+	    
+    def test_insert_empty_meal(self):
+	    resp = self.test_client.post("/api/meals",data="{\"super\":\"toto\"}",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()), 'Content-Type':'application/json'})
+	    self.assertEqual("422 UNPROCESSABLE ENTITY", resp.status)
+	    
+    def test_insert_meal(self):
+	    jsonRequestData = "{\"town\": \"Santiago\",\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\"},\"cleaners\":{\"nbRquCleaners\":1},\"simpleGuests\":{\"nbRquSimpleGuests\":6} }},\"privateInfo\" :{\"address\": \"30 avenue de Trudaine 75009\", \"adminPhone\":\"0601020304\"},\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+	    resp = self.test_client.post("/api/meals", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+	    self.assertEqual("201 CREATED", resp.status)
+	    dbMeal = self.db.meals.find_one()
+	    self.rmAddFieldsItem(dbMeal)
+	    testMeal = loads(open('../testData/meals_testData.json').read())[0]
+	    testMeal["_id"]= dbMeal["_id"]
+	    self.assertEqual(dbMeal, testMeal)
+
+class APITest2(BasicAPITest):
+    def setUp(self):
+        super(APITest2, self).setUp()
+        self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[0])
+        self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
+        self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
+        self.db.users.insert(loads(open('../testData/users_testData.json').read())[1])
         self.adminUser = User(_id="111111111111111111111111")
         self.otherUser = User(_id="111111111111111111111112")
-
+    
     def tearDown(self):
-        Application.db.meals.delete_many({})
-        Application.db.users.delete_many({})
-        
+	    super(APITest2, self).tearDown()
+	    
+	    
     def test_get_all_meals(self):
-        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        jsonAPIExpMeal2 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\"}"
-        resp = self.client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10.0},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10.0},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10.0}}}}"
+        resp = self.test_client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
-        resp = json.loads(resp.data)
+        resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
-        expOutcome2 = json.loads(jsonAPIExpMeal2)
         self.assertEqual(2, len(resp))
         self.assertEquals(resp[0],expOutcome1)
-        self.assertEquals(resp[1],expOutcome2)
         
-
     def test_get_detailed_info_subscribed(self):
-        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":true,\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        resp = self.client.get("/api/meal/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":true,\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10.0},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10.0},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10.0}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        resp = self.test_client.get("/api/meals/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
-        resp = json.loads(resp.data)
+        resp = self.rmAddFieldsItem(json.loads(resp.data))
         expected = json.loads(jsonAPIExpMeal1)
         self.assertEquals(resp,expected)
     
     def test_get_detailed_info_unsubscribed(self):
-        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":false,\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        resp = self.client.get("/api/meal/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
-        resp = json.loads(resp.data)
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":false,\"requiredGuests\": {\"cooks\":{\"nbRquCooks\":3,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":10.0},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":10.0},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":10.0}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        resp = self.test_client.get("/api/meals/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        resp = self.rmAddFieldsItem(json.loads(resp.data))
         expected = json.loads(jsonAPIExpMeal1)
         self.assertEquals(resp,expected)
-        
-        
+
     def test_subscribe_meal_ok(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
-        resp = self.client.post("/api/meal/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        resp = self.test_client.post("/api/meals/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
         testMeal = loads(open('../testData/meals_testData.json').read())[0]
         testMeal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"] = testMeal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"] -1
         testMeal["nbRemainingPlaces"] = testMeal["nbRemainingPlaces"] -1 
-        testMeal["privateInfo"]["users"].append ({u'_id': u'111111111111111111111112',u'role': [u'cook']}) 
-        dbMeal = Application.db.meals.find_one({"_id":ObjectId("111111111111111111111111")})
+        testMeal["privateInfo"]["users"].append ({"_id": ObjectId("111111111111111111111112"),"role": ["cook"]}) 
+        dbMeal = self.db.meals.find_one({"_id":ObjectId("111111111111111111111111")})
         self.assertEqual(dbMeal, testMeal)
-        
+
     def test_subscribe_meal_UserSubscribed(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
-        resp = self.client.post("/api/meal/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token())})
+        resp = self.test_client.post("/api/meals/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("400 BAD REQUEST", resp.status)
         self.assertEqual("User already registered", resp.data)
-    
 
     def test_subscribe_meal_fullRole(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
-        resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        resp = self.test_client.post("/api/meals/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("400 BAD REQUEST", resp.status)
         self.assertEqual("Role is full", resp.data)
             
     def test_subscribe_meal_fullMeal(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
-        Application.db.meals.insert(loads(open('../testData/meals_testData.json').read())[2])
-        resp = self.client.post("/api/meal/111111111111111111111113/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[2])
+        resp = self.test_client.post("/api/meals/111111111111111111111113/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("400 BAD REQUEST", resp.status)
         self.assertEqual("Meal is full", resp.data)
-            
-    def test_subscribe_meal_badRequest1(self):
-        jsonRequestData = "{\"test\": \"cook\"}"
-        resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
+        
+    def test_unsubscribe_meal_ok(self):
+        resp = self.test_client.post("/api/meals/111111111111111111111112/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        testMeal = loads(open('../testData/meals_testData.json').read())[1]
+        testMeal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"] +=  1
+        testMeal["nbRemainingPlaces"] += 1 
+        testMeal["privateInfo"]["users"].remove ({"_id": ObjectId("111111111111111111111112"),"role": ["simpleGuest"]}) 
+        dbMeal = self.db.meals.find_one({"_id":ObjectId("111111111111111111111112")})
+        self.assertEqual(dbMeal, testMeal)
+
+    def test_unsubscribe_meal_unsubscribed_user(self):
+        resp = self.test_client.post("/api/meals/111111111111111111111111/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("403 FORBIDDEN", resp.status)
+        self.assertEqual("User isn't subscribed", resp.data)
+        
+    def test_unsubscribe_meal_admin(self):
+        resp = self.test_client.post("/api/meals/111111111111111111111112/unsubscription", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("400 BAD REQUEST", resp.status)
+        self.assertEqual("Meal's admin cannot unsubscribe", resp.data)
         
+    def test_get_all_my_meals(self):
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 8,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\": {\"nbRemainingPlaces\": 0,\"nbRquCooks\": 1,\"price\":6},\"simpleGuests\": {\"nbRemainingPlaces\": 8,\"nbRquSimpleGuests\": 9,\"price\":6}}},\"privateInfo\":{\"adminPhone\":\"0601020304\",\"address\":\"3 impasse marie - blanche 75018\",\"users\": [{\"_id\": \"111111111111111111111111\",\"role\": [\"admin\", \"cook\"]},{\"_id\": \"111111111111111111111112\",\"role\": [\"simpleGuest\"]}]}}"
+        resp = self.test_client.get("/api/meals/private",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        resp = self.rmAddFieldsList(json.loads(resp.data))
+        expOutcome1 = json.loads(jsonAPIExpMeal1)
+        self.assertEqual(1, len(resp))
+        self.assertEquals(resp[0],expOutcome1)
         
-    def test_subscribe_meal_badRequest2(self):
-        jsonRequestData = "{\"requestRole\": \"cookies\"}"
-        resp = self.client.post("/api/meal/111111111111111111111112/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token())})
-        self.assertEqual("400 BAD REQUEST", resp.status)
+    def test_get_meal_private_info_subscribed(self):
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111112\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Soupions de légumes avec cassolette de veau\",\"price\": 60,\"nbGuests\": 10,\"nbRemainingPlaces\": 8,\"veggies\": false,\"time\": \"2017-12-20T17:00:00.000Z\",\"addressApprox\": \"Métro Blanche L2\",\"detailedInfo\": {\"requiredGuests\": {\"cooks\": {\"nbRemainingPlaces\": 0,\"nbRquCooks\": 1,\"price\":6},\"simpleGuests\": {\"nbRemainingPlaces\": 8,\"nbRquSimpleGuests\": 9,\"price\":6}}},\"privateInfo\":{\"adminPhone\":\"0601020304\",\"address\":\"3 impasse marie - blanche 75018\",\"users\": [{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\",\"role\": [\"admin\", \"cook\"]},{\"_id\": \"111111111111111111111112\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c8.0.50.50/p50x50/14203198_138331519950308_2376614838371002464_n.jpg?oh=466312d02a6f5cd78bbe664e7831e17d&oe=58487B54\",\"is_silhouette\": false}},\"first_name\": \"Dorothy\",\"last_name\": \"TestUser\",\"gender\": \"female\",\"role\": [\"simpleGuest\"]}]}}"
+        resp = self.test_client.get("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        resp = self.rmAddFieldsItem(json.loads(resp.data))
+        expected = json.loads(jsonAPIExpMeal1)
+        self.assertEquals(resp,expected)
         
-    #def test_delete_one_meal(self):
-    #    Application.db.meals.insert({"test_remove": "test"})
-    #    me =Application.db.meals.find_one()
-    #    resp1 = self.client.delete("/api/meal/"+ str(me['_id']))
-    #    self.assertEqual("200 OK", resp1.status)
-    #    self.assertEqual(resp1.data, '1 meal deleted')
-    #    self.assertEqual(None, Application.db.meals.find_one())
-    #    #When the meal don't exist
-    #    Application.db.meals.insert(me)
-    #    me2 =copy.copy(me)
-    #    me2['_id']=ObjectId(str(me['_id'])[:-3]+'123')
-    #    resp2 = self.client.delete("/api/meal/"+str(me2['_id']))
-    #    self.assertEqual("202 ACCEPTED", resp2.status)
-    #    self.assertEqual(resp2.data, '0 meal deleted')
-    #    self.assertEqual(me, Application.db.meals.find_one())
+    def test_get_meal_private_info_unsubscribed(self):
+        resp = self.test_client.get("/api/meals/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("404 NOT FOUND", resp.status)
+        
+    def test_delete_meal_ok(self):
+        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("204 NO CONTENT", resp.status)
+        meals = self.db.meals.find()
+        self.assertEqual( 1,meals.count())
+        self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
+        
+    def test_delete_meal_not_admin(self):
+        resp = self.test_client.delete("/api/meals/private111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("404 NOT FOUND", resp.status)
+        self.assertEqual( 2,self.db.meals.find().count())
 
-    #def test_update_one_partial_meal_withoutid(self):
-    #    Application.db.meals.insert({"test_update": "test"})
-    #    me =Application.db.meals.find_one()
-    #    resp1 = self.client.put("/api/meal/"+str(me['_id']),data="{\"test_update\":\"toto\"}")
-    #    me2 = Application.db.meals.find_one()
-    ##    me['test_update']="toto"
-    #    self.assertEqual(me2,me)
-    #    self.assertEqual("200 OK", resp1.status)
-    #    self.assertEqual(resp1.data, '1 meals modified')
-
-    #def test_update_one_meal_withid(self):
-    #    Application.db.meals.insert({"test_update": "test","test_toto": "toto"})
-    #    me =Application.db.meals.find_one()
-    #    me['test_toto']="koukou"
-    #    me3= copy.copy(me)
-    #    me3['_id']=str(me3['_id'])
-    #    resp1 = self.client.put("/api/meal/"+str(me['_id']),data=json.dumps(me3))
-    #    me2 = Application.db.meals.find_one()
-    #    self.assertEqual(me2,me)
-    #    self.assertEqual("200 OK", resp1.status)
-    #    self.assertEqual(resp1.data, '1 meals modified')
-
-    #def test_update_one_meal_that_dont_exist(self):
-    #    Application.db.meals.insert({"test_update": "test"})
-    #    me =Application.db.meals.find_one()
-    #    me2 =copy.copy(me)
-    #    me2['_id']=ObjectId(str(me['_id'])[:-3]+'123')
-    #    resp2 = self.client.put("/api/meal/"+str(me2['_id']),data="{\"test_update\":\"toto22\"}")
-    #    self.assertEqual("202 ACCEPTED", resp2.status)
-    #    self.assertEqual(resp2.data, '0 meals modified')
-    #    self.assertEqual(me, Application.db.meals.find_one())
-    #    self.assertEqual(None, Application.db.meals.find_one({"_id":me2['_id']}))
-
-    #def test_update_one_meal_with_nodata(self):
-    #    Application.db.meals.insert({"test_update": "test"})
-    #    me =Application.db.meals.find_one()
-    #    resp3 = self.client.put("/api/meal/"+str(me['_id']),data="")
-    #    self.assertEqual("202 ACCEPTED", resp3.status)
-    #    self.assertEqual(resp3.data, '0 meals modified')
-    #    self.assertEqual(me, Application.db.meals.find_one())
 
 if __name__ == '__main__':
     unittest.main()

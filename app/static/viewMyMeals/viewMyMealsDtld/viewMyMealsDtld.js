@@ -5,7 +5,7 @@ var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', '
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', function($scope, $http, $stateParams, $uibModal) {
 
   $scope.loadMyMealInfo = function(meal_id) {
-    $http.get('/api/meal/' + meal_id + '/private').then(function(response) {
+    $http.get('/api/meals/private/' + meal_id ).then(function(response) {
       $scope.meal = response.data;
       var userId = $scope.user._id;
 
@@ -74,7 +74,7 @@ modMyMealsDetailed.filter('MyMealsFiltered', function() {
 modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
 
   $scope.deleteMyMeal = function(meal_id) {
-    $http.delete('/api/meal/' + meal_id + '/private').then(function(response) {
+    $http.delete('/api/meals/private/' + meal_id ).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };
@@ -99,7 +99,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
 
   /* $scope.editMyMeal = function(meal_id) {
-    $http.modify('/api/meal/' + meal_id + '/private').then(function(response) {
+    $http.modify('/api/meals/private/' + meal_id).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };

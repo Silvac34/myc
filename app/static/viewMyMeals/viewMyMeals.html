@@ -1,10 +1,10 @@
-<h1 class="page-header" id="tables">Liste de mes repas à venir</h1>
-<div class="container">
+<div class="container-fluid">
+  <h1 class="page-header" id="tables">Mis cenas que se vienen</h1>
   <div class="col-sm-9 col-xs-12 list-my-meal">
     <div class="row" ng-repeat="meal in meals | MyMealsFiltered:true">
       <div class="col-xs-12">
         <div class="list-group">
-          <a class="list-group-item list-group-my-meal" ng-click=openModalDtldMyMeal(meal._id)>
+          <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
             <div class="hidden-xs col-sm-2 my-meal-admin">
               <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
               <div class="my-meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -12,14 +12,14 @@
             </div>
             <div class="col-xs-12 col-sm-10">
               <div class="row">
+                <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu}}</label> </br>
                 <div class="col-xs-8">
-                  <label class="my-meal-menu-label">{{meal.menu}}</label> </br>
                   <div class="my-meal-label my-meal-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
                   <div class="row">
-                    <div class="col-xs-6">
-                      <div class="my-meal-label my-meal-date">{{meal.time |date:'dd/MM/yyyy'}} </div>
+                    <div class="col-sm-9">
+                      <div class="my-meal-label my-meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
                     </div>
-                    <div class="col-xs-offset-2 col-xs-4">
+                    <div class="col-sm-3">
                       <div class="my-meal-label my-meal-time">{{meal.time |date:'HH:mm'}} </div>
                     </div>
                   </div>
@@ -40,14 +40,13 @@
   </div>
 </div>
 
-<h1 class="page-header" id="tables">Liste de mes repas passés</h1>
-
-<div class="container">
+<div class="container-fluid">
+  <h1 class="page-header" id="tables">Mis cenas pasadas</h1>
   <div class="col-sm-9 col-xs-12 list-my-meal">
     <div class="row" ng-repeat="meal in meals | MyMealsFiltered:false">
       <div class="col-xs-12">
         <div class="list-group">
-          <a class="list-group-item list-group-my-meal" ng-click=openModalDtldMyMeal(meal._id)>
+          <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
             <div class="hidden-xs col-sm-2 my-meal-admin">
               <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
               <div class="my-meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -55,14 +54,14 @@
             </div>
             <div class="col-xs-12 col-sm-10">
               <div class="row">
+                <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu}}</label> </br>
                 <div class="col-xs-8">
-                  <label class="my-meal-menu-label">{{meal.menu}}</label> </br>
                   <div class="my-meal-label my-meal-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
                   <div class="row">
-                    <div class="col-xs-6">
-                      <div class="my-meal-label my-meal-date">{{meal.time |date:'dd/MM/yyyy'}} </div>
+                    <div class="col-sm-9">
+                      <div class="my-meal-label my-meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
                     </div>
-                    <div class="col-xs-offset-2 col-xs-4">
+                    <div class="col-sm-3">
                       <div class="my-meal-label my-meal-time">{{meal.time |date:'HH:mm'}} </div>
                     </div>
                   </div>

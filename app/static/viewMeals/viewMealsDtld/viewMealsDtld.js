@@ -6,7 +6,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
 .controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', function($scope, $http, meal_id, $uibModalInstance) {
 
   $scope.loadMealInfo = function(meal_id) {
-    $http.get('/api/meal/' + meal_id).then(function(response) {
+    $http.get('/api/meals/' + meal_id).then(function(response) {
       $scope.meal = response.data;
 
       /*to check wether there is available space for each rôle*/
@@ -41,7 +41,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   
   
   $scope.subscribeMeal = function(meal_id,role) {
-    $http.post('/api/meal/' + meal_id +'/subscription', {"requestRole":role}).then(function(response) {
+    $http.post('/api/meals/' + meal_id +'/subscription', {"requestRole":role}).then(function(response) {
       //$scope.loadMealInfo(meal_id);
       $scope.meal.nbRemainingPlaces -=  1 
       $scope.meal.detailedInfo.requiredGuests[$scope.requestRole.name + "s"].nbRemainingPlaces -= 1 

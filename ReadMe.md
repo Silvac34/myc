@@ -168,33 +168,35 @@ Your app will be available at https://shareat123-prod.herokuapp.com
 ###Git repository and branches :
 - Master : La dernière version stable du code (le code aura été testé sur l’environnement de staging).
 - Prod : Le code déployé dans l’environnement de production
-- DevKev :  Branche de dev de Kevin. Il ne fusionnera cette branche avec le Master qu’après avoir tester le code sur l’environnement de staging.
-- DevDim :  Branche de dev de Dimitri. Il ne fusionnera cette branche avec le Master qu’après avoir tester le code sur l’environnement de staging.
+- funcbranch : Branche sur laquelle on développe une nouvelle fonctionnalité. On mergera cette branche avec le master lorsque la fonctionnalité sera complète et testée sur l'environnement de staging
+- funcbranchKev :  Branche de dev de Kevin sur la nouvelle fonctionnalité
+
 ### Development and commit workflow :
 
--	Je développe une fonctionnalité sur ma branche DevKev
--	Une fois qu’elle marche je la teste sur l’environnement de staging
+-	Je souhaite créer une nouvelle fonctionnalité, je crée un nouvelle branche distante sur BitBucket
+-	Je pull cette branche sur mon environment de développement local puis je crée une branche de dev.
 ```
-grunt StageDim
-```
--	Je mets à jour ma branche avec le master et je gère les éventuels conflits
-```
-git merge master
-```
--	Enfin je fusionne mon travaille avec le master
-```
-git checkout master
-git merge DevDim
-```
-Et je le partage
-```
-git push origin master
+git fetch && git checkout funcbranch && git checkout -b funcbranchKev
 ```
 
-Je peux partager ma branche avec le cloud à n'importe quel moment:
+- Je développe une sous fonctionnalité, je la commit puis je la pousse vers le repository distant. A partir de BitBucket, je crée un pull
+request entre funcbranchKev et funcbranch
+
+- La pull request fera l'objet d'une revue par les autres développeurs avant d'être mergé avec funcbranch. Chaque revue devra obligatoirement 
+comporter un test en environnement de staging
 ```
-git pull origin NomBranch
+git pull funcbranchKev
+grunt StageDim
 ```
+- Lorsque le développement de la nouvelle fonctionnalité est terminé, je vérifie le bon fonctionnement de funcbranch en environnement de staging
+
+- Je crée une pull request entre funcbranch et master, puis je gère les conflits.
+
+- Une fois que tous les conflits ont été levés et que la pull request a été approuvée par les autres développeurs, je sync funcbranch
+avec le master dans l'objectif de tester l'ensemble de la branch funcbranch sur l'environment de staging
+
+- Une fois les tests sont conformes aux attentes, je merge la pull request
+
 
 # Directory Layout
 

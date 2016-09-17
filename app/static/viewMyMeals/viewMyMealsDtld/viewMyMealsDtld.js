@@ -47,6 +47,18 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+  //modalUnsubscribe to unsubscribe to a meal
+  $scope.openModalUnsubscribe = function() {
+
+    $uibModal.open({
+      animation: true,
+      templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalUnsubscribeMyMealDtld.html',
+      controller: 'modalUnsubscribeInstanceCtrl',
+      size: "sm"
+    });
+  };
+
+
 }]);
 
 modMyMealsDetailed.filter('MyMealsFiltered', function() {
@@ -150,6 +162,31 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     //$scope.editMyMeal($stateParams.myMealId); utiliser 
     $uibModalInstance.close();
     $state.reload();
+  }; //function to validate the modal
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
+
+});
+
+modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
+
+  $scope.unsubscribeMyMeal = function(meal_id) {
+    $http.post('/api/meals/private/' + meal_id + '/unsubscription' ).then(function(response) {
+      //rajouter en fonction de la réponse un popup ?
+    });
+  };
+
+  $scope.unsubscribe = function() {
+    $scope.unsubscribeMyMeal($stateParams.myMealId);
+    $uibModalInstance.close();
+    $state.go('view_meals', {
+      reload: true,
+      inherit: false,
+      notify: false
+    });
+
   }; //function to validate the modal
 
   $scope.cancel = function() {

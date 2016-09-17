@@ -173,7 +173,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
 
   $scope.unsubscribeMyMeal = function(meal_id) {
-    $http.post('/api/meals/private/' + meal_id + '/unsubscription' ).then(function(response) {
+    $http.post('/api/meals/' + meal_id + '/unsubscription' ).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };

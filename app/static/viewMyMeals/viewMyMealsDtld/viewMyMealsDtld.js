@@ -110,12 +110,12 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
 
-  /* $scope.editMyMeal = function(meal_id) {
-    $http.modify('/api/meals/private/' + meal_id).then(function(response) {
+   $scope.editMyMeal = function(meal_id) {
+    $http.patch('/api/meals/private/' + meal_id).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };
-*/
+
   //required for the calendar toolbar (datamodel : editedMeal.time)
 
   $scope.dateOptions = {
@@ -159,7 +159,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
   $scope.meal = meal;
 
   $scope.edit = function() {
-    //$scope.editMyMeal($stateParams.myMealId); utiliser 
+    $scope.editMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
     $state.reload();
   }; //function to validate the modal

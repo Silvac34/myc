@@ -1,5 +1,17 @@
 /* app css stylesheet */
 
+.page-separation-title {
+  padding: 9px 0 9px 7px;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 25px;
+}
+
+.page-separation-title {
+  padding-bottom: 9px;
+  margin: 0 0 10px;
+  border-bottom: 1px solid #eeeeee;
+}
+
 .col-centered {
     float: none;
     margin: 0 auto;

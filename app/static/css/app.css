@@ -1,15 +1,25 @@
 /* app css stylesheet */
 
-.page-separation-title {
-  padding: 9px 0 9px 7px;
-  border-bottom: 1px solid #eeeeee;
-  font-size: 25px;
+@media (min-width: 768px) {
+    .page-separation-title {
+        padding: 9px 0 9px 7px;
+        border-bottom: 1px solid #eeeeee;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-separation-title {
+        padding: 9px 0 9px 7px;
+        border-bottom: 1px solid #eeeeee;
+        font-size: 15px;
+    }
 }
 
 .page-separation-title {
-  padding-bottom: 9px;
-  margin: 0 0 10px;
-  border-bottom: 1px solid #eeeeee;
+    padding-bottom: 9px;
+    margin: 0 0 10px;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .col-centered {
@@ -32,16 +42,16 @@
     content: "]";
 }
 
-.menu> li {
+.menu>li {
     display: inline;
 }
 
-.menu> li:before {
+.menu>li:before {
     content: "|";
     padding-right: 0.3em;
 }
 
-.menu> li:nth-child(1):before {
+.menu>li:nth-child(1):before {
     content: "";
     padding: 0;
 }
@@ -182,7 +192,7 @@
     text-indent: 5px;
 }
 
-.meal-label{
+.meal-label {
     font-size: 12px;
     color: rgba(56, 52, 52, 0.45);
     padding-left: 29px;
@@ -197,7 +207,7 @@
     min-height: 24px;
 }
 
-.meal-date{
+.meal-date {
     background: url("/static/sources/calendar_with_clock.png") no-repeat;
     min-height: 24px;
 }
@@ -558,7 +568,8 @@
 }
 
 .my-meal-dtld-panel-info {
-    border-color: #3a87ad;;
+    border-color: #3a87ad;
+    ;
     border-width: 2px;
 }
 
@@ -595,16 +606,15 @@
     min-height: 24px;
 }
 
-
 .my-meal-dtld-edit {
-        background: url("/static/sources/edit_square.png") no-repeat;
-        margin-left: -10px;
+    background: url("/static/sources/edit_square.png") no-repeat;
+    margin-left: -10px;
+}
+
+@media (max-width: 767px) {
+    .my-meal-dtld-hidden-txt {
+        visibility: hidden;
     }
-    
-@media (max-width: 767px) {    
-    .my-meal-dtld-hidden-txt{
-        visibility: hidden;    
-    }    
 }
 
 .my-meal-dtld-delete {
@@ -613,15 +623,15 @@
 }
 
 .page-separation {
-  padding-bottom: 9px;
-  margin: 0 0 10px;
-  border-bottom: 1px solid #eeeeee;
+    padding-bottom: 9px;
+    margin: 0 0 10px;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .size-16 {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .size-14 {
-  font-size: 14px;
+    font-size: 14px;
 }

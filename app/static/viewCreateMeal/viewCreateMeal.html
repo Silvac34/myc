@@ -3,52 +3,60 @@
 <form class="form-horizontal" name="createMealForm">
     <fieldset id="fieldset-form">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 <div class="form-group" ng-class="{'has-error': editedMeal.menu==undefined && createMealForm.$submitted};">
                     <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
                 </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="editedMeal.veggies"> Alternativa Vegetariana
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-offset-1 col-xs-5">
-                <div class="row">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-hide="editedMeal.price" required/>
-                            <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1) | currency}}"
-                            />
-                            <!-- a remodifier pour récupérer le prix / nombre de participants -->
-                            <span class="input-group-addon">≈ por pers</span>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-4">
+            <div class="row">
+                <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-hide="editedMeal.price" required/>
+                        <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="precio de la cena" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1) | currency}}"
+                        />
+                        <!-- a remodifier pour récupérer le prix / nombre de participants -->
+                        <span class="input-group-addon">≈ por pers</span>
 
-                            <!-- script servant pour le modal du calcul des prix -->
-                            <script type="text/ng-template" id="formModalPriceContent.html">
-                                <form class="form-horizontal" name="priceForm">
-                                    <fieldset>
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="alert" ng-click="cancel()">&times;</button>
-                                            <h3 class="modal-title">Calculo del precio de la cena</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="inputPrice" class="col-xs-6 control-label">Precio total de las compras</label>
-                                                <div class="col-xs-6">
-                                                    <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && priceForm.$submitted}">
-                                                        <span class="input-group-addon">$</span>
-                                                        <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price" />
-                                                    </div>
+                        <!-- script servant pour le modal du calcul des prix -->
+                        <script type="text/ng-template" id="formModalPriceContent.html">
+                            <form class="form-horizontal" name="priceForm">
+                                <fieldset>
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="alert" ng-click="cancel()">&times;</button>
+                                        <h3 class="modal-title">Calculo del precio de la cena</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="inputPrice" class="col-xs-6 control-label">Precio total de las compras</label>
+                                            <div class="col-xs-6">
+                                                <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && priceForm.$submitted}">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="number" class="form-control" id="inputPrice" ng-model="editedMeal.price" />
                                                 </div>
                                             </div>
+                                        </div>
 
 
-                                            <div class="page-header">
-                                                <h3>Informaciónes sobre los participantes</h3>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <table class="table table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="40%"></th>
-                                                                <th class="text-center"><span uib-popover="participantes" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                                                                <th class="text-center"><span uib-popover="hora de llegada" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"><span></th>
+                                        <div class="page-header">
+                                            <h3>Informaciónes sobre los participantes</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="35%"></th>
+                                                            <th class="text-center"><span uib-popover="participantes" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                                                            <th class="text-center"><span uib-popover="hora de llegada" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"><span></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -66,55 +74,43 @@
                                                                 <td>Ayuda a la loza</td>
                                                                 <td class="text-center"><input type="number" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                                                                 <td class="text-center"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Invitados</td>
-                                                                <td class="text-center"><input type="number" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
-                                                                <td class="text-center"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Total</td>
-                                                                <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests
-                                                                    + 1}}
-                                                                </td>
-                                                                <td></td>
-                                                            </tr>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Invitados</td>
+                                                            <td class="text-center"><input type="number" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                                                            <td class="text-center"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Total</td>
+                                                            <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests
+                                                                + 1}}
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
                                                         </tbody>
-                                                    </table>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row" ng-show="editedMeal.price==undefined && priceForm.$submitted">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>¡Damn!</strong> Llena bien todos los campos y prueba de nuevo. <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time">Además, los que ayudan a cocinar tienen que llegar antes de la cena.</span>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <div class="row" ng-show="editedMeal.price==undefined && priceForm.$submitted">
-                                                    <div class="alert alert-dismissible alert-danger">
-                                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                        <strong>¡Damn!</strong> Llena bien todos los campos y prueba de nuevo. <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time">Además, los que ayudan a cocinar tienen que llegar antes de la cena.</span>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-primary" type="button" ng-click="priceForm.$setSubmitted(); okPrice()">OK</button>
-                                                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
-                                            </div>
-                                    </fieldset>
-                                </form>
-                            </script>
+                                            <button class="btn btn-primary" type="button" ng-click="priceForm.$setSubmitted(); okPrice()">OK</button>
+                                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+                                        </div>
+                                </fieldset>
+                            </form>
+                        </script>
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <div class="checkbox">
-                                    <label>
-                            <input type="checkbox" ng-model="editedMeal.veggies"> Alternativa Vegetariana
-                        </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
                             <div class="col-xs-12">
@@ -131,7 +127,7 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="form-group" ng-class="{'has-error': editedMeal.town==undefined && locationForm.$submitted}">
-                                                    <div class="col-xs-8">
+                                                    <div class="col-xs-12 col-sm-8">
                                                         <select class="form-control" id="select" ng-model="editedMeal.town" required>
                                                     <option value="" disabled selected>Escoge tu ciudad</option>
                                                     <option>Santiago</option>

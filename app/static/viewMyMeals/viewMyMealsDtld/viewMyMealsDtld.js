@@ -5,7 +5,7 @@ var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', '
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', function($scope, $http, $stateParams, $uibModal) {
 
   $scope.loadMyMealInfo = function(meal_id) {
-    $http.get('/api/meals/private/' + meal_id ).then(function(response) {
+    $http.get('/api/meals/private/' + meal_id).then(function(response) {
       $scope.meal = response.data;
       var userId = $scope.user._id;
 
@@ -86,7 +86,7 @@ modMyMealsDetailed.filter('MyMealsFiltered', function() {
 modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
 
   $scope.deleteMyMeal = function(meal_id) {
-    $http.delete('/api/meals/private/' + meal_id ).then(function(response) {
+    $http.delete('/api/meals/private/' + meal_id).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };
@@ -110,7 +110,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
 
-   $scope.editMyMeal = function(meal_id) {
+  $scope.editMyMeal = function(meal_id) {
     $http.patch('/api/meals/private/' + meal_id).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
@@ -157,7 +157,19 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
   };
 
   $scope.meal = meal;
-
+  $scope.nbCooksInscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
+  if ($scope.meal.detailedInfo.requiredGuests.cleaners != undefined) {
+    $scope.nbCleanersInscribed = $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
+  }
+  else {
+    $scope.nbCleanersInscribed = 0;
+  }
+  if ($scope.meal.detailedInfo.requiredGuests.simpleGuests != undefined) {
+    $scope.nbSimpleGuestsInscribed = $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces;
+  }
+  else {
+    $scope.nbSimpleGuestsInscribed = 0;
+  }
   $scope.edit = function() {
     $scope.editMyMeal($stateParams.myMealId);
     $uibModalInstance.close();
@@ -173,7 +185,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
 
   $scope.unsubscribeMyMeal = function(meal_id) {
-    $http.post('/api/meals/' + meal_id + '/unsubscription' ).then(function(response) {
+    $http.post('/api/meals/' + meal_id + '/unsubscription').then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };

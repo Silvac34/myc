@@ -4,7 +4,7 @@
     <h4 class="modal-title">Modificar la cena</h4>
 </div>
 
-<form class="form-horizontal">
+<form class="form-horizontal" name="formModalEdit">
     <fieldset id="fieldset-form">
         <div class="modal-body">
             <div class="row">
@@ -84,6 +84,12 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="row" ng-show="(meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces < (meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces < meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces < meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests) && formModalEdit.$submitted">
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>¡Damn!</strong> No puedes disminuir la cantidad de cupones porque ya se inscribieron personas a tu cena
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form-group">
@@ -159,7 +165,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" ng-click="edit()">Actualizar la cena</button>
+            <button type="button" class="btn btn-primary" ng-click="formModalEdit.$setSubmitted(); edit()">Actualizar la cena</button>
             <button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
         </div>
     </fieldset>

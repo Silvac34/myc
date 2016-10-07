@@ -171,9 +171,11 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.nbSimpleGuestsInscribed = 0;
   }
   $scope.edit = function() {
-    $scope.editMyMeal($stateParams.myMealId);
-    $uibModalInstance.close();
-    $state.reload();
+    if (($scope.nbCooksInscribed <= ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) ||  $scope.nbCooksInscribed == undefined) && ($scope.nbCleanersInscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners ||  $scope.nbCleanersInscribed == undefined) && ($scope.nbSimpleGuestsInscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests || $scope.nbSimpleGuestsInscribed == undefined)) {
+      $scope.editMyMeal($stateParams.myMealId);
+      $uibModalInstance.close();
+      $state.reload();
+    }
   }; //function to validate the modal
 
   $scope.cancel = function() {

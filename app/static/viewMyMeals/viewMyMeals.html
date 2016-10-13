@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <h1 class="page-header" id="tables">Mis cenas que se vienen</h1>
-  <div class="col-sm-9 col-xs-12 list-my-meal">
-    <div class="row" ng-repeat="meal in meals | MyMealsFiltered:true">
+  <h1 class="page-separation-title" id="tables">Mis cenas que se vienen</h1>
+  <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal': mealFilteredFutur.length}>
+    <div class="row" ng-repeat="meal in mealFilteredFutur = (meals | MyMealsFiltered:true)">
       <div class="col-xs-12">
         <div class="list-group">
           <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
@@ -37,13 +37,14 @@
         </div>
       </div>
     </div>
+    <div ng-hide="mealFilteredFutur.length">No tienes cenas que se vienen</div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <h1 class="page-header" id="tables">Mis cenas pasadas</h1>
-  <div class="col-sm-9 col-xs-12 list-my-meal">
-    <div class="row" ng-repeat="meal in meals | MyMealsFiltered:false">
+  <h1 class="page-separation-title" id="tables">Mis cenas pasadas</h1>
+  <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal': mealFilteredPassed.length}>
+    <div class="row" ng-repeat="meal in mealFilteredPassed = (meals | MyMealsFiltered:false)">
       <div class="col-xs-12">
         <div class="list-group">
           <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
@@ -79,5 +80,6 @@
         </div>
       </div>
     </div>
+    <div ng-hide="mealFilteredPassed.length">No tienes cenas archivadas</div>
   </div>
 </div>

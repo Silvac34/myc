@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class="page-separation-title" id="tables">Mis cenas que se vienen</h1>
+  <h1 class="page-separation-title" id="tables">My meals to come</h1>
   <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal': mealFilteredFutur.length}>
     <div class="row" ng-repeat="meal in mealFilteredFutur = (meals | MyMealsFiltered:true)">
       <div class="col-xs-12">
@@ -37,12 +37,12 @@
         </div>
       </div>
     </div>
-    <div ng-hide="mealFilteredFutur.length">No tienes cenas que se vienen</div>
+    <div ng-hide="mealFilteredFutur.length">You do not have meals to come</div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <h1 class="page-separation-title" id="tables">Mis cenas pasadas</h1>
+  <h1 class="page-separation-title" id="tables">My previous meals</h1>
   <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal': mealFilteredPassed.length}>
     <div class="row" ng-repeat="meal in mealFilteredPassed = (meals | MyMealsFiltered:false)">
       <div class="col-xs-12">
@@ -80,6 +80,6 @@
         </div>
       </div>
     </div>
-    <div ng-hide="mealFilteredPassed.length">No tienes cenas archivadas</div>
+    <div ng-hide="mealFilteredPassed.length">You didn't participate yet</div>
   </div>
 </div>

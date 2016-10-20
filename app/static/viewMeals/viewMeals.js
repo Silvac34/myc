@@ -20,7 +20,6 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 
 
   $scope.loadMeals = function() {
-      //2016-07-14T18:30:51.753Z
       var date = new Date();
       var now = date.toISOString();
       $http.get('/api/meals?where={"time": {"$gte": "'+ now +'"} }').then(function(response) {

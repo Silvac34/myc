@@ -1,14 +1,14 @@
 <!-- form.html -->
 <div class="modal-header">
     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">Modificar la cena</h4>
+    <h4 class="modal-title">Modify the meal</h4>
 </div>
 
 <form class="form-horizontal" name="formModalEdit">
     <fieldset id="fieldset-form">
         <div class="modal-body">
             <div class="row">
-                <div class="page-separation size-16 text-primary">Información publica : visible de todos {{cooksInscribed}}</div>
+                <div class="page-separation size-16 text-primary">Public information</div>
             </div>
             <div class="form-group">
                 <div class="row">
@@ -23,7 +23,7 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label for="inputPrice" class="col-md-4 col-sm-5 col-xs-7 control-label">Precio total de las compras</label>
+                    <label for="inputPrice" class="col-md-4 col-sm-5 col-xs-7 control-label">Total price of the groceries</label>
                     <div class=" col-sm-2 col-xs-3 input-group">
                         <input type="number" class="form-control" id="inputPrice" ng-model="meal.price" />
                         <span class="input-group-addon">€</span>
@@ -34,20 +34,20 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th width="15%">Numero</th>
-                        <th width="30%">Hora de llegada</th>
-                        <th width="20%">Precio</th>
+                        <th width="15%">Number</th>
+                        <th width="30%">Arrival time</th>
+                        <th width="20%">Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="info">
-                        <td>Anfitrión (yo)</td>
+                        <td>Host (me)</td>
                         <td>1</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Ayuda a la cocina</td>
+                        <td>Helping cook</td>
                         <td><input type="number" class="form-control" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
                         <td><input type="time" name="formTime" class="form-control" uib-popover-template="formPopoverTimepickerTimeCooking.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepickerTimeCooking.title}}"
                                 value="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
@@ -65,13 +65,13 @@
                     </script>
 
                     <tr>
-                        <td>Ayuda a la loza</td>
+                        <td>Helping to wash dishes</td>
                         <td><input type="number" class="form-control" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                         <td><span ng-show="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{meal.time | date:'HH:mm'}}</span></td>
                         <td>{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</td>
                     </tr>
                     <tr>
-                        <td>Invitados</td>
+                        <td>Simple guest</td>
                         <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                         <td><span ng-show="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{meal.time | date:'HH:mm'}}</span></td>
                         <td>{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}}</td>
@@ -87,7 +87,7 @@
             <div class="row" ng-show="(nbCooksInscribed > (meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || nbCleanersInscribed > meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || nbSimpleGuestsInscribed > meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests) && formModalEdit.$submitted">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>¡Damn!</strong> No puedes disminuir la cantidad de cupones porque ya se inscribieron personas a tu cena
+                    <strong>¡Damn!</strong> You can't decrease the number of guests because people already inscribed themselves at your meal
                 </div>
             </div>
             <div class="row">
@@ -127,28 +127,24 @@
             </script>
             <div class="row">
                 <div class="form-group">
-                    <label class="col-xs-3 col-sm-2 control-label">Ciudad</label>
+                    <label class="col-xs-3 col-sm-2 control-label">Town</label>
                     <div class="col-xs-9 col-sm-10 col-md-2">
-                        <select class="form-control" id="select" ng-model="meal.town">
-                            <option>Santiago</option>
-                            <option>Concepción</option>
-                            <option>Valparaíso</option>
-                        </select>
+                        <input class="form-control" id="inputTown" placeholder="town" ng-model="meal.town"/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label class="col-xs-3 col-sm-2 control-label">Dirección approx</label>
+                    <label class="col-xs-3 col-sm-2 control-label">Approx address</label>
                     <div class="col-xs-9 col-sm-10">
-                        <textarea type="text" class="form-control" id="inputAddressApprox" ng-model="meal.addressApprox" uib-popover="sirve para dar un punto de referencia : bario, sector, esquina, metro ..." popover-trigger="mouseenter" popover-placement="bottom-left"></textarea>
+                        <textarea type="text" class="form-control" id="inputAddressApprox" ng-model="meal.addressApprox" uib-popover="used to display a reference point : metro, neighborhood, intersection ..." popover-trigger="mouseenter" popover-placement="bottom-left"></textarea>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="page-separation size-16 text-primary">Información privada : visible solo de los participantes inscribidos</div>
+                <div class="page-separation size-16 text-primary">Private information : displayed only for participants</div>
                 <div class="form-group">
-                    <label class="col-xs-3 col-sm-2 control-label">Dirección exacta</label>
+                    <label class="col-xs-3 col-sm-2 control-label">Exact address</label>
                     <div class="col-xs-9 col-sm-10">
                         <textarea type="text" class="form-control" id="inputAddress" ng-model="meal.privateInfo.address"></textarea>
                     </div>
@@ -156,17 +152,16 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label class="col-xs-3 col-sm-2 control-label">Celular</label>
+                    <label class="col-xs-3 col-sm-2 control-label">Cellphone</label>
                     <div class="col-xs-9 col-sm-10">
-                        <input class="form-control" id="inputAdminPhone" placeholder="celular" ng-model="meal.privateInfo.adminPhone" uib-popover="Información privada : unicamente para los participantes" popover-trigger="mouseenter" popover-placement="bottom-left"
-                        />
+                        <input class="form-control" id="inputAdminPhone" placeholder="cellphone" ng-model="meal.privateInfo.adminPhone" uib-popover="Private information : displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" ng-click="formModalEdit.$setSubmitted(); edit()">Actualizar la cena</button>
-            <button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+            <button type="button" class="btn btn-primary" ng-click="formModalEdit.$setSubmitted(); edit()">Modify the meal</button>
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
         </div>
     </fieldset>
 </form>

@@ -61,12 +61,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
   $scope.mstep = 15;
 
   $scope.formPopoverTimepicker = {
-    title: 'Hora de la cena',
+    title: 'Time of the meal',
     templateUrl: 'PopoverTimepickerTemplate.html'
   };
 
   $scope.formPopoverTimepickerTimeCooking = {
-    title: 'Hora de la cena',
+    title: 'Time of the meal',
     templateUrl: 'PopoverTimepickerTimeCookingTemplate.html'
   };
 

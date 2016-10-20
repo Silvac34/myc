@@ -1,16 +1,16 @@
 <div class="container-fluid">
-  <h1 class="page-separation-title">Lista de las cenas</h1>
+  <h1 class="page-separation-title">List of the meals</h1>
   <div class="row">
     <div class="meal-search-sort col-xs-7 col-xs-offset-5 col-sm-3 col-sm-offset-9">
-      <span class="meal-search-title-count">Ordernar por</span>
-      <div class="btn-group" uib-dropdown uib-popover="Hora de empiezo" popover-trigger="mouseenter" popover-placement="top">
+      <span class="meal-search-title-count">Order by</span>
+      <div class="btn-group" uib-dropdown uib-popover="Starting time" popover-trigger="mouseenter" popover-placement="top">
         <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
         <ul uib-dropdown-menu class="dropdown-menu sort-menu" data-toggle="dropdown">
           <li class="asc">
-            <a class="meal-search-sort-link" ng-click="SortOrder='asc'; reverse = false">Horario creciendo</a>
+            <a class="meal-search-sort-link" ng-click="SortOrder='asc'; reverse = false">Increasing</a>
           </li>
           <li class="desc">
-            <a class="meal-search-sort-link" ng-click="SortOrder='desc';reverse = true">Horario decreciendo</a>
+            <a class="meal-search-sort-link" ng-click="SortOrder='desc';reverse = true">Decreasing</a>
           </li>
         </ul>
       </div>
@@ -46,7 +46,7 @@
                   </div>
                   <div class="col-xs-4">
                     <div class="meal-price">{{meal.price/meal.nbGuests | currency}}</div>
-                    <div class="meal-label meal-price-label">par pers</div>
+                    <div class="meal-label meal-price-label">by pers</div>
                     <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
                       <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
                       <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
@@ -63,5 +63,5 @@
 </div>
 
 <div class="visible-xs-block">
-  <a class="btn btn-primary btn-lg filter-mobile-btn" ng-click="openModalFilter()">Filtres</a>
+  <a class="btn btn-primary btn-lg filter-mobile-btn" ng-click="openModalFilter()">Filters</a>
 </div>

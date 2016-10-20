@@ -24,7 +24,7 @@
                         <input type="text" class="form-control" ng-click="openModalFormPrice()" placeholder="Price of the meal" ng-show="editedMeal.price" value="{{editedMeal.price/(editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1) | currency}}"
                         />
                         <!-- a remodifier pour récupérer le prix / nombre de participants -->
-                        <span class="input-group-addon">≈ by pers</span>
+                        <span class="input-group-addon">≈ per pers</span>
 
                         <!-- script servant pour le modal du calcul des prix -->
                         <script type="text/ng-template" id="formModalPriceContent.html">
@@ -95,7 +95,7 @@
                                             <div class="row" ng-show="editedMeal.price==undefined && priceForm.$submitted">
                                                 <div class="alert alert-dismissible alert-danger">
                                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                    <strong>¡Damn!</strong> Fill well all the fields and try again. <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time">Hint: the helping cooks have to arrive before the meal.</span>
+                                                    Please fill in the missing field(s) and try again. <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time">Hint: the helping cooks have to arrive before the meal.</span>
                                                 </div>
                                             </div>
                                             <button class="btn btn-primary" type="button" ng-click="priceForm.$setSubmitted(); okPrice()">OK</button>
@@ -152,7 +152,7 @@
                                             <div class="row">
                                                 <div class="form-group">
                                                     <div class="col-xs-8">
-                                                        <input type="text" class="form-control" id="inputAddressComplement" placeholder="Complement" ng-model="address_complement">
+                                                        <input type="text" class="form-control" id="inputAddressComplement" placeholder="Additional information" ng-model="address_complement">
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,7 +161,7 @@
                                             <div class="row" ng-show="(editedMeal.addressApprox==undefined || editedMeal.privateInfo.address==undefined || editedMeal.town==undefined) && locationForm.$submitted">
                                                 <div class="alert alert-dismissible alert-danger">
                                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                    <strong>¡Damn!</strong> Fill well all the fields and try again.
+                                                    Please fill in the missing field(s) and try again
                                                 </div>
                                             </div>
                                             <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); okLocation()">OK</button>
@@ -202,7 +202,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="number" class="form-control" id="inputAdminPhone" placeholder="Cellphone" ng-model="editedMeal.privateInfo.adminPhone" uib-popover="Private information : displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left"
+                                <input type="number" class="form-control" id="inputAdminPhone" placeholder="Cellphone" ng-model="editedMeal.privateInfo.adminPhone" uib-popover="Private information: displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left"
                                 />
                             </div>
                         </div>
@@ -222,7 +222,7 @@
             <div class="row" ng-show="(editedMeal.menu==undefined || editedMeal.privateInfo.address==undefined || editedMeal.price==undefined) && createMealForm.$submitted">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>¡Damn!</strong> Fill well all the fields and try again to publish.
+                    Please fill in the missing field(s) and try again
                 </div>
             </div>
             <div class="row">

@@ -44,7 +44,7 @@
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>¡Careful! You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
+                    <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                             <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">At the end of or during the event, you will help to order and clean what was used to realize the meal</div>
+                    <div class="meal-dtld-helpers-description">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
@@ -74,7 +74,7 @@
                             <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">I help by paying a little bit more : this tip will be redistribuated between those who helped to organize the event</div>
+                    <div class="meal-dtld-helpers-description">I help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>
                 </div>
             </div>
         </uib-accordion>

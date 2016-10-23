@@ -33,9 +33,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/view_meals',
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
-      data: {
-        requiredLogin: true
-      }
     });
   $stateProvider
     .state('create_meal', {

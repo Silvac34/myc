@@ -20,6 +20,7 @@
 
   <div class="row">
     <div ui-view="filterInternet" class="hidden-xs col-sm-3"></div>
+    {{filter().weekDays}}
 
     <div class="col-sm-9 col-xs-12 list-meal">
       <div class="row" ng-repeat="meal in meals | orderBy:'time':reverse | dateRange:filter().dateFilterMin.value:filter().dateFilterMax.value | fWeekDays:filter().weekDays">

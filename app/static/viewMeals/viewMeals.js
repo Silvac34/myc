@@ -85,12 +85,6 @@ modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', f
       viewMealsFilterService.set($scope.filter);
     },
 
-    $scope.clearFilters = function() {
-      $scope.filter = "";
-      $scope.initializeFilters();
-      viewMealsFilterService.clear();
-    },
-
     $scope.initializeFilters = function() {
       $scope.filter = {
         weekDays: [{
@@ -150,7 +144,7 @@ modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', f
 
 
 
-modViewMeals.service('viewMealsFilterService', function() {
+modViewMeals.service('viewMealsFilterService', function() { // pourquoi service et pas factory vu qu'on veut renvoyer filter + filter est un objet utilisé pour filtrer et ici on le considère comme variable ... ?
   var filter = "";
   return {
     get: function() {
@@ -158,9 +152,6 @@ modViewMeals.service('viewMealsFilterService', function() {
     },
     set: function(value) {
       filter = value;
-    },
-    clear: function() {
-      filter = "";
     }
   };
 });

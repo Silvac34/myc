@@ -1,5 +1,6 @@
-<div class="container">
+<div class="container" id="modalFilterMobile">
     <div class="row">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
         <label class="control-label filter-label col-xs-12">Chose the days of the week</label>
         <div class="filter-date-checkbox-mobile text-center" ng-repeat="day in filter.weekDays">
             <label><input type="checkbox" ng-model=day.selected></br>{{day.label}}</label>
@@ -14,6 +15,6 @@
     </div>
 
     <div class="row" style="text-align:center">
-        <a class="btn btn-success btn-lg btn-filter-mobile-reinitialize" ng-click="initializeFilters()">Clear</a>
+        <a class="btn btn-success btn-lg btn-filter-mobile-reinitialize" ng-click="clearAndCloseFilterMobile()">Clear</a>
     </div>
 </div>

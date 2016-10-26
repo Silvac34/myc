@@ -18,11 +18,12 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 
 .controller('ViewMealsCtrl', ['$scope', '$http', 'viewMealsFilterService', '$state', '$uibModal', '$log', function($scope, $http, viewMealsFilterService, $state, $uibModal, $log) {
 
+  var $ctrl = this;
 
   $scope.loadMeals = function() {
       var date = new Date();
       var now = date.toISOString();
-      $http.get('/api/meals?where={"time": {"$gte": "'+ now +'"} }').then(function(response) {
+      $http.get('/api/meals?where={"time": {"$gte": "' + now + '"} }').then(function(response) {
         $scope.meals = response.data['_items'];
       });
     },
@@ -31,22 +32,18 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       return viewMealsFilterService.get();
     },
 
-    $scope.openModalFilter = function(size) {
-      var modalInstance = $uibModal.open({
+    $scope.openModalFilter = function() {
+      $uibModal.open({
         animation: true,
         templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
-        controller: 'filterMealCtrl',
-        size: size,
-      });
-      modalInstance.result.then(function(selectedItem) {
-        $scope.selected = selectedItem;
-      }, function() {
-        $log.info('Modal dismissed at: ' + new Date());
+        controller: 'filterMealCtrl'
       });
     };
 
+
+
   $scope.openModalDtld = function(meal_id) {
-    var modalInstance = $uibModal.open({
+    $uibModal.open({
       animation: true,
       templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
       controller: 'ViewMealsDtldCtrl',
@@ -71,80 +68,89 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 }]);
 
 
-modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
+modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', 'uibModalInstance', function($scope, viewMealsFilterService, $uibModalInstance) {
+
+  $scope.cancel = function() {
+    $uibModalInstance.close();
+  };
+
+  $scope.clearAndCloseFilterMobile = function() {
+    $scope.initializeFilters();
+    $uibModalInstance.close();
+  };
+
 
   $scope.dateFilterMin_open = function() {
-      $scope.filter.dateFilterMin.opened = true;
-    },
+    $scope.filter.dateFilterMin.opened = true;
+  };
 
-    $scope.dateFilterMax_open = function() {
-      $scope.filter.dateFilterMax.opened = true;
-    },
+  $scope.dateFilterMax_open = function() {
+    $scope.filter.dateFilterMax.opened = true;
+  };
 
-    $scope.applyFilters = function() {
-      viewMealsFilterService.set($scope.filter);
-    },
+  $scope.applyFilters = function() {
+    viewMealsFilterService.set($scope.filter);
+  };
 
-    $scope.initializeFilters = function() {
-      $scope.filter = {
-        weekDays: [{
-          label: 'Mon',
-          selected: false,
-          ind: 1
-        }, {
-          label: 'Tu',
-          selected: false,
-          ind: 2
-        }, {
-          label: 'Wed',
-          selected: false,
-          ind: 3
-        }, {
-          label: 'Th',
-          selected: false,
-          ind: 4
-        }, {
-          label: 'Fr',
-          selected: false,
-          ind: 5
-        }, {
-          label: 'Sat',
-          selected: false,
-          ind: 6
-        }, {
-          label: 'Sun',
-          selected: false,
-          ind: 0
-        }],
-        dateFilterMin: {
-          opened: false
-        },
-        dateFilterMax: {
-          opened: false
-        }
-      };
-    },
-
-
-    $scope.getFilters = function() {
-      var appliedFilters = viewMealsFilterService.get();
-      if (appliedFilters == "") {
-        $scope.initializeFilters();
+  $scope.initializeFilters = function() {
+    $scope.filter = {
+      weekDays: [{
+        label: 'Mon',
+        selected: false,
+        ind: 1
+      }, {
+        label: 'Tu',
+        selected: false,
+        ind: 2
+      }, {
+        label: 'Wed',
+        selected: false,
+        ind: 3
+      }, {
+        label: 'Th',
+        selected: false,
+        ind: 4
+      }, {
+        label: 'Fr',
+        selected: false,
+        ind: 5
+      }, {
+        label: 'Sat',
+        selected: false,
+        ind: 6
+      }, {
+        label: 'Sun',
+        selected: false,
+        ind: 0
+      }],
+      dateFilterMin: {
+        opened: false
+      },
+      dateFilterMax: {
+        opened: false,
       }
-      else {
-        $scope.filter = appliedFilters;
-      }
-    },
+    };
+  };
 
 
-    $scope.getFilters();
+  $scope.getFilters = function() {
+    var appliedFilters = viewMealsFilterService.get();
+    if (appliedFilters == "") {
+      $scope.initializeFilters();
+    }
+    else {
+      $scope.filter = appliedFilters;
+    }
+  };
+
+  $scope.getFilters();
   $scope.applyFilters(); // Set up dataBinding with the service from the beginning
 
 }]);
+// pourquoi service et pas factory vu qu'on veut renvoyer filter + filter est un objet utilisé pour filtrer et ici on le considère comme variable ... ?
 
 
-
-modViewMeals.service('viewMealsFilterService', function() { // pourquoi service et pas factory vu qu'on veut renvoyer filter + filter est un objet utilisé pour filtrer et ici on le considère comme variable ... ?
+modViewMeals.service('viewMealsFilterService', function() {
   var filter = "";
   return {
     get: function() {

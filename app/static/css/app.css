@@ -177,6 +177,11 @@
     margin-left: 15px;
     position: fixed;
 }
+
+.btn-filter-mobile-reinitialize{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
 .list-meal {

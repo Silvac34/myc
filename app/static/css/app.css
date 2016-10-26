@@ -91,12 +91,13 @@
 }
 
 .meal-search-sort {
-    /*float: right;*/
-    margin-right: 5px
+    float: right;
+    margin-right: 15px;
+    margin-top: -5px;
 }
 
 .meal-search-sort .btn-group {
-    margin: 0;
+    margin-right: 10px;
     margin-top: 5px
 }
 
@@ -171,7 +172,11 @@
     border-bottom-right-radius: 0px
 }
 
-
+.meal-search-filter{
+    float: left;
+    margin-left: 15px;
+    position: fixed;
+}
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
 .list-meal {
@@ -631,8 +636,8 @@
 }
 
 .page-separation {
-    padding-bottom: 9px;
-    margin: 0 0 10px;
+    padding-bottom: 4px;
+    margin: -11px 0 7px;
     border-bottom: 1px solid #eeeeee;
 }
 

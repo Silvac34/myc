@@ -1,7 +1,25 @@
 <div class="container-fluid">
-  <h1 class="page-separation-title">List of the meals</h1>
-  <div class="row">
-    <div class="meal-search-sort col-xs-7 col-xs-offset-5 col-sm-3 col-sm-offset-9">
+  <h1 class="page-separation-title">List of the meals
+    <div class="meal-search-sort hidden-xs">
+      <span class="meal-search-title-count">Order by</span>
+      <div class="btn-group" uib-dropdown uib-popover="Starting time" popover-trigger="mouseenter" popover-placement="top">
+        <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
+        <ul uib-dropdown-menu class="dropdown-menu sort-menu" data-toggle="dropdown">
+          <li class="asc">
+            <a class="meal-search-sort-link" ng-click="SortOrder='asc'; reverse = false">Increasing</a>
+          </li>
+          <li class="desc">
+            <a class="meal-search-sort-link" ng-click="SortOrder='desc';reverse = true">Decreasing</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </h1>
+  <div class="row hidden-sm hidden-md hidden-lg">
+    <div class="meal-search-filter">
+      <a class="btn btn-primary btn-sm" ng-click="openModalFilter()">Filters</a>
+    </div>
+    <div class="meal-search-sort">
       <span class="meal-search-title-count">Order by</span>
       <div class="btn-group" uib-dropdown uib-popover="Starting time" popover-trigger="mouseenter" popover-placement="top">
         <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
@@ -17,7 +35,7 @@
     </div>
   </div>
 
- 
+
   <div class="row">
     <div ui-view="filterInternet" class="hidden-xs col-sm-3"></div>
     <div class="col-sm-9 col-xs-12 list-meal">
@@ -59,8 +77,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="visible-xs-block">
-  <a class="btn btn-primary btn-lg filter-mobile-btn" ng-click="openModalFilter()">Filters</a>
 </div>

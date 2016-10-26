@@ -68,16 +68,17 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 }]);
 
 
-modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', 'uibModalInstance', function($scope, viewMealsFilterService, $uibModalInstance) {
-
-  $scope.cancel = function() {
+modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', /*'$uibModalInstance'*/function($scope, viewMealsFilterService/*, $uibModalInstance*/) {
+/*
+  $scope.close = function() {
     $uibModalInstance.close();
   };
-
+  
   $scope.clearAndCloseFilterMobile = function() {
     $scope.initializeFilters();
     $uibModalInstance.close();
   };
+  */
 
 
   $scope.dateFilterMin_open = function() {

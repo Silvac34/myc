@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h1 class="page-separation-title hidden-xs" id="tables">My meals to come</h1>
-  <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal': mealFilteredFutur.length}>
+  <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal':mealFilteredFutur.length}>
     <div class="row" ng-repeat="meal in mealFilteredFutur = (meals | MyMealsFiltered:true)">
       <div class="col-xs-12">
         <div class="list-group">
@@ -43,7 +43,7 @@
 
 <div class="container-fluid hidden-xs">
   <h1 class="page-separation-title" id="tables">My previous meals</h1>
-  <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal': mealFilteredPassed.length}>
+  <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal':mealFilteredPassed.length}>
     <div class="row" ng-repeat="meal in mealFilteredPassed = (meals | MyMealsFiltered:false)">
       <div class="col-xs-12">
         <div class="list-group">

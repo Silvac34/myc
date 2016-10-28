@@ -651,3 +651,37 @@
 .size-14 {
     font-size: 14px;
 }
+
+/* welcome---------------------------------------------------*/
+
+h2.slogan{
+    font-size:20px;
+    margin-top:-10px;
+    font-style:italic;
+}
+
+.welcome-buttons-meal{
+    margin-top: 20px;
+}
+
+.welcome-buttons-auth{
+    float: right;
+    margin-top: -60px;
+    padding-left: 30px;
+    padding-bottom: 5px;
+}
+
+.welcome-register.welcom-buttons-auth {
+    margin-right: 100px;
+}
+
+.welcome-register{
+    background: url("/static/sources/delete_cross.png") no-repeat;
+    margin-left: -10px;
+    margin-right: 90px;
+}
+
+.welcome-sign-in{
+    background: url("/static/sources/delete_cross.png") no-repeat;
+    margin-left: -10px;
+}

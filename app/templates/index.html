@@ -35,14 +35,14 @@
   <script src="../static/welcome/welcome.js"></script>
   <script src="../static/components/userServices.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
-  
+
 
 </head>
 
 <body>
 
   <div ng-controller="AppCtrl">
-    <div class="bs-component">
+    <div class="bs-component" data-ng-hide="$state.includes('welcome')">
       <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -77,10 +77,11 @@
         </div>
       </nav>
     </div>
+    <div data-ng-show="$state.includes('welcome')"></div>
     <div ui-view></div>
 
   </div>
-  
+
 </body>
 
 </html>

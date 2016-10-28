@@ -18,8 +18,6 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 
 .controller('ViewMealsCtrl', ['$scope', '$http', 'viewMealsFilterService', '$state', '$uibModal', '$log', function($scope, $http, viewMealsFilterService, $state, $uibModal, $log) {
 
-  var $ctrl = this;
-
   $scope.loadMeals = function() {
       var date = new Date();
       var now = date.toISOString();
@@ -36,7 +34,9 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       $uibModal.open({
         animation: true,
         templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
-        controller: 'filterMealCtrl'
+        controller: function($uibModalInstance){
+            
+        }
       });
     };
 
@@ -68,7 +68,7 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 }]);
 
 
-modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', /*'$uibModalInstance'*/function($scope, viewMealsFilterService/*, $uibModalInstance*/) {
+modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
 /*
   $scope.close = function() {
     $uibModalInstance.close();

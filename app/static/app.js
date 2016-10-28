@@ -77,9 +77,12 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
+    $rootScope.$state = $state;
 });
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
+  
+  var $ctrl = this;
   $scope.logout = function() {
     $auth.logout();
     $state.go('login');
@@ -101,5 +104,4 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;
   
-
 }]);

@@ -1,19 +1,27 @@
 <div ng-controller="WelcomeCtrl">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="row">
-          <div style="text-align:center">
-            <p><h1>myCommuneaty</h1></p>
-            <p><h2>Meet new people with participating meals</h2></p>
-          </div>
-        </div>
-      </div>
+    <div ui-sref="login" class="welcome-register welcome-buttons-auth text-info">
+      Register
     </div>
-    <div class="row">
-      <div style="text-align:center" class="bs-component">
-        <a ui-sref="create_meal" class="btn btn-primary btn-lg">Propose<br> a new meal</a>
-        <a ui-sref="view_meals" class="btn btn-primary btn-lg">See the meals<br> available</a>
+    <div class="welcome-sign-in welcome-buttons-auth text-info" ui-sref="login">
+      Sign In
+    </div>
+    <div class="col-xs-12 text-center">
+      <div class="row">
+        <h1>myCommunEATy</h1>
+      </div>
+      <div class="row">
+        <h2 class="slogan">Meet new people with participating meals</h2>
+      </div>
+      <div class="row welcome-buttons-meal">
+        <div class="col-xs-6">
+          <a ui-sref="create_meal" class="btn btn-primary btn-lg hidden-xs" href="#/create_meal">Propose your meal</a>
+          <a ui-sref="create_meal" class="btn btn-primary hidden-sm hidden-md hidden-lg" href="#/create_meal">Propose your meal</a>
+        </div>
+        <div class="col-xs-6">
+          <a ui-sref="view_meals" class="btn btn-primary btn-lg hidden-xs" href="#/view_meals">Chose a meal</a>
+          <a ui-sref="view_meals" class="btn btn-primary hidden-sm hidden-md hidden-lg" href="#/view_meals">Chose a meal</a>
+        </div>
       </div>
     </div>
   </div>

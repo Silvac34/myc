@@ -1,9 +1,9 @@
 <div ng-controller="WelcomeCtrl">
   <div class="container">
-    <div ui-sref="login" class="welcome-register welcome-buttons-auth text-info">
+    <div ui-sref="login" class="welcome-register welcome-buttons-auth text-info" href="#/login">
       Register
     </div>
-    <div class="welcome-sign-in welcome-buttons-auth text-info" ui-sref="login">
+    <div class="welcome-sign-in welcome-buttons-auth text-info" ui-sref="login" href="#/login">
       Sign In
     </div>
     <div class="col-xs-12 text-center">
@@ -21,6 +21,37 @@
         <div class="col-xs-6">
           <a ui-sref="view_meals" class="btn btn-primary btn-lg hidden-xs" href="#/view_meals">Chose a meal</a>
           <a ui-sref="view_meals" class="btn btn-primary hidden-sm hidden-md hidden-lg" href="#/view_meals">Chose a meal</a>
+        </div>
+      </div>
+      <div class="row welcome-how-it-works">
+        <h4 style="float:left">
+          How does it work ?
+        </h4>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          Screenshot form
+        </div>
+        <div class="col-sm-4">
+          screenshot inscription repas
+        </div>
+        <div class="col-sm-4">
+          carousel photos des repas
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          Someone publish a meal
+        </div>
+        <div class="col-sm-4">
+          Others suscribe to the meal
+        </div>
+        <div class="col-sm-4">
+          You share :<br>
+          <li class="text-left">Diner</li>
+          <li class="text-left">Good Vibes</li>
+          <li class="text-left">Diner's preparation task</li>
+          <li class="text-left">The price</li>
         </div>
       </div>
     </div>

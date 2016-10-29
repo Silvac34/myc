@@ -669,6 +669,7 @@ h2.slogan{
     margin-top: -60px;
     padding-left: 30px;
     padding-bottom: 5px;
+    padding-top:2px;
 }
 
 .welcome-register.welcom-buttons-auth {
@@ -676,12 +677,19 @@ h2.slogan{
 }
 
 .welcome-register{
-    background: url("/static/sources/delete_cross.png") no-repeat;
+    background: url("/static/sources/register.png") no-repeat;
     margin-left: -10px;
     margin-right: 90px;
 }
 
 .welcome-sign-in{
-    background: url("/static/sources/delete_cross.png") no-repeat;
+    background: url("/static/sources/sign_in.png") no-repeat;
     margin-left: -10px;
+}
+
+.row.welcome-how-it-works {
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #317eac;
+    margin-top: 20px;
 }

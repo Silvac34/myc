@@ -30,60 +30,62 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th width="15%">Number</th>
-                        <th width="30%">Arrival time</th>
-                        <th width="20%">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="info">
-                        <td>Host (me)</td>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Helping cook</td>
-                        <td><input type="number" class="form-control" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                        <td><input type="time" name="formTime" class="form-control" uib-popover-template="formPopoverTimepickerTimeCooking.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepickerTimeCooking.title}}"
-                                value="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
-                        <td>{{meal.detailedInfo.requiredGuests.cooks.price | currency}}</td>
-                    </tr>
+            <div class="row" style="overflow-x:scroll">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th width="15%">Number</th>
+                            <th width="30%">Arrival time</th>
+                            <th width="20%">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="info">
+                            <td>Host (me)</td>
+                            <td>1</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Helping cook</td>
+                            <td><input type="number" class="form-control" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                            <td><input type="time" name="formTime" class="form-control" uib-popover-template="formPopoverTimepickerTimeCooking.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepickerTimeCooking.title}}"
+                                    value="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
+                            <td>{{meal.detailedInfo.requiredGuests.cooks.price | currency}}</td>
+                        </tr>
 
-                    <script type="text/ng-template" id="PopoverTimepickerTemplateTimeCooking.html">
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <span class="input-group" ng-click="$event.stopPropagation()">
+                        <script type="text/ng-template" id="PopoverTimepickerTemplateTimeCooking.html">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <span class="input-group" ng-click="$event.stopPropagation()">
                                 <uib-timepicker ng-model="meal.detailedInfo.requiredGuests.cooks.timeCooking" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
                             </span>
+                                </div>
                             </div>
-                        </div>
-                    </script>
+                        </script>
 
-                    <tr>
-                        <td>Helping to wash dishes</td>
-                        <td><input type="number" class="form-control" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
-                        <td><span ng-show="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{meal.time | date:'HH:mm'}}</span></td>
-                        <td>{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Simple guest</td>
-                        <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
-                        <td><span ng-show="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{meal.time | date:'HH:mm'}}</span></td>
-                        <td>{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}}</td>
-                    </tr>
-                    <tr class="success">
-                        <td>Total</td>
-                        <td>{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks + meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
-                        <td>{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1}}</td>
-                        <td>{{nbCooksInscribed}}</td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr>
+                            <td>Helping to wash dishes</td>
+                            <td><input type="number" class="form-control" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                            <td><span ng-show="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{meal.time | date:'HH:mm'}}</span></td>
+                            <td>{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Simple guest</td>
+                            <td><input type="number" class="form-control" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                            <td><span ng-show="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{meal.time | date:'HH:mm'}}</span></td>
+                            <td>{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}}</td>
+                        </tr>
+                        <tr class="success">
+                            <td>Total</td>
+                            <td>{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks + meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</td>
+                            <td>{{meal.time | date:'HH:mm'}}</td>
+                            <td>{{meal.price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="row" ng-show="(nbCooksInscribed > (meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || nbCleanersInscribed > meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || nbSimpleGuestsInscribed > meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests) && formModalEdit.$submitted">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -129,7 +131,7 @@
                 <div class="form-group">
                     <label class="col-xs-3 col-sm-2 control-label">Town</label>
                     <div class="col-xs-9 col-sm-10 col-md-2">
-                        <input class="form-control" id="inputTown" placeholder="town" ng-model="meal.town"/>
+                        <input class="form-control" id="inputTown" placeholder="town" ng-model="meal.town" />
                     </div>
                 </div>
             </div>

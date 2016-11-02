@@ -691,5 +691,13 @@ h2.slogan{
     border-bottom-style: solid;
     border-bottom-width: thin;
     border-bottom-color: #317eac;
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
+}
+
+.welcome-images{
+    border-style: solid;
+    border-width: thin;
+    border-color: #317eac;
+    border-radius: 10px;
+    margin-top: 15px;
 }

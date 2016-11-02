@@ -1,10 +1,10 @@
 <div ng-controller="WelcomeCtrl">
   <div class="container">
-    <div ui-sref="login" class="welcome-register welcome-buttons-auth text-info" href="#/login">
-      Register
+    <div class="welcome-register welcome-buttons-auth text-info">
+      <a ui-sref="login">Register</a>
     </div>
-    <div class="welcome-sign-in welcome-buttons-auth text-info" ui-sref="login" href="#/login">
-      Sign In
+    <div class="welcome-sign-in welcome-buttons-auth text-info">
+      <a ui-sref="login">Sign In</a>
     </div>
     <div class="col-xs-12 text-center">
       <div class="row">
@@ -30,28 +30,32 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          Screenshot form
+          <img src="/static/sources/number_1.png"> Someone publish a meal
         </div>
         <div class="col-sm-4">
-          screenshot inscription repas
+          <img src="/static/sources/number_2.png"> Others suscribe to the meal
         </div>
-        <div class="col-sm-4">
-          carousel photos des repas
+        <div class="col-sm-4 text-left">
+          <img src="/static/sources/number_3.png"> You share :
+          <div class="row col-sm-offset-1">
+            <li>Diner</li>
+            <li>Good Vibes</li>
+            <li>Diner's preparation task</li>
+            <li>The price</li>
+          </div>
         </div>
       </div>
       <div class="row">
+      </div>
+      <div class="row hidden-xs hidden-sm hidden-md">
         <div class="col-sm-4">
-          Someone publish a meal
+          <img src="/static/sources/welcome_propose_meal.png" class="welcome-images">
         </div>
         <div class="col-sm-4">
-          Others suscribe to the meal
+          <img src="/static/sources/welcome_subscribe_meal.png" class="welcome-images">
         </div>
         <div class="col-sm-4">
-          You share :<br>
-          <li class="text-left">Diner</li>
-          <li class="text-left">Good Vibes</li>
-          <li class="text-left">Diner's preparation task</li>
-          <li class="text-left">The price</li>
+          <img src="/static/sources/welcome_meal_example.jpg" class="welcome-images" style="width:100%">
         </div>
       </div>
     </div>

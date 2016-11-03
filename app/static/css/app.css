@@ -531,6 +531,16 @@
 
 /* viewMyMealsDtld ---------------------------------------------------*/
 
+.my-meal-uitabset{
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+
+.my-meal-uitab{
+    margin-left: 10px;
+}
+
 .my-meal-dtld-label {
     font-size: 13px;
     padding-left: 29px;

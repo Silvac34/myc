@@ -1,6 +1,8 @@
 <div class="container-fluid">
-  <uib-tabset type="pills" class="my-meal-uitabset">
+  <div class="clear10"></div>
+  <uib-tabset type="pills">
     <uib-tab index="0" heading="Incoming meals" class="my-meal-uitab">
+      <div class="clear20"></div>
       <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal':mealFilteredFutur.length}>
         <div class="row" ng-repeat="meal in mealFilteredFutur = (meals | MyMealsFiltered:true)">
           <div class="col-xs-12">

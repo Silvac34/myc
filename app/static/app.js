@@ -52,6 +52,47 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
         requiredLogin: true
       }
     });
+  $stateProvider
+    .state('footer_information_feedback', {
+      url: '/information/send_feedback',
+      templateUrl: 'static/footer/information/feedback/send_feedback.html',
+    });
+  $stateProvider
+    .state('footer_information_contact', {
+      url: '/information/contact_us',
+      templateUrl: 'static/footer/information/contact/contact_us.html',
+    });
+  $stateProvider
+    .state('footer_information_who_we_are', {
+      url: '/information/who_we_are',
+      templateUrl: 'static/footer/information/whoWeAre/who_we_are.html',
+    });
+  $stateProvider
+    .state('footer_information_concept', {
+      url: '/information/concept',
+      templateUrl: 'static/footer/information/concept/concept.html',
+    });
+  $stateProvider
+    .state('footer_information_FAQ', {
+      url: '/information/FAQ',
+      templateUrl: 'static/footer/information/FAQ/FAQ.html',
+    });
+  $stateProvider
+    .state('footer_legal_terms_and_conditions', {
+      url: '/legal/terms_and_conditions',
+      templateUrl: 'static/footer/legal/termsAndConditions/terms_and_conditions.html',
+    });
+  $stateProvider
+    .state('footer_more_careers', {
+      url: '/more/careers',
+      templateUrl: 'static/footer/more/careers/careers.html',
+    });
+  $stateProvider
+    .state('footer_more_photo_gallery', {
+      url: '/more/photo_gallery',
+      templateUrl: 'static/footer/more/photoGallery/photo_gallery.html',
+    });
+
   $urlRouterProvider.otherwise('welcome');
 
   $authProvider.facebook({
@@ -77,31 +118,31 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
-    $rootScope.$state = $state;
+  $rootScope.$state = $state;
 });
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
-  
+
   var $ctrl = this;
   $scope.logout = function() {
-    $auth.logout();
-    $state.go('login');
-  },
+      $auth.logout();
+      $state.go('login');
+    },
 
-  $scope.isAuthenticated = function() {
-    return $auth.isAuthenticated();
-  },
-  
-  $scope.getUserProfile = function() {
-    if ($auth.isAuthenticated()) {
-      userServices.getUserInfo().then(function(data) {
-        $scope.user = data;
-      });
-    }
-  };
-  
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    },
+
+    $scope.getUserProfile = function() {
+      if ($auth.isAuthenticated()) {
+        userServices.getUserInfo().then(function(data) {
+          $scope.user = data;
+        });
+      }
+    };
+
 
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;
-  
+
 }]);

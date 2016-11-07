@@ -107,6 +107,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
 app.run(function($rootScope, $state, $auth) {
   $rootScope.$on('$stateChangeStart',
     function(event, toState) {
+      // when the state change, the user load the template at the top of the window
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
       var requiredLogin = false;
       // check if this state need login
       if (toState.data && toState.data.requiredLogin)
@@ -118,7 +120,9 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
+  // enable to get the state in the view
   $rootScope.$state = $state;
+  
 });
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {

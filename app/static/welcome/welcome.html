@@ -1,10 +1,15 @@
 <div ng-controller="WelcomeCtrl">
   <div class="container">
-    <div class="welcome-register welcome-buttons-auth text-info">
-      <a ui-sref="login" href="#/login">Register</a>
+    <div ng-hide="user">
+      <div class="welcome-register welcome-buttons-auth text-info">
+        <a ui-sref="login" href="#/login">Register</a>
+      </div>
+      <div class="welcome-sign-in welcome-buttons-auth text-info">
+        <a ui-sref="login" href="#/login">Sign In</a>
+      </div>
     </div>
-    <div class="welcome-sign-in welcome-buttons-auth text-info">
-      <a ui-sref="login" href="#/login">Sign In</a>
+    <div ng-show="user">
+      <h4 style="margin-top: -50px;">Welcome {{user.first_name}}</h4>
     </div>
     <div class="col-xs-12 text-center">
       <div class="row">

@@ -145,6 +145,19 @@ footer p {
     }
 }
 
+.welcome-buttons-auth {
+    float: right;
+    margin-top: -60px;
+    margin-right: 10px;
+}
+
+#facebook-button-nav{
+    width: 100px;
+    text-align: right;
+    margin-right: auto;
+    margin-left: 2%;
+}
+
 
 /* View Meals -------------------------------------------------------------------------------- */
 
@@ -747,20 +760,6 @@ h2.slogan {
     padding-top: 2px;
 }
 
-.welcome-register.welcom-buttons-auth {
-    margin-right: 100px;
-}
-
-.welcome-register {
-    background: url("/static/sources/register.png") no-repeat;
-    margin-left: -10px;
-    margin-right: 90px;
-}
-
-.welcome-sign-in {
-    background: url("/static/sources/sign_in.png") no-repeat;
-    margin-left: -10px;
-}
 
 .row.welcome-how-it-works {
     border-bottom-style: solid;

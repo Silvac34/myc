@@ -34,6 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
     });
+    
   $stateProvider
     .state('create_meal', {
       url: '/create_meal',
@@ -122,20 +123,35 @@ app.run(function($rootScope, $state, $auth) {
     });
   // enable to get the state in the view
   $rootScope.$state = $state;
-  
+
 });
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
 
-  var $ctrl = this;
+  $scope.auth = function(provider) {
+    $auth.authenticate(provider)
+      .then(function(response) {
+        console.debug("success", response);
+        $scope.getUserInfo();
+      })
+      .catch(function(response) {
+        console.debug("catch", response);
+      });
+  };
+
   $scope.logout = function() {
       $auth.logout();
-      $state.go('login');
     },
 
     $scope.isAuthenticated = function() {
       return $auth.isAuthenticated();
     },
+
+    $scope.getUserInfo = function() {
+        userServices.getUserInfo().then(function(data) {
+            $scope.$parent.user = data;
+        });
+    };
 
     $scope.getUserProfile = function() {
       if ($auth.isAuthenticated()) {
@@ -145,6 +161,9 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
       }
     };
 
+    $scope.status = {
+        isopen: false
+    };
 
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;

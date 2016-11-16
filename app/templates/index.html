@@ -42,7 +42,7 @@
 <body>
 
   <div ng-controller="AppCtrl">
-    <div class="bs-component" data-ng-hide="$state.includes('welcome')">
+    <div class="bs-component" ng-if="!$state.includes('welcome')">
       <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -52,7 +52,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../">myCommuneaty</a>
+            <a class="navbar-brand" href="../" ng-if="!$state.includes('welcome')">myCommuneaty</a>
           </div>
 
           <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
@@ -70,13 +70,28 @@
                   <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
                 </ul>
               </li>
-              <li ng-if="!isAuthenticated()"><a ui-sref="login" class="btn btn-success"> Sign In</a></li>
+              <li ng-if="!isAuthenticated()"><a ng-click="auth('facebook')" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>
             </ul>
-
           </div>
         </div>
       </nav>
     </div>
+      <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook')">
+      <button class="btn btn-block btn-social btn-facebook" type="button">
+            <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
+        </div>
+    
+        <div class="btn-group welcome-buttons-auth" uib-dropdown is-open="status.isopen" ng-if="$state.includes('welcome') && isAuthenticated()">
+      <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+        Welcome <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a href="#">Profile</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a ng-click="logout()">Logout</a></li>
+      </ul>
+    </div>
+  
     <div ui-view></div>
     <div class="clear40"></div>
   </div>

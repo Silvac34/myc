@@ -12,7 +12,8 @@ var app = angular.module('myApp', [
   'myApp.viewLogin',
   'myApp.viewProfile',
   'myApp.welcome',
-  'userServices'
+  'userServices',
+  'ngAutocomplete'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {

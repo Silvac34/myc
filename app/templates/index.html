@@ -33,6 +33,7 @@
   <script src="../static/viewMyMeals/viewMyMeals.js"></script>
   <script src="../static/viewLogin/viewLogin.js"></script>
   <script src="../static/welcome/welcome.js"></script>
+  <script src="../static/profile/viewProfile.js"></script>
   <script src="../static/components/userServices.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
 
@@ -67,6 +68,8 @@
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
+                  <li><a ui-sref="profile" class="btn btn-default">Profile</a></li>
+                  <li class="divider"></li>
                   <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
                 </ul>
               </li>
@@ -86,7 +89,7 @@
         Welcome <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li role="menuitem"><a href="#">Profile</a></li>
+        <li role="menuitem"><a ui-sref="profile">Profile</a></li>
         <li class="divider"></li>
         <li role="menuitem"><a ng-click="logout()">Logout</a></li>
       </ul>

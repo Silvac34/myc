@@ -127,6 +127,13 @@ footer p {
     content: "\f09a";
 }
 
+/* footer_who_we_are -----------------------*/
+
+.padding-left-15-right-15{
+    padding-left:15px;
+    padding-right:15px;
+}
+
 
 /*Profile pic */
 
@@ -260,7 +267,7 @@ footer p {
 .meal-search-filter {
     float: left;
     margin-left: 15px;
-    position: fixed;
+    position: absolute;
 }
 
 .btn-filter-mobile-reinitialize {

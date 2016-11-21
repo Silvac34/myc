@@ -10,6 +10,7 @@ var app = angular.module('myApp', [
   'myApp.viewMeals',
   'myApp.viewMyMeals',
   'myApp.viewLogin',
+  'myApp.viewProfile',
   'myApp.welcome',
   'userServices'
 ]);
@@ -34,7 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
     });
-    
+
   $stateProvider
     .state('create_meal', {
       url: '/create_meal',
@@ -93,6 +94,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/more/photo_gallery',
       templateUrl: 'static/footer/more/photoGallery/photo_gallery.html',
     });
+  $stateProvider
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'static/profile/viewProfile.html',
+      controller: 'ViewProfileCtrl'
+    });
 
   $urlRouterProvider.otherwise('welcome');
 
@@ -147,23 +154,17 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
       return $auth.isAuthenticated();
     },
 
-    $scope.getUserInfo = function() {
-        userServices.getUserInfo().then(function(data) {
-            $scope.$parent.user = data;
-        });
-    };
+  $scope.getUserProfile = function() {
+    if ($auth.isAuthenticated()) {
+      userServices.getUserInfo().then(function(data) {
+        $scope.user = data;
+      });
+    }
+  };
 
-    $scope.getUserProfile = function() {
-      if ($auth.isAuthenticated()) {
-        userServices.getUserInfo().then(function(data) {
-          $scope.user = data;
-        });
-      }
-    };
-
-    $scope.status = {
-        isopen: false
-    };
+  $scope.status = {
+    isopen: false
+  };
 
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;

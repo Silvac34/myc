@@ -107,6 +107,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 
     });
   };
 
+ $scope.addressAutocomplete;
 
 }])
 

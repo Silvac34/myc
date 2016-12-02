@@ -30,13 +30,16 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       return viewMealsFilterService.get();
     },
 
-    $scope.openModalFilter = function() {
+    $scope.openModalFilter = function(filter) {
       $uibModal.open({
         animation: true,
         templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
-        controller: function($uibModalInstance){
-            
+        controller: 'filterMealModalCtrl',
+        resolve: {
+        filter: function() {
+          return filter;
         }
+      }
       });
     };
 
@@ -67,18 +70,62 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 
 }]);
 
-
-modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
-/*
-  $scope.close = function() {
+modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstance) {
+  $scope.cancel = function() {
     $uibModalInstance.close();
+  };
+  
+    $scope.initializeFilters = function() {
+    $scope.filter = {
+      weekDays: [{
+        label: 'Mon',
+        selected: false,
+        ind: 1
+      }, {
+        label: 'Tu',
+        selected: false,
+        ind: 2
+      }, {
+        label: 'Wed',
+        selected: false,
+        ind: 3
+      }, {
+        label: 'Th',
+        selected: false,
+        ind: 4
+      }, {
+        label: 'Fr',
+        selected: false,
+        ind: 5
+      }, {
+        label: 'Sat',
+        selected: false,
+        ind: 6
+      }, {
+        label: 'Sun',
+        selected: false,
+        ind: 0
+      }],
+      dateFilterMin: {
+        opened: false
+      },
+      dateFilterMax: {
+        opened: false,
+      }
+    };
   };
   
   $scope.clearAndCloseFilterMobile = function() {
     $scope.initializeFilters();
     $uibModalInstance.close();
   };
-  */
+  
+});
+
+modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
+
+
+  
 
 
   $scope.dateFilterMin_open = function() {

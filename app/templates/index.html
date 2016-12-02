@@ -70,9 +70,9 @@
 
           <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
             <ul class="nav navbar-nav">
-              <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse">Create a Meal</a></li>
-              <li><a ui-sref="view_meals" ui-sref-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse">Suscribe to a Meal</a></li>
-              <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse">My Meals</a></li>
+              <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">Create a Meal</a></li>
+              <li><a ui-sref="view_meals" ui-sref-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">Suscribe to a Meal</a></li>
+              <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">My Meals</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -80,7 +80,7 @@
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
-                  <li><a ui-sref="profile" class="btn btn-default">Profile</a></li>
+                  <li><a ui-sref="profile" class="btn btn-primary">Profile</a></li>
                   <li class="divider"></li>
                   <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
                 </ul>

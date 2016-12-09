@@ -10,8 +10,10 @@ var app = angular.module('myApp', [
   'myApp.viewMeals',
   'myApp.viewMyMeals',
   'myApp.viewLogin',
+  'myApp.viewProfile',
   'myApp.welcome',
-  'userServices'
+  'userServices',
+  'ngAutocomplete'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
@@ -33,10 +35,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/view_meals',
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
-      data: {
-        requiredLogin: true
-      }
     });
+
   $stateProvider
     .state('create_meal', {
       url: '/create_meal',
@@ -55,6 +55,53 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
         requiredLogin: true
       }
     });
+  $stateProvider
+    .state('footer_information_feedback', {
+      url: '/information/send_feedback',
+      templateUrl: 'static/footer/information/feedback/send_feedback.html',
+    });
+  $stateProvider
+    .state('footer_information_contact', {
+      url: '/information/contact_us',
+      templateUrl: 'static/footer/information/contact/contact_us.html',
+    });
+  $stateProvider
+    .state('footer_information_who_we_are', {
+      url: '/information/who_we_are',
+      templateUrl: 'static/footer/information/whoWeAre/who_we_are.html',
+    });
+  $stateProvider
+    .state('footer_information_concept', {
+      url: '/information/concept',
+      templateUrl: 'static/footer/information/concept/concept.html',
+    });
+  $stateProvider
+    .state('footer_information_FAQ', {
+      url: '/information/FAQ',
+      templateUrl: 'static/footer/information/FAQ/FAQ.html',
+    });
+  $stateProvider
+    .state('footer_legal_terms_and_conditions', {
+      url: '/legal/terms_and_conditions',
+      templateUrl: 'static/footer/legal/termsAndConditions/terms_and_conditions.html',
+    });
+  $stateProvider
+    .state('footer_more_careers', {
+      url: '/more/careers',
+      templateUrl: 'static/footer/more/careers/careers.html',
+    });
+  $stateProvider
+    .state('footer_more_photo_gallery', {
+      url: '/more/photo_gallery',
+      templateUrl: 'static/footer/more/photoGallery/photo_gallery.html',
+    });
+  $stateProvider
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'static/profile/viewProfile.html',
+      controller: 'ViewProfileCtrl'
+    });
+
   $urlRouterProvider.otherwise('welcome');
 
   $authProvider.facebook({
@@ -69,6 +116,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
 app.run(function($rootScope, $state, $auth) {
   $rootScope.$on('$stateChangeStart',
     function(event, toState) {
+      // when the state change, the user load the template at the top of the window
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
       var requiredLogin = false;
       // check if this state need login
       if (toState.data && toState.data.requiredLogin)
@@ -80,18 +129,32 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
+  // enable to get the state in the view
+  $rootScope.$state = $state;
+
 });
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
-  $scope.logout = function() {
-    $auth.logout();
-    $state.go('login');
-  },
 
-  $scope.isAuthenticated = function() {
-    return $auth.isAuthenticated();
-  },
-  
+  $scope.auth = function(provider) {
+    $auth.authenticate(provider)
+      .then(function(response) {
+        console.debug("success", response);
+        $scope.getUserInfo();
+      })
+      .catch(function(response) {
+        console.debug("catch", response);
+      });
+  };
+
+  $scope.logout = function() {
+      $auth.logout();
+    },
+
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    },
+
   $scope.getUserProfile = function() {
     if ($auth.isAuthenticated()) {
       userServices.getUserInfo().then(function(data) {
@@ -99,10 +162,12 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
       });
     }
   };
-  
+
+  $scope.status = {
+    isopen: false
+  };
 
   $scope.getUserProfile();
   $scope.navbarCollapsed = true;
-  
 
 }]);

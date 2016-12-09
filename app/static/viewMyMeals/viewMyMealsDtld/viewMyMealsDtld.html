@@ -22,35 +22,35 @@
             </div>
             <div class="row" ng-if="userRole!='admin'">
                 <div class="col-xs-12">
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} a pagar</div>
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cleaner'">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} a pagar</div>
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='simpleGuest'">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} a pagar</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} left to pay</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cleaner'">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} left to pay</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='simpleGuest'">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} left to pay</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-2" ng-if="userRole=='admin'">
             <div class="col-sm-6">
                 <div class="my-meal-dtld-label my-meal-dtld-edit" ng-click="openModalEdit()">
-                    <span class="my-meal-dtld-hidden-txt">Modificar</span>
+                    <span class="my-meal-dtld-hidden-txt">Modify</span>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="my-meal-dtld-label my-meal-dtld-delete" ng-click="openModalDelete()">
-                    <span class="my-meal-dtld-hidden-txt">Supprimir</span>
+                    <span class="my-meal-dtld-hidden-txt">Delete</span>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-2" ng-if="userRole!='admin'">
             <div class="col-sm-offset-4 col-sm-6">
                 <div class="my-meal-dtld-label my-meal-dtld-delete" ng-click="openModalUnsubscribe()">
-                    <span class="my-meal-dtld-hidden-txt">Desinscribirse</span>
+                    <span class="my-meal-dtld-hidden-txt">Unsubscribe</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-9 page-header">
-            Participantes
+            Participants
         </div>
 
         <div class="col-xs-3 my-meal-dtld-right">
@@ -65,7 +65,7 @@
             <div class="panel-body">
                 <div class="col-xs-12">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Su anfitrión</div>
+                        <div class="text-primary my-meal-dtld-title">Your host</div>
                     </div>
                     <div class="row">
                         <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}<span ng-if="meal.privateInfo.adminPhone"> - {{meal.privateInfo.adminPhone}}</span></div>
@@ -79,10 +79,10 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Ayuda a la cocina</div>
+                        <div class="text-primary my-meal-dtld-title">Helping cook</div>
                     </div>
                     <div class="row" ng-if="userRole == 'admin'">
-                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} par pers</div>
+                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} by pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'cook'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
@@ -93,7 +93,7 @@
                         <div class="my-meal-dtld-label my-meal-dtld-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}} </div>
                     </div>
                     <div class="row">
-                        Cupones libres : {{meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces - 1}}
+                        Remaining places : {{meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}
                     </div>
                 </div>
             </div>
@@ -104,10 +104,10 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Ayuda a la loza</div>
+                        <div class="text-primary my-meal-dtld-title">Helping to wash dishes</div>
                     </div>
                     <div class="row" ng-if="userRole == 'admin'">
-                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} par pers</div>
+                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} by pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'cleaner'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
@@ -118,7 +118,7 @@
                         <div class="my-meal-dtld-label my-meal-dtld-time">{{meal.time |date:'HH:mm'}} </div>
                     </div>
                     <div class="row">
-                        Cupones libres : {{meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}
+                        Remaining places : {{meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}
                     </div>
                 </div>
             </div>
@@ -129,10 +129,10 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Invitados</div>
+                        <div class="text-primary my-meal-dtld-title">Simple guest</div>
                     </div>
                     <div class="row" ng-if="userRole == 'admin'">
-                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} par pers</div>
+                        <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} by pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'simpleGuest'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
@@ -143,16 +143,13 @@
                         <div class="my-meal-dtld-label my-meal-dtld-time">{{meal.time |date:'HH:mm'}} </div>
                     </div>
                     <div class="row">
-                        Cupones libres : {{meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}
+                        Remaining places : {{meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row page-header">
-        CHAT A METTRE EN PLACE
-    </div>
     <div class="row my-meal-btn-center">
-        <a href="/#/my_meals" class="btn btn-primary">Volver a mis cenas</a>
+        <a href="/#/my_meals" class="btn btn-primary">Back to my meals</a>
     </div>
 </div>

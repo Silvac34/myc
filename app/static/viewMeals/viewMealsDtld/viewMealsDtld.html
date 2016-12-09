@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row meal-dtld-group">
-        <div class="meal-label meal-dtld-group-label">Me inscribo como :</div>
+        <div class="meal-label meal-dtld-group-label">Inscription as :</div>
         <div class="meal-dtld-helpers-label meal-dtld-col">
             <span class="meal-dtld-helpers-places" uib-popover="participantes" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
             <span class="meal-dtld-helpers-price" uib-popover="precio" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/banknote.png" height="18px" width="18px"></span>
@@ -37,29 +37,29 @@
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cook" ng-disabled="!requiredGuests.availablePlaces.cooks">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1" is-disabled="!requiredGuests.availablePlaces.cooks">
                     <uib-accordion-heading>
-                        <div class="meal-dtld-helpers-label">Ayuda a la cocina
+                        <div class="meal-dtld-helpers-label">Helping cook
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
                             <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}}</span>
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">Vengo asistir el cocinero en la preparación de la cena. </br>¡OJO! hay que llegar a las <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span> para ayudar el
-                        anfitrión</div>
+                    <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
+                    </div>
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2" is-disabled="!requiredGuests.availablePlaces.cleaners">
                     <uib-accordion-heading>
-                        <div class="meal-dtld-helpers-label">Ayuda a la loza
+                        <div class="meal-dtld-helpers-label">Help to wash dishes
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
                             <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</span>
                             <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">Al final de la cena, ayudaré a ordenar y limpiar lo que se usó para hacer la cena (lavar la loza y limpiar la mesa)</div>
+                    <div class="meal-dtld-helpers-description">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
                 </div>
             </div>
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
@@ -67,27 +67,27 @@
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3" is-disabled="!requiredGuests.availablePlaces.simpleGuests">
                     <uib-accordion-heading>
 
-                        <div class="meal-dtld-helpers-label">Invitado
+                        <div class="meal-dtld-helpers-label">Simple guest
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
                             <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}}</span>
                             <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
                         </div>
                     </uib-accordion-heading>
-                    <div class="meal-dtld-helpers-description">Ayudo financialmente a los que preparan la cena pagando un poquito más : esta propina será redistribuido a los que cocinan y limpian como en el resto</div>
+                    <div class="meal-dtld-helpers-description">I help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>
                 </div>
             </div>
         </uib-accordion>
     </div>
     <div class="text-center">
         <div uib-alert ng-if="errorSubscribe.status" class="alert alert-dismissible alert-danger" close="closeAlert()">{{errorSubscribe.message}}</div>
-        <a class="btn btn-primary" ng-click="subscribeMeal(meal._id,requestRole.name)" ng-if="meal.nbRemainingPlaces>0 && !goToMeal">Participar</a>
-        <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">Ver la cena</a>
-        <div ng-if="meal.nbRemainingPlaces<=0  && !goToMeal" class="meal-dtld-full-msg">Damn ! La cena ya está llena</div>
+        <a class="btn btn-primary" ng-click="subscribeMeal(meal._id,requestRole.name)" ng-if="meal.nbRemainingPlaces>0 && !goToMeal">Participate</a>
+        <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
+        <div ng-if="meal.nbRemainingPlaces<=0  && !goToMeal" class="meal-dtld-full-msg">Damn ! The meal is already full</div>
     </div>
 
     <div class="row meal-dtld-group">
-        <div class="meal-label meal-dtld-group-label">Esta cena está organizada por :</div>
+        <div class="meal-label meal-dtld-group-label">The meal is organized by :</div>
         <div clas="meal-dtld-admin-wrapper">
             <img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
             <div class="meal-admin-name meal-dtld-admin-name">{{meal.admin.first_name}} </br> {{meal.admin.last_name}}</div>

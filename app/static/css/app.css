@@ -1,5 +1,23 @@
 /* app css stylesheet */
 
+
+/* function clear css to create lines with nothing*/
+
+.clear10 {
+    clear: both;
+    height: 10px;
+}
+
+.clear20 {
+    clear: both;
+    height: 20px;
+}
+
+.clear40 {
+    clear: both;
+    height: 40px;
+}
+
 @media (min-width: 768px) {
     .page-separation-title {
         padding: 9px 0 9px 7px;
@@ -57,12 +75,94 @@
 }
 
 
+/* footer -----------------------*/
+
+footer {
+    background-color: #0B4060;
+    color: #fff;
+    text-align: center;
+}
+
+#footer-bottom {
+    background-color: #033151
+}
+
+footer a,
+footer a:hover {
+    color: #fff;
+}
+
+footer .h3,
+footer p {
+    color: #fff;
+}
+
+.fa-2x {
+    font-size: 2em;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.social_circle {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 5px;
+    border: solid 2px #fff;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    font-size: 11px;
+}
+
+.fa-facebook:before {
+    content: "\f09a";
+}
+
+/* footer_who_we_are -----------------------*/
+
+.padding-left-15-right-15{
+    padding-left:15px;
+    padding-right:15px;
+}
+
+
 /*Profile pic */
 
 .profilePic {
     margin-bottom: -9px;
     margin-top: -9px;
     width: 50px;
+}
+
+
+/* Navbar ------------------------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+    .navbar-fixed-top.navbar-fixed-top-mobile {
+        position: absolute;
+    }
+}
+
+.welcome-buttons-auth {
+    float: right;
+    margin-top: -60px;
+    margin-right: 10px;
+}
+
+#facebook-button-nav{
+    width: 100px;
+    text-align: right;
+    margin-right: auto;
+    margin-left: 2%;
 }
 
 
@@ -83,12 +183,13 @@
 }
 
 .meal-search-sort {
-    /*float: right;*/
-    margin-right: 5px
+    float: right;
+    margin-right: 15px;
+    margin-top: -5px;
 }
 
 .meal-search-sort .btn-group {
-    margin: 0;
+    margin-right: 10px;
     margin-top: 5px
 }
 
@@ -161,6 +262,17 @@
     background: #0FAAF0 url("/static/sources/icones sort/menu_asc_hover.png") no-repeat 50% 50%;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px
+}
+
+.meal-search-filter {
+    float: left;
+    margin-left: 15px;
+    position: absolute;
+}
+
+.btn-filter-mobile-reinitialize {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -248,8 +360,6 @@
 
 
 /* viewMyMeals ---------------------------------------------------*/
-
-.meal-admin-phone {}
 
 .list-my-meal {
     overflow-y: scroll;
@@ -488,7 +598,7 @@
     background: url("/static/sources/vegetarian.png") no-repeat;
     text-indent: 25px;
     margin-top: auto;
-    background-position: 10px 5px;
+    background-position: 7px 5px;
 }
 
 .form-meal-price {
@@ -514,6 +624,10 @@
 
 
 /* viewMyMealsDtld ---------------------------------------------------*/
+
+.my-meal-uitab {
+    margin-left: 10px;
+}
 
 .my-meal-dtld-label {
     font-size: 13px;
@@ -623,8 +737,8 @@
 }
 
 .page-separation {
-    padding-bottom: 9px;
-    margin: 0 0 10px;
+    padding-bottom: 4px;
+    margin: -11px 0 7px;
     border-bottom: 1px solid #eeeeee;
 }
 
@@ -634,4 +748,46 @@
 
 .size-14 {
     font-size: 14px;
+}
+
+
+/* welcome---------------------------------------------------*/
+
+h2.slogan {
+    font-size: 20px;
+    margin-top: -10px;
+    font-style: italic;
+}
+
+.welcome-buttons-auth {
+    float: right;
+    margin-top: -60px;
+    padding-left: 30px;
+    padding-bottom: 5px;
+    padding-top: 2px;
+}
+
+
+.row.welcome-how-it-works {
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #317eac;
+}
+
+.welcome-images {
+    border-style: solid;
+    border-width: thin;
+    border-color: #317eac;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/*who we are --------------------------------------------------- */
+
+.who_we_are_pic{
+    height:250px;
+    border-radius: 200px;
+    border-color: #0B4060;
+    border-style: solid;
+    border-width: 2px;
 }

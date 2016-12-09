@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="../static/css/filter.css">
   <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- pour avoir la liste des pays avec leur drapeaux dans autocomplete nationality and flags -->
+  <link rel="stylesheet" href="../static/bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css">
+  <link rel="stylesheet" href="../static/bower_components/EasyAutocomplete/demo/resources/flags.css">
+  <!-- -->
   <script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-resource/angular-resource.js"></script>
   <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -33,17 +37,26 @@
   <script src="../static/viewMyMeals/viewMyMeals.js"></script>
   <script src="../static/viewLogin/viewLogin.js"></script>
   <script src="../static/welcome/welcome.js"></script>
+  <script src="../static/profile/viewProfile.js"></script>
   <script src="../static/components/userServices.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+  <!-- autocomplete with google-->
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA&libraries=places"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script src="../static/components/ngAutocomplete.js"></script>
+  <!-- autocomplete for nationality and flags-->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="../static/bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js"></script>
   
+
 
 </head>
 
 <body>
 
   <div ng-controller="AppCtrl">
-    <div class="bs-component">
-      <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="bs-component" ng-if="!$state.includes('welcome')">
+      <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
@@ -52,14 +65,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../">CommunEATy</a>
+            <a class="navbar-brand" href="../" ng-if="!$state.includes('welcome')">myCommuneaty</a>
           </div>
 
           <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
             <ul class="nav navbar-nav">
-              <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse"</div>Create a Meal</a></li>
-              <li><a ui-sref="view_meals" data-toggle="collapse" data-target="navbar-collapse">Suscribe to a Meal</a></li>
-              <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse">My Meals</a></li>
+              <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">Create a Meal</a></li>
+              <li><a ui-sref="view_meals" ui-sref-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">Suscribe to a Meal</a></li>
+              <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">My Meals</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -67,19 +80,99 @@
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
+                  <li><a ui-sref="profile" class="btn btn-primary">Profile</a></li>
+                  <li class="divider"></li>
                   <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
                 </ul>
               </li>
-              <li ng-if="!isAuthenticated()"><a ui-sref="login" class="btn btn-success"> Sign In</a></li>
+              <li ng-if="!isAuthenticated()"><a ng-click="auth('facebook')" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>
             </ul>
-
           </div>
         </div>
       </nav>
     </div>
+      <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook')">
+      <button class="btn btn-block btn-social btn-facebook" type="button">
+            <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
+        </div>
+    
+        <div class="btn-group welcome-buttons-auth" uib-dropdown is-open="status.isopen" ng-if="$state.includes('welcome') && isAuthenticated()">
+      <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+        Welcome <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a ui-sref="profile">Profile</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a ng-click="logout()">Logout</a></li>
+      </ul>
+    </div>
+  
     <div ui-view></div>
-
+    <div class="clear40"></div>
   </div>
 </body>
+
+<footer>
+  <div class="clear20"></div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-4">
+        <p class="text-uppercase"><strong>Information</strong></p>
+
+        <a ui-sref="footer_information_feedback" ui-sref-opts="{reload:true}">Send a feedback</a><br>
+        <a ui-sref="footer_information_contact">Contact us</a><br>
+        <a ui-sref="footer_information_who_we_are">Who we are</a><br>
+        <a ui-sref="footer_information_concept">Concept</a><br>
+        <a ui-sref="footer_information_FAQ">FAQ</a><br>
+      </div>
+
+      <div class="col-sm-4">
+        <hr class="visible-xs-block">
+        <p class="text-uppercase"><strong>Legal</strong></p>
+
+        <a ui-sref="footer_legal_terms_and_conditions">Terms and conditions</a><br>
+
+      </div>
+
+      <div class="col-sm-4">
+        <hr class="visible-xs-block">
+        <p class="text-uppercase"><strong>more</strong></p>
+
+        <a ui-sref="footer_more_photo_gallery">Photo Gallery</a><br>
+        <a ui-sref="footer_more_careers">Careers</a>
+      </div>
+      <!--
+      <div class="col-sm-3">
+        <hr class="visible-xs-block">
+        <p class="text-uppercase"><strong>Language</strong></p>
+
+        <a href="/index-de.html" title="deutsch" class="languageSelector" data-lang="de" data-href="/index-de.html"><img src="/gfx/2015/icons/de.png"></a> &nbsp;
+        <a href="/index-fr.html" title="fran&amp;ccedil;ais" class="languageSelector" data-lang="fr" data-href="/index-fr.html"><img src="/gfx/2015/icons/fr.gif"></a> &nbsp;
+        <a href="/index-es.html" title="español" class="languageSelector" data-lang="es" data-href="/index-es.html"><img src="/gfx/2015/icons/es.png"></a> &nbsp;
+      </div>
+    </div>
+    
+    -->
+    </div>
+  </div>
+  <div class="clear20"></div>
+
+  <div id="footer-bottom">
+    <div class="clear20"></div>
+    <div class="text-center">
+      <p class="h3">Share myCommuneaty on <a href="https://www.facebook.com/profile.php?id=100010745836006&fref=ts" target="_blank" class="social_circle"><i class="fa fa-facebook fa-2x"></i></a></p>
+
+
+      <!--
+      <a href="https://twitter.com/Workaway" target="_blank" class="social_circle"><i class="fa fa-twitter fa-2x"></i></a>
+      <a href="http://www.pinterest.com/search/pins/?q=workaway" target="_blank" class="social_circle"><i class="fa fa-pinterest fa-2x"></i></a>
+      <a href="http://instagram.com/workawayinfo" target="_blank" class="social_circle"><i class="fa fa-instagram fa-2x"></i></a>
+-->
+
+    </div>
+    <div class="clear20"></div>
+  </div>
+</footer>
 
 </html>

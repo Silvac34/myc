@@ -1,19 +1,61 @@
 <div ng-controller="WelcomeCtrl">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="row">
-          <div style="text-align:center">
-            <p><h1>CommunEATy</h1></p>
-            <p><h2>Conoces nueva gente gracias a cenas colaborativas !</h2></p>
+    <div class="col-xs-12 text-center">
+      <div class="row">
+        <h1>myCommunEATy</h1>
+      </div>
+      <div class="row">
+        <h2 class="slogan">Meet new people with participating meals</h2>
+      </div>
+      <div class="clear20"></div>
+      <div class="row">
+        <div class="col-xs-6">
+          <a ui-sref="create_meal" class="btn btn-primary btn-lg hidden-xs" href="#/create_meal">Propose your meal</a>
+          <a ui-sref="create_meal" class="btn btn-primary hidden-sm hidden-md hidden-lg" href="#/create_meal">Propose your meal</a>
+        </div>
+        <div class="col-xs-6">
+          <a ui-sref="view_meals" class="btn btn-primary btn-lg hidden-xs" href="#/view_meals">Chose a meal</a>
+          <a ui-sref="view_meals" class="btn btn-primary hidden-sm hidden-md hidden-lg" href="#/view_meals">Chose a meal</a>
+        </div>
+      </div>
+      <div class="clear20"></div>
+      <div class="row welcome-how-it-works">
+        <h4 style="float:left">
+          How does it work ?
+        </h4>
+      </div>
+      <div class="clear20"></div>
+      <div class="container text-left">
+        <div class="col-sm-4">
+          <img src="/static/sources/number_1.png"> Someone publish a meal
+        </div>
+        <div class="col-sm-4">
+          <hr class="visible-xs-block">
+          <img src="/static/sources/number_2.png"> Others suscribe to the meal
+        </div>
+        <div class="col-sm-4">
+          <hr class="visible-xs-block">
+          <img src="/static/sources/number_3.png"> You share:
+          <div class="row col-xs-offset-1">
+            <li>Diner</li>
+            <li>Good Vibes</li>
+            <li>Diner's preparation task</li>
+            <li>The price</li>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div style="text-align:center" class="bs-component">
-        <a ui-sref="create_meal" class="btn btn-primary btn-lg">Proponer</a>
-        <a ui-sref="view_meals" class="btn btn-primary btn-lg">Inscribirse</a>
+      <div class="clear10">
+      </div>
+      <div class="row visible-lg-block">
+        <div class="col-sm-4">
+          <img src="/static/sources/welcome_propose_meal.png" class="welcome-images">
+        </div>
+        <div class="col-sm-4">
+          <img src="/static/sources/welcome_subscribe_meal.png" class="welcome-images">
+        </div>
+        <div class="col-sm-4">
+          <img src="/static/sources/welcome_meal_example.png" class="welcome-images" style="width:100%">
+        </div>
       </div>
     </div>
   </div>

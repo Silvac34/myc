@@ -56,11 +56,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       }
     });
   $stateProvider
-    .state('footer_information_feedback', {
-      url: '/information/send_feedback',
-      templateUrl: 'static/footer/information/feedback/send_feedback.html',
-    });
-  $stateProvider
     .state('footer_information_contact', {
       url: '/information/contact_us',
       templateUrl: 'static/footer/information/contact/contact_us.html',

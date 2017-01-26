@@ -48,7 +48,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Helping cook</td>
+                            <td>Help cooking</td>
                             <td><input type="number" class="form-control" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
                             <td><input type="time" name="formTime" class="form-control" uib-popover-template="formPopoverTimepickerTimeCooking.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepickerTimeCooking.title}}"
                                     value="{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}"></td>
@@ -66,7 +66,7 @@
                         </script>
 
                         <tr>
-                            <td>Helping to wash dishes</td>
+                            <td>Help washing dishes</td>
                             <td><input type="number" class="form-control" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                             <td><span ng-show="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{meal.time | date:'HH:mm'}}</span></td>
                             <td>{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</td>

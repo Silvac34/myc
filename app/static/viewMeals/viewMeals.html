@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class="page-separation-title hidden-xs">List of the meals
+  <h1 class="page-separation-title hidden-xs">List of meals
     <div class="meal-search-sort">
       <span class="meal-search-title-count">Order by</span>
       <div class="btn-group" uib-dropdown uib-popover="Starting time" popover-trigger="mouseenter" popover-placement="top">
@@ -39,6 +39,7 @@
   <div class="row">
     <div ui-view="filterInternet" class="hidden-xs col-sm-3"></div>
     <div class="col-sm-9 col-xs-12 list-meal">
+      <div ng-hide="meals.length">There are no meals to come</div>
       <div class="row" ng-repeat="meal in meals | orderBy:'time':reverse | dateRange:filter().dateFilterMin.value:filter().dateFilterMax.value | fWeekDays:filter().weekDays">
         <div class="col-xs-12">
           <div class="list-group">

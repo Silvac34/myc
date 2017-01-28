@@ -9,7 +9,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>myCommuneaty: Meet new people with participating meals</title>
+  <title>myCommuneaty: more than a meal</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../static/css/bootstrap.css">
@@ -79,9 +79,9 @@
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
-                  <li><a ui-sref="profile" class="btn btn-primary">Profile</a></li>
+                  <li><a ui-sref="profile">Profile</a></li>
                   <li class="divider"></li>
-                  <li><a ng-click="logout()" class="btn btn-danger">Logout</a></li>
+                  <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>
               <li ng-if="!isAuthenticated()"><a ng-click="auth('facebook')" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>

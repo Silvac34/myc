@@ -17,7 +17,7 @@ class Calculator:
     
     def __init__(self):
         """par défaut, les prix de chacuns sont nuls"""
-        self.hostPrice
+        self.hostPrice = ""
         self.cookPrice = ""
         self.cleanerPrice = ""
         self.simpleGuestPrice = ""

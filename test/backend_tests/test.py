@@ -192,7 +192,6 @@ class APITest2(BasicAPITest):
         resp = self.test_client.delete("/api/meals/private111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
         self.assertEqual( 2,self.db.meals.find().count())
-
-
+    
 if __name__ == '__main__':
     unittest.main()

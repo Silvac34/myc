@@ -53,7 +53,7 @@ class Calculator:
             correlationHostHelp = 1.5 #l'hôte aura un discount de correlationHostHelp fois plus grand que l'aide
             alpha = (nbRquSimpleGuests * coefValorisationSimpleGuest) / (1 + (nbRquCleaners + nbRquCooks) / correlationHostHelp) #coef de discount de l'hôte: il aura un discount de alpha*unitPrice
             beta = alpha / correlationHostHelp
-            alphaZero = (1 + nbRquCleaners + nbRquCooks) / (1 + (nbRquCleaners + nbRquCooks) / correlationHostHelp)
+            alphaZero = (1 + nbRquCleaners + nbRquCooks) / (1 + (nbRquCleaners + nbRquCooks) / correlationHostHelp) #valeur pour laquelle on se place à la limite entre le cas général et le cas où le surplus donné par les invités paye l'hôte mais pas intégralement les aides
             
             if alpha < 1: #cas général de réduction des prix
                 self.hostPrice = (1 - alpha) * priceUnit
@@ -78,7 +78,7 @@ class Calculator:
                     self.cleanerPrice = ( (1 - beta) - abs((1 - alpha)) / (nbRquCleaners + nbRquCooks) ) * priceUnit
                 self.simpleGuestPrice = (1 + coefValorisationSimpleGuest) * priceUnit
          
-        #On arrondit tous les prix au dixième
+        #On arrondit tout les prix au dixième
         self.hostPrice = Aproximator(self.hostPrice).numberAproximate
         self.simpleGuestPrice = Aproximator(self.simpleGuestPrice).numberAproximate
         self.cookPrice = Aproximator(self.cookPrice).numberAproximate
@@ -89,6 +89,6 @@ class Calculator:
         
 monCalcul = Calculator()
 #[nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries]
-monResultat = monCalcul.resolve(23,1,2,60)
+monResultat = monCalcul.resolve(5,0,0,20)
 #[hostPrice,cookPrice,cleanerPrice,simpleGuestPrice]
 print(monResultat)

@@ -11,7 +11,7 @@ import json
 import eve
 import unittest
 from test_settings import MONGO_URI
-from unittest import TestCase   
+from unittest import TestCase 
 
 
 

@@ -10,7 +10,7 @@ from bson import ObjectId
 import json
 import eve
 import unittest
-from test_settings import MONGO_URI
+#from test_settings import MONGO_URI
 from unittest import TestCase 
 
 

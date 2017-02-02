@@ -24,7 +24,6 @@ schemaMeals = {
     },
     'town': {
         'type': 'string',
-        'allowed':["Santiago"],
         'required': True
     },
     'admin': { #mettre data relation

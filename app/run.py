@@ -189,7 +189,7 @@ def before_storing_POST_meals (items):
         #price = round(meal["price"] /nbGuests,2) old version
         price = calculator.resolve(nbSimpleGuests, nbCooks, nbCleaners, meal["price"]) #obtention du prix par type d'aide
         #association des prix à chacun des types d'aide
-        #meal["detailedInfo"]["requiredGuests"]["admin"]["price"] = price["adminPrice"] #on récupère le prix de l'hôte dans price obtenu avec calculator.resolve et on l'associe
+        #meal["detailedInfo"]["requiredGuests"]["hosts"]["price"] = price["hostPrice"] #on récupère le prix de l'hôte dans price obtenu avec calculator.resolve et on l'associe
         if "cooks" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price["cookPrice"] #on récupère le prix aide cuisine dans price obtenu avec calculator.resolve et on l'associe
         if "cleaners" in meal["detailedInfo"]["requiredGuests"] :

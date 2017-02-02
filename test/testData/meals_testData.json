@@ -117,11 +117,11 @@
                     "nbRemainingPlaces": 0,
                     "nbRquCooks": 1,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":15
+                    "price":7.5
                 }
             }
         },
-        "nbGuests": 1,
+        "nbGuests": 2,
         "veggies": true,
         "time": "2016-07-22T20:00:00.000Z",
         "addressApprox": "Métro Villier L2",
@@ -155,16 +155,16 @@
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10
+                    "price":7.45
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 2,
                     "nbRquSimpleGuests": 2,
-                    "price":10
+                    "price":10.45
                 }
             }
         },
-        "nbGuests": 5,
+        "nbGuests": 6,
         "veggies": true,
         "time": "2016-07-14T18:30:51.753Z",
         "addressApprox": "Lepic-Abesses",
@@ -198,16 +198,16 @@
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10
+                    "price":7.45
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 2,
                     "nbRquSimpleGuests": 2,
-                    "price":10
+                    "price":10.45
                 }
             }
         },
-        "nbGuests": 5,
+        "nbGuests": 6,
         "veggies": false,
         "time": "2016-07-15T18:30:27.913Z",
         "addressApprox": "Rue Oberkampf",
@@ -241,21 +241,21 @@
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":7.6
+                    "price":5.05
                 },
                 "cleaners": {
                     "nbRquCleaners": 1,
                     "nbRemainingPlaces": 1,
-                    "price":7.6
+                    "price":5.05
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":7.6
+                    "price":8.65
                 }
             }
         },
-        "nbGuests": 10,
+        "nbGuests": 11,
         "veggies": false,
         "time": "2016-07-16T18:30:19.264Z",
         "addressApprox": "Métro saint Michel",

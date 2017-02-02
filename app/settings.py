@@ -63,7 +63,6 @@ schemaMeals = {
             'adminPhone':{'type':'string'},
             'users':{
                 'type':'list',
-                #'required':True,
                 'schema': {
                     'type':'dict',
                     'schema':{
@@ -82,23 +81,23 @@ schemaMeals = {
     },
     'detailedInfo':{
         'type': 'dict',
-        'required':True,
         'schema':{
             'requiredGuests': {
                 'type':'dict',
                 'schema':{
-                    'hosts':{
-                        'type':'dict',
-                        'schema':{
-                            'price':{
-                                'type':'number',
-                                'min':0,
-                                'readonly':True
-                            }                        
-                        }
-                    },
+                    #'hosts':{
+                     #   'type':'dict',
+                      #  'schema':{
+                       #     'price':{
+                        #        'type':'number',
+                         #       'min':0,
+                          #      'readonly':True,
+                          #  }                        
+                        #}
+                    #},
                     'cleaners':{
                         'type':'dict',
+                        'required':True,
                         'schema':{
                             'nbRemainingPlaces':{
                                 'type':'number',
@@ -118,6 +117,7 @@ schemaMeals = {
                     },
                     'cooks':{
                         'type':'dict',
+                        'required':True,
                         'schema':{
                             'nbRemainingPlaces':{
                                 'type':'number',
@@ -141,6 +141,7 @@ schemaMeals = {
                     },
                     'simpleGuests':{
                         'type':'dict',
+                        'required':True,
                         'schema':{
                             'nbRemainingPlaces':{
                                 'type':'number',

@@ -12,7 +12,8 @@ import base64
 from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
-from os.path import abspath, dirname 
+from os.path import abspath, dirname
+import calculator
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
@@ -166,36 +167,35 @@ def  before_returning_GET_item_meal(response):
 def before_storing_POST_meals (items):
     for meal in items:
         meal["admin"] = g.user_id
-        meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin","cook"]}]
+        meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin"]}]
         ######### Add Guests #################
         nbCooks = 0
         nbCleaners = 0
         nbSimpleGuests = 0
-        if "cooks" in meal["detailedInfo"]["requiredGuests"] : #add required Guest info
-            #L'admin est systématiquement cook, du coup:
-            meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]+= 1
-            meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"]=meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - 1
-            ####
-        else : #lorsque l'admin ne demande pas d'aide cuisine et vu qu'il est automatiquement cook
-            meal["detailedInfo"]["requiredGuests"] ={"cooks":{"nbRquCooks":1,"nbRemainingPlaces":0}}
-        nbCooks = meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]
-        if "cleaners" in meal["detailedInfo"]["requiredGuests"] : #add required Guest info
+        nbHosts = 1
+        if "cooks" in meal["detailedInfo"]["requiredGuests"] : #add required cooks info
+            meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"] = meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]
+            nbCooks = meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"]
+        if "cleaners" in meal["detailedInfo"]["requiredGuests"] : #add required cleaners info
             meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRemainingPlaces"]=meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
             nbCleaners = meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"]
-        if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] : #add required Guest info
+        if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] : #add required simpleGuests info
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"]=meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRquSimpleGuests"]
             nbSimpleGuests = meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRquSimpleGuests"]
         nbGuests = nbCooks + nbCleaners + nbSimpleGuests
-        meal["nbGuests"] = nbGuests
-        meal["nbRemainingPlaces"] = nbGuests -1
+        meal["nbGuests"] = nbGuests + nbHosts
+        meal["nbRemainingPlaces"] = nbGuests
         ########## Pricer ###########
-        #price = Decimal(new_meal["price"] /nbGuest).quantize(Decimal('.01'), rounding=ROUND_UP)
-        price = round(meal["price"] /nbGuests,2)
-        meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price
+        #price = round(meal["price"] /nbGuests,2) old version
+        price = calculator.resolve(nbSimpleGuests, nbCooks, nbCleaners, meal["price"]) #obtention du prix par type d'aide
+        #association des prix à chacun des types d'aide
+        #meal["detailedInfo"]["requiredGuests"]["hosts"]["price"] = price["hostPrice"] #on récupère le prix de l'hôte dans price obtenu avec calculator.resolve et on l'associe
+        if "cooks" in meal["detailedInfo"]["requiredGuests"] :
+            meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price["cookPrice"] #on récupère le prix aide cuisine dans price obtenu avec calculator.resolve et on l'associe
         if "cleaners" in meal["detailedInfo"]["requiredGuests"] :
-            meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price
+            meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price["cleanerPrice"] #on récupère le prix aide vaisselle dans price obtenu avec calculator.resolve et on l'associe
         if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] :
-            meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price
+            meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
         #################
 
 #GET api/meals/private &  GET api/meals/private/<_id>

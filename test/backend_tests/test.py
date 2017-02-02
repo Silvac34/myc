@@ -70,6 +70,7 @@ class APITest1(BasicAPITest):
 	    testMeal = loads(open('../testData/meals_testData.json').read())[0]
 	    testMeal["_id"]= dbMeal["_id"]
 	    self.assertEqual(dbMeal, testMeal)
+	    
 
 class APITest2(BasicAPITest):
     def setUp(self):

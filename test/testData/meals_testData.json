@@ -16,7 +16,7 @@
                 "_id": {
                     "$oid": "111111111111111111111111"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }]
         },
         "detailedInfo": {
@@ -24,18 +24,18 @@
                 "cleaners": {
                     "nbRemainingPlaces": 1,
                     "nbRquCleaners": 1,
-                    "price":10.0
+                    "price":6.7
                 },
                 "cooks": {
                     "nbRemainingPlaces": 2,
-                    "nbRquCooks": 3,
+                    "nbRquCooks": 2,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10.0
+                    "price":6.7
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":10.0
+                    "price":12.55
                 }
             }
         },
@@ -62,7 +62,7 @@
                 "_id": {
                     "$oid": "111111111111111111111111"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             },{
                 "_id":  {
                     "$oid": "111111111111111111111112"
@@ -105,7 +105,7 @@
                 "_id": {
                    "$oid": "111111111111111111111111"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "37 rue du général foy 75008"
@@ -144,7 +144,7 @@
                 "_id": {
                     "$oid": "577946eb4403f92b93425e6a"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "37 rue lepic"
@@ -187,7 +187,7 @@
                 "_id": {
                   "$oid": "5776d0824403f974b97caf89"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "3 impasse Marie-blanche"
@@ -230,7 +230,7 @@
                 "_id":{
                     "$oid": "5776d0824403f974b97caf89"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "4 rue du temple"

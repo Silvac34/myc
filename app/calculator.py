@@ -40,7 +40,7 @@ if __name__ == "__main__": #test de la fonction transformIntoZero()
         print("The fonction doesn't work well")
         
 
-def calculator(nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries):
+def resolve(nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries):
     """fonction permettant de calculer les prix invités, cuisinier et aides qui prend en paramètre pour la méthode resolve:
     [nbRquSimpleGuests = nombre d'invités (simpleGuests), nbRquCleaners = nombre d'aides vaisselles, nbRquCooks = nombre d'aides cuisines, priceGroceries = prix total des courses]
     
@@ -101,13 +101,13 @@ def calculator(nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries):
     else:
         return "variable error"
         
-if __name__ == "__main__": #test de la fonction calculator()
+if __name__ == "__main__": #test de la fonction resolve()
     nbRquSimpleGuests = input("Enter the number of simple guests: ")
     nbRquCooks = input("Enter the number of helping cooks: ")
     nbRquCleaners = input("Enter the number of helping cleaners: ")
     priceGroceries = input("What is the price of the groceries: ")
-    resultCalculator = calculator(nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries)
+    resultResolve = resolve(nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries)
     try:
-        assert (priceGroceries - resultCalculator["total"]) < 1
+        assert (priceGroceries - resultResolve["total"]) < 1
     except ValueError:
         print("The difference between the sum and the price of the groceries is too big")

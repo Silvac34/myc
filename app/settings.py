@@ -87,6 +87,16 @@ schemaMeals = {
             'requiredGuests': {
                 'type':'dict',
                 'schema':{
+                    'hosts':{
+                        'type':'dict',
+                        'schema':{
+                            'price':{
+                                'type':'number',
+                                'min':0,
+                                'readonly':True
+                            }                        
+                        }
+                    },
                     'cleaners':{
                         'type':'dict',
                         'schema':{

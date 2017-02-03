@@ -12,7 +12,7 @@ angular.module('myApp.viewProfile', [])
 
   $scope.getUserProfile();
 
-  var optionsFlags = {
+  /*var optionsFlags = {
     url: "../static/bower_components/EasyAutocomplete/demo/resources/countries.json",
 
     getValue: "name",
@@ -35,5 +35,5 @@ angular.module('myApp.viewProfile', [])
   };
 
   $("#country_of_origin").easyAutocomplete(optionsFlags);
-
+*/
 }]);

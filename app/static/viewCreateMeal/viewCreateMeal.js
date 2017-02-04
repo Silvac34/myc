@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages', 'ngResource'])
+angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages'])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$resource', '$uibModal', '$state', function($scope, $http, $resource, $uibModal, $state) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', function($scope, $http, $uibModal, $state) {
   //$resource will serve for geolocation with $http
 
   //initialize the editedMeal model

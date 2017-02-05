@@ -188,8 +188,7 @@ def before_storing_POST_meals (items):
         ########## Pricer ###########
         #price = round(meal["price"] /nbGuests,2) old version
         price = calculator.resolve(nbSimpleGuests, nbCooks, nbCleaners, meal["price"]) #obtention du prix par type d'aide
-        meal["detailedInfo"]["requiredGuests"]["hosts"] = {}
-        #association des prix à chacun des types d'aide
+        print(pri)
         meal["detailedInfo"]["requiredGuests"]["hosts"]["price"] = price["hostPrice"] #on récupère le prix de l'hôte dans price obtenu avec calculator.resolve et on l'associe
         if "cooks" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price["cookPrice"] #on récupère le prix aide cuisine dans price obtenu avec calculator.resolve et on l'associe
@@ -198,7 +197,6 @@ def before_storing_POST_meals (items):
         if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
         #################
-
         
 #GET api/meals/private &  GET api/meals/private/<_id>
 def pre_get_privateMeals(request,lookup):   

@@ -24,8 +24,6 @@ schemaMeals = {
     },
     'town': {
         'type': 'string',
-        'allowed':["Santiago"],
-        'required': True
     },
     'admin': { #mettre data relation
         'type': 'objectid'
@@ -64,7 +62,6 @@ schemaMeals = {
             'adminPhone':{'type':'string'},
             'users':{
                 'type':'list',
-                #'required':True,
                 'schema': {
                     'type':'dict',
                     'schema':{
@@ -88,6 +85,16 @@ schemaMeals = {
             'requiredGuests': {
                 'type':'dict',
                 'schema':{
+                    'hosts':{
+                        'type':'dict',
+                        'schema':{
+                            'price':{
+                                'type':'number',
+                                'min':0,
+                                'readonly':True,
+                            }                        
+                        }
+                    },
                     'cleaners':{
                         'type':'dict',
                         'schema':{

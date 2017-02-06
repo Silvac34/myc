@@ -16,26 +16,29 @@
                 "_id": {
                     "$oid": "111111111111111111111111"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }]
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":5.05
+                },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
                     "nbRquCleaners": 1,
-                    "price":10.0
+                    "price":6.7
                 },
                 "cooks": {
                     "nbRemainingPlaces": 2,
-                    "nbRquCooks": 3,
+                    "nbRquCooks": 2,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10.0
+                    "price":6.7
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":10.0
+                    "price":12.55
                 }
             }
         },
@@ -46,8 +49,11 @@
         }
     },
     {
+        "_id": {
+            "$oid": "111111111111111111111112"
+        },
         "price": 60,
-        "nbGuests": 10,
+        "nbGuests": 11,
         "veggies": false,
         "town": "Santiago",
         "admin": {
@@ -62,7 +68,7 @@
                 "_id": {
                     "$oid": "111111111111111111111111"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             },{
                 "_id":  {
                     "$oid": "111111111111111111111112"
@@ -72,23 +78,23 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":0
+                },
                 "cooks": {
                     "nbRemainingPlaces": 0,
                     "nbRquCooks": 1,
-                    "price":6
+                    "price":0
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 8,
                     "nbRquSimpleGuests": 9,
-                    "price":6
+                    "price":6.7
                 }
             }
         },
         "time": "2017-12-20T17:00:00.000Z",
-        "addressApprox": "Métro Blanche L2",
-        "_id": {
-            "$oid": "111111111111111111111112"
-        }
+        "addressApprox": "Métro Blanche L2"
     }, {
         "_id": {
             "$oid": "111111111111111111111113"
@@ -105,7 +111,7 @@
                 "_id": {
                    "$oid": "111111111111111111111111"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "37 rue du général foy 75008"
@@ -113,15 +119,18 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":7.5
+                },
                 "cooks": {
                     "nbRemainingPlaces": 0,
                     "nbRquCooks": 1,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":15
+                    "price":7.5
                 }
             }
         },
-        "nbGuests": 1,
+        "nbGuests": 2,
         "veggies": true,
         "time": "2016-07-22T20:00:00.000Z",
         "addressApprox": "Métro Villier L2",
@@ -144,27 +153,30 @@
                 "_id": {
                     "$oid": "577946eb4403f92b93425e6a"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "37 rue lepic"
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":6.95
+                },
                 "cooks": {
                     "nbRemainingPlaces": 2,
-                    "nbRquCooks": 3,
+                    "nbRquCooks":3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10
+                    "price":7.45
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 2,
                     "nbRquSimpleGuests": 2,
-                    "price":10
+                    "price":10.45
                 }
             }
         },
-        "nbGuests": 5,
+        "nbGuests": 6,
         "veggies": true,
         "time": "2016-07-14T18:30:51.753Z",
         "addressApprox": "Lepic-Abesses",
@@ -187,27 +199,30 @@
                 "_id": {
                   "$oid": "5776d0824403f974b97caf89"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "3 impasse Marie-blanche"
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":6.95
+                },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":10
+                    "price":7.45
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 2,
                     "nbRquSimpleGuests": 2,
-                    "price":10
+                    "price":10.45
                 }
             }
         },
-        "nbGuests": 5,
+        "nbGuests": 6,
         "veggies": false,
         "time": "2016-07-15T18:30:27.913Z",
         "addressApprox": "Rue Oberkampf",
@@ -230,32 +245,35 @@
                 "_id":{
                     "$oid": "5776d0824403f974b97caf89"
                 },
-                "role": ["admin", "cook"]
+                "role": ["admin"]
             }],
             "adminPhone":"0601020304",
             "address": "4 rue du temple"
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":4.1
+                },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
-                    "price":7.6
+                    "price":5.05
                 },
                 "cleaners": {
                     "nbRquCleaners": 1,
                     "nbRemainingPlaces": 1,
-                    "price":7.6
+                    "price":5.05
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":7.6
+                    "price":8.65
                 }
             }
         },
-        "nbGuests": 10,
+        "nbGuests": 11,
         "veggies": false,
         "time": "2016-07-16T18:30:19.264Z",
         "addressApprox": "Métro saint Michel",

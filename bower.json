@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.5.2",
+    "angular": "^1.5.5",
     "angular-ui-router": "^0.2.18",
     "angular-loader": "^1.5.2",
     "angular-mocks": "^1.5.2",
@@ -18,8 +18,5 @@
     "angular-messages": "^1.5.5",
     "angular-svg-round-progressbar": "^0.4.2",
     "angular-resource": "^1.5.5"
-  },
-  "resolutions": {
-    "angular": "1.5.5"
   }
 }

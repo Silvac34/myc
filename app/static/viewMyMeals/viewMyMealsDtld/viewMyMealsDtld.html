@@ -80,7 +80,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Helping cook</div>
+                        <div class="text-primary my-meal-dtld-title">Help cooking</div>
                     </div>
                     <div class="row" ng-if="userRole == 'cook' || userRole == 'admin'">
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} by pers</div>
@@ -105,7 +105,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Helping to wash the dishes</div>
+                        <div class="text-primary my-meal-dtld-title">Help washing dishes</div>
                     </div>
                     <div class="row" ng-if="userRole == 'admin'">
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} by pers</div>

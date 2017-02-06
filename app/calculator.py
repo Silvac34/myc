@@ -8,20 +8,22 @@ def aproximator(value):
         remains = priceHundred % 5
         priceHundred = priceHundred + (5 - remains)
         return (priceHundred / 100)
+    elif value == 0:
+        return 0
     else:
         return ""
 
-if __name__ == "__main__": #test de la fonction aproximator()
-    valueTestApproximator = input("Enter a value to test the aproximate function: ")
-    inputValueApproximator = aproximator(valueTestApproximator)
-    try:
-        if isinstance(inputValueApproximator, (float,long)):
-            resultTestApproximator = (100 * inputValueApproximator) % 5
-        else:
-            resultTestApproximator = inputValueApproximator
-        assert resultTestApproximator == 0
-    except AssertionError:
-        print("You neither entered a number or a word")
+#if __name__ == "__main__": #test de la fonction aproximator()
+#    valueTestApproximator = input("Enter a value to test the aproximate function: ")
+#    inputValueApproximator = aproximator(valueTestApproximator)
+#    try:
+#        if isinstance(inputValueApproximator, (float,long)):
+#            resultTestApproximator = (100 * inputValueApproximator) % 5
+#        else:
+#            resultTestApproximator = inputValueApproximator
+#        assert resultTestApproximator == 0
+#    except AssertionError:
+#        print("You neither entered a number or a word")
             
             
 def transformIntoZero(value):
@@ -31,13 +33,13 @@ def transformIntoZero(value):
     else:
         return value
 
-if __name__ == "__main__": #test de la fonction transformIntoZero()
-    try:
-        valueTestTransformIntoZero = input("")
-        inputValueTransformIntoZero = transformIntoZero(valueTestTransformIntoZero)
-        assert inputValueTransformIntoZero == 0
-    except AssertionError:
-        print("The fonction doesn't work well")
+#if __name__ == "__main__": #test de la fonction transformIntoZero()
+#    try:
+#        valueTestTransformIntoZero = input("")
+#        inputValueTransformIntoZero = transformIntoZero(valueTestTransformIntoZero)
+#        assert inputValueTransformIntoZero == 0
+#    except AssertionError:
+#        print("The fonction doesn't work well")
         
 
 def resolve(nbRquSimpleGuests, nbRquCooks, nbRquCleaners, priceGroceries):
@@ -111,3 +113,8 @@ if __name__ == "__main__": #test de la fonction resolve()
         assert (priceGroceries - resultResolve["total"]) < 1
     except ValueError:
         print("The difference between the sum and the price of the groceries is too big")
+    
+    print(resultResolve['hostPrice'])
+    print(resultResolve['simpleGuestPrice'])
+    print(resultResolve['cookPrice'])
+    print(resultResolve['cleanerPrice'])

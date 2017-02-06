@@ -21,6 +21,9 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":5.05
+                },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
                     "nbRquCleaners": 1,
@@ -46,8 +49,11 @@
         }
     },
     {
+        "_id": {
+            "$oid": "111111111111111111111112"
+        },
         "price": 60,
-        "nbGuests": 10,
+        "nbGuests": 11,
         "veggies": false,
         "town": "Santiago",
         "admin": {
@@ -72,23 +78,23 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":0
+                },
                 "cooks": {
                     "nbRemainingPlaces": 0,
                     "nbRquCooks": 1,
-                    "price":6
+                    "price":0
                 },
                 "simpleGuests": {
                     "nbRemainingPlaces": 8,
                     "nbRquSimpleGuests": 9,
-                    "price":6
+                    "price":6.7
                 }
             }
         },
         "time": "2017-12-20T17:00:00.000Z",
-        "addressApprox": "Métro Blanche L2",
-        "_id": {
-            "$oid": "111111111111111111111112"
-        }
+        "addressApprox": "Métro Blanche L2"
     }, {
         "_id": {
             "$oid": "111111111111111111111113"
@@ -113,6 +119,9 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":7.5
+                },
                 "cooks": {
                     "nbRemainingPlaces": 0,
                     "nbRquCooks": 1,
@@ -151,9 +160,12 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":6.95
+                },
                 "cooks": {
                     "nbRemainingPlaces": 2,
-                    "nbRquCooks": 3,
+                    "nbRquCooks":3,
                     "timeCooking": "2016-07-13T18:00:39.303Z",
                     "price":7.45
                 },
@@ -194,6 +206,9 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":6.95
+                },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,
@@ -237,6 +252,9 @@
         },
         "detailedInfo": {
             "requiredGuests": {
+                "hosts": {
+                    "price":4.1
+                },
                 "cooks": {
                     "nbRemainingPlaces": 2,
                     "nbRquCooks": 3,

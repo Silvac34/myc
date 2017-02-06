@@ -24,7 +24,6 @@ schemaMeals = {
     },
     'town': {
         'type': 'string',
-        'required': True
     },
     'admin': { #mettre data relation
         'type': 'objectid'
@@ -81,6 +80,7 @@ schemaMeals = {
     },
     'detailedInfo':{
         'type': 'dict',
+        'required':True,
         'schema':{
             'requiredGuests': {
                 'type':'dict',
@@ -97,7 +97,6 @@ schemaMeals = {
                     },
                     'cleaners':{
                         'type':'dict',
-                        'required':True,
                         'schema':{
                             'nbRemainingPlaces':{
                                 'type':'number',
@@ -117,7 +116,6 @@ schemaMeals = {
                     },
                     'cooks':{
                         'type':'dict',
-                        'required':True,
                         'schema':{
                             'nbRemainingPlaces':{
                                 'type':'number',
@@ -141,7 +139,6 @@ schemaMeals = {
                     },
                     'simpleGuests':{
                         'type':'dict',
-                        'required':True,
                         'schema':{
                             'nbRemainingPlaces':{
                                 'type':'number',

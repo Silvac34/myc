@@ -19,8 +19,28 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages'])
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
         if ($scope.editedMeal.privateInfo.adminPhone != undefined) {
-          $scope.editedMeal.privateInfo.adminPhone = $scope.editedMeal.privateInfo.adminPhone.toString();
+          $scope.editedMeal.privateInfo.adminPhone = $scope.editedMeal.privateInfo.adminPhone.toString(); //on met le numéro de téléphone en format string
         }
+        if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+              $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le set à 0
+              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == null;
+            }
+          }
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null) {
+              $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le set à 0
+            }
+          }
+          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null) {
+              $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == 0; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le set à 0
+            }
+          }
+        }
+
+
         $http.post('/api/meals', $scope.editedMeal).then(function() {
           $state.go('my_meals', {
             reload: true

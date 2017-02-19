@@ -56,14 +56,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       }
     });
   $stateProvider
-    .state('footer_information_contact', {
-      url: '/information/contact_us',
-      templateUrl: 'static/footer/information/contact/contact_us.html',
+    .state('footer_more_contact', {
+      url: '/more/contact_us',
+      templateUrl: 'static/footer/more/contact/contact_us.html',
     });
   $stateProvider
-    .state('footer_information_who_we_are', {
-      url: '/information/who_we_are',
-      templateUrl: 'static/footer/information/whoWeAre/who_we_are.html',
+    .state('footer_information_team', {
+      url: '/information/team',
+      templateUrl: 'static/footer/information/team/team.html',
     });
   $stateProvider
     .state('footer_information_concept', {

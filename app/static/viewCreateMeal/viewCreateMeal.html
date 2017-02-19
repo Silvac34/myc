@@ -4,7 +4,7 @@
     <form class="form-horizontal" name="createMealForm">
         <fieldset id="fieldset-form">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <div class="form-group" ng-class="{'has-error': editedMeal.menu==undefined && createMealForm.$submitted};">
                         <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
                     </div>
@@ -17,7 +17,113 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-8 col-md-4">
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Address" ng-hide="editedMeal.addressApprox" required>
+                                <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
+
+                                <script type="text/ng-template" id="formModalLocationContent.html">
+                                    <form class="form-horizontal" name="locationForm">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+                                            <h3 class="modal-title">Address of the meal</h3>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="form-group" ng-class="{'has-error': editedMeal.town==undefined && locationForm.$submitted}">
+                                                    <div class="col-sm-12 col-sm-8">
+                                                        <input type="text" class="form-control" id="inputAdress" placeholder="Town" ng-model="editedMeal.town" uib-popover="Private information : displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="page-separation-title">
+                                                    <h4>Public information</h4>
+                                                </div>
+                                                <div class="form-group" ng-class="{'has-error': editedMeal.addressApprox==undefined && locationForm.$submitted}">
+                                                    <div class="col-sm-12">
+                                                        <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Approximative address to publish" ng-model="editedMeal.addressApprox" uib-popover="used to display a reference point : metro, neighborhood, intersection ..." popover-trigger="mouseenter"
+                                                            popover-placement="bottom-right" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="page-separation-title">
+                                                    <h4>Private information : displayed only for participants</h4>
+                                                </div>
+                                                <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && locationForm.$submitted}">
+                                                    <div class="col-sm-12">
+                                                        <textarea type="text" class="form-control" id="inputAddress" placeholder="Exact address" ng-model="editedMeal.privateInfo.address" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="inputAddressComplement" placeholder="Additional information" ng-model="address_complement">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row" ng-show="(editedMeal.addressApprox==undefined || editedMeal.privateInfo.address==undefined || editedMeal.town==undefined) && locationForm.$submitted">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button> Please fill in the missing field(s) and try again
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); okLocation()">OK</button>
+                                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </form>
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
+                                <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
+                                    close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-1 col-sm-3">
+                            <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}">
+                                <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}"
+                                    required>
+
+                                <!-- le script permet de mettre le timepicker dans le popover -->
+                                <script type="text/ng-template" id="PopoverTimepickerTemplate.html">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <span class="input-group" ng-click="$event.stopPropagation()">
+                                    <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                </span>
+                                        </div>
+                                    </div>
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 hidden-xs">
+                    <div class="row" ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks || editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">
+                        <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
+                            <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
+                            <!-- a définir si on fait apparaitre le nombre de place restante pour publier le repas ou si on fait apparaitre le nombre de place totales pour le repas -->
+                            <div round-progress responsive="true" max="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1"
+                                color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
                 <div class="row">
                     <div class="form-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted};">
                         <div class="input-group">
@@ -107,117 +213,12 @@
 
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="row">
-                            <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
-                                <div class="col-xs-12">
-                                    <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Address" ng-hide="editedMeal.addressApprox" required>
-                                    <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
-
-                                    <script type="text/ng-template" id="formModalLocationContent.html">
-                                        <form class="form-horizontal" name="locationForm">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-                                                <h3 class="modal-title">Address of the meal</h3>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="form-group" ng-class="{'has-error': editedMeal.town==undefined && locationForm.$submitted}">
-                                                        <div class="col-xs-12 col-sm-8">
-                                                            <input type="text" class="form-control" id="inputAdress" placeholder="Town" ng-model="editedMeal.town" uib-popover="Private information : displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="page-separation-title">
-                                                        <h4>Public information</h4>
-                                                    </div>
-                                                    <div class="form-group" ng-class="{'has-error': editedMeal.addressApprox==undefined && locationForm.$submitted}">
-                                                        <div class="col-xs-12">
-                                                            <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Approximative address to publish" ng-model="editedMeal.addressApprox" uib-popover="used to display a reference point : metro, neighborhood, intersection ..." popover-trigger="mouseenter"
-                                                                popover-placement="bottom-right" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="page-separation-title">
-                                                        <h4>Private information : displayed only for participants</h4>
-                                                    </div>
-                                                    <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && locationForm.$submitted}">
-                                                        <div class="col-xs-12">
-                                                            <textarea type="text" class="form-control" id="inputAddress" placeholder="Exact address" ng-model="editedMeal.privateInfo.address" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <div class="col-xs-8">
-                                                            <input type="text" class="form-control" id="inputAddressComplement" placeholder="Additional information" ng-model="address_complement">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="row" ng-show="(editedMeal.addressApprox==undefined || editedMeal.privateInfo.address==undefined || editedMeal.town==undefined) && locationForm.$submitted">
-                                                    <div class="alert alert-dismissible alert-danger">
-                                                        <button type="button" class="close" data-dismiss="alert">&times;</button> Please fill in the missing field(s) and try again
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); okLocation()">OK</button>
-                                                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                                            </div>
-                                        </form>
-                                    </script>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
-                                    <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
-                                        close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
-                                </div>
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-3">
-                                <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}">
-                                    <input type="text" name="formTime" class="form-control form-clock" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}"
-                                        required>
-
-                                    <!-- le script permet de mettre le timepicker dans le popover -->
-                                    <script type="text/ng-template" id="PopoverTimepickerTemplate.html">
-                                        <div class="form-group">
-                                            <div class="col-xs-6">
-                                                <span class="input-group" ng-click="$event.stopPropagation()">
-                                    <uib-timepicker ng-model="editedMeal.time" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-                                </span>
-                                            </div>
-                                        </div>
-                                    </script>
-
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <input type="number" class="form-control" id="inputAdminPhone" placeholder="Cellphone" ng-model="editedMeal.privateInfo.adminPhone" uib-popover="Private information: displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left"
                                     />
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-4">
-                        <div class="row" ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks || editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">
-                            <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
-                                <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center"> 1 / {{editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}</div>
-                                <!-- a définir si on fait apparaitre le nombre de place restante pour publier le repas ou si on fait apparaitre le nombre de place totales pour le repas -->
-                                <div round-progress responsive="true" max="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1" current="1"
-                                    color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
                             </div>
                         </div>
                     </div>

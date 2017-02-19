@@ -78,8 +78,8 @@
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
-                  <li><a ui-sref="profile">Profile</a></li>
-                  <li class="divider"></li>
+                  <!--<li><a ui-sref="profile">Profile</a></li>
+                  <li class="divider"></li>-->
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>
@@ -118,10 +118,8 @@
       <div class="col-sm-4">
         <p class="text-uppercase"><strong>Information</strong></p>
 
-        <a href="mailto:dimitri.kohn@centrale-marseille.fr?subject=feedback about myCommuneaty&cc=kevin.maillet@centrale-marseille.fr,maylis.sarhy@centrale-marseille.fr">Send a feedback</a><br>
-        <a ui-sref="footer_information_contact">Contact us</a><br>
-        <a ui-sref="footer_information_who_we_are">Who we are</a><br>
         <a ui-sref="footer_information_concept">Concept</a><br>
+        <a ui-sref="footer_information_who_we_are">Team</a><br>
         <a ui-sref="footer_information_FAQ">FAQ</a><br>
       </div>
 
@@ -138,7 +136,8 @@
         <p class="text-uppercase"><strong>more</strong></p>
 
         <a ui-sref="footer_more_photo_gallery">Photo Gallery</a><br>
-        <a ui-sref="footer_more_careers">Careers</a>
+        <a ui-sref="footer_more_careers">Careers</a><br>
+        <a ui-sref="footer_information_contact">Contact us</a><br>
       </div>
       <!--
       <div class="col-sm-3">

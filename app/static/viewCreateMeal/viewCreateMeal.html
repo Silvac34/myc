@@ -173,17 +173,17 @@
                                                                 <td class="text-center"></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Help cooking</td>
+                                                                <td><span uib-popover="People come to help you prepare the meal" popover-trigger="mouseenter">Help cooking</span></td>
                                                                 <td class="text-center"><input type="number" class="form-control text-center" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
                                                                 <td class="text-center" ng-class="{'has-error': (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined || editedMeal.detailedInfo.requiredGuests.cooks.timeCooking < editedMeal.time) && priceForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Help washing dishes</td>
+                                                                <td><span uib-popover="People will help you for cleaning" popover-trigger="mouseenter">Help washing dishes</span></td>
                                                                 <td class="text-center"><input type="number" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                                                                 <td class="text-center"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Simple guest</td>
+                                                                <td><span uib-popover="People won't help but will pay more to give you a meal's price discount" popover-trigger="mouseenter">Simple guest</span></td>
                                                                 <td class="text-center"><input type="number" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                                                                 <td class="text-center"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
                                                             </tr>

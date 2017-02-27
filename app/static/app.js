@@ -129,13 +129,22 @@ app.run(function($rootScope, $state, $auth) {
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', function($scope, $auth, $state, userServicesFactory) {
+
+  $scope.getUserProfile = function() {
+    if ($auth.isAuthenticated()) {
+      userServicesFactory().then(function(data) {
+        $scope.user = data;
+      });
+    }
+  };
 
   $scope.auth = function(provider) {
     $auth.authenticate(provider)
       .then(function(response) {
         console.debug("success", response);
-        $scope.getUserInfo();
+        $scope.getUserProfile();
+         
       })
       .catch(function(response) {
         console.debug("catch", response);
@@ -149,14 +158,6 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServices', function
     $scope.isAuthenticated = function() {
       return $auth.isAuthenticated();
     },
-
-  $scope.getUserProfile = function() {
-    if ($auth.isAuthenticated()) {
-      userServices.getUserInfo().then(function(data) {
-        $scope.user = data;
-      });
-    }
-  };
 
   $scope.status = {
     isopen: false

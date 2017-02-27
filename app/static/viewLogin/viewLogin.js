@@ -20,7 +20,7 @@ angular.module('myApp.viewLogin', ['ui.router', 'satellizer','userServices'])
       })
       .catch(function(response) {
         console.log("error response", response);
-      })
+      });
   };
 
   $scope.login = function() {
@@ -35,7 +35,7 @@ angular.module('myApp.viewLogin', ['ui.router', 'satellizer','userServices'])
       })
       .catch(function(response) {
         console.log("error response", response);
-      })
+      });
   };
 
 
@@ -48,13 +48,13 @@ angular.module('myApp.viewLogin', ['ui.router', 'satellizer','userServices'])
       })
       .catch(function(response) {
         console.debug("catch", response);
-      })
-  }
+      });
+  };
 
   $scope.getUserInfo = function() {
     userServices.getUserInfo().then(function(data) {
       $scope.$parent.user = data;
     });
-  }
+  };
 
 }]);

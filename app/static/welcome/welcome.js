@@ -2,7 +2,7 @@
 
 angular.module('myApp.welcome', ['ui.router', 'satellizer', 'userServices'])
 
-.controller('WelcomeCtrl', ['$scope', '$auth', '$state', 'userServices', function($scope, $auth, $state, userServices) {
+.controller('WelcomeCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', function($scope, $auth, $state, userServicesFactory) {
     $scope.status = {
         isopenWelcome: false
     };

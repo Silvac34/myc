@@ -20,7 +20,7 @@ class MyTokenAuth(TokenAuth):
         try:
             token = base64.b64decode(token)
             payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-            user =Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
+            user = Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             g.user_id = ObjectId(payload['sub'])
             return user 
         except DecodeError:

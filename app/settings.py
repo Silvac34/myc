@@ -208,6 +208,7 @@ meals = {
     'resource_methods': ['GET', 'POST'],
     'schema': schemaMeals,
     'item_methods' : ['GET'],
+    'authentication': None,
     'datasource':{
         'source': 'meals',
         'projection': {

@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.viewLogin', ['ui.router', 'satellizer','userServices'])
+angular.module('myApp.viewLogin', ['ui.router', 'satellizer', 'userServices'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {}])
 
-.controller('ViewLoginCtrl', ['$scope', '$auth', '$state','userServicesFactory', function($scope, $auth, $state,userServicesFactory) {
+.controller('ViewLoginCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', function($scope, $auth, $state, userServicesFactory) {
 
   $scope.signUp = function() {
     $auth
@@ -39,6 +39,12 @@ angular.module('myApp.viewLogin', ['ui.router', 'satellizer','userServices'])
   };
 
 
+  $scope.getUserInfo = function() {
+    userServicesFactory().then(function(data) {
+      $scope.$parent.user = data;
+    });
+  };
+
   $scope.auth = function(provider) {
     $auth.authenticate(provider)
       .then(function(response) {
@@ -49,12 +55,6 @@ angular.module('myApp.viewLogin', ['ui.router', 'satellizer','userServices'])
       .catch(function(response) {
         console.debug("catch", response);
       });
-  };
-
-  $scope.getUserInfo = function() {
-    userServicesFactory().then(function(data) {
-      $scope.$parent.user = data;
-    });
   };
 
 }]);

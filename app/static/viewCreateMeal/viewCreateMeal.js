@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ngMessages'])
+angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', function($scope, $http, $uibModal, $state) {

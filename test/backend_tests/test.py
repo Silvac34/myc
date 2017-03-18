@@ -16,7 +16,7 @@ from unittest import TestCase
 
 
 
-MONGOLAB_URI_TEST = 'mongodb://shareat:kmaillet230191@ds055872.mlab.com:55872/shareat_dev_test'
+MONGOLAB_URI_TEST = 'mongodb://dkohn:SharEat3santiago@ds135680.mlab.com:35680/mycommuneaty_dev_test'
 
 class BasicAPITest(TestCase):
     

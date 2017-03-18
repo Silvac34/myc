@@ -82,13 +82,13 @@
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>
-              <li ng-if="!isAuthenticated()"><a ng-click="auth('facebook')" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>
+              <li ng-if="!isAuthenticated()"><a ng-click="auth('facebook', toState)" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>
             </ul>
           </div>
         </div>
       </nav>
     </div>
-      <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook')">
+    <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook', toState)">
       <button class="btn btn-block btn-social btn-facebook" type="button">
             <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
         </div>
@@ -103,7 +103,7 @@
         <li role="menuitem"><a ng-click="logout()">Logout</a></li>
       </ul>
     </div>
-  
+
     <div ui-view></div>
     <div class="clear40"></div>
   </div>

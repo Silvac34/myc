@@ -155,7 +155,6 @@ def pre_get_privateUsers(request,lookup):
 
 # GET api/meals    
 def  before_returning_GET_meals(response):
-    print(g.current_user)
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
 

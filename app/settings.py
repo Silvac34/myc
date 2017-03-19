@@ -1,3 +1,4 @@
+
 RESOURCE_METHODS = ['GET', 'POST']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 HATEOAS=False
@@ -17,7 +18,7 @@ schemaMeals = {
     'menu': {
         'type': 'string',
         'required': True,
-        'empty':False
+        'empty': False
     },
     'veggies': {
         'type': 'boolean'
@@ -31,18 +32,18 @@ schemaMeals = {
     'addressApprox': {
         'type': 'string',
         'required': True,
-        'empty':False
+        'empty': False
     },
     'time': {
         'type': 'string',
         'required': True,
-        'empty':False
+        'empty': False
     },
     'price': {
         'type': 'number',
         'min': 0,
         'required': True,
-        'empty':False
+        'empty': False
     },
     'nbGuests': {
         'type': 'number',
@@ -60,7 +61,8 @@ schemaMeals = {
         'schema':{
             'address': {
                 'type':'string',
-                'required':True
+                'required':True,
+                'empty': False
             },
             'adminPhone':{'type':'string'},
             'users':{
@@ -128,7 +130,7 @@ schemaMeals = {
                             'nbRquCooks':{
                                 'type':'number',
                                 'min':0,
-                                'required':True
+                                'required': True
                             },
                             'timeCooking':{
                                 'type':'string',
@@ -187,7 +189,7 @@ schemaUsers = {
             'facebook_id': {
                 'type':'string'
             },
-            'email':{'type': 'string', 'regex': '^[a-zA-Z0-9._-]{1,64}@([a-zA-Z0-9-]{2,252}\.[a-zA-Z.]{2,6}){5,255}$'},
+            'email':{'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'},
             'link':{'type': 'string'}
         }
     },

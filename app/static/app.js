@@ -154,7 +154,9 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', f
   };
 
   $scope.logout = function() {
-      $auth.logout();
+      $auth.logout().then(function() {
+        $state.go("welcome");
+      });
     },
 
     $scope.isAuthenticated = function() {

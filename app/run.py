@@ -155,6 +155,7 @@ def pre_get_privateUsers(request,lookup):
 
 # GET api/meals    
 def  before_returning_GET_meals(response):
+    #if hasattr(g, "user_id"): #si l'utilisateur est connecté et que User a été crée --> les tests fonctionneront lorsque j'arriverai à provisionner l'environnement run dans test
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
 
@@ -162,8 +163,10 @@ def  before_returning_GET_meals(response):
 def  before_returning_GET_item_meal(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-    if User(_id=g.user_id).isSubscribed(meal_id=meal["_id"]):
-        meal["detailedInfo"].update({"subscribed" : True})
+    if hasattr(g, "user_id"): #si l'utilisateur est connecté et que User a été crée --> les tests fonctionneront lorsque j'arriverai à provisionner l'environnement run dans test
+        if User(_id=g.user_id).isSubscribed(meal_id=meal["_id"]):
+            meal["detailedInfo"].update({"subscribed" : True})
+        else: meal["detailedInfo"].update({"subscribed" : False})
     else: meal["detailedInfo"].update({"subscribed" : False})
         
 #POST api/meals

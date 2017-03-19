@@ -17,7 +17,8 @@ schemaMeals = {
     # (https://github.com/nicolaiarocci/cerberus) for details.
     'menu': {
         'type': 'string',
-        'required': True
+        'required': True,
+        'empty': False
     },
     'veggies': {
         'type': 'boolean'
@@ -30,16 +31,19 @@ schemaMeals = {
     },
     'addressApprox': {
         'type': 'string',
-        'required': True
+        'required': True,
+        'empty': False
     },
     'time': {
         'type': 'string',
-        'required': True
+        'required': True,
+        'empty': False
     },
     'price': {
         'type': 'number',
         'min': 0,
-        'required': True
+        'required': True,
+        'empty': False
     },
     'nbGuests': {
         'type': 'number',
@@ -57,7 +61,8 @@ schemaMeals = {
         'schema':{
             'address': {
                 'type':'string',
-                'required':True
+                'required':True,
+                'empty': False
             },
             'adminPhone':{'type':'string'},
             'users':{
@@ -124,7 +129,8 @@ schemaMeals = {
                             },
                             'nbRquCooks':{
                                 'type':'number',
-                                'min':0
+                                'min':0,
+                                'required': True
                             },
                             'timeCooking':{
                                 'type':'string',
@@ -205,10 +211,9 @@ schemaUsers = {
 
 meals = {
     # most global settings can be overridden at resource level
-    'resource_methods': ['GET', 'POST'],
+    'public_item_methods': ['GET'],
+    'public_methods' : ['GET'],
     'schema': schemaMeals,
-    'item_methods' : ['GET'],
-    'authentication': None,
     'datasource':{
         'source': 'meals',
         'projection': {

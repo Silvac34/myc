@@ -12,8 +12,9 @@ var app = angular.module('myApp', [
   'myApp.viewLogin',
   'myApp.viewProfile',
   'myApp.welcome',
-  'userServices'/*,
-  'ngAutocomplete'*/
+  'userServices'
+  /*,
+    'ngAutocomplete'*/
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
@@ -121,30 +122,31 @@ app.run(function($rootScope, $state, $auth) {
       // if yes and if this user is not logged in, redirect him to login page
       if (requiredLogin && !$auth.isAuthenticated()) {
         event.preventDefault();
+        $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
         $state.go('login');
       }
     });
   // enable to get the state in the view
   $rootScope.$state = $state;
 
+
 });
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', function($scope, $auth, $state, userServicesFactory) {
 
-  $scope.getUserProfile = function() {
-    if ($auth.isAuthenticated()) {
-      userServicesFactory().then(function(data) {
-        $scope.user = data;
-      });
-    }
-  };
-
-  $scope.auth = function(provider) {
+  $scope.auth = function(provider, toState) {
+    toState = toState || undefined;
     $auth.authenticate(provider)
       .then(function(response) {
         console.debug("success", response);
-        $scope.getUserProfile();
-         
+        if ($auth.isAuthenticated()) {
+          if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
+            $state.go(toState);
+          }
+          userServicesFactory().then(function(data) {
+            $scope.user = data;
+          });
+        }
       })
       .catch(function(response) {
         console.debug("catch", response);
@@ -159,11 +161,18 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', f
       return $auth.isAuthenticated();
     },
 
-  $scope.status = {
-    isopen: false
-  };
+    $scope.status = {
+      isopen: false
+    };
 
-  $scope.getUserProfile();
   $scope.navbarCollapsed = true;
 
+  function authVerification() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
+    if ($auth.isAuthenticated()) {
+      userServicesFactory().then(function(data) {
+        $scope.user = data;
+      });
+    }
+  }
+  authVerification();
 }]);

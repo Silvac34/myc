@@ -79,6 +79,10 @@ You're good to go!!!!
 
 Server Side API documentation is available at http://docs.shareat.apiary.io/# 
 
+# Databases management
+
+https://mlab.com
+Username : myCommuneaty
 
 #Application Deployment and Workflow
 

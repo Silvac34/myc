@@ -126,10 +126,10 @@ module.exports = function(grunt) {
             },
             InitStageDB : {
                 command: [
-                    'mongo ds019498.mlab.com:19498/shareat_stage -u shareat -p kmaillet230191 --eval "db.users.remove({})"',
-                    'mongo ds019498.mlab.com:19498/shareat_stage -u shareat -p kmaillet230191 --eval "db.meals.remove({})"',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_stage -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json --jsonArray',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_stage -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json --jsonArray'
+                    'mongo ds129600.mlab.com:29600/mycommuneatydb_stage -u dkohn -p SharEat3santiago --eval "db.users.remove({})"',
+                    'mongo ds129600.mlab.com:29600/mycommuneatydb_stage -u dkohn -p SharEat3santiago --eval "db.meals.remove({})"',
+                    'mongoimport -h ds129600.mlab.com:29600 -d mycommuneatydb_stage -c meals -u dkohn -p SharEat3santiago --file test/testData/meals_testData.json --jsonArray',
+                    'mongoimport -h ds129600.mlab.com:29600 -d mycommuneatydb_stage -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'
                     ].join('&&')
             },
             InitDevKevDB: {
@@ -142,10 +142,10 @@ module.exports = function(grunt) {
             },
             InitDevDimDB: {
                 command: [
-                    'mongo ds055782.mlab.com:55782/shareat-dev_dim -u shareat -p kmaillet230191 --eval "db.users.remove({})"',
-                    'mongo ds055782.mlab.com:55782/shareat-dev_dim -u shareat -p kmaillet230191 --eval "db.meals.remove({})"',
-                    'mongoimport -h ds055782.mlab.com:55782 -d shareat-dev_dim -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json --jsonArray',
-                    'mongoimport -h ds055782.mlab.com:55782 -d shareat-dev_dim -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json --jsonArray'
+                    'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.users.remove({})"',
+                    'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.meals.remove({})"',
+                    'mongoimport -h ds131320.mlab.com:31320 -d mycommuneatydb_dev -c meals -u dkohn -p SharEat3santiago --file test/testData/meals_testData.json --jsonArray',
+                    'mongoimport -h ds131320.mlab.com:31320 -d mycommuneatydb_dev -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'
                 ].join('&&')
             }
         },

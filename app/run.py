@@ -4,7 +4,7 @@ import jwt
 import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
-from flask import request, jsonify, render_template,g, Response
+from flask import request, jsonify, render_template, g, Response
 from bson import ObjectId
 import requests
 import json
@@ -22,7 +22,7 @@ class MyTokenAuth(TokenAuth):
             payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
             user = Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             g.user_id = ObjectId(payload['sub'])
-            return user 
+            return user
         except DecodeError:
             response = jsonify(message='Token is invalid')
             response.status_code = 401
@@ -53,7 +53,7 @@ class User:
         if self.facebook_id:
             if Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
                 #self._id= str(Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}}).inserted_id)
-                self._id= Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}}).inserted_id
+                self._id= Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
             #else: self._id = str(Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
             else: self._id = Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"]
         
@@ -138,7 +138,10 @@ def auth_facebook():
     userInfo["last_name"]=profile["last_name"]
     userInfo["gender"]=profile["gender"]
     user.updateUser(userInfo)
-    userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
+    if profile.get("email", None) == None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
+        userInfo = {"privateInfo.link" : profile["link"] }
+    else:
+        userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
     user.updateUser(userInfo)
     return jsonify(token=user.token())
 
@@ -152,6 +155,7 @@ def pre_get_privateUsers(request,lookup):
 
 # GET api/meals    
 def  before_returning_GET_meals(response):
+    #if hasattr(g, "user_id"): #si l'utilisateur est connecté et que User a été crée --> les tests fonctionneront lorsque j'arriverai à provisionner l'environnement run dans test
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
 
@@ -159,8 +163,10 @@ def  before_returning_GET_meals(response):
 def  before_returning_GET_item_meal(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-    if User(_id=g.user_id).isSubscribed(meal_id=meal["_id"]):
-        meal["detailedInfo"].update({"subscribed" : True})
+    if hasattr(g, "user_id"): #si l'utilisateur est connecté et que User a été crée --> les tests fonctionneront lorsque j'arriverai à provisionner l'environnement run dans test
+        if User(_id=g.user_id).isSubscribed(meal_id=meal["_id"]):
+            meal["detailedInfo"].update({"subscribed" : True})
+        else: meal["detailedInfo"].update({"subscribed" : False})
     else: meal["detailedInfo"].update({"subscribed" : False})
         
 #POST api/meals
@@ -217,7 +223,7 @@ def  before_returning_GET_item_privateMeals(response):
         usr.update(User(_id=usr["_id"]).getUserPublicInfo())
 
 # DELETE api/meals/private/<_id>
-def pre_delete_privateMeals(request,lookup):   
+def pre_delete_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
 
 # PATCH api/meals/private/<_id>

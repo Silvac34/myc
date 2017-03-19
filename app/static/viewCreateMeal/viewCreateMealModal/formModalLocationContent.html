@@ -1,0 +1,53 @@
+<form class="form-horizontal" name="locationForm">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Address of the meal</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group" ng-class="{'has-error': editedMeal.town==undefined && locationForm.$submitted}">
+                <div class="col-sm-12 col-sm-8">
+                    <input type="text" class="form-control" id="inputAdress" placeholder="Town" ng-model="editedMeal.town" uib-popover="Private information : displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="page-separation-title">
+                <h4>Public information</h4>
+            </div>
+            <div class="form-group" ng-class="{'has-error': editedMeal.addressApprox==undefined && locationForm.$submitted}">
+                <div class="col-sm-12">
+                    <textarea type="text" class="form-control" id="inputAddressApprox" placeholder="Approximative address to publish" ng-model="editedMeal.addressApprox" uib-popover="used to display a reference point : metro, neighborhood, intersection ..." popover-trigger="mouseenter"
+                        popover-placement="bottom-right" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="page-separation-title">
+                <h4>Private information : displayed only for participants</h4>
+            </div>
+            <div class="form-group" ng-class="{'has-error': editedMeal.privateInfo.address==undefined && locationForm.$submitted}">
+                <div class="col-sm-12">
+                    <textarea type="text" class="form-control" id="inputAddress" placeholder="Exact address" ng-model="editedMeal.privateInfo.address" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="inputAddressComplement" placeholder="Additional information" ng-model="address_complement" uib-popover="flat number or advice to find the place" popover-trigger="mouseenter" popover-placement="bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row" ng-show="(editedMeal.addressApprox==undefined || editedMeal.privateInfo.address==undefined || editedMeal.town==undefined) && locationForm.$submitted">
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button> Please fill in the missing field(s) and try again
+            </div>
+        </div>
+        <button class="btn btn-primary" type="button" ng-click="locationForm.$setSubmitted(); okLocation()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

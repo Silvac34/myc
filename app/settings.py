@@ -16,7 +16,8 @@ schemaMeals = {
     # (https://github.com/nicolaiarocci/cerberus) for details.
     'menu': {
         'type': 'string',
-        'required': True
+        'required': True,
+        'empty':False
     },
     'veggies': {
         'type': 'boolean'
@@ -29,16 +30,19 @@ schemaMeals = {
     },
     'addressApprox': {
         'type': 'string',
-        'required': True
+        'required': True,
+        'empty':False
     },
     'time': {
         'type': 'string',
-        'required': True
+        'required': True,
+        'empty':False
     },
     'price': {
         'type': 'number',
         'min': 0,
-        'required': True
+        'required': True,
+        'empty':False
     },
     'nbGuests': {
         'type': 'number',
@@ -123,12 +127,12 @@ schemaMeals = {
                             },
                             'nbRquCooks':{
                                 'type':'number',
-                                'min':0
+                                'min':0,
+                                'required':True
                             },
                             'timeCooking':{
                                 'type':'string',
-                                'required':True,
-                                'dependencies': 'nbRquCooks'
+                                'required':True
                             },                            
                             'price':{
                                 'type':'number',

@@ -20,7 +20,7 @@ class MyTokenAuth(TokenAuth):
         try:
             token = base64.b64decode(token)
             payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
-            user =Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
+            user = Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             g.user_id = ObjectId(payload['sub'])
             return user 
         except DecodeError:
@@ -53,7 +53,7 @@ class User:
         if self.facebook_id:
             if Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
                 #self._id= str(Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}}).inserted_id)
-                self._id= Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}}).inserted_id
+                self._id= Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
             #else: self._id = str(Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
             else: self._id = Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"]
         
@@ -138,7 +138,10 @@ def auth_facebook():
     userInfo["last_name"]=profile["last_name"]
     userInfo["gender"]=profile["gender"]
     user.updateUser(userInfo)
-    userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
+    if profile.get("email", None) == None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
+        userInfo = {"privateInfo.link" : profile["link"] }
+    else:
+        userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
     user.updateUser(userInfo)
     return jsonify(token=user.token())
 

@@ -1,4 +1,3 @@
-
 RESOURCE_METHODS = ['GET', 'POST']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 HATEOAS=False
@@ -128,7 +127,8 @@ schemaMeals = {
                             },
                             'timeCooking':{
                                 'type':'string',
-                                'required':True
+                                'required':True,
+                                'dependencies': 'nbRquCooks'
                             },                            
                             'price':{
                                 'type':'number',
@@ -183,7 +183,7 @@ schemaUsers = {
             'facebook_id': {
                 'type':'string'
             },
-            'email':{'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'},
+            'email':{'type': 'string', 'regex': '^[a-zA-Z0-9._-]{1,64}@([a-zA-Z0-9-]{2,252}\.[a-zA-Z.]{2,6}){5,255}$'},
             'link':{'type': 'string'}
         }
     },

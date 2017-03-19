@@ -4,7 +4,7 @@ import jwt
 import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
-from flask import request, jsonify, render_template,g, Response
+from flask import request, jsonify, render_template, g, Response
 from bson import ObjectId
 import requests
 import json
@@ -22,7 +22,7 @@ class MyTokenAuth(TokenAuth):
             payload = jwt.decode(token, Application.app.config['TOKEN_SECRET'])
             user = Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             g.user_id = ObjectId(payload['sub'])
-            return user 
+            return user
         except DecodeError:
             response = jsonify(message='Token is invalid')
             response.status_code = 401
@@ -155,6 +155,7 @@ def pre_get_privateUsers(request,lookup):
 
 # GET api/meals    
 def  before_returning_GET_meals(response):
+    print(g.current_user)
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
 
@@ -220,7 +221,7 @@ def  before_returning_GET_item_privateMeals(response):
         usr.update(User(_id=usr["_id"]).getUserPublicInfo())
 
 # DELETE api/meals/private/<_id>
-def pre_delete_privateMeals(request,lookup):   
+def pre_delete_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
 
 # PATCH api/meals/private/<_id>

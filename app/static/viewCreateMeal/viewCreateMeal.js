@@ -19,34 +19,46 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
     $scope.createMeal = function() {
       if ($scope.editedMeal.menu != undefined) {
         if ($scope.editedMeal.privateInfo.adminPhone != undefined) {
-          $scope.editedMeal.privateInfo.adminPhone = $scope.editedMeal.privateInfo.adminPhone.toString(); //on met le numéro de téléphone en format string
+          $scope.editedMeal.privateInfo.adminPhone = $scope.editedMeal.privateInfo.adminPhone.toString(); //on met le numéro de téléphone en format string pour qu'il soit accepter
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
             if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
-              $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le set à 0
-              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == null;
+              delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
+            }
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
+              console.log("you are trying to do somehting ilegal with the number of cooks!");
             }
           }
           if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
             if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null) {
-              $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le set à 0
+              delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
+            }
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
+              console.log("you are trying to do somehting ilegal with the number of cleaners!");
             }
           }
           if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
             if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null) {
-              $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == 0; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le set à 0
+              delete $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le supprime
+            }
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {
+              console.log("you are trying to do somehting ilegal with the number of cleaners!");
             }
           }
         }
 
 
         $http.post('/api/meals', $scope.editedMeal).then(function() {
-          $state.go('my_meals', {
-            reload: true
+            $state.go('my_meals', {
+              reload: true
+            });
+          },
+          function(response) {
+            console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
           });
-        });
       }
+
 
       //TODO : rediriger vers page du repas
     };
@@ -85,12 +97,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
   $scope.formPopoverTimepicker = {
     title: 'Time of the meal',
-    templateUrl: 'PopoverTimepickerTemplate.html'
-  };
-
-  $scope.formPopoverTimepickerTimeCooking = {
-    title: 'Time of the meal',
-    templateUrl: 'PopoverTimepickerTimeCookingTemplate.html'
+    templateUrl: 'static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'
   };
 
 
@@ -102,8 +109,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
     $uibModal.open({
       animation: $scope.animationsEnabled,
-      templateUrl: 'formModalLocationContent.html',
-      controller: 'FormModalInstanceCtrl',
+      templateUrl: 'static/viewCreateMeal/viewCreateMealModal/formModalLocationContent.html',
+      controller: 'formCreateMealModalInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -119,8 +126,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
     $uibModal.open({
       animation: $scope.animationsEnabled,
-      templateUrl: 'formModalPriceContent.html',
-      controller: 'FormModalInstanceCtrl',
+      templateUrl: 'static/viewCreateMeal/viewCreateMealModal/formModalPriceContent.html',
+      controller: 'formCreateMealModalInstanceCtrl',
       size: size,
       resolve: {
         editedMeal: function() {
@@ -130,12 +137,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
     });
   };
 
-  $scope.addressAutocomplete;
+  //$scope.addressAutocomplete;
 
 }])
 
-//controller for the Location Modal
-.controller('FormModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
+//controller for the Modal
+.controller('formCreateMealModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
 
@@ -150,24 +157,30 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
       $scope.address_complement = undefined;
       $uibModalInstance.close();
     }
-  }; //function to validate the modal
+  }; //function to validate the Location modal
 
   $scope.okPrice = function() {
+
     if ($scope.editedMeal.price != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
             if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0 || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+              delete $scope.editedMeal.detailedInfo.requiredGuests.cooks;
               $uibModalInstance.close();
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
-              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time) {
+              // on définit l'heure d'arrivée des cuisiniers comme étant le même jour que le jour du repas si besoin d'aides cuisine il y a
+              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.setDate($scope.editedMeal.time.getDate());
+              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.setFullYear($scope.editedMeal.time.getFullYear());
+              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.setMonth($scope.editedMeal.time.getMonth());
+              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() <= $scope.editedMeal.time.getHours()) {
                 $uibModalInstance.close();
               }
             }
           }
           else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
-            $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = null;
+            delete $scope.editedMeal.detailedInfo.requiredGuests.cooks;
             $uibModalInstance.close();
           }
         }
@@ -179,7 +192,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
         $uibModalInstance.close();
       }
     }
-  }; //function to validate the modal
+  }; //function to validate the Price modal
 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');

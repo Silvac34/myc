@@ -211,6 +211,7 @@ schemaUsers = {
 
 meals = {
     # most global settings can be overridden at resource level
+    'public_methods' : ['GET'],
     'schema': schemaMeals,
     'item_methods' : ['GET'],
     'datasource':{

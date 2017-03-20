@@ -1,9 +1,11 @@
+import os
+
 #Contains the project environments' configuration
 class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = 'this-really-needs-to-be-changed'
+    SECRET_KEY = os.urandom(24) # set the secret key for the cookie session:
 
 
 class ProductionConfig(Config):

@@ -52,6 +52,19 @@ If you want to use a database as a service such as Mlab, change the MONGOLAB_URI
 You 'll need to restart your VM in order for this command to be fully
 taken into account
 
+If you have a problem with the DB in development:
+1) open mongo by entering in the console
+mongod
+2) open a new terminal and enter
+mongo
+3) In this terminal enter
+db = connect('ds135700.mlab.com:35700/mycommuneaty_dev_test')
+4) Connect as admin to the database
+db.auth('dkohn','mdp')
+5) drop the database
+db.dropDatabase()
+6) exit
+
 ### Client side 
 The environment configuration for the front-end are in the folder app/config
 From this configuration, we will program grunt to generate a module config.js that holds the configuration

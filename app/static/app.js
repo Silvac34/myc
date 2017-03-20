@@ -141,7 +141,7 @@ app.run(function($rootScope, $state, $auth) {
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', function($scope, $auth, $state, userServicesFactory) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', function($scope, $auth, $state, userServicesFactory, $http) {
 
   $scope.auth = function(provider, toState) {
     toState = toState || undefined;
@@ -164,7 +164,10 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', f
 
   $scope.logout = function() {
       $auth.logout().then(function() {
-        $state.go("welcome");
+        $http.get('/auth/logout').then(function(response) {
+          console.log(response.data);
+          $state.go("welcome");
+        });
       });
     },
 

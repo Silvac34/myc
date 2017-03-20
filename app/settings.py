@@ -189,8 +189,12 @@ schemaUsers = {
             'facebook_id': {
                 'type':'string'
             },
-            'email':{'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'},
-            'link':{'type': 'string'}
+            'email':{
+                'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+            },
+            'link':{
+                'type': 'string'
+            }
         }
     },
     'picture': {
@@ -211,8 +215,8 @@ schemaUsers = {
 
 meals = {
     # most global settings can be overridden at resource level
-    'resource_methods': ['GET', 'POST'],
-    'item_methods' : ['GET'],
+    'public_item_methods': ['GET'],
+    'public_methods' : ['GET'],
     'schema': schemaMeals,
     'datasource':{
         'source': 'meals',

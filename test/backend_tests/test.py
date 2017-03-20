@@ -16,7 +16,11 @@ from unittest import TestCase
 
 
 
-MONGOLAB_URI_TEST = 'mongodb://dkohn:SharEat3santiago@ds135700.mlab.com:35700/mycommuneaty_dev_test'
+MONGOLAB_URI_TEST = 'mongodb://shareat:kmaillet230191@ds055872.mlab.com:55872/shareat_dev_test'
+
+@Application.app.errorhandler(Exception)
+def global_handler(e):
+    print(e)
 
 class BasicAPITest(TestCase):
     

@@ -213,7 +213,6 @@ meals = {
     # most global settings can be overridden at resource level
     'resource_methods': ['GET', 'POST'],
     'item_methods' : ['GET'],
-    'authentication': None,
     'schema': schemaMeals,
     'datasource':{
         'source': 'meals',

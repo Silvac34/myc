@@ -57,6 +57,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       }
     });
   $stateProvider
+    .state('view_my_dtld_meals', {
+      url: '/my_meals/:myMealId',
+      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
+      controller: 'ViewMyMealsDtldCtrl',
+      data: {
+        requiredLogin: true
+      }
+    });
+  $stateProvider
     .state('footer_more_contact', {
       url: '/more/contact_us',
       templateUrl: 'static/footer/more/contact/contact_us.html',

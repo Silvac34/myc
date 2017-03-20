@@ -2,17 +2,6 @@
 
 angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMyMealsDtld'])
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-
-  $stateProvider
-    .state('view_my_dtld_meals', {
-      url: '/my_meals/:myMealId',
-      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
-      controller: 'ViewMyMealsDtldCtrl'
-    });
-
-}])
-
 .controller('ViewMyMealsCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
 
   $scope.loadMeals = function() {
@@ -25,7 +14,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
             if ($scope.meals[j].privateInfo.users[i]._id == userId) {
               var userRole = $scope.meals[j].privateInfo.users[i].role[0];
               if(userRole == "simpleGuest"){
-                $scope.meals[j].priceUser = $scope.meals[j].detailedInfo.requiredGuests.simpleGuest.price;
+                $scope.meals[j].priceUser = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price;
               }
               if(userRole == "admin"){
                 $scope.meals[j].priceUser = $scope.meals[j].detailedInfo.requiredGuests.hosts.price;

@@ -167,7 +167,7 @@ def  before_returning_GET_item_meal(response):
         if User(_id=g.user_id).isSubscribed(meal_id=meal["_id"]):
             meal["detailedInfo"].update({"subscribed" : True})
         else: meal["detailedInfo"].update({"subscribed" : False})
-    else: meal["detailedInfo"].update({"subscribed" : False})
+    else: meal["detailedInfo"].update({"subscribed" : None})
         
 #POST api/meals
 def before_storing_POST_meals (items):

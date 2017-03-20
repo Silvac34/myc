@@ -28,6 +28,14 @@
                     <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='simpleGuest'">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} left to pay</div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="my-meal-dtld-label" ng-if="userRole=='admin'">You host this meal</div>
+                    <div class="my-meal-dtld-label" ng-if="userRole=='cook'">Inscribed as : "Help cooking"</div>
+                    <div class="my-meal-dtld-label" ng-if="userRole=='cleaner'">Inscribed as : "Help cleaning"</div>
+                    <div class="my-meal-dtld-label" ng-if="userRole=='simpleGuest'">Inscribed as : "Simple Guest"</div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-2" ng-if="userRole=='admin'">
             <div class="col-sm-6">
@@ -66,7 +74,7 @@
             <div class="panel-body">
                 <div class="col-xs-12">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Your host :<span class="my-meal-dtld-price" style="font-size:14px">{{meal.detailedInfo.requiredGuests.hosts.price | currency}}</span></div>
+                        <div class="text-primary my-meal-dtld-title">Your host :<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price | currency}}</span></div>
                     </div>
                     <div class="row">
                         <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}<span ng-if="meal.privateInfo.adminPhone"> - {{meal.privateInfo.adminPhone}}</span></div>
@@ -82,7 +90,7 @@
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Help cooking</div>
                     </div>
-                    <div class="row" ng-if="userRole == 'cook' || userRole == 'admin'">
+                    <div class="row" ng-if="userRole == 'admin'">
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} by pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">

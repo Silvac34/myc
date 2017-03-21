@@ -81,7 +81,7 @@
     </div>
     <div class="text-center">
         <div uib-alert ng-if="errorSubscribe.status" class="alert alert-dismissible alert-danger" close="closeAlert()">{{errorSubscribe.message}}</div>
-        <a class="btn btn-primary" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"><span ng-if="!isAuthenticated">Sign In to <br/></span>Participate</a>
+        <a class="btn btn-primary" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to </span>participate</a>
         <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
         <div ng-if="meal.nbRemainingPlaces<=0  && goToMeal=='false'" class="meal-dtld-full-msg">Damn ! The meal is already full</div>
     </div>

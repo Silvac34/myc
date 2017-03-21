@@ -31,7 +31,6 @@ class BasicAPITest(TestCase):
 	        self.test_client = c
             with c.session_transaction() as sess:
                 sess['user_id'] = '111111111111111111111111'
-
     # once this is reached the session was stored
 		
     def tearDown(self):
@@ -49,6 +48,10 @@ class BasicAPITest(TestCase):
         for i in listObj:
             i = self.rmAddFieldsItem(i)
         return listObj
+        
+    def test_logout(self):
+        rv = self.test_client.get("/auth/logout")
+        assert b'You were logged out' in rv.data
 	    
 class APITest1(BasicAPITest):
     def setUp(self):

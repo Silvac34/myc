@@ -152,7 +152,7 @@ def auth_facebook():
 def logout():
     # remove the username from the session if it's there
     session.pop('user_id', None)
-    return "you are logged out"
+    return "You were logged out"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 End Points Actions 

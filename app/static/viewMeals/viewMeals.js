@@ -55,7 +55,10 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       resolve: {
         meal_id: function() {
           return meal_id;
-        }
+        },
+        isAuthenticated: function(){
+          return $scope.isAuthenticated();
+          }
       }
     });
   };

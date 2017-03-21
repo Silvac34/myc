@@ -3,7 +3,7 @@
 var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
 
 
-.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', function($scope, $http, meal_id, $uibModalInstance, $state) {
+.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', 'isAuthenticated', function($scope, $http, meal_id, $uibModalInstance, $state, isAuthenticated) {
 
   $scope.loadMealInfo = function(meal_id) {
     $http.get('/api/meals/' + meal_id).then(function(response) {
@@ -23,7 +23,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       else {
         $scope.requiredGuests.availablePlaces['cleaners'] = true;
         if (!$scope.requestRole) {
-          $scope.requestRole.name = "cleaner"
+          $scope.requestRole.name = "cleaner";
         }
       }
       if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
@@ -32,12 +32,12 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       else {
         $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
         if (!$scope.requestRole) {
-          $scope.requestRole.name = "simpleGuest"
+          $scope.requestRole.name = "simpleGuest";
         }
       }
-      $scope.goToMeal = $scope.meal.detailedInfo.subscribed
+      $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
     });
-  }
+  };
 
 
   $scope.subscribeMeal = function(meal_id, role) {
@@ -76,10 +76,12 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   };*/
 
   //Initialize variable
+  $scope.isAuthenticated = isAuthenticated;
   $scope.requestRole = {};
   $scope.requiredGuests = {
     availablePlaces: {}
-  }
+  };
+  
   $scope.errorSubscribe = {
     "status": false
   };

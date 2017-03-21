@@ -5,15 +5,15 @@ import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
-from bson import ObjectId
+from bson import ObjectId, json_util
 import requests
 import json
 import base64
+import calculator
 from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname
-import calculator
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
@@ -23,6 +23,7 @@ class MyTokenAuth(TokenAuth):
             user = Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             session['user_id'] = payload['sub']
             g.user_id = ObjectId(payload['sub'])
+            
             return user
         except DecodeError:
             response = jsonify(message='Token is invalid')
@@ -68,7 +69,7 @@ class User:
     def isSubscribed(self,meal_id=None, meal =None):
         if meal == None:
             meal = Application.app.data.driver.db.meals.find_one({"_id": meal_id})
-        if any (x["_id"] == self._id for x in meal["privateInfo"]["users"]):
+        if any (x["_id"] == ObjectId(self._id) for x in meal["privateInfo"]["users"]):
             return True
         else: return False
 
@@ -170,7 +171,7 @@ def before_returning_GET_item_meal(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
     if 'user_id' in session:
-        if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]):
+        if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
             meal["detailedInfo"].update({"subscribed" : True})
         else: 
             meal["detailedInfo"].update({"subscribed" : False})

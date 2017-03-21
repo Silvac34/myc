@@ -16,11 +16,7 @@ from unittest import TestCase
 
 
 
-MONGOLAB_URI_TEST = 'mongodb://shareat:kmaillet230191@ds055872.mlab.com:55872/shareat_dev_test'
-
-@Application.app.errorhandler(Exception)
-def global_handler(e):
-    print(e)
+MONGOLAB_URI_TEST = 'mongodb://dkohn:SharEat3santiago@ds135700.mlab.com:35700/mycommuneaty_dev_test'
 
 class BasicAPITest(TestCase):
     
@@ -30,8 +26,13 @@ class BasicAPITest(TestCase):
 	    self.app.config['TESTING'] = True
 	    self.app.config['DEBUG'] = True
 	    self.app.config['MONGO_URI']=  MONGOLAB_URI_TEST
-	    self.test_client = self.app.test_client()
 	    self.db = MongoClient(MONGOLAB_URI_TEST).get_default_database()
+	    with self.app.test_client() as c:
+	        self.test_client = c
+            with c.session_transaction() as sess:
+                sess['user_id'] = '111111111111111111111111'
+
+    # once this is reached the session was stored
 		
     def tearDown(self):
 	    del self.app
@@ -82,8 +83,10 @@ class APITest2(BasicAPITest):
         super(APITest2, self).setUp()
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[0])
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
+        self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[6])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[1])
+        self.db.users.insert(loads(open('../testData/users_testData.json').read())[2])
         self.adminUser = User(_id="111111111111111111111111")
         self.otherUser = User(_id="111111111111111111111112")
     
@@ -97,7 +100,7 @@ class APITest2(BasicAPITest):
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
-        self.assertEqual(2, len(resp))
+        self.assertEqual(3, len(resp))
         self.assertEquals(resp[0],expOutcome1)
         
     def test_get_detailed_info_subscribed(self):
@@ -109,8 +112,9 @@ class APITest2(BasicAPITest):
         self.assertEquals(resp,expected)
     
     def test_get_detailed_info_unsubscribed(self):
-        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":false,\"requiredGuests\": {\"hosts\": {\"price\":5.05},\"cooks\":{\"nbRquCooks\":2,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":6.7},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":6.7},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":12.55}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        resp = self.test_client.get("/api/meals/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111114\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"5776d0824403f974b97caf89\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=c9e7b5856401d3dc61641aaf02dfb422&oe=5812FF92\",\"is_silhouette\": false}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":false,\"requiredGuests\": {\"hosts\": {\"price\":5.05},\"cooks\":{\"nbRquCooks\":2,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":6.7},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":6.7},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":12.55}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
+        #sessionId = self.test_client.sess['user_id']
+        resp = self.test_client.get("/api/meals/111111111111111111111114",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsItem(json.loads(resp.data))
         expected = json.loads(jsonAPIExpMeal1)
@@ -191,13 +195,13 @@ class APITest2(BasicAPITest):
         resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("204 NO CONTENT", resp.status)
         meals = self.db.meals.find()
-        self.assertEqual( 1,meals.count())
+        self.assertEqual( 2,meals.count())
         self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
         
     def test_delete_meal_not_admin(self):
         resp = self.test_client.delete("/api/meals/private111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
-        self.assertEqual( 2,self.db.meals.find().count())
+        self.assertEqual( 3,self.db.meals.find().count())
         
     
 if __name__ == '__main__':

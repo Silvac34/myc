@@ -23,17 +23,17 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price | currency}} left to pay</div>
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} left to pay</div>
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cleaner'">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} left to pay</div>
-                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='simpleGuest'">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} left to pay</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cook'">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='cleaner'">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</div>
+                    <div class="my-meal-dtld-label my-meal-dtld-price-guest" ng-if="userRole=='simpleGuest'">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="my-meal-dtld-label" ng-if="userRole=='admin'">You host this meal</div>
-                    <div class="my-meal-dtld-label" ng-if="userRole=='cook'">Inscribed as : "Help cooking"</div>
-                    <div class="my-meal-dtld-label" ng-if="userRole=='cleaner'">Inscribed as : "Help cleaning"</div>
-                    <div class="my-meal-dtld-label" ng-if="userRole=='simpleGuest'">Inscribed as : "Simple Guest"</div>
+                    <div class="my-meal-dtld-label" ng-if="userRole=='cook'">Inscribed as : <strong>"Help cooking"</strong></div>
+                    <div class="my-meal-dtld-label" ng-if="userRole=='cleaner'">Inscribed as : <strong>"Help cleaning"</strong></div>
+                    <div class="my-meal-dtld-label" ng-if="userRole=='simpleGuest'">Inscribed as : <strong>"Simple Guest"</strong></div>
                 </div>
             </div>
         </div>

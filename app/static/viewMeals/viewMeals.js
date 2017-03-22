@@ -12,19 +12,13 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
           controller: 'filterMealCtrl'
         }
       }
-    })
+    });
 }])
 
 
-.controller('ViewMealsCtrl', ['$scope', '$http', 'viewMealsFilterService', '$state', '$uibModal', '$log', '$auth', 'userServicesFactory', function($scope, $http, viewMealsFilterService, $state, $uibModal, $log, $auth, userServicesFactory) {
-
-  $scope.loadMeals = function() {
-      var date = new Date();
-      var now = date.toISOString();
-      $http.get('/api/meals?where={"time": {"$gte": "' + now + '"} }').then(function(response) {
-        $scope.meals = response.data['_items'];
-      });
-    },
+.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'userServicesFactory', 'response', function($scope, viewMealsFilterService, $state, $uibModal, $auth, userServicesFactory, response) {
+  
+  $scope.meals = response.data['_items'];  
 
     $scope.filter = function() {
       return viewMealsFilterService.get();
@@ -63,11 +57,8 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
     });
   };
 
-
   $scope.reverse = false;
   $scope.SortOrder = 'asc';
-
-  $scope.loadMeals();
 
   $state.go('view_meals.filterInternet');
 

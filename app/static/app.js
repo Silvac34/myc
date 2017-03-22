@@ -36,6 +36,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/view_meals',
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
+      resolve: {
+        response: function($http) {
+          var date = new Date();
+          var now = date.toISOString();
+          return $http.get('/api/meals?where={"time": {"$gte": "' + now + '"} }');
+        }
+      }
     });
 
   $stateProvider
@@ -54,6 +61,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       controller: 'ViewMyMealsCtrl',
       data: {
         requiredLogin: true
+      },
+      resolve:{
+        response : function($http){
+          return $http.get('/api/meals/private');
+        }
       }
     });
   $stateProvider
@@ -135,6 +147,7 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
+
   // enable to get the state in the view
   $rootScope.$state = $state;
 
@@ -189,4 +202,5 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     }
   }
   authVerification();
+
 }]);

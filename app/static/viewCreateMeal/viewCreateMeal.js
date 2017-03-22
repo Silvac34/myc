@@ -71,8 +71,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
             });
         }
       }
-
-      //TODO : rediriger vers page du repas
     };
 
   //required for the calendar toolbar (datamodel : editedMeal.time)

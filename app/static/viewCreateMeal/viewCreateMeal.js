@@ -18,9 +18,17 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
     $scope.createMeal = function() {
       var okToPost = true;
-      if ($scope.editedMeal.privateInfo.adminPhone == null) {
+      if ($scope.editedMeal.privateInfo != undefined) {
+        if ($scope.editedMeal.privateInfo.adminPhone == null) {
+          if ($scope.editedMeal.privateInfo.adminPhone.length == 0) {
+            delete $scope.editedMeal.privateInfo.adminPhone;
+            okToPost = true;
+          }
+          else {
             okToPost = false;
+          }
         }
+      }
       if ($scope.editedMeal.menu != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {

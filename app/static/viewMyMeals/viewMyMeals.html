@@ -28,7 +28,7 @@
                       </div>
                     </div>
                     <div class="col-xs-4">
-                      <div class="my-meal-price">{{meal.priceUser | currency : ""}} €</div>
+                      <div class="my-meal-price">{{meal.priceUser | currency}}</div>
                       <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
                         <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
                         <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
@@ -70,7 +70,7 @@
                       </div>
                     </div>
                     <div class="col-xs-4">
-                      <div class="my-meal-price">{{meal.price/meal.nbGuests | currency : ""}} €</div>
+                      <div class="my-meal-price">{{meal.price/meal.nbGuests | currency}}</div>
                       <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
                         <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
                         <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>

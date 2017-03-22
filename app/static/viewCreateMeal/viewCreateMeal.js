@@ -17,10 +17,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
 
     $scope.createMeal = function() {
-      if ($scope.editedMeal.menu != undefined) {
-        if ($scope.editedMeal.privateInfo.adminPhone != undefined) {
-          $scope.editedMeal.privateInfo.adminPhone = $scope.editedMeal.privateInfo.adminPhone.toString(); //on met le numéro de téléphone en format string pour qu'il soit accepter
+      var okToPost = true;
+      if ($scope.editedMeal.privateInfo.adminPhone == null) {
+            okToPost = false;
         }
+      if ($scope.editedMeal.menu != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
             if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
@@ -28,6 +29,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
               console.log("you are trying to do somehting ilegal with the number of cooks!");
+              okToPost = false;
             }
           }
           if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
@@ -36,6 +38,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
               console.log("you are trying to do somehting ilegal with the number of cleaners!");
+              okToPost = false;
             }
           }
           if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
@@ -44,21 +47,22 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
             }
             else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {
               console.log("you are trying to do somehting ilegal with the number of cleaners!");
+              okToPost = false;
             }
           }
         }
 
-
-        $http.post('/api/meals', $scope.editedMeal).then(function() {
-            $state.go('my_meals', {
-              reload: true
+        if (okToPost == true) {
+          $http.post('/api/meals', $scope.editedMeal).then(function(response) {
+              $state.go("view_my_dtld_meals", {
+                "myMealId": response.data._id
+              });
+            },
+            function(response) {
+              console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
             });
-          },
-          function(response) {
-            console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
-          });
+        }
       }
-
 
       //TODO : rediriger vers page du repas
     };

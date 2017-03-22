@@ -2,7 +2,7 @@
 
 var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
 
-.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', 'isAuthenticated', function($scope, $http, meal_id, $uibModalInstance, $state, isAuthenticated) {
+.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', 'isAuthenticated', '$auth', 'userServicesFactory', function($scope, $http, meal_id, $uibModalInstance, $state, isAuthenticated, $auth, userServicesFactory) {
 
   $scope.loadMealInfo = function(meal_id) {
     $http.get('/api/meals/' + meal_id).then(function(response) {
@@ -69,37 +69,54 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       subscribeMeal(meal_id, role);
     }
     else {
-      $uibModalInstance.close();
-      $state.go("login");
+      $auth.authenticate(provider)
+        .then(function(response) {
+          console.debug("success", response);
+          if ($auth.isAuthenticated()) {
+            userServicesFactory().then(function(data) {
+              $scope.user = data;
+              if (data._id == $scope.meal.admin._id) {
+                $scope.goToMeal = true;
+                $uibModalInstance.close();
+                $state.go("view_my_dtld_meals", {
+                  "myMealId": meal_id
+                });
+              }
+              else {
+                subscribeMeal(meal_id, role);
+              }
+            });
+          }
+        })
+        .catch(function(response) {
+          console.debug("catch", response);
+        });
     }
   };
 
 
-//Initialize variable
-$scope.isAuthenticated = isAuthenticated;
-$scope.requestRole = {};
-$scope.requiredGuests = {
-  availablePlaces: {}
-};
+  //Initialize variable
+  $scope.isAuthenticated = isAuthenticated;
+  $scope.requestRole = {};
+  $scope.requiredGuests = {
+    availablePlaces: {}
+  };
 
-$scope.errorSubscribe = {
-  "status": false
-};
-$scope.goToMeal = false;
+  $scope.errorSubscribe = {
+    "status": false
+  };
+  $scope.goToMeal = false;
 
-$scope.loadMealInfo(meal_id);
-$scope.accordionOneAtATime = true;
+  $scope.loadMealInfo(meal_id);
+  $scope.accordionOneAtATime = true;
 
-$scope.closeAlert = function() {
-  $scope.errorSubscribe.status = false;
-};
+  $scope.closeAlert = function() {
+    $scope.errorSubscribe.status = false;
+  };
 
-$scope.cancel = function() {
-  $uibModalInstance.dismiss('cancel');
-}; //funcion to dismiss the modal
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  }; //funcion to dismiss the modal
 
 
 }]);
-
-
-//{{user._id}} / id admin : {{meal.admin._id}}

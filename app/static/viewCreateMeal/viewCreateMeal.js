@@ -96,7 +96,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
   };
 
   //date formats for datepicker
-  $scope.date_formats = ['dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.date_formats = ['EEEE dd MMMM yyyy','dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.date_format = $scope.date_formats[0];
   $scope.altInputDateFormats = ['M!/d!/yyyy'];
 
@@ -210,6 +210,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 });
 
 var predefined_date = new Date();
-predefined_date.setDate(predefined_date.getDate() + 2);
+predefined_date.setDate(predefined_date.getDate());
 predefined_date.setHours(20);
 predefined_date.setMinutes(30);

@@ -25,7 +25,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5.05
+                    "price":5
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
@@ -41,7 +41,7 @@
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":12.55
+                    "price":12.5
                 }
             }
         },
@@ -307,7 +307,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5.05
+                    "price":5
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
@@ -323,7 +323,7 @@
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":12.55
+                    "price":12.5
                 }
             }
         },

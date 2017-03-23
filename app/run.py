@@ -109,11 +109,6 @@ class Meal:
 @Application.app.route('/')
 def homePage():
     return render_template("index.html")
-    
-@Application.app.route('/.well-known/acme-challenge/<string:acmeChallenge>')
-def letsencrypt_challenge_response(acmeChallenge):
-    return (acmeChallenge + ".BLVCS7hUAr16DM3i7Fi5eJVbZ0avT0NqrEw3jK_56rE")
-#http://mycommuneaty.com/.well-known/acme-challenge/f1h5Mv0-7OjnxaACC2ERvGCYk1ldSjSovzs7_FpZWH8
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

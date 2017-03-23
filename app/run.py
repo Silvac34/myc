@@ -112,10 +112,8 @@ def homePage():
     
 @Application.app.route('/.well-known/acme-challenge/<string:acmeChallenge>')
 def letsencrypt_challenge_response(acmeChallenge):
-    return (
-        os.environ.get('LETS_ENCRYPT_CHALLENGE', 'not set')
-    )
-
+    return acmeChallenge
+#http://mycommuneaty.com/.well-known/acme-challenge/f1h5Mv0-7OjnxaACC2ERvGCYk1ldSjSovzs7_FpZWH8
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

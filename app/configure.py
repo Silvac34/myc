@@ -1,4 +1,5 @@
 import os
+import run
 
 #Contains the project environments' configuration
 class Config(object):
@@ -14,6 +15,7 @@ class ProductionConfig(Config):
     MONGO_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat_prod'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET='5c9c6aae00e33c0daec661d2095d0d6a'
+    LETS_ENCRYPT_CHALLENGE= os.environ.get('LETS_ENCRYPT_CHALLENGE', 'not set')
 
 
 class StagingConfig(Config):

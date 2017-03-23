@@ -1,5 +1,4 @@
 import os
-import run
 
 #Contains the project environments' configuration
 class Config(object):

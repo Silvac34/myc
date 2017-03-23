@@ -306,6 +306,9 @@ predefined script to do this:
 npm run test-single-run
 ```
 
+#fron-end datas
+source for loading-bar : https://github.com/chieffancypants/angular-loading-bar
+
 
 ## End to end testing (Not used Yet)
 

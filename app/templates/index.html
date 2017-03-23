@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="../static/css/filter.css">
   <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' /><!-- permet d'obtenir la loading bar pour les transitions-->
+
   <!-- pour avoir la liste des pays avec leur drapeaux dans autocomplete nationality and flags 
   <link rel="stylesheet" href="../static/bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css">
   <link rel="stylesheet" href="../static/bower_components/EasyAutocomplete/demo/resources/flags.css">
@@ -38,6 +40,7 @@
   <script src="../static/profile/viewProfile.js"></script>
   <script src="../static/components/userServices.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+  <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script><!-- permet d'obtenir la loading bar pour les transitions-->
   <!-- autocomplete with google
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA&libraries=places"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -50,7 +53,6 @@
 </head>
 
 <body>
-
   <div ng-controller="AppCtrl">
     <div class="bs-component" ng-if="!$state.includes('welcome')">
       <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">

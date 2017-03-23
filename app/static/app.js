@@ -12,13 +12,16 @@ var app = angular.module('myApp', [
   'myApp.viewLogin',
   'myApp.viewProfile',
   'myApp.welcome',
-  'userServices'
+  'userServices',
+  'angular-loading-bar'
   /*,
     'ngAutocomplete'*/
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider) {
 
+  cfpLoadingBarProvider.includeSpinner = false;
+  
   $stateProvider
     .state('welcome', {
       url: '/welcome',

@@ -23,7 +23,6 @@ class MyTokenAuth(TokenAuth):
             user = Application.app.data.driver.db.users.find_one({"_id":ObjectId(payload['sub'])})
             session['user_id'] = payload['sub']
             g.user_id = ObjectId(payload['sub'])
-            
             return user
         except DecodeError:
             response = jsonify(message='Token is invalid')

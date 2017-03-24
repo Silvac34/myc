@@ -21,7 +21,7 @@ var app = angular.module('myApp', [
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider) {
 
   cfpLoadingBarProvider.includeSpinner = false;
-  
+
   $stateProvider
     .state('welcome', {
       url: '/welcome',
@@ -65,8 +65,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
       data: {
         requiredLogin: true
       },
-      resolve:{
-        response : function($http){
+      resolve: {
+        response: function($http) {
           return $http.get('/api/meals/private');
         }
       }
@@ -104,6 +104,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
     .state('footer_legal_terms_and_conditions', {
       url: '/legal/terms_and_conditions',
       templateUrl: 'static/footer/legal/termsAndConditions/terms_and_conditions.html',
+    });
+  $stateProvider
+    .state('footer_legal_privacy_policy', {
+      url: '/legal/privacy_policy',
+      templateUrl: 'static/footer/legal/privacyPolicy/privacy_policy.html',
     });
   $stateProvider
     .state('footer_more_careers', {

@@ -2,15 +2,7 @@
 
 angular.module('myApp.viewProfile', [])
 
-.controller('ViewProfileCtrl', ['$scope', 'userServices', function($scope, userServices) {
-
-  $scope.getUserProfile = function() {
-    userServices.getUserInfo().then(function(data) {
-      $scope.user = data;
-    });
-  };
-
-  $scope.getUserProfile();
+.controller('ViewProfileCtrl', ['$scope', function($scope) {
 
   var optionsFlags = {
     url: "../static/bower_components/EasyAutocomplete/demo/resources/countries.json",
@@ -29,7 +21,7 @@ angular.module('myApp.viewProfile', [])
       method: function(value, item) {
         return "<span class='flag flag-" + (item.code).toLowerCase() + "' ></span>" + value;
       }
-    },
+    },	
 
     theme: "round"
   };

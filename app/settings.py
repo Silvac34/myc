@@ -183,6 +183,12 @@ schemaUsers = {
         'type': 'string',
         'allowed': ["male","female"]
     },
+    'country_of_origin':{
+        'type': 'string'
+    },
+    'description':{
+        'type': 'string'
+    },
     'privateInfo': {
         'type': 'dict',
         'schema':{
@@ -194,6 +200,9 @@ schemaUsers = {
             },
             'link':{
                 'type': 'string'
+            },
+            'cellphone':{
+                'type': 'string', 'regex': '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$'
             }
         }
     },

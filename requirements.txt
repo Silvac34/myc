@@ -1,6 +1,6 @@
-Flask==0.10.1
+Flask==0.12
 PyJWT==1.4.0
-pymongo==3.2
+pymongo==3.4.0
 gunicorn==19.4.1
 requests
-eve==0.6.4
+eve==0.7.2

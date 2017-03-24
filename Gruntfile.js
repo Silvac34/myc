@@ -147,6 +147,14 @@ module.exports = function(grunt) {
                     'mongoimport -h ds131320.mlab.com:31320 -d mycommuneatydb_dev -c meals -u dkohn -p SharEat3santiago --file test/testData/meals_testData.json --jsonArray',
                     'mongoimport -h ds131320.mlab.com:31320 -d mycommuneatydb_dev -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'
                 ].join('&&')
+            },
+            InitDevTestDB: {
+                command: [
+                    'mongo ds135700.mlab.com:35700/mycommuneaty_dev_test -u dkohn -p SharEat3santiago --eval "db.users.remove({})"',
+                    'mongo ds135700.mlab.com:35700/mycommuneaty_dev_test -u dkohn -p SharEat3santiago --eval "db.meals.remove({})"',
+                    'mongoimport -h ds135700.mlab.com:35700 -d mycommuneaty_dev_test -c meals -u dkohn -p SharEat3santiago --file test/testData/meals_testData.json --jsonArray',
+                    'mongoimport -h ds135700.mlab.com:35700 -d mycommuneaty_dev_test -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'
+                ].join('&&')
             }
         },
 
@@ -154,6 +162,11 @@ module.exports = function(grunt) {
     });
 
 // Create Front End Configuration file for the environment --------------------------------------------------------------------------------------------------
+    grunt.registerTask('initDevTestDB', [
+        // This will generate the configuration file for the environment
+        'shell:InitDevTestDB'
+    ]);
+
     grunt.registerTask('devKev', [
         // This will generate the configuration file for the environment
         'ngconstant:devKev'

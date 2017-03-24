@@ -12,12 +12,15 @@ var app = angular.module('myApp', [
   'myApp.viewLogin',
   'myApp.viewProfile',
   'myApp.welcome',
-  'userServices'
+  'userServices',
+  'angular-loading-bar'
   /*,
     'ngAutocomplete'*/
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', function($stateProvider, $urlRouterProvider, $authProvider, ENV) {
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider) {
+
+  cfpLoadingBarProvider.includeSpinner = false;
 
   $stateProvider
     .state('welcome', {
@@ -36,6 +39,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/view_meals',
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
+      resolve: {
+        response: function($http) {
+          var date = new Date();
+          var now = date.toISOString();
+          return $http.get('/api/meals?where={"time": {"$gte": "' + now + '"} }');
+        }
+      }
     });
 
   $stateProvider
@@ -52,6 +62,20 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
       url: '/my_meals',
       templateUrl: 'static/viewMyMeals/viewMyMeals.html',
       controller: 'ViewMyMealsCtrl',
+      data: {
+        requiredLogin: true
+      },
+      resolve: {
+        response: function($http) {
+          return $http.get('/api/meals/private');
+        }
+      }
+    });
+  $stateProvider
+    .state('view_my_dtld_meals', {
+      url: '/my_meals/:myMealId',
+      templateUrl: 'static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.html',
+      controller: 'ViewMyMealsDtldCtrl',
       data: {
         requiredLogin: true
       }
@@ -80,6 +104,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', func
     .state('footer_legal_terms_and_conditions', {
       url: '/legal/terms_and_conditions',
       templateUrl: 'static/footer/legal/termsAndConditions/terms_and_conditions.html',
+    });
+  $stateProvider
+    .state('footer_legal_privacy_policy', {
+      url: '/legal/privacy_policy',
+      templateUrl: 'static/footer/legal/privacyPolicy/privacy_policy.html',
     });
   $stateProvider
     .state('footer_more_careers', {
@@ -126,13 +155,14 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
+
   // enable to get the state in the view
   $rootScope.$state = $state;
 
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', function($scope, $auth, $state, userServicesFactory) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', function($scope, $auth, $state, userServicesFactory, $http) {
 
   $scope.auth = function(provider, toState) {
     toState = toState || undefined;
@@ -154,7 +184,12 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', f
   };
 
   $scope.logout = function() {
-      $auth.logout();
+      $auth.logout().then(function() {
+        $http.get('/auth/logout').then(function(response) {
+          console.log(response.data);
+          $state.go("welcome");
+        });
+      });
     },
 
     $scope.isAuthenticated = function() {
@@ -175,4 +210,5 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', f
     }
   }
   authVerification();
+
 }]);

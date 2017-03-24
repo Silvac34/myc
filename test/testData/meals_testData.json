@@ -1,5 +1,8 @@
 [
     {
+        "_id": {
+            "$oid": "111111111111111111111111"
+        },
         "price": 100,
         "nbGuests": 10,
         "veggies": false,
@@ -22,7 +25,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5.05
+                    "price":5
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
@@ -38,15 +41,12 @@
                 "simpleGuests": {
                     "nbRemainingPlaces": 6,
                     "nbRquSimpleGuests": 6,
-                    "price":12.55
+                    "price":12.5
                 }
             }
         },
         "time": "2016-11-20T17:00:00.000Z",
-        "addressApprox": "Métro Anvers L2",
-        "_id": {
-            "$oid": "111111111111111111111111"
-        }
+        "addressApprox": "Métro Anvers L2"
     },
     {
         "_id": {
@@ -280,5 +280,54 @@
         "creationDate": {
             "$date": "2016-07-13T15:19:54.220Z"
         }
+    },
+    {
+        "_id": {
+            "$oid": "111111111111111111111114"
+        },
+        "price": 100,
+        "nbGuests": 10,
+        "veggies": false,
+        "town": "Santiago",
+        "admin": {
+            "$oid": "5776d0824403f974b97caf89"
+        },
+        "menu": "Jolie piece de boeuf",
+        "nbRemainingPlaces": 9,
+        "privateInfo": {
+            "address": "30 avenue de Trudaine 75009",
+            "adminPhone":"0601020304",
+            "users": [{
+                "_id": {
+                    "$oid": "5776d0824403f974b97caf89"
+                },
+                "role": ["admin"]
+            }]
+        },
+        "detailedInfo": {
+            "requiredGuests": {
+                "hosts": {
+                    "price":5
+                },
+                "cleaners": {
+                    "nbRemainingPlaces": 1,
+                    "nbRquCleaners": 1,
+                    "price":6.7
+                },
+                "cooks": {
+                    "nbRemainingPlaces": 2,
+                    "nbRquCooks": 2,
+                    "timeCooking": "2016-07-13T18:00:39.303Z",
+                    "price":6.7
+                },
+                "simpleGuests": {
+                    "nbRemainingPlaces": 6,
+                    "nbRquSimpleGuests": 6,
+                    "price":12.5
+                }
+            }
+        },
+        "time": "2016-11-20T17:00:00.000Z",
+        "addressApprox": "Métro Anvers L2"
     }
 ]

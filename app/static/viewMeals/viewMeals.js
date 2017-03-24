@@ -12,19 +12,13 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
           controller: 'filterMealCtrl'
         }
       }
-    })
+    });
 }])
 
 
-.controller('ViewMealsCtrl', ['$scope', '$http', 'viewMealsFilterService', '$state', '$uibModal', '$log', function($scope, $http, viewMealsFilterService, $state, $uibModal, $log) {
-
-  $scope.loadMeals = function() {
-      var date = new Date();
-      var now = date.toISOString();
-      $http.get('/api/meals?where={"time": {"$gte": "' + now + '"} }').then(function(response) {
-        $scope.meals = response.data['_items'];
-      });
-    },
+.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'userServicesFactory', 'response', function($scope, viewMealsFilterService, $state, $uibModal, $auth, userServicesFactory, response) {
+  
+  $scope.meals = response.data['_items'];  
 
     $scope.filter = function() {
       return viewMealsFilterService.get();
@@ -36,10 +30,10 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
         templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
         controller: 'filterMealModalCtrl',
         resolve: {
-        filter: function() {
-          return filter;
+          filter: function() {
+            return filter;
+          }
         }
-      }
       });
     };
 
@@ -55,16 +49,16 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       resolve: {
         meal_id: function() {
           return meal_id;
+        },
+        isAuthenticated: function(){
+          return $auth.isAuthenticated();
         }
       }
     });
   };
 
-
   $scope.reverse = false;
   $scope.SortOrder = 'asc';
-
-  $scope.loadMeals();
 
   $state.go('view_meals.filterInternet');
 
@@ -74,8 +68,8 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
   $scope.cancel = function() {
     $uibModalInstance.close();
   };
-  
-    $scope.initializeFilters = function() {
+
+  $scope.initializeFilters = function() {
     $scope.filter = {
       weekDays: [{
         label: 'Mon',
@@ -114,18 +108,18 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
       }
     };
   };
-  
+
   $scope.clearAndCloseFilterMobile = function() {
     $scope.initializeFilters();
     $uibModalInstance.close();
   };
-  
+
 });
 
 modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
 
 
-  
+
 
 
   $scope.dateFilterMin_open = function() {

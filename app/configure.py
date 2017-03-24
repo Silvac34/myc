@@ -1,9 +1,11 @@
+import os
+
 #Contains the project environments' configuration
 class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = 'this-really-needs-to-be-changed'
+    SECRET_KEY = os.urandom(24) # set the secret key for the cookie session:
 
 
 class ProductionConfig(Config):
@@ -12,7 +14,6 @@ class ProductionConfig(Config):
     MONGO_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat_prod'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET='5c9c6aae00e33c0daec661d2095d0d6a'
-
 
 class StagingConfig(Config):
     DEVELOPMENT = True

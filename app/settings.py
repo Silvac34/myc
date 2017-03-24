@@ -189,8 +189,12 @@ schemaUsers = {
             'facebook_id': {
                 'type':'string'
             },
-            'email':{'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'},
-            'link':{'type': 'string'}
+            'email':{
+                'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+            },
+            'link':{
+                'type': 'string'
+            }
         }
     },
     'picture': {

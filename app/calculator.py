@@ -6,8 +6,10 @@ def aproximator(value):
     if isinstance(value, ( float, long )): #vérifie que ce que l'on met dans la classe est bien un nombre, sinon ça vaut ""
         priceHundred = value * 100
         remains = priceHundred % 5
-        priceHundred = priceHundred + (5 - remains)
+        if(remains != 0):
+            priceHundred = priceHundred + (5 - remains)
         return (priceHundred / 100)
+            
     elif value == 0:
         return 0
     else:

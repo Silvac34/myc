@@ -5,7 +5,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
 .controller('ViewProfileCtrl', ['$scope', '$http', function($scope, $http) {
 
   $scope.user = $scope.$parent.user;
-
+  
   var setValue = function(variable) {
     if (typeof variable === 'undefined') {
       return undefined;
@@ -88,8 +88,10 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
         age = setValue($scope.user.age);
         presentation = setValue($scope.user.presentation);
         //country_of_origin = setValue($scope.user.country_of_origin);
+        $scope.actualized = true;
       }, function errorCallback(response) {
         console.log("We couldn't delete a data that was here before. Please contact Dimitri");
+        $scope.actualized = false;
       });
     }
   };

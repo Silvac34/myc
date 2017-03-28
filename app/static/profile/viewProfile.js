@@ -5,7 +5,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
 .controller('ViewProfileCtrl', ['$scope', '$http', function($scope, $http) {
 
   $scope.user = $scope.$parent.user;
-  
+
   var setValue = function(variable) {
     if (typeof variable === 'undefined') {
       return undefined;
@@ -31,6 +31,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
   var email = setValue($scope.user.privateInfo.email);
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
+  var email = setValue($scope.user.email);
   //var country_of_origin = setValue($scope.user.country_of_origin);
 
   $scope.autocompleteOptions = {
@@ -38,18 +39,29 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
   };
 
   function getDataToPerform() {
+    var actionProhibited = false;
     var origUser = {
       "privateInfo": {
         "keep": false
       }
     };
     if (cellphone != setValueScope($scope.user.privateInfo.cellphone)) {
-      origUser.privateInfo.cellphone = $scope.user.privateInfo.cellphone;
-      origUser.privateInfo.keep = true;
+      if ($scope.user.privateInfo.cellphone == "") {
+        actionProhibited = true;
+      }
+      else {
+        origUser.privateInfo.cellphone = $scope.user.privateInfo.cellphone;
+        origUser.privateInfo.keep = true;
+      }
     }
     if (email != setValueScope($scope.user.privateInfo.email)) {
-      origUser.privateInfo.email = $scope.user.privateInfo.email;
-      origUser.privateInfo.keep = true;
+      if ($scope.user.privateInfo.email == "") {
+        actionProhibited = true;
+      }
+      else {
+        origUser.privateInfo.email = $scope.user.privateInfo.email;
+        origUser.privateInfo.keep = true;
+      }
     }
     if (age != setValueScope($scope.user.age)) {
       origUser.age = $scope.user.age;
@@ -60,7 +72,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
     /*if (country_of_origin != setValueScope($scope.user.country_of_origin)) {
       origUser.country_of_origin = $scope.user.country_of_origin;
     }*/
-    if (origUser.privateInfo.keep == false) {
+    if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
       delete origUser.privateInfo;
     }
     else {
@@ -69,31 +81,44 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
     if (angular.equals(origUser, {})) {
       return null;
     }
-    return origUser;
+    if (actionProhibited == true) {
+      return "this action is prohibited";
+    }
+    else {
+      return origUser;
+    }
   }
 
 
   $scope.actualizeUser = function(user_id, _etag) {
+    if ($scope.actualized != undefined) {
+      delete $scope.actualized;
+    }
     var dataToPerform = getDataToPerform();
-    if (dataToPerform != null) { //check si dataToPerfom est vide
-      var config = {
-        headers: {
-          'IF-Match': _etag
-        }
-      };
-      $http.patch('api/users/private/' + user_id, dataToPerform, config).then(function successCallBack(response) {
-        $scope.user._etag = response.data._etag;
-        cellphone = setValue($scope.user.privateInfo.cellphone);
-        email = setValue($scope.user.privateInfo.email);
-        age = setValue($scope.user.age);
-        presentation = setValue($scope.user.presentation);
-        //country_of_origin = setValue($scope.user.country_of_origin);
-        $scope.actualized = true;
-      }, function errorCallback(response) {
-        console.log("We couldn't delete a data that was here before. Please contact Dimitri");
-        $scope.actualized = false;
-      });
+    if (dataToPerform == "this action is prohibited") {
+      console.log("email or cellphone are needed to participate");
+      $scope.actualized = "error";
+    }
+    else {
+      if (dataToPerform != null && dataToPerform) { //check si dataToPerfom est vide
+        var config = {
+          headers: {
+            'IF-Match': _etag
+          }
+        };
+        $http.patch('api/users/private/' + user_id, dataToPerform, config).then(function successCallBack(response) {
+          $scope.user._etag = response.data._etag;
+          cellphone = setValue($scope.user.privateInfo.cellphone);
+          email = setValue($scope.user.privateInfo.email);
+          age = setValue($scope.user.age);
+          presentation = setValue($scope.user.presentation);
+          //country_of_origin = setValue($scope.user.country_of_origin);
+          $scope.actualized = true;
+        }, function errorCallback(response) {
+          console.log("We couldn't delete a data that was here before. Please contact Dimitri");
+          $scope.actualized = false;
+        });
+      }
     }
   };
-
 }]);

@@ -139,8 +139,7 @@ def auth_facebook():
     currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
-    if currentUser["picture"] != profile["picture"]:
-        userInfo["picture"]=profile["picture"]
+    userInfo["picture"] = profile["picture"]
     if currentUser["first_name"] != profile["first_name"]:
         userInfo["first_name"]=profile["first_name"]
     if currentUser["last_name"] != profile["last_name"]:
@@ -153,8 +152,7 @@ def auth_facebook():
     else:
         if currentUser["privateInfo"]["link"] == profile["link"] and currentUser["privateInfo"]["email"] == profile["email"]:
             userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
-    if(userInfo != {}):
-        user.updateUser(userInfo)
+    user.updateUser(userInfo)
     return jsonify(token=user.token())
     
 @Application.app.route('/auth/logout', methods=['GET'])

@@ -65,6 +65,9 @@ class User:
     def getUserPublicInfo(self):
         return Application.app.data.driver.db.users.find_one({"_id": self._id},{"privateInfo":0})
         
+    def getUserAllInfo(self):
+        return Application.app.data.driver.db.users.find_one({"_id": self._id})
+        
     def isSubscribed(self,meal_id=None, meal =None):
         if meal == None:
             meal = Application.app.data.driver.db.meals.find_one({"_id": meal_id})
@@ -132,18 +135,26 @@ def auth_facebook():
     profile = json.loads(r.text)
     # Step 3. Create a new account or return an existing one.
     user = User(facebook_id=profile['id'])
+    #getInfo json from this user
+    currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
-    userInfo["picture"]=profile["picture"]
-    userInfo["first_name"]=profile["first_name"]
-    userInfo["last_name"]=profile["last_name"]
-    userInfo["gender"]=profile["gender"]
-    user.updateUser(userInfo)
+    if currentUser["picture"] != profile["picture"]:
+        userInfo["picture"]=profile["picture"]
+    if currentUser["first_name"] != profile["first_name"]:
+        userInfo["first_name"]=profile["first_name"]
+    if currentUser["last_name"] != profile["last_name"]:
+        userInfo["last_name"]=profile["last_name"]
+    if currentUser["gender"] != profile["gender"]:
+        userInfo["gender"]=profile["gender"]
     if profile.get("email", None) == None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
-        userInfo = {"privateInfo.link" : profile["link"] }
+        if currentUser["privateInfo"]["link"] == profile["link"]:
+            userInfo = {"privateInfo.link" : profile["link"] }
     else:
-        userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
-    user.updateUser(userInfo)
+        if currentUser["privateInfo"]["link"] == profile["link"] and currentUser["privateInfo"]["email"] == profile["email"]:
+            userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
+    if(userInfo != {}):
+        user.updateUser(userInfo)
     return jsonify(token=user.token())
     
 @Application.app.route('/auth/logout', methods=['GET'])

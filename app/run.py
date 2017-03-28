@@ -140,6 +140,7 @@ def auth_facebook():
     #Store data from facebook
     userInfo = {}
     userInfo["picture"] = profile["picture"]
+    user.updateUser(userInfo)
     if currentUser["first_name"] != profile["first_name"]:
         userInfo["first_name"]=profile["first_name"]
     if currentUser["last_name"] != profile["last_name"]:

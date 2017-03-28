@@ -79,6 +79,7 @@ class APITest1(BasicAPITest):
 	    self.rmAddFieldsItem(dbMeal)
 	    testMeal = loads(open('../testData/meals_testData.json').read())[0]
 	    testMeal["_id"]= dbMeal["_id"]
+	    testMeal["_etag"]= dbMeal["_etag"]
 	    self.assertEqual(dbMeal, testMeal)
 	    
 
@@ -104,6 +105,7 @@ class APITest2(BasicAPITest):
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
+        expOutcome1["_etag"]= resp[0]["_etag"]
         self.assertEqual(3, len(resp))
         self.assertEquals(resp[0],expOutcome1)
         
@@ -113,15 +115,16 @@ class APITest2(BasicAPITest):
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsItem(json.loads(resp.data))
         expected = json.loads(jsonAPIExpMeal1)
+        expected["_etag"]= resp["_etag"]
         self.assertEquals(resp,expected)
     
     def test_get_detailed_info_unsubscribed(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111114\",\"town\": \"Santiago\",\"admin\":{\"_id\": \"5776d0824403f974b97caf89\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=c9e7b5856401d3dc61641aaf02dfb422&oe=5812FF92\",\"is_silhouette\": false}},\"first_name\": \"Kevin\",\"last_name\": \"Marteau\",\"gender\": \"male\"},\"menu\": \"Jolie piece de boeuf\",\"price\": 100,\"detailedInfo\": {\"subscribed\":false,\"requiredGuests\": {\"hosts\": {\"price\":5},\"cooks\":{\"nbRquCooks\":2,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":6.7},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":6.7},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":12.5}}},\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"addressApprox\": \"Métro Anvers L2\"}"
-        #sessionId = self.test_client.sess['user_id']
         resp = self.test_client.get("/api/meals/111111111111111111111114",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsItem(json.loads(resp.data))
         expected = json.loads(jsonAPIExpMeal1)
+        expected["_etag"]= resp["_etag"]
         self.assertEquals(resp,expected)
 
     def test_subscribe_meal_ok(self):
@@ -180,6 +183,7 @@ class APITest2(BasicAPITest):
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
+        expOutcome1["_etag"]= resp[0]["_etag"]
         self.assertEqual(1, len(resp))
         self.assertEquals(resp[0],expOutcome1)
         
@@ -189,21 +193,31 @@ class APITest2(BasicAPITest):
         self.assertEqual("200 OK", resp.status)
         resp = self.rmAddFieldsItem(json.loads(resp.data))
         expected = json.loads(jsonAPIExpMeal1)
+        expected['_etag']=resp['_etag']
         self.assertEquals(resp,expected)
         
     def test_get_meal_private_info_unsubscribed(self):
-        resp = self.test_client.get("/api/meals/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        respget = self.test_client.get("/api/meals/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        respget = self.rmAddFieldsItem(json.loads(respget.data))
+        _etag = respget["_etag"]        
+        resp = self.test_client.get("/api/meals/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
         
     def test_delete_meal_ok(self):
-        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
-        self.assertEqual("204 NO CONTENT", resp.status)
+        respget = self.test_client.get("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        respget = self.rmAddFieldsItem(json.loads(respget.data))
+        _etag = respget["_etag"]
+        respDelete = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'If-Match': _etag,'Content-Type':'application/json'})
+        self.assertEqual("204 NO CONTENT", respDelete.status)
         meals = self.db.meals.find()
         self.assertEqual( 2,meals.count())
         self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
         
     def test_delete_meal_not_admin(self):
-        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        respget = self.test_client.get("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        respget = self.rmAddFieldsItem(json.loads(respget.data))
+        _etag = respget["_etag"]
+        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
         self.assertEqual( 3,self.db.meals.find().count())
         
@@ -212,15 +226,20 @@ class APITest2(BasicAPITest):
         self.assertEqual("200 OK", resp.status)
     
     def test_update_current_user(self):
+        respget = self.test_client.get("/api/users/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        respget = self.rmAddFieldsItem(json.loads(respget.data))
+        _etag = respget["_etag"]            
         jsonRequestData = "{\"privateInfo\": {\"cellphone\": \"0611515364\"}}"
-        resp = self.test_client.patch("/api/users/private/111111111111111111111111", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        resp = self.test_client.patch("/api/users/private/111111111111111111111111", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
 
     def test_update_not_current_user(self):
+        respget = self.test_client.get("/api/users/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        respget = self.rmAddFieldsItem(json.loads(respget.data))
+        _etag = respget["_etag"]    
         jsonRequestData = "{\"privateInfo\": {\"cellphone\": \"0611515364\"}}"
-        resp = self.test_client.patch("/api/users/private/111111111111111111111112", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
-        self.assertEqual("403 FORBIDDEN", resp.status)
-        self.assertEqual("You are not allowed to modify this user", resp.data)
+        resp = self.test_client.patch("/api/users/private/111111111111111111111112", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
+        self.assertEqual("412 PRECONDITION FAILED", resp.status)
     
 if __name__ == '__main__':
     unittest.main()

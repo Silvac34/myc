@@ -31,7 +31,6 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
   var email = setValue($scope.user.privateInfo.email);
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
-  var email = setValue($scope.user.email);
   //var country_of_origin = setValue($scope.user.country_of_origin);
 
   $scope.autocompleteOptions = {
@@ -79,7 +78,12 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
       delete origUser.privateInfo.keep;
     }
     if (angular.equals(origUser, {})) {
-      return null;
+      if (actionProhibited == true) {
+        return "this action is prohibited";
+      }
+      else {
+        return null;
+      }
     }
     if (actionProhibited == true) {
       return "this action is prohibited";
@@ -100,7 +104,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
       $scope.actualized = "error";
     }
     else {
-      if (dataToPerform != null && dataToPerform) { //check si dataToPerfom est vide
+      if (dataToPerform != null) { //check si dataToPerfom est vide
         var config = {
           headers: {
             'IF-Match': _etag

@@ -64,6 +64,11 @@ class User:
         
     def getUserPublicInfo(self):
         return Application.app.data.driver.db.users.find_one({"_id": self._id},{"privateInfo":0})
+    
+    def getUserEtag(self):
+         etag = Application.app.data.driver.db.users.find_one({"_id": self._id})
+         if "_etag" in etag:
+             return etag["_etag"]
         
     def isSubscribed(self,meal_id=None, meal =None):
         if meal == None:
@@ -108,7 +113,6 @@ class Meal:
 @Application.app.route('/')
 def homePage():
     return render_template("index.html")
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 LOGIN API
@@ -158,9 +162,16 @@ End Points Actions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 #GET api/users/private
-def pre_get_privateUsers(request,lookup):  
+def pre_get_privateUsers(request,lookup): 
     lookup.update({"_id":g.user_id })
-
+    
+#PATCH api/users/private/<_id>
+def before_updating_PATCH_privateUsers(request, lookup):
+    etag = User(_id=ObjectId(session["user_id"])).getUserEtag()
+    if etag is not None:
+        print("coucou")
+    
+# GET api/meals
 def before_returning_GET_meals(response):
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
@@ -222,14 +233,15 @@ def pre_get_privateMeals(request,lookup):
     lookup.update({"privateInfo.users._id":g.user_id })
 
 # GET api/meals/private
-def  before_returning_GET_privateMeals(response):
+def before_returning_GET_privateMeals(response):
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
 
 # GET api/meals/private/<_id>
-def  before_returning_GET_item_privateMeals(response):
+def before_returning_GET_item_privateMeals(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
+    print(User(_id=meal["admin"]).getUserEtag())
     for usr in meal["privateInfo"]["users"]:
         usr.update(User(_id=usr["_id"]).getUserPublicInfo())
 
@@ -238,14 +250,12 @@ def pre_delete_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
 
 # PATCH api/meals/private/<_id>
-def pre_patch_privateMeals(request,lookup):   
+def pre_patch_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
-    
-# POST api/
-    
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers
+Application.app.on_pre_PATCH_privateUsers += before_updating_PATCH_privateUsers
 ### meals ressource ###
 Application.app.on_fetched_resource_meals +=  before_returning_GET_meals
 Application.app.on_fetched_item_meals +=  before_returning_GET_item_meal

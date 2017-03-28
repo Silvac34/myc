@@ -25,7 +25,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5
+                    "price":5.0
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
@@ -307,7 +307,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5
+                    "price":5.0
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,

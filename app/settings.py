@@ -3,7 +3,7 @@ RESOURCE_METHODS = ['GET', 'POST']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 HATEOAS=False
 #to enable concurrency control
-IF_MATCH = False
+IF_MATCH = True
 URL_PREFIX="api"
 DEBUG = True
 
@@ -183,10 +183,13 @@ schemaUsers = {
         'type': 'string',
         'allowed': ["male","female"]
     },
-    'country_of_origin':{
-        'type': 'string'
+    #'country_of_origin':{ #à rajouter plus tard
+    #    'type': 'string'
+    #},
+    'age':{
+        'type': 'number'
     },
-    'description':{
+    'presentation':{
         'type': 'string'
     },
     'privateInfo': {
@@ -249,7 +252,7 @@ privateUsers = {
     'url':'users/private',
     'resource_methods': ['GET'],
     'schema': schemaUsers,
-    'item_methods' : [],
+    'item_methods' : ['GET','PATCH'],
     'datasource':{
         'source': 'users'
     }

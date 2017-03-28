@@ -134,6 +134,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
     redirectUri: ENV.fbRedirectURI,
     scope: ['email']
   });
+  
+  
 
 }]);
 

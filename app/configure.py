@@ -11,21 +11,21 @@ class Config(object):
 class ProductionConfig(Config):
     DEBUG = False
     #We use MLab as a database as a service
-    MONGO_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat_prod'
+    MONGO_URI= 'mongodb://dkohn:SharEat3santiago@ds131340.mlab.com:31340/mycommuneatydb_prod'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET='5c9c6aae00e33c0daec661d2095d0d6a'
 
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    MONGO_URI= 'mongodb://shareat:kmaillet230191@ds019498.mlab.com:19498/shareat_stage'
+    MONGO_URI= 'mongodb://dkohn:SharEat3santiago@ds129600.mlab.com:29600/mycommuneatydb_stage'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET= '4a944b87ba3cec1475019cc8cdd16bed'
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    MONGO_URI= 'mongodb://shareat:kmaillet230191@ds055782.mlab.com:55782/shareat-dev_dim'
+    MONGO_URI= 'mongodb://dkohn:SharEat3santiago@ds131320.mlab.com:31320/mycommuneatydb_dev'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET= '6f748f72ff723b0b9d11997a6b2c0a37'
 

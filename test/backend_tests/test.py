@@ -58,6 +58,7 @@ class APITest1(BasicAPITest):
         super(APITest1, self).setUp()
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
         self.adminUser = User(_id="111111111111111111111111")
+        
     
     def tearDown(self):
 	    super(APITest1, self).tearDown()
@@ -202,10 +203,24 @@ class APITest2(BasicAPITest):
         self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
         
     def test_delete_meal_not_admin(self):
-        resp = self.test_client.delete("/api/meals/private111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
         self.assertEqual( 3,self.db.meals.find().count())
         
+    def test_get_private_user(self):
+        resp = self.test_client.get("/api/users/private/111111111111111111111111", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+    
+    def test_update_current_user(self):
+        jsonRequestData = "{\"privateInfo\": {\"cellphone\": \"0611515364\"}}"
+        resp = self.test_client.patch("/api/users/private/111111111111111111111111", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+
+    def test_update_not_current_user(self):
+        jsonRequestData = "{\"privateInfo\": {\"cellphone\": \"0611515364\"}}"
+        resp = self.test_client.patch("/api/users/private/111111111111111111111112", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("403 FORBIDDEN", resp.status)
+        self.assertEqual("You are not allowed to modify this user", resp.data)
     
 if __name__ == '__main__':
     unittest.main()

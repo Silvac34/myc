@@ -18,11 +18,8 @@
   <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
   <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' /><!-- permet d'obtenir la loading bar pour les transitions-->
-
-  <!-- pour avoir la liste des pays avec leur drapeaux dans autocomplete nationality and flags -->
-  <link rel="stylesheet" href="../static/bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css">
-  <link rel="stylesheet" href="../static/bower_components/EasyAutocomplete/demo/resources/flags.css">
-  <!-- -->
+  <link rel="stylesheet" href="../static/bower_components/angular-google-places-autocomplete/src/autocomplete.css">
+  
   <script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="../static/bower_components/satellizer/satellizer.min.js"></script>
@@ -46,10 +43,9 @@
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA&libraries=places"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="../static/components/ngAutocomplete.js"></script>
-   <!--autocomplete for nationality and flags-->
-  <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
-  <script src="../static/bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js"></script>
-  
+   <!--autocomplete for country_of_origin
+   <script src="../static/bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>-->
 
 </head>
 
@@ -81,7 +77,7 @@
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
                   <li><a ui-sref="profile">Profile</a></li>
-                  <li class="divider"></li>-->
+                  <li class="divider"></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>

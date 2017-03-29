@@ -447,8 +447,9 @@ footer p {
     .modal-meal-window .modal-dialog {
         top: 17%;
         left: 27.5%;
-        position: fixed;
+        position: initial;
         max-width: 67.5%;
+        overflow-y: scroll;
     }
 }
 

@@ -16,7 +16,7 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 }])
 
 
-.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'userServicesFactory', 'response', function($scope, viewMealsFilterService, $state, $uibModal, $auth, userServicesFactory, response) {
+.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'response', function($scope, viewMealsFilterService, $state, $uibModal, $auth, response) {
   
   $scope.meals = response.data['_items'];  
 

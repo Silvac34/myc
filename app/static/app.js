@@ -164,7 +164,7 @@ app.run(function($rootScope, $state, $auth) {
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', function($scope, $auth, $state, userServicesFactory, $http) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', function($scope, $auth, $state, userServicesFactory, $http, $rootScope) {
 
   $scope.auth = function(provider, toState) {
     toState = toState || undefined;
@@ -176,7 +176,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
             $state.go(toState);
           }
           userServicesFactory().then(function(data) {
-            $scope.user = data;
+            $rootScope.user = data;
           });
         }
       })
@@ -189,6 +189,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       $auth.logout().then(function() {
         $http.get('/auth/logout').then(function(response) {
           console.log(response.data);
+          delete $rootScope.user;
           $state.go("welcome");
         });
       });
@@ -207,7 +208,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   function authVerification() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
     if ($auth.isAuthenticated()) {
       userServicesFactory().then(function(data) {
-        $scope.user = data;
+        $rootScope.user = data;
       });
     }
   }

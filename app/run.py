@@ -139,19 +139,40 @@ def auth_facebook():
     currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
-    userInfo["picture"] = profile["picture"]
-    user.updateUser(userInfo)
-    if currentUser["first_name"] != profile["first_name"]:
+    if hasattr(currentUser,"picture"):
+        if currentUser["picture"] != profile["picture"]:
+            userInfo["picture"] = profile["picture"]
+    else:
+        userInfo["picture"] = profile["picture"]
+    if hasattr(currentUser,"first_name"):
+        if currentUser["first_name"] != profile["first_name"]:
+            userInfo["first_name"]=profile["first_name"]
+    else:
         userInfo["first_name"]=profile["first_name"]
-    if currentUser["last_name"] != profile["last_name"]:
+    if hasattr(currentUser,"last_name"):
+        if currentUser["last_name"] != profile["last_name"]:
+            userInfo["last_name"]=profile["last_name"]
+    else:
         userInfo["last_name"]=profile["last_name"]
-    if currentUser["gender"] != profile["gender"]:
-        userInfo["gender"]=profile["gender"]
+    if hasattr(currentUser,"gender"):  
+        if currentUser["gender"] != profile["gender"]:
+            userInfo["gender"]=profile["gender"]
+    else:
+        userInfo["gender"]=profile["gender"]  
+    user.updateUser(userInfo)
     if profile.get("email", None) == None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
-        if currentUser["privateInfo"]["link"] == profile["link"]:
+        if hasattr(currentUser,"privateInfo"):
+            if hasattr(currentUser["privateInfo"],"gender"):
+                if currentUser["privateInfo"]["link"] == profile["link"]:
+                    userInfo = {"privateInfo.link" : profile["link"] }
+        else:
             userInfo = {"privateInfo.link" : profile["link"] }
     else:
-        if currentUser["privateInfo"]["link"] == profile["link"] and currentUser["privateInfo"]["email"] == profile["email"]:
+        if hasattr(currentUser,"privateInfo"):    
+            if hasattr(currentUser["privateInfo"],"gender") and hasattr(currentUser["privateInfo"],"email"):
+                if currentUser["privateInfo"]["link"] == profile["link"] and currentUser["privateInfo"]["email"] == profile["email"]:
+                    userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
+        else:
             userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
     user.updateUser(userInfo)
     return jsonify(token=user.token())
@@ -181,11 +202,13 @@ def before_returning_GET_item_meal(response):
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
     if 'user_id' in session:
         if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
+            print("ok")
             meal["detailedInfo"].update({"subscribed" : True})
         else: 
             meal["detailedInfo"].update({"subscribed" : False})
     else: 
         meal["detailedInfo"].update({"subscribed" : None})
+        print("pas ok")
         
 #POST api/meals
     
@@ -228,8 +251,11 @@ def before_storing_POST_meals (items):
 
         
 #GET api/meals/private &  GET api/meals/private/<_id>
-def pre_get_privateMeals(request,lookup):   
-    lookup.update({"privateInfo.users._id":g.user_id })
+def pre_get_privateMeals(request,lookup):
+    if 'user_id' in session:
+        lookup.update({"privateInfo.users._id":session['user_id']})
+    else:
+        lookup.update({"privateInfo.users._id":g.user_id })
 
 # GET api/meals/private
 def before_returning_GET_privateMeals(response):

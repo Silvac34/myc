@@ -162,9 +162,9 @@ module.exports = function(grunt) {
     });
 
 // Create Front End Configuration file for the environment --------------------------------------------------------------------------------------------------
-    grunt.registerTask('initDevTestDB', [
+    grunt.registerTask('initDevDimDB', [
         // This will generate the configuration file for the environment
-        'shell:InitDevTestDB'
+        'shell:InitDevDimDB'
     ]);
 
     grunt.registerTask('devKev', [

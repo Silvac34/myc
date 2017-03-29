@@ -28,9 +28,9 @@
     <div class="row meal-dtld-group">
         <div class="meal-label meal-dtld-group-label">Inscription as :</div>
         <div class="meal-dtld-helpers-label meal-dtld-col">
-            <span class="meal-dtld-helpers-places" uib-popover="participantes" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
-            <span class="meal-dtld-helpers-price" uib-popover="precio" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/banknote.png" height="18px" width="18px"></span>
-            <span class="meal-dtld-helpers-places" uib-popover="hora de llegada" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"></span>
+            <span class="meal-dtld-helpers-places" uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
+            <span class="meal-dtld-helpers-price" uib-popover="price" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/banknote.png" height="18px" width="18px"></span>
+            <span class="meal-dtld-helpers-places" uib-popover="arrival time" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"></span>
         </div>
         <uib-accordion close-others="accordionOneAtATime">
             <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
@@ -79,12 +79,23 @@
             </div>
         </uib-accordion>
     </div>
-    <div class="text-center">
-        <div uib-alert ng-if="errorSubscribe.status" class="alert alert-dismissible alert-danger" close="closeAlert()">{{errorSubscribe.message}}</div>
+    <div ng-if="!isAuthenticated || (cellphoneValidation==true && isAuthenticated)">
+        <div class="row meal-dtld-group">
+            <div class="meal-label meal-dtld-group-label">Info required :</div>
+        </div>
+        <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone">
+        <div class="clear20"></div>
+    </div>
+    <div class="text-center row">
         <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to </span>participate</a>
         <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
         <div ng-if="meal.nbRemainingPlaces<=0  && (goToMeal=='false' || goToMeal==null)" class="meal-dtld-full-msg">Damn ! The meal is already full</div>
     </div>
+    <div class="clear10"></div>
+    <div ng-if="errorSubscribe.status">
+        <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.message}}</div>
+    </div>
+
 
     <div class="row meal-dtld-group">
         <div class="meal-label meal-dtld-group-label">The meal is organized by :</div>

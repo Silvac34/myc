@@ -202,13 +202,11 @@ def before_returning_GET_item_meal(response):
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
     if 'user_id' in session:
         if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
-            print("ok")
             meal["detailedInfo"].update({"subscribed" : True})
         else: 
             meal["detailedInfo"].update({"subscribed" : False})
     else: 
         meal["detailedInfo"].update({"subscribed" : None})
-        print("pas ok")
         
 #POST api/meals
     

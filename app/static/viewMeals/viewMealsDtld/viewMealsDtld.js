@@ -105,17 +105,17 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       });
     }, function(response) {
       loadMealInfo(meal_id);
-      $scope.errorSubscribe.status = true;
+      $scope.errorSubscribe.requestRole.status = true;
       if (RegExp(response.data = "requestRole")) {
         if (response.status == 400) {
-          $scope.errorSubscribe.message = response.data.message;
+          $scope.errorSubscribe.requestRole.message = response.data.message;
         }
         else {
-          $scope.errorSubscribe.message = "you have to select a role to participate";
+          $scope.errorSubscribe.requestRole.message = "you have to select a role to participate";
         }
       }
       else {
-        $scope.errorSubscribe.message = response.data;
+        $scope.errorSubscribe.requestRole.message = response.data;
       }
     });
   }
@@ -138,8 +138,8 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
           });
         }
         else if (needToUpdateCellphone() == false) {
-          $scope.errorSubscribe.status = true;
-          $scope.errorSubscribe.message = "Please fill your cellphone number to participate (to get in touch with the host).";
+          $scope.errorSubscribe.cellphone.status = true;
+          $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
           console.log("please fill your number");
         }
         else {
@@ -147,14 +147,14 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
         }
       }
       else {
-        $scope.errorSubscribe.status = true;
-        $scope.errorSubscribe.message = "";
         if (!check($scope.$parent.$root.user.privateInfo.cellphone)) {
-          $scope.errorSubscribe.message += "Please fill your cellphone number to participate (to get in touch with the host).";
+          $scope.errorSubscribe.cellphone.status = true;
+          $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
           console.log("please fill your number");
         }
         if (!check($scope.requestRole.name)) {
-          $scope.errorSubscribe.message += "You have to select a role to participate";
+          $scope.errorSubscribe.requestRole.status = true;
+          $scope.errorSubscribe.requestRole.message = "You have to select a role to participate";
           console.log("please choose a role");
         }
       }
@@ -200,14 +200,14 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                       });
                     }*/
                     else { // si son tel n'est pas dans notre BDD on lui demande de le remplir
-                      $scope.errorSubscribe.status = true;
-                      $scope.errorSubscribe.message = "Please fill your cellphone number to participate (to get in touch with the host).";
+                      $scope.errorSubscribe.cellphone.status = true;
+                      $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
                       console.log("please fill your number");
 
                     }
                     /*else if (needToUpdateCellphone() == false) {
-                      $scope.errorSubscribe.status = true;
-                      $scope.errorSubscribe.message = "Please fill your cellphone number to participate (to get in touch with the host).";
+                      $scope.errorSubscribe.cellphone.status = true;
+                      $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
                       console.log("please fill your number");
                     }
                     else {
@@ -215,10 +215,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                     }*/
                   }
                   /*                    else {
-                                        $scope.errorSubscribe.status = true;
-                                        $scope.errorSubscribe.message = "";
+                                        
                                         if (!check($scope.$parent.$root.user.privateInfo.cellphone))
-                                          $scope.errorSubscribe.message += "Please fill your cellphone number to participate (to get in touch with the host).";
+                                          $scope.errorSubscribe.cellphone.status = true;
+                                          $scope.errorSubscribe.cellphone.message += "Please fill your cellphone number to participate.";
                                         console.log("please fill your number");
                                       }*/
                 });
@@ -231,8 +231,8 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       }
       else {
         if (!check($scope.requestRole.name)) {
-          $scope.errorSubscribe.status = true;
-          $scope.errorSubscribe.message = "You have to select a role to participate";
+          $scope.errorSubscribe.requestRole.status = true;
+          $scope.errorSubscribe.requestRole.message = "You have to select a role to participate";
           console.log("please choose a role");
         }
       }
@@ -247,7 +247,12 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     availablePlaces: {}
   };
   $scope.errorSubscribe = {
-    "status": false
+    requestRole: {
+      "status": false
+    },
+    cellphone: {
+      "status": false
+    }
   };
   $scope.goToMeal = false;
 
@@ -255,7 +260,8 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   $scope.accordionOneAtATime = true;
 
   $scope.closeAlert = function() {
-    $scope.errorSubscribe.status = false;
+    $scope.errorSubscribe.requestRole.status = false;
+    $scope.errorSubscribe.cellphone.status = false;
   };
 
   $scope.cancel = function() {

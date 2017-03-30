@@ -17,10 +17,10 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 
 
 .controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'response', function($scope, viewMealsFilterService, $state, $uibModal, $auth, response) {
-  
-  $scope.meals = response.data['_items'];  
 
-    $scope.filter = function() {
+  $scope.meals = response.data['_items'];
+
+  $scope.filter = function() {
       return viewMealsFilterService.get();
     },
 
@@ -40,21 +40,28 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 
 
   $scope.openModalDtld = function(meal_id) {
-    $uibModal.open({
-      animation: true,
-      templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
-      controller: 'ViewMealsDtldCtrl',
-      size: "lg",
-      windowClass: 'modal-meal-window',
-      resolve: {
-        meal_id: function() {
-          return meal_id;
-        },
-        isAuthenticated: function(){
-          return $auth.isAuthenticated();
+    if (this.meal.detailedInfo.subscribed == true) {
+      $state.go("view_my_dtld_meals", {
+        "myMealId": meal_id
+      });
+    }
+    else {
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
+        controller: 'ViewMealsDtldCtrl',
+        size: "lg",
+        windowClass: 'modal-meal-window',
+        resolve: {
+          meal_id: function() {
+            return meal_id;
+          },
+          isAuthenticated: function() {
+            return $auth.isAuthenticated();
+          }
         }
-      }
-    });
+      });
+    }
   };
 
   $scope.reverse = false;

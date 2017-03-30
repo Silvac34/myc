@@ -250,10 +250,7 @@ def before_storing_POST_meals (items):
         
 #GET api/meals/private &  GET api/meals/private/<_id>
 def pre_get_privateMeals(request,lookup):
-    if 'user_id' in session:
-        lookup.update({"privateInfo.users._id":session['user_id']})
-    else:
-        lookup.update({"privateInfo.users._id":g.user_id })
+    lookup.update({"privateInfo.users._id":g.user_id })
 
 # GET api/meals/private
 def before_returning_GET_privateMeals(response):
@@ -264,8 +261,8 @@ def before_returning_GET_privateMeals(response):
 def before_returning_GET_item_privateMeals(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-    for usr in meal["privateInfo"]["users"]:
-        usr.update(User(_id=usr["_id"]).getUserPublicInfo())
+    for user in meal["privateInfo"]["users"]:
+        user.update(User(_id=user["_id"]).getUserPublicInfo())
 
 # DELETE api/meals/private/<_id>
 def pre_delete_privateMeals(request,lookup):
@@ -316,7 +313,7 @@ def subscribe_to_meal(meal_id):
             return Response("Meal is full",status=400)
         elif not meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"]>0 :
             return Response("Role is full",status=400)
-        elif User(_id=g.user_id).isSubscribed(meal=meal): 
+        elif User(_id=ObjectId(session['user_id'])).isSubscribed(meal=meal): 
             return Response("User already registered",status=400)
         else :
             meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] - 1

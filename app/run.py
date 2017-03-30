@@ -195,6 +195,13 @@ def pre_get_privateUsers(request,lookup):
 def before_returning_GET_meals(response):
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
+        if 'user_id' in session:
+            if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
+                meal["detailedInfo"].update({"subscribed" : True})
+            else: 
+                meal["detailedInfo"].update({"subscribed" : False})
+        else: 
+            meal["detailedInfo"].update({"subscribed" : None})
 
 # GET api/meals/<_id>
 def before_returning_GET_item_meal(response):

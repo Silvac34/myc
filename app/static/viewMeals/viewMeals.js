@@ -125,10 +125,6 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
 
 modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
 
-
-
-
-
   $scope.dateFilterMin_open = function() {
     $scope.filter.dateFilterMin.opened = true;
   };
@@ -196,7 +192,6 @@ modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', f
   $scope.applyFilters(); // Set up dataBinding with the service from the beginning
 
 }]);
-// pourquoi service et pas factory vu qu'on veut renvoyer filter + filter est un objet utilisé pour filtrer et ici on le considère comme variable ... ?
 
 
 modViewMeals.service('viewMealsFilterService', function() {

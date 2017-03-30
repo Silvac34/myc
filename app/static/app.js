@@ -134,8 +134,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
     redirectUri: ENV.fbRedirectURI,
     scope: ['email']
   });
-  
-  
+
+
 
 }]);
 
@@ -164,25 +164,39 @@ app.run(function($rootScope, $state, $auth) {
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', function($scope, $auth, $state, userServicesFactory, $http, $rootScope) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q) {
+
+  function authe(provider, toState) {
+    //toState = toState || undefined;
+    return $q(function(resolve, reject) {
+      $auth.authenticate(provider)
+        .then(function(response) {
+          console.debug("success", response);
+          if ($auth.isAuthenticated()) {
+            resolve(userServicesFactory().then(function(data) {
+              $rootScope.user = data;
+            }));
+            /*if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
+              $state.go(toState);
+            }*/
+          }
+        })
+        .catch(function(response) {
+          console.debug("catch", response);
+        });
+    });
+  }
 
   $scope.auth = function(provider, toState) {
-    toState = toState || undefined;
-    $auth.authenticate(provider)
-      .then(function(response) {
-        console.debug("success", response);
-        if ($auth.isAuthenticated()) {
-          if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
-            $state.go(toState);
-          }
-          userServicesFactory().then(function(data) {
-            $rootScope.user = data;
-          });
-        }
-      })
-      .catch(function(response) {
-        console.debug("catch", response);
-      });
+    authe(provider, toState).then(function successCallBack() {
+      toState = toState || undefined;
+      if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
+        $state.go(toState);
+      }
+      else {
+        $state.reload();
+      }
+    });
   };
 
   $scope.logout = function() {

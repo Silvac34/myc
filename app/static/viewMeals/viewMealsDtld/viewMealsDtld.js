@@ -268,5 +268,4 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
 
-
 }]);

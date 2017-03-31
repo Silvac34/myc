@@ -804,9 +804,14 @@ h2.slogan {
     }
     .welcome-well-left {
         right: 10px;
+        height:100px;
     }
     .welcome-well-right {
         left: 10px;
+        height:100px;
+    }
+    .welcome-well-center {
+        height:100px;
     }
 }
 

@@ -269,8 +269,13 @@ def before_returning_GET_item_privateMeals(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
     for user in meal["privateInfo"]["users"]:
-        user.update(User(_id=user["_id"]).getUserPublicInfo())
-        
+        userToUpdate = User(_id=user["_id"]).getUserPublicInfo()
+        userAllInfo = User(_id=user["_id"]).getUserAllInfo()
+        if "privateInfo" in userAllInfo:
+            if "cellphone" in userAllInfo["privateInfo"]:
+                userToUpdate["privateInfo"] = {"cellphone": User(_id=user["_id"]).getUserAllInfo()["privateInfo"]["cellphone"]}
+        user.update(userToUpdate)
+
 
 # DELETE api/meals/private/<_id>
 def pre_delete_privateMeals(request,lookup):

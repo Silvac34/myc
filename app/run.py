@@ -267,13 +267,18 @@ def before_returning_GET_privateMeals(response):
 # GET api/meals/private/<_id>
 def before_returning_GET_item_privateMeals(response):
     meal = response
-    meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
+    adminToUpdate = User(_id=meal["admin"]).getUserPublicInfo()
+    adminAllInfo = User(_id=meal["admin"]).getUserAllInfo()
+    if "privateInfo" in adminAllInfo:
+            if "cellphone" in adminAllInfo["privateInfo"]:
+                adminToUpdate["privateInfo"] = {"cellphone": adminAllInfo["privateInfo"]["cellphone"]}
+    meal["admin"] = adminToUpdate
     for user in meal["privateInfo"]["users"]:
         userToUpdate = User(_id=user["_id"]).getUserPublicInfo()
         userAllInfo = User(_id=user["_id"]).getUserAllInfo()
         if "privateInfo" in userAllInfo:
             if "cellphone" in userAllInfo["privateInfo"]:
-                userToUpdate["privateInfo"] = {"cellphone": User(_id=user["_id"]).getUserAllInfo()["privateInfo"]["cellphone"]}
+                userToUpdate["privateInfo"] = {"cellphone": userAllInfo["privateInfo"]["cellphone"]}
         user.update(userToUpdate)
 
 

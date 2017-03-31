@@ -78,7 +78,7 @@
                         <div class="text-primary my-meal-dtld-title">Your host :<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price | currency}}</span></div>
                     </div>
                     <div class="row">
-                        <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}<span ng-if="meal.privateInfo.adminPhone"> - {{meal.privateInfo.adminPhone}}</span></div>
+                        <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}<span ng-if="meal.admin.privateInfo.cellphone"> - {{meal.admin.privateInfo.cellphone}}</span></div>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} per pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cook'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                        <div ng-if="user.role[0] == 'cook'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -120,7 +120,7 @@
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} per pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cleaner'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                        <div ng-if="user.role[0] == 'cleaner'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -145,7 +145,7 @@
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} per pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'simpleGuest'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}</div>
+                        <div ng-if="user.role[0] == 'simpleGuest'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4">

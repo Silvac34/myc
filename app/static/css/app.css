@@ -5,7 +5,7 @@
     text-align: center;
     height: auto;
     padding-bottom: 100px;
-    background: #fff url(/static/sources/welcome/welcome_photo_general.jpg) no-repeat center scroll;
+    background: #fff url("/static/sources/welcome/welcome_photo_general.jpg") no-repeat center scroll;
     background-size: cover;
 }
 

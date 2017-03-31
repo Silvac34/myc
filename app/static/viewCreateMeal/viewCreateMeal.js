@@ -15,63 +15,129 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
       }
     },
 
+    $scope.setValue = function(variable) {
+      if (typeof variable === 'undefined') {
+        return undefined;
+      }
+      else {
+        return variable.toString();
+      }
+    };
 
-    $scope.createMeal = function() {
-      var okToPost = true;
-      if ($scope.editedMeal.privateInfo != undefined) {
-        if ($scope.editedMeal.privateInfo.adminPhone == null) {
-          if ($scope.editedMeal.privateInfo.adminPhone.length == 0) {
-            delete $scope.editedMeal.privateInfo.adminPhone;
-            okToPost = true;
+  function check(value) {
+    if (value != undefined) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  if (check($scope.$parent.$root.user)) {
+    var cellphoneStr = $scope.setValue($scope.$parent.$root.user.privateInfo.cellphone); //on initie le téléphone comme un string
+  }
+
+  $scope.cellphoneValidation = needToUpdateCellphone();
+
+  function needToUpdateCellphone() { // if true --> need to patch, if false --> need to return error, if null subscribe to a meal
+    if (check($scope.$parent.$root.user)) {
+      if (check($scope.$parent.$root.user.privateInfo)) {
+        if (check($scope.$parent.$root.user.privateInfo.cellphone) || $scope.$parent.$root.user.privateInfo.cellphone == '') {
+          if ($scope.$parent.$root.user.privateInfo.cellphone != '') {
+            if (cellphoneStr != '' && cellphoneStr != undefined) { // si quand on se connecte la première fois le téléphone n'est pas vide alors on n'a pas besoin de faire un patch
+              return null;
+            }
+            else {
+              return true; //si cellphoneStr (cellphone quand on se connecte) est vide ou undefined alors $scope.$parent.$root.user.privateInfo.cellphone 
+              //qui correspond à la modif du cellphone par le user doit être patché
+            }
           }
           else {
+            return false;
+          }
+        }
+        else {
+          return false;
+        }
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+  }
+
+  $scope.createMeal = function() {
+    if (needToUpdateCellphone() == true) {
+      $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
+        "privateInfo": {
+          "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
+        }
+      }, {
+        headers: {
+          "If-Match": $scope.$parent.$root.user._etag
+        }
+      }).then(function successCallBack(response) {
+        $scope.user._etag = response.data._etag;
+        createMealWithPhone();
+      });
+    }
+    else if (needToUpdateCellphone() == false) {
+      console.log("please fill your number");
+    }
+    else {
+      createMealWithPhone();
+    }
+  };
+
+
+  function createMealWithPhone() {
+    var okToPost = true;
+    if ($scope.editedMeal.menu != undefined) {
+      if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+            delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
+          }
+          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
+            console.log("you are trying to do somehting ilegal with the number of cooks!");
+            okToPost = false;
+          }
+        }
+        if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null) {
+            delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
+          }
+          else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
+            console.log("you are trying to do somehting ilegal with the number of cleaners!");
+            okToPost = false;
+          }
+        }
+        if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null) {
+            delete $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le supprime
+          }
+          else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {
+            console.log("you are trying to do somehting ilegal with the number of cleaners!");
             okToPost = false;
           }
         }
       }
-      if ($scope.editedMeal.menu != undefined) {
-        if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
-              delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
-            }
-            else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
-              console.log("you are trying to do somehting ilegal with the number of cooks!");
-              okToPost = false;
-            }
-          }
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null) {
-              delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
-            }
-            else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
-              console.log("you are trying to do somehting ilegal with the number of cleaners!");
-              okToPost = false;
-            }
-          }
-          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null) {
-              delete $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le supprime
-            }
-            else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {
-              console.log("you are trying to do somehting ilegal with the number of cleaners!");
-              okToPost = false;
-            }
-          }
-        }
 
-        if (okToPost == true) {
-          $http.post('/api/meals', $scope.editedMeal).then(function(response) {
-              $state.go("view_my_dtld_meals", {
-                "myMealId": response.data._id
-              });
-            },
-            function(response) {
-              console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
+      if (okToPost == true) {
+        $http.post('/api/meals', $scope.editedMeal).then(function(response) {
+            $state.go("view_my_dtld_meals", {
+              "myMealId": response.data._id
             });
-        }
+          },
+          function(response) {
+            console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
+          });
       }
-    };
+    }
+  }
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
 
@@ -96,7 +162,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
   };
 
   //date formats for datepicker
-  $scope.date_formats = ['EEEE dd MMMM yyyy','dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.date_formats = ['EEEE dd MMMM yyyy', 'dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.date_format = $scope.date_formats[0];
   $scope.altInputDateFormats = ['M!/d!/yyyy'];
 

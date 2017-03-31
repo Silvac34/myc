@@ -217,7 +217,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       isopen: false
     };
 
-  $scope.navbarCollapsed = true;
+  $rootScope.navbarCollapsed = true;
 
   function authVerification() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
     if ($auth.isAuthenticated()) {

@@ -250,8 +250,6 @@ def before_storing_POST_meals (items):
             meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price["cleanerPrice"] #on récupère le prix aide vaisselle dans price obtenu avec calculator.resolve et on l'associe
         if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
-        ########## phone ###########
-        str(meal["privateInfo"]["adminPhone"])
         #################
 
         

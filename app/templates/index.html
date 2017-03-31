@@ -78,7 +78,7 @@
                 <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
-                  <li><a ui-sref="profile">Profile</a></li>
+                  <li><a ui-sref="profile" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">Profile</a></li>
                   <li class="divider"></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>

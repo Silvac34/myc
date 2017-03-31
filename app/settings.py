@@ -64,7 +64,6 @@ schemaMeals = {
                 'required':True,
                 'empty': False
             },
-            'adminPhone':{'type':'string'},
             'users':{
                 'type':'list',
                 'schema': {

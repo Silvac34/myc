@@ -166,17 +166,20 @@ footer p {
     }
 }
 
-.welcome-buttons-auth {
-    float: right;
-    margin-top: -60px;
-    margin-right: 10px;
-}
-
 #facebook-button-nav {
     width: 100px;
     text-align: right;
     margin-right: auto;
     margin-left: 2%;
+}
+
+.welcome-buttons-auth {
+    float: right;
+    margin-top: -60px;
+    padding-left: 30px;
+    padding-bottom: 5px;
+    padding-top: 2px;
+    margin-right: 10px;
 }
 
 
@@ -774,14 +777,6 @@ h2.slogan {
     font-style: italic;
 }
 
-.welcome-buttons-auth {
-    float: right;
-    margin-top: -60px;
-    padding-left: 30px;
-    padding-bottom: 5px;
-    padding-top: 2px;
-}
-
 .row.welcome-how-it-works {
     border-bottom-style: solid;
     border-bottom-width: thin;
@@ -800,11 +795,6 @@ h2.slogan {
     margin-top: 12px;
     margin-right: -8px;
     margin-left: -8px;
-}
-
-.welcome-photo-general{
-    background: url("/static/sources/welcome/welcome_photo_general.jpg") no-repeat 0;    
-    opacity: 0.75;
 }
 
 @media (min-width: 768px) {

@@ -209,7 +209,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       });
     },
 
-    $scope.isAuthenticated = function() {
+    $rootScope.isAuthenticated = function() {
       return $auth.isAuthenticated();
     },
 

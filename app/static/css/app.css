@@ -1,5 +1,13 @@
 /* app css stylesheet */
 
+#header {
+    margin: auto;
+    text-align: center;
+    height: auto;
+    padding-bottom: 100px;
+    background: #fff url(/static/sources/welcome/welcome_photo_general.jpg) no-repeat center scroll;
+    background-size: cover;
+}
 
 /* function clear css to create lines with nothing*/
 
@@ -11,6 +19,11 @@
 .clear20 {
     clear: both;
     height: 20px;
+}
+
+.clear30 {
+    clear: both;
+    height: 30px;
 }
 
 .clear40 {
@@ -127,11 +140,12 @@ footer p {
     content: "\f09a";
 }
 
+
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
-.padding-left-15-right-15{
-    padding-left:15px;
-    padding-right:15px;
+.padding-left-15-right-15 {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 
@@ -142,6 +156,7 @@ footer p {
     margin-top: -9px;
     width: 50px;
 }
+
 
 /* Navbar ------------------------------------------------------------------------------------ */
 
@@ -157,7 +172,7 @@ footer p {
     margin-right: 10px;
 }
 
-#facebook-button-nav{
+#facebook-button-nav {
     width: 100px;
     text-align: right;
     margin-right: auto;
@@ -767,7 +782,6 @@ h2.slogan {
     padding-top: 2px;
 }
 
-
 .row.welcome-how-it-works {
     border-bottom-style: solid;
     border-bottom-width: thin;
@@ -782,10 +796,42 @@ h2.slogan {
     margin-top: 15px;
 }
 
+.welcome-how-does-it-work-text {
+    margin-top: 12px;
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.welcome-photo-general{
+    background: url("/static/sources/welcome/welcome_photo_general.jpg") no-repeat 0;    
+    opacity: 0.75;
+}
+
+@media (min-width: 768px) {
+    .welcome-how-to-pay {
+        background: url("/static/sources/welcome/how_to_pay_blue.png") no-repeat 0;
+        padding-left: 64px;
+    }
+    .welcome-well-left {
+        right: 10px;
+    }
+    .welcome-well-right {
+        left: 10px;
+    }
+}
+
+.well-meeting{
+    background: url("/static/sources/welcome/well/meeting.png") no-repeat 0; 
+    background-color:#f5f5f5;
+    background-position-y: top;
+    background-position-x: 5px;
+}
+
+
 /*who we are --------------------------------------------------- */
 
-.who_we_are_pic{
-    height:250px;
+.who_we_are_pic {
+    height: 250px;
     border-radius: 200px;
     border-color: #0B4060;
     border-style: solid;

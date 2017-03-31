@@ -17,9 +17,10 @@
   <link rel="stylesheet" href="../static/css/filter.css">
   <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' /><!-- permet d'obtenir la loading bar pour les transitions-->
+  <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+  <!-- permet d'obtenir la loading bar pour les transitions-->
   <!--<link rel="stylesheet" href="../static/bower_components/angular-google-places-autocomplete/src/autocomplete.css">-->
-  
+
   <script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="../static/bower_components/satellizer/satellizer.min.js"></script>
@@ -37,8 +38,9 @@
   <script src="../static/profile/viewProfile.js"></script>
   <script src="../static/components/userServices.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
-  <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script><!-- permet d'obtenir la loading bar pour les transitions-->
-  
+  <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script>
+  <!-- permet d'obtenir la loading bar pour les transitions-->
+
   <!-- autocomplete with google
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA&libraries=places"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -50,7 +52,7 @@
 </head>
 
 <body>
-  <div ng-controller="AppCtrl">
+  <header>
     <div class="bs-component" ng-if="!$state.includes('welcome')">
       <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">
         <div class="container-fluid">
@@ -87,8 +89,12 @@
         </div>
       </nav>
     </div>
-    <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook', toState)">
-      <button class="btn btn-block btn-social btn-facebook" type="button">
+  </header>
+
+  <section>
+    <div ng-controller="AppCtrl">
+      <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook', toState)">
+        <button class="btn btn-block btn-social btn-facebook" type="button">
             <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
         </div>
     
@@ -96,50 +102,50 @@
       <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
         Welcome <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li role="menuitem"><a ui-sref="profile">Profile</a></li>
-        <li role="menuitem" ng-if="isAuthenticated()"><a ui-sref="my_meals">My meals</a></li>
-        <li class="divider" ng-if="isAuthenticated()"></li>
-        <li role="menuitem"><a ng-click="logout()">Logout</a></li>
-      </ul>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a ui-sref="profile">Profile</a></li>
+          <li role="menuitem" ng-if="isAuthenticated()"><a ui-sref="my_meals">My meals</a></li>
+          <li class="divider" ng-if="isAuthenticated()"></li>
+          <li role="menuitem"><a ng-click="logout()">Logout</a></li>
+        </ul>
+      </div>
+
+      <div ui-view></div>
+      <div class="clear40"></div>
     </div>
+  </section>
 
-    <div ui-view></div>
-    <div class="clear40"></div>
-  </div>
-</body>
+  <footer>
+    <div class="clear20"></div>
+    <div class="container">
 
-<footer>
-  <div class="clear20"></div>
-  <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <p class="text-uppercase"><strong>Information</strong></p>
 
-    <div class="row">
-      <div class="col-sm-4">
-        <p class="text-uppercase"><strong>Information</strong></p>
+          <a ui-sref="footer_information_concept">Concept</a><br>
+          <a ui-sref="footer_information_team">Team</a><br>
+          <a ui-sref="footer_information_FAQ">FAQ</a><br>
+        </div>
 
-        <a ui-sref="footer_information_concept">Concept</a><br>
-        <a ui-sref="footer_information_team">Team</a><br>
-        <a ui-sref="footer_information_FAQ">FAQ</a><br>
-      </div>
+        <div class="col-sm-4">
+          <hr class="visible-xs-block">
+          <p class="text-uppercase"><strong>Legal</strong></p>
 
-      <div class="col-sm-4">
-        <hr class="visible-xs-block">
-        <p class="text-uppercase"><strong>Legal</strong></p>
+          <a ui-sref="footer_legal_terms_and_conditions">Terms and conditions</a><br>
+          <a ui-sref="footer_legal_privacy_policy">Privacy policy</a><br>
 
-        <a ui-sref="footer_legal_terms_and_conditions">Terms and conditions</a><br>
-        <a ui-sref="footer_legal_privacy_policy">Privacy policy</a><br>
+        </div>
 
-      </div>
+        <div class="col-sm-4">
+          <hr class="visible-xs-block">
+          <p class="text-uppercase"><strong>more</strong></p>
 
-      <div class="col-sm-4">
-        <hr class="visible-xs-block">
-        <p class="text-uppercase"><strong>more</strong></p>
-
-        <a ui-sref="footer_more_photo_gallery">Photo Gallery</a><br>
-        <a ui-sref="footer_more_careers">Careers</a><br>
-        <a ui-sref="footer_more_contact">Contact us</a><br>
-      </div>
-      <!--
+          <a ui-sref="footer_more_photo_gallery">Photo Gallery</a><br>
+          <a ui-sref="footer_more_careers">Careers</a><br>
+          <a ui-sref="footer_more_contact">Contact us</a><br>
+        </div>
+        <!--
       <div class="col-sm-3">
         <hr class="visible-xs-block">
         <p class="text-uppercase"><strong>Language</strong></p>
@@ -151,17 +157,18 @@
     </div>
     
     -->
+      </div>
     </div>
-  </div>
-  <div class="clear20"></div>
+    <div class="clear20"></div>
 
-  <div id="footer-bottom">
-    <div class="clear20"></div>
-    <div class="text-center">
-      <p class="h3">Share myCommuneaty on <a href="https://www.facebook.com/profile.php?id=100010745836006&fref=ts" target="_blank" class="social_circle"><i class="fa fa-facebook fa-2x"></i></a></p>
+    <div id="footer-bottom">
+      <div class="clear20"></div>
+      <div class="text-center">
+        <p class="h3">Share myCommuneaty on <a href="https://www.facebook.com/profile.php?id=100010745836006&fref=ts" target="_blank" class="social_circle"><i class="fa fa-facebook fa-2x"></i></a></p>
+      </div>
+      <div class="clear20"></div>
     </div>
-    <div class="clear20"></div>
-  </div>
-</footer>
+  </footer>
+</body>
 
 </html>

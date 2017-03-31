@@ -77,8 +77,8 @@
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Your host :<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price | currency}}</span></div>
                     </div>
-                    <div class="row">
-                        <div><img class="img-circle my-meal-dtld-profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />{{meal.admin.first_name}} {{meal.admin.last_name}}<span ng-if="meal.admin.privateInfo.cellphone"> - {{meal.admin.privateInfo.cellphone}}</span></div>
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
+                        <div ng-if="user.role[0] == 'admin'"><img class="img-circle my-meal-dtld-profilePic my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></div>
                     </div>
                 </div>
             </div>

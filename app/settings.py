@@ -76,7 +76,7 @@ schemaMeals = {
                         'role': {
                             'type': 'list',
                         'allowed': ["admin", "cook", "cleaner","simpleGuest"]
-                       }
+                       },
                     }
                 }
             }

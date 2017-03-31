@@ -14,7 +14,6 @@
         "nbRemainingPlaces": 9,
         "privateInfo": {
             "address": "30 avenue de Trudaine 75009",
-            "adminPhone":"0601020304",
             "users": [{
                 "_id": {
                     "$oid": "111111111111111111111111"
@@ -25,7 +24,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5.0
+                    "price":5
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,
@@ -63,7 +62,6 @@
         "nbRemainingPlaces": 8,
         "privateInfo": {
             "address": "3 impasse marie - blanche 75018",
-            "adminPhone":"0601020304",
             "users": [{
                 "_id": {
                     "$oid": "111111111111111111111111"
@@ -113,7 +111,6 @@
                 },
                 "role": ["admin"]
             }],
-            "adminPhone":"0601020304",
             "address": "37 rue du général foy 75008"
             
         },
@@ -155,7 +152,6 @@
                 },
                 "role": ["admin"]
             }],
-            "adminPhone":"0601020304",
             "address": "37 rue lepic"
         },
         "detailedInfo": {
@@ -201,7 +197,6 @@
                 },
                 "role": ["admin"]
             }],
-            "adminPhone":"0601020304",
             "address": "3 impasse Marie-blanche"
         },
         "detailedInfo": {
@@ -247,7 +242,6 @@
                 },
                 "role": ["admin"]
             }],
-            "adminPhone":"0601020304",
             "address": "4 rue du temple"
         },
         "detailedInfo": {
@@ -296,7 +290,6 @@
         "nbRemainingPlaces": 9,
         "privateInfo": {
             "address": "30 avenue de Trudaine 75009",
-            "adminPhone":"0601020304",
             "users": [{
                 "_id": {
                     "$oid": "5776d0824403f974b97caf89"
@@ -307,7 +300,7 @@
         "detailedInfo": {
             "requiredGuests": {
                 "hosts": {
-                    "price":5.0
+                    "price":5
                 },
                 "cleaners": {
                     "nbRemainingPlaces": 1,

@@ -187,7 +187,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     });
   }
 
-  $scope.auth = function(provider, toState) {
+  $rootScope.auth = function(provider, toState) {
     authe(provider, toState).then(function successCallBack() {
       toState = toState || undefined;
       if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
@@ -199,7 +199,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     });
   };
 
-  $scope.logout = function() {
+  $rootScope.logout = function() {
       $auth.logout().then(function() {
         $http.get('/auth/logout').then(function(response) {
           console.log(response.data);

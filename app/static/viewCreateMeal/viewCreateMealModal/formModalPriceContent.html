@@ -40,7 +40,7 @@
                                     <td class="text-center" ng-class="{'has-error': (editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined || editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time) && priceForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
                             </tr>
                             <tr>
-                                <td><span uib-popover="People will help you for cleaning" popover-trigger="mouseenter">Help washing dishes</span></td>
+                                <td><span uib-popover="People will help you for cleaning" popover-trigger="mouseenter">Help cleaning</span></td>
                                 <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                                 <td class="text-center"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
                             </tr>

@@ -55,7 +55,7 @@
                 <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners">
                 <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2" is-disabled="!requiredGuests.availablePlaces.cleaners">
                     <uib-accordion-heading>
-                        <div class="meal-dtld-helpers-label">Help washing dishes
+                        <div class="meal-dtld-helpers-label">Help cleaning
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
                             <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
                             <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</span>

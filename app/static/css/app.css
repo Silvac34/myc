@@ -9,6 +9,7 @@
     background-size: cover;
 }
 
+
 /* function clear css to create lines with nothing*/
 
 .clear10 {
@@ -499,10 +500,7 @@ footer p {
 }
 
 .meal-dtld-admin-pic {
-    margin-bottom: 5px;
-    margin-top: 0px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin: 0 30px 5px 30px;
     width: 60px;
     border-radius: 24%;
     float: left;
@@ -511,6 +509,22 @@ footer p {
 .meal-dtld-admin-wrapper {
     width: 100%;
     overflow: auto;
+}
+
+.meal-dtld-participants-pic {
+    border-radius: 24%;
+    float: left;
+    margin: 5px 0 20px 15px;
+}
+
+.meal-dtld-participants-name {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.meal-dtld-participants-role {
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .meal-dtld-menu-label {
@@ -567,7 +581,7 @@ footer p {
 
 .meal-dtld-full-msg {
     color: red;
-    margin-bottom: pxpx;
+    margin-bottom: 20px;
 }
 
 
@@ -804,20 +818,20 @@ h2.slogan {
     }
     .welcome-well-left {
         right: 10px;
-        height:100px;
+        height: 100px;
     }
     .welcome-well-right {
         left: 10px;
-        height:100px;
+        height: 100px;
     }
     .welcome-well-center {
-        height:100px;
+        height: 100px;
     }
 }
 
-.well-meeting{
-    background: url("/static/sources/welcome/well/meeting.png") no-repeat 0; 
-    background-color:#f5f5f5;
+.well-meeting {
+    background: url("/static/sources/welcome/well/meeting.png") no-repeat 0;
+    background-color: #f5f5f5;
     background-position-y: top;
     background-position-x: 5px;
 }

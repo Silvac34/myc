@@ -50,7 +50,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   $scope.cellphoneValidation = needToUpdateCellphone();
 
   function loadMealInfo(meal_id) {
-    $http.get('/api/meals/' + meal_id).then(function(response) {
+    $http.get('api/meals/' + meal_id).then(function(response) {
       $scope.meal = response.data;
 
       /*to check wether there is available space for each rôle*/
@@ -82,6 +82,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
     });
   }
+
 
   function check(value) {
     if (value != undefined) {

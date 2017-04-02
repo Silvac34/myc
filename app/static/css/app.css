@@ -1,12 +1,19 @@
 /* app css stylesheet */
 
-#header {
-    margin: auto;
-    text-align: center;
-    height: auto;
-    padding-bottom: 100px;
-    background: #fff url("/static/sources/welcome/welcome_photo_general.jpg") no-repeat center scroll;
-    background-size: cover;
+@media (max-width: 768px) {
+    .header {
+        margin: auto;
+        text-align: center;
+        height: auto;
+        padding-bottom: 100px;
+        margin-top: -70px;
+        background: #fff url("/static/sources/welcome/welcome_photo_general.jpg") no-repeat center scroll;
+        background-size: cover;
+    }
+    .welcome-buttons-auth-header {
+        bottom: 10px;
+        opacity: 0.75;
+    }
 }
 
 

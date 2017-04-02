@@ -53,7 +53,7 @@
 </head>
 
 <body>
-  <header>
+  <header ng-class="{'header':$state.includes('welcome')}">
     <div class="bs-component" ng-if="!$state.includes('welcome')">
       <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">
         <div class="container-fluid">
@@ -93,14 +93,17 @@
 
   <section>
     <div ng-controller="AppCtrl">
+      <div class="hidden-xs row" style="float:left">
+        <h1 style="font-size: x-large; margin: -59px 0 0 35px;">myCommuneaty</h1>
+      </div>
       <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook', toState)">
-        <button class="btn btn-block btn-social btn-facebook" type="button">
+        <button class="btn btn-block btn-social btn-facebook welcome-buttons-auth-header" type="button">
             <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
         </div>
     
         <div class="btn-group welcome-buttons-auth" uib-dropdown is-open="status.isopen" ng-if="$state.includes('welcome') && isAuthenticated()">
-      <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
-        Welcome <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
+      <button id="single-button" type="button" class="btn btn-default welcome-buttons-auth-header" uib-dropdown-toggle ng-disabled="disabled">
+        Hi <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
       </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem"><a ui-sref="profile">Profile</a></li>

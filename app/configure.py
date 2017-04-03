@@ -4,7 +4,7 @@ import os
 class Config(object):
     DEBUG = False
     TESTING = False
-    CSRF_ENABLED = True
+    CSRF_ENABLED = False
     SECRET_KEY = os.urandom(24) # set the secret key for the cookie session:
 
 

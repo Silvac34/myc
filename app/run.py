@@ -5,6 +5,7 @@ import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
+#from flask_mail import (Mail, Message)
 from bson import ObjectId, json_util
 import requests
 import json
@@ -41,6 +42,15 @@ class Application:
     app.root_path = abspath(dirname(__file__))
     configEnv = getattr(configure, os.environ.get('APP_SETTINGS'))()
     app.config.from_object(configEnv)
+    #app.config.update(dict(
+    #MAIL_SERVER = 'smtp.gmail.com',
+    #MAIL_PORT = 587,
+    #MAIL_USE_TLS = True,
+    #MAIL_USE_SSL = False,
+    #MAIL_USERNAME = 'shareat29@gmail.com',
+    #MAIL_PASSWORD = 'SharEat3santiago',
+    #))
+    #app.mail = Mail(app)
 
 class User:
     def __init__(self,email=None,password=None,facebook_id=None,_id=None):
@@ -202,6 +212,8 @@ def before_returning_GET_meals(response):
                 meal["detailedInfo"].update({"subscribed" : False})
         else: 
             meal["detailedInfo"].update({"subscribed" : None})
+    #msg = Message("Hello", sender="shareat29@gmail.com", recipients=["dimitri.kohn.pro@gmail.com"])
+    #Application.app.mail.send(msg)
 
 # GET api/meals/<_id>
 def before_returning_GET_item_meal(response):

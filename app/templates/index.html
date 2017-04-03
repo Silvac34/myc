@@ -53,9 +53,9 @@
 </head>
 
 <body>
-  <header ng-class="{'header':$state.includes('welcome')}">
+  <header ng-class="{'header':$state.includes('welcome')}" id="header">
     <div class="bs-component" ng-if="!$state.includes('welcome')">
-      <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile">
+      <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
@@ -75,10 +75,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown">
-                <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <a uib-dropdown-toggle class="dropdown-toggle">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
-                <ul uib-dropdown-menu class="dropdown-menu" aria-labelledby="download">
-                  <li><a ui-sref="profile" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true">Profile</a></li>
+                <ul uib-dropdown-menu class="dropdown-menu">
+                  <li><a ui-sref="profile" ng-click="$parent.navbarCollapsed = true">Profile</a></li>
                   <li class="divider"></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
@@ -91,7 +91,7 @@
     </div>
   </header>
 
-  <section>
+  <section id="section">
     <div ng-controller="AppCtrl">
       <!--<div class="hidden-xs row" style="float:left">
         <h1 style="font-size: x-large; margin: -59px 0 0 35px;">myCommuneaty</h1>
@@ -118,7 +118,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer id="footer">
     <div class="clear20"></div>
     <div class="container">
 

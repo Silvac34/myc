@@ -159,8 +159,7 @@ app.run(function($rootScope, $state, $auth) {
     });
 
   // enable to get the state in the view
-  $rootScope.$state = $state;
-
+  $rootScope.$state = $state; 
 
 });
 
@@ -217,8 +216,6 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       isopen: false
     };
 
-  $rootScope.navbarCollapsed = true;
-
   function authVerification() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
     if ($auth.isAuthenticated()) {
       userServicesFactory().then(function(data) {
@@ -228,4 +225,5 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   }
   authVerification();
 
+  $rootScope.navbarCollapsed = true;
 }]);

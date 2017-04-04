@@ -7,7 +7,6 @@ class Config(object):
     CSRF_ENABLED = False
     SECRET_KEY = os.urandom(24) # set the secret key for the cookie session:
 
-
 class ProductionConfig(Config):
     DEBUG = False
     #We use MLab as a database as a service

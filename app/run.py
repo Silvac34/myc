@@ -5,12 +5,13 @@ import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
-#from flask_mail import (Mail, Message)
 from bson import ObjectId, json_util
 import requests
 import json
 import base64
 import calculator
+import traceback #webhooks facebook
+import random #webhooks facebook
 from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
@@ -42,15 +43,6 @@ class Application:
     app.root_path = abspath(dirname(__file__))
     configEnv = getattr(configure, os.environ.get('APP_SETTINGS'))()
     app.config.from_object(configEnv)
-    #app.config.update(dict(
-    #MAIL_SERVER = 'smtp.gmail.com',
-    #MAIL_PORT = 587,
-    #MAIL_USE_TLS = True,
-    #MAIL_USE_SSL = False,
-    #MAIL_USERNAME = 'shareat29@gmail.com',
-    #MAIL_PASSWORD = 'SharEat3santiago',
-    #))
-    #app.mail = Mail(app)
 
 class User:
     def __init__(self,email=None,password=None,facebook_id=None,_id=None):
@@ -63,9 +55,7 @@ class User:
             return self
         if self.facebook_id:
             if Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
-                #self._id= str(Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}}).inserted_id)
                 self._id = Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
-            #else: self._id = str(Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"])
             else: 
                 self._id = Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"]
         
@@ -212,9 +202,7 @@ def before_returning_GET_meals(response):
                 meal["detailedInfo"].update({"subscribed" : False})
         else: 
             meal["detailedInfo"].update({"subscribed" : None})
-    #msg = Message("Hello", sender="shareat29@gmail.com", recipients=["dimitri.kohn.pro@gmail.com"])
-    #Application.app.mail.send(msg)
-
+            
 # GET api/meals/<_id>
 def before_returning_GET_item_meal(response):
     meal = response
@@ -369,6 +357,31 @@ def unsubscribe_to_meal(meal_id):
             meal["detailedInfo"]["requiredGuests"][r + "s"]["nbRemainingPlaces"] +=1
         Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal})
         return Response(status=200)
+        
+        
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+FACEBOOK WEBHOOKS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+token = "EAAVynZAjdOe0BAHR0zDRsqWokHZCbRLjiReLKVJtHgzd4e4mBK4dkukc5Y9kIZBI03CpDZC7bls5csrofuLo2RGX30PlLQ8HDhXACexavuftmQjiwMSbq9872gIZBKe2FHM4nZCEUCfttAkfi2jlBSt1NZBXulabrjTEBBfatb3JAZDZD"
+
+@Application.app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+  if request.method == 'POST':
+    try:
+      data = json.loads(request.data)
+      text = data['entry'][0]['messaging'][0]['message']['text'] # Incoming Message Text
+      sender = data['entry'][0]['messaging'][0]['sender']['id'] # Sender ID
+      payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}} # We're going to send this back
+      r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token, json=payload) # Lets send it
+    except Exception as e:
+      print traceback.format_exc() # something went wrong
+  elif request.method == 'GET': # For the initial verification
+    if request.args.get('hub.verify_token') == '2093843HREKJFBD0Ujnfdfkjdbfkdfu9320948340983ckdnd3POI23J2K3Ndkdklfjeiou0989032U4H3HBdbdjodh0909UJ89JDJ':
+      return request.args.get('hub.challenge')
+    return "Wrong Verify Token"
+  return "Hello World" #Not Really Necessary
 
 if __name__ == '__main__':
     Application.app.run(host='0.0.0.0', port=8080)

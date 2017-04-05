@@ -190,6 +190,18 @@ footer p {
     margin-right: 10px;
 }
 
+@media (max-width: 768px) {
+    .welcome-plugin-social-fb {
+        top: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .welcome-plugin-social-fb {
+        bottom: 50px;
+    }
+}
+
 
 /* View Meals -------------------------------------------------------------------------------- */
 

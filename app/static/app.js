@@ -159,11 +159,11 @@ app.run(function($rootScope, $state, $auth) {
     });
 
   // enable to get the state in the view
-  $rootScope.$state = $state; 
+  $rootScope.$state = $state;
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window) {
 
   function authe(provider, toState) {
     //toState = toState || undefined;
@@ -226,4 +226,26 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   authVerification();
 
   $rootScope.navbarCollapsed = true;
+  
+  //Facebook SDK javascript
+    $window.fbAsyncInit = function() {
+      FB.init({
+        appId: '1533396083620333',
+        xfbml: true,
+        version: 'v2.8'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  
 }]);

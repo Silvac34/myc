@@ -97,7 +97,7 @@
         <h1 style="font-size: x-large; margin: -59px 0 0 35px;">myCommuneaty</h1>
       </div>-->
       <div class="col-xs-6 welcome-plugin-social-fb">
-        <div ng-if="$state.includes('welcome')" class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+        <div ng-if="$state.includes('welcome') && isAuthenticated()" class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
       </div>
       <div class="col-xs-6">
         <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook', toState)">
@@ -118,7 +118,6 @@
           </ul>
         </div>
       </div>
-
       <div ui-view></div>
       <div class="clear40"></div>
     </div>

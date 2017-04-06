@@ -137,7 +137,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
   });
 
   ezfbProvider.setInitParams({
-    appId: '1533396083620333',
+    appId: ENV.appId,
     version: 'v2.6'
   });  
 

@@ -1,4 +1,5 @@
 {
     "fbClientID":"1555868738039734",
-    "fbRedirectURI":"https://shareat123-stage.herokuapp.com/"
+    "fbRedirectURI":"https://shareat123-stage.herokuapp.com/",
+    "appId":"1555868738039734"
 }

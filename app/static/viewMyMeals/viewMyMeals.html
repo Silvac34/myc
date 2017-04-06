@@ -3,7 +3,7 @@
   <uib-tabset type="pills">
     <uib-tab index="0" heading="Incoming meals" class="my-meal-uitab">
       <div class="clear20"></div>
-      <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal':mealFilteredFutur.length}>
+      <div class="col-xs-12" ng-class={'list-my-meal':mealFilteredFutur.length}>
         <div class="row" ng-repeat="meal in mealFilteredFutur = (meals | MyMealsFiltered:true)">
           <div class="col-xs-12">
             <div class="list-group">
@@ -45,7 +45,7 @@
     </uib-tab>
     <uib-tab index="1" heading="Previous meals" class="my-meal-uitab">
       <div class="clear20"></div>
-      <div class="col-sm-9 col-xs-12" ng-class={'list-my-meal':mealFilteredPassed.length}>
+      <div class="col-xs-12" ng-class={'list-my-meal':mealFilteredPassed.length}>
         <div class="row" ng-repeat="meal in mealFilteredPassed = (meals | MyMealsFiltered:false)">
           <div class="col-xs-12">
             <div class="list-group">

@@ -3,7 +3,7 @@
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', function($scope, $http, $uibModal, $state) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', function($scope, $http, $uibModal, $state, ENV) {
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
@@ -214,10 +214,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
   //$scope.addressAutocomplete;
   
-  /*$scope.origin = 'https://shareat123-prod.herokuapp.com';
+  $scope.origin = ENV + "#/create_meal";
   $scope.page_id = 254569051671689;
   $scope.app_id = 1533396083620333;
-  $scope.user_ref = "1234";*/
+  $scope.user_ref = "12343";
 
 }])
 

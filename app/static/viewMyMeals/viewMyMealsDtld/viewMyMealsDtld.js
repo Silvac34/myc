@@ -3,12 +3,11 @@
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap']);
 
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', function($scope, $http, $stateParams, $uibModal, ENV) {
-
+  
   $scope.loadMyMealInfo = function(meal_id) {
     $http.get('/api/meals/private/' + meal_id).then(function(response) {
       $scope.meal = response.data;
       var userId = $scope.user._id;
-
       for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
         if ($scope.meal.privateInfo.users[i]._id == userId) {
           $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
@@ -18,6 +17,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   };
 
   $scope.loadMyMealInfo($stateParams.myMealId);
+        $scope.data_href = ENV.fbRedirectURI +"#/my_meals/" + $stateParams.myMealId;
 
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {

@@ -213,8 +213,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
   };
 
   //$scope.addressAutocomplete;
-  
-  $scope.origin = ENV + "#/create_meal";
+  $scope.origin = ENV.fbRedirectURI + "#/create_meal";
   $scope.page_id = 254569051671689;
   $scope.app_id = ENV.appId;
   $scope.user_ref = "12343";

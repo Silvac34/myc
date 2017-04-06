@@ -2,7 +2,7 @@
 
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', function($scope, $http, $stateParams, $uibModal) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', function($scope, $http, $stateParams, $uibModal, ENV) {
 
   $scope.loadMyMealInfo = function(meal_id) {
     $http.get('/api/meals/private/' + meal_id).then(function(response) {

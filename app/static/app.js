@@ -184,9 +184,6 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
             resolve(userServicesFactory().then(function(data) {
               $rootScope.user = data;
             }));
-            /*if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
-              $state.go(toState);
-            }*/
           }
         })
         .catch(function(response) {

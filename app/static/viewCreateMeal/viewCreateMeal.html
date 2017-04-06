@@ -70,8 +70,8 @@
                     <div class="row" ng-if="cellphoneValidation==false">
                         <div class="col-sm-12">
                             <div class="form-group" ng-class="{'has-error': (createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)&& createMealForm.$submitted};">
-                                <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone"
-                                    uib-popover="Private information: displayed only for participants" popover-trigger="mouseenter" popover-placement="bottom-left" required/>
+                                <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone" uib-popover="Private information: displayed only for participants"
+                                    popover-trigger="mouseenter" popover-placement="bottom-left" required/>
                             </div>
                         </div>
                     </div>
@@ -83,6 +83,9 @@
                     <span>Please fill in the missing field(s) and try again</span>
                     <span ng-show="createMealForm.inputCellphone.$invalid"><br/>Your phone number is not correct</span>
                 </div>
+            </div>
+            <div class="row">
+                <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
             </div>
             <div class="row">
                 <div class="form-group">

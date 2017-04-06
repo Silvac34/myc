@@ -214,10 +214,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
   //$scope.addressAutocomplete;
   
-  $scope.origin = "https://shareat123-stage.herokuapp.com/#/create_meal";
+  /*$scope.origin = 'https://shareat123-prod.herokuapp.com';
   $scope.page_id = 254569051671689;
   $scope.app_id = 1533396083620333;
-  $scope.user_ref = "1234";
+  $scope.user_ref = "1234";*/
 
 }])
 

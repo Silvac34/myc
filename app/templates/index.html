@@ -40,6 +40,7 @@
   <script src="../static/components/userServices.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
   <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script>
+  <script src="../static/bower_components/angular-easyfb/build/angular-easyfb.min.js"></script>
   <!-- permet d'obtenir la loading bar pour les transitions-->
 
   <!-- autocomplete with google
@@ -96,17 +97,17 @@
       <!--<div class="hidden-xs row" style="float:left">
         <h1 style="font-size: x-large; margin: -59px 0 0 35px;">myCommuneaty</h1>
       </div>-->
-      <div class="col-xs-6 welcome-plugin-social-fb">
-        <div ng-if="$state.includes('welcome') && isAuthenticated()" class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+      <div class="col-xs-6 welcome-plugin-social-fb" ng-if="$state.includes('welcome')">
+        <div ng-if="isAuthenticated()" class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
       </div>
-      <div class="col-xs-6">
-        <div class="welcome-buttons-auth" ng-if="$state.includes('welcome') && !isAuthenticated()" ng-click="auth('facebook', toState)">
+      <div class="col-xs-6" ng-if="$state.includes('welcome')">
+        <div class="welcome-buttons-auth" ng-if="!isAuthenticated()" ng-click="auth('facebook', toState)">
           <button class="btn btn-block btn-social btn-facebook welcome-buttons-auth-header" type="button">
           <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
         </div>
       
     
-        <div class="btn-group welcome-buttons-auth" uib-dropdown is-open="status.isopen" ng-if="$state.includes('welcome') && isAuthenticated()">
+        <div class="btn-group welcome-buttons-auth" uib-dropdown is-open="status.isopen" ng-if="isAuthenticated()">
       <button id="single-button" type="button" class="btn btn-default welcome-buttons-auth-header" uib-dropdown-toggle ng-disabled="disabled">
         Hi <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
       </button>

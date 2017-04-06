@@ -13,12 +13,13 @@ var app = angular.module('myApp', [
   'myApp.viewProfile',
   'myApp.welcome',
   'userServices',
-  'angular-loading-bar'
+  'angular-loading-bar',
+  'ezfb'
   /*,
     'ngAutocomplete'*/
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {
 
   cfpLoadingBarProvider.includeSpinner = false;
 
@@ -135,7 +136,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
     scope: ['email']
   });
 
-
+  ezfbProvider.setInitParams({
+    appId: '1533396083620333',
+    version: 'v2.6'
+  });  
 
 }]);
 
@@ -162,6 +166,11 @@ app.run(function($rootScope, $state, $auth) {
   $rootScope.$state = $state;
 
 });
+
+  var _defaultInitFunction = ['$window', 'ezfbInitParams', function ($window, ezfbInitParams) {
+  // Initialize the FB JS SDK
+  $window.FB.init(ezfbInitParams);
+}];
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window) {
 
@@ -226,25 +235,5 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   authVerification();
 
   $rootScope.navbarCollapsed = true;
-  
-  //Facebook SDK javascript
-    $window.fbAsyncInit = function() {
-      FB.init({
-        appId: '1533396083620333',
-        xfbml: true,
-        version: 'v2.8'
-      });
-      FB.AppEvents.logPageView();
-    };
 
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
 }]);

@@ -3,7 +3,7 @@
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap']);
 
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', function($scope, $http, $stateParams, $uibModal, ENV) {
-  
+
   $scope.loadMyMealInfo = function(meal_id) {
     $http.get('/api/meals/private/' + meal_id).then(function(response) {
       $scope.meal = response.data;
@@ -17,7 +17,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   };
 
   $scope.loadMyMealInfo($stateParams.myMealId);
-        $scope.data_href = ENV.fbRedirectURI +"#/my_meals/" + $stateParams.myMealId;
+  $scope.data_href = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
 
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {
@@ -26,7 +26,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       animation: true,
       templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalDeleteMyMealDtld.html',
       controller: 'modalDeleteInstanceCtrl',
-      size: "sm"
+      size: "sm",
+      resolve: {
+        _etag: function() {
+            return $scope.meal._etag;
+          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+      }
     });
   };
 
@@ -83,16 +88,21 @@ modMyMealsDetailed.filter('MyMealsFiltered', function() {
   };
 });
 
-modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
+modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, _etag) {
 
-  $scope.deleteMyMeal = function(meal_id) {
-    $http.delete('/api/meals/private/' + meal_id).then(function(response) {
+  $scope.deleteMyMeal = function(meal_id, _etag) {
+
+    $http.delete('/api/meals/private/' + meal_id, {
+      headers: {
+        "If-Match": _etag
+      }
+    }).then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
   };
 
   $scope.delete = function() {
-    $scope.deleteMyMeal($stateParams.myMealId);
+    $scope.deleteMyMeal($stateParams.myMealId, _etag);
     $uibModalInstance.close();
     $state.go('view_meals', {
       reload: true,
@@ -171,7 +181,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.nbSimpleGuestsInscribed = 0;
   }
   $scope.edit = function() {
-    if (($scope.nbCooksInscribed <= ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) ||  $scope.nbCooksInscribed == undefined) && ($scope.nbCleanersInscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners ||  $scope.nbCleanersInscribed == undefined) && ($scope.nbSimpleGuestsInscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests || $scope.nbSimpleGuestsInscribed == undefined)) {
+    if (($scope.nbCooksInscribed <= ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || $scope.nbCooksInscribed == undefined) && ($scope.nbCleanersInscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || $scope.nbCleanersInscribed == undefined) && ($scope.nbSimpleGuestsInscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests || $scope.nbSimpleGuestsInscribed == undefined)) {
       $scope.editMyMeal($stateParams.myMealId);
       $uibModalInstance.close();
       $state.reload();

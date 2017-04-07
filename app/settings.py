@@ -26,7 +26,7 @@ schemaMeals = {
             },
             'description': {
                 'type':'string'
-            }
+            },
         }
     },
     'veggies': {

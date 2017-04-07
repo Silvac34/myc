@@ -7,7 +7,7 @@
         height: auto;
         padding-bottom: 100px;
         margin-top: -70px;
-        background: #fff url("/static/sources/welcome/welcome_photo_general.jpg") no-repeat center scroll;
+        background: #fff url("/static/sources/header/photo_header_mobile.jpg") no-repeat center scroll;
         background-size: cover;
     }
     .welcome-buttons-auth-header {
@@ -186,8 +186,8 @@ footer p {
     #facebook-button-nav {
         width: 100px;
         text-align: right;
-        right:10px;
-        top:5px;
+        right: 10px;
+        top: 5px;
     }
 }
 
@@ -863,6 +863,42 @@ h2.slogan {
     .welcome-well-center {
         height: 100px;
     }
+}
+
+.well-conviviality-background {
+    background: url("/static/sources/welcome/well/conviviality.png") no-repeat 0;
+    background-size: cover;
+    color: black;
+}
+
+.well-meeting-background {
+    background: url("/static/sources/welcome/well/meeting.png") no-repeat 0;
+    background-size: cover;
+    color: black;
+}
+
+.well-sharing-background {
+    background: url("/static/sources/welcome/well/sharing.png") no-repeat 0;
+    background-size: cover;
+    color: black;
+}
+
+.well-new-background {
+    background: url("/static/sources/welcome/well/new.png") no-repeat 0;
+    background-size: cover;
+    color: black;
+}
+
+.well-community-background {
+    background: url("/static/sources/welcome/well/community.png") no-repeat 0;
+    background-size: cover;
+    color: black;
+}
+
+.well-authenticity-simplicity-background {
+    background: url("/static/sources/welcome/well/authenticity_simplicity.png") no-repeat 0;
+    background-size: cover;
+    color: black;
 }
 
 

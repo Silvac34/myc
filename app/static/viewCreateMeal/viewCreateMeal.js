@@ -3,7 +3,26 @@
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', function($scope, $http, $uibModal, $state, ENV) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', '$window', function($scope, $http, $uibModal, $state, ENV, $window) {
+
+  $window.fbAsyncInit = function() {
+    FB.init({
+      appId: ENV.appId,
+      xfbml: true,
+      version: 'v2.8'
+    });
+  };
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    var fbElement = d.getElementById(id);
+    if (fbElement) {
+      return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = '//connect.facebook.net/en_US/sdk.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {

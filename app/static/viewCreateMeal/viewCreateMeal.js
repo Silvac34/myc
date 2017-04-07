@@ -4,7 +4,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', '$window', function($scope, $http, $uibModal, $state, ENV, $window) {
-
+  
+  //initialize SDK facebook v2.8 pour utiliser le plugin checkbox messenger
   $window.fbAsyncInit = function() {
     FB.init({
       appId: ENV.appId,

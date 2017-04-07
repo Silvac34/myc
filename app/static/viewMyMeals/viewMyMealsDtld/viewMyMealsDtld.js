@@ -17,7 +17,8 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   };
 
   $scope.loadMyMealInfo($stateParams.myMealId);
-  $scope.data_href = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
+  $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
+  $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
 
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {

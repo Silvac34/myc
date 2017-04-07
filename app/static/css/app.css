@@ -901,6 +901,10 @@ h2.slogan {
     color: black;
 }
 
+.welcome-ul {
+    list-style-image: url("/static/sources/swirly-arrow.png")
+}
+
 
 /*who we are --------------------------------------------------- */
 

@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-10">
                   <div class="row">
-                    <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu}}</label> </br>
+                    <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</label> </br>
                     <div class="col-xs-8">
                       <div class="my-meal-label my-meal-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
                       <div class="row">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-10">
                   <div class="row">
-                    <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu}}</label> </br>
+                    <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title}}</label> </br>
                     <div class="col-xs-8">
                       <div class="my-meal-label my-meal-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
                       <div class="row">

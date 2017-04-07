@@ -26,8 +26,11 @@
         <fieldset id="fieldset-form">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="form-group" ng-class="{'has-error': editedMeal.menu==undefined && createMealForm.$submitted};">
-                        <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" id="inputMenu" placeholder="Menu" ng-model="editedMeal.menu" required></textarea>
+                    <div class="form-group" ng-class="{'has-error': editedMeal.menu.title==undefined && createMealForm.$submitted};">
+                        <input type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" placeholder="Title of your menu" id="inputMenu" ng-model="editedMeal.menu.title" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" placeholder="Menu description" ng-model="editedMeal.menu.description"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
@@ -98,16 +101,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-show="(editedMeal.menu==undefined || editedMeal.privateInfo.address==undefined || editedMeal.price==undefined || createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)  && createMealForm.$submitted">
+            <div class="row" ng-show="(editedMeal.menu.title==undefined || editedMeal.privateInfo.address==undefined || editedMeal.price==undefined || createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)  && createMealForm.$submitted">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span>Please fill in the missing field(s) and try again</span>
                     <span ng-show="createMealForm.inputCellphone.$invalid"><br/>Your phone number is not correct</span>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">

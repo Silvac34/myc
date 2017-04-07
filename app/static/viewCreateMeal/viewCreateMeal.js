@@ -113,7 +113,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
   function createMealWithPhone() {
     var okToPost = true;
-    if ($scope.editedMeal.menu != undefined) {
+    if ($scope.editedMeal.menu.title != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {

@@ -1,10 +1,15 @@
 <div class="container-fluid">
     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
     <div class="row">
-        <label class="meal-dtld-menu-label">{{meal.menu}}</label>
+        <label class="meal-dtld-menu-label">{{meal.menu.title}}</label>
         <div class="col-xs-9 meal-dtld-left">
             <div class="row">
                 <div class="col-xs-12">
+                    <div class="row" ng-if="meal.menu.description">
+                        <div class="col-xs-12">
+                            <div class="meal-label">{{meal.menu.description}}</div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="meal-label meal-location">{{meal.town}} - {{meal.addressApprox}}</div>

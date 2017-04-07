@@ -174,11 +174,21 @@ footer p {
     }
 }
 
-#facebook-button-nav {
-    width: 100px;
-    text-align: right;
-    margin-right: auto;
-    margin-left: 2%;
+@media (max-width: 768px) {
+    #facebook-button-nav {
+        width: 100px;
+        text-align: right;
+        margin-left: 2%;
+    }
+}
+
+@media (min-width: 769px) {
+    #facebook-button-nav {
+        width: 100px;
+        text-align: right;
+        right:10px;
+        top:5px;
+    }
 }
 
 .welcome-buttons-auth {
@@ -199,6 +209,13 @@ footer p {
 @media (min-width: 769px) {
     .welcome-plugin-social-fb {
         bottom: 50px;
+    }
+}
+
+@media (min-width: 769px) {
+    #navbar-button-position {
+        padding-top: 21px;
+        padding-bottom: 21px;
     }
 }
 
@@ -357,7 +374,7 @@ footer p {
 }
 
 .meal-date {
-    background: url("/static/sources/calendar_with_clock.png") no-repeat;
+    background: url("/static/sources/calendar.png") no-repeat;
     min-height: 24px;
 }
 
@@ -440,7 +457,7 @@ footer p {
 }
 
 .my-meal-date {
-    background: url("/static/sources/calendar_with_clock.png") no-repeat;
+    background: url("/static/sources/calendar.png") no-repeat;
     min-height: 24px;
 }
 
@@ -617,8 +634,8 @@ footer p {
 }
 
 .form-calendar {
-    background: url("/static/sources/calendar_with_clock.png") no-repeat;
-    text-indent: 25px;
+    background: url("/static/sources/calendar.png") no-repeat;
+    text-indent: 30px;
     margin-top: auto;
     background-position: 10px 7px;
     font-size: 80%;
@@ -626,7 +643,7 @@ footer p {
 
 .form-clock {
     background: url("/static/sources/clock.png") no-repeat;
-    text-indent: 25px;
+    text-indent: 30px;
     margin-top: auto;
     background-position: 10px 7px;
     font-size: 80%;
@@ -634,7 +651,7 @@ footer p {
 
 .form-location {
     background: url("/static/sources/location.png") no-repeat;
-    text-indent: 25px;
+    text-indent: 30px;
     margin-top: auto;
     background-position: 10px 5px;
     font-size: 80%;
@@ -647,7 +664,7 @@ footer p {
 
 .form-vegetarian {
     background: url("/static/sources/vegetarian.png") no-repeat;
-    text-indent: 25px;
+    text-indent: 30px;
     margin-top: auto;
     background-position: 7px 5px;
 }
@@ -704,7 +721,7 @@ footer p {
 }
 
 .my-meal-dtld-date {
-    background: url("/static/sources/calendar_with_clock.png") no-repeat;
+    background: url("/static/sources/calendar.png") no-repeat;
     min-height: 24px;
 }
 

@@ -16,9 +16,18 @@ schemaMeals = {
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/nicolaiarocci/cerberus) for details.
     'menu': {
-        'type': 'string',
-        'required': True,
-        'empty': False
+        'type': 'dict',
+        'required':True,
+        'schema':{
+            'title': {
+                'type':'string',
+                'required':True,
+                'empty': False
+            },
+            'description': {
+                'type':'string'
+            }
+        }
     },
     'veggies': {
         'type': 'boolean'

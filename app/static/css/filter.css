@@ -30,7 +30,7 @@
 }
 
 .search_calendar {
-    background: url("/static/sources/calendar_with_clock.png") no-repeat;
+    background: url("/static/sources/calendar.png") no-repeat;
     text-indent: 25px;
     margin-top: auto;
     background-position: 10px 7px;

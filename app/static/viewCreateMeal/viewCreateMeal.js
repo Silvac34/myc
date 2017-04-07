@@ -117,7 +117,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
     if ($scope.editedMeal.menu.title != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
           }
           else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
@@ -126,7 +126,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
           }
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null || $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
           }
           else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
@@ -135,7 +135,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
           }
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null || $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le supprime
           }
           else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {

@@ -16,7 +16,6 @@
     }
 }
 
-
 /* function clear css to create lines with nothing*/
 
 .clear10 {
@@ -901,8 +900,10 @@ h2.slogan {
     color: black;
 }
 
-.welcome-ul {
-    list-style-image: url("/static/sources/swirly-arrow.png")
+@media (max-width: 768px) {
+    .welcome-ul {
+        list-style-image: url("/static/sources/swirly-arrow.png")
+    }
 }
 
 

@@ -801,6 +801,7 @@ footer p {
 .my-meal-dtld-delete {
     background: url("/static/sources/delete_cross.png") no-repeat;
     margin-left: -10px;
+    float:left;
 }
 
 .page-separation {

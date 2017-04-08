@@ -4,7 +4,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', '$window', function($scope, $http, $uibModal, $state, ENV, $window) {
-  
+
+  //$scope pour le plugin checkbox messenger
+  $scope.origin = ENV.fbRedirectURI + "#/create_meal";
+  $scope.page_id = 254569051671689;
+  $scope.app_id = ENV.appId;
+  $scope.user_ref = Math.floor((Math.random() * 10000000000) + 1);
+
   //initialize SDK facebook v2.8 pour utiliser le plugin checkbox messenger
   $window.fbAsyncInit = function() {
     FB.init({
@@ -13,20 +19,32 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
       version: 'v2.6'
     });
     FB.Event.subscribe('messenger_checkbox', function(e) {
-            console.log("messenger_checkbox event");
-            console.log(e);
+      console.log("messenger_checkbox event");
+      console.log(e);
 
-            if (e.event == 'rendered') {
-                console.log("Plugin was rendered");
-            } else if (e.event == 'checkbox') {
-                var checkboxState = e.state;
-                console.log("Checkbox state: " + checkboxState);
-            } else if (e.event == 'not_you') {
-                console.log("User clicked 'not you'");
-            } else if (e.event == 'hidden') {
-                console.log("Plugin was hidden");
-            }
-        });
+      if (e.event == 'rendered') {
+        console.log("Plugin was rendered");
+      }
+      else if (e.event == 'checkbox') {
+        var checkboxState = e.state;
+        console.log("Checkbox state: " + checkboxState);
+      }
+      else if (e.event == 'not_you') {
+        console.log("User clicked 'not you'");
+      }
+      else if (e.event == 'hidden') {
+        console.log("Plugin was hidden");
+      }
+    });
+
+    $scope.confirmOptIn = function() {
+      FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+        'app_id': ENV.appId,
+        'page_id': 254569051671689,
+        'ref': 'myCommuneaty-new-meal',
+        'user_ref': $scope.user_ref
+      });
+    };
   };
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -247,11 +265,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
     });
   };
 
-  //$scope.addressAutocomplete;
-  $scope.origin = ENV.fbRedirectURI + "#/create_meal";
-  $scope.page_id = 254569051671689;
-  $scope.app_id = ENV.appId;
-  $scope.user_ref = Math.floor((Math.random() * 10000000000) + 1);
+  //$scope.addressAutocomplete
 
 }])
 

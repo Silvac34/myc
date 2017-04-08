@@ -7,7 +7,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
   //$scope pour le plugin checkbox messenger
   $scope.origin = ENV.fbRedirectURI + "#/create_meal";
-  $scope.page_id = 254569051671689;
+  $scope.page_id = ENV.page_id;
   $scope.app_id = ENV.appId;
   $scope.user_ref = Math.floor((Math.random() * 10000000000) + 1);
 

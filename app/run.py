@@ -365,6 +365,7 @@ FACEBOOK WEBHOOKS
 
 
 token = "EAAVynZAjdOe0BAHR0zDRsqWokHZCbRLjiReLKVJtHgzd4e4mBK4dkukc5Y9kIZBI03CpDZC7bls5csrofuLo2RGX30PlLQ8HDhXACexavuftmQjiwMSbq9872gIZBKe2FHM4nZCEUCfttAkfi2jlBSt1NZBXulabrjTEBBfatb3JAZDZD"
+token_stage = "EAAWHDetyr7YBAKduUMKBiuFk7FqKbDfigW1MMqmQvlWZAF26zZApJkIqnEKdZCqDmrywJaOzLjlPArwfA5eUZAnWZCZCZCjyposWov3TnVr5VHKqVwXj8MrdOhS1zBFNal1Q5f8aNESajoIuF7n6uHyjiT9QQWmeWmhYDMdkyTOLwZDZD"
 
 @Application.app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
@@ -378,7 +379,7 @@ def webhook():
       print(sender)
       payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}} # We're going to send this back
       print(payload)
-      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token, json=payload) # Lets send it
+      r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token_stage, json=payload) # Lets send it
     except Exception as e:
       print traceback.format_exc() # something went wrong
   elif request.method == 'GET': # For the initial verification

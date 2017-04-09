@@ -9,7 +9,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
   $scope.origin = ENV.fbRedirectURI + "#/create_meal";
   $scope.page_id = ENV.page_id;
   $scope.app_id = ENV.appId;
-  $scope.user_ref = Math.floor((Math.random() * 10000000000) + 1);
+  $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1);
 
   //initialize SDK facebook v2.8 pour utiliser le plugin checkbox messenger
   $window.fbAsyncInit = function() {
@@ -40,8 +40,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
     $scope.confirmOptIn = function() {
       FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
         'app_id': ENV.appId,
-        'page_id': 254569051671689,
-        'ref': 'myCommuneaty-new-meal',
+        'page_id': ENV.page_id,
+        'ref': $scope.$parent.$root.user._id,
         'user_ref': $scope.user_ref
       });
     };

@@ -311,6 +311,14 @@ def subscribe_to_meal(meal_id):
         "requestRole":{
             "type": "string",
             "allowed":["cook","cleaner","simpleGuest"]
+        },
+        "user":{
+            "type":"dict",
+            "schema":{
+                "_id":{
+                    "type": "string"
+                }
+            }
         }
     }
     v= Validator(dataSchema)
@@ -331,6 +339,12 @@ def subscribe_to_meal(meal_id):
             meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] - 1
             meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]})
             Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal})
+            participant = User(_id=ObjectId(rquData["user"]["_id"])).getUserPublicInfo()
+            admin = User(_id = meal["admin"]).getUserAllInfo()
+            admin_user_ref = admin["privateInfo"]["user_ref"]
+            text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal"
+            payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token_dev, json=payload) # Lets send it (reqeust not workin because of json args)
             return Response(status=200)
             
 # Unsubsribe to a meal
@@ -364,22 +378,28 @@ FACEBOOK WEBHOOKS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-token = "EAAVynZAjdOe0BAHR0zDRsqWokHZCbRLjiReLKVJtHgzd4e4mBK4dkukc5Y9kIZBI03CpDZC7bls5csrofuLo2RGX30PlLQ8HDhXACexavuftmQjiwMSbq9872gIZBKe2FHM4nZCEUCfttAkfi2jlBSt1NZBXulabrjTEBBfatb3JAZDZD"
+token_prod = "EAAVynZAjdOe0BAHR0zDRsqWokHZCbRLjiReLKVJtHgzd4e4mBK4dkukc5Y9kIZBI03CpDZC7bls5csrofuLo2RGX30PlLQ8HDhXACexavuftmQjiwMSbq9872gIZBKe2FHM4nZCEUCfttAkfi2jlBSt1NZBXulabrjTEBBfatb3JAZDZD"
 token_stage = "EAAWHDetyr7YBAKduUMKBiuFk7FqKbDfigW1MMqmQvlWZAF26zZApJkIqnEKdZCqDmrywJaOzLjlPArwfA5eUZAnWZCZCZCjyposWov3TnVr5VHKqVwXj8MrdOhS1zBFNal1Q5f8aNESajoIuF7n6uHyjiT9QQWmeWmhYDMdkyTOLwZDZD"
+token_dev = "EAAWHDX9daxYBAP2NU6nCaGZBwBZAYYSr8pR9vzGWmumWsq7lmWySNVE1gvRZCXSWKizxOvmQCfYasklZCM8v5KAb4oFtdGUe9CF26xzbr0ywmHN42fUZBuwGn47jY4WkYMGbFPHcr2K68ZAbonVzFlsJLBiZA9VlusTLtJhhTaNcAZDZD"
 
 @Application.app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
   if request.method == 'POST':
     try:
       data = json.loads(request.data)
+      if 'optin' in data['entry'][0]['messaging'][0]:
+          #print(data['entry'][0]['messaging'][0]['optin']['ref'])
+          user = User(_id=ObjectId(data['entry'][0]['messaging'][0]['optin']['ref'])) #ref = _id
+          user.updateUser({'privateInfo.user_ref':data['entry'][0]['messaging'][0]['optin']['user_ref']}) #update de user_ref dans la BDD
       print(data)
-      text = data['entry'][0]['messaging'][0]['message']['text'] # Incoming Message Text
-      print(text)
-      sender = data['entry'][0]['messaging'][0]['sender']['id'] # Sender ID
-      print(sender)
-      payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}} # We're going to send this back
-      print(payload)
-      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token, json=payload) # Lets send it
+      
+      #text = data['entry'][0]['messaging'][0]['message']['text'] # Incoming Message Text for bots messenger
+      #print(text)
+      #sender = data['entry'][0]['messaging'][0]['sender']['id'] # Sender ID
+      #print(sender)
+      #payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}} # We're going to send this back
+      #print(payload)
+      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token_prod, json=payload) # Lets send it
     except Exception as e:
       print traceback.format_exc() # something went wrong
   elif request.method == 'GET': # For the initial verification

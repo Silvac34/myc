@@ -128,7 +128,7 @@ class APITest2(BasicAPITest):
         self.assertEquals(resp,expected)
 
     def test_subscribe_meal_ok(self):
-        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        jsonRequestData = "{\"requestRole\": \"cook\", \"user\":{\"_id\":\"111111111111111111111112\"}}"
         resp = self.test_client.post("/api/meals/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
         testMeal = loads(open('../testData/meals_testData.json').read())[0]

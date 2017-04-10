@@ -58,6 +58,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         requiredLogin: true
       }
     });
+
   $stateProvider
     .state('my_meals', {
       url: '/my_meals',
@@ -139,7 +140,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
   ezfbProvider.setInitParams({
     appId: ENV.appId,
     version: 'v2.6'
-  });  
+  });
 
 }]);
 
@@ -166,11 +167,6 @@ app.run(function($rootScope, $state, $auth) {
   $rootScope.$state = $state;
 
 });
-
-  var _defaultInitFunction = ['$window', 'ezfbInitParams', function ($window, ezfbInitParams) {
-  // Initialize the FB JS SDK
-  $window.FB.init(ezfbInitParams);
-}];
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window) {
 

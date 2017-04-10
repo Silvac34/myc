@@ -1,0 +1,21 @@
+'use strict';
+
+var app = angular.module('facebookService', []);
+
+app.factory('getEventFacebook', function($q) {
+    return {
+        getEvent: function(user_id) {
+            var deferred = $q.defer();
+            FB.api('/'+user_id+'/events', {
+                fields: 'data'
+            }, function(response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured');
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
+    }
+});

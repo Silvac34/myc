@@ -2,8 +2,7 @@
 
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
-
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', '$window', function($scope, $http, $uibModal, $state, ENV, $window) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', '$window', 'ezfb', function($scope, $http, $uibModal, $state, ENV, $window, ezfb) {
 
   //$scope pour le plugin checkbox messenger
   $scope.origin = ENV.fbRedirectURI + "#/create_meal";
@@ -11,12 +10,39 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
   $scope.app_id = ENV.appId;
   $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1);
 
+  $scope.$watch(function() {
+    return ezfb;
+  }, function() {
+
+    ezfb.Event.subscribe('messenger_checkbox', function(e) {
+      console.log("messenger_checkbox event");
+      console.log(e);
+
+      if (e.event == 'rendered') {
+        console.log("Plugin was rendered");
+      }
+      else if (e.event == 'checkbox') {
+        var checkboxState = e.state;
+        console.log("Checkbox state: " + checkboxState);
+      }
+      else if (e.event == 'not_you') {
+        console.log("User clicked 'not you'");
+      }
+      else if (e.event == 'hidden') {
+        console.log("Plugin was hidden");
+      }
+    });
+  });
+
+
+
   //initialize SDK facebook v2.8 pour utiliser le plugin checkbox messenger
-  $window.fbAsyncInit = function() {
+  /*$window.fbAsyncInit = function() {
     FB.init({
       appId: ENV.appId,
       xfbml: true,
-      version: 'v2.6'
+      version: 'v2.6',
+      cookie: true
     });
     FB.Event.subscribe('messenger_checkbox', function(e) {
       console.log("messenger_checkbox event");
@@ -37,26 +63,27 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
       }
     });
 
-    $scope.confirmOptIn = function() {
+    function confirmOptIn() {
       FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
         'app_id': ENV.appId,
         'page_id': ENV.page_id,
         'ref': $scope.$parent.$root.user._id,
         'user_ref': $scope.user_ref
       });
-    };
+    }
   };
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    var fbElement = d.getElementById(id);
-    if (fbElement) {
+  (function(d) {
+    var js, id = 'facebook-jssdk',
+      ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {
       return;
     }
-    js = d.createElement(s);
+    js = d.createElement('script');
     js.id = id;
-    js.src = '//connect.facebook.net/en_US/sdk.js';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+    js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document));*/
 
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
@@ -180,6 +207,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate'])
 
       if (okToPost == true) {
         $http.post('/api/meals', $scope.editedMeal).then(function(response) {
+            //confirmOptIn();
             $state.go("view_my_dtld_meals", {
               "myMealId": response.data._id
             });

@@ -147,9 +147,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
 
 app.run(function($rootScope, $state, $auth) {
   $rootScope.$on('$stateChangeStart',
-    function(event, toState) {
+    function(event, toState, toParams, fromState, fromParams) {
       // when the state change, the user load the template at the top of the window
       document.body.scrollTop = document.documentElement.scrollTop = 0;
+      $rootScope.fromState = fromState;
       var requiredLogin = false;
       // check if this state need login
       if (toState.data && toState.data.requiredLogin)
@@ -162,13 +163,13 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
-
+    
   // enable to get the state in the view
   $rootScope.$state = $state;
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb) {
 
   function authe(provider, toState) {
     //toState = toState || undefined;

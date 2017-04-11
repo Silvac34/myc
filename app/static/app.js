@@ -150,7 +150,7 @@ app.run(function($rootScope, $state, $auth) {
     function(event, toState, toParams, fromState, fromParams) {
       // when the state change, the user load the template at the top of the window
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-      $rootScope.fromState = fromState;
+      $rootScope.fromState = fromState; // on récupère fromState pour l'apparition du plugin checkbox messenger dans create_meal
       var requiredLogin = false;
       // check if this state need login
       if (toState.data && toState.data.requiredLogin)

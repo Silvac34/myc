@@ -344,7 +344,7 @@ def subscribe_to_meal(meal_id):
             admin_user_ref = admin["privateInfo"]["user_ref"]
             text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal"
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token_dev, json=payload) # Lets send it (reqeust not workin because of json args)
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it (reqeust not workin because of json args)
             return Response(status=200)
             
 # Unsubsribe to a meal
@@ -377,11 +377,6 @@ def unsubscribe_to_meal(meal_id):
 FACEBOOK WEBHOOKS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-token_prod = "EAAVynZAjdOe0BAHR0zDRsqWokHZCbRLjiReLKVJtHgzd4e4mBK4dkukc5Y9kIZBI03CpDZC7bls5csrofuLo2RGX30PlLQ8HDhXACexavuftmQjiwMSbq9872gIZBKe2FHM4nZCEUCfttAkfi2jlBSt1NZBXulabrjTEBBfatb3JAZDZD"
-token_stage = "EAAWHDetyr7YBAKduUMKBiuFk7FqKbDfigW1MMqmQvlWZAF26zZApJkIqnEKdZCqDmrywJaOzLjlPArwfA5eUZAnWZCZCZCjyposWov3TnVr5VHKqVwXj8MrdOhS1zBFNal1Q5f8aNESajoIuF7n6uHyjiT9QQWmeWmhYDMdkyTOLwZDZD"
-token_dev = "EAAWHDX9daxYBAP2NU6nCaGZBwBZAYYSr8pR9vzGWmumWsq7lmWySNVE1gvRZCXSWKizxOvmQCfYasklZCM8v5KAb4oFtdGUe9CF26xzbr0ywmHN42fUZBuwGn47jY4WkYMGbFPHcr2K68ZAbonVzFlsJLBiZA9VlusTLtJhhTaNcAZDZD"
-
 @Application.app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
   if request.method == 'POST':
@@ -399,7 +394,7 @@ def webhook():
       #print(sender)
       #payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}} # We're going to send this back
       #print(payload)
-      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + token_prod, json=payload) # Lets send it
+      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     except Exception as e:
       print traceback.format_exc() # something went wrong
   elif request.method == 'GET': # For the initial verification

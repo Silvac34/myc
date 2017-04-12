@@ -291,8 +291,7 @@ def after_delete_privateMeals(item):
         else:
             text = "Hi " + participant["first_name"] +", just to inform you that " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "." 
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-        print(payload)
-        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it (reqeust not workin because of json args)
+        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     
 
 # PATCH api/meals/private/<_id>
@@ -359,9 +358,12 @@ def subscribe_to_meal(meal_id):
             participant = User(_id=ObjectId(rquData["user"]["_id"])).getUserPublicInfo()
             admin = User(_id = meal["admin"]).getUserAllInfo()
             admin_user_ref = admin["privateInfo"]["user_ref"]
-            text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal"
+            if meal["nbRemainingPlaces"] == 0:
+                text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". Now, you meal is full."
+            else:
+                text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "."
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it (reqeust not workin because of json args)
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
             return Response(status=200)
             
 # Unsubsribe to a meal
@@ -383,10 +385,17 @@ def unsubscribe_to_meal(meal_id):
             if u["_id"] == user._id:
                 roles = u["role"]
                 meal["privateInfo"]["users"].remove(u)
+                participant = User(_id=ObjectId(user._id)).getUserPublicInfo()
+                admin = User(_id = meal["admin"]).getUserAllInfo()
+                admin_user_ref = admin["privateInfo"]["user_ref"]
+                text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " unsubscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "."
+                payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
                 break
         for r in roles :
             meal["detailedInfo"]["requiredGuests"][r + "s"]["nbRemainingPlaces"] +=1
         Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal})
+        
         return Response(status=200)
         
         
@@ -400,9 +409,7 @@ def webhook():
     try:
       data = json.loads(request.data)
       if 'optin' in data['entry'][0]['messaging'][0]:
-          print(data['entry'][0]['messaging'][0]['optin']['ref'])
           user = User(_id=ObjectId(data['entry'][0]['messaging'][0]['optin']['ref'])) #ref = _id
-          print(user.getUserAllInfo())
           user.updateUser({'privateInfo.user_ref':data['entry'][0]['messaging'][0]['optin']['user_ref']}) #update de user_ref dans la BDD
       
       #text = data['entry'][0]['messaging'][0]['message']['text'] # Incoming Message Text for bots messenger

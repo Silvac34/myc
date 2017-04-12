@@ -283,18 +283,13 @@ def pre_delete_privateMeals(request,lookup):
 def after_delete_privateMeals(item):
     meal = item
     admin = User(_id = meal["admin"]).getUserAllInfo()
-    print(meal)
     for user in meal["privateInfo"]["users"]:
         participant = User(_id=user["_id"]).getUserAllInfo()
-        print(participant)
         participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
-        print(participant_user_ref)
         if participant["_id"] == admin["_id"]:
             text = "Hi " + participant["first_name"] +", all participants are now informed that your meal on " + "{:%A, %B %d at %H:%M}".format(dateutil.parser.parse(meal["time"])) + " has been canceled."
-            print(text)
         else:
             text = "Hi " + participant["first_name"] +", just to inform you that " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + "{:%A, %B %d at %H:%M}".format(dateutil.parser.parse(meal["time"])) + "." 
-            print(text)
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
         print(payload)
         requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it (reqeust not workin because of json args)

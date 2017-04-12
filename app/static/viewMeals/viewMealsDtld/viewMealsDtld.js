@@ -2,7 +2,28 @@
 
 var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
 
-.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', 'isAuthenticated', '$auth', 'userServicesFactory', '$rootScope', function($scope, $http, meal_id, $uibModalInstance, $state, isAuthenticated, $auth, userServicesFactory, $rootScope) {
+.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', 'isAuthenticated', '$auth', 'userServicesFactory', '$rootScope', 'ENV', 'ezfb', function($scope, $http, meal_id, $uibModalInstance, $state, isAuthenticated, $auth, userServicesFactory, $rootScope, ENV, ezfb) {
+
+  $scope.origin = ENV.fbRedirectURI + "#/view_meal";
+  $scope.page_id = ENV.page_id;
+  $scope.app_id = ENV.appId;
+  $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1);
+
+  if ($scope.$parent.$root.fromState.name != "") { // si on rafraichit la page alors le state d'avant est vide sinon, on relance le plugin
+    $scope.$applyAsync(function() { // pour que le plugin prenne en compte correctement les paramètres alors il faut l'appeler après que le scope se soit mis en place
+      ezfb.XFBML.parse(document.getElementById('fb-messenger_checkbox')); //XFBML.parse relance le plugin
+    });
+  }
+
+  function confirmOptIn() {
+    ezfb.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+      'app_id': ENV.appId,
+      'page_id': ENV.page_id,
+      'ref': $scope.$parent.$root.user._id,
+      'user_ref': $scope.user_ref
+    });
+  }
+
 
   var setValue = function(variable) {
     if (typeof variable === 'undefined') {
@@ -100,6 +121,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
         "_id": $scope.$parent.$root.user._id
       }
     }).then(function(response) {
+      confirmOptIn();
       $scope.meal.nbRemainingPlaces -= 1;
       $scope.meal.detailedInfo.requiredGuests[$scope.requestRole.name + "s"].nbRemainingPlaces -= 1;
       $scope.goToMeal = true;

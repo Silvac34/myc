@@ -4,6 +4,7 @@ import jwt
 import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
+import dateutil.parser
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
 from bson import ObjectId, json_util
 import requests
@@ -278,6 +279,26 @@ def before_returning_GET_item_privateMeals(response):
 # DELETE api/meals/private/<_id>
 def pre_delete_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
+    
+def after_delete_privateMeals(item):
+    meal = item
+    admin = User(_id = meal["admin"]).getUserAllInfo()
+    print(meal)
+    for user in meal["privateInfo"]["users"]:
+        participant = User(_id=user["_id"]).getUserAllInfo()
+        print(participant)
+        participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
+        print(participant_user_ref)
+        if participant["_id"] == admin["_id"]:
+            text = "Hi " + participant["first_name"] +", all participants are now informed that your meal on " + "{:%A, %B %d at %H:%M}".format(dateutil.parser.parse(meal["time"])) + " has been canceled."
+            print(text)
+        else:
+            text = "Hi " + participant["first_name"] +", just to inform you that " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + "{:%A, %B %d at %H:%M}".format(dateutil.parser.parse(meal["time"])) + "." 
+            print(text)
+        payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+        print(payload)
+        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it (reqeust not workin because of json args)
+    
 
 # PATCH api/meals/private/<_id>
 def pre_patch_privateMeals(request,lookup):
@@ -294,6 +315,7 @@ Application.app.on_pre_GET_privateMeals += pre_get_privateMeals
 Application.app.on_fetched_resource_privateMeals +=  before_returning_GET_privateMeals
 Application.app.on_fetched_item_privateMeals +=  before_returning_GET_item_privateMeals
 Application.app.on_pre_DELETE_privateMeals += pre_delete_privateMeals
+Application.app.on_deleted_item_privateMeals += after_delete_privateMeals
 Application.app.on_pre_PATCH_privateMeals += pre_patch_privateMeals
 
 
@@ -383,10 +405,10 @@ def webhook():
     try:
       data = json.loads(request.data)
       if 'optin' in data['entry'][0]['messaging'][0]:
-          #print(data['entry'][0]['messaging'][0]['optin']['ref'])
+          print(data['entry'][0]['messaging'][0]['optin']['ref'])
           user = User(_id=ObjectId(data['entry'][0]['messaging'][0]['optin']['ref'])) #ref = _id
+          print(user.getUserAllInfo())
           user.updateUser({'privateInfo.user_ref':data['entry'][0]['messaging'][0]['optin']['user_ref']}) #update de user_ref dans la BDD
-      print(data)
       
       #text = data['entry'][0]['messaging'][0]['message']['text'] # Incoming Message Text for bots messenger
       #print(text)

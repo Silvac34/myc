@@ -64,6 +64,14 @@ schemaMeals = {
         'min': 0,
         'readonly': True
     },
+    'time': {
+        'type': 'string',
+        'required': True,
+        'empty': False
+    },
+    'automaticSubscription': {
+        'type': 'boolean'
+    },
     'privateInfo':{
         'type': 'dict',
         'required':True,

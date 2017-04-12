@@ -31,7 +31,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
       time: predefined_date,
       detailedInfo: {
         "requiredGuests": {}
-      }
+      },
+      automaticSubscription: true
     },
 
     $scope.setValue = function(variable) {

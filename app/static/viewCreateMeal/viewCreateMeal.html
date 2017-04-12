@@ -27,7 +27,6 @@
                             <div class="col-sm-12">
                                 <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Address" ng-hide="editedMeal.addressApprox" required>
                                 <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
-
                             </div>
                         </div>
                     </div>
@@ -86,10 +85,26 @@
                     <span ng-show="createMealForm.inputCellphone.$invalid"><br/>Your phone number is not correct</span>
                 </div>
             </div>
+            <div class="clear10"></div>
             <div class="row">
-                <div>Do you want to receive updates about the meal on messenger? (recommended)</div>
+                <div class="col-sm-12">
+                    <div class="row">Automatically approve bookings?</div>
+                    <div class="row col-sm-12">
+                        <div class="form-group">
+                            <div class="radio">
+                                <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="true">Yes, sure !</label>
+                                <label class="radio-inline"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="false">No, thanks <span class="small">(You approve each booking request yourself.)</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear10"></div>
+            <div class="row">
+                <div>Do you want to receive updates about the meal on messenger? <span class="small">(recommended)</span></div>
                 <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
             </div>
+            <div class="clear20"></div>
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">

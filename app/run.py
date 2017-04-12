@@ -4,7 +4,7 @@ import jwt
 import configure
 from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
-import dateutil.parser
+from dateutil import parser
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
 from bson import ObjectId, json_util
 import requests
@@ -287,9 +287,9 @@ def after_delete_privateMeals(item):
         participant = User(_id=user["_id"]).getUserAllInfo()
         participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
         if participant["_id"] == admin["_id"]:
-            text = "Hi " + participant["first_name"] +", all participants are now informed that your meal on " + "{:%A, %B %d at %H:%M}".format(dateutil.parser.parse(meal["time"])) + " has been canceled."
+            text = "Hi " + participant["first_name"] +", all participants are now informed that your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + " has been canceled."
         else:
-            text = "Hi " + participant["first_name"] +", just to inform you that " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + "{:%A, %B %d at %H:%M}".format(dateutil.parser.parse(meal["time"])) + "." 
+            text = "Hi " + participant["first_name"] +", just to inform you that " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "." 
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
         print(payload)
         requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it (reqeust not workin because of json args)

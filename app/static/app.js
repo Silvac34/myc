@@ -80,6 +80,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
       controller: 'ViewMyMealsDtldCtrl',
       data: {
         requiredLogin: true
+      },
+      params: {
+        successSubscribedMessage: null
       }
     });
   $stateProvider
@@ -163,7 +166,7 @@ app.run(function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
-    
+
   // enable to get the state in the view
   $rootScope.$state = $state;
 

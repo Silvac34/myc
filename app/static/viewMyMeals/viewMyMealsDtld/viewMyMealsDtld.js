@@ -2,7 +2,7 @@
 
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', function($scope, $http, $stateParams, $uibModal, ENV) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', function($scope, $http, $stateParams, $uibModal, ENV, $timeout) {
 
   $scope.loadMyMealInfo = function(meal_id) {
     $http.get('/api/meals/private/' + meal_id).then(function(response) {
@@ -64,6 +64,15 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+  function successfullySubscribed(variable) {
+    $scope.successSubscribedMessage = variable || false;
+    if ($scope.successSubscribedMessage == true) {
+      $timeout(function() {
+        $scope.successSubscribedMessage = false;
+      }, 3000);
+    }
+  }
+  successfullySubscribed($stateParams.successSubscribedMessage);
 
 }]);
 

@@ -124,7 +124,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       $scope.goToMeal = true;
       $uibModalInstance.close();
       $state.go("view_my_dtld_meals", {
-        "myMealId": meal_id
+        "myMealId": meal_id, "successSubscribedMessage":true
       });
     }, function(response) {
       loadMealInfo(meal_id);
@@ -198,7 +198,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                     $scope.goToMeal = true;
                     $uibModalInstance.close();
                     $state.go("view_my_dtld_meals", {
-                      "myMealId": meal_id
+                      "myMealId": meal_id, "successSubscribedMessage":true
                     });
                   }
                   else { // s'il n'est ni l'hôte ni inscrit au repas

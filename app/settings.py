@@ -95,6 +95,10 @@ schemaMeals = {
                             'type': 'list',
                         'allowed': ["admin", "cook", "cleaner","simpleGuest"]
                        },
+                       'status': {
+                           'type': 'string',
+                           'allowed': ["accepted", "refused", "pending"]
+                       }
                     }
                 }
             }

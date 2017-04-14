@@ -20,7 +20,8 @@
             "_id": {
                 "$oid": "111111111111111111111111"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }]
     },
     "detailedInfo": {
@@ -70,12 +71,14 @@
             "_id": {
                 "$oid": "111111111111111111111111"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }, {
             "_id": {
                 "$oid": "111111111111111111111112"
             },
-            "role": ["simpleGuest"]
+            "role": ["simpleGuest"],
+            "status":"accepted"
         }]
     },
     "detailedInfo": {
@@ -116,7 +119,8 @@
             "_id": {
                 "$oid": "111111111111111111111111"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }],
         "address": "37 rue du général foy 75008"
 
@@ -160,7 +164,8 @@
             "_id": {
                 "$oid": "577946eb4403f92b93425e6a"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }],
         "address": "37 rue lepic"
     },
@@ -208,7 +213,8 @@
             "_id": {
                 "$oid": "5776d0824403f974b97caf89"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }],
         "address": "3 impasse Marie-blanche"
     },
@@ -256,7 +262,8 @@
             "_id": {
                 "$oid": "5776d0824403f974b97caf89"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }],
         "address": "4 rue du temple"
     },
@@ -312,7 +319,8 @@
             "_id": {
                 "$oid": "5776d0824403f974b97caf89"
             },
-            "role": ["admin"]
+            "role": ["admin"],
+            "status":"accepted"
         }]
     },
     "detailedInfo": {

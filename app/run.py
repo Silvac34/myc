@@ -221,7 +221,7 @@ def before_returning_GET_item_meal(response):
 def before_storing_POST_meals (items):
     for meal in items:
         meal["admin"] = g.user_id
-        meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin"]}]
+        meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin"],"status":"accepted"}]
         ######### Add Guests #################
         nbCooks = 0
         nbCleaners = 0
@@ -323,7 +323,6 @@ Custom End Points
 def subscribe_to_meal(meal_id):
     meal_id = ObjectId(meal_id)
     rquData = json.loads(request.data)
-    print(request.url.split("/"))
     dataSchema = {
         "requestRole":{
             "type": "string",
@@ -350,20 +349,55 @@ def subscribe_to_meal(meal_id):
             admin = User(_id = meal["admin"]).getUserAllInfo() #info de l'admin pour envoyer des text messengers
             admin_user_ref = admin["privateInfo"]["user_ref"] #user_ref de l'admin relatif au plugin checkbox messenger pour pouvoir le reconnaître
             if meal["automaticSubscription"] == True: #si acceptation automatique
-                meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]}) #mettre cette ligne de code que quand c'est validé par l'hôte
-                Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
+                meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"accepted"})
                 #code pour envoyer un message à l'hôte que quelqu'un s'est inscrit à son repas
                 if meal["nbRemainingPlaces"] == 0: #si dernière place alors on précise que le meal est full
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". Now, you meal is full."
                 else: 
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "."
             else: #si acceptation manuelle
+                meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]
                 text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate the booking."
+            Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
             return Response(status=200)
+            
+
+
+# Validate a subscription to a meal
+@Application.app.route('/api/meals/<meal_id>/subscription/validate/<participant_id>', methods=['POST'])
+@requires_auth('ressource')
+def validate_a_subscription(meal_id, participant_id):            
+    meal_id = ObjectId(meal_id)
+    meal = Meal(meal_id).getInfo()
+    validation_result = json.loads(request.data)
+    if not meal:
+        return Response("Meal doesn't exist",status =404)
+    admin = User(_id=g.user_id)
+    if not admin.isAdmin(meal=meal):
+        return Response("Meal's admin is the only one who can validate a subscription",status=400)
+    if admin.getUserPublicInfo()["_id"] == ObjectId(participant_id):
+        return Response("Admin can not validate himself",status=400)
+    if not validation_result:
+        return Response("No validation has been passed in argument",status=400)
+    else:
+        if validation_result == True:
+            for participant in meal["privateInfo"]["users"]:
+                if participant["_id"] == ObjectId(participant_id):
+                    participant["status"] = "accepted"
+                    role = participant["role"]
+        elif validation_result == False:
+            for participant in meal["privateInfo"]["users"]:
+                if participant["_id"] == ObjectId(participant_id):
+                    participant["status"] = "refused"
+                    role = participant["role"]
+            meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
+            meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
+        Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
+        return Response(status=200)
             
 # Unsubsribe to a meal
 @Application.app.route('/api/meals/<meal_id>/unsubscription', methods=['POST'])
@@ -394,7 +428,6 @@ def unsubscribe_to_meal(meal_id):
         for r in roles :
             meal["detailedInfo"]["requiredGuests"][r + "s"]["nbRemainingPlaces"] +=1
         Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal})
-        
         return Response(status=200)
         
         

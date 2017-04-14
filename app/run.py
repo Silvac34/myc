@@ -323,6 +323,7 @@ Custom End Points
 def subscribe_to_meal(meal_id):
     meal_id = ObjectId(meal_id)
     rquData = json.loads(request.data)
+    print(request.url.split("/"))
     dataSchema = {
         "requestRole":{
             "type": "string",
@@ -357,7 +358,9 @@ def subscribe_to_meal(meal_id):
                 else: 
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "."
             else: #si acceptation manuelle
-                text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". You chose to validate manually the bookings of your meal. Please, go to " + request.url + " to validate the booking."
+                request_url_split = request.url.split("/")
+                url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]
+                text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate the booking."
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
             return Response(status=200)

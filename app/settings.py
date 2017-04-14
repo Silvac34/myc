@@ -70,7 +70,8 @@ schemaMeals = {
         'empty': False
     },
     'automaticSubscription': {
-        'type': 'boolean'
+        'type': 'boolean',
+        'required': True
     },
     'privateInfo':{
         'type': 'dict',

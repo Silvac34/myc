@@ -9,6 +9,7 @@
     "admin": {
         "$oid": "111111111111111111111111"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Jolie piece de boeuf"
     },
@@ -58,6 +59,7 @@
     "admin": {
         "$oid": "111111111111111111111111"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Soupions de légumes avec cassolette de veau"
     },
@@ -103,6 +105,7 @@
     "admin": {
         "$oid": "111111111111111111111111"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Hachi-parmentier de canard"
     },
@@ -146,6 +149,7 @@
     "admin": {
         "$oid": "577946eb4403f92b93425e6a"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Mozarella Burrata et petits légumes grillés"
     },
@@ -193,6 +197,7 @@
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Poisson pané"
     },
@@ -240,6 +245,7 @@
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Beurre blanc"
     },
@@ -295,6 +301,7 @@
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
+    "automaticSubscription": true,
     "menu": {
         "title": "Jolie piece de boeuf"
     },

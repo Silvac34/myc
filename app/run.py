@@ -336,7 +336,7 @@ def subscribe_to_meal(meal_id):
         meal = Meal(meal_id).getInfo()
         if not meal:
             return Response("Meal doesn't exist",status =404)
-        if meal["nbRemainingPlaces"]<=0 : 
+        if meal["nbRemainingPlaces"]<=0: 
             return Response("Meal is full",status=400)
         elif not meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"]>0 :
             return Response("Role is full",status=400)
@@ -345,24 +345,22 @@ def subscribe_to_meal(meal_id):
         else :
             meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] - 1 #on enlève 1 aux nombres totales de places restantes si acceptation manuelle ou automatique
             meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] - 1 #on enlève 1 place au nombre spécifique du rôle de places restantes si acceptation manuelle ou automatique
-            if meal["automaticSubscription"] == True:
+            participant = User(_id=g.user_id).getUserPublicInfo() #info du participant pour envoyer des text messengers
+            admin = User(_id = meal["admin"]).getUserAllInfo() #info de l'admin pour envoyer des text messengers
+            admin_user_ref = admin["privateInfo"]["user_ref"] #user_ref de l'admin relatif au plugin checkbox messenger pour pouvoir le reconnaître
+            if meal["automaticSubscription"] == True: #si acceptation automatique
                 meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]}) #mettre cette ligne de code que quand c'est validé par l'hôte
                 Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
-                #a partir d'ici, code pour envoyer un message à l'hôte que quelqu'un s'est inscrit à son repas
-                participant = User(_id=g.user_id).getUserPublicInfo()
-                admin = User(_id = meal["admin"]).getUserAllInfo()
-                admin_user_ref = admin["privateInfo"]["user_ref"]
-                if meal["nbRemainingPlaces"] == 0:
+                #code pour envoyer un message à l'hôte que quelqu'un s'est inscrit à son repas
+                if meal["nbRemainingPlaces"] == 0: #si dernière place alors on précise que le meal est full
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". Now, you meal is full."
-                else:
+                else: 
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + "."
-                payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
-                return Response(status=200)
-            elif meal["automaticSubscription"] == False:
-                print("couco")
-            else:
-                return Response("Meal acceptance type should be automatic or manual",status=400)
+            else: #si acceptation manuelle
+                text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + "{:%A, %B %d at %H:%M}".format(parser.parse(meal["time"])) + ". You chose to validate manually the bookings of your meal. Please, go to " + request.url + " to validate the booking."
+            payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+            return Response(status=200)
             
 # Unsubsribe to a meal
 @Application.app.route('/api/meals/<meal_id>/unsubscription', methods=['POST'])

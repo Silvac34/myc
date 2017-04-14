@@ -116,10 +116,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
 
   function subscribeMeal(meal_id, role) {
     $http.post('/api/meals/' + meal_id + '/subscription', {
-      "requestRole": role,
-      "user": {
-        "_id": $scope.$parent.$root.user._id
-      }
+      "requestRole": role
     }).then(function(response) {
       confirmOptIn();
       $scope.meal.nbRemainingPlaces -= 1;

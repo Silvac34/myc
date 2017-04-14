@@ -327,14 +327,6 @@ def subscribe_to_meal(meal_id):
         "requestRole":{
             "type": "string",
             "allowed":["cook","cleaner","simpleGuest"]
-        },
-        "user":{
-            "type":"dict",
-            "schema":{
-                "_id":{
-                    "type": "string"
-                }
-            }
         }
     }
     v= Validator(dataSchema)
@@ -350,12 +342,13 @@ def subscribe_to_meal(meal_id):
             return Response("Role is full",status=400)
         elif User(_id=ObjectId(session['user_id'])).isSubscribed(meal=meal): 
             return Response("User already registered",status=400)
-        else :
+        else : #besoin de rajouter un if si 
             meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] - 1
             meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][rquData["requestRole"] + "s"]["nbRemainingPlaces"] - 1
-            meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]})
-            Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal})
-            participant = User(_id=ObjectId(rquData["user"]["_id"])).getUserPublicInfo()
+            meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]]}) #mettre cette ligne de code que quand c'est validé par l'hôte
+            Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
+            #a partir d'ici, code pour envoyer un message à l'hôte que quelqu'un s'est inscrit à son repas
+            participant = User(_id=g.user_id).getUserPublicInfo()
             admin = User(_id = meal["admin"]).getUserAllInfo()
             admin_user_ref = admin["privateInfo"]["user_ref"]
             if meal["nbRemainingPlaces"] == 0:

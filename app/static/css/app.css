@@ -818,6 +818,17 @@ footer p {
     font-size: 14px;
 }
 
+/* The starting CSS styles for the enter animation */
+.fade.ng-leave {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-leave.ng-leave-active {
+  opacity:1;
+}
+
 
 /* welcome---------------------------------------------------*/
 

@@ -378,6 +378,7 @@ def subscribe_to_meal(meal_id):
                 else: 
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + "."
             else: #si acceptation manuelle
+                print(rquData["requestRole"])
                 meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]

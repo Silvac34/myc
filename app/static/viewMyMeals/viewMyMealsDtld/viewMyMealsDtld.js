@@ -3,12 +3,14 @@
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate']);
 
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', function($scope, $http, $stateParams, $uibModal, ENV, $timeout) {
-
+  
   $scope.loadMyMealInfo = function(meal_id) {
     $http.get('/api/meals/private/' + meal_id).then(function(response) {
       $scope.meal = response.data;
       var userId = $scope.user._id;
       for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+        $scope.meal.privateInfo.users[i].role[0] = response.data.privateInfo.users[i].role[0];
+        console.log(response.data.privateInfo.users[i].role[0]);
         if ($scope.meal.privateInfo.users[i]._id == userId) {
           $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
         }
@@ -17,10 +19,10 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       checkPendingRequest();
     });
   };
-
   $scope.loadMyMealInfo($stateParams.myMealId);
   $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
   $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
+  console.log($scope.meal);
 
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {
@@ -40,7 +42,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
 
   //modalEdit to delete a meal
-  $scope.openModalEdit = function() {
+  /*$scope.openModalEdit = function() {
 
     $uibModal.open({
       animation: true,
@@ -53,7 +55,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
           } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
       }
     });
-  };
+  };*/
 
   //modalUnsubscribe to unsubscribe to a meal
   $scope.openModalUnsubscribe = function() {

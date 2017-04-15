@@ -72,11 +72,17 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       });
     }
     modalInstance.result.then(function(result) {
-      var result_value = result || {"manualSubscriptionPending":false, "pending":false};
+      var result_value = result;
+      if (result_value == undefined) {
+        result_value = {
+          "manualSubscriptionPending": false,
+          "pending": false
+        };
+      }
       $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
       for (var i = 0; i < $scope.meals.length; i++) {
-        if ($scope.meals[i]._id == meal_id){
-          $scope.meals[i].detailedInfo.pending = result_value.pending;  
+        if ($scope.meals[i]._id == meal_id) {
+          $scope.meals[i].detailedInfo.pending = result_value.pending;
         }
       }
     });

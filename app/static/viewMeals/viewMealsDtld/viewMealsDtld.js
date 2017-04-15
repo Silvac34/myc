@@ -121,11 +121,18 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       confirmOptIn();
       $scope.meal.nbRemainingPlaces -= 1;
       $scope.meal.detailedInfo.requiredGuests[$scope.requestRole.name + "s"].nbRemainingPlaces -= 1;
-      $scope.goToMeal = true;
-      $uibModalInstance.close();
-      $state.go("view_my_dtld_meals", {
-        "myMealId": meal_id, "successSubscribedMessage":true
-      });
+      if ($scope.meal.automaticSubscription == true) {
+        $scope.goToMeal = true;
+        $uibModalInstance.close({manualSubscriptionPending: false, pending:false});
+        $state.go("view_my_dtld_meals", {
+          "myMealId": meal_id,
+          "successSubscribedMessage": true
+        });
+      }
+      else if ($scope.meal.automaticSubscription == false) {
+        $scope.goToMeal = false;
+        $uibModalInstance.close({manualSubscriptionPending: true, pending:true});
+      }
     }, function(response) {
       loadMealInfo(meal_id);
       $scope.errorSubscribe.requestRole.status = true;
@@ -196,54 +203,27 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                   $scope.meal.subscribed = responseUser.data.detailedInfo.subscribed;
                   if (data._id == $scope.meal.admin._id || $scope.meal.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
                     $scope.goToMeal = true;
-                    $uibModalInstance.close();
+                    $uibModalInstance.close({manualSubscriptionPending: false, pending:false});
                     $state.go("view_my_dtld_meals", {
-                      "myMealId": meal_id, "successSubscribedMessage":true
+                      "myMealId": meal_id,
+                      "successSubscribedMessage": true
                     });
                   }
+                  if (data._id == $scope.meal.admin._id || $scope.meal.pending == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
+                    $scope.goToMeal = false;
+                    $uibModalInstance.close({manualSubscriptionPending: true, pending:true});
+                  }
                   else { // s'il n'est ni l'hôte ni inscrit au repas
-                    /*if(document.getElementById("inputCellphone").value != ''){ 
-                      $scope.$parent.$root.user.privateInfo.cellphone = document.getElementById("inputCellphone").value;
-                    }*/
                     if (check($scope.$parent.$root.user.privateInfo.cellphone) == true) { // on check si son cellphone est déjà rentré dans notre BDD
                       subscribeMeal(meal_id, role); // si son tel est dans notre BDD, on l'inscrit au repas
                     }
-                    /*if (needToUpdateCellphone() == true) { 
-                      $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
-                        "privateInfo": {
-                          "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
-                        }
-                      }, {
-                        headers: {
-                          "If-Match": $scope.$parent.$root.user._etag
-                        }
-                      }).then(function successCallBack(response) {
-                        $scope.user._etag = response.data._etag;
-                        subscribeMeal(meal_id, role);
-                      });
-                    }*/
                     else { // si son tel n'est pas dans notre BDD on lui demande de le remplir
                       $scope.errorSubscribe.cellphone.status = true;
                       $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
                       console.log("please fill your number");
 
                     }
-                    /*else if (needToUpdateCellphone() == false) {
-                      $scope.errorSubscribe.cellphone.status = true;
-                      $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
-                      console.log("please fill your number");
-                    }
-                    else {
-                      subscribeMeal(meal_id, role);
-                    }*/
                   }
-                  /*                    else {
-                                        
-                                        if (!check($scope.$parent.$root.user.privateInfo.cellphone))
-                                          $scope.errorSubscribe.cellphone.status = true;
-                                          $scope.errorSubscribe.cellphone.message += "Please fill your cellphone number to participate.";
-                                        console.log("please fill your number");
-                                      }*/
                 });
               });
             }

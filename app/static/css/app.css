@@ -16,6 +16,7 @@
     }
 }
 
+
 /* function clear css to create lines with nothing*/
 
 .clear10 {
@@ -383,14 +384,14 @@ footer p {
 }
 
 .meal-price {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: #3EA93E;
-    text-align: right;
+    float: right;
 }
 
 .meal-price-label {
-    text-align: right;
+    float: right;
     padding-top: 0;
     padding-left: 0;
     margin-bottom: -5px;
@@ -409,6 +410,10 @@ footer p {
     margin-top: 15px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.meal-status{
+    float:right;
 }
 
 
@@ -748,6 +753,11 @@ footer p {
     border-width: 2px;
 }
 
+.my-meal-dtld-panel-warning {
+    border-color: #dd5600;
+    border-width: 2px;
+}
+
 .my-meal-dtld-panel-info {
     border-color: #3a87ad;
     ;
@@ -757,7 +767,7 @@ footer p {
 .my-meal-dtld-profilePic {
     width: 35px;
     margin-right: 6px;
-    float:left;
+    float: left;
 }
 
 .my-meal-dtld-price {
@@ -772,7 +782,7 @@ footer p {
 }
 
 .my-meal-dtld-guestList {
-    line-height:2.6;
+    line-height: 2.6;
 }
 
 .my-meal-btn-center {
@@ -802,7 +812,7 @@ footer p {
 .my-meal-dtld-delete {
     background: url("/static/sources/delete_cross.png") no-repeat;
     margin-left: -10px;
-    float:right;
+    float: right;
 }
 
 .page-separation {
@@ -819,23 +829,24 @@ footer p {
     font-size: 14px;
 }
 
-.fade-out-success.ng-hide{
-  opacity:0;
+.fade-out-success.ng-hide {
+    opacity: 0;
 }
 
 .fade-out-success.ng-hide-add {
-  transition: all linear 0.5s;
+    transition: all linear 0.5s;
 }
 
-.my-meal-dtld-list-pending-user{
-    margin:5px 15px 0px 15px;
+.my-meal-dtld-list-pending-user {
+    margin: 5px 15px 0px 15px;
 }
 
-.my-meal-dtld-profilePic-pending-validation{
+.my-meal-dtld-profilePic-pending-validation {
     margin: 0px 10px 10px 0px;
-    width:50px;
-    float:left;
+    width: 50px;
+    float: left;
 }
+
 
 /* welcome---------------------------------------------------*/
 

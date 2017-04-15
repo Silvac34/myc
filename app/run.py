@@ -76,6 +76,14 @@ class User:
         if any (x["_id"] == ObjectId(self._id) for x in meal["privateInfo"]["users"]):
             return True
         else: return False
+        
+    def isSubscriptionPending(self, meal_id=None, meal =None):
+        if meal == None:
+            meal = Application.app.data.driver.db.meals.find_one({"_id": meal_id})
+        if any ((x["_id"] == ObjectId(self._id) and x["status"] == "pending")for x in meal["privateInfo"]["users"]):
+            return True
+        else: 
+            return False
 
     def isAdmin(self,meal_id=None, meal =None):
         if meal == None:
@@ -199,11 +207,15 @@ def before_returning_GET_meals(response):
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
         if 'user_id' in session:
             if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
-                meal["detailedInfo"].update({"subscribed" : True})
+                print (User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]))
+                if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
+                    meal["detailedInfo"].update({"subscribed" : True, "pending": False})
+                else: 
+                    meal["detailedInfo"].update({"subscribed" : False, "pending": True}) 
             else: 
-                meal["detailedInfo"].update({"subscribed" : False})
+                meal["detailedInfo"].update({"subscribed" : False, "pending": False})
         else: 
-            meal["detailedInfo"].update({"subscribed" : None})
+            meal["detailedInfo"].update({"subscribed" : None, "pending": None})
             
 # GET api/meals/<_id>
 def before_returning_GET_item_meal(response):
@@ -211,11 +223,14 @@ def before_returning_GET_item_meal(response):
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
     if 'user_id' in session:
         if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
-            meal["detailedInfo"].update({"subscribed" : True})
+            if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
+                meal["detailedInfo"].update({"subscribed" : True, "pending": False})
+            else: 
+                meal["detailedInfo"].update({"subscribed" : False, "pending": True})  
         else: 
-            meal["detailedInfo"].update({"subscribed" : False})
+            meal["detailedInfo"].update({"subscribed" : False, "pending": False})
     else: 
-        meal["detailedInfo"].update({"subscribed" : None})
+        meal["detailedInfo"].update({"subscribed" : None, "pending": None})
         
 #POST api/meals
     
@@ -428,8 +443,10 @@ def unsubscribe_to_meal(meal_id):
     user = User(_id=g.user_id)
     if not user.isSubscribed(meal=meal): 
         return Response("User isn't subscribed",status=403)
+    if user.isSubscriptionPending(meal=meal):
+       return Response("User request is pending",status=403) 
     elif user.isAdmin(meal=meal):
-        return Response("Meal's admin cannot unsubscribe",status=400)
+        return Response("Meal's admin cannot unsubscribe",status=401)
     else:
         meal["nbRemainingPlaces"] +=  1
         for u in meal["privateInfo"]["users"]: 

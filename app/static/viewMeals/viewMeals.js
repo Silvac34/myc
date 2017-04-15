@@ -16,9 +16,18 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 }])
 
 
-.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'response', function($scope, viewMealsFilterService, $state, $uibModal, $auth, response) {
+.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'response', '$timeout', function($scope, viewMealsFilterService, $state, $uibModal, $auth, response, $timeout) {
 
   $scope.meals = response.data['_items'];
+
+  $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) {
+    console.log($scope.manualSubscriptionPending);
+    if (newValue == true && oldValue == undefined) {
+      $timeout(function() {
+        $scope.manualSubscriptionPending = false;
+      }, 4000);
+    }
+  });
 
   $scope.filter = function() {
       return viewMealsFilterService.get();
@@ -46,7 +55,7 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
       });
     }
     else {
-      $uibModal.open({
+      var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
         controller: 'ViewMealsDtldCtrl',
@@ -62,7 +71,20 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
         }
       });
     }
+    modalInstance.result.then(function(result) {
+      
+      $scope.manualSubscriptionPending = result.manualSubscriptionPending;
+      for (var i = 0; i < $scope.meals.length; i++) {
+        if ($scope.meals[i]._id == meal_id){
+          $scope.meals[i].detailedInfo.pending = result.pending;  
+        }
+      }
+    });
   };
+
+
+
+
 
   $scope.reverse = false;
   $scope.SortOrder = 'asc';

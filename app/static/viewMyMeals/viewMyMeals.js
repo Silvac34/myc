@@ -27,5 +27,4 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     }
   }
 
-
 }]);

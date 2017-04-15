@@ -3,7 +3,7 @@
         <div class="col-xs-12">
             <div class="alert alert-dismissible alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Well done!</strong> You successfully subscribed to the meal</a>.
+                <strong>Well done!</strong> You successfully subscribed to the meal.
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
                         <div ng-if="user.status == 'pending'" class="my-meal-dtld-list-pending-user">
                             <div class="row" style="margin-right:initial; margin-left:initial; margin-bottom:8px">
                                 <div class="col-md-3 col-sm-4 col-xs-12">
-                                    <strong>Requested role:</strong> {{user.role[0]}}
+                                    <strong>Requested role:</strong> <span ng-if="user.role[0]=cooker">help cooking</span><span ng-if="user.role[0]=cleaner">help cleaning</span><span ng-if="user.role[0]=simpleGuest">simple guest</span>
                                 </div>
                                 <div class="col-xs-8">
                                     <a class="btn btn-success btn-xs" ng-click="validateSubscription(user._id)">Accept</a>

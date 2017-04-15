@@ -13,6 +13,8 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
           $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
         }
       }
+      $scope.pendingRequest = false;
+      checkPendingRequest();
     });
   };
 
@@ -64,6 +66,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+  //function pour faire apparaître un well de validation lorsqu'un utilisateur vient de s'inscrire
   function successfullySubscribed(variable) {
     $scope.successSubscribedMessage = variable || false;
     if ($scope.successSubscribedMessage == true) {
@@ -73,6 +76,41 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     }
   }
   successfullySubscribed($stateParams.successSubscribedMessage);
+
+  //function pour faire apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
+  function checkPendingRequest() {
+    for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+      if ($scope.meal.privateInfo.users[i].status == "pending") {
+        $scope.pendingRequest = true;
+      }
+    }
+  }
+
+  $scope.validateSubscription = function(participant_id) {
+    $http.post('/api/meals/' + $stateParams.myMealId + '/subscription/validate/' + participant_id, {
+      'validation_result': true
+    }).then(function() {
+      $scope.pendingRequest = false;
+      for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+        if($scope.meal.privateInfo.users[i]._id == participant_id){
+             $scope.meal.privateInfo.users[i].status = "accepted";
+        }
+      }
+    });
+  };
+
+  $scope.refuseSubscription = function(participant_id) {
+    $http.post('/api/meals/' + $stateParams.myMealId + '/subscription/validate/' + participant_id, {
+      'validation_result': false
+    }).then(function() {
+      $scope.pendingRequest = false;
+      for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+        if($scope.meal.privateInfo.users[i]._id == participant_id){
+             delete $scope.meal.privateInfo.users[i];
+        }
+      }
+    });
+  };
 
 }]);
 

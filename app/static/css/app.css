@@ -756,7 +756,8 @@ footer p {
 
 .my-meal-dtld-profilePic {
     width: 35px;
-    margin-right: 10px;
+    margin-right: 6px;
+    float:left;
 }
 
 .my-meal-dtld-price {
@@ -771,7 +772,7 @@ footer p {
 }
 
 .my-meal-dtld-guestList {
-    margin-bottom: 10px;
+    line-height:2.6;
 }
 
 .my-meal-btn-center {
@@ -818,12 +819,22 @@ footer p {
     font-size: 14px;
 }
 
-.fade-out-success-subscribe.ng-hide{
+.fade-out-success.ng-hide{
   opacity:0;
 }
 
-.fade-out-success-subscribe.ng-hide-add {
+.fade-out-success.ng-hide-add {
   transition: all linear 0.5s;
+}
+
+.my-meal-dtld-list-pending-user{
+    margin:5px 15px 0px 15px;
+}
+
+.my-meal-dtld-profilePic-pending-validation{
+    margin: 0px 10px 10px 0px;
+    width:50px;
+    float:left;
 }
 
 /* welcome---------------------------------------------------*/

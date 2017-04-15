@@ -380,7 +380,8 @@ def subscribe_to_meal(meal_id):
 def validate_a_subscription(meal_id, participant_id):            
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
-    validation_result = json.loads(request.data)
+    data_result = json.loads(request.data)
+    validation_result = data_result["validation_result"]
     if not meal:
         return Response("Meal doesn't exist",status =404)
     admin = User(_id=g.user_id)
@@ -388,7 +389,7 @@ def validate_a_subscription(meal_id, participant_id):
         return Response("Meal's admin is the only one who can validate a subscription",status=400)
     if admin.getUserPublicInfo()["_id"] == ObjectId(participant_id):
         return Response("Admin can not validate himself",status=400)
-    if not validation_result:
+    if validation_result is None:
         return Response("No validation has been passed in argument",status=400)
     else:
         if validation_result == True:
@@ -399,8 +400,8 @@ def validate_a_subscription(meal_id, participant_id):
         elif validation_result == False:
             for participant in meal["privateInfo"]["users"]:
                 if participant["_id"] == ObjectId(participant_id):
-                    participant["status"] = "refused"
                     role = participant["role"]
+                    meal["privateInfo"]["users"].remove(participant)
             meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
             meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
         Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas

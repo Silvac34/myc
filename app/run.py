@@ -366,7 +366,7 @@ def subscribe_to_meal(meal_id):
                 meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]
-                text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate the booking."
+                text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate this one."
             Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
@@ -392,19 +392,28 @@ def validate_a_subscription(meal_id, participant_id):
     if validation_result is None:
         return Response("No validation has been passed in argument",status=400)
     else:
-        if validation_result == True:
-            for participant in meal["privateInfo"]["users"]:
-                if participant["_id"] == ObjectId(participant_id):
+        admin = admin.getUserAllInfo()
+        request_url_split = request.url.split("/")
+        url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + str(meal["_id"])
+        meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+        local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+        meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+        for participant in meal["privateInfo"]["users"]:
+            if participant["_id"] == ObjectId(participant_id):
+                role = participant["role"]
+                participantInfo = User(_id = ObjectId(participant_id)).getUserAllInfo()
+                participant_user_ref = participantInfo["privateInfo"]["user_ref"]
+                if validation_result == True:
                     participant["status"] = "accepted"
-                    role = participant["role"]
-        elif validation_result == False:
-            for participant in meal["privateInfo"]["users"]:
-                if participant["_id"] == ObjectId(participant_id):
-                    role = participant["role"]
+                    text = "Hi " + participantInfo["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been approved. To see more details about the meal, click here : " + url_to_send
+                elif validation_result == False:
                     meal["privateInfo"]["users"].remove(participant)
-            meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
-            meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
-        Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
+                    text = "Hi " + participantInfo["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been denied. Let's try another one!"
+                    meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
+                    meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
+                payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+                Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
         return Response(status=200)
             
 # Unsubsribe to a meal

@@ -200,8 +200,9 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                 $scope.isAuthenticated = true;
                 isAuthenticated = true;
                 $http.get('/api/meals/' + meal_id).then(function successCallBack(responseUser) { // on récupère les infos pour savoir si l'user est inscrit au repas
-                  $scope.meal.subscribed = responseUser.data.detailedInfo.subscribed;
-                  if (data._id == $scope.meal.admin._id || $scope.meal.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
+                  $scope.meal.detailedInfo.subscribed = responseUser.data.detailedInfo.subscribed; //on actualise l'état subscribed du repas
+                  $scope.meal.detailedInfo.pending = responseUser.data.detailedInfo.pending; // on actualise l'état pending du repas
+                  if (data._id == $scope.meal.admin._id || $scope.meal.detailedInfo.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
                     $scope.goToMeal = true;
                     $uibModalInstance.close({manualSubscriptionPending: false, pending:false});
                     $state.go("view_my_dtld_meals", {
@@ -209,7 +210,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                       "successSubscribedMessage": true
                     });
                   }
-                  if (data._id == $scope.meal.admin._id || $scope.meal.pending == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
+                  if ($scope.meal.detailedInfo.pending == true) { //s'il est en attente sur le repas
                     $scope.goToMeal = false;
                     $uibModalInstance.close({manualSubscriptionPending: true, pending:true});
                   }

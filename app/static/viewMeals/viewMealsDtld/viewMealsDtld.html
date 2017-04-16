@@ -105,7 +105,7 @@
         </div>
         <div class="clear10"></div>
         <div class="text-center row">
-            <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to participate</span><span ng-if="isAuthenticated">Participate</span></a>
+            <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated, 'disabled': meal.detailedInfo.pending==true}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to participate</span><span ng-if="isAuthenticated">Participate</span></a>
             <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
             <div ng-if="meal.nbRemainingPlaces<=0  && (goToMeal=='false' || goToMeal==null)" class="meal-dtld-full-msg">Damn ! The meal is already full</div>
         </div>

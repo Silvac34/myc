@@ -21,7 +21,6 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
   $scope.meals = response.data['_items'];
 
   $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) {
-    console.log($scope.manualSubscriptionPending);
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
         $scope.manualSubscriptionPending = false;

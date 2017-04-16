@@ -69,7 +69,6 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
           }
         }
       });
-    }
     modalInstance.result.then(function(result) {
       var result_value = result;
       if (result_value == undefined) {
@@ -85,6 +84,7 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
         }
       }
     });
+    }
   };
 
 

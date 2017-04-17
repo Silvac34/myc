@@ -7,7 +7,7 @@
         <div class="row" ng-repeat="meal in myFuturMealsFilter = (meals | filter:futurMealsFilter)">
           <div class="col-xs-12">
             <div class="list-group">
-              <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':(meal.detailedInfo.pending==false),'my-meal-dtld-panel-warning':(meal.detailedInfo.pending==true)}" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
+              <a ng-if="meal.detailedInfo.pending==false" class="list-group-item list-group-meal my-meal-dtld-panel-success" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
                 <div class="hidden-xs col-sm-2 meal-admin">
                   <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                   <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -28,7 +28,46 @@
                     </div>
                     <div class="col-xs-4">
                       <div class="row">
-                        <div class="meal-status" ng-class="{'text-success': meal.detailedInfo.pending == false, 'text-warning': meal.detailedInfo.pending==true}"><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.pending==false">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></div>
+                        <div class="meal-status text-success"><span class="hidden-xs">status : </span>I'm going</div>
+                      </div>
+                      <div class="row">
+                        <div class="meal-price">{{meal.priceUser | currency}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="meal-label meal-price-label">per pers</div>
+                      </div>
+                      <div class="row">
+                        <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
+                          <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                          <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a ng-if="meal.detailedInfo.pending==true" class="list-group-item list-group-meal my-meal-dtld-panel-warning">
+                <div class="hidden-xs col-sm-2 meal-admin">
+                  <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                  <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                  <div class="row">
+                    <div class="col-xs-8">
+                      <label class="meal-menu-label" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</label> </br>
+                      <div class="meal-label meal-location">{{meal.town}} - {{meal.addressApprox}}</div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="meal-label meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-4">
+                          <div class="meal-label meal-time">{{meal.time |date:'HH:mm'}} </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="row">
+                        <div class="meal-status text-warning"><span class="hidden-xs">status : </span>pending</div>
                       </div>
                       <div class="row">
                         <div class="meal-price">{{meal.priceUser | currency}}</div>

@@ -31,7 +31,7 @@
                         <div class="meal-status" ng-class="{'text-success': meal.detailedInfo.pending == false, 'text-warning': meal.detailedInfo.pending==true}"><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.pending==false">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></div>
                       </div>
                       <div class="row">
-                        <div class="meal-price"><u>></u> {{meal.price/meal.nbGuests | currency}}</div>
+                        <div class="meal-price">{{meal.priceUser | currency}}</div>
                       </div>
                       <div class="row">
                         <div class="meal-label meal-price-label">per pers</div>
@@ -82,7 +82,7 @@
                         <div class="meal-status text-info"><span class="hidden-xs">status : passed</span></div>
                       </div>
                       <div class="row">
-                        <div class="meal-price"><u>></u> {{meal.price/meal.nbGuests | currency}}</div>
+                        <div class="meal-price">{{meal.priceUser | currency}}</div>
                       </div>
                       <div class="row">
                         <div class="meal-label meal-price-label">per pers</div>

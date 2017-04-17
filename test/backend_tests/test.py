@@ -240,6 +240,16 @@ class APITest2(BasicAPITest):
         jsonRequestData = "{\"privateInfo\": {\"cellphone\": \"0611515364\"}}"
         resp = self.test_client.patch("/api/users/private/111111111111111111111112", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("412 PRECONDITION FAILED", resp.status)
-    
+        
+    def test_validate_a_subscription(self):
+        respget = self.test_client.get("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
+        respget = self.rmAddFieldsItem(json.loads(respget.data))
+        _etag = respget["_etag"]
+        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
+        self.assertEqual("404 NOT FOUND", resp.status)
+        self.assertEqual( 3,self.db.meals.find().count())
+        
+        
+        
 if __name__ == '__main__':
     unittest.main()

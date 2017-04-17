@@ -340,7 +340,6 @@ Application.app.on_pre_PATCH_privateMeals += pre_patch_privateMeals
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Custom End Points
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 # Subscribe to a meal
 @Application.app.route('/api/meals/<meal_id>/subscription', methods=['POST'])
 @requires_auth('ressource')
@@ -393,13 +392,13 @@ def subscribe_to_meal(meal_id):
             return Response(status=200)
             
 
-
 # Validate a subscription to a meal
 @Application.app.route('/api/meals/<meal_id>/subscription/validate/<participant_id>', methods=['POST'])
 @requires_auth('ressource')
 def validate_a_subscription(meal_id, participant_id):            
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
+    print(meal)
     data_result = json.loads(request.data)
     validation_result = data_result["validation_result"]
     if not meal:

@@ -3,8 +3,8 @@
   <uib-tabset type="pills">
     <uib-tab index="0" heading="Incoming meals" class="my-meal-uitab">
       <div class="clear20"></div>
-      <div class="col-xs-12" ng-class={'list-my-meal':mealFilteredFutur.length}>
-        <div class="row" ng-repeat="meal in mealFilteredFutur = (meals | MyMealsFiltered:true)">
+      <div class="col-xs-12" ng-class="{'list-my-meal':myFuturMealsFilter.length}">
+        <div class="row" ng-repeat="meal in myFuturMealsFilter = (meals | filter:futurMealsFilter)">
           <div class="col-xs-12">
             <div class="list-group">
               <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
@@ -40,13 +40,13 @@
             </div>
           </div>
         </div>
-        <div ng-hide="mealFilteredFutur.length">You do not have meals to come</div>
+        <div ng-hide="myFuturMealsFilter.length">You do not have meals to come</div>
       </div>
     </uib-tab>
-    <uib-tab index="1" heading="Previous meals" class="my-meal-uitab">
+    <uib-tab index="1" heading="Pending meals" class="my-meal-uitab">
       <div class="clear20"></div>
-      <div class="col-xs-12" ng-class={'list-my-meal':mealFilteredPassed.length}>
-        <div class="row" ng-repeat="meal in mealFilteredPassed = (meals | MyMealsFiltered:false)">
+      <div class="col-xs-12" ng-class="{ 'list-my-meal':myPendingMealsFilter.length}">
+        <div class="row" ng-repeat="meal in myPendingMealsFilter = (meals | filter: pendingMealsFilter)">
           <div class="col-xs-12">
             <div class="list-group">
               <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
@@ -82,7 +82,49 @@
             </div>
           </div>
         </div>
-        <div ng-hide="mealFilteredPassed.length">You didn't participate yet</div>
+        <div ng-hide="myPendingMealsFilter.length">You don't have pending meals</div>
+      </div>
+    </uib-tab>
+    <uib-tab index="2" heading="Previous meals" class="my-meal-uitab">
+      <div class="clear20"></div>
+      <div class="col-xs-12" ng-class="{ 'list-my-meal':pastMealsFilter.length}">
+        <div class="row" ng-repeat="meal in myPastMealsFilter = (meals | filter: pastMealsFilter)">
+          <div class="col-xs-12">
+            <div class="list-group">
+              <a class="list-group-item list-group-my-meal" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
+                <div class="hidden-xs col-sm-2 my-meal-admin">
+                  <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                  <div class="my-meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                  <div class="my-meal-admin-phone">{{meal.privateInfo.adminPhone}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                  <div class="row">
+                    <label class="my-meal-menu-label" ng-class="{'my-meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title}}</label> </br>
+                    <div class="col-xs-8">
+                      <div class="my-meal-label my-meal-location">{{meal.town}} - {{meal.privateInfo.address}}</div>
+                      <div class="row">
+                        <div class="col-sm-9">
+                          <div class="my-meal-label my-meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="my-meal-label my-meal-time">{{meal.time |date:'HH:mm'}} </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="my-meal-price">{{meal.price/meal.nbGuests | currency}}</div>
+                      <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
+                        <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                        <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div ng-hide="myPastMealsFilter.length">You didn't participate yet</div>
       </div>
     </uib-tab>
   </uib-tabset>

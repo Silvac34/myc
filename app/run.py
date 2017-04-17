@@ -278,6 +278,11 @@ def pre_get_privateMeals(request,lookup):
 def before_returning_GET_privateMeals(response):
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
+        if 'user_id' in session:
+            if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
+                meal["detailedInfo"].update({"pending": False})
+            else: 
+                meal["detailedInfo"].update({"pending": True}) 
 
 # GET api/meals/private/<_id>
 def before_returning_GET_item_privateMeals(response):
@@ -378,7 +383,6 @@ def subscribe_to_meal(meal_id):
                 else: 
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + "."
             else: #si acceptation manuelle
-                print(rquData["requestRole"])
                 meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]

@@ -2,27 +2,24 @@
 
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', function($scope, $http, $stateParams, $uibModal, ENV, $timeout) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal) {
   
-  $scope.loadMyMealInfo = function(meal_id) {
-    $http.get('/api/meals/private/' + meal_id).then(function(response) {
-      $scope.meal = response.data;
-      var userId = $scope.user._id;
+  $scope.meal = meal.data;
+  function check_loading(){
+      $scope.pendingRequest = false;
       for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-        $scope.meal.privateInfo.users[i].role[0] = response.data.privateInfo.users[i].role[0];
-        console.log(response.data.privateInfo.users[i].role[0]);
-        if ($scope.meal.privateInfo.users[i]._id == userId) {
+        if ($scope.meal.privateInfo.users[i]._id == $scope.user._id) {
           $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
         }
+        if ($scope.meal.privateInfo.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
+          $scope.pendingRequest = true;
+        }
       }
-      $scope.pendingRequest = false;
-      checkPendingRequest();
-    });
-  };
-  $scope.loadMyMealInfo($stateParams.myMealId);
+  }
+  check_loading();
+  
   $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
   $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
-  console.log($scope.meal);
 
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {
@@ -79,23 +76,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   }
   successfullySubscribed($stateParams.successSubscribedMessage);
 
-  //function pour faire apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
-  function checkPendingRequest() {
-    for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-      if ($scope.meal.privateInfo.users[i].status == "pending") {
-        $scope.pendingRequest = true;
-      }
-    }
-  }
-
   $scope.validateSubscription = function(participant_id) {
     $http.post('/api/meals/' + $stateParams.myMealId + '/subscription/validate/' + participant_id, {
       'validation_result': true
     }).then(function() {
       $scope.pendingRequest = false;
       for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-        if($scope.meal.privateInfo.users[i]._id == participant_id){
-             $scope.meal.privateInfo.users[i].status = "accepted";
+        if ($scope.meal.privateInfo.users[i]._id == participant_id) {
+          $scope.meal.privateInfo.users[i].status = "accepted";
         }
       }
     });
@@ -107,8 +95,8 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     }).then(function() {
       $scope.pendingRequest = false;
       for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-        if($scope.meal.privateInfo.users[i]._id == participant_id){
-             delete $scope.meal.privateInfo.users[i];
+        if ($scope.meal.privateInfo.users[i]._id == participant_id) {
+          delete $scope.meal.privateInfo.users[i];
         }
       }
     });

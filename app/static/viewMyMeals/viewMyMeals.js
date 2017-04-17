@@ -30,15 +30,11 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
   var now = new Date();
 
   $scope.futurMealsFilter = function(meal) {
-    return ($filter('date')(meal.time) >= $filter('date')(now) && $filter('date')(meal.time, "yyyy") >= $filter('date')(now, "yyyy") && meal.detailedInfo.pending == false);
+    return ($filter('date')(meal.time) >= $filter('date')(now) && $filter('date')(meal.time, "yyyy") >= $filter('date')(now, "yyyy"));
   };
 
   $scope.pastMealsFilter = function(meal) {
     return (($filter('date')(meal.time) < $filter('date')(now) && $filter('date')(meal.time, "yyyy") < $filter('date')(now, "yyyy")) || ($filter('date')(meal.time) >= $filter('date')(now) && $filter('date')(meal.time, "yyyy") < $filter('date')(now, "yyyy")));
-  };
-  
-  $scope.pendingMealsFilter = function(meal) {
-    return ($filter('date')(meal.time) >= $filter('date')(now) && $filter('date')(meal.time, "yyyy") >= $filter('date')(now, "yyyy") && meal.detailedInfo.pending == true);
   };
 
 }]);

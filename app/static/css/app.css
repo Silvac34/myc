@@ -1,6 +1,6 @@
 /* app css stylesheet */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .header {
         margin: auto;
         text-align: center;
@@ -168,13 +168,13 @@ footer p {
 
 /* Navbar ------------------------------------------------------------------------------------ */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .navbar-fixed-top.navbar-fixed-top-mobile {
         position: absolute;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     #facebook-button-nav {
         width: 100px;
         text-align: right;
@@ -182,7 +182,7 @@ footer p {
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
     #facebook-button-nav {
         width: 100px;
         text-align: right;
@@ -200,19 +200,19 @@ footer p {
     margin-right: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .welcome-plugin-social-fb {
         top: 10px;
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
     .welcome-plugin-social-fb {
         bottom: 50px;
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
     #navbar-button-position {
         padding-top: 21px;
         padding-bottom: 21px;
@@ -930,7 +930,7 @@ h2.slogan {
     color: black;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .welcome-ul {
         list-style-image: url("/static/sources/swirly-arrow.png")
     }

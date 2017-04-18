@@ -3,11 +3,9 @@
         "$oid": "111111111111111111111111"
     },
     "privateInfo": {
-        "facebook_id": "103194673461647",
         "email": "jennifer_pqiuuez_testosuser@tfbnw.net",
-        "link": "https://www.facebook.com/app_scoped_user_id/103194673461647/",
         "cellphone": "0601020304",
-        "user_ref":"a9759552920598"
+        "user_ref": "a9759552920598"
     },
     "picture": {
         "data": {
@@ -17,17 +15,17 @@
     },
     "first_name": "Jennifer",
     "last_name": "TestosUser",
-    "gender": "female"
+    "gender": "female",
+    "facebook_id": "103194673461647",
+    "link": "https://www.facebook.com/app_scoped_user_id/103194673461647/"
 }, {
     "_id": {
         "$oid": "111111111111111111111112"
     },
     "privateInfo": {
-        "facebook_id": "114780772305383",
         "email": "dorothy_wdwyhuo_testuser@tfbnw.net",
-        "link": "https://www.facebook.com/app_scoped_user_id/114780772305383/",
         "cellphone": "042685687",
-        "user_ref":"a9759552920599"
+        "user_ref": "a9759552920599"
     },
     "picture": {
         "data": {
@@ -37,17 +35,17 @@
     },
     "first_name": "Dorothy",
     "last_name": "TestUser",
-    "gender": "female"
+    "gender": "female",
+    "facebook_id": "114780772305383",
+    "link": "https://www.facebook.com/app_scoped_user_id/114780772305383/"
 }, {
     "_id": {
         "$oid": "5776d0824403f974b97caf89"
     },
     "privateInfo": {
-        "facebook_id": "10153280539797267",
-        "link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/",
         "email": "maillet.kevin91@gmail.com",
         "cellphone": "0123456789",
-        "user_ref":"a9759552920595"
+        "user_ref": "a9759552920595"
     },
     "picture": {
         "data": {
@@ -57,17 +55,17 @@
     },
     "first_name": "Kevin",
     "last_name": "Marteau",
-    "gender": "male"
+    "gender": "male",
+    "facebook_id": "10153280539797267",
+    "link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/"
 }, {
     "_id": {
         "$oid": "577946eb4403f92b93425e6a"
     },
     "privateInfo": {
-        "facebook_id": "10153917348848395",
         "email": "dimitri.kohn@centrale-marseille.fr",
-        "link": "https://www.facebook.com/app_scoped_user_id/10153917348848395/",
         "cellphone": "0669686766",
-        "user_ref":"a9759552920594"
+        "user_ref": "a9759552920594"
     },
     "picture": {
         "data": {
@@ -77,5 +75,7 @@
     },
     "first_name": "Dimitri",
     "last_name": "Odyssound",
-    "gender": "male"
+    "gender": "male",
+    "facebook_id": "10153917348848395",
+    "link": "https://www.facebook.com/app_scoped_user_id/10153917348848395/"
 }]

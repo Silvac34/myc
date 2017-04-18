@@ -56,10 +56,10 @@ class User:
         if self._id:
             return self
         if self.facebook_id:
-            if Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id}) is None:
-                self._id = Application.app.data.driver.db.users.insert({"privateInfo" : {"facebook_id":self.facebook_id}})
+            if Application.app.data.driver.db.users.find_one({"facebook_id":self.facebook_id}) is None:
+                self._id = Application.app.data.driver.db.users.insert({"facebook_id":self.facebook_id})
             else: 
-                self._id = Application.app.data.driver.db.users.find_one({"privateInfo.facebook_id":self.facebook_id})["_id"]
+                self._id = Application.app.data.driver.db.users.find_one({"facebook_id":self.facebook_id})["_id"]
         
     def updateUser(self,information):
         Application.app.data.driver.db.users.update_one({"_id":self._id}, {"$set":information})
@@ -169,22 +169,22 @@ def auth_facebook():
             userInfo["gender"]=profile["gender"]
     else:
         userInfo["gender"]=profile["gender"]  
-    user.updateUser(userInfo)
-    if profile.get("email", None) == None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
-        if hasattr(currentUser,"privateInfo"):
-            if hasattr(currentUser["privateInfo"],"gender"):
-                if currentUser["privateInfo"]["link"] == profile["link"]:
-                    userInfo = {"privateInfo.link" : profile["link"] }
-        else:
-            userInfo = {"privateInfo.link" : profile["link"] }
+    if hasattr(currentUser,"link"):  
+        if currentUser["link"] != profile["link"]:
+            userInfo["link"]=profile["link"]
     else:
-        if hasattr(currentUser,"privateInfo"):    
-            if hasattr(currentUser["privateInfo"],"gender") and hasattr(currentUser["privateInfo"],"email"):
-                if currentUser["privateInfo"]["link"] == profile["link"] and currentUser["privateInfo"]["email"] == profile["email"]:
-                    userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
-        else:
-            userInfo = {"privateInfo.email" : profile["email"],"privateInfo.link" : profile["link"] }
+        userInfo["link"]=profile["link"]  
     user.updateUser(userInfo)
+    
+    if profile.get("email", None) != None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
+        if hasattr(currentUser,"privateInfo"):    
+            if hasattr(currentUser["privateInfo"],"email"):
+                if currentUser["privateInfo"]["email"] != profile["email"]:
+                    userInfo = {"privateInfo.email" : profile["email"]}
+                    user.updateUser(userInfo)
+        else:
+            userInfo = {"privateInfo.email" : profile["email"]}
+            user.updateUser(userInfo)
     return jsonify(token=user.token())
     
 @Application.app.route('/auth/logout', methods=['GET'])

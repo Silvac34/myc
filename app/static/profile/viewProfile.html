@@ -2,7 +2,10 @@
     <div class="clear20"></div>
     <form class="form-horizontal" name="updateUserForm">
         <fieldset>
-            <legend>{{user.first_name}} {{user.last_name}}'s profile</legend>
+            <div class="col-xs-12">
+                <img class="img-circle profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" style="float:left;margin-right:10px;"/><h4>{{user.first_name}} {{user.last_name}}</h4>
+            </div>
+            <div class="clear10"></div>
             <div class="form-group" ng-if="$parent.user._id == user._id">
                 <label class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">

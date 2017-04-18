@@ -33,7 +33,8 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
   else {
     $scope.user = userInfo.data;
   }
-
+  
+  console.log($scope.user);
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
   //var country_of_origin = setValue($scope.user.country_of_origin);

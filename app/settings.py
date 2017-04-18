@@ -213,17 +213,17 @@ schemaUsers = {
     'presentation':{
         'type': 'string'
     },
+    'facebook_id': {
+        'type':'string'
+            },
+    'link':{
+        'type': 'string'
+            },
     'privateInfo': {
         'type': 'dict',
         'schema':{
-            'facebook_id': {
-                'type':'string'
-            },
             'email':{
                 'type': 'string', 'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-            },
-            'link':{
-                'type': 'string'
             },
             'cellphone':{
                 'type': 'string', 'regex': '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$'

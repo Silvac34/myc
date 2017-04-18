@@ -3,7 +3,7 @@
     <form class="form-horizontal" name="updateUserForm">
         <fieldset>
             <div class="col-xs-12">
-                <img class="img-circle profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" style="float:left;margin-right:10px;"/><h4>{{user.first_name}} {{user.last_name}}</h4>
+                <a href="{{user.link}}"><img class="img-circle profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" style="float:left;margin-right:10px;"/><h4 style="line-height:12px">{{user.first_name}} {{user.last_name}}</h4></a>
             </div>
             <div class="clear10"></div>
             <div class="form-group" ng-if="$parent.user._id == user._id">

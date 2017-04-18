@@ -114,8 +114,8 @@
         <div class="row meal-dtld-group">
             <div class="meal-label meal-dtld-group-label">The meal is organized by :</div>
             <div class="meal-dtld-admin-wrapper">
-                <img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                <div class="meal-admin-name meal-dtld-admin-name">{{meal.admin.first_name}} </br> {{meal.admin.last_name}}</div>
+                <a href="{{meal.admin.link}}"><img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                <div class="meal-admin-name meal-dtld-admin-name">{{meal.admin.first_name}} </br> {{meal.admin.last_name}}</div></a>
             </div>
         </div>
     </form>

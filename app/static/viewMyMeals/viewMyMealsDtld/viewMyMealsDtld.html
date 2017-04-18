@@ -131,7 +131,7 @@
                         <div class="text-primary my-meal-dtld-title">Your host :<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price | currency}}</span></div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'admin'"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
+                        <div ng-if="user.role[0] == 'admin'"><a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}} per pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
+                        <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'"><a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
                         </div>
                         <div ng-if="user.role[0] == 'cook' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
@@ -176,7 +176,7 @@
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}} per pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
+                        <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'"><a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
                         </div>
                         <div ng-if="user.role[0] == 'cleaner' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
@@ -203,7 +203,7 @@
                         <div class="my-meal-dtld-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}} per pers</div>
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}<span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
+                        <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'"><a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"> - {{user.privateInfo.cellphone}}</span></span>
                         </div>
                         <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>

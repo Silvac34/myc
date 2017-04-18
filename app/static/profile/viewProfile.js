@@ -2,20 +2,18 @@
 
 angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
 
-.controller('ViewProfileCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', function($scope, $http, userInfo) {
 
-  $scope.user = $scope.$parent.user;
-
-  var setValue = function(variable) {
+  function setValue(variable) {
     if (typeof variable === 'undefined') {
       return undefined;
     }
     else {
       return variable.toString();
     }
-  };
+  }
 
-  var setValueScope = function(variable) {
+  function setValueScope(variable) {
     if (typeof variable === 'undefined') {
       return undefined;
     }
@@ -25,10 +23,17 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
     else {
       return variable.toString();
     }
-  };
+  }
 
-  var cellphone = setValue($scope.user.privateInfo.cellphone);
-  var email = setValue($scope.user.privateInfo.email);
+  if (userInfo.data._id == $scope.$parent.user._id) {
+    $scope.user = $scope.$parent.user;
+    var cellphone = setValue($scope.user.privateInfo.cellphone);
+    var email = setValue($scope.user.privateInfo.email);
+  }
+  else {
+    $scope.user = userInfo.data;
+  }
+
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
   //var country_of_origin = setValue($scope.user.country_of_origin);

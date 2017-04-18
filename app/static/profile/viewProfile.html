@@ -3,13 +3,13 @@
     <form class="form-horizontal" name="updateUserForm">
         <fieldset>
             <legend>{{user.first_name}} {{user.last_name}}'s profile</legend>
-            <div class="form-group">
+            <div class="form-group" ng-if="$parent.user._id == user._id">
                 <label class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" ng-model="user.privateInfo.email">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': updateUserForm.inputCellphone.$invalid && userUpdateForm.$submitted};">
+            <div class="form-group" ng-class="{'has-error': updateUserForm.inputCellphone.$invalid && userUpdateForm.$submitted};" ng-if="$parent.user._id == user._id">
                 <label class="col-lg-2 control-label">Cellphone</label>
                 <div class="col-lg-10">
                     <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="Cellphone" uib-popover="Private information: displayed only for participants and host"
@@ -41,7 +41,7 @@
                     <span class="help-block">Tell us about you</span>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-if="$parent.user._id == user._id">
                 <div class="col-lg-2 col-lg-offset-2">
                     <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag)">Actualize</button>
                 </div>

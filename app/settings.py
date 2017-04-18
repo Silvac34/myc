@@ -272,6 +272,18 @@ privateMeals = {
     }
 }
 
+users = {
+    'public_item_methods': ['GET'],
+    'public_methods' : ['GET'],
+    'schema': schemaUsers,
+    'datasource':{
+        'source': 'users',
+        'projection': {
+            'privateInfo':0
+        }
+    }
+}
+
 privateUsers = {
     'url':'users/private',
     'resource_methods': ['GET'],
@@ -284,6 +296,7 @@ privateUsers = {
 
 DOMAIN={
     'meals':meals,
+    'users':users,
     'privateMeals':privateMeals,
     'privateUsers':privateUsers
 }

@@ -132,9 +132,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
     });
   $stateProvider
     .state('profile', {
-      url: '/profile',
+      url: '/profile/:userId',
       templateUrl: 'static/profile/viewProfile.html',
-      controller: 'ViewProfileCtrl'
+      controller: 'ViewProfileCtrl',
+      resolve: {
+        userInfo: function($http, $stateParams) {
+          return $http.get('/api/users/' + $stateParams.userId);
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('welcome');

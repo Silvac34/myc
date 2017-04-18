@@ -207,7 +207,6 @@ def before_returning_GET_meals(response):
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
         if 'user_id' in session:
             if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
-                print (User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]))
                 if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
                     meal["detailedInfo"].update({"subscribed" : True, "pending": False})
                 else: 
@@ -398,17 +397,16 @@ def subscribe_to_meal(meal_id):
 def validate_a_subscription(meal_id, participant_id):            
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
-    print(meal)
     data_result = json.loads(request.data)
     validation_result = data_result["validation_result"]
     if not meal:
         return Response("Meal doesn't exist",status =404)
     admin = User(_id=g.user_id)
     if not admin.isAdmin(meal=meal):
-        return Response("Meal's admin is the only one who can validate a subscription",status=400)
+        return Response("Meal's admin is the only one who can validate a subscription",status=401)
     if admin.getUserPublicInfo()["_id"] == ObjectId(participant_id):
         return Response("Admin can not validate himself",status=400)
-    if validation_result is None:
+    if not(validation_result == True or validation_result == False):
         return Response("No validation has been passed in argument",status=400)
     else:
         admin = admin.getUserAllInfo()

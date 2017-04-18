@@ -348,4 +348,59 @@
     },
     "time": "2016-11-20T17:00:00.000Z",
     "addressApprox": "Métro Anvers L2"
+}, {
+    "_id": {
+        "$oid": "58f4183e3187971673aa4cb4"
+    },
+    "town": "Melbourne",
+    "admin": {
+        "$oid": "111111111111111111111111"
+    },
+    "menu": {
+        "title": "Manual"
+    },
+    "price": 29,
+    "nbRemainingPlaces": 3,
+    "privateInfo": {
+        "users": [{
+            "status": "accepted",
+            "_id": {
+                "$oid": "111111111111111111111111"
+            },
+            "role": [
+                "admin"
+            ]
+        }, {
+            "status": "pending",
+            "_id": {
+                "$oid": "111111111111111111111112"
+            },
+            "role": [
+                "simpleGuest"
+            ]
+        }],
+        "address": "144 Holmes Road"
+    },
+    "detailedInfo": {
+        "requiredGuests": {
+            "cleaners": {
+                "price": 5,
+                "nbRquCleaners": 2,
+                "nbRemainingPlaces": 2
+            },
+            "hosts": {
+                "price": 4.6
+            },
+            "simpleGuests": {
+                "price": 7.25,
+                "nbRquSimpleGuests": 2,
+                "nbRemainingPlaces": 1
+            }
+        }
+    },
+    "automaticSubscription": false,
+    "veggies": false,
+    "time": "2017-04-17T10:30:45.508Z",
+    "addressApprox": "144 Holmes Road",
+    "nbGuests": 5
 }]

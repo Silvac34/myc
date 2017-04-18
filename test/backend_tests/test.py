@@ -89,6 +89,7 @@ class APITest2(BasicAPITest):
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[0])
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[6])
+        self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[7])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[1])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[2])
@@ -106,7 +107,7 @@ class APITest2(BasicAPITest):
         resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
         expOutcome1["_etag"]= resp[0]["_etag"]
-        self.assertEqual(3, len(resp))
+        self.assertEqual(4, len(resp))
         self.assertEquals(resp[0],expOutcome1)
         
     def test_get_detailed_info_subscribed(self):
@@ -184,7 +185,7 @@ class APITest2(BasicAPITest):
         resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
         expOutcome1["_etag"]= resp[0]["_etag"]
-        self.assertEqual(1, len(resp))
+        self.assertEqual(2, len(resp))
         self.assertEquals(resp[0],expOutcome1)
         
     def test_get_meal_private_info_subscribed(self):
@@ -210,7 +211,7 @@ class APITest2(BasicAPITest):
         respDelete = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'If-Match': _etag,'Content-Type':'application/json'})
         self.assertEqual("204 NO CONTENT", respDelete.status)
         meals = self.db.meals.find()
-        self.assertEqual( 2,meals.count())
+        self.assertEqual( 3,meals.count())
         self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
         
     def test_delete_meal_not_admin(self):
@@ -219,7 +220,7 @@ class APITest2(BasicAPITest):
         _etag = respget["_etag"]
         resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
-        self.assertEqual( 3,self.db.meals.find().count())
+        self.assertEqual( 4,self.db.meals.find().count())
         
     def test_get_private_user(self):
         resp = self.test_client.get("/api/users/private/111111111111111111111111", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
@@ -241,15 +242,50 @@ class APITest2(BasicAPITest):
         resp = self.test_client.patch("/api/users/private/111111111111111111111112", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("412 PRECONDITION FAILED", resp.status)
         
-    def test_validate_a_subscription(self):
-        respget = self.test_client.get("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'Content-Type':'application/json'})
-        respget = self.rmAddFieldsItem(json.loads(respget.data))
-        _etag = respget["_etag"]
-        resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
+    def test_validate_a_subscription_when_meal_doesnt_exist(self): #un test qui vérifie que la validation ne peut se faire sur un repas qui n'existe pas
+        jsonRequestData = "{\"validation_result\": \"true\"}"
+        participant_id = "111111111111111111111111"
+        meal_id = "112311111111111111111114"
+        resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
-        self.assertEqual( 3,self.db.meals.find().count())
+        
+    def test_validate_a_subscription_not_by_admin(self): #un test qui vérifie que si t'es pas admin tu peux pas valider un repas
+        jsonRequestData = "{\"validation_result\": \"true\"}"
+        participant_id = "111111111111111111111112"
+        meal_id = "111111111111111111111114"
+        resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}) #adminUser n'est pas l'admin du repas 1111111..4
+        self.assertEqual("401 UNAUTHORIZED", resp.status)
+        
+    def test_validate_a_subscription_of_admin_by_admin(self): #un test qui vérifie que l'admin ne peut se valider lui même
+        jsonRequestData = "{\"validation_result\": \"true\"}"
+        participant_id = "111111111111111111111111"
+        meal_id = "58f4183e3187971673aa4cb4"
+        resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}) #adminUser n'est pas l'admin du repas 1111111..4
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        
+    def test_validate_a_subscription_without_validation_data(self): #un test qui vérifie que la validation n'a pas lieu si l'info n'est pas donnée en entrée
+        jsonRequestData = "{\"validation_result\": \"None\"}"
+        participant_id = "111111111111111111111112"
+        meal_id = "58f4183e3187971673aa4cb4"
+        resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}) #adminUser n'est pas l'admin du repas 1111111..4
+        self.assertEqual("400 BAD REQUEST", resp.status)
+        
+    def test_validate_a_subscription_accepted(self): #un test qui vérifie la validation lorsque l'admin accepte l'utilisateur
+        jsonRequestData = "{\"validation_result\": true}"
+        participant_id = "111111111111111111111112"
+        meal_id = "58f4183e3187971673aa4cb4"
+        resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}) #adminUser n'est pas l'admin du repas 1111111..4
+        self.assertEqual("200 OK", resp.status)
+        
+    def test_validate_a_subscription_refused(self): #un test qui vérifie la validation lorsque l'admin refuse l'utilisateur
+        jsonRequestData = "{\"validation_result\": false}"
+        participant_id = "111111111111111111111112"
+        meal_id = "58f4183e3187971673aa4cb4"
+        resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}) #adminUser n'est pas l'admin du repas 1111111..4
+        self.assertEqual("200 OK", resp.status)
         
         
         
+    
 if __name__ == '__main__':
     unittest.main()

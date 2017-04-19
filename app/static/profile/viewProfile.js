@@ -34,14 +34,9 @@ angular.module('myApp.viewProfile', [])
     $scope.user = userInfo.data;
   }
 
-  console.log($scope.user);
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
-  var country_of_origin = setValue($scope.user.country_of_origin);
-
-  $scope.autocompleteOptions = {
-    types: ['(cities)']
-  };
+  var country_of_origin_name = setValue($scope.user.country_of_origin.name);
 
   function getDataToPerform() {
     var actionProhibited = false;
@@ -74,7 +69,7 @@ angular.module('myApp.viewProfile', [])
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
     }
-    if (country_of_origin != setValueScope($scope.user.country_of_origin)) {
+    if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
       origUser.country_of_origin = $scope.user.country_of_origin;
     }
     if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
@@ -105,6 +100,7 @@ angular.module('myApp.viewProfile', [])
       delete $scope.actualized;
     }
     var dataToPerform = getDataToPerform();
+    console.log(dataToPerform);
     if (dataToPerform == "this action is prohibited") {
       console.log("email or cellphone are needed to participate");
       $scope.actualized = "error";
@@ -122,7 +118,7 @@ angular.module('myApp.viewProfile', [])
           email = setValue($scope.user.privateInfo.email);
           age = setValue($scope.user.age);
           presentation = setValue($scope.user.presentation);
-          country_of_origin = setValue($scope.user.country_of_origin);
+          country_of_origin_name = setValue($scope.user.country_of_origin.name);
           $scope.actualized = true;
         }, function errorCallback(response) {
           console.log("We couldn't delete a data that was here before. Please contact Dimitri");

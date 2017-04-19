@@ -205,7 +205,21 @@ schemaUsers = {
         'allowed': ["male","female"]
     },
     'country_of_origin':{
-        'type': 'string'
+        'type':'dict',
+        'schema':{
+            'name':{
+                'type': 'string'
+            },
+            'url':{
+                'type': 'string'
+            },
+            'flag_url':{
+                'type': 'string'
+            },
+            'code':{
+                'type': 'string'
+            }
+        }
     },
     'age':{
         'type': 'number'

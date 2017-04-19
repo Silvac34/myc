@@ -56,14 +56,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                      <input type="text" ng-model="selected" uib-typeahead="state for state in states" class="form-control">
-                </div>
-                <!--<div class="form-group">
                     <label class="col-lg-2 control-label">Country of origin</label>
                     <div class="col-lg-10">
-                        <input type="text" g-places-autocomplete options="autocompleteOptions" class="form-control" placeholder="Country" ng-model="user.country_of_origin">
+                        <input type="text" ng-model="user.country_of_origin" uib-typeahead="country.name for country in countries | filter:$viewValue | limitTo:8" class="form-control">
+                        <!--<input type="text" g-places-autocomplete options="autocompleteOptions" class="form-control" placeholder="Country" ng-model="user.country_of_origin">-->
                     </div>
-                </div>-->
+                </div>
                 <div class="form-group">
                     <label for="textArea" class="col-lg-2 control-label">Presentation</label>
                     <div class="col-lg-10">

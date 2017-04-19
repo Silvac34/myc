@@ -36,7 +36,12 @@ angular.module('myApp.viewProfile', [])
 
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
-  var country_of_origin_name = setValue($scope.user.country_of_origin.name);
+  if ($scope.user.country_of_origin == undefined) {
+    var country_of_origin_name = "";
+  }
+  else {
+    var country_of_origin_name = setValue($scope.user.country_of_origin.name);
+  }
 
   function getDataToPerform() {
     var actionProhibited = false;
@@ -69,8 +74,10 @@ angular.module('myApp.viewProfile', [])
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
     }
-    if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
-      origUser.country_of_origin = $scope.user.country_of_origin;
+    if ($scope.user.country_of_origin != undefined) {
+      if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
+        origUser.country_of_origin = $scope.user.country_of_origin;
+      }
     }
     if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
       delete origUser.privateInfo;
@@ -118,7 +125,9 @@ angular.module('myApp.viewProfile', [])
           email = setValue($scope.user.privateInfo.email);
           age = setValue($scope.user.age);
           presentation = setValue($scope.user.presentation);
-          country_of_origin_name = setValue($scope.user.country_of_origin.name);
+          if ($scope.user.country_of_origin != undefined) {
+            country_of_origin_name = setValue($scope.user.country_of_origin.name);
+          }
           $scope.actualized = true;
         }, function errorCallback(response) {
           console.log("We couldn't delete a data that was here before. Please contact Dimitri");
@@ -128,7 +137,7 @@ angular.module('myApp.viewProfile', [])
     }
   };
 
-  $http.get("/static/sources/profile/countries.json").then(function(res){
-          $scope.countries = res.data;                
-        });
+  $http.get("/static/sources/profile/countries.json").then(function(res) {
+    $scope.countries = res.data;
+  });
 }]);

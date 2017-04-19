@@ -204,9 +204,9 @@ schemaUsers = {
         'type': 'string',
         'allowed': ["male","female"]
     },
-    #'country_of_origin':{ #à rajouter plus tard
-    #    'type': 'string'
-    #},
+    'country_of_origin':{
+        'type': 'string'
+    },
     'age':{
         'type': 'number'
     },

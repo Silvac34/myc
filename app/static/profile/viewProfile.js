@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
+angular.module('myApp.viewProfile', [])
 
 .controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', function($scope, $http, userInfo) {
 
@@ -37,7 +37,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
   console.log($scope.user);
   var age = setValue($scope.user.age);
   var presentation = setValue($scope.user.presentation);
-  //var country_of_origin = setValue($scope.user.country_of_origin);
+  var country_of_origin = setValue($scope.user.country_of_origin);
 
   $scope.autocompleteOptions = {
     types: ['(cities)']
@@ -74,9 +74,9 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
     }
-    /*if (country_of_origin != setValueScope($scope.user.country_of_origin)) {
+    if (country_of_origin != setValueScope($scope.user.country_of_origin)) {
       origUser.country_of_origin = $scope.user.country_of_origin;
-    }*/
+    }
     if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
       delete origUser.privateInfo;
     }
@@ -122,7 +122,7 @@ angular.module('myApp.viewProfile', [ /*'google.places'*/ ])
           email = setValue($scope.user.privateInfo.email);
           age = setValue($scope.user.age);
           presentation = setValue($scope.user.presentation);
-          //country_of_origin = setValue($scope.user.country_of_origin);
+          country_of_origin = setValue($scope.user.country_of_origin);
           $scope.actualized = true;
         }, function errorCallback(response) {
           console.log("We couldn't delete a data that was here before. Please contact Dimitri");

@@ -167,7 +167,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
       maxDate: new Date(2020, 5, 22),
       minDate: new Date(),
       startingDay: 1
-    },
+    };
 
 
     $scope.clear = function() {

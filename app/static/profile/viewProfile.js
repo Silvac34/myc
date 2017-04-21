@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewProfile', [])
+angular.module('myApp.viewProfile', ['dateDropdownService'])
 
 .controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', function($scope, $http, userInfo) {
 
@@ -34,7 +34,8 @@ angular.module('myApp.viewProfile', [])
     $scope.user = userInfo.data;
   }
 
-  var age = setValue($scope.user.age);
+  $scope.user._created = new Date(parseInt($scope.user._id.substring(0, 8), 16) * 1000);
+  var birthdate = setValue($scope.user.birthdate);
   var presentation = setValue($scope.user.presentation);
   if ($scope.user.country_of_origin == undefined) {
     var country_of_origin_name = "";
@@ -68,8 +69,8 @@ angular.module('myApp.viewProfile', [])
         origUser.privateInfo.keep = true;
       }
     }
-    if (age != setValueScope($scope.user.age)) {
-      origUser.age = $scope.user.age;
+    if (birthdate != setValueScope($scope.user.birthdate)) {
+      origUser.birthdate = $scope.user.birthdate;
     }
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
@@ -123,7 +124,7 @@ angular.module('myApp.viewProfile', [])
           $scope.user._etag = response.data._etag;
           cellphone = setValue($scope.user.privateInfo.cellphone);
           email = setValue($scope.user.privateInfo.email);
-          age = setValue($scope.user.age);
+          birthdate = setValue($scope.user.birthdate);
           presentation = setValue($scope.user.presentation);
           if ($scope.user.country_of_origin != undefined) {
             country_of_origin_name = setValue($scope.user.country_of_origin.name);
@@ -140,4 +141,5 @@ angular.module('myApp.viewProfile', [])
   $http.get("/static/sources/profile/countries.json").then(function(res) {
     $scope.countries = res.data;
   });
+
 }]);

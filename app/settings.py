@@ -221,8 +221,8 @@ schemaUsers = {
             }
         }
     },
-    'age':{
-        'type': 'number'
+    'birthdate':{
+        'type': 'string'
     },
     'presentation':{
         'type': 'string'

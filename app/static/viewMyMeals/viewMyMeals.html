@@ -4,7 +4,7 @@
     <uib-tab index="0" heading="Incoming meals" class="my-meal-uitab">
       <div class="clear20"></div>
       <div class="col-xs-12" ng-class="{'list-my-meal':myFuturMealsFilter.length}">
-        <div class="row" ng-repeat="meal in myFuturMealsFilter = (meals | filter:futurMealsFilter)">
+        <div class="row" ng-repeat="meal in myFuturMealsFilter = (meals | filter:futurMealsFilter | orderBy:'time')">
           <div class="col-xs-12">
             <div class="list-group">
               <a ng-if="meal.detailedInfo.pending==false" class="list-group-item list-group-meal my-meal-dtld-panel-success" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
@@ -94,7 +94,7 @@
     <uib-tab index="1" heading="Previous meals" class="my-meal-uitab">
       <div class="clear20"></div>
       <div class="col-xs-12" ng-class="{ 'list-my-meal':pastMealsFilter.length}">
-        <div class="row" ng-repeat="meal in myPastMealsFilter = (meals | filter: pastMealsFilter)">
+        <div class="row" ng-repeat="meal in myPastMealsFilter = (meals | filter: pastMealsFilter | orderBy:'-time')">
           <div class="col-xs-12">
             <div class="list-group">
               <a class="list-group-item list-group-meal my-meal-dtld-panel-info" ui-sref="view_my_dtld_meals({myMealId: meal._id})">

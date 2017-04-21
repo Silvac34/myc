@@ -232,7 +232,6 @@ def before_returning_GET_item_meal(response):
         meal["detailedInfo"].update({"subscribed" : None, "pending": None})
         
 #POST api/meals
-    
 def before_storing_POST_meals (items):
     for meal in items:
         meal["admin"] = g.user_id

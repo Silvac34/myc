@@ -3,23 +3,30 @@
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate']);
 
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal) {
-  
+
   $scope.meal = meal.data;
-  function check_loading(){
-      $scope.pendingRequest = false;
-      for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-        if ($scope.meal.privateInfo.users[i]._id == $scope.user._id) {
-          $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
-        }
-        if ($scope.meal.privateInfo.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
-          $scope.pendingRequest = true;
-        }
+
+  function check_loading() {
+    $scope.pendingRequest = false;
+    for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+      if ($scope.meal.privateInfo.users[i]._id == $scope.user._id) {
+        $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
       }
+      if ($scope.meal.privateInfo.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
+        $scope.pendingRequest = true;
+      }
+    }
   }
   check_loading();
-  
+
   $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
   $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
+
+  $scope.calculateAge = function calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  };
 
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {
@@ -103,28 +110,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   };
 
 }]);
-
-modMyMealsDetailed.filter('MyMealsFiltered', function() {
-  return function(input, current) {
-    input = input || '';
-    var today = new Date();
-    var output = [];
-    for (var i = 0; i < input.length; i++) {
-      var my_meals_date = new Date(input[i].time);
-      if (current) {
-        if (my_meals_date > today) {
-          output.push(input[i]);
-        }
-      }
-      else {
-        if (my_meals_date < today) {
-          output.push(input[i]);
-        }
-      }
-    }
-    return output;
-  };
-});
 
 modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, _etag) {
 

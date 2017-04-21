@@ -29,7 +29,7 @@
                                 <div class="col-md-3 col-sm-4 col-xs-12" style="float:left">
                                     <img class="img-circle my-meal-dtld-profilePic-pending-validation my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />
                                     <span style="float:inherit;margin-top:5px"><span>{{user.first_name}} {{user.last_name}}</span><br/>
-                                    <span>{{user.gender}}<span ng-if="user.age"> - {{user.age}} years old</span></span>
+                                    <span>{{user.gender}}<span ng-if="user.birthday"> - {{calculateAge(user.birthday)}} years old</span></span>
                                     </span>
                                 </div>
                                 <div class="col-md-9 col-sm-8 col-xs-12 text-justify" style="float:left;margin-top:5px">

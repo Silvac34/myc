@@ -22,12 +22,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
   $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
 
-  $scope.calculateAge = function calculateAge(birthday) { // birthday is a date
-    var ageDifMs = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  };
-
   //modalDelete to delete a meal
   $scope.openModalDelete = function() {
 
@@ -240,4 +234,18 @@ modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
 
+})
+
+.filter('ageFilter', function() {
+  function calculateAge(birthday) { // birthday is a date
+    var now = new Date;
+    var birthday_value = new Date(birthday);
+    var ageDifMs = now - birthday_value;
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  return function(birthdate) {
+    return calculateAge(birthdate);
+  };
 });

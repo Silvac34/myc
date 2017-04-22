@@ -118,6 +118,9 @@ schemaMeals = {
                         'type':'number',
                         'required': True,
                         'empty': False
+                    },
+                    'complement':{
+                        'type':'string'
                     }
                 }
             },

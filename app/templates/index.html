@@ -17,10 +17,9 @@
   <link rel="stylesheet" href="../static/css/filter.css">
   <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- permet d'obtenir la loading bar pour les transitions-->
   <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
   <!--préparation de la place pour le logo<link rel="icon" type="image/png" href="../static/sources/logo/logo.ico" />-->
-  <!-- permet d'obtenir la loading bar pour les transitions-->
-  <!--<link rel="stylesheet" href="../static/bower_components/angular-google-places-autocomplete/src/autocomplete.css">-->
 
   <script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -42,16 +41,11 @@
   <script src="../static/components/facebookService.js"></script>
   <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
   <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script>
-  <script src="../static/bower_components/angular-easyfb/build/angular-easyfb.min.js"></script>
   <!-- permet d'obtenir la loading bar pour les transitions-->
-
-  <!-- autocomplete with google
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQsOeNUwks7blgswNuJQqWlJ-MzcdS_UA&libraries=places"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-  <script src="../static/components/ngAutocomplete.js"></script>
-   <!--autocomplete for country_of_origin
-   <script src="../static/bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
-   <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>-->
+  <script src="../static/bower_components/angular-easyfb/build/angular-easyfb.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+  <script src="../static/bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
+  
 
 </head>
 
@@ -101,7 +95,9 @@
       </div>-->
       <div class="col-xs-6 welcome-plugin-social-fb" ng-if="$state.includes('welcome')">
         <div class="fb-follow" data-href="https://www.facebook.com/mycommuneaty" data-layout="button" data-size="small" data-show-faces="true"></div>
-        <div class="fb-share-button" data-href="https://www.facebook.com/mycommuneaty" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fmycommuneaty&amp;src=sdkpreparse"></a></div>
+        <div class="fb-share-button" data-href="https://www.facebook.com/mycommuneaty" data-layout="button" data-size="small" data-mobile-iframe="true">
+          <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fmycommuneaty&amp;src=sdkpreparse"></a>
+        </div>
       </div>
       <div class="col-xs-6" ng-if="$state.includes('welcome')">
         <div class="welcome-buttons-auth" ng-if="!isAuthenticated()" ng-click="auth('facebook', toState)">

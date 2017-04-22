@@ -5,7 +5,6 @@
     "price": 100,
     "nbGuests": 10,
     "veggies": false,
-    "town": "Santiago",
     "admin": {
         "$oid": "111111111111111111111111"
     },
@@ -14,14 +13,25 @@
         "title": "Jolie piece de boeuf"
     },
     "nbRemainingPlaces": 9,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75009",
+        "lat": 48.881,
+        "lng": 2.341,
+        "country": "France"
+    },
     "privateInfo": {
-        "address": "30 avenue de Trudaine 75009",
+        "address": {
+            "name": "30 avenue de Trudaine",
+            "lat": 48.88092409999999,
+            "lng": 2.34052829999996
+        },
         "users": [{
             "_id": {
                 "$oid": "111111111111111111111111"
             },
             "role": ["admin"],
-            "status":"accepted"
+            "status": "accepted"
         }]
     },
     "detailedInfo": {
@@ -47,8 +57,7 @@
             }
         }
     },
-    "time": "2016-11-20T17:00:00.000Z",
-    "addressApprox": "Métro Anvers L2"
+    "time": "2016-11-20T17:00:00.000Z"
 }, {
     "_id": {
         "$oid": "111111111111111111111112"
@@ -56,7 +65,6 @@
     "price": 60,
     "nbGuests": 11,
     "veggies": false,
-    "town": "Santiago",
     "admin": {
         "$oid": "111111111111111111111111"
     },
@@ -65,20 +73,31 @@
         "title": "Soupions de légumes avec cassolette de veau"
     },
     "nbRemainingPlaces": 8,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75009",
+        "lat": 48.886,
+        "lng": 2.333,
+        "country": "France"
+    },
     "privateInfo": {
-        "address": "3 impasse marie - blanche 75018",
+        "address": {
+            "name": "3 Impasse Marie Blanche",
+            "lat": 48.8856138,
+            "lng": 2.3328533999999763
+        },
         "users": [{
             "_id": {
                 "$oid": "111111111111111111111111"
             },
             "role": ["admin"],
-            "status":"accepted"
+            "status": "accepted"
         }, {
             "_id": {
                 "$oid": "111111111111111111111112"
             },
             "role": ["simpleGuest"],
-            "status":"accepted"
+            "status": "accepted"
         }]
     },
     "detailedInfo": {
@@ -98,13 +117,11 @@
             }
         }
     },
-    "time": "2017-12-20T17:00:00.000Z",
-    "addressApprox": "Métro Blanche L2"
+    "time": "2017-12-20T17:00:00.000Z"
 }, {
     "_id": {
         "$oid": "111111111111111111111113"
     },
-    "town": "Santiago",
     "admin": {
         "$oid": "111111111111111111111111"
     },
@@ -114,15 +131,26 @@
     },
     "price": 15,
     "nbRemainingPlaces": 0,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75018",
+        "lat": 48.881,
+        "lng": 2.316,
+        "country": "France"
+    },
     "privateInfo": {
         "users": [{
             "_id": {
                 "$oid": "111111111111111111111111"
             },
             "role": ["admin"],
-            "status":"accepted"
+            "status": "accepted"
         }],
-        "address": "37 rue du général foy 75008"
+        "address": {
+            "name": "37 rue du général foy",
+            "lat": 48.88092409999999,
+            "lng": 2.3164193999999725
+        }
 
     },
     "detailedInfo": {
@@ -141,7 +169,7 @@
     "nbGuests": 2,
     "veggies": true,
     "time": "2016-07-22T20:00:00.000Z",
-    "addressApprox": "Métro Villier L2",
+
     "creationDate": {
         "$date": "2016-04-17T16:14:01.531Z"
     }
@@ -149,7 +177,6 @@
     "_id": {
         "$oid": "57759dcc4403f9234e4c7e2b"
     },
-    "town": "Santiago",
     "admin": {
         "$oid": "577946eb4403f92b93425e6a"
     },
@@ -159,15 +186,26 @@
     },
     "price": 50,
     "nbRemainingPlaces": 4,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75018",
+        "lat": 48.886,
+        "lng": 2.334,
+        "country": "France"
+    },
     "privateInfo": {
+        "address": {
+            "name": "37 Rue Lepic",
+            "lat": 48.886308,
+            "lng": 2.33376039999996
+        },
         "users": [{
             "_id": {
                 "$oid": "577946eb4403f92b93425e6a"
             },
             "role": ["admin"],
-            "status":"accepted"
-        }],
-        "address": "37 rue lepic"
+            "status": "accepted"
+        }]
     },
     "detailedInfo": {
         "requiredGuests": {
@@ -190,7 +228,6 @@
     "nbGuests": 6,
     "veggies": true,
     "time": "2016-07-14T18:30:51.753Z",
-    "addressApprox": "Lepic-Abesses",
     "creationDate": {
         "$date": "2016-06-30T22:31:40.558Z"
     }
@@ -198,7 +235,6 @@
     "_id": {
         "$oid": "578654e64403f908ba2fbd21"
     },
-    "town": "Santiago",
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
@@ -208,15 +244,26 @@
     },
     "price": 50,
     "nbRemainingPlaces": 4,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75009",
+        "lat": 48.886,
+        "lng": 2.333,
+        "country": "France"
+    },
     "privateInfo": {
+        "address": {
+            "name": "3 Impasse Marie Blanche",
+            "lat": 48.8856138,
+            "lng": 2.3328533999999763
+        },
         "users": [{
             "_id": {
                 "$oid": "5776d0824403f974b97caf89"
             },
             "role": ["admin"],
-            "status":"accepted"
-        }],
-        "address": "3 impasse Marie-blanche"
+            "status": "accepted"
+        }]
     },
     "detailedInfo": {
         "requiredGuests": {
@@ -239,7 +286,6 @@
     "nbGuests": 6,
     "veggies": false,
     "time": "2016-07-15T18:30:27.913Z",
-    "addressApprox": "Rue Oberkampf",
     "creationDate": {
         "$date": "2016-07-13T14:49:10.667Z"
     }
@@ -247,7 +293,6 @@
     "_id": {
         "$oid": "57865c1a4403f908ba2fbd22"
     },
-    "town": "Santiago",
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
@@ -257,15 +302,26 @@
     },
     "price": 76,
     "nbRemainingPlaces": 9,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75004",
+        "lat": 48.858,
+        "lng": 2.353,
+        "country": "France"
+    },
     "privateInfo": {
+        "address": {
+            "name": "4 rue du temple",
+            "lat": 48.8576169,
+            "lng": 2.3527622000000292
+        },
         "users": [{
             "_id": {
                 "$oid": "5776d0824403f974b97caf89"
             },
             "role": ["admin"],
-            "status":"accepted"
-        }],
-        "address": "4 rue du temple"
+            "status": "accepted"
+        }]
     },
     "detailedInfo": {
         "requiredGuests": {
@@ -293,7 +349,6 @@
     "nbGuests": 11,
     "veggies": false,
     "time": "2016-07-16T18:30:19.264Z",
-    "addressApprox": "Métro saint Michel",
     "creationDate": {
         "$date": "2016-07-13T15:19:54.220Z"
     }
@@ -304,7 +359,6 @@
     "price": 100,
     "nbGuests": 10,
     "veggies": false,
-    "town": "Santiago",
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
@@ -313,14 +367,25 @@
         "title": "Jolie piece de boeuf"
     },
     "nbRemainingPlaces": 9,
+    "address": {
+        "town": "Paris",
+        "postalCode": "75009",
+        "lat": 48.881,
+        "lng": 2.341,
+        "country": "France"
+    },
     "privateInfo": {
-        "address": "30 avenue de Trudaine 75009",
+        "address": {
+            "name": "30 avenue de Trudaine",
+            "lat": 48.88092409999999,
+            "lng": 2.34052829999996
+        },
         "users": [{
             "_id": {
                 "$oid": "5776d0824403f974b97caf89"
             },
             "role": ["admin"],
-            "status":"accepted"
+            "status": "accepted"
         }]
     },
     "detailedInfo": {
@@ -346,13 +411,11 @@
             }
         }
     },
-    "time": "2016-11-20T17:00:00.000Z",
-    "addressApprox": "Métro Anvers L2"
+    "time": "2016-11-20T17:00:00.000Z"
 }, {
     "_id": {
         "$oid": "58f4183e3187971673aa4cb4"
     },
-    "town": "Melbourne",
     "admin": {
         "$oid": "111111111111111111111111"
     },
@@ -361,7 +424,19 @@
     },
     "price": 29,
     "nbRemainingPlaces": 3,
+    "address": {
+        "town": "Moonee Ponds",
+        "postalCode": "3039",
+        "lat": -37.765,
+        "lng": 144.907,
+        "country": "Australia"
+    },
     "privateInfo": {
+        "address": {
+            "name": "144 Holmes Rd",
+            "lat": -37.765111,
+            "lng": 144.90709700000002
+        },
         "users": [{
             "status": "accepted",
             "_id": {
@@ -378,8 +453,7 @@
             "role": [
                 "simpleGuest"
             ]
-        }],
-        "address": "144 Holmes Road"
+        }]
     },
     "detailedInfo": {
         "requiredGuests": {
@@ -401,6 +475,5 @@
     "automaticSubscription": false,
     "veggies": false,
     "time": "2017-04-17T10:30:45.508Z",
-    "addressApprox": "144 Holmes Road",
     "nbGuests": 5
 }]

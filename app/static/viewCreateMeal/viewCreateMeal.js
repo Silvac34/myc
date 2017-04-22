@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
+angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAutocomplete'])
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', 'ezfb', function($scope, $http, $uibModal, $state, ENV, ezfb) {
 
@@ -32,7 +32,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
       detailedInfo: {
         "requiredGuests": {}
       },
-      automaticSubscription: true
+      automaticSubscription: true,
+      address:{},
+      privateInfo:{"address":{}}
     },
 
     $scope.setValue = function(variable) {
@@ -114,6 +116,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
 
 
   function createMealWithPhone() {
+    getAddressFromAutocomplete();
     var okToPost = true;
     if ($scope.editedMeal.menu.title != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
@@ -159,6 +162,24 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
       }
     }
   }
+  
+  function getAddressFromAutocomplete(){
+    var precision_needed_for_rounding_lat_lng = 1000;
+    $scope.editedMeal.address.town = $scope.details.vicinity;
+    $scope.editedMeal.privateInfo.address.name = $scope.details.name;
+    $scope.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
+    $scope.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();
+    $scope.editedMeal.address.lat = Math.round($scope.details.geometry.location.lat()*precision_needed_for_rounding_lat_lng)/precision_needed_for_rounding_lat_lng;
+    $scope.editedMeal.address.lng = Math.round($scope.details.geometry.location.lng()*precision_needed_for_rounding_lat_lng)/precision_needed_for_rounding_lat_lng;
+    for (var i=0;i<$scope.details.address_components.length;i++){
+      if($scope.details.address_components[i].types[0] == "postal_code"){
+       $scope.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
+      }
+      if($scope.details.address_components[i].types[0] == "country"){
+        $scope.editedMeal.address.country = $scope.details.address_components[i].long_name;
+      }
+    }
+  }
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
 
@@ -201,22 +222,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
   //enable animations in the modal
   $scope.animationsEnabled = true;
 
-  //modal to get the address of the meal
-  $scope.openModalFormLocation = function(size) {
-
-    $uibModal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: 'static/viewCreateMeal/viewCreateMealModal/formModalLocationContent.html',
-      controller: 'formCreateMealModalInstanceCtrl',
-      size: size,
-      resolve: {
-        editedMeal: function() {
-            return $scope.editedMeal;
-          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
-      }
-    });
-  };
-
 
   //modal to define the price of the meal and the number of participants
   $scope.openModalFormPrice = function(size) {
@@ -234,7 +239,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
     });
   };
 
-  //$scope.addressAutocomplete
+  $scope.autocomplete;
+
 
 }])
 
@@ -242,19 +248,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb'])
 .controller('formCreateMealModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
 
   $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
-
-  $scope.okLocation = function() {
-    if ($scope.editedMeal.town != undefined && $scope.editedMeal.privateInfo.address != undefined && $scope.editedMeal.addressApprox != undefined) {
-      if ($scope.address_complement == undefined) {
-        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address;
-      }
-      else {
-        $scope.editedMeal.privateInfo.address = $scope.editedMeal.privateInfo.address + " - " + $scope.address_complement;
-      }
-      $scope.address_complement = undefined;
-      $uibModalInstance.close();
-    }
-  }; //function to validate the Location modal
 
   $scope.okPrice = function() {
 

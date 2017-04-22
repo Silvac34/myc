@@ -59,7 +59,7 @@
                 <div class="row">
                   <div class="col-xs-8">
                     <label class="meal-menu-label" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</label> </br>
-                    <div class="meal-label meal-location">{{meal.town}} - {{meal.addressApprox}}</div>
+                    <div class="meal-label meal-location">{{meal.address.town}} - {{meal.address.postalCode}}</div>
                     <div class="row">
                       <div class="col-sm-6">
                         <div class="meal-label meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>

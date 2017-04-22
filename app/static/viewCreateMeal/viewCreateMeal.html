@@ -25,8 +25,14 @@
                     <div class="row">
                         <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
                             <div class="col-sm-12">
-                                <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" placeholder="Address" ng-hide="editedMeal.addressApprox" required>
-                                <input type="text" class="form-control form-location" ng-click="openModalFormLocation()" ng-show="editedMeal.addressApprox" value="{{editedMeal.town}} - {{editedMeal.addressApprox}}">
+                                <input type="text" class="form-control form-location" placeholder="Address (displayed only for participants)" ng-autocomplete ng-model="autocompleteAddress" options="options" details="details" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group" ng-class="{'has-error': (editedMeal.privateInfo.address==undefined)  && createMealForm.$submitted}">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputAddressComplement" placeholder="Additional information (flat number, floor, ...)" ng-model="address_complement" uib-popover="flat number or advice to find the place" popover-trigger="mouseenter" popover-placement="bottom">
                             </div>
                         </div>
                     </div>

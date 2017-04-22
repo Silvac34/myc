@@ -32,16 +32,38 @@ schemaMeals = {
     'veggies': {
         'type': 'boolean'
     },
-    'town': {
-        'type': 'string',
-    },
     'admin': { #mettre data relation
         'type': 'objectid'
     },
-    'addressApprox': {
-        'type': 'string',
-        'required': True,
-        'empty': False
+    'address': {
+        'type': 'dict',
+        'required':True,
+        'empty': False,
+        'schema':{
+            'town': {
+                'type':'string',
+                'required':True,
+                'empty': False
+            },
+            'lat':{
+                'type':'number',
+                'required': True,
+                'empty': False
+            },
+            'lng':{
+                'type':'number',
+                'required': True,
+                'empty': False
+            },
+            'country':{
+                'type':'string',
+                'required': True,
+                'empty': False
+            },
+            'postalCode':{
+                'type':'string'
+            },
+        }
     },
     'time': {
         'type': 'string',
@@ -78,9 +100,26 @@ schemaMeals = {
         'required':True,
         'schema':{
             'address': {
-                'type':'string',
+                'type':'dict',
                 'required':True,
-                'empty': False
+                'empty': False,
+                'schema':{
+                    'name': {
+                        'type': 'string',
+                        'required':True,
+                        'empty': False,
+                    },
+                    'lat':{
+                        'type':'number',
+                        'required': True,
+                        'empty': False
+                    },
+                    'lng':{
+                        'type':'number',
+                        'required': True,
+                        'empty': False
+                    }
+                }
             },
             'users':{
                 'type':'list',

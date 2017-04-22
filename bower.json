@@ -19,6 +19,7 @@
     "angular-svg-round-progressbar": "^0.4.2",
     "jquery": "^2.2.4",
     "angular-loading-bar": "^0.9.0",
-    "angular-easyfb": "^1.1.0"
+    "angular-easyfb": "^1.1.0",
+    "ngAutocomplete": ""
   }
 }

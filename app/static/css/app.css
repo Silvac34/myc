@@ -61,6 +61,15 @@
     border-bottom: 1px solid #eeeeee;
 }
 
+.general-title {
+    font-family: Gill Sans, Verdana;
+    font-size: 16px;
+    line-height: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
 .col-centered {
     float: none;
     margin: 0 auto;
@@ -412,8 +421,8 @@ footer p {
     font-weight: bold;
 }
 
-.meal-status{
-    float:right;
+.meal-status {
+    float: right;
 }
 
 
@@ -694,6 +703,58 @@ footer p {
     border-radius: 15px;
 }
 
+@media (min-width: 768px) {
+    .margin-left-5px-sm-md-lg {
+        margin-left: 5px;
+    }
+}
+
+.meal-addon-groceries {
+    float: left;
+    background-color: white;
+    line-height: inherit;
+    padding-right: 18px;
+}
+
+.table-meal-border {
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+}
+
+.table-meal-border-bottom {
+    border-bottom: 1px solid #dddddd;
+}
+
+.img-create-meal {
+    border-radius: 20px;
+    border: 2px solid #0B4060;
+    position: absolute;
+}
+
+.img-create-meal.img-create-meal-help {
+    height: 209px;
+    margin-top: 52px;
+}
+
+.img-create-meal.img-create-meal-menu {
+    height: 112px;
+}
+
+.text-create-meal {
+    color: white;
+    font-size: 18px;
+    text-shadow: #0B4060 1px 1px, #0B4060 -1px 1px, #0B4060 -1px -1px, #0B4060 1px -1px;
+    position: absolute;
+}
+
+.text-create-meal.text-create-meal-help {
+    margin: 125px 0px 0px 120px;
+}
+
+.text-create-meal.text-create-meal-menu {
+    margin: 40px 0px 0px 100px;
+}
+
 
 /* viewMyMealsDtld ---------------------------------------------------*/
 
@@ -947,22 +1008,28 @@ h2.slogan {
     border-width: 2px;
 }
 
+
 /*Profile ------------------------------------------------------ */
-.day-container{
-    width:45px;
-    float:left;
+
+.day-container {
+    width: 45px;
+    float: left;
     height: 25px;
 }
 
-.month-container{
-    width:100px;
-    float:left;
+.month-container {
+    width: 100px;
+    float: left;
     margin: 0px 5px;
     height: 25px;
 }
 
-.year-container{
-    width:70px;
-    float:left;
+.year-container {
+    width: 70px;
+    float: left;
     height: 25px;
+}
+
+.country-flag {
+    width: 23px;
 }

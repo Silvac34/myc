@@ -3,7 +3,6 @@
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAutocomplete'])
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', 'ezfb', function($scope, $http, $uibModal, $state, ENV, ezfb) {
-
   //$scope pour le plugin checkbox messenger
   $scope.origin = ENV.fbRedirectURI + "#/create_meal";
   $scope.page_id = ENV.page_id;
@@ -33,8 +32,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         "requiredGuests": {}
       },
       automaticSubscription: true,
-      address:{},
-      privateInfo:{"address":{}}
+      address: {},
+      privateInfo: {
+        "address": {}
+      }
     },
 
     $scope.setValue = function(variable) {
@@ -162,21 +163,23 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       }
     }
   }
-  
-  function getAddressFromAutocomplete(){
+
+  function getAddressFromAutocomplete() {
     var precision_needed_for_rounding_lat_lng = 1000;
-    $scope.editedMeal.address.town = $scope.details.vicinity;
-    $scope.editedMeal.privateInfo.address.name = $scope.details.name;
-    $scope.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
-    $scope.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();
-    $scope.editedMeal.address.lat = Math.round($scope.details.geometry.location.lat()*precision_needed_for_rounding_lat_lng)/precision_needed_for_rounding_lat_lng;
-    $scope.editedMeal.address.lng = Math.round($scope.details.geometry.location.lng()*precision_needed_for_rounding_lat_lng)/precision_needed_for_rounding_lat_lng;
-    for (var i=0;i<$scope.details.address_components.length;i++){
-      if($scope.details.address_components[i].types[0] == "postal_code"){
-       $scope.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
-      }
-      if($scope.details.address_components[i].types[0] == "country"){
-        $scope.editedMeal.address.country = $scope.details.address_components[i].long_name;
+    if ($scope.details != undefined) {
+      $scope.editedMeal.address.town = $scope.details.vicinity;
+      $scope.editedMeal.privateInfo.address.name = $scope.details.name;
+      $scope.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
+      $scope.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();
+      $scope.editedMeal.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+      $scope.editedMeal.address.lng = Math.round($scope.details.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+      for (var i = 0; i < $scope.details.address_components.length; i++) {
+        if ($scope.details.address_components[i].types[0] == "postal_code") {
+          $scope.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
+        }
+        if ($scope.details.address_components[i].types[0] == "country") {
+          $scope.editedMeal.address.country = $scope.details.address_components[i].long_name;
+        }
       }
     }
   }
@@ -184,16 +187,16 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   //required for the calendar toolbar (datamodel : editedMeal.time)
 
   $scope.dateOptions = {
-      formatYear: 'yy',
-      maxDate: new Date(2020, 5, 22),
-      minDate: new Date(),
-      startingDay: 1
-    };
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
 
 
-    $scope.clear = function() {
-      $scope.editedMeal.time = null;
-    };
+  $scope.clear = function() {
+    $scope.editedMeal.time = null;
+  };
 
   $scope.date_open = function() {
     $scope.date_popup.opened = true;
@@ -241,6 +244,35 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
 
   $scope.autocomplete;
 
+  $scope.checkTimeCooking = function() {
+    if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
+      if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != 0) {
+        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == undefined) {
+          return true;
+        }
+        else {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() > $scope.editedMeal.time.getHours()) {
+            return true;
+          }
+          else {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() == $scope.editedMeal.time.getHours() && $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getMinutes() > $scope.editedMeal.time.getMinutes()) {
+              return true;
+            }
+            else {
+              return false;
+            }
+          }
+        }
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+  };
+
 
 }])
 
@@ -287,7 +319,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
-});
+})
 
 var predefined_date = new Date();
 predefined_date.setDate(predefined_date.getDate());

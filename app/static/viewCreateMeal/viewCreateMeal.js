@@ -149,7 +149,14 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
           }
         }
       }
-
+      if($scope.editedMeal.address.vicinity == undefined || $scope.editedMeal.privateInfo.address.name == undefined){
+        console.log("address is missing");
+        okToPost = false;
+      }
+      if($scope.editedMeal.price == undefined){
+       console.log("price of the groceries is missing"); 
+       okToPost = false;
+      }
       if (okToPost == true) {
         $http.post('/api/meals', $scope.editedMeal).then(function(response) {
             confirmOptIn();
@@ -245,23 +252,38 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.autocomplete;
 
   $scope.checkTimeCooking = function() {
-    if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
-      if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != 0) {
-        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == undefined) {
-          return true;
-        }
-        else {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() > $scope.editedMeal.time.getHours()) {
-            return true;
-          }
-          else {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() == $scope.editedMeal.time.getHours() && $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getMinutes() > $scope.editedMeal.time.getMinutes()) {
-              return true;
+    if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+      if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != 0) {
+              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == undefined) {
+                return true;
+              }
+              else {
+                if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() > $scope.editedMeal.time.getHours()) {
+                  return true;
+                }
+                else {
+                  if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() == $scope.editedMeal.time.getHours() && $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getMinutes() > $scope.editedMeal.time.getMinutes()) {
+                    return true;
+                  }
+                  else {
+                    return false;
+                  }
+                }
+              }
             }
             else {
               return false;
             }
           }
+          else {
+            return false;
+          }
+        }
+        else {
+          return false;
         }
       }
       else {
@@ -274,52 +296,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   };
 
 
-}])
-
-//controller for the Modal
-.controller('formCreateMealModalInstanceCtrl', function($scope, $uibModalInstance, editedMeal) {
-
-  $scope.editedMeal = editedMeal; //enable the DOM to be modified in the modal
-
-  $scope.okPrice = function() {
-
-    if ($scope.editedMeal.price != undefined) {
-      if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
-        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0 || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
-              delete $scope.editedMeal.detailedInfo.requiredGuests.cooks;
-              $uibModalInstance.close();
-            }
-            else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking != undefined) {
-              // on définit l'heure d'arrivée des cuisiniers comme étant le même jour que le jour du repas si besoin d'aides cuisine il y a
-              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.setDate($scope.editedMeal.time.getDate());
-              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.setFullYear($scope.editedMeal.time.getFullYear());
-              $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.setMonth($scope.editedMeal.time.getMonth());
-              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() <= $scope.editedMeal.time.getHours()) {
-                $uibModalInstance.close();
-              }
-            }
-          }
-          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null) {
-            delete $scope.editedMeal.detailedInfo.requiredGuests.cooks;
-            $uibModalInstance.close();
-          }
-        }
-        else {
-          $uibModalInstance.close();
-        }
-      }
-      else {
-        $uibModalInstance.close();
-      }
-    }
-  }; //function to validate the Price modal
-
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  }; //funcion to dismiss the modal
-})
+}]);
 
 var predefined_date = new Date();
 predefined_date.setDate(predefined_date.getDate());

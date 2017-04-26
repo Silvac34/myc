@@ -232,23 +232,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   //enable animations in the modal
   $scope.animationsEnabled = true;
 
-
-  //modal to define the price of the meal and the number of participants
-  $scope.openModalFormPrice = function(size) {
-
-    $uibModal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: 'static/viewCreateMeal/viewCreateMealModal/formModalPriceContent.html',
-      controller: 'formCreateMealModalInstanceCtrl',
-      size: size,
-      resolve: {
-        editedMeal: function() {
-            return $scope.editedMeal;
-          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
-      }
-    });
-  };
-
   $scope.autocomplete;
 
   $scope.checkTimeCooking = function() {

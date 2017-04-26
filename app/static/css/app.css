@@ -245,10 +245,20 @@ footer p {
     line-height: 24px
 }
 
-.meal-search-sort {
-    float: right;
-    margin-right: 15px;
-    margin-top: -5px;
+@media (min-width: 768px) {
+    .meal-search-sort {
+        float: right;
+        margin-right: 15px;
+        margin-top: -15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .meal-search-sort {
+        float: right;
+        margin-right: 15px;
+        margin-top: -5px;
+    }
 }
 
 .meal-search-sort .btn-group {
@@ -729,30 +739,68 @@ footer p {
     border-radius: 20px;
     border: 2px solid #0B4060;
     position: absolute;
+    width: 375px;
 }
 
 .img-create-meal.img-create-meal-help {
-    height: 209px;
     margin-top: 52px;
 }
 
 .img-create-meal.img-create-meal-menu {
-    height: 112px;
+    height: 209px;
 }
 
-.text-create-meal {
+.img-create-meal.img-create-meal-publish {
+    margin-top: 33px;
+}
+
+.img-create-meal.img-create-meal-address {
+    height: 177px;
+    margin-top: -10px;
+}
+
+.text-create-meal-menu {
+    color: black;
+    font-size: 22px;
+    text-shadow: white 1px 1px, white -1px 1px, white -1px -1px, white 1px -1px;
+    position: absolute;
+}
+
+.text-create-meal-address {
+    color: black;
+    font-size: 18px;
+    text-shadow: white 1px 1px, white -1px 1px, white -1px -1px, white 1px -1px;
+    position: absolute;
+}
+
+.text-create-meal-help {
     color: white;
     font-size: 18px;
     text-shadow: #0B4060 1px 1px, #0B4060 -1px 1px, #0B4060 -1px -1px, #0B4060 1px -1px;
     position: absolute;
 }
 
+.text-create-meal-publish {
+    color: black;
+    font-size: 21px;
+    text-shadow: white 1px 1px, white -1px 1px, white -1px -1px, white 1px -1px;
+    position: absolute;
+}
+
+.text-create-meal.text-create-meal-menu {
+    margin: 75px 0px 0px 90px;
+}
+
 .text-create-meal.text-create-meal-help {
     margin: 125px 0px 0px 120px;
 }
 
-.text-create-meal.text-create-meal-menu {
-    margin: 40px 0px 0px 100px;
+.text-create-meal.text-create-meal-publish {
+    margin: 95px 0px 0px 113px;
+}
+
+.text-create-meal.text-create-meal-address {
+    margin: 56px 0px 0px 75px;
 }
 
 

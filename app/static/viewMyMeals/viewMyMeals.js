@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMyMealsDtld'])
 
-.controller('ViewMyMealsCtrl', ['$scope', 'response', '$uibModal', '$filter', function($scope, response, $uibModal, $filter) {
+.controller('ViewMyMealsCtrl', ['$scope', 'response', '$uibModal', function($scope, response, $uibModal) {
 
   $scope.meals = response.data['_items'];
   var userId = $scope.user._id;

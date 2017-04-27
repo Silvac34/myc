@@ -3,7 +3,7 @@
         <button type="button" class="close" ng-click="cancel()" style="margin-right: 5px;">&times;</button>
         <label class="control-label filter-label col-xs-12">Chose the days of the week</label>
         <div class="filter-date-checkbox-mobile text-center" ng-repeat="day in filter.weekDays">
-            <label><input type="checkbox" ng-model=day.selected></br>{{day.label}}</label>
+            <label><input type="checkbox" ng-model=day.selected></br>{{day.label | limitTo:3}}</label>
         </div>
         <label class="control-label filter-label col-xs-12">Chose a period</label>
         <div class="col-xs-6">

@@ -46,12 +46,28 @@
           </div>
           <form class="form-horizontal">
             <fieldset>
-              <div class="panel-body" style="padding-bottom:5px;">
-                <span ng-click="isCollapsed = !isCollapsed" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed, 'glyphicon-chevron-right': isCollapsed}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
-              </div>
-              <div uib-collapse="isCollapsed" class="collapsing-filter">
-                <div ng-repeat="day in filter.weekDays">
-                  <div class="row col-xs-12" style="padding-right:0px"><span class="pull-left"><input type="checkbox" ng-model=day.selected> {{day.label}}</span><span class="pull-right">104</span></div>
+              <div class="panel-body" style="padding-bottom:5px;margin-right:15px;margin-left:15px">
+                <div class="row">
+                  <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed.weekDays, 'glyphicon-chevron-right': isCollapsed.weekDays}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
+                  <div uib-collapse="isCollapsed.weekDays" class="collapsing-filter">
+                    <div ng-repeat="day in filter.weekDays">
+                      <div class="row" style="margin:0px 5px"><span class="pull-left"><input type="checkbox" ng-model=day.selected> {{day.label}}</span><span class="pull-right">104</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" class="row-margin-filter">
+                  <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed.period, 'glyphicon-chevron-right': isCollapsed.period}"></i><span class="text-in-filter"><strong>Period</strong></span></span>
+                  <div uib-collapse="isCollapsed.period" class="collapsing-filter">
+                    <input type="text" style="margin-bottom: 5px;" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" placeholder="from"/>
+                    <input type="text" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="to"/>
+                  </div>
+                </div>
+                <div class="row" class="row-margin-filter">
+                  <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed.price, 'glyphicon-chevron-right': isCollapsed.price}"></i><span class="text-in-filter"><strong>Price</strong></span></span>
+                  <div uib-collapse="isCollapsed.price" class="collapsing-filter">
+                    <input type="number" style="margin-bottom: 5px;" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMin.value" placeholder="from"/>
+                    <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMax.value" placeholder="to"/>
+                  </div>
                 </div>
               </div>
             </fieldset>
@@ -96,8 +112,8 @@
           </div>
         </div>
         <div ng-hide="meals.length">There are no meals to come</div>
-        <div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | orderBy:'-time':reverse)">
-        <!--<div class="row" ng-repeat="meal in meals | orderBy:'time':reverse | filter:"><!--dateRange:filter().dateFilterMin.value:filter().dateFilterMax.value | -->
+        <div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | orderBy:'-time':reverse)">
+          <!--<div class="row" ng-repeat="meal in meals | orderBy:'time':reverse | filter:"><!--dateRange:filter().dateFilterMin.value:filter().dateFilterMax.value | -->
           <div class="col-xs-12">
             <div class="list-group">
               <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':meal.detailedInfo.subscribed,'my-meal-dtld-panel-warning':meal.detailedInfo.pending}" ng-click=openModalDtld(meal._id)>

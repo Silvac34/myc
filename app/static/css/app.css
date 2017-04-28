@@ -337,26 +337,6 @@ footer p {
     border-bottom-right-radius: 0px
 }
 
-.meal-search-filter {
-    float: left;
-    margin-left: 15px;
-    position: absolute;
-}
-
-.btn-filter-mobile-reinitialize {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.text-in-filter {
-    padding-left: 4px;
-    font-size: 16px;
-}
-
-.collapsing-filter{
-    padding-left: 20px;
-}
-
 
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 

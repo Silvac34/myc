@@ -5,14 +5,6 @@ var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-
 modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-    .state('view_meals.filterInternet', {
-      views: {
-        'filterInternet': {
-          templateUrl: 'static/viewMeals/viewFilter/filterInternet.html',
-          controller: 'filterMealCtrl'
-        }
-      }
-    })
     .state('view_meals.mealsMap', {
       views: {
         'mealsMap': {
@@ -32,11 +24,11 @@ modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProv
 }]);
 
 
-modViewMeals.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$state', '$uibModal', '$auth', 'response', '$timeout', '$filter', function($scope, viewMealsFilterService, $state, $uibModal, $auth, response, $timeout, $filter) {
+modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', function($scope, $state, $uibModal, $auth, response, $timeout) {
 
   $scope.meals = response.data['_items']; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
-  $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) {//permet de savoir si dans les données chargées, il y a des meals en attente de validation
+  $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
         $scope.manualSubscriptionPending = false;
@@ -44,10 +36,6 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$
     }
   });
 
-  /*  $scope.filter = function() {
-        return viewMealsFilterService.get();
-      },
-  */
   $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
     if (this.meal.detailedInfo.subscribed == true) {
       $state.go("view_my_dtld_meals", {
@@ -87,18 +75,21 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$
       });
     }
   };
-  $scope.isCollapsed = false; //permet de faire apparaître tous les filtres lors du chargement de la page
+  $scope.isCollapsed = {
+    "weekDays": false,
+    "period": false
+  }; //permet de faire apparaître tous les filtres lors du chargement de la page
   $scope.reverse = false; //permet de filtrer du plus récent au plus ancien
   $scope.SortOrder = 'asc';
-  
-  $scope.openModalFilter = function(filter) {//permet d'ouvrir le modal de filtres lorsqu'on est sur mobile
-      $uibModal.open({
-        animation: true,
-        templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
-        controller: 'filterMealModalCtrl',
-        scope: $scope
-      });
-    };
+
+  $scope.openModalFilter = function(filter) { //permet d'ouvrir le modal de filtres lorsqu'on est sur mobile
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'static/viewMeals/viewFilter/filterMobile.html',
+      controller: 'filterMealModalCtrl',
+      scope: $scope
+    });
+  };
 
   $scope.filter = {
     weekDays: [{
@@ -130,15 +121,24 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$
       selected: false,
       ind: 0
     }],
-      dateFilterMin: {
-        opened: false
-      },
-      dateFilterMax: {
-        opened: false,
-      }
+    dateFilterMin: {
+      opened: false,
+      value: null
+    },
+    dateFilterMax: {
+      opened: false,
+      value: null
+    },
+    priceFilterMin: {
+      value: null
+    },
+    priceFilterMax: {
+      value: null
+    }
   };
 
-  $scope.weekDaysFilter = function(meal) {
+  //code pour faire les filtres selon les weekDays
+  $scope.weekDaysFilter = function(meal) { //permet de faire un filtre avec les jours de la semaine selectionnés
     if ($scope.filter.weekDays.some(checkIfWeekDaysSelected) == true) {
       for (var i = 0; i < $scope.filter.weekDays.length; i++) {
         if ($scope.filter.weekDays[i].selected == true) {
@@ -152,77 +152,56 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', 'viewMealsFilterService', '$
     }
   };
 
-  function checkIfWeekDaysSelected(element, index, array) {
+  function checkIfWeekDaysSelected(element, index, array) { //vérifie si au moins un des jours de la semaine a été selectionné dans les filtres
     return element.selected == true;
   }
-  
-  //$state.go('view_meals.filterInternet');
-  /*
-    $scope.dateFilterMin_open = function() {
-      $scope.filter.dateFilterMin.opened = true;
-    };
 
-    $scope.dateFilterMax_open = function() {
-      $scope.filter.dateFilterMax.opened = true;
-    };
+  //code pour faire les filtres selon une période fixe de temps
+  $scope.dateFilterMin_open = function() {
+    $scope.filter.dateFilterMin.opened = true;
+  };
 
-    $scope.applyFilters = function() {
-      viewMealsFilterService.set($scope.filter);
-    };*/
+  $scope.dateFilterMax_open = function() {
+    $scope.filter.dateFilterMax.opened = true;
+  };
 
-  /*$scope.initializeFilters = function() {
-    $scope.filter = {
-      weekDays: [{
-        label: 'Monday',
-        selected: false,
-        ind: 1
-      }, {
-        label: 'Tuesday',
-        selected: false,
-        ind: 2
-      }, {
-        label: 'Wednesday',
-        selected: false,
-        ind: 3
-      }, {
-        label: 'Thursday',
-        selected: false,
-        ind: 4
-      }, {
-        label: 'Friday',
-        selected: false,
-        ind: 5
-      }, {
-        label: 'Saturday',
-        selected: false,
-        ind: 6
-      }, {
-        label: 'Sunday',
-        selected: false,
-        ind: 0
-      }],
-      dateFilterMin: {
-        opened: false
-      },
-      dateFilterMax: {
-        opened: false,
-      }
-    };
-  };*/
-
-  /*$scope.getFilters = function() {
-    var appliedFilters = viewMealsFilterService.get();
-    if (appliedFilters == "") {
-      $scope.initializeFilters();
+  $scope.dateRangeFilter = function(meal) {
+    var mealDate = new Date(meal.time);
+    if ($scope.filter.dateFilterMin.value != null && $scope.filter.dateFilterMax.value != null) {
+      return (mealDate >= $scope.filter.dateFilterMin.value && mealDate <= $scope.filter.dateFilterMax.value);
     }
     else {
-      $scope.filter = appliedFilters;
+      if ($scope.filter.dateFilterMin.value != null) {
+        return (mealDate >= $scope.filter.dateFilterMin.value);
+      }
+      else if ($scope.filter.dateFilterMax.value != null) {
+        return (mealDate <= $scope.filter.dateFilterMax.value);
+      }
+      else {
+        return meal;
+      }
     }
   };
 
-  $scope.getFilters();
-  $scope.applyFilters(); // Set up dataBinding with the service from the beginning
-*/
+  $scope.priceRangeFilter = function(meal) {
+    if ($scope.filter.priceFilterMin.value != null && $scope.filter.priceFilterMax.value != null) {
+      return ((meal.price/meal.nbGuests) >= $scope.filter.priceFilterMin.value && (meal.price/meal.nbGuests) <= $scope.filter.priceFilterMax.value);
+    }
+    else {
+      if ($scope.filter.priceFilterMin.value != null) {
+        return ((meal.price/meal.nbGuests) >= $scope.filter.priceFilterMin.value);
+      }
+      else if ($scope.filter.priceFilterMax.value != null) {
+        return ((meal.price/meal.nbGuests) <= $scope.filter.priceFilterMax.value);
+      }
+      else {
+        return meal;
+      }
+    }
+  };
+
+
+
 }]);
 
 modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstance) {
@@ -231,92 +210,10 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
   };
 
   $scope.clearAndCloseFilterMobile = function() {
-    $scope.initializeFilters();
+    for (var i = 0; i < $scope.filter.weekDays.length; i++) {
+      $scope.filter.weekDays[i].selected = false;
+    }
     $uibModalInstance.close();
   };
 
-});
-
-modViewMeals.controller('filterMealCtrl', ['$scope', 'viewMealsFilterService', function($scope, viewMealsFilterService) {
-
-
-}]);
-
-
-modViewMeals.service('viewMealsFilterService', function() {
-  var filter = "";
-  return {
-    get: function() {
-      return filter;
-    },
-    set: function(value) {
-      filter = value;
-    }
-  };
-});
-
-modViewMeals.filter('dateRange', function() {
-  return function(items, from, to) {
-    var filtered = [];
-    if (!items || !items.length) {
-      return;
-    }
-    if (from == null && to == null) {
-      return items;
-    }
-    if (to == null) {
-      for (var i = 0; i < items.length; ++i) {
-        var itemTime = new Date(items[i].time);
-        if (itemTime >= from) {
-          filtered.push(items[i]);
-        }
-      }
-    }
-    else {
-      var too = new Date(to);
-      too.setDate(to.getDate() + 1); //If we want the upper limit to be the end of the day  
-    }
-    if (from == null) {
-      for (var i = 0; i < items.length; ++i) {
-        var itemTime = new Date(items[i].time);
-        if (itemTime <= too) {
-          filtered.push(items[i]);
-        }
-      }
-    }
-    if (from != null && to != null) {
-      for (var i = 0; i < items.length; ++i) {
-        var itemTime = new Date(items[i].time);
-        if (itemTime >= from && itemTime <= too) {
-          filtered.push(items[i]);
-        }
-      }
-    }
-    return filtered;
-  };
-});
-
-modViewMeals.filter('fWeekDays', function() {
-  return function(items, weekDays) {
-    var filtered = [];
-    var selectedDays = [];
-    if (!items || !items.length || !weekDays || !weekDays.length) {
-      return;
-    }
-    for (var i = 0; i < weekDays.length; ++i) {
-      if (weekDays[i].selected == true) {
-        selectedDays.push(weekDays[i].ind);
-      }
-    }
-    if (selectedDays.length == 0) {
-      return items;
-    }
-    for (var i = 0; i < items.length; ++i) {
-      var itemTime = new Date(items[i].time);
-      if (selectedDays.indexOf(itemTime.getDay()) != -1) {
-        filtered.push(items[i]);
-      }
-    }
-    return filtered;
-  };
 });

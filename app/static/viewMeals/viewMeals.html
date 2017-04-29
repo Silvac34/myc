@@ -38,7 +38,8 @@
 
     <div class="row">
       <div class="col-sm-3 hidden-xs">
-        <div>meals on a map</div>
+        <div ui-sref="view_meals.mealsMap" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view"><strong><em>See meals on a map</em></strong></div>
+        <div ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view"><strong><em>See the list of meals</em></strong></div>
         <!--<div ui-view="filterInternet"></div>-->
         <div class="panel panel-info" style="padding-bottom:20px;">
           <div class="panel-heading">
@@ -48,7 +49,7 @@
             <fieldset>
               <div class="panel-body" style="padding-bottom:5px;margin-right:15px;margin-left:15px">
                 <div class="row">
-                  <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed.weekDays, 'glyphicon-chevron-right': isCollapsed.weekDays}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
+                  <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.weekDays, 'glyphicon-triangle-right': isCollapsed.weekDays}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
                   <div uib-collapse="isCollapsed.weekDays" class="collapsing-filter">
                     <div ng-repeat="day in filter.weekDays">
                       <div class="row" style="margin:0px 5px"><span class="pull-left"><input type="checkbox" ng-model=day.selected> {{day.label}}</span><span class="pull-right">104</span></div>
@@ -56,14 +57,14 @@
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
-                  <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed.period, 'glyphicon-chevron-right': isCollapsed.period}"></i><span class="text-in-filter"><strong>Period</strong></span></span>
+                  <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.period, 'glyphicon-triangle-right': isCollapsed.period}"></i><span class="text-in-filter"><strong>Period</strong></span></span>
                   <div uib-collapse="isCollapsed.period" class="collapsing-filter">
                     <input type="text" style="margin-bottom: 5px;" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" placeholder="from"/>
                     <input type="text" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="to"/>
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
-                  <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-chevron-down': !isCollapsed.price, 'glyphicon-chevron-right': isCollapsed.price}"></i><span class="text-in-filter"><strong>Price</strong></span></span>
+                  <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.price, 'glyphicon-triangle-right': isCollapsed.price}"></i><span class="text-in-filter"><strong>Price</strong></span></span>
                   <div uib-collapse="isCollapsed.price" class="collapsing-filter">
                     <input type="number" style="margin-bottom: 5px;" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMin.value" placeholder="from"/>
                     <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMax.value" placeholder="to"/>
@@ -73,91 +74,10 @@
             </fieldset>
           </form>
         </div>
-
-        <!--<div class="filter-desktop-panel">
-          <div class="row">
-            <h3>Filters</h3>
-          </div>
-          <div class="row">
-            <label class="control-label filter-label col-sm-12">Filter by days</label>
-            <div class="filter-date-checkbox-desktop text-center col-sm-3 col-lg-1" ng-repeat="day in filter.weekDays">
-              <label class="filter-label-sm"><input type="checkbox" ng-model=day.selected></br>{{day.label}}</label>
-            </div>
-            <label class="control-label filter-label col-sm-12">Filter by period</label>
-            <div class="col-sm-12">
-              <label class="filter-label-sm">From<input type="text" class= "form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" /></label>
-            </div>
-            <div class="col-sm-12">
-              <label class="filter-label-sm">
-             To<input type="text" class="form-control filter_mobile_calendar search_calendar" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" />  
-            </label>
-            </div>
-          </div>
-
-          <div class="row" style="margin-top:20px;">
-
-            <a class="col-sm-12 btn btn-sm btn-success" ng-click="initializeFilters()">Clear</a>
-            <!--<a class="hidden-sm  col-md-6 btn btn-sm btn-success" ng-click="clearFilters()">Réinitialiser</a>
-            <a class="col-sm-12 col-md-6 btn btn-sm btn-primary" ng-click="applyFilters()">Appliquer</a>
-            <a class="visible-sm-inline btn" style="font-size:12px;" ng-click="clearFilters()">Réinitialiser</a>-->
-        <!--</div>
-        </div>-->
       </div>
-      <div class="col-sm-9 col-xs-12 list-meal">
-        <div class="row fade-out-success" ng-show="manualSubscriptionPending==true">
-          <div class="col-xs-12">
-            <div class="alert alert-dismissible alert-warning">
-              <button type="button" class="close" data-dismiss="alert">&times;</button> Your request has been sent to the host.
-            </div>
-          </div>
-        </div>
-        <div ng-hide="meals.length">There are no meals to come</div>
-        <div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | orderBy:'-time':reverse)">
-          <!--<div class="row" ng-repeat="meal in meals | orderBy:'time':reverse | filter:"><!--dateRange:filter().dateFilterMin.value:filter().dateFilterMax.value | -->
-          <div class="col-xs-12">
-            <div class="list-group">
-              <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':meal.detailedInfo.subscribed,'my-meal-dtld-panel-warning':meal.detailedInfo.pending}" ng-click=openModalDtld(meal._id)>
-                <div class="hidden-xs col-sm-2 meal-admin">
-                  <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                  <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
-                </div>
-                <div class="col-xs-12 col-sm-10">
-                  <div class="row">
-                    <div class="col-xs-8">
-                      <label class="meal-menu-label" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</label> </br>
-                      <div class="meal-label meal-location">{{meal.address.town}} - {{meal.address.postalCode}}</div>
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <div class="meal-label meal-date">{{meal.time |date:'EEEE dd MMMM'}} </div>
-                        </div>
-                        <div class="col-sm-offset-2 col-sm-4">
-                          <div class="meal-label meal-time">{{meal.time |date:'HH:mm'}} </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-4">
-                      <div class="row">
-                        <div ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true" class="meal-status" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></div>
-                      </div>
-                      <div class="row">
-                        <div class="meal-price"><u>></u> {{meal.price/meal.nbGuests | currency}}</div>
-                      </div>
-                      <div class="row">
-                        <div class="meal-label meal-price-label">per pers</div>
-                      </div>
-                      <div class="row">
-                        <div ng-style="getStyle()" style="float:right;width:67px;text-align:center">
-                          <div ng-style="getStyle()" class="" style="font-size: 12px;top:42px;position:relative;color: rgba(56, 52, 52, 0.45);font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
-                          <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+      <div class="col-sm-9 col-xs-12">
+        <div ui-view="mealsList" ng-show="$state.includes('view_meals.mealsList')" class="list-meal"></div>
+        <div ui-view="mealsMap" ng-show="$state.includes('view_meals.mealsMap')"></div>
       </div>
     </div>
 </div>

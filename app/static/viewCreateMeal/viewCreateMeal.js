@@ -149,7 +149,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
           }
         }
       }
-      if($scope.editedMeal.address.vicinity == undefined || $scope.editedMeal.privateInfo.address.name == undefined){
+      if($scope.editedMeal.address.town == undefined || $scope.editedMeal.privateInfo.address.name == undefined){
         console.log("address is missing");
         okToPost = false;
       }

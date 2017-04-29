@@ -337,6 +337,22 @@ footer p {
     border-bottom-right-radius: 0px
 }
 
+.cutlery-menu {
+    background: url("/static/sources/createMeal/cutlery_menu.png") no-repeat 0;
+}
+
+.date-calendar {
+    background: url("/static/sources/calendar.png") no-repeat 0;
+}
+
+.time-calendar {
+    background: url("/static/sources/clock.png") no-repeat 0;
+}
+
+.price-banknote {
+    background: url("/static/sources/banknote.png") no-repeat 0;
+}
+
 
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
@@ -422,6 +438,53 @@ footer p {
 
 .meal-status {
     float: right;
+}
+
+.viewmeals-change-view {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.angular-google-map-container {
+    height: 400px;
+}
+
+.cutlery-menu.map-menu {
+    font-size: 16px;
+    height: 32px;
+    margin-bottom: 10px;
+}
+
+.date-calendar.map-date {
+    height: 24px;
+    text-indent: 30px;
+    line-height: 2;
+    margin-right: 20px;
+    display: inline-block
+}
+
+.time-calendar.map-time {
+    height: 24px;
+    text-indent: 30px;
+    line-height: 2;
+    display: inline-block
+}
+
+.price-banknote.map-price {
+    height: 24px;
+    text-indent: 30px;
+    line-height: 2;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #3EA93E;
+}
+
+.map-text-menu {
+    position: relative;
+    left: 40px;
+    top: 7px;
+    padding-bottom: 7px;
 }
 
 
@@ -639,7 +702,7 @@ footer p {
 /*------------------------------------------------------------------------------------------------------------------------- */
 
 
-/* form */
+/* create Meal */
 
 .legend {
     margin-left: 5px;

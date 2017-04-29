@@ -52,7 +52,7 @@
                   <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.weekDays, 'glyphicon-triangle-right': isCollapsed.weekDays}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
                   <div uib-collapse="isCollapsed.weekDays" class="collapsing-filter">
                     <div ng-repeat="day in filter.weekDays">
-                      <div class="row" style="margin:0px 5px"><span class="pull-left"><input type="checkbox" ng-model=day.selected> {{day.label}}</span><span class="pull-right">104</span></div>
+                      <div class="row" style="margin:0px 5px"><span class="pull-left"><input type="checkbox" ng-model=day.selected> {{day.label}}</span><span class="pull-right"></span></div>
                     </div>
                   </div>
                 </div>

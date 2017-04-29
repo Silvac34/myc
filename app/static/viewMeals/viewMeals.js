@@ -202,7 +202,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   $state.go("view_meals.mealsList");
   $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M";
 
-  NgMap.getMap().then(function(map) {
+  NgMap.getMap("mealsMap").then(function(map) {
     var markers = [];
     for (var i = 0; i < $scope.meals.length; i++) {
       var position = { // definit la position du repas

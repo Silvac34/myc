@@ -8,54 +8,44 @@
             </div>
             <div class="clear10"></div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group" ng-class="{'has-error': editedMeal.menu.title==undefined && createMealForm.$submitted};">
-                                <input type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" placeholder="Title of your menu" id="inputMenu" ng-model="editedMeal.menu.title" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model="editedMeal.menu.description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
+                <div class="col-sm-12">
+                    <div class="form-group" ng-class="{'has-error': editedMeal.menu.title==undefined && createMealForm.$submitted};">
+                        <input type="text" class="form-control" ng-class="{'form-vegetarian': editedMeal.veggies}" placeholder="Title of your menu" id="inputMenu" ng-model="editedMeal.menu.title" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model="editedMeal.menu.description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
                             <input type="checkbox" ng-model="editedMeal.veggies">Vegetarian alternative
                         </label>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-8 col-xs-12">
-                            <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
-                                <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
-                                    close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-10">
-                            <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}" style="padding-right:5px;">
-                                <input type="text" name="formTime" class="form-control form-clock margin-left-5px-sm-md-lg" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}"
-                                    value="{{editedMeal.time | date:'HH:mm'}}" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-offset-1 col-md-5 hidden-xs">
-                    <img src="/static/sources/createMeal/choose_your_menu.jpg" class="img-create-meal img-create-meal-menu">
-                    <span class="text-create-meal text-create-meal-menu text-center"><strong>Define your</br>meal</strong></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <div class="col-xs-12" style="margin-right:inherit;margin-left:inherit;padding-right:0px">
-                            <table class="table table-hover" style="line-height:inherit;">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center" style="width:80px"><span uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                                        <th class="text-center" style="width:113px"><span uib-popover="Arrival time" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"><span></th>
+                <div class="col-sm-8 col-xs-12">
+                    <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
+                        <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
+                            close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-10">
+                    <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}" style="padding-right:5px;">
+                        <input type="text" name="formTime" class="form-control form-clock margin-left-5px-sm-md-lg" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}"
+                            value="{{editedMeal.time | date:'HH:mm'}}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-right:inherit;margin-left:inherit;padding-right:0px">
+                    <table class="table table-hover" style="line-height:inherit;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center" style="width:80px"><span uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                                <th class="text-center" style="width:113px"><span uib-popover="Arrival time" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"><span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,33 +56,27 @@
                         </tr>
                         <tr class="table-meal-border">
                                 <td style="vertical-align:middle"><span uib-popover="People will help you for cooking" popover-trigger="mouseenter">Help cooking</span></td>
-                                            <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                                            <td class="text-center" ng-class="{'has-error': checkTimeCooking() && createMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
-                                    </tr>
-                                    <tr class="table-meal-border">
-                                        <td style="vertical-align:middle"><span uib-popover="People will help you for cleaning" popover-trigger="mouseenter">Help cleaning</span></td>
-                                        <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
-                                        <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
-                                    </tr>
-                                    <tr class="table-meal-border">
-                                        <td style="vertical-align:middle"><span uib-popover="People won't help but will pay more to give you a meal price discount" popover-trigger="mouseenter">Simple guest</span></td>
-                                        <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
-                                        <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
-                                    </tr>
-                                    <tr class="table-meal-border table-meal-border-bottom">
-                                        <td>Total</td>
-                                        <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-offset-1 col-md-5 hidden-xs">
-                    <img src="/static/sources/createMeal/people_sharing_meal.jpg" class="img-create-meal img-create-meal-help">
-                    <span class="text-create-meal text-create-meal-help text-center"><strong>Choose the help</br>you'll need</strong></span>
+                                    <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                                    <td class="text-center" ng-class="{'has-error': checkTimeCooking() && createMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
+                            </tr>
+                            <tr class="table-meal-border">
+                                <td style="vertical-align:middle"><span uib-popover="People will help you for cleaning" popover-trigger="mouseenter">Help cleaning</span></td>
+                                <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                                <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                            </tr>
+                            <tr class="table-meal-border">
+                                <td style="vertical-align:middle"><span uib-popover="People won't help but will pay more to give you a meal price discount" popover-trigger="mouseenter">Simple guest</span></td>
+                                <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                                <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                            </tr>
+                            <tr class="table-meal-border table-meal-border-bottom">
+                                <td>Total</td>
+                                <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}
+                                </td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                    </table>
                 </div>
             </div>
             <div class="row">
@@ -100,35 +84,27 @@
             </div>
             <div class="clear10"></div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group" ng-class="{'has-error': (details.vicinity==undefined)  && createMealForm.$submitted}">
-                                <input type="text" class="form-control form-location" placeholder="Address" ng-autocomplete ng-model="autocompleteAddress" options="options" details="details" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control" style="font-size:80%" id="inputAddressComplement" placeholder="Additional information (flat number, floor, ...)" ng-model="editedMeal.privateInfo.address.complement">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted}">
-                                    <span class="input-group-addon meal-addon-groceries">$</span>
-                                    <input type="number" class="form-control" style="width:180px" ng-model="editedMeal.price" placeholder="Price of the groceries" />
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-sm-12">
+                    <div class="form-group" ng-class="{'has-error': (details.vicinity==undefined)  && createMealForm.$submitted}">
+                        <input type="text" class="form-control form-location" placeholder="Address" ng-autocomplete ng-model="autocompleteAddress" options="options" details="details" required/>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-offset-1 col-md-5 hidden-xs">
-                    <img src="/static/sources/createMeal/select_your_address.jpeg" class="img-create-meal img-create-meal-address">
-                    <span class="text-create-meal text-create-meal-address text-center"><strong>Informations only displayed</br>to participants</strong></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control" style="font-size:80%" id="inputAddressComplement" placeholder="Additional information (flat number, floor, ...)" ng-model="editedMeal.privateInfo.address.complement">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted}">
+                            <span class="input-group-addon meal-addon-groceries">$</span>
+                            <input type="number" class="form-control" style="width:180px" ng-model="editedMeal.price" placeholder="Price of the groceries" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row" ng-if="cellphoneValidation==false">
@@ -147,43 +123,35 @@
                     <span ng-show="createMealForm.inputCellphone.$invalid"><br/>Your phone number is not correct</span>
                 </div>
             </div>
+            <div class="clear10"></div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="clear10"></div>
-                    <div class="row">
-                        <h4><em>Notifications</em></h4>
-                    </div>
-                    <div class="clear10"></div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="row">Automatically approve bookings?</div>
-                            <div class="row col-sm-12">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="true">Yes, sure !</label>
-                                        <label class="radio-inline"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="false">No, thanks <span class="small">(You approve each booking request yourself.)</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clear10"></div>
-                    <div class="row">
-                        <div>Do you want to receive updates about the meal on messenger? <span class="small">(recommended)</span></div>
-                        <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
-                    </div>
-                    <div class="clear20"></div>
-                    <div class="row">
+                <h4><em>Notifications</em></h4>
+            </div>
+            <div class="clear10"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">Automatically approve bookings?</div>
+                    <div class="row col-sm-12">
                         <div class="form-group">
-                            <div class="form-btn-center">
-                                <a class="btn btn-primary btn-md" ng-click="createMealForm.$setSubmitted(); createMeal()">Publish the meal</a>
+                            <div class="radio">
+                                <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="true">Yes, sure !</label>
+                                <label class="radio-inline"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="false">No, thanks <span class="small">(You approve each booking request yourself.)</span></label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-offset-1 col-md-5 hidden-xs">
-                    <img src="/static/sources/createMeal/ready_to_publish.jpg" class="img-create-meal img-create-meal-publish">
-                    <span class="text-create-meal text-create-meal-publish text-center"><strong>Almost ready to</br>publish</strong></span>
+            </div>
+            <div class="clear10"></div>
+            <div class="row">
+                <div>Do you want to receive updates about the meal on messenger? <span class="small">(recommended)</span></div>
+                <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
+            </div>
+            <div class="clear20"></div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="form-btn-center">
+                        <a class="btn btn-primary btn-md" ng-click="createMealForm.$setSubmitted(); createMeal()">Publish the meal</a>
+                    </div>
                 </div>
             </div>
         </fieldset>

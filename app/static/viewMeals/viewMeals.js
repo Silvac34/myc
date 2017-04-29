@@ -22,7 +22,7 @@ modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProv
 }]);
 
 
-modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter) {
+modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile) {
 
   $scope.meals = response.data['_items']; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
@@ -35,44 +35,49 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   });
 
   $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
-    if (this.meal.detailedInfo.subscribed == true) {
-      $state.go("view_my_dtld_meals", {
-        "myMealId": meal_id
-      });
-    }
-    else {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
-        controller: 'ViewMealsDtldCtrl',
-        size: "lg",
-        windowClass: 'modal-meal-window',
-        resolve: {
-          meal_id: function() {
-            return meal_id;
-          },
-          isAuthenticated: function() {
-            return $auth.isAuthenticated();
-          }
+    for (var i = 0; i < $scope.meals.length; i++) {
+      if ($scope.meals[i]._id == meal_id) {
+        if ($scope.meals[i].detailedInfo.subscribed == true) {
+          $state.go("view_my_dtld_meals", {
+            "myMealId": meal_id
+          });
         }
-      });
-      modalInstance.result.then(function(result) {
-        var result_value = result;
-        if (result_value == undefined) {
-          result_value = {
-            "manualSubscriptionPending": false,
-            "pending": false
-          };
+        else {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
+            controller: 'ViewMealsDtldCtrl',
+            size: "lg",
+            windowClass: 'modal-meal-window',
+            resolve: {
+              meal_id: function() {
+                return meal_id;
+              },
+              isAuthenticated: function() {
+                return $auth.isAuthenticated();
+              }
+            }
+          });
+          modalInstance.result.then(function(result) {
+            var result_value = result;
+            if (result_value == undefined) {
+              result_value = {
+                "manualSubscriptionPending": false,
+                "pending": false
+              };
+            }
+            $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
+            for (var i = 0; i < $scope.meals.length; i++) {
+              if ($scope.meals[i]._id == meal_id) {
+                $scope.meals[i].detailedInfo.pending = result_value.pending;
+              }
+            }
+          });
         }
-        $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
-        for (var i = 0; i < $scope.meals.length; i++) {
-          if ($scope.meals[i]._id == meal_id) {
-            $scope.meals[i].detailedInfo.pending = result_value.pending;
-          }
-        }
-      });
+      }
     }
   };
+
   $scope.isCollapsed = {
     "weekDays": false,
     "period": false,
@@ -202,7 +207,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   $state.go("view_meals.mealsList");
   $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M";
 
-  NgMap.getMap("mealsMap").then(function(map) {
+  NgMap.getMap("map").then(function(map) {
     var markers = [];
     for (var i = 0; i < $scope.meals.length; i++) {
       var position = { // definit la position du repas
@@ -224,41 +229,43 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
         for (var j = 0; j < $scope.meals.length; j++) {
           if ($scope.meals[j]._id == meal_id) {
             var mealPrice = $scope.meals[j].price / $scope.meals[j].ngGuests;
-            if("cooks" in $scope.meals[j].detailedInfo.requiredGuests){
-               mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price;
+            if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
+              mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price;
             }
-            else if("cleaners" in $scope.meals[j].detailedInfo.requiredGuests){
-             mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price;
+            else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
+              mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price;
             }
-            else if("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests){
+            else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
               mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price;
             }
             var content = '<div id="content">' + //définit ce qui va apparaître dans la fenêtre lorsqu'on clique sur un marqueur
-            '<div class="cutlery-menu map-menu"><strong class="map-text-menu">' + $scope.meals[j].menu.title + '</strong></div>' +
+              '<div class="cutlery-menu map-menu"><strong class="map-text-menu">' + $scope.meals[j].menu.title + '</strong></div>' +
               '<div>' +
-                '<span class="date-calendar map-date">' + $filter('date')($scope.meals[j].time, 'EEEE dd MMMM') + '</span>' +
-                '<span class="time-calendar map-time">' + $filter('date')($scope.meals[j].time, 'HH:mm') + '</span>' +
+              '<span class="date-calendar map-date">' + $filter('date')($scope.meals[j].time, 'EEEE dd MMMM') + '</span>' +
+              '<span class="time-calendar map-time">' + $filter('date')($scope.meals[j].time, 'HH:mm') + '</span>' +
               '</div>' +
               '<div class="clear10"></div>' +
-              '<span class="price-banknote map-price"><span style="color:initial;font-weight:100;">From</span> ' + $filter('currency')(mealPrice) +'</span>' +
+              '<span class="price-banknote map-price"><span style="color:initial;font-weight:100;">From</span> ' + $filter('currency')(mealPrice) + '</span>' +
               '<div class="clear10"></div>' +
-              '<div>'+
-                '<div>'+
-                  '<strong>Hosted by:</strong>'+
-                '</div>'+
-                '<div style="float:right;"><a ui-sref="my_meals">'+
-                  '<span class="meal-admin-name">'+ $scope.meals[j].admin.first_name +' '+ $scope.meals[j].admin.last_name+'</span>'+
-                  '<img class="img-circle profilePic" style="margin-left: 10px;margin-bottom: 0px;" src="'+ $scope.meals[j].admin.picture.data.url+'" alt="User profile picture" /></a>' +
-                '</div>'+
+              '<div>' +
+                '<div>' +
+                  '<strong>Hosted by:</strong>' +
+                '</div>' +
+                '<div style="float:right;"><a ui-sref="profile({userId: \'' + $scope.meals[j].admin._id + '\'})">' +
+                  '<span class="meal-admin-name">' + $scope.meals[j].admin.first_name + ' ' + $scope.meals[j].admin.last_name + '</span>' +
+                  '<img class="img-circle profilePic" style="margin-left: 10px;margin-bottom: 0px;" src="' + $scope.meals[j].admin.picture.data.url + '" alt="User profile picture" /></a>' +
+                '</div>' +
                 '<div class="clear10"></div>' +
-              '</div>'+
-              /*'<div class="text-center" style="width:110%">'+
-                '<a ng-click=openModalDtld('+$scope.meals[j]._id+') class="btn btn-primary btn-sm">Subscribe</a>'+
-              '</div>'+*/
-            '</div>';
+              '</div>' +
+              '<div class="text-center" style="width:110%">' +
+                '<a ng-if="' + $scope.meals[j].detailedInfo.subscribed + '==false" ng-click=openModalDtld(\'' + $scope.meals[j]._id + '\') class="btn btn-primary btn-sm">Subscribe</a>' +
+                '<a ng-if="' + $scope.meals[j].detailedInfo.subscribed + '==true" ng-click=openModalDtld(\'' + $scope.meals[j]._id + '\') class="btn btn-success btn-sm">See meal</a>' +
+              '</div>' +
+              '</div>';
+            var compiledContent = $compile(content)($scope);
           }
         }
-        infoWindow.setContent(content);
+        infoWindow.setContent(compiledContent[0]);
         infoWindow.open(map, markers[this.index]);
         map.panTo(markers[this.index].getPosition());
       });

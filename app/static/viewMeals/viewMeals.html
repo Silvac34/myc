@@ -49,6 +49,12 @@
             <fieldset>
               <div class="panel-body" style="padding-bottom:5px;margin-right:15px;margin-left:15px">
                 <div class="row">
+                  <span ng-click="isCollapsed.place = !isCollapsed.place" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.place, 'glyphicon-triangle-right': isCollapsed.place}"></i><span class="text-in-filter"><strong>City</strong></span></span>
+                  <div uib-collapse="isCollapsed.place" class="collapsing-filter">
+                    <input ng-autocomplete type="text" class="form-control form-location" placeholder="City" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details"/>
+                  </div>
+                </div>
+                <div class="row">
                   <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.weekDays, 'glyphicon-triangle-right': isCollapsed.weekDays}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
                   <div uib-collapse="isCollapsed.weekDays" class="collapsing-filter">
                     <div ng-repeat="day in filter.weekDays">
@@ -59,15 +65,16 @@
                 <div class="row" class="row-margin-filter">
                   <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.period, 'glyphicon-triangle-right': isCollapsed.period}"></i><span class="text-in-filter"><strong>Period</strong></span></span>
                   <div uib-collapse="isCollapsed.period" class="collapsing-filter">
-                    <input type="text" style="margin-bottom: 5px;" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" placeholder="from"/>
-                    <input type="text" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="to"/>
+                    <input type="text" style="margin-bottom: 5px;" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close"
+                      placeholder="from" />
+                    <input type="text" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="to" />
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
                   <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.price, 'glyphicon-triangle-right': isCollapsed.price}"></i><span class="text-in-filter"><strong>Price</strong></span></span>
                   <div uib-collapse="isCollapsed.price" class="collapsing-filter">
-                    <input type="number" style="margin-bottom: 5px;" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMin.value" placeholder="from"/>
-                    <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMax.value" placeholder="to"/>
+                    <input type="number" style="margin-bottom: 5px;" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMin.value" placeholder="from" />
+                    <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMax.value" placeholder="to" />
                   </div>
                 </div>
               </div>

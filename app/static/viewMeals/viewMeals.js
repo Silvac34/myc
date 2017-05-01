@@ -38,14 +38,10 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     for (var j = 0; j < $scope.meals.length; j++) {
       $scope.meals[j].mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
       if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
-        if ($scope.meals[j].detailedInfo.requiredGuests.cooks.price != 0) {
-          $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
-        }
+        $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
       }
       else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
-        if ($scope.meals[j].detailedInfo.requiredGuests.cleaners.price != 0) {
-          $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
-        }
+        $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
       }
       else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
         $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
@@ -103,6 +99,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     "weekDays": false,
     "period": false,
     "price": false,
+    "place": false
   }; //permet de faire apparaître tous les filtres lors du chargement de la page
   $scope.reverse = false; //permet de filtrer du plus récent au plus ancien
   $scope.SortOrder = 'asc';
@@ -159,7 +156,8 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     },
     priceFilterMax: {
       value: null
-    }
+    },
+    placeFilter: null
   };
 
   //code pour faire les filtres selon les weekDays
@@ -222,6 +220,15 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       else {
         return meal;
       }
+    }
+  };
+
+  $scope.placeRangeFilter = function(meal) {
+    if ($scope.filter.placeFilter != null) {
+      return (meal.address.town == $scope.details.vicinity);
+    }
+    else {
+      return meal;
     }
   };
 

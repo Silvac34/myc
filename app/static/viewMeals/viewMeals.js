@@ -225,7 +225,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
 
   $scope.placeRangeFilter = function(meal) {
     if ($scope.filter.placeFilter != null) {
-      return (meal.address.town == $scope.details.vicinity);
+        return (meal.address.town == $scope.filter.placeFilter.split(",")[0]);
     }
     else {
       return meal;

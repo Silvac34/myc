@@ -33,7 +33,7 @@
                                 <div ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true" class="meal-status" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></div>
                             </div>
                             <div class="row">
-                                <div class="meal-price"><u>></u> {{meal.price/meal.nbGuests | currency}}</div>
+                                <div class="meal-price"><span style="color:initial;font-weight:100;" class="small">From</span> {{meal.mealPrice | currency}}</div>
                             </div>
                             <div class="row">
                                 <div class="meal-label meal-price-label">per pers</div>

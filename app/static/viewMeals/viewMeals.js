@@ -157,7 +157,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     priceFilterMax: {
       value: null
     },
-    placeFilter: null
+    placeFilter: ""
   };
 
   //code pour faire les filtres selon les weekDays
@@ -224,13 +224,36 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   };
 
   $scope.placeRangeFilter = function(meal) {
-    if ($scope.filter.placeFilter != null) {
-        return (meal.address.town == $scope.filter.placeFilter.split(",")[0]);
+    if ($scope.filter.placeFilter != "") {
+      var city = "";
+      if ($scope.filter.placeFilter.match(",")) {
+        city = $scope.filter.placeFilter.split(",")[0];
+      }
+      else {
+        city = $scope.filter.placeFilter;
+      }
+      if (city.match(" ")) {//si la ville a des espaces, on met en majuscule chacune des premières lettres
+        var arrayCity = city.split(" ");
+        city = "";
+        for (var i = 0; i < arrayCity.length; i++) {
+          arrayCity[i] = capitalizeFirstLetter(arrayCity[i]);
+          city += arrayCity[i] + " ";
+        }
+        city = city.substring(0,city.length-1);
+      }
+      else {
+        city = capitalizeFirstLetter(city);
+      } // on met en majuscule la première lettre
+      return meal.address.town.match(city);
     }
     else {
       return meal;
     }
   };
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   $state.go("view_meals.mealsList");
   NgMap.getMap("map").then(function(map) {

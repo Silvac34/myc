@@ -445,6 +445,10 @@ footer p {
     margin-bottom: 10px;
 }
 
+.viewmeals-change-view.viewmeals-change-view-mobile {
+    margin-left: 10px;
+}
+
 .angular-google-map-container {
     height: 400px;
 }
@@ -485,6 +489,18 @@ footer p {
     left: 40px;
     top: 7px;
     padding-bottom: 7px;
+}
+
+@media (min-width: 768px) {
+    .map-height {
+        height: 577px;
+    }
+}
+
+@media (max-width: 767px) {
+    .map-height {
+        height: 340px;
+    }
 }
 
 
@@ -786,6 +802,7 @@ footer p {
 .table-meal-border-bottom {
     border-bottom: 1px solid #dddddd;
 }
+
 
 /* viewMyMealsDtld ---------------------------------------------------*/
 

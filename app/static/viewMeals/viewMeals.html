@@ -18,6 +18,8 @@
     <div class="row hidden-sm hidden-md hidden-lg" style="padding-bottom:10px">
       <div class="meal-search-filter">
         <a class="btn btn-primary btn-sm" ng-click="openModalFilter()">Filters</a>
+        <span ui-sref="view_meals.mealsMap" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>Map</em></strong></span>
+        <span ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>List</em></strong></span>
       </div>
       <div class="meal-search-sort">
         <span class="meal-search-title-count">Order by</span>
@@ -40,7 +42,6 @@
       <div class="col-sm-3 hidden-xs">
         <div ui-sref="view_meals.mealsMap" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view"><strong><em>See meals on a map</em></strong></div>
         <div ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view"><strong><em>See the list of meals</em></strong></div>
-        <!--<div ui-view="filterInternet"></div>-->
         <div class="panel panel-info" style="padding-bottom:20px;">
           <div class="panel-heading">
             <h3 class="panel-title">Filter by</h3>
@@ -51,7 +52,7 @@
                 <div class="row">
                   <span ng-click="isCollapsed.place = !isCollapsed.place" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.place, 'glyphicon-triangle-right': isCollapsed.place}"></i><span class="text-in-filter"><strong>City</strong></span></span>
                   <div uib-collapse="isCollapsed.place" class="collapsing-filter">
-                    <input ng-autocomplete type="text" class="form-control form-location" placeholder="City, suburbs" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details"/>
+                    <input ng-autocomplete type="text" class="form-control form-location" placeholder="City, suburbs" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details" />
                   </div>
                 </div>
                 <div class="row">

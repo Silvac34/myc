@@ -230,7 +230,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     $scope.map = map;
   });
 
-  $scope.openInfowindow = function() { //ouvre l'infowindow associé à la carte google
+  $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
     $scope.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
   };
 

@@ -6,7 +6,7 @@
     </div>
 </div>
 <div ng-hide="meals.length">There are no meals to come</div>
-<div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: placeRangeFilter | orderBy:'-time':reverse)">
+<div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | orderBy:'-time':reverse)">
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':meal.detailedInfo.subscribed,'my-meal-dtld-panel-warning':meal.detailedInfo.pending}" ng-click=openModalDtld(meal._id)>

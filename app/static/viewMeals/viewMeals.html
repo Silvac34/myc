@@ -52,7 +52,7 @@
                 <div class="row">
                   <span ng-click="isCollapsed.place = !isCollapsed.place" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.place, 'glyphicon-triangle-right': isCollapsed.place}"></i><span class="text-in-filter"><strong>City</strong></span></span>
                   <div uib-collapse="isCollapsed.place" class="collapsing-filter">
-                    <input ng-autocomplete type="text" class="form-control form-location" placeholder="City, suburb" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details" />
+                    <input ng-autocomplete type="text" ng-model="filter.cityFilter" class="form-control form-location" placeholder="City, suburb" options="{types:'(cities)'}" />
                   </div>
                 </div>
                 <div class="row">

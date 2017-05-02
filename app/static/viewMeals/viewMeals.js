@@ -26,6 +26,10 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
 
   $scope.meals = response.data['_items']; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
+  $http.get("/static/sources/profile/countries.json").then(function(res) {
+    $scope.countries = res.data;
+  });
+  
   $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
@@ -164,7 +168,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     priceFilterMax: {
       value: null
     },
-    placeFilter: ""
+    cityFilter: ""
   };
 
   //code pour faire les filtres selon les weekDays
@@ -230,14 +234,14 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   };
 
-  $scope.placeRangeFilter = function(meal) {
-    if ($scope.filter.placeFilter != "") {
+  $scope.cityRangeFilter = function(meal) {
+    if ($scope.filter.cityFilter != "") {
       var city = "";
-      if ($scope.filter.placeFilter.match(",")) {
-        city = $scope.filter.placeFilter.split(",")[0];
+      if ($scope.filter.cityFilter.match(",")) {
+        city = $scope.filter.cityFilter.split(",")[0];
       }
       else {
-        city = $scope.filter.placeFilter;
+        city = $scope.filter.cityFilter;
       }
       if (city.match(" ")) { //si la ville a des espaces, on met en majuscule chacune des premières lettres
         var arrayCity = city.split(" ");
@@ -263,12 +267,13 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   }
 
   $state.go("view_meals.mealsList");
+  var vm = this;
   NgMap.getMap("map").then(function(map) {
-    $scope.map = map;
+    vm.map = map;
   });
 
   $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
-    $scope.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
+    vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
   };
 
 }]);

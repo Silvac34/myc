@@ -103,6 +103,18 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     });
   };
 
+  $http.get("/static/sources/profile/countries.json").then(function(res) {
+      $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
+  });
+
+  function getCountry(country_code, jsonData) {
+    for (var i = 0; i < jsonData.length; i++) {
+      if (jsonData[i].code == country_code) {
+        return jsonData[i].name;
+      }
+    }
+  }
+
 }]);
 
 modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, _etag) {

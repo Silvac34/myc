@@ -1,131 +1,131 @@
 [{
   "url": "/wiki/Afghanistan",
-  "code": "AFG",
+  "code": "AF",
   "flag_url": "commons/9/9a/Flag_of_Afghanistan",
   "name": "Afghanistan"
 }, {
   "url": "/wiki/%C3%85land_Islands",
-  "code": "ALA",
+  "code": "AX",
   "flag_url": "commons/5/52/Flag_of_%C3%85land",
   "name": "Åland Islands"
 }, {
   "url": "/wiki/Albania",
-  "code": "ALB",
+  "code": "AL",
   "flag_url": "commons/3/36/Flag_of_Albania",
   "name": "Albania"
 }, {
   "url": "/wiki/Algeria",
-  "code": "DZA",
+  "code": "DZ",
   "flag_url": "commons/7/77/Flag_of_Algeria",
   "name": "Algeria"
 }, {
   "url": "/wiki/American_Samoa",
-  "code": "ASM",
+  "code": "AS",
   "flag_url": "commons/8/87/Flag_of_American_Samoa",
   "name": "American Samoa"
 }, {
   "url": "/wiki/Andorra",
-  "code": "AND",
+  "code": "AD",
   "flag_url": "commons/1/19/Flag_of_Andorra",
   "name": "Andorra"
 }, {
   "url": "/wiki/Angola",
-  "code": "AGO",
+  "code": "AO",
   "flag_url": "commons/9/9d/Flag_of_Angola",
   "name": "Angola"
 }, {
   "url": "/wiki/Anguilla",
-  "code": "AIA",
+  "code": "AI",
   "flag_url": "commons/b/b4/Flag_of_Anguilla",
   "name": "Anguilla"
 }, {
   "url": "/wiki/Antigua_and_Barbuda",
-  "code": "ATG",
+  "code": "AG",
   "flag_url": "commons/8/89/Flag_of_Antigua_and_Barbuda",
   "name": "Antigua and Barbuda"
 }, {
   "url": "/wiki/Argentina",
-  "code": "ARG",
+  "code": "AR",
   "flag_url": "commons/1/1a/Flag_of_Argentina",
   "name": "Argentina"
 }, {
   "url": "/wiki/Armenia",
-  "code": "ARM",
+  "code": "AM",
   "flag_url": "commons/2/2f/Flag_of_Armenia",
   "name": "Armenia"
 }, {
   "url": "/wiki/Aruba",
-  "code": "ABW",
+  "code": "AW",
   "flag_url": "commons/f/f6/Flag_of_Aruba",
   "name": "Aruba"
 }, {
   "url": "/wiki/Australia",
-  "code": "AUS",
+  "code": "AU",
   "flag_url": "commons/8/88/Flag_of_Australia_%28converted%29",
   "name": "Australia"
 }, {
   "url": "/wiki/Austria",
-  "code": "AUT",
+  "code": "AT",
   "flag_url": "commons/4/41/Flag_of_Austria",
   "name": "Austria"
 }, {
   "url": "/wiki/Azerbaijan",
-  "code": "AZE",
+  "code": "AZ",
   "flag_url": "commons/d/dd/Flag_of_Azerbaijan",
   "name": "Azerbaijan"
 }, {
   "url": "/wiki/Bahamas",
-  "code": "BHS",
+  "code": "BS",
   "flag_url": "commons/9/93/Flag_of_the_Bahamas",
   "name": "Bahamas"
 }, {
   "url": "/wiki/Bahrain",
-  "code": "BHR",
+  "code": "BH",
   "flag_url": "commons/2/2c/Flag_of_Bahrain",
   "name": "Bahrain"
 }, {
   "url": "/wiki/Bangladesh",
-  "code": "BGD",
+  "code": "BD",
   "flag_url": "commons/f/f9/Flag_of_Bangladesh",
   "name": "Bangladesh"
 }, {
   "url": "/wiki/Barbados",
-  "code": "BRB",
+  "code": "BB",
   "flag_url": "commons/e/ef/Flag_of_Barbados",
   "name": "Barbados"
 }, {
   "url": "/wiki/Belarus",
-  "code": "BLR",
+  "code": "BY",
   "flag_url": "commons/8/85/Flag_of_Belarus",
   "name": "Belarus"
 }, {
   "url": "/wiki/Belgium",
-  "code": "BEL",
+  "code": "BE",
   "flag_url": "commons/6/65/Flag_of_Belgium",
   "name": "Belgium"
 }, {
   "url": "/wiki/Belize",
-  "code": "BLZ",
+  "code": "BZ",
   "flag_url": "commons/e/e7/Flag_of_Belize",
   "name": "Belize"
 }, {
   "url": "/wiki/Benin",
-  "code": "BEN",
+  "code": "BJ",
   "flag_url": "commons/0/0a/Flag_of_Benin",
   "name": "Benin"
 }, {
   "url": "/wiki/Bermuda",
-  "code": "BMU",
+  "code": "BM",
   "flag_url": "commons/b/bf/Flag_of_Bermuda",
   "name": "Bermuda"
 }, {
   "url": "/wiki/Bhutan",
-  "code": "BTN",
+  "code": "BT",
   "flag_url": "commons/9/91/Flag_of_Bhutan",
   "name": "Bhutan"
 }, {
   "url": "/wiki/Bolivia,_Plurinational_State_of",
-  "code": "BOL",
+  "code": "BO",
   "flag_url": "commons/d/de/Flag_of_Bolivia_%28state%29",
   "name": "Bolivia - Plurinational State of"
 }, {
@@ -135,147 +135,147 @@
   "name": "Bonaire - Sint Eustatius and Saba"
 }, {
   "url": "/wiki/Bosnia_and_Herzegovina",
-  "code": "BIH",
+  "code": "BO",
   "flag_url": "commons/b/bf/Flag_of_Bosnia_and_Herzegovina",
   "name": "Bosnia and Herzegovina"
 }, {
   "url": "/wiki/Botswana",
-  "code": "BWA",
+  "code": "BW",
   "flag_url": "commons/f/fa/Flag_of_Botswana",
   "name": "Botswana"
 }, {
   "url": "/wiki/Bouvet_Island",
-  "code": "BVT",
+  "code": "BV",
   "flag_url": "commons/d/d9/Flag_of_Norway",
   "name": "Bouvet Island"
 }, {
   "url": "/wiki/Brazil",
-  "code": "BRA",
+  "code": "BR",
   "flag_url": "en/0/05/Flag_of_Brazil",
   "name": "Brazil"
 }, {
   "url": "/wiki/British_Indian_Ocean_Territory",
-  "code": "IOT",
+  "code": "IO",
   "flag_url": "commons/6/6e/Flag_of_the_British_Indian_Ocean_Territory",
   "name": "British Indian Ocean Territory"
 }, {
   "url": "/wiki/Brunei_Darussalam",
-  "code": "BRN",
+  "code": "BN",
   "flag_url": "commons/9/9c/Flag_of_Brunei",
   "name": "Brunei Darussalam"
 }, {
   "url": "/wiki/Bulgaria",
-  "code": "BGR",
+  "code": "BG",
   "flag_url": "commons/9/9a/Flag_of_Bulgaria",
   "name": "Bulgaria"
 }, {
   "url": "/wiki/Burkina_Faso",
-  "code": "BFA",
+  "code": "BF",
   "flag_url": "commons/3/31/Flag_of_Burkina_Faso",
   "name": "Burkina Faso"
 }, {
   "url": "/wiki/Burundi",
-  "code": "BDI",
+  "code": "BI",
   "flag_url": "commons/5/50/Flag_of_Burundi",
   "name": "Burundi"
 }, {
   "url": "/wiki/Cambodia",
-  "code": "KHM",
+  "code": "KH",
   "flag_url": "commons/8/83/Flag_of_Cambodia",
   "name": "Cambodia"
 }, {
   "url": "/wiki/Cameroon",
-  "code": "CMR",
+  "code": "CM",
   "flag_url": "commons/4/4f/Flag_of_Cameroon",
   "name": "Cameroon"
 }, {
   "url": "/wiki/Canada",
-  "code": "CAN",
+  "code": "CA",
   "flag_url": "en/c/cf/Flag_of_Canada",
   "name": "Canada"
 }, {
   "url": "/wiki/Cape_Verde",
-  "code": "CPV",
+  "code": "CV",
   "flag_url": "commons/3/38/Flag_of_Cape_Verde",
   "name": "Cape Verde"
 }, {
   "url": "/wiki/Cayman_Islands",
-  "code": "CYM",
+  "code": "CM",
   "flag_url": "commons/0/0f/Flag_of_the_Cayman_Islands",
   "name": "Cayman Islands"
 }, {
   "url": "/wiki/Central_African_Republic",
-  "code": "CAF",
+  "code": "CF",
   "flag_url": "commons/6/6f/Flag_of_the_Central_African_Republic",
   "name": "Central African Republic"
 }, {
   "url": "/wiki/Chad",
-  "code": "TCD",
+  "code": "TD",
   "flag_url": "commons/4/4b/Flag_of_Chad",
   "name": "Chad"
 }, {
   "url": "/wiki/Chile",
-  "code": "CHL",
+  "code": "CL",
   "flag_url": "commons/7/78/Flag_of_Chile",
   "name": "Chile"
 }, {
   "url": "/wiki/China",
-  "code": "CHN",
+  "code": "CN",
   "flag_url": "commons/f/fa/Flag_of_the_People%27s_Republic_of_China",
   "name": "China"
 }, {
   "url": "/wiki/Christmas_Island",
-  "code": "CXR",
+  "code": "CX",
   "flag_url": "commons/6/67/Flag_of_Christmas_Island",
   "name": "Christmas Island"
 }, {
   "url": "/wiki/Cocos_(Keeling)_Islands",
-  "code": "CCK",
+  "code": "CC",
   "flag_url": "commons/7/74/Flag_of_the_Cocos_%28Keeling%29_Islands",
   "name": "Cocos (Keeling) Islands"
 }, {
   "url": "/wiki/Colombia",
-  "code": "COL",
+  "code": "CO",
   "flag_url": "commons/2/21/Flag_of_Colombia",
   "name": "Colombia"
 }, {
   "url": "/wiki/Comoros",
-  "code": "COM",
+  "code": "KM",
   "flag_url": "commons/9/94/Flag_of_the_Comoros",
   "name": "Comoros"
 }, {
   "url": "/wiki/Republic_of_the_Congo",
-  "code": "COG",
+  "code": "CG",
   "flag_url": "commons/9/92/Flag_of_the_Republic_of_the_Congo",
   "name": "Congo"
 }, {
   "url": "/wiki/Congo,_the_Democratic_Republic_of_the",
-  "code": "COD",
+  "code": "CD",
   "flag_url": "commons/6/6f/Flag_of_the_Democratic_Republic_of_the_Congo",
   "name": "Congo - the Democratic Republic of the"
 }, {
   "url": "/wiki/Cook_Islands",
-  "code": "COK",
+  "code": "CK",
   "flag_url": "commons/3/35/Flag_of_the_Cook_Islands",
   "name": "Cook Islands"
 }, {
   "url": "/wiki/Costa_Rica",
-  "code": "CRI",
+  "code": "CR",
   "flag_url": "commons/b/bc/Flag_of_Costa_Rica_%28state%29",
   "name": "Costa Rica"
 }, {
   "url": "/wiki/C%C3%B4te_d%27Ivoire",
-  "code": "CIV",
+  "code": "CI",
   "flag_url": "commons/f/fe/Flag_of_C%C3%B4te_d%27Ivoire",
   "name": "Côte d'Ivoire"
 }, {
   "url": "/wiki/Croatia",
-  "code": "HRV",
+  "code": "HR",
   "flag_url": "commons/1/1b/Flag_of_Croatia",
   "name": "Croatia"
 }, {
   "url": "/wiki/Cuba",
-  "code": "CUB",
+  "code": "CU",
   "flag_url": "commons/b/bd/Flag_of_Cuba",
   "name": "Cuba"
 }, {
@@ -285,947 +285,947 @@
   "name": "Curaçao"
 }, {
   "url": "/wiki/Cyprus",
-  "code": "CYP",
+  "code": "CY",
   "flag_url": "commons/d/d4/Flag_of_Cyprus",
   "name": "Cyprus"
 }, {
   "url": "/wiki/Czech_Republic",
-  "code": "CZE",
+  "code": "CZ",
   "flag_url": "commons/c/cb/Flag_of_the_Czech_Republic",
   "name": "Czech Republic"
 }, {
   "url": "/wiki/Denmark",
-  "code": "DNK",
+  "code": "DK",
   "flag_url": "commons/9/9c/Flag_of_Denmark",
   "name": "Denmark"
 }, {
   "url": "/wiki/Djibouti",
-  "code": "DJI",
+  "code": "DJ",
   "flag_url": "commons/3/34/Flag_of_Djibouti",
   "name": "Djibouti"
 }, {
   "url": "/wiki/Dominica",
-  "code": "DMA",
+  "code": "DM",
   "flag_url": "commons/c/c4/Flag_of_Dominica",
   "name": "Dominica"
 }, {
   "url": "/wiki/Dominican_Republic",
-  "code": "DOM",
+  "code": "DO",
   "flag_url": "commons/9/9f/Flag_of_the_Dominican_Republic",
   "name": "Dominican Republic"
 }, {
   "url": "/wiki/Ecuador",
-  "code": "ECU",
+  "code": "EC",
   "flag_url": "commons/e/e8/Flag_of_Ecuador",
   "name": "Ecuador"
 }, {
   "url": "/wiki/Egypt",
-  "code": "EGY",
+  "code": "EG",
   "flag_url": "commons/f/fe/Flag_of_Egypt",
   "name": "Egypt"
 }, {
   "url": "/wiki/El_Salvador",
-  "code": "SLV",
+  "code": "SV",
   "flag_url": "commons/3/34/Flag_of_El_Salvador",
   "name": "El Salvador"
 }, {
   "url": "/wiki/Equatorial_Guinea",
-  "code": "GNQ",
+  "code": "GQ",
   "flag_url": "commons/3/31/Flag_of_Equatorial_Guinea",
   "name": "Equatorial Guinea"
 }, {
   "url": "/wiki/Eritrea",
-  "code": "ERI",
+  "code": "ER",
   "flag_url": "commons/2/29/Flag_of_Eritrea",
   "name": "Eritrea"
 }, {
   "url": "/wiki/Estonia",
-  "code": "EST",
+  "code": "EE",
   "flag_url": "commons/8/8f/Flag_of_Estonia",
   "name": "Estonia"
 }, {
   "url": "/wiki/Ethiopia",
-  "code": "ETH",
+  "code": "ET",
   "flag_url": "commons/7/71/Flag_of_Ethiopia",
   "name": "Ethiopia"
 }, {
   "url": "/wiki/Falkland_Islands_(Malvinas)",
-  "code": "FLK",
+  "code": "FK",
   "flag_url": "commons/8/83/Flag_of_the_Falkland_Islands",
   "name": "Falkland Islands (Malvinas)"
 }, {
   "url": "/wiki/Faroe_Islands",
-  "code": "FRO",
+  "code": "FO",
   "flag_url": "commons/3/3c/Flag_of_the_Faroe_Islands",
   "name": "Faroe Islands"
 }, {
   "url": "/wiki/Fiji",
-  "code": "FJI",
+  "code": "FJ",
   "flag_url": "commons/b/ba/Flag_of_Fiji",
   "name": "Fiji"
 }, {
   "url": "/wiki/Finland",
-  "code": "FIN",
+  "code": "FI",
   "flag_url": "commons/b/bc/Flag_of_Finland",
   "name": "Finland"
 }, {
   "url": "/wiki/France",
-  "code": "FRA",
+  "code": "FR",
   "flag_url": "en/c/c3/Flag_of_France",
   "name": "France"
 }, {
   "url": "/wiki/French_Guiana",
-  "code": "GUF",
+  "code": "GF",
   "flag_url": "commons/2/29/Flag_of_French_Guiana",
   "name": "French Guiana"
 }, {
   "url": "/wiki/French_Polynesia",
-  "code": "PYF",
+  "code": "PF",
   "flag_url": "commons/d/db/Flag_of_French_Polynesia",
   "name": "French Polynesia"
 }, {
   "url": "/wiki/French_Southern_Territories",
-  "code": "ATF",
+  "code": "TF",
   "flag_url": "commons/a/a7/Flag_of_the_French_Southern_and_Antarctic_Lands",
   "name": "French Southern Territories"
 }, {
   "url": "/wiki/Gabon",
-  "code": "GAB",
+  "code": "GA",
   "flag_url": "commons/0/04/Flag_of_Gabon",
   "name": "Gabon"
 }, {
   "url": "/wiki/Gambia",
-  "code": "GMB",
+  "code": "GM",
   "flag_url": "commons/7/77/Flag_of_The_Gambia",
   "name": "Gambia"
 }, {
   "url": "/wiki/Georgia_(country)",
-  "code": "GEO",
+  "code": "GE",
   "flag_url": "commons/0/0f/Flag_of_Georgia",
   "name": "Georgia"
 }, {
   "url": "/wiki/Germany",
-  "code": "DEU",
+  "code": "DE",
   "flag_url": "en/b/ba/Flag_of_Germany",
   "name": "Germany"
 }, {
   "url": "/wiki/Ghana",
-  "code": "GHA",
+  "code": "GH",
   "flag_url": "commons/1/19/Flag_of_Ghana",
   "name": "Ghana"
 }, {
   "url": "/wiki/Gibraltar",
-  "code": "GIB",
+  "code": "GI",
   "flag_url": "commons/0/02/Flag_of_Gibraltar",
   "name": "Gibraltar"
 }, {
   "url": "/wiki/Greece",
-  "code": "GRC",
+  "code": "GR",
   "flag_url": "commons/5/5c/Flag_of_Greece",
   "name": "Greece"
 }, {
   "url": "/wiki/Greenland",
-  "code": "GRL",
+  "code": "GL",
   "flag_url": "commons/0/09/Flag_of_Greenland",
   "name": "Greenland"
 }, {
   "url": "/wiki/Grenada",
-  "code": "GRD",
+  "code": "GD",
   "flag_url": "commons/b/bc/Flag_of_Grenada",
   "name": "Grenada"
 }, {
   "url": "/wiki/Guadeloupe",
-  "code": "GLP",
+  "code": "GP",
   "flag_url": "commons/0/04/Flag_of_Guadeloupe_%28local%29",
   "name": "Guadeloupe"
 }, {
   "url": "/wiki/Guam",
-  "code": "GUM",
+  "code": "GU",
   "flag_url": "commons/0/07/Flag_of_Guam",
   "name": "Guam"
 }, {
   "url": "/wiki/Guatemala",
-  "code": "GTM",
+  "code": "GT",
   "flag_url": "commons/e/ec/Flag_of_Guatemala",
   "name": "Guatemala"
 }, {
   "url": "/wiki/Guernsey",
-  "code": "GGY",
+  "code": "GG",
   "flag_url": "commons/f/fa/Flag_of_Guernsey",
   "name": "Guernsey"
 }, {
   "url": "/wiki/Guinea",
-  "code": "GIN",
+  "code": "GN",
   "flag_url": "commons/e/ed/Flag_of_Guinea",
   "name": "Guinea"
 }, {
   "url": "/wiki/Guinea-Bissau",
-  "code": "GNB",
+  "code": "GW",
   "flag_url": "commons/0/01/Flag_of_Guinea-Bissau",
   "name": "Guinea-Bissau"
 }, {
   "url": "/wiki/Guyana",
-  "code": "GUY",
+  "code": "GY",
   "flag_url": "commons/9/99/Flag_of_Guyana",
   "name": "Guyana"
 }, {
   "url": "/wiki/Haiti",
-  "code": "HTI",
+  "code": "HT",
   "flag_url": "commons/5/56/Flag_of_Haiti",
   "name": "Haiti"
 }, {
   "url": "/wiki/Heard_Island_and_McDonald_Islands",
-  "code": "HMD",
+  "code": "HM",
   "flag_url": "commons/f/fa/Flag_of_Antarctica",
   "name": "Heard Island and McDonald Islands"
 }, {
   "url": "/wiki/Vatican_City_State",
-  "code": "VAT",
+  "code": "VA",
   "flag_url": "commons/0/00/Flag_of_the_Vatican_City",
   "name": "Holy See (Vatican City State)"
 }, {
   "url": "/wiki/Honduras",
-  "code": "HND",
+  "code": "HN",
   "flag_url": "commons/8/82/Flag_of_Honduras",
   "name": "Honduras"
 }, {
   "url": "/wiki/Hong_Kong",
-  "code": "HKG",
+  "code": "HK",
   "flag_url": "commons/5/5b/Flag_of_Hong_Kong",
   "name": "Hong Kong"
 }, {
   "url": "/wiki/Hungary",
-  "code": "HUN",
+  "code": "HU",
   "flag_url": "commons/c/c1/Flag_of_Hungary",
   "name": "Hungary"
 }, {
   "url": "/wiki/Iceland",
-  "code": "ISL",
+  "code": "IS",
   "flag_url": "commons/c/ce/Flag_of_Iceland",
   "name": "Iceland"
 }, {
   "url": "/wiki/India",
-  "code": "IND",
+  "code": "IN",
   "flag_url": "en/4/41/Flag_of_India",
   "name": "India"
 }, {
   "url": "/wiki/Indonesia",
-  "code": "IDN",
+  "code": "ID",
   "flag_url": "commons/9/9f/Flag_of_Indonesia",
   "name": "Indonesia"
 }, {
   "url": "/wiki/Iran,_Islamic_Republic_of",
-  "code": "IRN",
+  "code": "IR",
   "flag_url": "commons/c/ca/Flag_of_Iran",
   "name": "Iran - Islamic Republic of"
 }, {
   "url": "/wiki/Iraq",
-  "code": "IRQ",
+  "code": "IQ",
   "flag_url": "commons/f/f6/Flag_of_Iraq",
   "name": "Iraq"
 }, {
   "url": "/wiki/Republic_of_Ireland",
-  "code": "IRL",
+  "code": "IE",
   "flag_url": "commons/4/45/Flag_of_Ireland",
   "name": "Ireland"
 }, {
   "url": "/wiki/Isle_of_Man",
-  "code": "IMN",
+  "code": "IM",
   "flag_url": "commons/b/bc/Flag_of_the_Isle_of_Man",
   "name": "Isle of Man"
 }, {
   "url": "/wiki/Israel",
-  "code": "ISR",
+  "code": "IL",
   "flag_url": "commons/d/d4/Flag_of_Israel",
   "name": "Israel"
 }, {
   "url": "/wiki/Italy",
-  "code": "ITA",
+  "code": "IT",
   "flag_url": "en/0/03/Flag_of_Italy",
   "name": "Italy"
 }, {
   "url": "/wiki/Jamaica",
-  "code": "JAM",
+  "code": "JM",
   "flag_url": "commons/0/0a/Flag_of_Jamaica",
   "name": "Jamaica"
 }, {
   "url": "/wiki/Japan",
-  "code": "JPN",
+  "code": "JP",
   "flag_url": "en/9/9e/Flag_of_Japan",
   "name": "Japan"
 }, {
   "url": "/wiki/Jersey",
-  "code": "JEY",
+  "code": "JE",
   "flag_url": "commons/1/1c/Flag_of_Jersey",
   "name": "Jersey"
 }, {
   "url": "/wiki/Jordan",
-  "code": "JOR",
+  "code": "JO",
   "flag_url": "commons/c/c0/Flag_of_Jordan",
   "name": "Jordan"
 }, {
   "url": "/wiki/Kazakhstan",
-  "code": "KAZ",
+  "code": "KZ",
   "flag_url": "commons/d/d3/Flag_of_Kazakhstan",
   "name": "Kazakhstan"
 }, {
   "url": "/wiki/Kenya",
-  "code": "KEN",
+  "code": "KE",
   "flag_url": "commons/4/49/Flag_of_Kenya",
   "name": "Kenya"
 }, {
   "url": "/wiki/Kiribati",
-  "code": "KIR",
+  "code": "KI",
   "flag_url": "commons/d/d3/Flag_of_Kiribati",
   "name": "Kiribati"
 }, {
   "url": "/wiki/Korea,_Democratic_People%27s_Republic_of",
-  "code": "PRK",
+  "code": "KP",
   "flag_url": "commons/5/51/Flag_of_North_Korea",
   "name": "Korea - Democratic People's Republic of"
 }, {
   "url": "/wiki/Korea,_Republic_of",
-  "code": "KOR",
+  "code": "KR",
   "flag_url": "commons/0/09/Flag_of_South_Korea",
   "name": "Korea - Republic of"
 }, {
   "url": "/wiki/Kuwait",
-  "code": "KWT",
+  "code": "KW",
   "flag_url": "commons/a/aa/Flag_of_Kuwait",
   "name": "Kuwait"
 }, {
   "url": "/wiki/Kyrgyzstan",
-  "code": "KGZ",
+  "code": "KG",
   "flag_url": "commons/c/c7/Flag_of_Kyrgyzstan",
   "name": "Kyrgyzstan"
 }, {
   "url": "/wiki/Lao_People%27s_Democratic_Republic",
-  "code": "LAO",
+  "code": "LA",
   "flag_url": "commons/5/56/Flag_of_Laos",
   "name": "Lao People's Democratic Republic"
 }, {
   "url": "/wiki/Latvia",
-  "code": "LVA",
+  "code": "LV",
   "flag_url": "commons/8/84/Flag_of_Latvia",
   "name": "Latvia"
 }, {
   "url": "/wiki/Lebanon",
-  "code": "LBN",
+  "code": "LB",
   "flag_url": "commons/5/59/Flag_of_Lebanon",
   "name": "Lebanon"
 }, {
   "url": "/wiki/Lesotho",
-  "code": "LSO",
+  "code": "LS",
   "flag_url": "commons/4/4a/Flag_of_Lesotho",
   "name": "Lesotho"
 }, {
   "url": "/wiki/Liberia",
-  "code": "LBR",
+  "code": "LR",
   "flag_url": "commons/b/b8/Flag_of_Liberia",
   "name": "Liberia"
 }, {
   "url": "/wiki/Libya",
-  "code": "LBY",
+  "code": "LY",
   "flag_url": "commons/0/05/Flag_of_Libya",
   "name": "Libya"
 }, {
   "url": "/wiki/Liechtenstein",
-  "code": "LIE",
+  "code": "LI",
   "flag_url": "commons/4/47/Flag_of_Liechtenstein",
   "name": "Liechtenstein"
 }, {
   "url": "/wiki/Lithuania",
-  "code": "LTU",
+  "code": "LT",
   "flag_url": "commons/1/11/Flag_of_Lithuania",
   "name": "Lithuania"
 }, {
   "url": "/wiki/Luxembourg",
-  "code": "LUX",
+  "code": "LU",
   "flag_url": "commons/d/da/Flag_of_Luxembourg",
   "name": "Luxembourg"
 }, {
   "url": "/wiki/Macao",
-  "code": "MAC",
+  "code": "MO",
   "flag_url": "commons/6/63/Flag_of_Macau",
   "name": "Macao"
 }, {
   "url": "/wiki/Republic_of_Macedonia",
-  "code": "MKD",
+  "code": "MK",
   "flag_url": "commons/f/f8/Flag_of_Macedonia",
   "name": "Macedonia - the former Yugoslav Republic of"
 }, {
   "url": "/wiki/Madagascar",
-  "code": "MDG",
+  "code": "MG",
   "flag_url": "commons/b/bc/Flag_of_Madagascar",
   "name": "Madagascar"
 }, {
   "url": "/wiki/Malawi",
-  "code": "MWI",
+  "code": "MW",
   "flag_url": "commons/d/d1/Flag_of_Malawi",
   "name": "Malawi"
 }, {
   "url": "/wiki/Malaysia",
-  "code": "MYS",
+  "code": "MY",
   "flag_url": "commons/6/66/Flag_of_Malaysia",
   "name": "Malaysia"
 }, {
   "url": "/wiki/Maldives",
-  "code": "MDV",
+  "code": "MV",
   "flag_url": "commons/0/0f/Flag_of_Maldives",
   "name": "Maldives"
 }, {
   "url": "/wiki/Mali",
-  "code": "MLI",
+  "code": "ML",
   "flag_url": "commons/9/92/Flag_of_Mali",
   "name": "Mali"
 }, {
   "url": "/wiki/Malta",
-  "code": "MLT",
+  "code": "MT",
   "flag_url": "commons/7/73/Flag_of_Malta",
   "name": "Malta"
 }, {
   "url": "/wiki/Marshall_Islands",
-  "code": "MHL",
+  "code": "MH",
   "flag_url": "commons/2/2e/Flag_of_the_Marshall_Islands",
   "name": "Marshall Islands"
 }, {
   "url": "/wiki/Martinique",
-  "code": "MTQ",
+  "code": "MQ",
   "flag_url": "commons/5/52/Flag_of_Martinique",
   "name": "Martinique"
 }, {
   "url": "/wiki/Mauritania",
-  "code": "MRT",
+  "code": "MR",
   "flag_url": "commons/4/43/Flag_of_Mauritania",
   "name": "Mauritania"
 }, {
   "url": "/wiki/Mauritius",
-  "code": "MUS",
+  "code": "MU",
   "flag_url": "commons/7/77/Flag_of_Mauritius",
   "name": "Mauritius"
 }, {
   "url": "/wiki/Mayotte",
-  "code": "MYT",
+  "code": "YT",
   "flag_url": "en/c/c3/Flag_of_France",
   "name": "Mayotte"
 }, {
   "url": "/wiki/Mexico",
-  "code": "MEX",
+  "code": "MX",
   "flag_url": "commons/f/fc/Flag_of_Mexico",
   "name": "Mexico"
 }, {
   "url": "/wiki/Micronesia,_Federated_States_of",
-  "code": "FSM",
+  "code": "FM",
   "flag_url": "commons/e/e4/Flag_of_the_Federated_States_of_Micronesia",
   "name": "Micronesia - Federated States of"
 }, {
   "url": "/wiki/Moldova,_Republic_of",
-  "code": "MDA",
+  "code": "MD",
   "flag_url": "commons/2/27/Flag_of_Moldova",
   "name": "Moldova - Republic of"
 }, {
   "url": "/wiki/Monaco",
-  "code": "MCO",
+  "code": "MC",
   "flag_url": "commons/e/ea/Flag_of_Monaco",
   "name": "Monaco"
 }, {
   "url": "/wiki/Mongolia",
-  "code": "MNG",
+  "code": "MN",
   "flag_url": "commons/4/4c/Flag_of_Mongolia",
   "name": "Mongolia"
 }, {
   "url": "/wiki/Montenegro",
-  "code": "MNE",
+  "code": "CS",
   "flag_url": "commons/6/64/Flag_of_Montenegro",
   "name": "Montenegro"
 }, {
   "url": "/wiki/Montserrat",
-  "code": "MSR",
+  "code": "MS",
   "flag_url": "commons/d/d0/Flag_of_Montserrat",
   "name": "Montserrat"
 }, {
   "url": "/wiki/Morocco",
-  "code": "MAR",
+  "code": "MA",
   "flag_url": "commons/2/2c/Flag_of_Morocco",
   "name": "Morocco"
 }, {
   "url": "/wiki/Mozambique",
-  "code": "MOZ",
+  "code": "MZ",
   "flag_url": "commons/d/d0/Flag_of_Mozambique",
   "name": "Mozambique"
 }, {
   "url": "/wiki/Myanmar",
-  "code": "MMR",
+  "code": "MM",
   "flag_url": "commons/8/8c/Flag_of_Myanmar",
   "name": "Myanmar"
 }, {
   "url": "/wiki/Namibia",
-  "code": "NAM",
+  "code": "NA",
   "flag_url": "commons/0/00/Flag_of_Namibia",
   "name": "Namibia"
 }, {
   "url": "/wiki/Nauru",
-  "code": "NRU",
+  "code": "NR",
   "flag_url": "commons/3/30/Flag_of_Nauru",
   "name": "Nauru"
 }, {
   "url": "/wiki/Nepal",
-  "code": "NPL",
+  "code": "NP",
   "flag_url": "commons/9/9b/Flag_of_Nepal",
   "name": "Nepal"
 }, {
   "url": "/wiki/Netherlands",
-  "code": "NLD",
+  "code": "NL",
   "flag_url": "commons/2/20/Flag_of_the_Netherlands",
   "name": "Netherlands"
 }, {
   "url": "/wiki/New_Caledonia",
-  "code": "NCL",
+  "code": "NC",
   "flag_url": "commons/2/23/Flag_of_New_Caledonia",
   "name": "New Caledonia"
 }, {
   "url": "/wiki/New_Zealand",
-  "code": "NZL",
+  "code": "NZ",
   "flag_url": "commons/3/3e/Flag_of_New_Zealand",
   "name": "New Zealand"
 }, {
   "url": "/wiki/Nicaragua",
-  "code": "NIC",
+  "code": "NI",
   "flag_url": "commons/1/19/Flag_of_Nicaragua",
   "name": "Nicaragua"
 }, {
   "url": "/wiki/Niger",
-  "code": "NER",
+  "code": "NE",
   "flag_url": "commons/f/f4/Flag_of_Niger",
   "name": "Niger"
 }, {
   "url": "/wiki/Nigeria",
-  "code": "NGA",
+  "code": "NG",
   "flag_url": "commons/7/79/Flag_of_Nigeria",
   "name": "Nigeria"
 }, {
   "url": "/wiki/Niue",
-  "code": "NIU",
+  "code": "NU",
   "flag_url": "commons/0/01/Flag_of_Niue",
   "name": "Niue"
 }, {
   "url": "/wiki/Norfolk_Island",
-  "code": "NFK",
+  "code": "NF",
   "flag_url": "commons/4/48/Flag_of_Norfolk_Island",
   "name": "Norfolk Island"
 }, {
   "url": "/wiki/Northern_Mariana_Islands",
-  "code": "MNP",
+  "code": "MP",
   "flag_url": "commons/e/e0/Flag_of_the_Northern_Mariana_Islands",
   "name": "Northern Mariana Islands"
 }, {
   "url": "/wiki/Norway",
-  "code": "NOR",
+  "code": "NO",
   "flag_url": "commons/d/d9/Flag_of_Norway",
   "name": "Norway"
 }, {
   "url": "/wiki/Oman",
-  "code": "OMN",
+  "code": "OM",
   "flag_url": "commons/d/dd/Flag_of_Oman",
   "name": "Oman"
 }, {
   "url": "/wiki/Pakistan",
-  "code": "PAK",
+  "code": "PK",
   "flag_url": "commons/3/32/Flag_of_Pakistan",
   "name": "Pakistan"
 }, {
   "url": "/wiki/Palau",
-  "code": "PLW",
+  "code": "PW",
   "flag_url": "commons/4/48/Flag_of_Palau",
   "name": "Palau"
 }, {
   "url": "/wiki/State_of_Palestine",
-  "code": "PSE",
+  "code": "PS",
   "flag_url": "commons/0/00/Flag_of_Palestine",
   "name": "Palestine - State of"
 }, {
   "url": "/wiki/Panama",
-  "code": "PAN",
+  "code": "PA",
   "flag_url": "commons/a/ab/Flag_of_Panama",
   "name": "Panama"
 }, {
   "url": "/wiki/Papua_New_Guinea",
-  "code": "PNG",
+  "code": "PG",
   "flag_url": "commons/e/e3/Flag_of_Papua_New_Guinea",
   "name": "Papua New Guinea"
 }, {
   "url": "/wiki/Paraguay",
-  "code": "PRY",
+  "code": "PY",
   "flag_url": "commons/2/27/Flag_of_Paraguay",
   "name": "Paraguay"
 }, {
   "url": "/wiki/Peru",
-  "code": "PER",
+  "code": "PE",
   "flag_url": "commons/c/cf/Flag_of_Peru",
   "name": "Peru"
 }, {
   "url": "/wiki/Philippines",
-  "code": "PHL",
+  "code": "PH",
   "flag_url": "commons/9/99/Flag_of_the_Philippines",
   "name": "Philippines"
 }, {
   "url": "/wiki/Pitcairn",
-  "code": "PCN",
+  "code": "PN",
   "flag_url": "commons/8/88/Flag_of_the_Pitcairn_Islands",
   "name": "Pitcairn"
 }, {
   "url": "/wiki/Poland",
-  "code": "POL",
+  "code": "PL",
   "flag_url": "en/1/12/Flag_of_Poland",
   "name": "Poland"
 }, {
   "url": "/wiki/Portugal",
-  "code": "PRT",
+  "code": "PT",
   "flag_url": "commons/5/5c/Flag_of_Portugal",
   "name": "Portugal"
 }, {
   "url": "/wiki/Puerto_Rico",
-  "code": "PRI",
+  "code": "PR",
   "flag_url": "commons/2/28/Flag_of_Puerto_Rico",
   "name": "Puerto Rico"
 }, {
   "url": "/wiki/Qatar",
-  "code": "QAT",
+  "code": "QA",
   "flag_url": "commons/6/65/Flag_of_Qatar",
   "name": "Qatar"
 }, {
   "url": "/wiki/R%C3%A9union",
-  "code": "REU",
+  "code": "RE",
   "flag_url": "en/c/c3/Flag_of_France",
   "name": "Réunion"
 }, {
   "url": "/wiki/Romania",
-  "code": "ROU",
+  "code": "RO",
   "flag_url": "commons/7/73/Flag_of_Romania",
   "name": "Romania"
 }, {
   "url": "/wiki/Russian_Federation",
-  "code": "RUS",
+  "code": "RU",
   "flag_url": "en/f/f3/Flag_of_Russia",
   "name": "Russian Federation"
 }, {
   "url": "/wiki/Rwanda",
-  "code": "RWA",
+  "code": "RW",
   "flag_url": "commons/1/17/Flag_of_Rwanda",
   "name": "Rwanda"
 }, {
   "url": "/wiki/Saint_Barth%C3%A9lemy",
-  "code": "BLM",
+  "code": "FR",
   "flag_url": "en/c/c3/Flag_of_France",
   "name": "Saint Barthélemy"
 }, {
   "url": "/wiki/Saint_Helena,_Ascension_and_Tristan_da_Cunha",
-  "code": "SHN",
+  "code": "SH",
   "flag_url": "en/a/ae/Flag_of_the_United_Kingdom",
   "name": "Saint Helena - Ascension and Tristan da Cunha"
 }, {
   "url": "/wiki/Saint_Kitts_and_Nevis",
-  "code": "KNA",
+  "code": "KN",
   "flag_url": "commons/f/fe/Flag_of_Saint_Kitts_and_Nevis",
   "name": "Saint Kitts and Nevis"
 }, {
   "url": "/wiki/Saint_Lucia",
-  "code": "LCA",
+  "code": "LC",
   "flag_url": "commons/9/9f/Flag_of_Saint_Lucia",
   "name": "Saint Lucia"
 }, {
   "url": "/wiki/Saint_Martin_(French_part)",
-  "code": "MAF",
+  "code": "FR",
   "flag_url": "en/c/c3/Flag_of_France",
   "name": "Saint Martin (French part)"
 }, {
   "url": "/wiki/Saint_Pierre_and_Miquelon",
-  "code": "SPM",
+  "code": "PM",
   "flag_url": "commons/7/74/Flag_of_Saint-Pierre_and_Miquelon",
   "name": "Saint Pierre and Miquelon"
 }, {
   "url": "/wiki/Saint_Vincent_and_the_Grenadines",
-  "code": "VCT",
+  "code": "VC",
   "flag_url": "commons/6/6d/Flag_of_Saint_Vincent_and_the_Grenadines",
   "name": "Saint Vincent and the Grenadines"
 }, {
   "url": "/wiki/Samoa",
-  "code": "WSM",
+  "code": "WS",
   "flag_url": "commons/3/31/Flag_of_Samoa",
   "name": "Samoa"
 }, {
   "url": "/wiki/San_Marino",
-  "code": "SMR",
+  "code": "SM",
   "flag_url": "commons/b/b1/Flag_of_San_Marino",
   "name": "San Marino"
 }, {
   "url": "/wiki/Sao_Tome_and_Principe",
-  "code": "STP",
+  "code": "ST",
   "flag_url": "commons/4/4f/Flag_of_Sao_Tome_and_Principe",
   "name": "Sao Tome and Principe"
 }, {
   "url": "/wiki/Saudi_Arabia",
-  "code": "SAU",
+  "code": "SA",
   "flag_url": "commons/0/0d/Flag_of_Saudi_Arabia",
   "name": "Saudi Arabia"
 }, {
   "url": "/wiki/Senegal",
-  "code": "SEN",
+  "code": "SN",
   "flag_url": "commons/f/fd/Flag_of_Senegal",
   "name": "Senegal"
 }, {
   "url": "/wiki/Serbia",
-  "code": "SRB",
+  "code": "CS",
   "flag_url": "commons/f/ff/Flag_of_Serbia",
   "name": "Serbia"
 }, {
   "url": "/wiki/Seychelles",
-  "code": "SYC",
+  "code": "SC",
   "flag_url": "commons/f/fc/Flag_of_Seychelles",
   "name": "Seychelles"
 }, {
   "url": "/wiki/Sierra_Leone",
-  "code": "SLE",
+  "code": "SL",
   "flag_url": "commons/1/17/Flag_of_Sierra_Leone",
   "name": "Sierra Leone"
 }, {
   "url": "/wiki/Singapore",
-  "code": "SGP",
+  "code": "SG",
   "flag_url": "commons/4/48/Flag_of_Singapore",
   "name": "Singapore"
 }, {
   "url": "/wiki/Sint_Maarten_(Dutch_part)",
-  "code": "SXM",
+  "code": "DE",
   "flag_url": "commons/d/d3/Flag_of_Sint_Maarten",
   "name": "Sint Maarten (Dutch part)"
 }, {
   "url": "/wiki/Slovakia",
-  "code": "SVK",
+  "code": "SK",
   "flag_url": "commons/e/e6/Flag_of_Slovakia",
   "name": "Slovakia"
 }, {
   "url": "/wiki/Slovenia",
-  "code": "SVN",
+  "code": "SI",
   "flag_url": "commons/f/f0/Flag_of_Slovenia",
   "name": "Slovenia"
 }, {
   "url": "/wiki/Solomon_Islands",
-  "code": "SLB",
+  "code": "SB",
   "flag_url": "commons/7/74/Flag_of_the_Solomon_Islands",
   "name": "Solomon Islands"
 }, {
   "url": "/wiki/Somalia",
-  "code": "SOM",
+  "code": "SO",
   "flag_url": "commons/a/a0/Flag_of_Somalia",
   "name": "Somalia"
 }, {
   "url": "/wiki/South_Africa",
-  "code": "ZAF",
+  "code": "ZA",
   "flag_url": "commons/a/af/Flag_of_South_Africa",
   "name": "South Africa"
 }, {
   "url": "/wiki/South_Georgia_and_the_South_Sandwich_Islands",
-  "code": "SGS",
+  "code": "GS",
   "flag_url": "commons/e/ed/Flag_of_South_Georgia_and_the_South_Sandwich_Islands",
   "name": "South Georgia and the South Sandwich Islands"
 }, {
   "url": "/wiki/South_Sudan",
-  "code": "SSD",
+  "code": "SD",
   "flag_url": "commons/7/7a/Flag_of_South_Sudan",
   "name": "South Sudan"
 }, {
   "url": "/wiki/Spain",
-  "code": "ESP",
+  "code": "ES",
   "flag_url": "en/9/9a/Flag_of_Spain",
   "name": "Spain"
 }, {
   "url": "/wiki/Sri_Lanka",
-  "code": "LKA",
+  "code": "LK",
   "flag_url": "commons/1/11/Flag_of_Sri_Lanka",
   "name": "Sri Lanka"
 }, {
   "url": "/wiki/Sudan",
-  "code": "SDN",
+  "code": "SD",
   "flag_url": "commons/0/01/Flag_of_Sudan",
   "name": "Sudan"
 }, {
   "url": "/wiki/Suriname",
-  "code": "SUR",
+  "code": "SR",
   "flag_url": "commons/6/60/Flag_of_Suriname",
   "name": "Suriname"
 }, {
   "url": "/wiki/Swaziland",
-  "code": "SWZ",
+  "code": "SZ",
   "flag_url": "commons/1/1e/Flag_of_Swaziland",
   "name": "Swaziland"
 }, {
   "url": "/wiki/Sweden",
-  "code": "SWE",
+  "code": "SE",
   "flag_url": "en/4/4c/Flag_of_Sweden",
   "name": "Sweden"
 }, {
   "url": "/wiki/Switzerland",
-  "code": "CHE",
+  "code": "CH",
   "flag_url": "commons/0/08/Flag_of_Switzerland_%28Pantone%29",
   "name": "Switzerland"
 }, {
   "url": "/wiki/Syrian_Arab_Republic",
-  "code": "SYR",
+  "code": "SY",
   "flag_url": "commons/5/53/Flag_of_Syria",
   "name": "Syrian Arab Republic"
 }, {
   "url": "/wiki/Taiwan",
-  "code": "TWN",
+  "code": "TW",
   "flag_url": "commons/7/72/Flag_of_the_Republic_of_China",
   "name": "Taiwan"
 }, {
   "url": "/wiki/Tajikistan",
-  "code": "TJK",
+  "code": "TJ",
   "flag_url": "commons/d/d0/Flag_of_Tajikistan",
   "name": "Tajikistan"
 }, {
   "url": "/wiki/Tanzania,_United_Republic_of",
-  "code": "TZA",
+  "code": "TZ",
   "flag_url": "commons/3/38/Flag_of_Tanzania",
   "name": "Tanzania - United Republic of"
 }, {
   "url": "/wiki/Thailand",
-  "code": "THA",
+  "code": "TH",
   "flag_url": "commons/a/a9/Flag_of_Thailand",
   "name": "Thailand"
 }, {
   "url": "/wiki/Timor-Leste",
-  "code": "TLS",
+  "code": "TL",
   "flag_url": "commons/2/26/Flag_of_East_Timor",
   "name": "Timor-Leste"
 }, {
   "url": "/wiki/Togo",
-  "code": "TGO",
+  "code": "TG",
   "flag_url": "commons/6/68/Flag_of_Togo",
   "name": "Togo"
 }, {
   "url": "/wiki/Tokelau",
-  "code": "TKL",
+  "code": "TK",
   "flag_url": "commons/8/8e/Flag_of_Tokelau",
   "name": "Tokelau"
 }, {
   "url": "/wiki/Tonga",
-  "code": "TON",
+  "code": "TO",
   "flag_url": "commons/9/9a/Flag_of_Tonga",
   "name": "Tonga"
 }, {
   "url": "/wiki/Trinidad_and_Tobago",
-  "code": "TTO",
+  "code": "TT",
   "flag_url": "commons/6/64/Flag_of_Trinidad_and_Tobago",
   "name": "Trinidad and Tobago"
 }, {
   "url": "/wiki/Tunisia",
-  "code": "TUN",
+  "code": "TN",
   "flag_url": "commons/c/ce/Flag_of_Tunisia",
   "name": "Tunisia"
 }, {
   "url": "/wiki/Turkey",
-  "code": "TUR",
+  "code": "TR",
   "flag_url": "commons/b/b4/Flag_of_Turkey",
   "name": "Turkey"
 }, {
   "url": "/wiki/Turkmenistan",
-  "code": "TKM",
+  "code": "TM",
   "flag_url": "commons/1/1b/Flag_of_Turkmenistan",
   "name": "Turkmenistan"
 }, {
   "url": "/wiki/Turks_and_Caicos_Islands",
-  "code": "TCA",
+  "code": "TC",
   "flag_url": "commons/a/a0/Flag_of_the_Turks_and_Caicos_Islands",
   "name": "Turks and Caicos Islands"
 }, {
   "url": "/wiki/Tuvalu",
-  "code": "TUV",
+  "code": "TV",
   "flag_url": "commons/3/38/Flag_of_Tuvalu",
   "name": "Tuvalu"
 }, {
   "url": "/wiki/Uganda",
-  "code": "UGA",
+  "code": "UG",
   "flag_url": "commons/4/4e/Flag_of_Uganda",
   "name": "Uganda"
 }, {
   "url": "/wiki/Ukraine",
-  "code": "UKR",
+  "code": "UK",
   "flag_url": "commons/4/49/Flag_of_Ukraine",
   "name": "Ukraine"
 }, {
   "url": "/wiki/United_Arab_Emirates",
-  "code": "ARE",
+  "code": "AE",
   "flag_url": "commons/c/cb/Flag_of_the_United_Arab_Emirates",
   "name": "United Arab Emirates"
 }, {
   "url": "/wiki/United_Kingdom",
-  "code": "GBR",
+  "code": "GB",
   "flag_url": "en/a/ae/Flag_of_the_United_Kingdom",
   "name": "United Kingdom"
 }, {
   "url": "/wiki/United_States",
-  "code": "USA",
+  "code": "US",
   "flag_url": "en/a/a4/Flag_of_the_United_States",
   "name": "United States"
 }, {
   "url": "/wiki/United_States_Minor_Outlying_Islands",
-  "code": "UMI",
+  "code": "UM",
   "flag_url": "en/a/a4/Flag_of_the_United_States",
   "name": "United States Minor Outlying Islands"
 }, {
   "url": "/wiki/Uruguay",
-  "code": "URY",
+  "code": "UY",
   "flag_url": "commons/f/fe/Flag_of_Uruguay",
   "name": "Uruguay"
 }, {
   "url": "/wiki/Uzbekistan",
-  "code": "UZB",
+  "code": "UZ",
   "flag_url": "commons/8/84/Flag_of_Uzbekistan",
   "name": "Uzbekistan"
 }, {
   "url": "/wiki/Vanuatu",
-  "code": "VUT",
+  "code": "VU",
   "flag_url": "commons/b/bc/Flag_of_Vanuatu",
   "name": "Vanuatu"
 }, {
   "url": "/wiki/Venezuela,_Bolivarian_Republic_of",
-  "code": "VEN",
+  "code": "VE",
   "flag_url": "commons/0/06/Flag_of_Venezuela",
   "name": "Venezuela - Bolivarian Republic of"
 }, {
   "url": "/wiki/Viet_Nam",
-  "code": "VNM",
+  "code": "VN",
   "flag_url": "commons/2/21/Flag_of_Vietnam",
   "name": "Viet Nam"
 }, {
   "url": "/wiki/Virgin_Islands,_British",
-  "code": "VGB",
+  "code": "VG",
   "flag_url": "commons/4/42/Flag_of_the_British_Virgin_Islands",
   "name": "Virgin Islands - British"
 }, {
   "url": "/wiki/Virgin_Islands,_U.S.",
-  "code": "VIR",
+  "code": "VI",
   "flag_url": "commons/f/f8/Flag_of_the_United_States_Virgin_Islands",
   "name": "Virgin Islands - U.S."
 }, {
   "url": "/wiki/Wallis_and_Futuna",
-  "code": "WLF",
+  "code": "WF",
   "flag_url": "commons/d/d2/Flag_of_Wallis_and_Futuna",
   "name": "Wallis and Futuna"
 }, {
   "url": "/wiki/Yemen",
-  "code": "YEM",
+  "code": "YE",
   "flag_url": "commons/8/89/Flag_of_Yemen",
   "name": "Yemen"
 }, {
   "url": "/wiki/Zambia",
-  "code": "ZMB",
+  "code": "ZM",
   "flag_url": "commons/0/06/Flag_of_Zambia",
   "name": "Zambia"
 }, {
   "url": "/wiki/Zimbabwe",
-  "code": "ZWE",
+  "code": "ZW",
   "flag_url": "commons/6/6a/Flag_of_Zimbabwe",
   "name": "Zimbabwe"
 }]

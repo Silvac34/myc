@@ -791,7 +791,7 @@ footer p {
     float: left;
     background-color: white;
     line-height: inherit;
-    padding-right: 18px;
+    width:50px;
 }
 
 .table-meal-border {

@@ -18,7 +18,7 @@
         "postalCode": "75009",
         "lat": 48.881,
         "lng": 2.341,
-        "country": "France"
+        "country_code": "FR"
     },
     "privateInfo": {
         "address": {
@@ -78,7 +78,7 @@
         "postalCode": "75009",
         "lat": 48.886,
         "lng": 2.333,
-        "country": "France"
+        "country_code": "FR"
     },
     "privateInfo": {
         "address": {
@@ -136,7 +136,7 @@
         "postalCode": "75018",
         "lat": 48.880,
         "lng": 2.316,
-        "country": "France"
+        "country_code_code": "FR"
     },
     "privateInfo": {
         "users": [{
@@ -191,7 +191,7 @@
         "postalCode": "75018",
         "lat": 48.886,
         "lng": 2.334,
-        "country": "France"
+        "country_code": "FR"
     },
     "privateInfo": {
         "address": {
@@ -249,7 +249,7 @@
         "postalCode": "75009",
         "lat": 48.886,
         "lng": 2.333,
-        "country": "France"
+        "country_code": "FR"
     },
     "privateInfo": {
         "address": {
@@ -307,7 +307,7 @@
         "postalCode": "75004",
         "lat": 48.858,
         "lng": 2.353,
-        "country": "France"
+        "country_code": "FR"
     },
     "privateInfo": {
         "address": {
@@ -372,7 +372,7 @@
         "postalCode": "75009",
         "lat": 48.881,
         "lng": 2.341,
-        "country": "France"
+        "country_code": "FR"
     },
     "privateInfo": {
         "address": {
@@ -429,7 +429,7 @@
         "postalCode": "3039",
         "lat": -37.765,
         "lng": 144.907,
-        "country": "Australia"
+        "country_code": "AU"
     },
     "privateInfo": {
         "address": {

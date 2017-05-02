@@ -149,13 +149,13 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
           }
         }
       }
-      if($scope.editedMeal.address.town == undefined || $scope.editedMeal.privateInfo.address.name == undefined){
+      if ($scope.editedMeal.address.town == undefined || $scope.editedMeal.privateInfo.address.name == undefined) {
         console.log("address is missing");
         okToPost = false;
       }
-      if($scope.editedMeal.price == undefined){
-       console.log("price of the groceries is missing"); 
-       okToPost = false;
+      if ($scope.editedMeal.price == undefined) {
+        console.log("price of the groceries is missing");
+        okToPost = false;
       }
       if (okToPost == true) {
         $http.post('/api/meals', $scope.editedMeal).then(function(response) {
@@ -185,7 +185,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
           $scope.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
         }
         if ($scope.details.address_components[i].types[0] == "country") {
-          $scope.editedMeal.address.country = $scope.details.address_components[i].long_name;
+          $scope.editedMeal.address.country_code = $scope.details.address_components[i].short_name;
         }
       }
     }
@@ -278,6 +278,22 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     }
   };
 
+  $scope.currency_symbol = "$";
+  $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
+    $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
+      $scope.$watch('details', function getCurrency() {
+        if ($scope.details != undefined) {
+          for (var i = 0; i < $scope.details.address_components.length; i++) {
+            if ($scope.details.address_components[i].types[0] == "country") {
+              var country_code = $scope.details.address_components[i].short_name;
+            }
+          }
+          var currency = result_currency.data[country_code];
+          $scope.currency_symbol = result_currency_symbol.data[currency].symbol_native;
+        }
+      });
+    });
+  });
 
 }]);
 

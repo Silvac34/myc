@@ -72,38 +72,56 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
 
   function loadMealInfo(meal_id) {
     $http.get('api/meals/' + meal_id).then(function(response) {
-      $scope.meal = response.data;
+      $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
+        $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
+          $scope.meal = response.data;
 
-      /*to check wether there is available space for each rôle*/
-      if (!$scope.meal.detailedInfo.requiredGuests.cooks || $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces <= 0) {
-        $scope.requiredGuests.availablePlaces['cooks'] = false;
-      }
-      else {
-        $scope.requiredGuests.availablePlaces['cooks'] = true;
-        $scope.requestRole.name = "cook";
-      }
-      if (!$scope.meal.detailedInfo.requiredGuests.cleaners || $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces <= 0) {
-        $scope.requiredGuests.availablePlaces['cleaners'] = false;
-      }
-      else {
-        $scope.requiredGuests.availablePlaces['cleaners'] = true;
-        if (!$scope.requestRole) {
-          $scope.requestRole.name = "cleaner";
-        }
-      }
-      if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
-        $scope.requiredGuests.availablePlaces['simpleGuests'] = false;
-      }
-      else {
-        $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
-        if (!$scope.requestRole) {
-          $scope.requestRole.name = "simpleGuest";
-        }
-      }
-      $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
+          /*to check wether there is available space for each rôle*/
+          if (!$scope.meal.detailedInfo.requiredGuests.cooks || $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces <= 0) {
+            $scope.requiredGuests.availablePlaces['cooks'] = false;
+          }
+          else {
+            $scope.requiredGuests.availablePlaces['cooks'] = true;
+            $scope.requestRole.name = "cook";
+          }
+          if (!$scope.meal.detailedInfo.requiredGuests.cleaners || $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces <= 0) {
+            $scope.requiredGuests.availablePlaces['cleaners'] = false;
+          }
+          else {
+            $scope.requiredGuests.availablePlaces['cleaners'] = true;
+            if (!$scope.requestRole) {
+              $scope.requestRole.name = "cleaner";
+            }
+          }
+          if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
+            $scope.requiredGuests.availablePlaces['simpleGuests'] = false;
+          }
+          else {
+            $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
+            if (!$scope.requestRole) {
+              $scope.requestRole.name = "simpleGuest";
+            }
+          }
+          $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
+          if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
+            $scope.meal.detailedInfo.requiredGuests.cooks.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cooks.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          }
+          if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
+            $scope.meal.detailedInfo.requiredGuests.cleaners.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cleaners.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          }
+          if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
+            $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.simpleGuests.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          }
+        });
+      });
     });
   }
 
+  function getCurrencySymbol(price, country_code, jsonDataCurrency, jsonDataCurrencySymbol) {
+    var currency = jsonDataCurrency.data[country_code];
+    var currency_symbol = jsonDataCurrencySymbol.data[currency].symbol_native;
+    return currency_symbol + " " + price;
+  }
 
   function check(value) {
     if (value != undefined) {
@@ -123,7 +141,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       $scope.meal.detailedInfo.requiredGuests[$scope.requestRole.name + "s"].nbRemainingPlaces -= 1;
       if ($scope.meal.automaticSubscription == true) {
         $scope.goToMeal = true;
-        $uibModalInstance.close({manualSubscriptionPending: false, pending:false});
+        $uibModalInstance.close({
+          manualSubscriptionPending: false,
+          pending: false
+        });
         $state.go("view_my_dtld_meals", {
           "myMealId": meal_id,
           "successSubscribedMessage": true
@@ -131,7 +152,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       }
       else if ($scope.meal.automaticSubscription == false) {
         $scope.goToMeal = false;
-        $uibModalInstance.close({manualSubscriptionPending: true, pending:true});
+        $uibModalInstance.close({
+          manualSubscriptionPending: true,
+          pending: true
+        });
       }
     }, function(response) {
       loadMealInfo(meal_id);
@@ -204,7 +228,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                   $scope.meal.detailedInfo.pending = responseUser.data.detailedInfo.pending; // on actualise l'état pending du repas
                   if (data._id == $scope.meal.admin._id || $scope.meal.detailedInfo.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
                     $scope.goToMeal = true;
-                    $uibModalInstance.close({manualSubscriptionPending: false, pending:false});
+                    $uibModalInstance.close({
+                      manualSubscriptionPending: false,
+                      pending: false
+                    });
                     $state.go("view_my_dtld_meals", {
                       "myMealId": meal_id,
                       "successSubscribedMessage": true
@@ -212,7 +239,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                   }
                   if ($scope.meal.detailedInfo.pending == true) { //s'il est en attente sur le repas
                     $scope.goToMeal = false;
-                    $uibModalInstance.close({manualSubscriptionPending: true, pending:true});
+                    $uibModalInstance.close({
+                      manualSubscriptionPending: true,
+                      pending: true
+                    });
                   }
                   else { // s'il n'est ni l'hôte ni inscrit au repas
                     if (check($scope.$parent.$root.user.privateInfo.cellphone) == true) { // on check si son cellphone est déjà rentré dans notre BDD

@@ -49,7 +49,7 @@
                             <div class="meal-dtld-helpers-label">Help cooking
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
                                 <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
-                                <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cooks.price | currency}}</span>
+                                <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cooks.price}}</span>
                                 <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
@@ -64,7 +64,7 @@
                             <div class="meal-dtld-helpers-label">Help cleaning
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
                                 <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
-                                <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cleaners.price | currency}}</span>
+                                <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.cleaners.price}}</span>
                                 <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
@@ -79,7 +79,7 @@
                             <div class="meal-dtld-helpers-label">Simple guest
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
                                 <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
-                                <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currency}}</span>
+                                <span class="meal-dtld-helpers-price">{{meal.detailedInfo.requiredGuests.simpleGuests.price}}</span>
                                 <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>

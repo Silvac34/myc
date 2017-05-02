@@ -1,6 +1,6 @@
 'use strict';
 
-var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap'])
+var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'currencySymbolService'])
 
 modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -22,7 +22,7 @@ modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProv
 }]);
 
 
-modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile) {
+modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', '$http', 'currencySymbolFactory', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile, $http, currencySymbolFactory) {
 
   $scope.meals = response.data['_items']; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
@@ -35,18 +35,25 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   });
 
   function defineAllMealPrice() { //on définit le prix du repas qui doit s'afficher
-    for (var j = 0; j < $scope.meals.length; j++) {
-      $scope.meals[j].mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
-      if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
-        $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
-      }
-      else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
-        $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
-      }
-      else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
-        $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
-      }
-    }
+    $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
+      $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
+        for (var j = 0; j < $scope.meals.length; j++) {
+          $scope.meals[j].mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
+          if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
+          }
+          else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
+          }
+          else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
+          }
+          var currency = result_currency.data[$scope.meals[j].address.country_code];
+          var currency_symbol = result_currency_symbol.data[currency].symbol_native;
+          $scope.meals[j].mealPrice = currency_symbol + " " + $scope.meals[j].mealPrice;
+        }
+      });
+    });
   }
 
   defineAllMealPrice();
@@ -232,14 +239,14 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       else {
         city = $scope.filter.placeFilter;
       }
-      if (city.match(" ")) {//si la ville a des espaces, on met en majuscule chacune des premières lettres
+      if (city.match(" ")) { //si la ville a des espaces, on met en majuscule chacune des premières lettres
         var arrayCity = city.split(" ");
         city = "";
         for (var i = 0; i < arrayCity.length; i++) {
           arrayCity[i] = capitalizeFirstLetter(arrayCity[i]);
           city += arrayCity[i] + " ";
         }
-        city = city.substring(0,city.length-1);
+        city = city.substring(0, city.length - 1);
       }
       else {
         city = capitalizeFirstLetter(city);

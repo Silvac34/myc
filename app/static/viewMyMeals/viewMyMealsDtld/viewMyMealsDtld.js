@@ -104,8 +104,31 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   };
 
   $http.get("/static/sources/profile/countries.json").then(function(res) {
-      $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
+    $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
+      $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
+        $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
+        $scope.meal.pricePayback = $scope.meal.price - $scope.meal.detailedInfo.requiredGuests.hosts.price;
+        $scope.meal.pricePayback = getCurrencySymbol($scope.meal.pricePayback, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+        $scope.meal.price = getCurrencySymbol($scope.meal.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+        $scope.meal.detailedInfo.requiredGuests.hosts.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.hosts.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+        if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
+          $scope.meal.detailedInfo.requiredGuests.cooks.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cooks.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+        }
+        if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
+          $scope.meal.detailedInfo.requiredGuests.cleaners.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cleaners.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+        }
+        if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
+          $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.simpleGuests.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+        }
+      });
+    });
   });
+
+  function getCurrencySymbol(price, country_code, jsonDataCurrency, jsonDataCurrencySymbol) {
+    var currency = jsonDataCurrency.data[country_code];
+    var currency_symbol = jsonDataCurrencySymbol.data[currency].symbol_native;
+    return currency_symbol + " " + price;
+  }
 
   function getCountry(country_code, jsonData) {
     for (var i = 0; i < jsonData.length; i++) {

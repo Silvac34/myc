@@ -187,7 +187,7 @@ def auth_facebook():
                 userInfo = {"privateInfo.email" : profile["email"]}
                 user.updateUser(userInfo)
             else:
-                userInfo = {"privateInfo" : ""}
+                userInfo = {"privateInfo.email" : ""}
                 user.updateUser(userInfo)
     return jsonify(token=user.token())
     

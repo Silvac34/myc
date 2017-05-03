@@ -503,6 +503,11 @@ footer p {
     }
 }
 
+.color-text-priceSentence {
+    color: initial;
+    font-weight: 100;
+}
+
 
 /* viewMyMeals ---------------------------------------------------*/
 
@@ -791,7 +796,7 @@ footer p {
     float: left;
     background-color: white;
     line-height: inherit;
-    width:50px;
+    width: 50px;
 }
 
 .table-meal-border {

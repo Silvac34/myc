@@ -1,6 +1,6 @@
 'use strict';
 
-var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'currencySymbolService'])
+var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'ngSanitize'])
 
 modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -22,14 +22,14 @@ modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProv
 }]);
 
 
-modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', '$http', 'currencySymbolFactory', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile, $http, currencySymbolFactory) {
+modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', '$http', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile, $http) {
 
   $scope.meals = response.data['_items']; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
   $http.get("/static/sources/profile/countries.json").then(function(res) {
     $scope.countries = res.data;
   });
-  
+
   $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
@@ -42,19 +42,35 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
       $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
         for (var j = 0; j < $scope.meals.length; j++) {
-          $scope.meals[j].mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
-          if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
-            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
+          var mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
+          var priceUnit = Math.ceil(100 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 100;
+          if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
+            mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
           }
-          else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
-            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
-          }
-          else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
-            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
+          else {
+            if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
+              mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
+            }
+            else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
+              mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
+            }
           }
           var currency = result_currency.data[$scope.meals[j].address.country_code];
           var currency_symbol = result_currency_symbol.data[currency].symbol_native;
-          $scope.meals[j].mealPrice = currency_symbol + " " + $scope.meals[j].mealPrice;
+          var mealPriceWithSymbol = currency_symbol + " " + mealPrice;
+          var priceUnitWithSymbol = currency_symbol + " " + priceUnit;
+          if(mealPrice < priceUnit){
+            $scope.meals[j].mealPriceMin = mealPrice;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> '+ mealPriceWithSymbol +'<span class="small color-text-priceSentence"> to</span> '+ priceUnitWithSymbol;
+          }
+          else if (mealPrice > priceUnit){
+            $scope.meals[j].mealPriceMin = priceUnit;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> '+ priceUnitWithSymbol +'<span class="small color-text-priceSentence"> to</span> '+ mealPriceWithSymbol;
+          }
+          else if (mealPrice == priceUnit){
+            $scope.meals[j].mealPriceMin = mealPrice;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> '+ priceUnitWithSymbol;
+          }
         }
       });
     });
@@ -219,14 +235,14 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
 
   $scope.priceRangeFilter = function(meal) {
     if ($scope.filter.priceFilterMin.value != null && $scope.filter.priceFilterMax.value != null) {
-      return ($scope.meals[j].mealPrice >= $scope.filter.priceFilterMin.value && $scope.meals[j].mealPrice <= $scope.filter.priceFilterMax.value);
+      return ($scope.meals[j].mealPriceMin >= $scope.filter.priceFilterMin.value && $scope.meals[j].mealPriceMin <= $scope.filter.priceFilterMax.value);
     }
     else {
       if ($scope.filter.priceFilterMin.value != null) {
-        return ($scope.meals[j].mealPrice >= $scope.filter.priceFilterMin.value);
+        return ($scope.meals[j].mealPriceMin >= $scope.filter.priceFilterMin.value);
       }
       else if ($scope.filter.priceFilterMax.value != null) {
-        return ($scope.meals[j].mealPrice <= $scope.filter.priceFilterMax.value);
+        return ($scope.meals[j].mealPriceMin <= $scope.filter.priceFilterMax.value);
       }
       else {
         return meal;

@@ -177,14 +177,18 @@ def auth_facebook():
     user.updateUser(userInfo)
     
     if profile.get("email", None) != None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database
-        if hasattr(currentUser,"privateInfo"):    
-            if hasattr(currentUser["privateInfo"],"email"):
+        if ("privateInfo" in currentUser):
+            if ("email" in currentUser["privateInfo"]):
                 if currentUser["privateInfo"]["email"] != profile["email"]:
                     userInfo = {"privateInfo.email" : profile["email"]}
                     user.updateUser(userInfo)
         else:
-            userInfo = {"privateInfo.email" : profile["email"]}
-            user.updateUser(userInfo)
+            if("email" in profile):
+                userInfo = {"privateInfo.email" : profile["email"]}
+                user.updateUser(userInfo)
+            else:
+                userInfo = {"privateInfo" : ""}
+                user.updateUser(userInfo)
     return jsonify(token=user.token())
     
 @Application.app.route('/auth/logout', methods=['GET'])

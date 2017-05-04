@@ -43,7 +43,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
         for (var j = 0; j < $scope.meals.length; j++) {
           var mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
-          var priceUnit = Math.ceil(100 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 100;
+          var priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10;
           if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
             mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
           }

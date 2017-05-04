@@ -61,15 +61,15 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
           var priceUnitWithSymbol = currency_symbol + " " + priceUnit;
           if (mealPrice < priceUnit) {
             $scope.meals[j].mealPriceMin = mealPrice;
-            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> ' + mealPriceWithSymbol + '<span class="small color-text-priceSentence"> to</span> ' + priceUnitWithSymbol;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + mealPriceWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + priceUnitWithSymbol + '</strong>';
           }
           else if (mealPrice > priceUnit) {
             $scope.meals[j].mealPriceMin = priceUnit;
-            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> ' + priceUnitWithSymbol + '<span class="small color-text-priceSentence"> to</span> ' + mealPriceWithSymbol;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + mealPriceWithSymbol + '</strong>';
           }
           else if (mealPrice == priceUnit) {
             $scope.meals[j].mealPriceMin = mealPrice;
-            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> ' + priceUnitWithSymbol;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol + '</strong>';
           }
         }
       });
@@ -307,11 +307,3 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
   };
 
 });
-
-
-
-modViewMeals.filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {
-  return function(birthdate) {
-    return getAgeServiceFactory(birthdate);
-  };
-}]);

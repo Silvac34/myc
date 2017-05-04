@@ -356,11 +356,6 @@ footer p {
 
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
-.list-meal {
-    overflow-y: scroll;
-    height: 70vh;
-}
-
 .list-group-meal {
     display: inline-block;
     width: 100%;
@@ -369,7 +364,6 @@ footer p {
 .meal-menu {
     font-size: 16px;
     padding: inherit;
-    margin-bottom:10px;
 }
 
 .meal-menu-label {
@@ -377,6 +371,10 @@ footer p {
     padding-left: 22px;
     height: 25px;
     margin-bottom: 27px;
+}
+
+.meal-info-label {
+    margin-top: 8px;
 }
 
 .meal-menu-vegetarian-label {
@@ -398,11 +396,6 @@ footer p {
     font-weight: bold;
 }
 
-.meal-location {
-    background: url("/static/sources/location.png") no-repeat 0;
-    min-height: 24px;
-}
-
 .meal-date {
     background: url("/static/sources/calendar.png") no-repeat;
     min-height: 24px;
@@ -414,10 +407,7 @@ footer p {
 }
 
 .meal-price {
-    font-size: 16px;
-    font-weight: 700;
-    color: #3EA93E;
-    float: right;
+    font-size: 15px;
 }
 
 .meal-price-label {
@@ -427,22 +417,35 @@ footer p {
     margin-bottom: -5px;
 }
 
-.meal-admin {
-    transform: translateY(10%);
+.meal-admin-container {
+    transform: translateY(30%);
 }
 
 .meal-admin-dtld-sm {
     padding-right: 0px;
 }
 
-.meal-admin-name {
-    margin-top: 15px;
+.meal-admin {
     font-size: 12px;
     font-weight: bold;
 }
 
-.meal-status {
-    float: right;
+.meal-admin.meal-admin-name {
+    margin-top: 15px;
+}
+
+.meal-background {}
+
+@media (min-width: 768px) {
+    .meal-clock-display {
+        padding-left: 15px
+    }
+}
+
+@media (max-width: 767px) {
+    .meal-clock-display {
+        margin-top: 8px
+    }
 }
 
 .viewmeals-change-view {
@@ -510,7 +513,6 @@ footer p {
 
 .color-text-priceSentence {
     color: initial;
-    font-weight: 100;
 }
 
 
@@ -1016,37 +1018,37 @@ h2.slogan {
 .well-conviviality-background {
     background: url("/static/sources/welcome/well/conviviality.png") no-repeat 0;
     background-size: cover;
-    color: black;
+    color: black !important;
 }
 
 .well-meeting-background {
     background: url("/static/sources/welcome/well/meeting.png") no-repeat 0;
     background-size: cover;
-    color: black;
+    color: black !important;
 }
 
 .well-sharing-background {
     background: url("/static/sources/welcome/well/sharing.png") no-repeat 0;
     background-size: cover;
-    color: black;
+    color: black !important;
 }
 
 .well-new-background {
     background: url("/static/sources/welcome/well/new.png") no-repeat 0;
     background-size: cover;
-    color: black;
+    color: black !important;
 }
 
 .well-community-background {
     background: url("/static/sources/welcome/well/community.png") no-repeat 0;
     background-size: cover;
-    color: black;
+    color: black !important;
 }
 
 .well-authenticity-simplicity-background {
     background: url("/static/sources/welcome/well/authenticity_simplicity.png") no-repeat 0;
     background-size: cover;
-    color: black;
+    color: black !important;
 }
 
 @media (max-width: 767px) {

@@ -13,7 +13,7 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
         for (var j = 0; j < $scope.meals.length; j++) {
           for (var i = 0; i < $scope.meals[j].privateInfo.users.length; i++) {
             var mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
-            var priceUnit = Math.ceil($scope.meals[j].price / $scope.meals[j].nbGuests);
+            var priceUnit = Math.ceil(10*$scope.meals[j].price / $scope.meals[j].nbGuests)/10;
             if ($scope.meals[j].privateInfo.users[i]._id == userId) {
               var userRole = $scope.meals[j].privateInfo.users[i].role[0];
               if (userRole == "simpleGuests") {
@@ -35,13 +35,13 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
               var mealPriceWithSymbol = currency_symbol + " " + mealPrice;
               var priceUnitWithSymbol = currency_symbol + " " + priceUnit;
               if (mealPrice < priceUnit) {
-                $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> ' + mealPriceWithSymbol + '<span class="small color-text-priceSentence"> to</span> ' + priceUnitWithSymbol;
+                $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> <strong>' + mealPriceWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + priceUnitWithSymbol + '</strong>';
               }
               else if (mealPrice > priceUnit) {
-                $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> ' + priceUnitWithSymbol + '<span class="small color-text-priceSentence"> to</span> ' + mealPriceWithSymbol;
+                $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> <strong>' + priceUnitWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + mealPriceWithSymbol + '</strong>';
               }
               else if (mealPrice == priceUnit) {
-                $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> ' + priceUnitWithSymbol;
+                $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol;
               }
             }
           }

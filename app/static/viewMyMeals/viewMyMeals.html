@@ -31,7 +31,7 @@
                         <div class="meal-status text-success"><span class="hidden-xs">status : </span>I'm going</div>
                       </div>
                       <div class="row">
-                        <div class="meal-price">{{meal.priceUser}}</div>
+                        <div class="meal-price" ng-bind-html="meal.priceSentence"></div>
                       </div>
                       <div class="row">
                         <div class="meal-label meal-price-label">per pers</div>
@@ -70,7 +70,7 @@
                         <div class="meal-status text-warning"><span class="hidden-xs">status : </span>pending</div>
                       </div>
                       <div class="row">
-                        <div class="meal-price">{{meal.priceUser}}</div>
+                        <div class="meal-price" ng-bind-html="meal.priceSentence"></div>
                       </div>
                       <div class="row">
                         <div class="meal-label meal-price-label">per pers</div>

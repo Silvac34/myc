@@ -518,11 +518,6 @@ footer p {
 
 /* viewMyMeals ---------------------------------------------------*/
 
-.list-my-meal {
-    overflow-y: scroll;
-    height: 70vh;
-}
-
 .list-group-my-meal {
     display: inline-block;
     width: 100%;

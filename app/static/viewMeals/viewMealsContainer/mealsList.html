@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-xs-10">
                             <div class="row meal-info-label">
-                                <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}} - {{meal.address.postalCode}}
+                                <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:15px">{{meal.address.postalCode}}</span></span><span class="hidden-xs"> - {{meal.address.postalCode}}</span>
                             </div>
                             <div class="row meal-info-label">
                                 <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time

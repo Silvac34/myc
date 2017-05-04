@@ -37,6 +37,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   $scope.user._created = new Date(parseInt($scope.user._id.substring(0, 8), 16) * 1000);
   var birthdate = setValue($scope.user.birthdate);
   var presentation = setValue($scope.user.presentation);
+  var whymycommuneaty = setValue($scope.user.whymycommuneaty);
   if ($scope.user.country_of_origin == undefined) {
     var country_of_origin_name = "";
   }
@@ -74,6 +75,9 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     }
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
+    }
+        if (whymycommuneaty != setValueScope($scope.user.whymycommuneaty)) {
+      origUser.whymycommuneaty = $scope.user.whymycommuneaty;
     }
     if ($scope.user.country_of_origin != undefined) {
       if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
@@ -126,6 +130,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           email = setValue($scope.user.privateInfo.email);
           birthdate = setValue($scope.user.birthdate);
           presentation = setValue($scope.user.presentation);
+          whymycommuneaty = setValue($scope.user.whymycommuneaty);
           if ($scope.user.country_of_origin != undefined) {
             country_of_origin_name = setValue($scope.user.country_of_origin.name);
           }
@@ -144,16 +149,8 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
 
 }])
 
-.filter('ageFilter', function() {
-  function calculateAge(birthday) { // birthday is a date
-    var now = new Date;
-    var birthday_value = new Date(birthday);
-    var ageDifMs = now - birthday_value;
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
+.filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {
   return function(birthdate) {
-    return calculateAge(birthdate);
+    return getAgeServiceFactory(birthdate);
   };
-});
+}]);

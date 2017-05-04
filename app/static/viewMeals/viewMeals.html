@@ -84,6 +84,13 @@
         </div>
       </div>
       <div class="col-sm-9 col-xs-12">
+        <div class="row fade-out-success" ng-show="manualSubscriptionPending==true">
+          <div class="col-xs-12">
+            <div class="alert alert-dismissible alert-warning">
+              <button type="button" class="close" data-dismiss="alert">&times;</button> Your request has been sent to the host.
+            </div>
+          </div>
+        </div>
         <div ui-view="mealsList" ng-show="$state.includes('view_meals.mealsList')" class="list-meal"></div>
         <div ui-view="mealsMap" ng-show="$state.includes('view_meals.mealsMap')"></div>
       </div>

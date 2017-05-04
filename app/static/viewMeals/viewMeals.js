@@ -1,6 +1,6 @@
 'use strict';
 
-var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'ngSanitize'])
+var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'ngSanitize', 'getAgeService'])
 
 modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -59,17 +59,17 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
           var currency_symbol = result_currency_symbol.data[currency].symbol_native;
           var mealPriceWithSymbol = currency_symbol + " " + mealPrice;
           var priceUnitWithSymbol = currency_symbol + " " + priceUnit;
-          if(mealPrice < priceUnit){
+          if (mealPrice < priceUnit) {
             $scope.meals[j].mealPriceMin = mealPrice;
-            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> '+ mealPriceWithSymbol +'<span class="small color-text-priceSentence"> to</span> '+ priceUnitWithSymbol;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> ' + mealPriceWithSymbol + '<span class="small color-text-priceSentence"> to</span> ' + priceUnitWithSymbol;
           }
-          else if (mealPrice > priceUnit){
+          else if (mealPrice > priceUnit) {
             $scope.meals[j].mealPriceMin = priceUnit;
-            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> '+ priceUnitWithSymbol +'<span class="small color-text-priceSentence"> to</span> '+ mealPriceWithSymbol;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence hidden-xs">From</span> ' + priceUnitWithSymbol + '<span class="small color-text-priceSentence"> to</span> ' + mealPriceWithSymbol;
           }
-          else if (mealPrice == priceUnit){
+          else if (mealPrice == priceUnit) {
             $scope.meals[j].mealPriceMin = mealPrice;
-            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> '+ priceUnitWithSymbol;
+            $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> ' + priceUnitWithSymbol;
           }
         }
       });
@@ -307,3 +307,11 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
   };
 
 });
+
+
+
+modViewMeals.filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {
+  return function(birthdate) {
+    return getAgeServiceFactory(birthdate);
+  };
+}]);

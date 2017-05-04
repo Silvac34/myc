@@ -1,11 +1,4 @@
-<div class="row fade-out-success" ng-show="manualSubscriptionPending==true">
-    <div class="col-xs-12">
-        <div class="alert alert-dismissible alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button> Your request has been sent to the host.
-        </div>
-    </div>
-</div>
-<div ng-hide="meals.length">There are no meals to come</div>
+<div ng-hide="meals.length" class="text-center text-info">There are no meals to come</div>
 <div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | orderBy:'-time':reverse)">
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
@@ -24,7 +17,7 @@
                 <div class="hidden-xs col-sm-2 meal-admin">
                     <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                     <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
-                    <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                    <div class="meal-admin-name" ng-if="meal.admin.birthdate">{{meal.admin.birthdate | ageFilter}} {{meal.admin.last_name | limitTo:1}}</div>
                 </div>
                 <div class="col-xs-12 col-sm-10">
                     <div class="row">

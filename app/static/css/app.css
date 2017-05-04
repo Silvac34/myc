@@ -366,6 +366,12 @@ footer p {
     width: 100%;
 }
 
+.meal-menu {
+    font-size: 16px;
+    padding: inherit;
+    margin-bottom:10px;
+}
+
 .meal-menu-label {
     font-size: 16px;
     padding-left: 22px;
@@ -422,8 +428,7 @@ footer p {
 }
 
 .meal-admin {
-    transform: translateY(70%);
-    padding-right: 0px;
+    transform: translateY(10%);
 }
 
 .meal-admin-dtld-sm {

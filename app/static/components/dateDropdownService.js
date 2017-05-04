@@ -62,9 +62,7 @@ app.factory('rsmdateutils', function() {
     return {
         checkDate: function(date) {
             var d;
-            date.month += 1;
             if (!date.day || !date.month || !date.year) return false;
-            date.month -= 1;
             d = new Date(Date.UTC(date.year, date.month, date.day));
 
             if (d && (d.getMonth() === date.month && d.getDate() === Number(date.day))) {

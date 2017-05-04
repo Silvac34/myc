@@ -10,14 +10,25 @@
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':meal.detailedInfo.subscribed,'my-meal-dtld-panel-warning':meal.detailedInfo.pending}" ng-click=openModalDtld(meal._id)>
+                <div class="row">
+                    <div class="meal-menu text-center" ng-class="{'meal-menu-vegetarian-label': meal.veggies,'col-xs-8 col-sm-9 col-lg-10':meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true,'col-xs-12':meal.detailedInfo.subscribed==false && meal.detailedInfo.pending==false}">
+                        <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</strong>
+                        <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
+                        <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
+                        <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
+                    </div>
+                    <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
+                        <div class="meal-status" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></div>
+                    </div>
+                </div>
                 <div class="hidden-xs col-sm-2 meal-admin">
                     <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                    <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                     <div class="meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                 </div>
                 <div class="col-xs-12 col-sm-10">
                     <div class="row">
                         <div class="col-xs-7">
-                            <label class="meal-menu-label" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</label> </br>
                             <div class="meal-label meal-location">{{meal.address.town}} - {{meal.address.postalCode}}</div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -29,9 +40,6 @@
                             </div>
                         </div>
                         <div class="col-xs-5">
-                            <div class="row">
-                                <div ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true" class="meal-status" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></div>
-                            </div>
                             <div class="row">
                                 <div class="meal-price" ng-bind-html="meal.priceSentence"></div>
                             </div>

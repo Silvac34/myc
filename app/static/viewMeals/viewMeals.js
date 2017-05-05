@@ -44,7 +44,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
         $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
           for (var j = 0; j < $scope.meals.length; j++) {
             var mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
-            var priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10;
+            $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10;
             if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
               mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
             }
@@ -57,18 +57,18 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
               }
             }
             var currency = result_currency.data[$scope.meals[j].address.country_code];
-            var currency_symbol = result_currency_symbol.data[currency].symbol_native;
-            var mealPriceWithSymbol = currency_symbol + " " + mealPrice;
-            var priceUnitWithSymbol = currency_symbol + " " + priceUnit;
-            if (mealPrice < priceUnit) {
+            $scope.meals[j].currency_symbol = result_currency_symbol.data[currency].symbol_native;
+            var mealPriceWithSymbol = $scope.meals[j].currency_symbol + " " + mealPrice;
+            var priceUnitWithSymbol = $scope.meals[j].currency_symbol + " " + $scope.meals[j].priceUnit;
+            if (mealPrice < $scope.meals[j].priceUnit) {
               $scope.meals[j].mealPriceMin = mealPrice;
               $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + mealPriceWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + priceUnitWithSymbol + '</strong>';
             }
-            else if (mealPrice > priceUnit) {
-              $scope.meals[j].mealPriceMin = priceUnit;
+            else if (mealPrice > $scope.meals[j].priceUnit) {
+              $scope.meals[j].mealPriceMin = $scope.meals[j].priceUnit;
               $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + mealPriceWithSymbol + '</strong>';
             }
-            else if (mealPrice == priceUnit) {
+            else if (mealPrice == $scope.meals[j].priceUnit) {
               $scope.meals[j].mealPriceMin = mealPrice;
               $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol + '</strong>';
             }
@@ -105,8 +105,8 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
             size: "lg",
             windowClass: 'modal-meal-window',
             resolve: {
-              meal_id: function() {
-                return meal_id;
+              meal: function() {
+                return $scope.meals[i];
               },
               isAuthenticated: function() {
                 return $auth.isAuthenticated();

@@ -2,7 +2,9 @@
 
 var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
 
-.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal_id', '$uibModalInstance', '$state', 'isAuthenticated', '$auth', 'userServicesFactory', '$rootScope', 'ENV', 'ezfb', function($scope, $http, meal_id, $uibModalInstance, $state, isAuthenticated, $auth, userServicesFactory, $rootScope, ENV, ezfb) {
+.controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal', '$uibModalInstance', '$state', 'isAuthenticated', '$auth', 'userServicesFactory', '$rootScope', 'ENV', 'ezfb', function($scope, $http, meal, $uibModalInstance, $state, isAuthenticated, $auth, userServicesFactory, $rootScope, ENV, ezfb) {
+
+  $scope.meal = meal;
 
   $scope.origin = ENV.fbRedirectURI + "#/view_meal";
   $scope.page_id = ENV.page_id;
@@ -70,57 +72,27 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
 
   $scope.cellphoneValidation = needToUpdateCellphone();
 
-  function loadMealInfo(meal_id) {
-    $http.get('api/meals/' + meal_id).then(function(response) {
-      $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
-        $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
-          $scope.meal = response.data;
-
-          /*to check wether there is available space for each rôle*/
-          if (!$scope.meal.detailedInfo.requiredGuests.cooks || $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces <= 0) {
-            $scope.requiredGuests.availablePlaces['cooks'] = false;
-          }
-          else {
-            $scope.requiredGuests.availablePlaces['cooks'] = true;
-            $scope.requestRole.name = "cook";
-          }
-          if (!$scope.meal.detailedInfo.requiredGuests.cleaners || $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces <= 0) {
-            $scope.requiredGuests.availablePlaces['cleaners'] = false;
-          }
-          else {
-            $scope.requiredGuests.availablePlaces['cleaners'] = true;
-            if (!$scope.requestRole) {
-              $scope.requestRole.name = "cleaner";
-            }
-          }
-          if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
-            $scope.requiredGuests.availablePlaces['simpleGuests'] = false;
-          }
-          else {
-            $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
-            if (!$scope.requestRole) {
-              $scope.requestRole.name = "simpleGuest";
-            }
-          }
-          $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
-          if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
-            $scope.meal.detailedInfo.requiredGuests.cooks.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cooks.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-          }
-          if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
-            $scope.meal.detailedInfo.requiredGuests.cleaners.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cleaners.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-          }
-          if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
-            $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.simpleGuests.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-          }
-        });
-      });
-    });
-  }
-
-  function getCurrencySymbol(price, country_code, jsonDataCurrency, jsonDataCurrencySymbol) {
-    var currency = jsonDataCurrency.data[country_code];
-    var currency_symbol = jsonDataCurrencySymbol.data[currency].symbol_native;
-    return currency_symbol + " " + price;
+  function checkAvailablePlaces() {
+    /*to check wether there is available space for each rôle*/
+    if (!$scope.meal.detailedInfo.requiredGuests.cooks || $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces <= 0) {
+      $scope.requiredGuests.availablePlaces['cooks'] = false;
+    }
+    else {
+      $scope.requiredGuests.availablePlaces['cooks'] = true;
+    }
+    if (!$scope.meal.detailedInfo.requiredGuests.cleaners || $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces <= 0) {
+      $scope.requiredGuests.availablePlaces['cleaners'] = false;
+    }
+    else {
+      $scope.requiredGuests.availablePlaces['cleaners'] = true;
+    }
+    if (!$scope.meal.detailedInfo.requiredGuests.simpleGuests || $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces <= 0) {
+      $scope.requiredGuests.availablePlaces['simpleGuests'] = false;
+    }
+    else {
+      $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
+    }
+    $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
   }
 
   function check(value) {
@@ -158,7 +130,6 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
         });
       }
     }, function(response) {
-      loadMealInfo(meal_id);
       $scope.errorSubscribe.requestRole.status = true;
       if (RegExp(response.data = "requestRole")) {
         if (response.status == 400) {
@@ -273,6 +244,17 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     }
   };
 
+  function defineMealPriceSentence() {
+    $scope.meal.priceSentence = "";
+    if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
+      $scope.meal.priceSentence = 'from <strong class="meal-price text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cooks.price + '</strong> to <strong class="text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit + '</strong>';
+    }
+    if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
+      $scope.meal.priceSentence = 'from <strong class="meal-price text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cleaners.price + '</strong> to <strong class="text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit + '</strong>';
+    }
+  }
+
+  defineMealPriceSentence();
 
   //Initialize variable
   $scope.isAuthenticated = isAuthenticated;
@@ -290,7 +272,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   };
   $scope.goToMeal = false;
 
-  loadMealInfo(meal_id);
+  checkAvailablePlaces();
   $scope.accordionOneAtATime = true;
 
   $scope.closeAlert = function() {

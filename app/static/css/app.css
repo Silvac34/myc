@@ -661,10 +661,8 @@ footer p {
     font-weight: bold;
 }
 
-.meal-dtld-menu-label {
-    font-size: 16px;
-    text-align: center;
-    min-width: 100%;
+.meal-dtld-menu {
+    font-size: 18px;
 }
 
 .meal-dtld-helpers-label {
@@ -810,6 +808,12 @@ footer p {
 
 /* viewMyMealsDtld ---------------------------------------------------*/
 
+.my-meal-dtld-participant{
+    border-bottom: 1px solid #eeeeee;
+    padding-left: 0px;
+    left: 20px;
+    padding-bottom: 3px;
+}
 .my-meal-uitab {
     margin-left: 10px;
 }
@@ -922,10 +926,16 @@ footer p {
     }
 }
 
-.my-meal-dtld-delete {
-    background: url("/static/sources/delete_cross.png") no-repeat;
-    margin-left: -10px;
-    float: right;
+@media (max-width: 767px) {
+    .my-meal-dtld-delete {
+        margin-top: -22px;
+    }
+}
+
+@media (min-width: 768px) {
+    .my-meal-dtld-delete {
+        margin-top: -10px;
+    }
 }
 
 .page-separation {

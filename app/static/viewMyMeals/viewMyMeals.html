@@ -26,7 +26,7 @@
                 <div class="row">
                   <div class="col-xs-10">
                     <div class="row meal-info-label">
-                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-xs">, </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.address.town}}, {{meal.address.country}}<span ng-if="meal.privateInfo.address.complement"> - {{meal.privateInfo.address.complement}}</span>
+                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span><span class="hidden-xs">, {{meal.address.town}}, {{meal.address.country}}</span><span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:18px">{{meal.address.town}}, {{meal.address.country}}</span></span><span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - {{meal.privateInfo.address.complement}}</span></span>
                     </div>
                     <div class="row meal-info-label">
                       <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} </span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
@@ -122,7 +122,7 @@
                 <div class="row">
                   <div class="col-xs-10">
                     <div class="row meal-info-label">
-                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-xs">, </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.address.town}}, {{meal.address.country}}<span ng-if="meal.privateInfo.address.complement"> - {{meal.privateInfo.address.complement}}</span>
+                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-xs">, </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.address.town}}, {{meal.address.country}}<span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.privateInfo.address.complement}}</span>
                     </div>
                     <div class="row meal-info-label">
                       <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} </span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}

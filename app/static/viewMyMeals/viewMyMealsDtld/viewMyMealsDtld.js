@@ -19,7 +19,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   }
   check_loading();
 
-  $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $stateParams.myMealId;
+  $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $scope.meal._id;
   $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
 
   //modalDelete to delete a meal
@@ -78,7 +78,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   successfullySubscribed($stateParams.successSubscribedMessage);
 
   $scope.validateSubscription = function(participant_id) {
-    $http.post('/api/meals/' + $stateParams.myMealId + '/subscription/validate/' + participant_id, {
+    $http.post('/api/meals/' + $scope.meal._id + '/subscription/validate/' + participant_id, {
       'validation_result': true
     }).then(function() {
       $scope.pendingRequest = false;
@@ -91,7 +91,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   };
 
   $scope.refuseSubscription = function(participant_id) {
-    $http.post('/api/meals/' + $stateParams.myMealId + '/subscription/validate/' + participant_id, {
+    $http.post('/api/meals/' + $scope.meal._id + '/subscription/validate/' + participant_id, {
       'validation_result': false
     }).then(function() {
       $scope.pendingRequest = false;
@@ -106,20 +106,43 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
   $http.get("/static/sources/profile/countries.json").then(function(res) {
     $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
       $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
-        $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
-        $scope.meal.pricePayback = $scope.meal.price - $scope.meal.detailedInfo.requiredGuests.hosts.price;
-        $scope.meal.pricePayback = getCurrencySymbol($scope.meal.pricePayback, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-        $scope.meal.price = getCurrencySymbol($scope.meal.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-        $scope.meal.detailedInfo.requiredGuests.hosts.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.hosts.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-        if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
-          $scope.meal.detailedInfo.requiredGuests.cooks.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cooks.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-        }
-        if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
-          $scope.meal.detailedInfo.requiredGuests.cleaners.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.cleaners.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-        }
-        if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
-          $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = getCurrencySymbol($scope.meal.detailedInfo.requiredGuests.simpleGuests.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-        }
+        $http.get("/api/meals/" + $scope.meal._id + "/calculateMealPrice").then(function(responsePrice) {
+          $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
+          $scope.meal.pricePaybackIfFull = $scope.meal.price - $scope.meal.detailedInfo.requiredGuests.hosts.price;
+          $scope.meal.price = getCurrencySymbol($scope.meal.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          $scope.meal.detailedInfo.requiredGuests.hosts.price = getCurrencySymbol(responsePrice.data.hostPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          $scope.meal.currentPricePayback = 0;
+          if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
+            if (responsePrice.data.cookPrice == "") {
+              $scope.meal.detailedInfo.requiredGuests.cooks.price = undefined;
+            }
+            else {
+              $scope.meal.detailedInfo.requiredGuests.cooks.price = getCurrencySymbol(responsePrice.data.cookPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+              $scope.meal.currentPricePayback += responsePrice.data.cookPrice * ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces);
+            }
+          }
+          if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
+            if (responsePrice.data.cleanerPrice == "") {
+              $scope.meal.detailedInfo.requiredGuests.cleaners.price = undefined;
+            }
+            else {
+              $scope.meal.detailedInfo.requiredGuests.cleaners.price = getCurrencySymbol(responsePrice.data.cleanerPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+              $scope.meal.currentPricePayback += responsePrice.data.cleanerPrice * ($scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces);
+            }
+          }
+          if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
+            if (responsePrice.data.simpleGuestPrice == "") {
+              $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = undefined;
+            }
+            else {
+              $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = getCurrencySymbol(responsePrice.data.simpleGuestPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+              $scope.meal.currentPricePayback += responsePrice.data.simpleGuestPrice * ($scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces);
+            }
+          }
+          $scope.meal.currentPricePayback = getCurrencySymbol($scope.meal.currentPricePayback, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          $scope.meal.pricePaybackIfFull = getCurrencySymbol($scope.meal.pricePaybackIfFull, $scope.meal.address.country_code, result_currency, result_currency_symbol);
+          
+        });
       });
     });
   });
@@ -137,18 +160,15 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       }
     }
   }
-   var vm=this;
+  var vm = this;
   NgMap.getMap("map").then(function(map) {
     vm.map = map;
   });
 
-  $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
-    vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
-  };
 
 }]);
 
-modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, _etag) {
+modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, _etag) {
 
   $scope.deleteMyMeal = function(meal_id, _etag) {
 
@@ -162,7 +182,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
   };
 
   $scope.delete = function() {
-    $scope.deleteMyMeal($stateParams.myMealId, _etag);
+    $scope.deleteMyMeal($scope.meal._id, _etag);
     $uibModalInstance.close();
     $state.go('view_meals', {
       reload: true,
@@ -178,7 +198,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 });
 
-modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state, meal) {
+modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
 
   $scope.editMyMeal = function(meal_id) {
     $http.patch('/api/meals/private/' + meal_id).then(function(response) {
@@ -242,7 +262,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
   }
   $scope.edit = function() {
     if (($scope.nbCooksInscribed <= ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || $scope.nbCooksInscribed == undefined) && ($scope.nbCleanersInscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || $scope.nbCleanersInscribed == undefined) && ($scope.nbSimpleGuestsInscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests || $scope.nbSimpleGuestsInscribed == undefined)) {
-      $scope.editMyMeal($stateParams.myMealId);
+      $scope.editMyMeal($scope.meal._id);
       $uibModalInstance.close();
       $state.reload();
     }
@@ -254,7 +274,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 
 });
 
-modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $stateParams, $uibModalInstance, $state) {
+modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state) {
 
   $scope.unsubscribeMyMeal = function(meal_id) {
     $http.post('/api/meals/' + meal_id + '/unsubscription').then(function(response) {
@@ -263,7 +283,7 @@ modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $
   };
 
   $scope.unsubscribe = function() {
-    $scope.unsubscribeMyMeal($stateParams.myMealId);
+    $scope.unsubscribeMyMeal($scope.meal._id);
     $uibModalInstance.close();
     $state.go('view_meals', {
       reload: true,

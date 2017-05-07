@@ -527,6 +527,12 @@ footer p {
     color: initial;
 }
 
+.my-meal-dtld-cellphone-position{
+    left: 40px;
+    top: -10px;
+    position: relative;
+}
+
 
 /* viewMyMeals ---------------------------------------------------*/
 

@@ -442,7 +442,6 @@ def validate_a_subscription(meal_id, participant_id):
 def unsubscribe_to_meal(meal_id):
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
-    
     if not meal:
         return Response("Meal doesn't exist",status =404)
     user = User(_id=g.user_id)
@@ -472,6 +471,30 @@ def unsubscribe_to_meal(meal_id):
             meal["detailedInfo"]["requiredGuests"][r + "s"]["nbRemainingPlaces"] +=1
         Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal})
         return Response(status=200)
+        
+# Caculate dynamically the price of a meal
+@Application.app.route('/api/meals/<meal_id>/calculateMealPrice', methods=['GET'])
+@requires_auth('ressource')
+def calculate_price_meal(meal_id):
+    meal_id = ObjectId(meal_id)
+    meal = Meal(meal_id).getInfo()
+    priceUnit = meal["price"] / meal["nbGuests"]
+    priceTotalCurrent = priceUnit * (meal["nbGuests"] - meal["nbRemainingPlaces"])
+    if ("simpleGuests" in meal["detailedInfo"]["requiredGuests"]):
+        nbSimpleGuests = meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRquSimpleGuests"] - meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"]
+    else:
+        nbSimpleGuests = 0
+    if ("cooks" in meal["detailedInfo"]["requiredGuests"]):
+        nbCooks = meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRquCooks"] - meal["detailedInfo"]["requiredGuests"]["cooks"]["nbRemainingPlaces"]
+    else:
+        nbCooks = 0
+    if ("cleaners" in meal["detailedInfo"]["requiredGuests"]):
+        nbCleaners = meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRquCleaners"] - meal["detailedInfo"]["requiredGuests"]["cleaners"]["nbRemainingPlaces"]
+    else:
+        nbCleaners = 0
+    price = calculator.resolve(nbSimpleGuests, nbCooks, nbCleaners, priceTotalCurrent) #obtention du prix par type d'aide
+    return Response(response=json.dumps(price), status=200)
+    
         
         
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

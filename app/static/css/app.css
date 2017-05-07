@@ -511,6 +511,18 @@ footer p {
     }
 }
 
+@media (min-width: 768px) {
+    .my-meal-dtld-map-height {
+        height: 236px;
+    }
+}
+
+@media (max-width: 767px) {
+    .my-meal-dtld-map-height {
+        height: 160px;
+    }
+}
+
 .color-text-priceSentence {
     color: initial;
 }

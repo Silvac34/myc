@@ -1,8 +1,8 @@
 'use strict';
 
-var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate']);
+var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap) {
 
   $scope.meal = meal.data;
 
@@ -137,6 +137,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       }
     }
   }
+   var vm=this;
+  NgMap.getMap("map").then(function(map) {
+    vm.map = map;
+  });
+
+  $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
+    vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
+  };
 
 }]);
 

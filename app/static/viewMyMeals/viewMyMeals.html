@@ -8,7 +8,7 @@
           <div class="list-group" style="cursor:pointer;">
             <a ng-if="meal.detailedInfo.pending==false" class="list-group-item list-group-meal my-meal-dtld-panel-success" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
               <div class="row">
-                <div class="meal-menu text-center col-xs-8 col-sm-9 col-lg-10" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">
+                <div class="meal-menu text-center col-xs-8 col-sm-9 col-lg-10">
                   <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</strong>
                   <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
                   <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
@@ -26,7 +26,9 @@
                 <div class="row">
                   <div class="col-xs-10">
                     <div class="row meal-info-label">
-                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span><span class="hidden-xs">, {{meal.address.town}}, {{meal.address.country}}</span><span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:18px">{{meal.address.town}}, {{meal.address.country}}</span></span><span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - {{meal.privateInfo.address.complement}}</span></span>
+                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span>
+                      <span
+                        class="hidden-xs">, {{meal.address.town}}, {{meal.address.country}}</span><span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:18px">{{meal.address.town}}, {{meal.address.country}}</span></span><span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - {{meal.privateInfo.address.complement}}</span></span>
                     </div>
                     <div class="row meal-info-label">
                       <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} </span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
@@ -44,6 +46,9 @@
                 <div class="row" style="margin-top:7px;">
                   <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
                 </div>
+                <div class="row" ng-if="meal.veggies == true"  style="margin-top:7px">
+                  <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal
+                </div>
               </div>
             </a>
           </div>
@@ -52,7 +57,7 @@
           <div class="list-group" style="cursor:pointer;">
             <a ng-if="meal.detailedInfo.pending==true" class="list-group-item list-group-meal my-meal-dtld-panel-warning">
               <div class="row">
-                <div class="meal-menu text-center col-xs-8 col-sm-9 col-lg-10" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">
+                <div class="meal-menu text-center col-xs-8 col-sm-9 col-lg-10">
                   <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</strong>
                   <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
                   <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
@@ -88,6 +93,9 @@
                 <div class="row" style="margin-top:7px;">
                   <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
                 </div>
+                <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
+                  <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal
+                </div>
               </div>
             </a>
           </div>
@@ -104,7 +112,7 @@
           <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal my-meal-dtld-panel-info" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
               <div class="row">
-                <div class="meal-menu text-center col-xs-8 col-sm-9 col-lg-10" ng-class="{'meal-menu-vegetarian-label': meal.veggies}">
+                <div class="meal-menu text-center col-xs-8 col-sm-9 col-lg-10">
                   <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</strong>
                   <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
                   <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
@@ -122,7 +130,10 @@
                 <div class="row">
                   <div class="col-xs-10">
                     <div class="row meal-info-label">
-                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-xs">, </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.address.town}}, {{meal.address.country}}<span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.privateInfo.address.complement}}</span>
+                      <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-xs">, </span><span class="hidden-sm hidden-md hidden-lg"></br></span>{{meal.address.town}}, {{meal.address.country}}<span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - </span>
+                      <span
+                        class="hidden-sm hidden-md hidden-lg"></br>
+                        </span>{{meal.privateInfo.address.complement}}</span>
                     </div>
                     <div class="row meal-info-label">
                       <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} </span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
@@ -139,6 +150,9 @@
                 </div>
                 <div class="row" style="margin-top:7px;">
                   <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
+                </div>
+                <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
+                  <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal
                 </div>
               </div>
             </a>

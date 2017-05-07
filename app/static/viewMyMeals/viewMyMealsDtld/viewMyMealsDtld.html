@@ -85,6 +85,9 @@
                     <div class="meal-info-label" ng-if="userRole=='admin'">
                         <img src="/static/sources/people.png" style="width:14px; height:14px"> Subscription recapitulatory: <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
                     </div>
+                    <div class="meal-info-label" ng-if="meal.veggies == true">
+                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal
+                    </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}</span>
                         <span ng-hide="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking">{{meal.time |date:'HH:mm'}}</span>

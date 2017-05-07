@@ -284,7 +284,11 @@ class APITest2(BasicAPITest):
         resp = self.test_client.post("/api/meals/"+ meal_id +"/subscription/validate/"+participant_id, data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}) #adminUser n'est pas l'admin du repas 1111111..4
         self.assertEqual("200 OK", resp.status)
         
-        
+    def test_calculate_price_of_a_meal(self):
+        expected = json.dumps({'hostPrice': 10.0, 'cookPrice': '', 'total': 10.0, 'simpleGuestPrice': '', 'cleanerPrice': ''})
+        resp = self.test_client.get("/api/meals/111111111111111111111111/calculateMealPrice",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        self.assertEquals(resp.data,expected)
         
     
 if __name__ == '__main__':

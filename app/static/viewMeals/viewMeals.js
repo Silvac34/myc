@@ -195,7 +195,11 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     priceFilterMax: {
       value: null
     },
-    cityFilter: ""
+    cityFilter: "",
+    preferenceFilter: {
+      "veggies": false,
+      "vegan": false
+    }
   };
 
   //code pour faire les filtres selon les weekDays
@@ -286,6 +290,23 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
     else {
       return meal;
+    }
+  };
+
+  $scope.preferenceFilter = function(meal) {
+    if ($scope.filter.preferenceFilter.veggies == true && $scope.filter.preferenceFilter.vegan == true) {
+      return (meal.veggies == true || meal.vegan == true);
+    }
+    else {
+      if ($scope.filter.preferenceFilter.veggies == true) {
+        return meal.veggies == true;
+      }
+      else if ($scope.filter.preferenceFilter.vegan == true) {
+        return meal.vegan == true;
+      }
+      else {
+        return meal;
+      }
     }
   };
 

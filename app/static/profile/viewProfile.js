@@ -146,7 +146,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   });
 
   //$scope pour le plugin checkbox messenger
-  $scope.origin = ENV.fbRedirectURI + "#/create_meal/" + userInfo.data._id;
+  /*$scope.origin = ENV.fbRedirectURI + "#/create_meal/" + userInfo.data._id;
   $scope.page_id = ENV.page_id;
   $scope.app_id = ENV.appId;
   $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1);
@@ -163,7 +163,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       'user_ref': $scope.user_ref
     });
   }
-
+*/
 }])
 
 .filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {

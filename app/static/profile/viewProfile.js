@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewProfile', ['dateDropdownService'])
 
-.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', function($scope, $http, userInfo) {
+.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', function($scope, $http, userInfo, ENV, ezfb) {
 
   function setValue(variable) {
     if (typeof variable === 'undefined') {
@@ -38,11 +38,9 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   var birthdate = setValue($scope.user.birthdate);
   var presentation = setValue($scope.user.presentation);
   var whymycommuneaty = setValue($scope.user.whymycommuneaty);
-  if ($scope.user.country_of_origin == undefined) {
-    var country_of_origin_name = "";
-  }
-  else {
-    var country_of_origin_name = setValue($scope.user.country_of_origin.name);
+  var country_of_origin_name = "";
+  if ($scope.user.country_of_origin != undefined) {
+    country_of_origin_name = setValue($scope.user.country_of_origin.name);
   }
 
   function getDataToPerform() {
@@ -76,7 +74,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
     }
-        if (whymycommuneaty != setValueScope($scope.user.whymycommuneaty)) {
+    if (whymycommuneaty != setValueScope($scope.user.whymycommuneaty)) {
       origUser.whymycommuneaty = $scope.user.whymycommuneaty;
     }
     if ($scope.user.country_of_origin != undefined) {
@@ -146,6 +144,25 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   $http.get("/static/sources/profile/countries.json").then(function(res) {
     $scope.countries = res.data;
   });
+
+  //$scope pour le plugin checkbox messenger
+  $scope.origin = ENV.fbRedirectURI + "#/create_meal/" + userInfo.data._id;
+  $scope.page_id = ENV.page_id;
+  $scope.app_id = ENV.appId;
+  $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1);
+
+  $scope.$applyAsync(function() { //on relance le plugin pour qu'il prenne en compte correctement les paramètres du scope / on l'appelle après que le scope se soit mis en place
+    ezfb.XFBML.parse(document.getElementById('fb-messenger-checkbox')); //XFBML.parse relance le plugin
+  });
+
+  function confirmOptIn() {
+    ezfb.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+      'app_id': ENV.appId,
+      'page_id': ENV.page_id,
+      'ref': $scope.$parent.$root.user._id,
+      'user_ref': $scope.user_ref
+    });
+  }
 
 }])
 

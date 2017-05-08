@@ -518,7 +518,7 @@ footer p {
     color: initial;
 }
 
-.my-meal-dtld-cellphone-position{
+.my-meal-dtld-cellphone-position {
     left: 40px;
     top: -10px;
     position: relative;
@@ -805,15 +805,22 @@ footer p {
     border-bottom: 1px solid #dddddd;
 }
 
+@media (min-width: 768px) {
+    .form-design-vegan {
+        margin-left: 15px;
+    }
+}
+
 
 /* viewMyMealsDtld ---------------------------------------------------*/
 
-.my-meal-dtld-participant{
+.my-meal-dtld-participant {
     border-bottom: 1px solid #eeeeee;
     padding-left: 0px;
     left: 20px;
     padding-bottom: 3px;
 }
+
 .my-meal-uitab {
     margin-left: 10px;
 }

@@ -62,13 +62,18 @@
                     <h3 class="panel-title">Important information
                 </div>
                 <div class="panel-body">
+                    <div class="meal-info-label">
+                        <span ng-if="userRole=='cook'">Inscribed as: <strong class="text-success">" Help cooking "</strong></span>
+                        <span ng-if="userRole=='cleaner'">Inscribed as: <strong class="text-success">" Help cleaning "</strong></span>
+                        <span ng-if="userRole=='simpleGuest'">Inscribed as: <strong class="text-success">" Simple Guest "</strong></span>
+                    </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
                         <span class="glyphicon glyphicon-shopping-cart"></span> Total price of the groceries: <strong class="text-success">{{meal.price}}</strong>
                     </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
                         <span class="glyphicon glyphicon-thumbs-up"></span> Total participants payback</br>
-                            <span style="padding-left:30px;">If the meal is full: <strong class="text-success">{{meal.pricePaybackIfFull}}</strong></span></br>
-                            <span style="padding-left:30px;">Currently: <strong class="text-success">{{meal.currentPricePayback}}</strong></span>
+                        <span style="padding-left:30px;">If the meal is full: <strong class="text-success">{{meal.pricePaybackIfFull}}</strong></span></br>
+                        <span style="padding-left:30px;">Currently: <strong class="text-success">{{meal.currentPricePayback}}</strong></span>
                     </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-piggy-bank"></span>
@@ -77,16 +82,11 @@
                         <span ng-if="userRole=='cleaner'"><strong class="text-success">{{meal.detailedInfo.requiredGuests.cleaners.price}}</strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
                         <span ng-if="userRole=='simpleGuest'"><strong class="text-success">{{meal.detailedInfo.requiredGuests.simpleGuests.price}}</strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
                     </div>
-                    <div class="meal-info-label">
-                        <span ng-if="userRole=='cook'">Inscribed as: <strong class="text-success">" Help cooking "</strong></span>
-                        <span ng-if="userRole=='cleaner'">Inscribed as: <strong class="text-success">" Help cleaning "</strong></span>
-                        <span ng-if="userRole=='simpleGuest'">Inscribed as: <strong class="text-success">" Simple Guest "</strong></span>
-                    </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
                         <img src="/static/sources/people.png" style="width:14px; height:14px"> Subscription recapitulatory: <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
                     </div>
-                    <div class="meal-info-label" ng-if="meal.veggies == true">
-                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal
+                    <div class="meal-info-label" ng-if="meal.veggies == true || meal.vegan == true">
+                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                     </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}</span>
@@ -131,7 +131,10 @@
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'admin'">
-                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span><span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span></span></span>
+                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
                         </div>
                     </div>
                 </div>
@@ -150,7 +153,10 @@
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'">
-                           <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span><span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span></span></span>
+                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
                         </div>
                         <div ng-if="user.role[0] == 'cook' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
@@ -178,7 +184,10 @@
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'">
-                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span><span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span></span></span>
+                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
                         </div>
                         <div ng-if="user.role[0] == 'cleaner' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
@@ -206,7 +215,10 @@
                     </div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'">
-                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span><span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span></span></span>
+                            <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone"><span class="hidden-xs"> - {{user.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
                         </div>
                         <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>

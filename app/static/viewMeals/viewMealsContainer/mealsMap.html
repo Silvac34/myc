@@ -15,8 +15,8 @@
                     <div class="clear10"></div>
                         <span class="price-banknote map-price" ng-bind-html="meal.priceSentence"></span>
                     <div class="clear10"></div>
-                      <span ng-if="meal.veggies == true"><img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal</span>
-                    <div class="clear10" ng-if="meal.veggies == true"></div>
+                      <span ng-if="meal.veggies == true || meal.vegan == true"><img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal</span>
+                    <div class="clear10" ng-if="meal.veggies == true || meal.vegan == true"></div>
                     <div>
                         <div>
                             <strong>Hosted by:</strong>

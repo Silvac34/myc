@@ -8,8 +8,8 @@
     <div class="clear30"></div>
     <form class="form-horizontal" name="updateUserForm">
         <fieldset>
-            <div class="row">
-                <div class="col-lg-10 col-xs-12">
+            <div class="col-xs-12">
+                <div class="row">
                     <a href="{{user.link}}"><img class="img-circle profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" style="float:left;margin-right:10px;" />
                         <div class="row">
                             <h4 style="line-height:12px">{{user.first_name}} {{user.last_name}}</h4>
@@ -19,76 +19,63 @@
                         </div>-->
                     </a>
                 </div>
-            </div>
-            <div ng-if="$parent.user._id != user._id">
-                <div class="clear30"></div>
+                <div class="clear10"></div>
                 <div class="row">
-                    <div class="col-xs-12" style="left:24px;">
-                        <p ng-show="user.presentation">"<em>{{user.presentation}}</em>"</p>
-                        <p ng-hide="user.presentation">{{user.first_name}} did not specified yet a description</p>
-                    </div>
+                    <h4><em>Informations about you</em></h4>
                 </div>
-                <div class="row" ng-if="user.birthdate">
-                    <div class="col-xs-12">
+                <div ng-if="$parent.user._id != user._id">
+                    <div class="row">
+                        <div class="col-xs-12" style="left:24px;">
+                            <p ng-show="user.presentation">"<em>{{user.presentation}}</em>"</p>
+                            <p ng-hide="user.presentation">{{user.first_name}} did not specified yet a description</p>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="user.birthdate">
                         <p>Age: {{user.birthdate | ageFilter}}</p>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
+                    <div class="row">
                         <p>Gender : {{user.gender}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="clear20"></div>
-            <div ng-if="$parent.user._id == user._id">
-                <div class="form-group">
-                    <div class="col-xs-12">
+                <div ng-if="$parent.user._id == user._id">
+                    <div class="form-group">
                         <input type="text" class="form-control" ng-model="user.privateInfo.email" placeholder="Email">
                     </div>
-                </div>
-                <div class="form-group" ng-class="{'has-error': updateUserForm.inputCellphone.$invalid && userUpdateForm.$submitted};">
-                    <div class="col-xs-12">
+                    <div class="form-group" ng-class="{'has-error': updateUserForm.inputCellphone.$invalid && userUpdateForm.$submitted};">
                         <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="Cellphone" uib-popover="Private information: displayed only for participants and host"
                             popover-trigger="mouseenter" popover-placement="top" ng-model="user.privateInfo.cellphone">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="form-group">
                         Gender: {{user.gender}}
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="form-group">
                         <div class="hidden-sm hidden-md hidden-lg">Birthdate:</div>
                         <div><span style="float:left;margin-right:10px" class="hidden-xs">Birthdate: </span><input datedropdowns ng-model="user.birthdate" day-div-class="day-container" month-div-class="month-container" year-div-class="year-container" /></div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="form-group">
                         <input type="text" ng-model="user.country_of_origin" placeholder="Native country" uib-typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo:8" typeahead-template-url="customTemplate.html" class="form-control"
                             typeahead-show-hint="true" typeahead-min-length="0" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-12">
-                        <textarea class="form-control" rows="3" placeholder="Introduce yourself" ng-model="user.presentation"></textarea>
-                    </div>
+                    <textarea class="form-control" rows="3" placeholder="Introduce yourself" ng-model="user.presentation"></textarea>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-12">
-                        <textarea class="form-control" rows="3" placeholder="Why are you on myCommuneaty ?" ng-model="user.whymycommuneaty"></textarea>
-                    </div>
+                    <textarea class="form-control" rows="3" placeholder="Why are you on myCommuneaty ?" ng-model="user.whymycommuneaty"></textarea>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
+                <div class="form-group">
                     Member since {{user._created | date:'MMMM yyyy'}}
                 </div>
-            </div>
-            <div class="form-group" ng-if="$parent.user._id == user._id">
-                <div class="col-lg-2">
-                    <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag)">Actualize</button>
+                <!--<div class="row">
+                    <h4><em>Notifications</em></h4>
                 </div>
+                <div class="row">
+                    <div>Do you want to receive updates about the meal on messenger? <span class="small">(recommended)</span></div>
+                    <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
+                </div>
+                <div class="form-group" ng-if="$parent.user._id == user._id">
+                    <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag); confirmOptIn()">Actualize</button>
+                </div>-->
             </div>
             <div class="form-group" ng-show="updateUserForm.$submitted && actualized != null">
                 <div class="col-xs-12 col-sm-6 col-md-4">

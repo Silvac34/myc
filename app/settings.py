@@ -32,6 +32,9 @@ schemaMeals = {
     'veggies': {
         'type': 'boolean'
     },
+    'vegan': {
+        'type': 'boolean'
+    },
     'admin': { #mettre data relation
         'type': 'objectid'
     },

@@ -15,6 +15,9 @@
                 <div class="row meal-info-label">
                     <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
                 </div>
+                <div class="row meal-info-label" ng-if="meal.veggies == true || meal.vegan == true" >
+                    <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                </div>
             </div>
         </div>
         <div class="row meal-dtld-group">
@@ -40,7 +43,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
-                        <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <span ng-bind-html="meal.priceSentence"></span> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                            <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <span ng-bind-html="meal.priceSentence"></span> according to the inscriptions. You will be inform before the dinner of the final price.</div>
                         </div>
                     </div>
                 </div>

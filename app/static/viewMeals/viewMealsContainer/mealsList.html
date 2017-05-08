@@ -43,8 +43,8 @@
                     <div class="row" style="margin-top:7px;">
                         <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
                     </div>
-                    <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
-                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> Vegetarian meal
+                    <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
+                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                     </div>
                 </div>
             </a>

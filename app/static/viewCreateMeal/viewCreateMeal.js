@@ -11,7 +11,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
 
   if ($scope.$parent.$parent.fromState.name != "") { // si on rafraichit la page alors le state d'avant est vide sinon, on relance le plugin
     $scope.$applyAsync(function() { // pour que le plugin prenne en compte correctement les paramètres alors il faut l'appeler après que le scope se soit mis en place
-      ezfb.XFBML.parse(document.getElementById('fb-messenger_checkbox')); //XFBML.parse relance le plugin
+      ezfb.XFBML.parse(document.getElementById('fb-messenger-checkbox')); //XFBML.parse relance le plugin
     });
   }
 
@@ -27,6 +27,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   //initialize the editedMeal model
   $scope.editedMeal = $scope.editedMeal || {
       veggies: false,
+      vegan: false,
       time: predefined_date,
       detailedInfo: {
         "requiredGuests": {}

@@ -8,12 +8,16 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
   function check_loading() {
     $scope.pendingRequest = false;
-    for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-      if ($scope.meal.privateInfo.users[i]._id == $scope.user._id) {
-        $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
-      }
-      if ($scope.meal.privateInfo.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
-        $scope.pendingRequest = true;
+    if ("privateInfo" in $scope.meal) {
+      if ("users" in $scope.meal.privateInfo) {
+        for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+          if ($scope.meal.privateInfo.users[i]._id == $scope.user._id) {
+            $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
+          }
+          if ($scope.meal.privateInfo.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
+            $scope.pendingRequest = true;
+          }
+        }
       }
     }
   }
@@ -141,7 +145,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
           }
           $scope.meal.currentPricePayback = getCurrencySymbol($scope.meal.currentPricePayback, $scope.meal.address.country_code, result_currency, result_currency_symbol);
           $scope.meal.pricePaybackIfFull = getCurrencySymbol($scope.meal.pricePaybackIfFull, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-          
+
         });
       });
     });

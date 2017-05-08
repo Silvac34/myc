@@ -205,12 +205,16 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   //code pour faire les filtres selon les weekDays
   $scope.weekDaysFilter = function(meal) { //permet de faire un filtre avec les jours de la semaine selectionnés
     if ($scope.filter.weekDays.some(checkIfWeekDaysSelected) == true) {
+      var listMeal = [];
       for (var i = 0; i < $scope.filter.weekDays.length; i++) {
         if ($scope.filter.weekDays[i].selected == true) {
           var mealDate = new Date(meal.time);
-          return (mealDate.getDay() == $scope.filter.weekDays[i].ind);
+          if (mealDate.getDay() == $scope.filter.weekDays[i].ind) {
+            listMeal.push(meal);
+          }
         }
       }
+      return listMeal[0];
     }
     else {
       return meal;

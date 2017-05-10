@@ -18,8 +18,8 @@
     <div class="row hidden-sm hidden-md hidden-lg" style="padding-bottom:10px">
       <div class="meal-search-filter">
         <a class="btn btn-primary btn-sm" ng-click="openModalFilter()">Filters</a>
-        <div ui-sref="view_meals.mealsMap" ng-click="InitializeMealsMap()" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>Map</em></strong></div>
-        <div ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>List</em></strong></div>
+        <span ui-sref="view_meals.mealsMap" ng-click="InitializeMealsMap()" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>Map</em></strong></span>
+        <span ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>List</em></strong></span>
       </div>
       <div class="meal-search-sort">
         <span class="meal-search-title-count">Order by</span>

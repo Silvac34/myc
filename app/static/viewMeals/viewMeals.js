@@ -319,13 +319,20 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   }
 
   $state.go("view_meals.mealsList");
-  var vm = this;
-  NgMap.getMap("map").then(function(map) {
-    vm.map = map;
-  });
+  $scope.mapInitialized = false;
 
-  $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
-    vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
+  $scope.InitializeMealsMap = function() {
+    if ($scope.mapInitialized == false) {
+      var vm = this;
+      NgMap.getMap("mealsMap").then(function(map) {
+        vm.map = map;
+      });
+
+      $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
+        vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
+      };
+      $scope.mapInitialized = true;
+    }
   };
 
 }]);

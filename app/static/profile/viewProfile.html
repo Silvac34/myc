@@ -21,7 +21,7 @@
                 </div>
                 <div class="clear10"></div>
                 <div class="row">
-                    <h4><em>Informations about <span ng-if="$parent.user._id == user._id">you</span><span ng-if="$parent.user._id != user._id && user.gender==male">him</span><span ng-if="$parent.user._id != user._id && user.gender==female">her</span></em></h4>
+                    <h4><em>Informations about <span ng-if="$parent.user._id == user._id">you</span><span ng-if="$parent.user._id != user._id && user.gender=='male'">him</span><span ng-if="$parent.user._id != user._id && user.gender=='female'">her</span></em></h4>
                 </div>
                 <div ng-if="$parent.user._id != user._id">
                     <div class="row">

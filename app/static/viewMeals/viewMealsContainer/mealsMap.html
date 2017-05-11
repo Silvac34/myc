@@ -9,11 +9,10 @@
                         <strong class="map-text-menu"> {{meal.menu.title}} </strong>
                     </div>
                     <div>
-                        <span class="date-calendar map-date"> {{meal.time | date:'EEEE dd MMMM'}} </span>
-                        <span class="time-calendar map-time"> {{meal.time | date:'HH:mm'}} </span>
+                        <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
                     </div>
                     <div class="clear10"></div>
-                        <span class="price-banknote map-price" ng-bind-html="meal.priceSentence"></span>
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
                     <div class="clear10"></div>
                       <span ng-if="meal.veggies == true || meal.vegan == true"><img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal</span>
                     <div class="clear10" ng-if="meal.veggies == true || meal.vegan == true"></div>
@@ -23,8 +22,8 @@
                         </div>
                         <div style="float:right;">
                             <a ui-sref="profile({userId:meal.admin._id})">
-                                <span class="meal-admin meal-admin-name"> {{meal.admin.first_name}} {{meal.admin.last_name}} </span>
-                                <img class="img-circle profilePic" style="margin-left: 10px;margin-bottom: 0px;" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" /></a>
+                                <span class="meal-admin meal-admin-name" style="padding-right:5px"> {{meal.admin.first_name}} {{meal.admin.last_name}} </span>
+                                <img class="img-circle profilePic" style="margin-bottom: 0px;" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" /></a>
                         </div>
                         <div class="clear10"></div>
                     </div>

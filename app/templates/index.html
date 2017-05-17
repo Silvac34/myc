@@ -116,8 +116,8 @@
         Hi <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
       </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-            <li role="menuitem"><a ui-sref="profile({userId:user._id})">Profile</a></li>
             <li role="menuitem" ng-if="isAuthenticated()"><a ui-sref="my_meals">My meals</a></li>
+            <li role="menuitem"><a ui-sref="profile({userId:user._id})">Profile</a></li>
             <li class="divider" ng-if="isAuthenticated()"></li>
             <li role="menuitem"><a ng-click="logout()">Logout</a></li>
           </ul>

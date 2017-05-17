@@ -175,7 +175,12 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   function getAddressFromAutocomplete() {
     var precision_needed_for_rounding_lat_lng = 1000;
     if ($scope.details != undefined) {
-      $scope.editedMeal.address.town = $scope.details.vicinity;
+      if ("vicinity" in $scope.details) {
+        $scope.editedMeal.address.town = $scope.details.vicinity;
+      }
+      else {
+        $scope.editedMeal.address.town = $scope.autocompleteAddress.split(",")[0];
+      }
       $scope.editedMeal.privateInfo.address.name = $scope.details.name;
       $scope.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
       $scope.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();

@@ -292,7 +292,10 @@ schemaUsers = {
             },
             'user_ref':{
                 'type': 'string'
-            }
+            },
+            'city_notification_preference':{
+                'type': 'list'
+            },
         }
     },
     'picture': {

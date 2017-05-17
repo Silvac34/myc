@@ -90,6 +90,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       if (city_notification_preference != setValueScope($scope.user.privateInfo.city_notification_preference)) {
         origUser.privateInfo.city_notification_preference = $scope.user.privateInfo.city_notification_preference;
         origUser.privateInfo.keep = true;
+        origUser.privateInfo.user_ref = $scope.user_ref;
       }
     }
     if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
@@ -209,7 +210,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     ezfb.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
       'app_id': ENV.appId,
       'page_id': ENV.page_id,
-      'ref': $scope.$parent.$root.user._id,
+      //'ref': $scope.$parent.$root.user._id,
       'user_ref': $scope.user_ref
     });
   }

@@ -18,7 +18,7 @@ from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname
-from celery import Celery
+
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):

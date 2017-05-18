@@ -198,7 +198,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   $scope.origin = ENV.fbRedirectURI + "#/profile/" + userInfo.data._id;
   $scope.page_id = ENV.page_id;
   $scope.app_id = ENV.appId;
-  $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1);
+  $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1).toString();
 
   if ($scope.$parent.$parent.fromState.name != "") { // si on rafraichit la page alors le state d'avant est vide sinon, on relance le plugin
     $scope.$applyAsync(function() { // pour que le plugin prenne en compte correctement les paramètres alors il faut l'appeler après que le scope se soit mis en place

@@ -18,3 +18,6 @@ sudo pip install -r requirements.txt
 
 #install heroku
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+#To install celery
+sudo pip install celery

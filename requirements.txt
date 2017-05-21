@@ -6,4 +6,3 @@ requests
 eve==0.7.2
 python-dateutil
 pytz
-celery

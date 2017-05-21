@@ -18,7 +18,7 @@ from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname
-import celeryFile
+#import celeryFile
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
@@ -118,9 +118,9 @@ class Meal:
             return False
         else : return meal
 
-celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
+#celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
     
-@celery.task()
+#@celery.task()
 def sendNotificationCityPreference(meal, mealPrice):
     users = Application.app.data.driver.db.users.find({"privateInfo.city_notification_preference": {'$in': [ meal["address"]["town"] ]}}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend

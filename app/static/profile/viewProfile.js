@@ -43,8 +43,10 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     country_of_origin_name = setValue($scope.user.country_of_origin.name);
   }
   var city_notification_preference = "";
-  if ("city_notification_preference" in $scope.user.privateInfo) {
-    city_notification_preference = setValue($scope.user.privateInfo.city_notification_preference);
+  if ("privateInfo" in $scope.user) {
+    if ("city_notification_preference" in $scope.user.privateInfo) {
+      city_notification_preference = setValue($scope.user.privateInfo.city_notification_preference);
+    }
   }
 
   function getDataToPerform() {
@@ -206,14 +208,14 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     });
   }
 
-  function confirmOptIn() {
+  $scope.confirmOptIn = function() {
     ezfb.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
       'app_id': ENV.appId,
       'page_id': ENV.page_id,
-      //'ref': $scope.$parent.$root.user._id,
+      'ref': $scope.$parent.$root.user._id,
       'user_ref': $scope.user_ref
     });
-  }
+  };
 
 }])
 

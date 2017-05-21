@@ -37,7 +37,10 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
       resolve: {
         _etag: function() {
             return $scope.meal._etag;
-          } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+          }, //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+          meal: function() {
+            return $scope.meal;
+          }
       }
     });
   };
@@ -172,7 +175,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
 }]);
 
-modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, _etag) {
+modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, _etag, meal) {
 
   $scope.deleteMyMeal = function(meal_id, _etag) {
 
@@ -186,7 +189,7 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
   };
 
   $scope.delete = function() {
-    $scope.deleteMyMeal($scope.meal._id, _etag);
+    $scope.deleteMyMeal(meal._id, _etag);
     $uibModalInstance.close();
     $state.go('view_meals', {
       reload: true,

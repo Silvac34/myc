@@ -18,7 +18,7 @@ from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname
-
+import celeryFile
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
@@ -118,7 +118,19 @@ class Meal:
             return False
         else : return meal
 
-
+celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
+    
+@celery.task()
+def sendNotificationCityPreference(meal, mealPrice):
+    users = Application.app.data.driver.db.users.find({"privateInfo.city_notification_preference": {'$in': [ meal["address"]["town"] ]}}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
+    meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+    local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+    meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+    for user in users:
+        text = "Hi " + user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
+        payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
+        result = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+    
 @Application.app.route('/')
 def homePage():
     return render_template("index.html")
@@ -264,12 +276,18 @@ def before_storing_POST_meals (items):
         meal["detailedInfo"]["requiredGuests"]["hosts"] = {}
         #association des prix à chacun des types d'aide
         meal["detailedInfo"]["requiredGuests"]["hosts"]["price"] = price["hostPrice"] #on récupère le prix de l'hôte dans price obtenu avec calculator.resolve et on l'associe
+        price_city_notification = None
         if "cooks" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price["cookPrice"] #on récupère le prix aide cuisine dans price obtenu avec calculator.resolve et on l'associe
+            price_city_notification = price["cookPrice"]
         if "cleaners" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price["cleanerPrice"] #on récupère le prix aide vaisselle dans price obtenu avec calculator.resolve et on l'associe
+            price_city_notification = price["cleanerPrice"]
         if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
+            if price_city_notification == None:
+                price_city_notification = price["simpleGuestPrice"]
+        #sendNotificationCityPreference(meal, price_city_notification)
         #################
 
         

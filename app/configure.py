@@ -31,7 +31,8 @@ class DevelopmentConfig(Config):
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET= '6f748f72ff723b0b9d11997a6b2c0a37'
     TOKEN_POST_FACEBOOK='EAAWHDX9daxYBAP2NU6nCaGZBwBZAYYSr8pR9vzGWmumWsq7lmWySNVE1gvRZCXSWKizxOvmQCfYasklZCM8v5KAb4oFtdGUe9CF26xzbr0ywmHN42fUZBuwGn47jY4WkYMGbFPHcr2K68ZAbonVzFlsJLBiZA9VlusTLtJhhTaNcAZDZD'
-
+    CELERY_BROKER_URL= 'redis://localhost:6379'
+    
 class DevelopmentKev(Config):
     DEVELOPMENT = True
     DEBUG = True

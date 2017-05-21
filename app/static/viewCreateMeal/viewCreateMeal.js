@@ -231,7 +231,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
 
   $scope.formPopoverTimepicker = {
     title: 'Time of the meal',
-    templateUrl: 'static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'
+    templateUrl: '../static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'
   };
 
 

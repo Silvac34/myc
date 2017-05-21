@@ -26,13 +26,6 @@ module.exports = function(grunt) {
                 dest: '<%= yeoman.app %>/static/config.js'
             },
             // Environment targets
-            devKev: {
-                // Key-values created as Angular Constants
-                constants: {
-                    // This JSON file will be available in the app under the ENV              variable
-                    ENV: grunt.file.readJSON('app/config/devKev.json')
-                }
-            },
             production: {
                 constants: {
                     ENV: grunt.file.readJSON('app/config/production.json')
@@ -61,12 +54,6 @@ module.exports = function(grunt) {
             master: {
                 options: {
                     branch: 'master',
-                    overwrite: false
-                }
-            },
-            DevKev: {
-                options: {
-                    branch: 'DevKev',
                     overwrite: false
                 }
             }
@@ -132,14 +119,6 @@ module.exports = function(grunt) {
                     'mongoimport -h ds129600.mlab.com:29600 -d mycommuneatydb_stage -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'
                     ].join('&&')
             },
-            InitDevKevDB: {
-                command: [
-                    'mongo ds019498.mlab.com:19498/shareat_dev -u shareat -p kmaillet230191 --eval "db.users.remove({})"',
-                    'mongo ds019498.mlab.com:19498/shareat_dev -u shareat -p kmaillet230191 --eval "db.meals.remove({})"',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_dev -c meals -u shareat -p kmaillet230191 --file test/testData/meals_testData.json --jsonArray',
-                    'mongoimport -h ds019498.mlab.com:19498 -d shareat_dev -c users -u shareat -p kmaillet230191 --file test/testData/users_testData.json --jsonArray'
-                ].join('&&')
-            },
             InitDevDimDB: {
                 command: [
                     'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.users.remove({})"',
@@ -167,15 +146,10 @@ module.exports = function(grunt) {
         'shell:InitDevDimDB'
     ]);
 
-    grunt.registerTask('devKev', [
-        // This will generate the configuration file for the environment
-        'ngconstant:devKev'
-    ]);
     grunt.registerTask('devDim', [
         // This will generate the configuration file for the environment
         'ngconstant:devDim'
     ]);
-    
 
 // Grunt task to build your source code for deployment to production ------------------------------------------------------------------------------------
     grunt.registerTask('Prod', [
@@ -184,16 +158,6 @@ module.exports = function(grunt) {
     
     grunt.registerTask('Stage', [
         'gitcheckout:branchDeploy', 'ngconstant:stage', 'gitadd:Conf', 'gitcommit:Conf', 'shell:PushStageBuild', 'shell:InitStageDB'
-    ]);
-
-    grunt.registerTask('ProdKev', [
-        // This will build and deploy the app to prod and reset config for devKev environment
-        'Prod', 'gitcheckout:DevKev', 'devKev'
-    ]);
-    
-    grunt.registerTask('StageKev', [
-        // This will build and deploy the app to stage and reset config for devKev environment
-        'Stage', 'gitcheckout:DevKev', 'devKev'
     ]);
     
     grunt.registerTask('ProdDim', [

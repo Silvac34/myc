@@ -12,12 +12,12 @@ sudo apt-get install -y mongodb-org
 sudo apt-get install -y mongodb-org-shell
 sudo apt-get install -y mongodb-org-tools
 
+#To install celery
+sudo pip install celery
+
 #To install all the Python dependencies
 sudo apt-get install -y python-pip
 sudo pip install -r requirements.txt
 
 #install heroku
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-
-#To install celery
-sudo pip install celery

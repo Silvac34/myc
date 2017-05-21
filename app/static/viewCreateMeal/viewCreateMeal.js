@@ -227,7 +227,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   //required for the calendar toolbar (datamodel : editedMeal.time)
 
   $scope.ismeridian = false;
-  $scope.mstep = 15;
+  $scope.mstep = 10;
 
   $scope.formPopoverTimepicker = {
     title: 'Time of the meal',

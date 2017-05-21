@@ -36,8 +36,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-10">
                     <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}" style="padding-right:5px;">
-                        <input type="text" name="formTime" class="form-control form-clock margin-left-5px-sm-md-lg" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{formPopoverTimepicker.title}}"
-                            value="{{editedMeal.time | date:'HH:mm'}}" required>
+                        <input type="text" name="formTime" class="form-control form-clock margin-left-5px-sm-md-lg" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="'outsideClick'" popover-placement="bottom-left" popover-title="{{formPopoverTimepicker.title}}"value="{{editedMeal.time | date:'HH:mm'}}" required>
                     </div>
                 </div>
             </div>

@@ -287,6 +287,7 @@ def before_storing_POST_meals (items):
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
             if price_city_notification == None:
                 price_city_notification = price["simpleGuestPrice"]
+        print("couc")
         sendNotificationCityPreference(meal, price_city_notification)
         #################
 

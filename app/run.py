@@ -343,9 +343,14 @@ def after_delete_privateMeals(item):
 # PATCH api/meals/private/<_id>
 def pre_patch_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
+    
+# PATCH api/users/private/<_id>
+def pre_patch_privateUsers(request,lookup):
+    lookup.update({"admin":g.user_id })
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers
+Application.app.on_pre_PATCH_privateUsers += pre_patch_privateUsers
 ### meals ressource ###
 Application.app.on_fetched_resource_meals +=  before_returning_GET_meals
 Application.app.on_fetched_item_meals +=  before_returning_GET_item_meal

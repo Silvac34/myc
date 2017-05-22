@@ -12,16 +12,6 @@ sudo apt-get install -y mongodb-org
 sudo apt-get install -y mongodb-org-shell
 sudo apt-get install -y mongodb-org-tools
 
-#To install Redis (broker for celery)
-#sudo pip install redis
-#sudo apt-get install redis-server peut être pas besoin avec l'addon d'heroku
-
-#Create the addon for redis (broker for celery)
-#heroku addons:create heroku-redis -a sushi
-
-#To install celery
-#sudo pip install celery
-
 #To install all the Python dependencies
 sudo apt-get install -y python-pip
 sudo pip install -r requirements.txt

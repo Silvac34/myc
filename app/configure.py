@@ -24,7 +24,7 @@ class StagingConfig(Config):
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET= '4a944b87ba3cec1475019cc8cdd16bed'
     TOKEN_POST_FACEBOOK = 'EAAWHDetyr7YBAKduUMKBiuFk7FqKbDfigW1MMqmQvlWZAF26zZApJkIqnEKdZCqDmrywJaOzLjlPArwfA5eUZAnWZCZCZCjyposWov3TnVr5VHKqVwXj8MrdOhS1zBFNal1Q5f8aNESajoIuF7n6uHyjiT9QQWmeWmhYDMdkyTOLwZDZD'
-    CELERY_BROKER_URL= 'redis://'
+    CELERY_BROKER_URL= 'redis://blabla'
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True

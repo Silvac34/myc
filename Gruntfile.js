@@ -110,7 +110,7 @@ module.exports = function(grunt) {
                 command: [
                     'git push --force stage buildingAndDeploy:master',
                     'heroku addons | grep heroku-redis',
-                    'heroku addons:create heroku-redis:hobby-dev -a sushi',
+                    'heroku addons:create heroku-redis:hobby-dev -a shareat123-stage',
                     'heroku addons:info soaring-duly-3158',
                     'heroku config | grep REDIS'
                     ].join('&&'),

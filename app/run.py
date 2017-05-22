@@ -346,7 +346,11 @@ def pre_patch_privateMeals(request,lookup):
     
 # PATCH api/users/private/<_id>
 def pre_patch_privateUsers(request,lookup):
-    lookup.update({"admin":g.user_id })
+
+    user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
+    print(user)
+    print(user["_etag"])
+    Application.app.logger.debug(user)
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers

@@ -162,6 +162,7 @@ def auth_facebook():
     currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
+    print(currentUser)
     if hasattr(currentUser,"picture"):
         if currentUser["picture"] != profile["picture"]:
             userInfo["picture"] = profile["picture"]
@@ -287,7 +288,6 @@ def before_storing_POST_meals (items):
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
             if price_city_notification == None:
                 price_city_notification = price["simpleGuestPrice"]
-        print("couc")
         sendNotificationCityPreference(meal, price_city_notification)
         #################
 
@@ -346,10 +346,7 @@ def pre_patch_privateMeals(request,lookup):
     
 # PATCH api/users/private/<_id>
 def pre_patch_privateUsers(request,lookup):
-
     user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
-    print(user)
-    print(user["_etag"])
     Application.app.logger.debug(user)
 
 ### privateUsers ressource ###

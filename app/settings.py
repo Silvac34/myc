@@ -4,6 +4,7 @@ ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 HATEOAS=False
 #to enable concurrency control
 IF_MATCH = True
+ENFORCE_IF_MATCH = True
 URL_PREFIX="api"
 DEBUG = True
 

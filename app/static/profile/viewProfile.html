@@ -71,25 +71,38 @@
                         <h4><em>Notifications</em></h4>
                     </div>
                     <div class="row">
-                        <div>Receive notifications through messenger about new meals ? <span class="small">(type your cities of interest)</span></div>
+                        <div>Receive notifications through messenger about new meals ?</div>
                     </div>
                     <div class="clear10"></div>
                     <div class="row">
+                        <div class="small">Type your cities of interest:</div>
+                        <div class="clear10"></div>
                         <div class="input-group" style="width:290px;">
                             <span class="input-group-addon" style="background-color:white"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <input ng-autocomplete type="text" ng-model="autocomplete" class="form-control pull-left" placeholder="City, suburb" options="{types:'(cities)'}" details="details" autocomplete="off" style="margin-right:20px" ng-keypress="addCityNotificationPreference($event)"/>
+                            <input ng-autocomplete type="text" ng-model="autocomplete" class="form-control pull-left" placeholder="City, suburb" options="{types:'(cities)'}" details="details" autocomplete="off" style="margin-right:20px" ng-keypress="addCityNotificationPreference($event)"
+                            />
                             <span class="input-group-btn">
                               <button class="btn btn-default" type="button" ng-click="addCityNotificationPreference()">Add</button>
                             </span>
                         </div>
                     </div>
-                    <div class="clear20" ng-hide="user.privateInfo.city_notification_preference.length == 0"></div>
+                    <div class="clear10"></div>
                     <div class="row">
                         <div ng-repeat="cities in user.privateInfo.preferences.city_notification" class="well well-sm profile-city-notification-preference">
                             <strong>&nbsp;&nbsp;{{cities}}&nbsp;</strong><span class="glyphicon glyphicon-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeCityNotificationPreference($event)"></span>
                         </div>
                     </div>
-                    <div class="row" ng-hide="user.privateInfo.city_notification_preference.length == 0" style="margin-top:-15px">
+                    <div class="row">
+                        <div class="small">Dietary preferences:</div>
+                        <div class="clear10"></div>
+                        <div class="checkbox" style="bottom:10px">
+                            <span uib-tooltip="Chose a city to receive notifications first" tooltip-placement="right" tooltip-enable="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">
+                            <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.veggies_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/>Vegetarian</label>
+                            <label><input type="checkbox" ng-model="user.privateInfo.preferences.vegan_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">Vegan</label></span>
+                        </div>
+                    </div>
+                    <div class="clear10"></div>
+                    <div class="row" ng-hide="user.privateInfo.preferences.city_notification.length == 0" style="margin-top:-15px">
                         <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
                     </div>
                     <div class="clear10"></div>

@@ -18,7 +18,7 @@ from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname
-#import celeryFile
+import celeryFile
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
@@ -118,11 +118,16 @@ class Meal:
             return False
         else : return meal
 
-#celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
+celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
     
-#@celery.task()
-def sendNotificationCityPreference(meal, mealPrice):
-    users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
+@celery.task()
+def sendNotificationPreference(meal, mealPrice):
+    if(meal['veggies'] == True):
+        users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.veggies_notification": True}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas et qui sont veggies
+    elif (meal['vegan'] == True):
+        users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.vegan_notification": True}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas et qui sont vegan
+    else:
+        users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.veggies_notification": False, "privateInfo.preferences.vegan_notification": False}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
     local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
@@ -276,18 +281,18 @@ def before_storing_POST_meals (items):
         meal["detailedInfo"]["requiredGuests"]["hosts"] = {}
         #association des prix à chacun des types d'aide
         meal["detailedInfo"]["requiredGuests"]["hosts"]["price"] = price["hostPrice"] #on récupère le prix de l'hôte dans price obtenu avec calculator.resolve et on l'associe
-        price_city_notification = None
+        price_notification = None
         if "cooks" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["cooks"]["price"]= price["cookPrice"] #on récupère le prix aide cuisine dans price obtenu avec calculator.resolve et on l'associe
-            price_city_notification = price["cookPrice"]
+            price_notification = price["cookPrice"]
         if "cleaners" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["cleaners"]["price"]= price["cleanerPrice"] #on récupère le prix aide vaisselle dans price obtenu avec calculator.resolve et on l'associe
-            price_city_notification = price["cleanerPrice"]
+            price_notification = price["cleanerPrice"]
         if "simpleGuests" in meal["detailedInfo"]["requiredGuests"] :
             meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["price"]= price["simpleGuestPrice"] #on récupère le prix simpleGuest dans price obtenu avec calculator.resolve et on l'associe
-            if price_city_notification == None:
-                price_city_notification = price["simpleGuestPrice"]
-        sendNotificationCityPreference(meal, price_city_notification)
+            if price_notification == None:
+                price_notification = price["simpleGuestPrice"]
+        sendNotificationPreference(meal, price_notification)
         #################
 
         
@@ -345,7 +350,7 @@ def pre_patch_privateMeals(request,lookup):
     
 # PATCH api/users/private/<_id>
 def pre_patch_privateUsers(request,lookup):
-    user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
+    lookup.update({"_id":g.user_id })
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers

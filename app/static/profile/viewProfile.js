@@ -29,6 +29,24 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     $scope.user = $scope.$parent.user;
     var cellphone = setValue($scope.user.privateInfo.cellphone);
     var email = setValue($scope.user.privateInfo.email);
+    var city_notification = "";
+    var veggies_notification = "";
+    var vegan_notification = "";
+    if ("preferences" in $scope.user.privateInfo) {
+      if ("city_notification" in $scope.user.privateInfo.preferences) {
+        city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+      }
+      if ("veggies_notification" in $scope.user.privateInfo.preferences) {
+        veggies_notification = setValue($scope.user.privateInfo.preferences.veggies_notification);
+      }
+      if ("vegan_notification" in $scope.user.privateInfo.preferences) {
+        vegan_notification = setValue($scope.user.privateInfo.preferences.vegan_notification);
+      }
+    }
+    else{ //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
+      $scope.user.privateInfo = {"preferences" : {"veggies_notification": false}};
+      $scope.user.privateInfo = {"preferences" : {"vegan_notification": false}};
+    }
   }
   else {
     $scope.user = userInfo.data;
@@ -42,14 +60,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   if ($scope.user.country_of_origin != undefined) {
     country_of_origin_name = setValue($scope.user.country_of_origin.name);
   }
-  var city_notification = "";
-  if ("privateInfo" in $scope.user) {
-    if ("preferences" in $scope.user.privateInfo) {
-      if ("city_notification_preference" in $scope.user.privateInfo.preferences) {
-        city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
-      }
-    }
-  }
+
 
   function getDataToPerform() {
     var actionProhibited = false;
@@ -93,7 +104,28 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     if ("preferences" in $scope.user.privateInfo) {
       if ("city_notification" in $scope.user.privateInfo.preferences) {
         if (city_notification != setValueScope($scope.user.privateInfo.preferences.city_notification)) {
-          origUser.privateInfo.preferences = {"city_notification": $scope.user.privateInfo.preferences.city_notification};
+          origUser.privateInfo.preferences = {
+            "city_notification": $scope.user.privateInfo.preferences.city_notification
+          };
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
+          setDietaryPreferencesToNull(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
+        }
+      }
+      if ("veggies_notification" in $scope.user.privateInfo.preferences) {
+        if (veggies_notification != setValueScope($scope.user.privateInfo.preferences.veggies_notification)) {
+          origUser.privateInfo.preferences = {
+            "veggies_notification": $scope.user.privateInfo.preferences.veggies_notification
+          };
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
+        }
+      }
+      if ("vegan_notification" in $scope.user.privateInfo.preferences) {
+        if (vegan_notification != setValueScope($scope.user.privateInfo.preferences.vegan_notification)) {
+          origUser.privateInfo.preferences = {
+            "vegan_notification": $scope.user.privateInfo.preferences.vegan_notification
+          };
           origUser.privateInfo.keep = true;
           origUser.privateInfo.user_ref = $scope.user_ref;
         }
@@ -120,9 +152,9 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       return origUser;
     }
   }
-  
-  function addPreferencesToUser(){
-    if ($scope.user.privateInfo.preferences == undefined){
+
+  function addPreferencesToUser() {
+    if ($scope.user.privateInfo.preferences == undefined) {
       $scope.user.privateInfo.preferences = {};
     }
   }
@@ -180,6 +212,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
         };
         $http.patch('api/users/private/' + user_id, dataToPerform, config).then(function successCallBack(response) {
           $scope.user._etag = response.data._etag;
+          $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1).toString();
           cellphone = setValue($scope.user.privateInfo.cellphone);
           email = setValue($scope.user.privateInfo.email);
           birthdate = setValue($scope.user.birthdate);
@@ -191,6 +224,12 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           if ("preferences" in $scope.user.privateInfo) {
             if ("city_notification" in $scope.user.privateInfo.preferences) {
               city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+            }
+            if ("veggies_notification" in $scope.user.privateInfo.preferences) {
+              veggies_notification = setValue($scope.user.privateInfo.preferences.veggies_notification);
+            }
+            if ("vegan_notification" in $scope.user.privateInfo.preferences) {
+              vegan_notification = setValue($scope.user.privateInfo.preferences.vegan_notification);
             }
           }
           $scope.actualized = true;
@@ -229,6 +268,13 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       'user_ref': $scope.user_ref
     });
   };
+
+  function setDietaryPreferencesToNull() {
+    if ($scope.user.privateInfo.preferences.city_notification.length == 0) {
+      $scope.user.privateInfo.preferences.veggies_notification = false;
+      $scope.user.privateInfo.preferences.vegan_notification = false;
+    }
+  }
 
 }])
 

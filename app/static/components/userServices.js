@@ -8,7 +8,6 @@ app.factory('userServicesFactory', ['$http', function($http) {
         return $http.get('/api/users/private').then(function successCallback(result) {
             // this callback will be called asynchronously
             // when the response is available
-            console.log(result.data);
             return result.data['_items'][0];
         }, function errorCallback(result) {
             // called asynchronously if an error occurs

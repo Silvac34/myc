@@ -18,7 +18,7 @@ from eve import Eve
 from eve.auth import TokenAuth,requires_auth
 from eve.io.mongo import Validator
 from os.path import abspath, dirname
-import celeryFile
+#import celeryFile
 
 class MyTokenAuth(TokenAuth):
     def check_auth(self, token, allowed_roles, resource, method):
@@ -118,9 +118,9 @@ class Meal:
             return False
         else : return meal
 
-celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
+#celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
     
-@celery.task()
+#@celery.task()
 def sendNotificationCityPreference(meal, mealPrice):
     users = Application.app.data.driver.db.users.find({"privateInfo.city_notification_preference": {'$in': [ meal["address"]["town"] ]}}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
@@ -129,7 +129,7 @@ def sendNotificationCityPreference(meal, mealPrice):
     for user in users:
         text = "Hi " + user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
         payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
-        result = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     
 @Application.app.route('/')
 def homePage():
@@ -162,7 +162,6 @@ def auth_facebook():
     currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
-    print(currentUser)
     if hasattr(currentUser,"picture"):
         if currentUser["picture"] != profile["picture"]:
             userInfo["picture"] = profile["picture"]
@@ -216,8 +215,10 @@ End Points Actions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 #GET api/users/private
-def pre_get_privateUsers(request,lookup): 
+def pre_get_privateUsers(request,lookup):
     lookup.update({"_id":g.user_id })
+    user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
+    Application.app.logger.debug(user)
     
 # GET api/meals
 def before_returning_GET_meals(response):

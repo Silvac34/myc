@@ -44,8 +44,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       }
     }
     else{ //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
-      $scope.user.privateInfo = {"preferences" : {"veggies_notification": false}};
-      $scope.user.privateInfo = {"preferences" : {"vegan_notification": false}};
+      $scope.user.privateInfo.preferences = {"veggies_notification": false, "vegan_notification": false};
     }
   }
   else {

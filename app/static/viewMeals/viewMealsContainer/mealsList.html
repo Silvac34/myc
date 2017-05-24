@@ -1,11 +1,11 @@
-<div ng-hide="meals.length" class="text-center" style="font-size:large;">
+<div ng-hide="mealsFiltered.length" class="text-center" style="font-size:large;">
     <div class="text-info" style="margin-top:23px">There are no incoming meals but you can</div>
     <div class="clear20"></div>
     <a ui-sref="create_meal" class="btn btn-primary" href="#/create_meal">Propose your own meal</a>
     <div class="clear20"></div>
     <div class="text-info">and enjoy meeting new people from all over the world <span class="glyphicon glyphicon-thumbs-up" style="left:5px;top:2px"></span></div>
 </div>
-<div class="row" ng-repeat="meal in mealsWeekDaysFilter = (meals | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | orderBy:'time':reverse)">
+<div class="row" ng-repeat="meal in mealsFiltered = (meals | filter: futurMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | orderBy:'time':reverse)">
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':meal.detailedInfo.subscribed,'my-meal-dtld-panel-warning':meal.detailedInfo.pending}" ng-click=openModalDtld(meal._id)>
@@ -56,3 +56,60 @@
         </div>
     </div>
 </div>
+<div class="clear40"></div>
+<div style="border:solid 1px #3a87ad"></div>
+<div class="clear20"></div>
+<div class="general-title text-info" style="font-size:medium">Previous meals</div>
+<div class="clear20"></div>
+<div class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | orderBy:'time':reverse)">
+    <div class="col-xs-12">
+        <div class="list-group" style="cursor:pointer;">
+            <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-info':meal.detailedInfo.subscribed}" ng-click=openModalDtld(meal._id)>
+                <div class="row">
+                    <div class="meal-menu text-center" ng-class="{'col-xs-8 col-sm-9 col-lg-10':meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true,'col-xs-12':meal.detailedInfo.subscribed==false && meal.detailedInfo.pending==false}">
+                        <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 25}}{{meal.menu.title.length > 25 ? '...' : ''}}</strong>
+                        <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
+                        <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
+                        <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
+                    </div>
+                    <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
+                        <div class="pull-right" ng-class="{'text-info': meal.detailedInfo.subscribed}"><strong><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I went</span></strong></div>
+                    </div>
+                </div>
+                <div class="hidden-xs col-sm-2 meal-admin-container">
+                    <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                    <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                </div>
+                <div class="col-xs-offset-1 col-xs-11 col-sm-offset-0 col-sm-10">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <div class="row meal-info-label">
+                                <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:15px" ng-if="meal.address.postalCode">{{meal.address.postalCode}}</span></span>
+                                <span class="hidden-xs" ng-if="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
+                            </div>
+                            <div class="row meal-info-label">
+                                <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time
+                                |date:'HH:mm'}}
+                            </div>
+                        </div>
+                        <div class="col-xs-2" style="margin-top:-8px;">
+                            <div class="row">
+                                <div ng-style="getStyle()" style="float:right;width:51px;text-align:center">
+                                    <div ng-style="getStyle()" class="" style="font-size: 11px;top:32px;position:relative;font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                                    <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:7px;">
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
+                    </div>
+                    <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
+                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+        

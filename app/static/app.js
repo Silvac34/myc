@@ -42,9 +42,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
       controller: 'ViewMealsCtrl',
       resolve: {
         response: function($http) {
-          var date = new Date();
-          var now = date.toISOString();
-          return $http.get('/api/meals?where={"time": {"$gte": "' + now + '"} }');
+          /*var date = new Date();
+          var now = date.toISOString();*/
+          return $http.get('/api/meals'/*?where={"time": {"$gte": "' + now + '"} }'*/); //on met en commentaire la requête filtrée pour repas > now
         }
       }
     });

@@ -220,6 +220,16 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       return meal;
     }
   };
+  
+  var now = new Date();
+  
+  $scope.futurMealsFilter = function(meal) {
+    return (Date.parse(meal.time) >= now.getTime());
+  };
+
+  $scope.pastMealsFilter = function(meal) {
+    return (Date.parse(meal.time) < now.getTime());
+  };
 
   function checkIfWeekDaysSelected(element, index, array) { //vérifie si au moins un des jours de la semaine a été selectionné dans les filtres
     return element.selected == true;

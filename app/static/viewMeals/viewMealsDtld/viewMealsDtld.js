@@ -284,4 +284,9 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
 
+  var now = new Date();
+  
+  $scope.checkMealDate = function() {
+    return (Date.parse($scope.meal.time) >= now.getTime());
+  };
 }]);

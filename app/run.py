@@ -122,7 +122,7 @@ class Meal:
     
 #@celery.task()
 def sendNotificationCityPreference(meal, mealPrice):
-    users = Application.app.data.driver.db.users.find({"privateInfo.city_notification_preference": {'$in': [ meal["address"]["town"] ]}}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
+    users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
     local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
@@ -217,8 +217,6 @@ End Points Actions
 #GET api/users/private
 def pre_get_privateUsers(request,lookup):
     lookup.update({"_id":g.user_id })
-    user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
-    Application.app.logger.error(user)
     
 # GET api/meals
 def before_returning_GET_meals(response):
@@ -348,7 +346,6 @@ def pre_patch_privateMeals(request,lookup):
 # PATCH api/users/private/<_id>
 def pre_patch_privateUsers(request,lookup):
     user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
-    Application.app.logger.error(user)
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers

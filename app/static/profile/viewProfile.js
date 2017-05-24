@@ -91,11 +91,12 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       }
     }
     if ("preferences" in $scope.user.privateInfo) {
-    if ("city_notification" in $scope.user.privateInfo.preferences) {
-      if (city_notification != setValueScope($scope.user.privateInfo.preferences.city_notification)) {
-        origUser.privateInfo.preferences.city_notification = $scope.user.privateInfo.preferences.city_notification;
-        origUser.privateInfo.keep = true;
-        origUser.privateInfo.user_ref = $scope.user_ref;
+      if ("city_notification" in $scope.user.privateInfo.preferences) {
+        if (city_notification != setValueScope($scope.user.privateInfo.preferences.city_notification)) {
+          origUser.privateInfo.preferences = {"city_notification": $scope.user.privateInfo.preferences.city_notification};
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
+        }
       }
     }
     if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
@@ -119,6 +120,12 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       return origUser;
     }
   }
+  
+  function addPreferencesToUser(){
+    if ($scope.user.privateInfo.preferences == undefined){
+      $scope.user.privateInfo.preferences = {};
+    }
+  }
 
   function checkIfCityIsNew(cityToAdd) {
     if ($scope.user.privateInfo.preferences.city_notification == undefined) {
@@ -132,6 +139,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   }
 
   $scope.addCityNotificationPreference = function($event) {
+    addPreferencesToUser();
     if (event.which === 13 && event.type == "keypress" || event.type == "click") {
       if ("details" in this) {
         if ("vicinity" in this.details) {

@@ -294,16 +294,18 @@ schemaUsers = {
             'user_ref':{
                 'type': 'string'
             },
-            'preferences': 'dict',
-            'schema':{
-                'city_notification':{
-                    'type': 'list'
-                },
-                'veggies_notification':{
-                    'type': 'boolean'
-                },
-                'vegan_notification':{
-                    'type': 'boolean'
+            'preferences': {
+                'type': 'dict',
+                'schema':{
+                    'city_notification':{
+                        'type': 'list'
+                    },
+                    'veggies_notification':{
+                        'type': 'boolean'
+                    },
+                    'vegan_notification':{
+                        'type': 'boolean'
+                    }
                 }
             }
         }

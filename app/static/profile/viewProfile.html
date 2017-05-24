@@ -85,7 +85,7 @@
                     </div>
                     <div class="clear20" ng-hide="user.privateInfo.city_notification_preference.length == 0"></div>
                     <div class="row">
-                        <div ng-repeat="cities in user.privateInfo.city_notification_preference" class="well well-sm profile-city-notification-preference">
+                        <div ng-repeat="cities in user.privateInfo.preferences.city_notification" class="well well-sm profile-city-notification-preference">
                             <strong>&nbsp;&nbsp;{{cities}}&nbsp;</strong><span class="glyphicon glyphicon-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeCityNotificationPreference($event)"></span>
                         </div>
                     </div>

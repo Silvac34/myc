@@ -218,7 +218,7 @@ End Points Actions
 def pre_get_privateUsers(request,lookup):
     lookup.update({"_id":g.user_id })
     user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
-    Application.app.logger.debug(user)
+    Application.app.logger.error(user)
     
 # GET api/meals
 def before_returning_GET_meals(response):
@@ -348,7 +348,7 @@ def pre_patch_privateMeals(request,lookup):
 # PATCH api/users/private/<_id>
 def pre_patch_privateUsers(request,lookup):
     user = User(_id = ObjectId(lookup['_id'])).getUserAllInfo()
-    Application.app.logger.debug(user)
+    Application.app.logger.error(user)
 
 ### privateUsers ressource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers

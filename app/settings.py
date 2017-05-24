@@ -294,9 +294,18 @@ schemaUsers = {
             'user_ref':{
                 'type': 'string'
             },
-            'city_notification_preference':{
-                'type': 'list'
-            },
+            'preferences': 'dict',
+            'schema':{
+                'city_notification':{
+                    'type': 'list'
+                },
+                'veggies_notification':{
+                    'type': 'boolean'
+                },
+                'vegan_notification':{
+                    'type': 'boolean'
+                }
+            }
         }
     },
     'picture': {

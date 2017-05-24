@@ -42,10 +42,12 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   if ($scope.user.country_of_origin != undefined) {
     country_of_origin_name = setValue($scope.user.country_of_origin.name);
   }
-  var city_notification_preference = "";
+  var city_notification = "";
   if ("privateInfo" in $scope.user) {
-    if ("city_notification_preference" in $scope.user.privateInfo) {
-      city_notification_preference = setValue($scope.user.privateInfo.city_notification_preference);
+    if ("preferences" in $scope.user.privateInfo) {
+      if ("city_notification_preference" in $scope.user.privateInfo.preferences) {
+        city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+      }
     }
   }
 
@@ -88,9 +90,10 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
         origUser.country_of_origin = $scope.user.country_of_origin;
       }
     }
-    if ("city_notification_preference" in $scope.user.privateInfo) {
-      if (city_notification_preference != setValueScope($scope.user.privateInfo.city_notification_preference)) {
-        origUser.privateInfo.city_notification_preference = $scope.user.privateInfo.city_notification_preference;
+    if ("preferences" in $scope.user.privateInfo) {
+    if ("city_notification" in $scope.user.privateInfo.preferences) {
+      if (city_notification != setValueScope($scope.user.privateInfo.preferences.city_notification)) {
+        origUser.privateInfo.preferences.city_notification = $scope.user.privateInfo.preferences.city_notification;
         origUser.privateInfo.keep = true;
         origUser.privateInfo.user_ref = $scope.user_ref;
       }
@@ -118,12 +121,12 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   }
 
   function checkIfCityIsNew(cityToAdd) {
-    if ($scope.user.privateInfo.city_notification_preference == undefined) {
-      $scope.user.privateInfo.city_notification_preference = [cityToAdd];
+    if ($scope.user.privateInfo.preferences.city_notification == undefined) {
+      $scope.user.privateInfo.preferences.city_notification = [cityToAdd];
     }
     else {
-      if ($scope.user.privateInfo.city_notification_preference.includes(cityToAdd) == false) {
-        $scope.user.privateInfo.city_notification_preference.push(cityToAdd);
+      if ($scope.user.privateInfo.preferences.city_notification.includes(cityToAdd) == false) {
+        $scope.user.privateInfo.preferences.city_notification.push(cityToAdd);
       }
     }
   }
@@ -145,9 +148,9 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   };
 
   $scope.removeCityNotificationPreference = function() {
-    var index = $scope.user.privateInfo.city_notification_preference.indexOf(this.cities);
+    var index = $scope.user.privateInfo.preferences.city_notification.indexOf(this.cities);
     if (index > -1) {
-      $scope.user.privateInfo.city_notification_preference.splice(index, 1);
+      $scope.user.privateInfo.preferences.city_notification.splice(index, 1);
     }
   };
 
@@ -177,8 +180,10 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           if ($scope.user.country_of_origin != undefined) {
             country_of_origin_name = setValue($scope.user.country_of_origin.name);
           }
-          if ("city_notification_preference" in $scope.user.privateInfo) {
-            city_notification_preference = setValue($scope.user.privateInfo.city_notification_preference);
+          if ("preferences" in $scope.user.privateInfo) {
+            if ("city_notification" in $scope.user.privateInfo.preferences) {
+              city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+            }
           }
           $scope.actualized = true;
         }, function errorCallback(response) {

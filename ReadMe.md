@@ -214,6 +214,9 @@ avec le master dans l'objectif de tester l'ensemble de la branch funcbranch sur 
 
 - Une fois les tests sont conformes aux attentes, je merge la pull request
 
+# Utilisation de redis et celery
+voir le dashboard du serveur redis (addon heoku) qui effectue les tâches en backend ici: 
+ https://dashboard.heroku.com/apps/mycommuneaty/resources
 
 # Directory Layout
 

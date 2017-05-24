@@ -212,7 +212,6 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
         };
         $http.patch('api/users/private/' + user_id, dataToPerform, config).then(function successCallBack(response) {
           $scope.user._etag = response.data._etag;
-          $scope.user_ref = Math.floor((Math.random() * 10000000000000) + 1).toString();
           cellphone = setValue($scope.user.privateInfo.cellphone);
           email = setValue($scope.user.privateInfo.email);
           birthdate = setValue($scope.user.birthdate);

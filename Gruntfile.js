@@ -102,7 +102,12 @@ module.exports = function(grunt) {
 
         shell: {
             PushProdBuild: {
-                command: 'git push --force prod buildingAndDeploy:master',
+                command: [
+                    'git push --force prod buildingAndDeploy:master',
+                    'heroku addons | grep heroku-redis',
+                    'heroku addons:create heroku-redis:hobby-dev -a mycommuneaty',
+                    'heroku config --remote prod | grep REDIS'
+                    ].join('&&'),
                 options: {
                 }
             },

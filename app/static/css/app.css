@@ -77,6 +77,11 @@
     height: 40px;
 }
 
+.clear120 {
+    clear: both;
+    height: 120px;
+}
+
 @media (min-width: 768px) {
     .page-separation-title {
         padding: 9px 0 9px 7px;

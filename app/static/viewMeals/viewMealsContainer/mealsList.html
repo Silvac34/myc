@@ -56,10 +56,10 @@
         </div>
     </div>
 </div>
-<div class="clear40"></div>
-<div style="border:solid 1px #3a87ad"></div>
+<div class="clear120"></div>
+<div style="border:dashed 1px #3a87ad" class="col-xs-4 col-xs-offset-4"></div>
 <div class="clear20"></div>
-<div class="general-title text-info" style="font-size:medium">Previous meals</div>
+<div class="general-title text-info" style="font-size:small">Previous meals</div>
 <div class="clear20"></div>
 <div class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | orderBy:'time':reverse)">
     <div class="col-xs-12">

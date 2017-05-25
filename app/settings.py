@@ -282,6 +282,34 @@ schemaUsers = {
     'link':{
         'type': 'string'
             },
+    'reviews':{
+        'type': 'list',
+        'schema': {
+            'type': 'dict',
+            'schema': {
+                'rating': {
+                    'type': 'string',
+                    'allowed': ['positive', 'negative', 'neutral'],
+                    'required': True
+                },
+                'fromUser':{
+                    'type': 'objectid',
+                    'required': True
+                },
+                'comment': {
+                    'type': 'string'
+                },
+                'date': {
+                    'type': 'string',
+                    'required': True
+                },
+                'mealAssociated': {
+                    'type': 'objectid',
+                    'required': True
+                }
+            }
+        }
+    },
     'privateInfo': {
         'type': 'dict',
         'schema':{

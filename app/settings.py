@@ -306,6 +306,10 @@ schemaUsers = {
                 'mealAssociated': {
                     'type': 'objectid',
                     'required': True
+                },
+                'role': {
+                    'type': 'string',
+                    'allowed': ["admin", "cook", "cleaner","simpleGuest"]
                 }
             }
         }

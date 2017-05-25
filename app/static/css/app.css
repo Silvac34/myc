@@ -561,12 +561,6 @@ footer p {
     color: initial;
 }
 
-.my-meal-dtld-cellphone-position {
-    left: 40px;
-    top: -10px;
-    position: relative;
-}
-
 
 /* viewMyMeals ---------------------------------------------------*/
 
@@ -948,8 +942,41 @@ footer p {
     font-size: 20px;
 }
 
-.my-meal-dtld-guestList {
-    line-height: 2.6;
+@media (min-width: 768px) {
+    .my-meal-dtld-guestList {
+        position: relative;
+        top: 8px;
+    }
+}
+
+@media (min-width: 768px) {
+    .my-meal-dtld-cellphone-position {
+        position: relative;
+        top: 8px;
+    }
+}
+
+@media (max-width: 767px) {
+    .my-meal-dtld-cellphone-position {
+        position: relative;
+        top: -4px;
+    }
+}
+
+@media (min-width: 768px) {
+    .my-meal-dtld-input-review {
+        margin-left: 10px;
+        display: inline-block;
+        width: 320px;
+    }
+}
+
+@media (max-width: 767px) {
+    .my-meal-dtld-input-review {
+        margin-top: 10px;
+        display: inline-block;
+        width: 100%;
+    }
 }
 
 .my-meal-btn-center {
@@ -1017,7 +1044,6 @@ footer p {
 .my-meal-dtld-profilePic-pending-validation {
     margin: 0px 10px 10px 0px;
     width: 50px;
-    float: left;
 }
 
 
@@ -1150,5 +1176,5 @@ h2.slogan {
     display: inline-block;
     border-radius: 25px;
     margin-right: 10px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }

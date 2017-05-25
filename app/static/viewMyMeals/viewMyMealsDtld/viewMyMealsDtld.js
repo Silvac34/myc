@@ -172,6 +172,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     vm.map = map;
   });
 
+  $scope.isOldMeal = function(){
+    var now = new Date;
+    var mealTime = new Date($scope.meal.time);
+    return now >= mealTime;
+  };
+
 
 }]);
 
@@ -303,14 +309,14 @@ modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   }; //funcion to dismiss the modal
-
+  
 })
 
 .filter('ageFilter', function() {
   function calculateAge(birthday) { // birthday is a date
-    var now = new Date;
+    var nowAge = new Date;
     var birthday_value = new Date(birthday);
-    var ageDifMs = now - birthday_value;
+    var ageDifMs = nowAge - birthday_value;
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }

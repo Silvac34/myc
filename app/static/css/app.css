@@ -965,7 +965,7 @@ footer p {
 
 @media (min-width: 768px) {
     .my-meal-dtld-input-review {
-        margin-left: 10px;
+        margin: 0px 10px;
         display: inline-block;
         width: 320px;
     }
@@ -973,7 +973,7 @@ footer p {
 
 @media (max-width: 767px) {
     .my-meal-dtld-input-review {
-        margin-top: 10px;
+        margin: 10px 0px;
         display: inline-block;
         width: 100%;
     }

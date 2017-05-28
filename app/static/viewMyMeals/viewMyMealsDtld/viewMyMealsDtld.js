@@ -192,19 +192,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         return i;
     };
 
-    $scope.addRating = function(participantId, value) {
+    $scope.sendReview = function(participantId, type, value) {
         var index = $scope.checkIndexDataForReview(participantId);
         if (index == $scope.dataForReview.length) {
             $scope.dataForReview.push({
                 "participant_id": participantId
             });
         }
-        $scope.dataForReview[index]["rating"] = value;
-        console.log($scope.dataForReview);
-    };
-
-    $scope.sendReview = function(participantId) {
-        console.log($scope.dataForReview);
+        $scope.dataForReview[index][type] = value;
     };
 
 

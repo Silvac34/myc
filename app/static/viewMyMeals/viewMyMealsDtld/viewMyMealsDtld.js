@@ -180,7 +180,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     $scope.dataForReview = [];
 
-    $scope.checkIndexDataForReview = function(participantId) { //retourne l'index où on doit faire les modifications dans dataForReview
+    function checkIndexDataForReview(participantId) { //retourne l'index où on doit faire les modifications dans dataForReview
         var i = 0;
         if ($scope.dataForReview.length > 0) {
             for (i; i < $scope.dataForReview.length; i++) {
@@ -190,16 +190,50 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             }
         }
         return i;
+    }
+
+    $scope.checkRating = function(participantId) {
+        var index = checkIndexDataForReview(participantId);
+        try {
+            if ("rating" in $scope.dataForReview[index]) {
+                return $scope.dataForReview[index].rating;
+            }
+            else {
+                return null;
+            }
+
+        }
+        catch (e) {
+        }
     };
 
-    $scope.sendReview = function(participantId, type, value) {
-        var index = $scope.checkIndexDataForReview(participantId);
+
+    $scope.sendReview = function(participantId, role, type, value) {
+        var index = checkIndexDataForReview(participantId);
+        var now = new Date();
         if (index == $scope.dataForReview.length) {
             $scope.dataForReview.push({
-                "participant_id": participantId
+                "participant_id": participantId,
+                "mealAssociated": $scope.meal._id,
+                "date": now,
+                "fromUser": $scope.user._id,
+                "role": role[0]
             });
         }
         $scope.dataForReview[index][type] = value;
+        if (type == "comment") {
+            if ($scope.dataForReview[index].rating == undefined) {
+                for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+                    if ($scope.meal.privateInfo.users[i]._id == participantId) {
+                        $scope.meal.privateInfo.users[i]["reviewError"] = true; //ajouter l'erreur qui doit apparaître en front end
+                    }
+                }
+            }
+            else {
+                console.log("ok");
+                //$http.post('/api/meals/private/');
+            }
+        }
     };
 
 

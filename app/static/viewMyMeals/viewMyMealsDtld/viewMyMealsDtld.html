@@ -139,10 +139,10 @@
                                     </span>
                             </div>
                             <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, 'rating', 'positive')" uib-tooltip="Positive" tooltip-placement="top"
-                                    style="cursor:pointer" ng-click="sendReview(user._id, 'rating', 'positive')"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, 'rating', 'neutral')" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer" ng-click="sendReview(user._id, 'rating', 'neutral')"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, 'rating', 'negative')" uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer" ng-click="sendReview(user._id, 'rating', 'negative')"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, 'comment', user.comment)"
+                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
+                                    style="cursor:pointer" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}"></span> &nbsp;
+                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}"  uib-tooltip="Negative"
+                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
                                     class="btn btn-default">Send</a></span>
                             </div>
                         </div>
@@ -178,10 +178,10 @@
                                     </span>
                             </div>
                             <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, 'rating', 'positive')" uib-tooltip="Positive" tooltip-placement="top"
+                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
                                     style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, 'rating', 'neutral')" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, 'rating', 'negative')" uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, 'comment', user.comment)"
+                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger"  ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}" uib-tooltip="Negative"
+                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
                                     class="btn btn-default">Send</a></span>
                             </div>
                         </div>
@@ -218,10 +218,10 @@
                                     </span>
                             </div>
                             <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, 'rating', 'positive')" uib-tooltip="Positive" tooltip-placement="top"
+                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
                                     style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, 'rating', 'neutral')" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, 'rating', 'negative')" uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, 'comment', user.comment)"
+                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}"  uib-tooltip="Negative"
+                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
                                     class="btn btn-default">Send</a></span>
                             </div>
                         </div>
@@ -258,10 +258,10 @@
                                     </span>
                             </div>
                             <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, 'rating', 'positive')" uib-tooltip="Positive" tooltip-placement="top"
+                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
                                     style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, 'rating', 'neutral')" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, 'rating', 'negative')" uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, 'comment', user.comment)"
+                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}"  uib-tooltip="Negative"
+                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
                                     class="btn btn-default">Send</a></span>
                             </div>
                         </div>

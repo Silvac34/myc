@@ -61,7 +61,7 @@
 <div class="clear20"></div>
 <div class="general-title text-info" style="font-size:small">Previous meals</div>
 <div class="clear20"></div>
-<div class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | orderBy:'time':reverse)">
+<div class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | orderBy:'-time')">
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-info':meal.detailedInfo.subscribed}" ng-click=openModalDtld(meal._id)>

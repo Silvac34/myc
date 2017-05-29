@@ -253,7 +253,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             if ($scope.dataForReview[index].forUser.rating == undefined) {
                 for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
                     if ($scope.meal.privateInfo.users[i]._id == participantId) {
-                        $scope.meal.privateInfo.users[i]["reviewError"] = true; //ajouter l'erreur qui doit apparaître en front end
+                        console.log("you need to grade " + $scope.meal.privateInfo.users[i].first_name);
                     }
                 }
             }
@@ -268,6 +268,15 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             }
         }
     };
+
+    function fadeErro(variable) {
+        $scope.successSubscribedMessage = variable || false;
+        if ($scope.successSubscribedMessage == true) {
+            $timeout(function() {
+                $scope.successSubscribedMessage = false;
+            }, 3000);
+        }
+    }
 
 }]);
 

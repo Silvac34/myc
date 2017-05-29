@@ -149,7 +149,7 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!checkRating(user._id)" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!checkRating(user._id)">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!checkRating(user._id)" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!checkRating(user._id)">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -242,7 +242,7 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!checkRating(user._id)" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!checkRating(user._id)">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -289,7 +289,7 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!checkRating(user._id)" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!checkRating(user._id)">Send</a>
                                 </span>
                             </div>
                         </div>

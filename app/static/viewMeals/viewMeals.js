@@ -38,48 +38,33 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   });
 
-  function defineAllMealPrice() { //on définit le prix du repas qui doit s'afficher
-    $http.get("/static/sources/profile/countries.json").then(function(res) {
-      $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
-        $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
-          for (var j = 0; j < $scope.meals.length; j++) {
-            var mealPrice = $scope.meals[j].price / $scope.meals[j].nbGuests; // de base c'est le nombre de participant diviser par le prix des courses (en dernier recours)
-            $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10;
-            if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
-              mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
-            }
-            else {
-              if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
-                mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
-              }
-              else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
-                mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
-              }
-            }
-            var currency = result_currency.data[$scope.meals[j].address.country_code];
-            $scope.meals[j].currency_symbol = result_currency_symbol.data[currency].symbol_native;
-            var mealPriceWithSymbol = $scope.meals[j].currency_symbol + " " + mealPrice;
-            var priceUnitWithSymbol = $scope.meals[j].currency_symbol + " " + $scope.meals[j].priceUnit;
-            if (mealPrice < $scope.meals[j].priceUnit) {
-              $scope.meals[j].mealPriceMin = mealPrice;
-              $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + mealPriceWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + priceUnitWithSymbol + '</strong>';
-            }
-            else if (mealPrice > $scope.meals[j].priceUnit) {
-              $scope.meals[j].mealPriceMin = $scope.meals[j].priceUnit;
-              $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol + '</strong><span class="small color-text-priceSentence"> to</span> <strong>' + mealPriceWithSymbol + '</strong>';
-            }
-            else if (mealPrice == $scope.meals[j].priceUnit) {
-              $scope.meals[j].mealPriceMin = mealPrice;
-              $scope.meals[j].priceSentence = '<span class="small color-text-priceSentence">From</span> <strong>' + priceUnitWithSymbol + '</strong>';
-            }
-            $scope.meals[j].address.country = getCountry($scope.meals[j].address.country_code, res.data); //récupère correctement le pays
+  //on définit le prix du repas qui doit s'afficher
+  $http.get("/static/sources/profile/countries.json").then(function(res) {
+    $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
+      $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
+        for (var j = 0; j < $scope.meals.length; j++) {
+          if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
+              $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; // si aide cuisine alors le prix du repas est le prix de l'aide cuisine
           }
-        });
+          else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
+              $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price;  // si pas aide cuisine et aide vaisselle alors le prix du repas est le prix de l'aide vaisselle
+          }
+          else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
+              $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //sinon c'est soit le prix d'aide cuisine s'il n'y a ni l'un ni l'autre
+          }
+          else{
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.hosts.price; // si le repas n'a pas d'invités (par précaution), c'est le prix de l'hôte
+          }
+          $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10; //sera utilisé pour viewMyMealDtld pour la phrase de variation de prix
+          var currency = result_currency.data[$scope.meals[j].address.country_code];
+          $scope.meals[j].currency_symbol = result_currency_symbol.data[currency].symbol_native; ////récupère correctement la monnaie où s'effectue le repas
+          $scope.meals[j].address.country = getCountry($scope.meals[j].address.country_code, res.data); //récupère correctement le pays
+        }
       });
     });
-  }
-
-  defineAllMealPrice();
+  });
+  
+  
 
   function getCountry(country_code, jsonData) {
     for (var i = 0; i < jsonData.length; i++) {
@@ -220,9 +205,9 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       return meal;
     }
   };
-  
+
   var now = new Date();
-  
+
   $scope.futurMealsFilter = function(meal) {
     return (Date.parse(meal.time) >= now.getTime());
   };

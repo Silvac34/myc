@@ -184,7 +184,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         var i = 0;
         if ($scope.dataForReview.length > 0) {
             for (i; i < $scope.dataForReview.length; i++) {
-                if ($scope.dataForReview[i].participant_id == participantId) {
+                if ($scope.dataForReview[i].forUser._id == participantId) {
                     break;
                 }
             }
@@ -194,35 +194,43 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     $scope.checkRating = function(participantId) {
         var index = checkIndexDataForReview(participantId);
-        try {
-            if ("rating" in $scope.dataForReview[index]) {
-                return $scope.dataForReview[index].rating;
+        if ($scope.dataForReview.length > 0) {
+            if ($scope.dataForReview[index] != undefined) {
+                if ($scope.dataForReview[index].forUser.rating != undefined) {
+                    return $scope.dataForReview[index].forUser.rating;
+                }
+                else{
+                    return null;
+                }
             }
             else {
                 return null;
             }
-
         }
-        catch (e) {
+        else {
+            return null;
         }
     };
 
-
     $scope.sendReview = function(participantId, role, type, value) {
         var index = checkIndexDataForReview(participantId);
-        var now = new Date();
         if (index == $scope.dataForReview.length) {
             $scope.dataForReview.push({
-                "participant_id": participantId,
+                "forUser": {
+                    "_id": participantId,
+                    "role": role[0]
+                },
                 "mealAssociated": $scope.meal._id,
-                "date": now,
-                "fromUser": $scope.user._id,
-                "role": role[0]
+                "fromUser": {
+                    "_id": $scope.user._id,
+                    "role": $scope.userRole
+                },
+                "sent": false
             });
         }
-        $scope.dataForReview[index][type] = value;
+        $scope.dataForReview[index].forUser[type] = value;
         if (type == "comment") {
-            if ($scope.dataForReview[index].rating == undefined) {
+            if ($scope.dataForReview[index].forUser.rating == undefined) {
                 for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
                     if ($scope.meal.privateInfo.users[i]._id == participantId) {
                         $scope.meal.privateInfo.users[i]["reviewError"] = true; //ajouter l'erreur qui doit apparaître en front end
@@ -230,12 +238,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 }
             }
             else {
-                console.log("ok");
-                //$http.post('/api/meals/private/');
+                delete $scope.dataForReview.sent;
+                $http.post('/api/reviews', $scope.dataForReview[index]).then(function(response) {
+                    $scope.dataForReview[index]['sent'] = true;
+                    console.log(response);
+                });
             }
         }
     };
-
 
 }]);
 

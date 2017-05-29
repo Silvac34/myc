@@ -282,38 +282,6 @@ schemaUsers = {
     'link':{
         'type': 'string'
             },
-    'reviews':{
-        'type': 'list',
-        'schema': {
-            'type': 'dict',
-            'schema': {
-                'rating': {
-                    'type': 'string',
-                    'allowed': ['positive', 'negative', 'neutral'],
-                    'required': True
-                },
-                'fromUser':{
-                    'type': 'objectid',
-                    'required': True
-                },
-                'comment': {
-                    'type': 'string'
-                },
-                'date': {
-                    'type': 'string',
-                    'required': True
-                },
-                'mealAssociated': {
-                    'type': 'objectid',
-                    'required': True
-                },
-                'role': {
-                    'type': 'string',
-                    'allowed': ["admin", "cook", "cleaner","simpleGuest"]
-                }
-            }
-        }
-    },
     'privateInfo': {
         'type': 'dict',
         'schema':{
@@ -356,7 +324,46 @@ schemaUsers = {
     }
 }
 
-
+schemaReviews = {
+    'forUser':{
+        'type': 'dict',
+        'schema': {
+            '_id':{
+                'type': 'objectid',
+                'required': True
+                },
+            'role': {
+               'type': 'string',
+                'allowed': ["admin", "cook", "cleaner","simpleGuest"]
+            },
+            'rating': {
+                'type': 'string',
+                'allowed': ['positive', 'negative', 'neutral'],
+                'required': True
+            },
+            'comment': {
+                'type': 'string'
+            }
+        }
+    },
+    'fromUser':{
+        'type': 'dict',
+        'schema': {
+            '_id':{
+                'type': 'objectid',
+                'required': True
+            },
+            'role': {
+               'type': 'string',
+                'allowed': ["admin", "cook", "cleaner","simpleGuest"]
+            }
+        }
+    },
+    'mealAssociated': {
+        'type': 'objectid',
+        'required': True
+    }
+}
 
 meals = {
     # most global settings can be overridden at resource level
@@ -393,6 +400,16 @@ users = {
     }
 }
 
+reviews = {
+    'public_item_methods': ['GET'],
+    'public_methods' : ['GET'],
+    'resource_methods' : ['POST'],
+    'schema': schemaReviews,
+    'datasource':{
+        'source': 'reviews'
+    }
+}
+
 privateUsers = {
     'url':'users/private',
     'resource_methods': ['GET'],
@@ -406,6 +423,7 @@ privateUsers = {
 DOMAIN={
     'meals':meals,
     'users':users,
+    'reviews':reviews,
     'privateMeals':privateMeals,
     'privateUsers':privateUsers
 }

@@ -979,6 +979,25 @@ footer p {
     }
 }
 
+@media (min-width: 768px) {
+    .my-meal-dtld-text-review {
+        margin: 0px 10px;
+        display: inline-block;
+        width: 410px;
+    }
+}
+
+@media (max-width: 767px) {
+    .my-meal-dtld-text-review {
+
+    }
+}
+
+.my-meal-dtld-glyphicon-position {
+    vertical-align: top;
+    top: 3px;
+}
+
 .my-meal-btn-center {
     width: 150px;
     margin-right: auto;
@@ -1031,6 +1050,10 @@ footer p {
 
 .size-14 {
     font-size: 14px;
+}
+
+.margintop7 {
+    margin-top: 7px;
 }
 
 .fade-out-success.ng-hide {

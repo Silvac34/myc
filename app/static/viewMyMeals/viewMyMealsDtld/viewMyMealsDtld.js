@@ -192,6 +192,26 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         return i;
     }
 
+    $scope.checkAlreadyReviewed = function(participantId) {
+        var index = checkIndexDataForReview(participantId);
+        if ($scope.dataForReview.length > 0) {
+            if ($scope.dataForReview[index] != undefined) {
+                if ($scope.dataForReview[index].sent == true) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    };
+
     $scope.checkRating = function(participantId) {
         var index = checkIndexDataForReview(participantId);
         if ($scope.dataForReview.length > 0) {
@@ -199,7 +219,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 if ($scope.dataForReview[index].forUser.rating != undefined) {
                     return $scope.dataForReview[index].forUser.rating;
                 }
-                else{
+                else {
                     return null;
                 }
             }
@@ -238,10 +258,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 }
             }
             else {
-                delete $scope.dataForReview.sent;
-                $http.post('/api/reviews', $scope.dataForReview[index]).then(function(response) {
-                    $scope.dataForReview[index]['sent'] = true;
-                    console.log(response);
+                delete $scope.dataForReview[index].sent;
+                $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
+                    $scope.dataForReview[index]['sent'] = true; //on ajoute cet attribut pour modifier la vue HTML des références
+                    console.log($scope.dataForReview[index]);
+                }, function errorCallback(response) {
+                    $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
                 });
             }
         }

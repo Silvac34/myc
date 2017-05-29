@@ -138,11 +138,19 @@
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}"  uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
-                                    class="btn btn-default">Send</a></span>
+                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="checkRating(user._id) != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="checkRating(user._id) != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="checkRating(user._id) != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -176,12 +184,19 @@
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
-                                    style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger"  ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}" uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
-                                    class="btn btn-default">Send</a></span>
+                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="checkRating(user._id) != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="checkRating(user._id) != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="checkRating(user._id) != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                </span>
                             </div>
                         </div>
                         <div ng-if="user.role[0] == 'cook' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
@@ -216,12 +231,19 @@
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
-                                    style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}"  uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
-                                    class="btn btn-default">Send</a></span>
+                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="checkRating(user._id) != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="checkRating(user._id) != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="checkRating(user._id) != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                </span>
                             </div>
                         </div>
                         <div ng-if="user.role[0] == 'cleaner' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
@@ -256,12 +278,19 @@
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true">
-                                <span class="form-group"><span style="padding-right:10px"><em>Give a grade:</em></span><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')" ng-class="{'size-18': checkRating(user._id) == 'positive'}" uib-tooltip="Positive" tooltip-placement="top"
-                                    style="cursor:pointer"></span> &nbsp;
-                                <span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral'}" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-class="{'size-18': checkRating(user._id) == 'negative'}"  uib-tooltip="Negative"
-                                    tooltip-placement="top" style="cursor:pointer"></span> <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}"><a ng-click="sendReview(user._id, user.role, 'comment', user.comment)"
-                                    class="btn btn-default">Send</a></span>
+                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="checkRating(user._id) != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="checkRating(user._id) != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="checkRating(user._id) != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': checkRating(user._id) == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                    uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{user.comment}}</em>"</span>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default">Send</a>
+                                </span>
                             </div>
                         </div>
                         <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>

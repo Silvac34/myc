@@ -43,7 +43,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
-                            <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <span ng-bind-html="meal.priceSentence"></span> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                            <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="meal-dtld-helpers-description">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
-                        <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <span ng-bind-html="meal.priceSentence"></span> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                        <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
                     </div>
                 </div>
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">

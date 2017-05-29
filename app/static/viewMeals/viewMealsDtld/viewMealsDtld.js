@@ -247,10 +247,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   function defineMealPriceSentence() {
     $scope.meal.priceSentence = "";
     if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
-      $scope.meal.priceSentence = 'from <strong class="meal-price text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cooks.price + '</strong> to <strong class="meal-price text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit + '</strong>';
+      $scope.meal.priceSentence = 'from ' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cooks.price + ' to ' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit;
     }
     if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
-      $scope.meal.priceSentence = 'from <strong class="meal-price text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cleaners.price + '</strong> to <strong class="meal-price text-success">' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit + '</strong>';
+      $scope.meal.priceSentence = 'from ' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cleaners.price + ' to ' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit;
     }
   }
 

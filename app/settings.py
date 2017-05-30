@@ -402,8 +402,7 @@ users = {
 
 reviews = {
     'public_item_methods': ['GET'],
-    'public_methods' : ['GET'],
-    'resource_methods' : ['POST'],
+    'resource_methods' : ['GET', 'POST'],
     'schema': schemaReviews,
     'datasource':{
         'source': 'reviews'

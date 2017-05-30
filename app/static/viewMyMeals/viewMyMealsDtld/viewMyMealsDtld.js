@@ -1,10 +1,11 @@
 'use strict';
 
-var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
+var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap', 'getReviewService']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory) {
 
     $scope.meal = meal.data;
+    //getMealReviewServiceFactory($scope.meal._id, $scope.user._id);
 
     function check_loading() {
         $scope.pendingRequest = false;
@@ -268,15 +269,8 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             }
         }
     };
-
-    function fadeErro(variable) {
-        $scope.successSubscribedMessage = variable || false;
-        if ($scope.successSubscribedMessage == true) {
-            $timeout(function() {
-                $scope.successSubscribedMessage = false;
-            }, 3000);
-        }
-    }
+    
+    
 
 }]);
 

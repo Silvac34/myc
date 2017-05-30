@@ -130,7 +130,7 @@
                         <div class="text-primary my-meal-dtld-title">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
                     </div>
                     <div class="clear10"></div>
-                    <div class="row" ng-repeat="user in meal.privateInfo.users" style="padding-bottom:8px">
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'admin'">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
@@ -176,7 +176,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="clear10"></div>
-                    <div class="row" ng-repeat="user in meal.privateInfo.users" style="padding-bottom:8px">
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
@@ -223,7 +223,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="clear10"></div>
-                    <div class="row" ng-repeat="user in meal.privateInfo.users" style="padding-bottom:8px">
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
@@ -270,7 +270,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="clear10"></div>
-                    <div class="row" ng-repeat="user in meal.privateInfo.users" style="padding-bottom:8px">
+                    <div class="row" ng-repeat="user in meal.privateInfo.users">
                         <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>

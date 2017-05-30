@@ -177,19 +177,21 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         var mealTime = new Date($scope.meal.time);
         return now >= mealTime;
     };
-    
-    function initializeDataForReview(){
+
+    function initializeDataForReview() {
         $scope.dataForReview = [];
-        getMealReviewServiceFactory($scope.meal._id, $scope.user._id).then(function successCallBack(response){
-            if(response.length > 0){
-                $scope.dataForReview = response;//mettre correctement en place l'initialisation de dataForReview
-                console.log($scope.dataForReview);
+        getMealReviewServiceFactory($scope.meal._id, $scope.user._id).then(function successCallBack(response) {
+            if (response.length > 0) {
+                $scope.dataForReview = response; //mettre correctement en place l'initialisation de dataForReview
+                for (var i = 0; i < $scope.dataForReview.length; i++) {
+                    $scope.dataForReview[i]['sent'] = true;
+                }
             }
         });
     }
-    
+
     initializeDataForReview();
-    
+
     function checkIndexDataForReview(participantId) { //retourne l'index où on doit faire les modifications dans dataForReview
         var i = 0;
         if ($scope.dataForReview.length > 0) {
@@ -201,6 +203,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         }
         return i;
     }
+
 
     $scope.checkAlreadyReviewed = function(participantId) {
         var index = checkIndexDataForReview(participantId);
@@ -222,15 +225,25 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         }
     };
 
-    $scope.checkRating = function(participantId) {
+    $scope.getDataForReview = function(participantId, type) {
         var index = checkIndexDataForReview(participantId);
         if ($scope.dataForReview.length > 0) {
             if ($scope.dataForReview[index] != undefined) {
-                if ($scope.dataForReview[index].forUser.rating != undefined) {
-                    return $scope.dataForReview[index].forUser.rating;
+                if (type == "rating") {
+                    if ($scope.dataForReview[index].forUser.rating != undefined) {
+                        return $scope.dataForReview[index].forUser.rating;
+                    }
+                    else {
+                        return null;
+                    }
                 }
-                else {
-                    return null;
+                if (type == "comment") {
+                    if ($scope.dataForReview[index].forUser.comment != undefined) {
+                        return $scope.dataForReview[index].forUser.comment;
+                    }
+                    else {
+                        return null;
+                    }
                 }
             }
             else {
@@ -278,8 +291,8 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             }
         }
     };
-    
-    
+
+
 
 }]);
 

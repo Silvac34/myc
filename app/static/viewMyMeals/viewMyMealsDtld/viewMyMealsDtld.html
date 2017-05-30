@@ -129,9 +129,8 @@
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
                     </div>
-                    <div class="clear10"></div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'admin'">
+                        <div ng-if="user.role[0] == 'admin'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
@@ -149,7 +148,8 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -175,9 +175,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="clear10"></div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'">
+                        <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
@@ -195,7 +194,8 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -222,9 +222,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="clear10"></div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'">
+                        <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
@@ -242,7 +241,8 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -269,9 +269,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="clear10"></div>
                     <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'">
+                        <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
@@ -289,7 +288,8 @@
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
                                 <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
                                     class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top" tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>

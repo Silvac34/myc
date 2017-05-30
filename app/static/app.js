@@ -113,12 +113,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
   $stateProvider
     .state('footer_legal_terms_and_conditions', {
       url: '/legal/terms_and_conditions',
-      templateUrl: 'static/footer/legal/termsAndConditions/terms_and_conditions.html',
+      templateUrl: 'static/footer/legal/termsAndConditions/terms_and_conditions.html'
     });
   $stateProvider
     .state('footer_legal_privacy_policy', {
       url: '/legal/privacy_policy',
-      templateUrl: 'static/footer/legal/privacyPolicy/privacy_policy.html',
+      templateUrl: 'static/footer/legal/privacyPolicy/privacy_policy.html'
+    });
+  $stateProvider
+    .state('footer_legal_general_policies', {
+      url: '/legal/general_policies',
+      templateUrl: 'static/footer/legal/generalPolicies/general_policies.html'
+    });
+  $stateProvider
+    .state('footer_legal_guidelines', {
+      url: '/legal/guidelines',
+      templateUrl: 'static/footer/legal/guidelines/guidelines.html'
     });
   $stateProvider
     .state('footer_more_careers', {

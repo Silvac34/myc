@@ -5,7 +5,6 @@ var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', '
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory) {
 
     $scope.meal = meal.data;
-    //getMealReviewServiceFactory($scope.meal._id, $scope.user._id);
 
     function check_loading() {
         $scope.pendingRequest = false;
@@ -178,9 +177,19 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         var mealTime = new Date($scope.meal.time);
         return now >= mealTime;
     };
-
-    $scope.dataForReview = [];
-
+    
+    function initializeDataForReview(){
+        $scope.dataForReview = [];
+        getMealReviewServiceFactory($scope.meal._id, $scope.user._id).then(function successCallBack(response){
+            if(response.length > 0){
+                $scope.dataForReview = response;//mettre correctement en place l'initialisation de dataForReview
+                console.log($scope.dataForReview);
+            }
+        });
+    }
+    
+    initializeDataForReview();
+    
     function checkIndexDataForReview(participantId) { //retourne l'index où on doit faire les modifications dans dataForReview
         var i = 0;
         if ($scope.dataForReview.length > 0) {

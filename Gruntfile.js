@@ -133,6 +133,7 @@ module.exports = function(grunt) {
                 command: [
                     'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.users.remove({})"',
                     'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.meals.remove({})"',
+                    'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.reviews.remove({})"',
                     'mongoimport -h ds131320.mlab.com:31320 -d mycommuneatydb_dev -c meals -u dkohn -p SharEat3santiago --file test/testData/meals_testData.json --jsonArray',
                     'mongoimport -h ds131320.mlab.com:31320 -d mycommuneatydb_dev -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'
                 ].join('&&')

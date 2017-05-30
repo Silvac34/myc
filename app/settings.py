@@ -273,9 +273,6 @@ schemaUsers = {
     'presentation':{
         'type': 'string'
     },
-    'whymycommuneaty':{
-        'type': 'string'
-    },
     'facebook_id': {
         'type':'string'
             },

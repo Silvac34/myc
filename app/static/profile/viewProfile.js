@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewProfile', ['dateDropdownService'])
 
-.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', function($scope, $http, userInfo, ENV, ezfb, $timeout) {
+.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory) {
 
   function setValue(variable) {
     if (typeof variable === 'undefined') {
@@ -43,8 +43,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
         vegan_notification = setValue($scope.user.privateInfo.preferences.vegan_notification);
       }
     }
-    else{ //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
-      $scope.user.privateInfo.preferences = {"veggies_notification": false, "vegan_notification": false};
+    else { //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
+      $scope.user.privateInfo.preferences = {
+        "veggies_notification": false,
+        "vegan_notification": false
+      };
     }
   }
   else {
@@ -273,6 +276,19 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       $scope.user.privateInfo.preferences.vegan_notification = false;
     }
   }
+
+  $scope.user.reviews = [];
+  getUserReviewServiceFactory($scope.user._id).then(function successCallBack(responseGetUserReviews) {
+    if (responseGetUserReviews.length > 0) {
+      $scope.user.reviews = responseGetUserReviews;
+      $scope.user.reviews.forEach(function(element) {
+        getSpecificUserFactory(element.fromUser._id).then(function successCallBack(responseGetSpecificUser) {
+          element.fromUser.datas = responseGetSpecificUser;
+        });
+      });
+      console.log($scope.user.reviews);
+    }
+  });
 
 }])
 

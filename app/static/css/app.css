@@ -988,9 +988,7 @@ footer p {
 }
 
 @media (max-width: 767px) {
-    .my-meal-dtld-text-review {
-
-    }
+    .my-meal-dtld-text-review {}
 }
 
 .my-meal-dtld-glyphicon-position {
@@ -1204,4 +1202,34 @@ h2.slogan {
     border-radius: 25px;
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .panel-profile-reviews {
+        padding: 0px 15px 5px 15px;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 767px) {
+    .panel-profile-reviews {
+        padding: 10px 15px 0px 15px;
+        display: inline-block;
+    }
+}
+
+@media (min-width: 768px) {
+    .panel-profile-name-user {
+        float: inherit;
+        margin-top: 5px;
+        vertical-align: sub;
+    }
+}
+
+@media (max-width: 767px) {
+    .panel-profile-name-user {
+        float: inherit;
+        margin-top: 5px;
+        vertical-align: text-bottom;
+    }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap', 'getReviewService']);
+var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
 
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory) {
 
@@ -178,19 +178,16 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         return now >= mealTime;
     };
 
-    function initializeDataForReview() {
-        $scope.dataForReview = [];
-        getMealReviewServiceFactory($scope.meal._id, $scope.user._id).then(function successCallBack(response) {
-            if (response.length > 0) {
-                $scope.dataForReview = response; //mettre correctement en place l'initialisation de dataForReview
-                for (var i = 0; i < $scope.dataForReview.length; i++) {
-                    $scope.dataForReview[i]['sent'] = true;
-                }
+    $scope.dataForReview = [];
+    getMealReviewServiceFactory($scope.meal._id, $scope.user._id).then(function successCallBack(response) {
+        if (response.length > 0) {
+            $scope.dataForReview = response;
+            for (var i = 0; i < $scope.dataForReview.length; i++) {
+                $scope.dataForReview[i]['sent'] = true;
             }
-        });
-    }
+        }
+    });
 
-    initializeDataForReview();
 
     function checkIndexDataForReview(participantId) { //retourne l'index où on doit faire les modifications dans dataForReview
         var i = 0;

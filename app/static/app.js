@@ -14,9 +14,8 @@ var app = angular.module('myApp', [
   'myApp.welcome',
   'userServices',
   'angular-loading-bar',
-  'ezfb'
-  /*,
-    'ngAutocomplete'*/
+  'ezfb',
+  'getReviewService'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {

@@ -64,8 +64,22 @@
                     Member since {{user._created | date:'MMMM yyyy'}}
                 </div>
                 <div class="row">
-                        <h4><em>Reviews</em></h4>
+                    <h4><em>Reviews</em></h4>
+                </div>
+                <div class="row">
+                    <span ng-if="user.reviews.length == 0">Get new reviews by <a class="btn btn-primary btn-xs" ui-sref="create_meal">proposing</a> or <a class="btn btn-primary btn-xs" ui-sref="view_meals">browsing</a> a meal.</span>
+                    <div class="panel panel-default" ng-repeat="review in user.reviews" ng-if="user.reviews.length > 0">
+                        <div class="panel-body panel-profile-reviews">
+                            <img class="img-circle my-meal-dtld-profilePic-pending-validation my-meal-dtld-guestList" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                            <span class="panel-profile-name-user"><span>{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name}}</span><br/>
+                        </div>
+                        <div class="panel-footer">
+                            <span class="glyphicon glyphicon-plus-sign text-success" ng-if="review.forUser.rating == 'positive'" style="vertical-align:text-top" uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>
+                            <span class="glyphicon glyphicon-record text-default" ng-if="review.forUser.rating == 'neutral'" style="vertical-align:text-top" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>
+                            <span class="glyphicon glyphicon-minus-sign text-danger" ng-if="review.forUser.rating == 'negative'" style="vertical-align:text-top" uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;"
+                            <em>{{review.forUser.comment}}</em>"</div>
                     </div>
+                </div>
                 <div ng-if="$parent.user._id == user._id">
                     <div class="row">
                         <h4><em>Notifications</em></h4>

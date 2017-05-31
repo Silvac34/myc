@@ -24,7 +24,6 @@ app.factory('getUserReviewServiceFactory', ['$http', function($http) {
         return $http.get('/api/reviews?where={"forUser._id": "' + participantId + '"}').then(function successCallback(result) {
             // this callback will be called asynchronously
             // when the response is available
-            console.log(result.data['_items']);
             return result.data['_items'];
         }, function errorCallback(result) {
             // called asynchronously if an error occurs

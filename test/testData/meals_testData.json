@@ -5,6 +5,7 @@
     "price": 100,
     "nbGuests": 10,
     "veggies": false,
+    "vegan": false,
     "admin": {
         "$oid": "111111111111111111111111"
     },
@@ -65,6 +66,7 @@
     "price": 60,
     "nbGuests": 11,
     "veggies": false,
+    "vegan": false,
     "admin": {
         "$oid": "111111111111111111111111"
     },
@@ -285,6 +287,7 @@
     },
     "nbGuests": 6,
     "veggies": false,
+    "vegan": false,
     "time": "2016-07-15T18:30:27.913Z",
     "creationDate": {
         "$date": "2016-07-13T14:49:10.667Z"
@@ -348,6 +351,7 @@
     },
     "nbGuests": 11,
     "veggies": false,
+    "vegan": false,
     "time": "2016-07-16T18:30:19.264Z",
     "creationDate": {
         "$date": "2016-07-13T15:19:54.220Z"
@@ -359,6 +363,7 @@
     "price": 100,
     "nbGuests": 10,
     "veggies": false,
+    "vegan": false,
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
@@ -474,6 +479,7 @@
     },
     "automaticSubscription": false,
     "veggies": false,
+    "vegan": false,
     "time": "2017-04-17T10:30:45.508Z",
     "nbGuests": 5
 }]

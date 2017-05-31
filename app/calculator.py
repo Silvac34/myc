@@ -4,11 +4,7 @@ import math
 def aproximator(value):
     """fonction permettant d'approximer un prix pour obtenir par exemple : 9.95€ au lieu de 9.98€ ou alors 3.30€ au lieu de 3.32€"""
     if isinstance(value, ( float, long )): #vérifie que ce que l'on met dans la classe est bien un nombre, sinon ça vaut ""
-        priceHundred = value * 100
-        remains = priceHundred % 5
-        if(remains != 0):
-            priceHundred = priceHundred + (5 - remains)
-        return (priceHundred / 100)
+        return math.ceil(value * 10) / 10
             
     elif value == 0:
         return 0

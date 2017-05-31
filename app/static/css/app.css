@@ -949,6 +949,13 @@ footer p {
     }
 }
 
+@media (max-width: 767px) {
+    .my-meal-dtld-guestList-old {
+        position: relative;
+        top: 8px;
+    }
+}
+
 @media (min-width: 768px) {
     .my-meal-dtld-cellphone-position {
         position: relative;
@@ -983,7 +990,7 @@ footer p {
     .my-meal-dtld-text-review {
         margin: 0px 10px;
         display: inline-block;
-        width: 410px;
+        width: 425px;
     }
 }
 

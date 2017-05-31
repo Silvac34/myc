@@ -14,26 +14,26 @@
                     <h3 class="panel-title">You have a pending request</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.status == 'pending'" class="my-meal-dtld-list-pending-user">
+                    <div class="row" ng-repeat="participant in meal.privateInfo.users">
+                        <div ng-if="participant.status == 'pending'" class="my-meal-dtld-list-pending-user">
                             <div class="row" style="margin-right:initial; margin-left:initial; margin-bottom:8px">
                                 <div class="col-md-3 col-sm-4 col-xs-12">
-                                    <strong>Requested role:</strong> <span ng-if="user.role[0]==cooker">help cooking</span><span ng-if="user.role[0]==cleaner">help cleaning</span><span ng-if="user.role[0]==simpleGuest">simple guest</span>
+                                    <strong>Requested role:</strong> <span ng-if="participant.role[0]==cooker">help cooking</span><span ng-if="participant.role[0]==cleaner">help cleaning</span><span ng-if="participant.role[0]==simpleGuest">simple guest</span>
                                 </div>
                                 <div class="col-xs-8">
-                                    <a class="btn btn-success btn-xs" ng-click="validateSubscription(user._id)">Accept</a>
-                                    <a class="btn btn-danger btn-xs" ng-click="refuseSubscription(user._id)">Refuse</a>
+                                    <a class="btn btn-success btn-xs" ng-click="validateSubscription(participant._id)">Accept</a>
+                                    <a class="btn btn-danger btn-xs" ng-click="refuseSubscription(participant._id)">Refuse</a>
                                 </div>
                             </div>
                             <div class="row" style="margin:initial">
                                 <div class="col-md-3 col-sm-4 col-xs-12" style="float:left">
-                                    <img class="img-circle my-meal-dtld-profilePic-pending-validation my-meal-dtld-guestList" ng-src="{{user.picture.data.url}}" alt="User profile picture" />
-                                    <span style="float:inherit;margin-top:5px"><span>{{user.first_name}} {{user.last_name}}</span><br/>
-                                    <span>{{user.gender}}<span ng-if="user.birthday"> - {{user.birthday | ageFilter}} years old</span></span>
+                                    <img class="img-circle my-meal-dtld-profilePic-pending-validation my-meal-dtld-guestList" ng-src="{{participant.picture.data.url}}" alt="User profile picture" />
+                                    <span style="float:inherit;margin-top:5px"><span>{{participant.first_name}} {{participant.last_name}}</span><br/>
+                                    <span>{{participant.gender}}<span ng-if="participant.birthday"> - {{participant.birthday | ageFilter}} years old</span></span>
                                     </span>
                                 </div>
                                 <div class="col-md-9 col-sm-8 col-xs-12 text-justify" style="float:left;margin-top:5px">
-                                    <div ng-if="user.presentation"><em>"{{user.presentation | limitTo: 150}}{{user.presentation.length > 150 ? '...': ''}}"</em></div>
+                                    <div ng-if="participant.presentation"><em>"{{participant.presentation | limitTo: 150}}{{participant.presentation.length > 150 ? '...': ''}}"</em></div>
                                 </div>
                             </div>
                         </div>
@@ -129,27 +129,27 @@
                     <div class="row">
                         <div class="text-primary my-meal-dtld-title">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
                     </div>
-                    <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'admin'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.privateInfo.users">
+                        <div ng-if="participant.role[0] == 'admin'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
-                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
                                 <span class="form-group">
-                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="getDataForReview(user._id, 'rating') != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
-                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
-                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
-                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{participant.first_name}}" ng-hide="checkAlreadyReviewed(participant._id) == true"><span ng-show="checkAlreadyReviewed(participant._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="Grade {{participant.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(participant._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
@@ -175,31 +175,31 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cook' && user.status == 'accepted'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.privateInfo.users">
+                        <div ng-if="participant.role[0] == 'cook' && participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
-                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
                                 <span class="form-group">
-                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="getDataForReview(user._id, 'rating') != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
-                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
-                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
-                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{participant.first_name}}" ng-hide="checkAlreadyReviewed(participant._id) == true"><span ng-show="checkAlreadyReviewed(participant._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="Grade {{participant.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(participant._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
-                        <div ng-if="user.role[0] == 'cook' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
+                        <div ng-if="participant.role[0] == 'cook' && participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_participant.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
                 </div>
             </div>
@@ -222,31 +222,31 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'cleaner' && user.status == 'accepted'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.privateInfo.users">
+                        <div ng-if="participant.role[0] == 'cleaner' && participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
-                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
                                 <span class="form-group">
-                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="getDataForReview(user._id, 'rating') != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
-                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
-                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
-                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{participant.first_name}}" ng-hide="checkAlreadyReviewed(participant._id) == true"><span ng-show="checkAlreadyReviewed(participant._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="Grade {{participant.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(participant._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
-                        <div ng-if="user.role[0] == 'cleaner' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
+                        <div ng-if="participant.role[0] == 'cleaner' && participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_participant.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
                 </div>
             </div>
@@ -269,31 +269,31 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="row" ng-repeat="user in meal.privateInfo.users">
-                        <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'accepted'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.privateInfo.users">
+                        <div ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{user.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{user.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px">{{user.first_name}} {{user.last_name}}</a><span ng-if="user.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{user.privateInfo.cellphone}}</span>
-                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{user.privateInfo.cellphone}}</span>
+                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                    <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
                             </div>
-                            <div class="pull-right" ng-if="isOldMeal()==true" ng-class="{'margintop7': checkAlreadyReviewed(user._id) == true}">
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
                                 <span class="form-group">
-                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(user._id) == true"><em>Give a grade:</em></span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'positive' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(user._id, user.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'positive' && checkAlreadyReviewed(user._id) == true}"
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true"><em>Give a grade:</em></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span ng-hide="getDataForReview(user._id, 'rating') != 'neutral' && checkAlreadyReviewed(user._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(user._id, user.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'neutral' && checkAlreadyReviewed(user._id) == true}"
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(user._id, user.role, 'rating', 'negative')" ng-hide="getDataForReview(user._id, 'rating') != 'negative' && checkAlreadyReviewed(user._id) == true" ng-class="{'size-18': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(user._id, 'rating') == 'negative' && checkAlreadyReviewed(user._id) == true}"
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
                                     uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
-                                <input type="text" ng-model="user.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{user.first_name}}" ng-hide="checkAlreadyReviewed(user._id) == true"><span ng-show="checkAlreadyReviewed(user._id) == true"
-                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(user._id, 'comment')}}</em>"</span>
-                                <a ng-click="sendReview(user._id, user.role, 'comment', user.comment)" ng-hide="checkAlreadyReviewed(user._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(user._id, 'rating')" uib-tooltip="Grade {{user.first_name}} first" tooltip-placement="top"
-                                    tooltip-enable="!getDataForReview(user._id, 'rating')">Send</a>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{participant.first_name}}" ng-hide="checkAlreadyReviewed(participant._id) == true"><span ng-show="checkAlreadyReviewed(participant._id) == true"
+                                    class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="Grade {{participant.first_name}} first" tooltip-placement="top"
+                                    tooltip-enable="!getDataForReview(participant._id, 'rating')">Send</a>
                                 </span>
                             </div>
                         </div>
-                        <div ng-if="user.role[0] == 'simpleGuest' && user.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
+                        <div ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="../static/sources/viewMyMealDtld/unknown_participant.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
                 </div>
             </div>

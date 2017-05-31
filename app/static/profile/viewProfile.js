@@ -286,7 +286,6 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           element.fromUser.datas = responseGetSpecificUser;
         });
       });
-      console.log($scope.user.reviews);
     }
   });
 

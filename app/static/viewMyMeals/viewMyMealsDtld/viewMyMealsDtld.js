@@ -254,37 +254,39 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     $scope.sendReview = function(participantId, role, type, value) {
         var index = checkIndexDataForReview(participantId);
-        if (index == $scope.dataForReview.length) {
-            $scope.dataForReview.push({
-                "forUser": {
-                    "_id": participantId,
-                    "role": role[0]
-                },
-                "mealAssociated": $scope.meal._id,
-                "fromUser": {
-                    "_id": $scope.user._id,
-                    "role": $scope.userRole
-                },
-                "sent": false
-            });
-        }
-        $scope.dataForReview[index].forUser[type] = value;
-        if (type == "comment") {
-            if ($scope.dataForReview[index].forUser.rating == undefined) {
-                for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-                    if ($scope.meal.privateInfo.users[i]._id == participantId) {
-                        console.log("you need to grade " + $scope.meal.privateInfo.users[i].first_name);
+        if (participantId != $scope.$parent.$root.user._id) {
+            if (index == $scope.dataForReview.length) {
+                $scope.dataForReview.push({
+                    "forUser": {
+                        "_id": participantId,
+                        "role": role[0]
+                    },
+                    "mealAssociated": $scope.meal._id,
+                    "fromUser": {
+                        "_id": $scope.user._id,
+                        "role": $scope.userRole
+                    },
+                    "sent": false
+                });
+            }
+            $scope.dataForReview[index].forUser[type] = value;
+            if (type == "comment") {
+                if ($scope.dataForReview[index].forUser.rating == undefined) {
+                    for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
+                        if ($scope.meal.privateInfo.users[i]._id == participantId) {
+                            console.log("you need to grade " + $scope.meal.privateInfo.users[i].first_name);
+                        }
                     }
                 }
-            }
-            else {
-                delete $scope.dataForReview[index].sent;
-                $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
-                    $scope.dataForReview[index]['sent'] = true; //on ajoute cet attribut pour modifier la vue HTML des références
-                    console.log($scope.dataForReview[index]);
-                }, function errorCallback(response) {
-                    $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
-                });
+                else {
+                    delete $scope.dataForReview[index].sent;
+                    $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
+                        $scope.dataForReview[index]['sent'] = true; //on ajoute cet attribut pour modifier la vue HTML des références
+                        console.log($scope.dataForReview[index]);
+                    }, function errorCallback(response) {
+                        $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
+                    });
+                }
             }
         }
     };

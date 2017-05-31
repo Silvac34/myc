@@ -27,6 +27,9 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
 
   if (userInfo.data._id == $scope.$parent.user._id) {
     $scope.user = $scope.$parent.user;
+    $scope.user.reviews.positive = $scope.user.reviews.positive || 0;
+    $scope.user.reviews.neutral = $scope.user.reviews.neutral || 0;
+    $scope.user.reviews.negative = $scope.user.reviews.negative || 0;
     var cellphone = setValue($scope.user.privateInfo.cellphone);
     var email = setValue($scope.user.privateInfo.email);
     var city_notification = "";
@@ -277,23 +280,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     }
   }
 
-  $scope.user.reviews = [];
-  $scope.positive_reviews = 0;
-  $scope.neutral_reviews = 0;
-  $scope.negative_reviews = 0;
+  $scope.reviews = [];
   getUserReviewServiceFactory($scope.user._id).then(function successCallBack(responseGetUserReviews) {
     if (responseGetUserReviews.length > 0) {
-      $scope.user.reviews = responseGetUserReviews;
-      $scope.user.reviews.forEach(function(element) {
-        if(element.forUser.rating == "positive"){
-          $scope.positive_reviews += 1;
-        }
-        if(element.forUser.rating == "neutral"){
-          $scope.neutral_reviews += 1;
-        }
-        if(element.forUser.rating == "negative"){
-          $scope.negative_reviews += 1;
-        }
+      $scope.reviews = responseGetUserReviews;
+      $scope.reviews.forEach(function(element) {
         getSpecificUserFactory(element.fromUser._id).then(function successCallBack(responseGetSpecificUser) {
           element.fromUser.datas = responseGetSpecificUser;
         });

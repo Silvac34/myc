@@ -279,6 +279,23 @@ schemaUsers = {
     'link':{
         'type': 'string'
             },
+    'reviews':{
+      'type': 'dict',
+      'schema':{
+          'positive':{
+              'type': 'number',
+              'default': 0
+          },
+          'neutral':{
+              'type': 'number',
+              'default': 0
+          },
+          'negative':{
+              'type': 'number',
+              'default': 0
+          }
+      }
+    },
     'privateInfo': {
         'type': 'dict',
         'schema':{

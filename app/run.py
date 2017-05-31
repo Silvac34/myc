@@ -118,6 +118,8 @@ class Meal:
             return False
         else : return meal
 
+### celery tasks (queues tasks) ###
+
 celery = celeryFile.make_celery(Application.app) #on créer le décorateur qui va permettre de faire les taches en background avec celery
     
 @celery.task()
@@ -135,6 +137,22 @@ def sendNotificationPreference(meal, mealPrice):
         text = "Hi " + user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
         payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
         requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+        
+@celery.task()
+def addReviewRatingToUser(userId, rating):
+    user = User(_id=ObjectId(userId))
+    userDatas = user.getUserPublicInfo()
+    print(userDatas)
+    userInfo = {}
+    if("reviews" in userDatas):
+        numberOfRating = userDatas['reviews'][rating] + 1
+        userInfo = {"reviews."+ rating: numberOfRating}
+        print(userInfo)
+        user.updateUser(userInfo)
+    else:
+        userInfo = {"reviews."+ rating: 1}
+        print(userInfo)
+        user.updateUser(userInfo)
     
 @Application.app.route('/')
 def homePage():
@@ -218,10 +236,16 @@ def logout():
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 End Points Actions 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+### user ###
 #GET api/users/private
 def pre_get_privateUsers(request,lookup):
     lookup.update({"_id":g.user_id })
+    
+# PATCH api/users/private/<_id>
+def pre_patch_privateUsers(request,lookup):
+    lookup.update({"_id":g.user_id })
+    
+### meals ###
     
 # GET api/meals
 def before_returning_GET_meals(response):
@@ -348,17 +372,20 @@ def after_delete_privateMeals(item):
 def pre_patch_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
     
-# PATCH api/users/private/<_id>
-def pre_patch_privateUsers(request,lookup):
-    lookup.update({"_id":g.user_id })
+### reviews ###
+def after_storing_POST_reviews(items):
+    addReviewRatingToUser(items[0]['forUser']['_id'], items[0]['forUser']['rating'])
+    
 
-### privateUsers ressource ###
+### privateUsers resource ###
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers
 Application.app.on_pre_PATCH_privateUsers += pre_patch_privateUsers
-### meals ressource ###
+### meals resource ###
 Application.app.on_fetched_resource_meals +=  before_returning_GET_meals
 Application.app.on_fetched_item_meals +=  before_returning_GET_item_meal
 Application.app.on_insert_meals +=  before_storing_POST_meals
+### reviews resource ##
+Application.app.on_inserted_reviews +=  after_storing_POST_reviews
 ### privateMeals ressource ###
 Application.app.on_pre_GET_privateMeals += pre_get_privateMeals
 Application.app.on_fetched_resource_privateMeals +=  before_returning_GET_privateMeals

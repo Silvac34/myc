@@ -45,8 +45,8 @@
     <div class="clear10"></div>
     <div class="row">
         <div class="col-xs-12 text-center meal-dtld-menu text-info">
-            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole=='admin'"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Delete</button>
-            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole!='admin'"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Unsubscribe</button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Delete</button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole!='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Unsubscribe</button>
             <strong>{{meal.menu.title}}</strong>
         </div>
     </div>

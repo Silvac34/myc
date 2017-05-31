@@ -278,10 +278,22 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   }
 
   $scope.user.reviews = [];
+  $scope.positive_reviews = 0;
+  $scope.neutral_reviews = 0;
+  $scope.negative_reviews = 0;
   getUserReviewServiceFactory($scope.user._id).then(function successCallBack(responseGetUserReviews) {
     if (responseGetUserReviews.length > 0) {
       $scope.user.reviews = responseGetUserReviews;
       $scope.user.reviews.forEach(function(element) {
+        if(element.forUser.rating == "positive"){
+          $scope.positive_reviews += 1;
+        }
+        if(element.forUser.rating == "neutral"){
+          $scope.neutral_reviews += 1;
+        }
+        if(element.forUser.rating == "negative"){
+          $scope.negative_reviews += 1;
+        }
         getSpecificUserFactory(element.fromUser._id).then(function successCallBack(responseGetSpecificUser) {
           element.fromUser.datas = responseGetSpecificUser;
         });

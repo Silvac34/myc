@@ -28,21 +28,22 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     //modalDelete to delete a meal
     $scope.openModalDelete = function() {
-
-        $uibModal.open({
-            animation: true,
-            templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalDeleteMyMealDtld.html',
-            controller: 'modalDeleteInstanceCtrl',
-            size: "sm",
-            resolve: {
-                _etag: function() {
-                    return $scope.meal._etag;
-                }, //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
-                meal: function() {
-                    return $scope.meal;
+        if ($scope.isOldMeal() != true) {
+            $uibModal.open({
+                animation: true,
+                templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalDeleteMyMealDtld.html',
+                controller: 'modalDeleteInstanceCtrl',
+                size: "sm",
+                resolve: {
+                    _etag: function() {
+                        return $scope.meal._etag;
+                    }, //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+                    meal: function() {
+                        return $scope.meal;
+                    }
                 }
-            }
-        });
+            });
+        }
     };
 
 
@@ -64,13 +65,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     //modalUnsubscribe to unsubscribe to a meal
     $scope.openModalUnsubscribe = function() {
-
-        $uibModal.open({
-            animation: true,
-            templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalUnsubscribeMyMealDtld.html',
-            controller: 'modalUnsubscribeInstanceCtrl',
-            size: "sm"
-        });
+        if ($scope.isOldMeal() != true) {
+            $uibModal.open({
+                animation: true,
+                templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalUnsubscribeMyMealDtld.html',
+                controller: 'modalUnsubscribeInstanceCtrl',
+                size: "sm"
+            });
+        }
     };
 
     //function pour faire apparaître un well de validation lorsqu'un utilisateur vient de s'inscrire

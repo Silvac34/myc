@@ -69,6 +69,7 @@
                 <div class="row">
                     <span ng-if="user.reviews.length == 0">Get new reviews by <a class="btn btn-primary btn-xs" ui-sref="create_meal">proposing</a> or <a class="btn btn-primary btn-xs" ui-sref="view_meals">browsing</a> a meal.</span>
                     <div ng-if="user.reviews.length > 0">
+                        <div> <span class="glyphicon glyphicon-plus-sign text-success"></span> {{positive_reviews}} <span class="glyphicon glyphicon-record text-default"></span> {{neutral_reviews}} <span class="glyphicon glyphicon-minus-sign text-danger"></span> {{negative_reviews}} </div>
                         <div class="panel panel-default" ng-repeat="review in user.reviews">
                             <div class="panel-body panel-profile-reviews">
                                 <img class="img-circle my-meal-dtld-profilePic-pending-validation my-meal-dtld-guestList" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />

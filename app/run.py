@@ -165,7 +165,7 @@ LOGIN API
 @Application.app.route('/auth/facebook', methods=['POST'])
 def auth_facebook():
     access_token_url = 'https://graph.facebook.com/v2.3/oauth/access_token'
-    graph_api_url = 'https://graph.facebook.com/v2.5/me?fields=id,email,last_name,first_name,link, gender,picture'
+    graph_api_url = 'https://graph.facebook.com/v2.5/me?fields=id,email,last_name,first_name,link, gender,picture.type(large)'
     params = {
         'client_id': request.json['clientId'],
         'redirect_uri': request.json['redirectUri'],

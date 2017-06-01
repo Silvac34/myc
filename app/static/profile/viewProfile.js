@@ -60,7 +60,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   $scope.user._created = new Date(parseInt($scope.user._id.substring(0, 8), 16) * 1000);
   var birthdate = setValue($scope.user.birthdate);
   var presentation = setValue($scope.user.presentation);
-  var whymycommuneaty = setValue($scope.user.whymycommuneaty);
+  var gender = setValue($scope.user.gender);
   var country_of_origin_name = "";
   if ($scope.user.country_of_origin != undefined) {
     country_of_origin_name = setValue($scope.user.country_of_origin.name);
@@ -98,8 +98,8 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     if (presentation != setValueScope($scope.user.presentation)) {
       origUser.presentation = $scope.user.presentation;
     }
-    if (whymycommuneaty != setValueScope($scope.user.whymycommuneaty)) {
-      origUser.whymycommuneaty = $scope.user.whymycommuneaty;
+    if (gender != setValueScope($scope.user.gender)) {
+      origUser.gender = $scope.user.gender;
     }
     if ("country_of_origin" in $scope.user) {
       if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
@@ -221,7 +221,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           email = setValue($scope.user.privateInfo.email);
           birthdate = setValue($scope.user.birthdate);
           presentation = setValue($scope.user.presentation);
-          whymycommuneaty = setValue($scope.user.whymycommuneaty);
+          gender = setValue($scope.user.gender);
           if ($scope.user.country_of_origin != undefined) {
             country_of_origin_name = setValue($scope.user.country_of_origin.name);
           }

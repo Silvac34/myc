@@ -26,9 +26,9 @@
                 <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.requestRole.message}}</div>
             </div>
             <div class="meal-dtld-helpers-label meal-dtld-col">
-                <span class="meal-dtld-helpers-places" uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
-                <span class="meal-dtld-helpers-price" uib-popover="price" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/banknote.png" height="18px" width="18px"></span>
-                <span class="meal-dtld-helpers-places" uib-popover="arrival time" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"></span>
+                <span class="meal-dtld-helpers-position" uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
+                <span class="meal-dtld-helpers-position glyphicon glyphicon-piggy-bank" uib-popover="price" popover-trigger="mouseenter" popover-placement="top" style="font-size:18px"></span>
+                <span class="meal-dtld-helpers-position glyphicon glyphicon-time" uib-popover="arrival time" popover-trigger="mouseenter" popover-placement="top" style="font-size:18px"></span>
             </div>
             <uib-accordion close-others="accordionOneAtATime">
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
@@ -37,9 +37,9 @@
                         <uib-accordion-heading>
                             <div class="meal-dtld-helpers-label">Help cooking
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
-                                <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
-                                <span class="meal-dtld-helpers-price">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cooks.price}}</span>
-                                <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
+                                <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
+                                <span class="meal-dtld-helpers-position text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cooks.price}}</span>
+                                <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
                         <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
@@ -53,9 +53,9 @@
                         <uib-accordion-heading>
                             <div class="meal-dtld-helpers-label">Help cleaning
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
-                                <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
-                                <span class="meal-dtld-helpers-price">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cleaners.price}}</span>
-                                <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
+                                <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
+                                <span class="meal-dtld-helpers-position text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cleaners.price}}</span>
+                                <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
                         <div class="meal-dtld-helpers-description">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
@@ -68,9 +68,9 @@
                         <uib-accordion-heading>
                             <div class="meal-dtld-helpers-label">Simple guest
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
-                                <span class="meal-dtld-helpers-places">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
-                                <span class="meal-dtld-helpers-price">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.simpleGuests.price}}</span>
-                                <span class="meal-dtld-helpers-places">{{meal.time | date:'HH:mm'}}</span>
+                                <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
+                                <span class="meal-dtld-helpers-position text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.simpleGuests.price}}</span>
+                                <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
                         <div class="meal-dtld-helpers-description">I help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>

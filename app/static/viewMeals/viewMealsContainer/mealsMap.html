@@ -23,7 +23,24 @@
                         <div style="float:right;">
                             <a ui-sref="profile({userId:meal.admin._id})">
                                 <span class="meal-admin meal-admin-name" style="padding-right:5px"> {{meal.admin.first_name}} {{meal.admin.last_name}} </span>
-                                <img class="img-circle profilePic" style="margin-bottom: 0px;" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" /></a>
+                                <img class="img-circle profilePic" style="margin-bottom: 0px;" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                                <div class="well well-sm well-resume-rating" style="border:initial">
+                                    <table style="text-align:center">
+                                        <tbody>
+                                            <tr>
+                                                <td ng-if="meal.admin.reviews.positive"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                                <td ng-if="meal.admin.reviews.neutral" style="padding:0px 8px"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                                <td ng-if="meal.admin.reviews.negative"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                            </tr>
+                                            <tr style="font-size:11px" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
+                                                <td ng-if="meal.admin.reviews.positive">{{meal.admin.reviews.positive}}</td>
+                                                <td style="padding:0px 8px" ng-if="meal.admin.reviews.neutral">{{meal.admin.reviews.neutral}}</td>
+                                                <td ng-if="meal.admin.reviews.negative">{{meal.admin.reviews.negative}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </a>
                         </div>
                         <div class="clear10"></div>
                     </div>

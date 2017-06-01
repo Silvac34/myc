@@ -83,7 +83,7 @@
                         <span ng-if="userRole=='simpleGuest'"><strong class="text-success">{{meal.detailedInfo.requiredGuests.simpleGuests.price}}</strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
                     </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
-                        <img src="/static/sources/people.png" style="width:14px; height:14px"> Subscription recapitulatory: <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
+                        <img src="/static/sources/multiple-users-silhouette.png" style="width:14px; height:14px"> Subscription recapitulatory: <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
                     </div>
                     <div class="meal-info-label" ng-if="meal.veggies == true || meal.vegan == true">
                         <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal

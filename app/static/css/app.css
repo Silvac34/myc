@@ -714,14 +714,7 @@ footer p {
     margin-bottom: 10px;
 }
 
-.meal-dtld-helpers-price {
-    color: #3EA93E;
-    min-width: 15%;
-    text-align: center;
-    float: right;
-}
-
-.meal-dtld-helpers-places {
+.meal-dtld-helpers-position {
     min-width: 15%;
     text-align: center;
     float: right;
@@ -763,7 +756,6 @@ footer p {
     margin-left: 5px;
 }
 
-
 #fieldset-form {
     padding-left: 30px;
     padding-right: 40px;
@@ -776,18 +768,10 @@ footer p {
     background-position: 7px 5px;
 }
 
-.form-meal-price {
-    font-size: 20px;
-    font-weight: 700;
-    color: #3EA93E;
-    text-align: right;
-}
-
-.form-meal-price-label {
-    text-align: right;
-    padding-top: 0;
-    padding-left: 0;
-    margin-bottom: -5px;
+#inputMenu {
+    background-size: 24px;
+    text-indent: 25px;
+    background-position: 6px;
 }
 
 .form-btn-center {

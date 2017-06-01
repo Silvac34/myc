@@ -1171,6 +1171,8 @@ h2.slogan {
     }
 }
 
+
+/* on garde ou pas */
 @media (min-width: 768px) {
     .panel-profile-name-user {
         float: inherit;

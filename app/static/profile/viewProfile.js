@@ -292,6 +292,14 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     }
   });
 
+  $scope.capitalizeFirstLetter = function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  
+  $scope.getDateFromObjectId = function(objectId){
+    return new Date(parseInt(objectId.substring(0,8), 16)*1000);
+  };
+  
 }])
 
 .filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {

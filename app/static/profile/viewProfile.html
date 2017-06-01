@@ -101,15 +101,17 @@
                                     <span ng-if="reviews.length == 0">Get new reviews by <a class="btn btn-primary btn-xs" ui-sref="create_meal">proposing</a> or <a class="btn btn-primary btn-xs" ui-sref="view_meals">browsing</a> a meal.</span>
                                     <div ng-if="reviews.length > 0">
                                         <div class="panel panel-default" ng-repeat="review in reviews">
-                                            <div class="panel-body panel-profile-reviews">
-                                                <img class="img-circle my-meal-dtld-profilePic-pending-validation my-meal-dtld-guestList" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
-                                                <span class="panel-profile-name-user"><span>{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name}}</span><br/>
+                                            <div class="panel-body">
+                                                <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
+                                                <div class="pull-left" style="padding-right:15px">
+                                                    <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                                    <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                                </div>
+                                                <div style="padding-top:20px">
+                                                    <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}" style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span>
+                                                    &nbsp;"<em>{{review.forUser.comment}}</em>"
+                                                </div>
                                             </div>
-                                            <div class="panel-footer">
-                                                <span class="glyphicon glyphicon-plus-sign text-success" ng-if="review.forUser.rating == 'positive'" style="vertical-align:text-top" uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>
-                                                <span class="glyphicon glyphicon-record text-default" ng-if="review.forUser.rating == 'neutral'" style="vertical-align:text-top" uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>
-                                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-if="review.forUser.rating == 'negative'" style="vertical-align:text-top" uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>                                                &nbsp;"
-                                                <em>{{review.forUser.comment}}</em>"</div>
                                         </div>
                                     </div>
                                 </div>

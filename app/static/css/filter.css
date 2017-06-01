@@ -30,23 +30,6 @@
   text-align: left;
 }
 
-.filter-desgin {
-  text-indent: 30px;
-  margin-top: auto;
-}
-
-.filter-desgin.calendar-img {
-  background: url("/static/sources/calendar.png") no-repeat;
-  background-position: 10px 7px;
-  background-color: white;
-}
-
-.filter-desgin.banknote-img {
-  background: url("/static/sources/banknote.png") no-repeat;
-  background-position: 10px 7px;
-  background-color: white;
-}
-
 .filter_mobile_calendar {
   margin-top: 0px;
   margin-left: 0px;

@@ -55,7 +55,7 @@
 }
 
 
-/* rating */
+/* rating well */
 
 .well-resume-rating {
     display: inline-block;
@@ -63,7 +63,7 @@
     background-color: inherit;
     margin: 0px;
     box-shadow: inherit;
-    border:inherit;
+    border: inherit;
 }
 
 

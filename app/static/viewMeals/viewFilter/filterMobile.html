@@ -3,7 +3,10 @@
         <button type="button" class="close" ng-click="cancel()" style="margin-right: 5px;">&times;</button>
         <label class="control-label filter-label col-xs-12">Chose a city</label>
         <div class="col-xs-12">
-            <input ng-autocomplete type="text" class="form-control form-location" placeholder="City" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details" />
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon glyphicon-map-marker"></i>
+                <input ng-autocomplete type="text" class="form-control" placeholder="City" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details" />
+            </div>
         </div>
         <label class="control-label filter-label col-xs-12">Chose the days of the week</label>
         <div class="filter-date-checkbox-mobile text-center" ng-repeat="day in filter.weekDays">
@@ -11,22 +14,34 @@
         </div>
         <label class="control-label filter-label col-xs-12">Chose a period</label>
         <div class="col-xs-6">
-            <input type="text" class="form-control filter-desgin calendar-img" placeholder="from" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" />
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon glyphicon-calendar"></i>
+                <input type="text" class="form-control" placeholder="From" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" />
+            </div>
         </div>
         <div class="col-xs-6">
-            <input type="text" class="form-control filter-desgin calendar-img" placeholder="to" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" />
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon glyphicon-calendar"></i>
+                <input type="text" class="form-control" placeholder="To" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" />
+            </div>
         </div>
         <label class="control-label filter-label col-xs-12">Chose a price range</label>
         <div class="col-xs-6">
-            <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMin.value" placeholder="from" />
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
+                <input type="number" class="form-control" ng-model="filter.priceFilterMin.value" placeholder="From" />
+            </div>
         </div>
         <div class="col-xs-6">
-            <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMax.value" placeholder="to" />
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
+                <input type="number" class="form-control" ng-model="filter.priceFilterMax.value" placeholder="To" />
+            </div>
         </div>
         <label class="control-label filter-label col-xs-12">Meal preferences</label>
         <div class="checkbox">
-                <label style="margin-left:55px;"><input type="checkbox" ng-model="filter.preferenceFilter.veggies">Vegetarian</label>
-                <label style="margin-left:15px;"><input type="checkbox" ng-model="filter.preferenceFilter.vegan">Vegan</label>
+            <label style="margin-left:55px;"><input type="checkbox" ng-model="filter.preferenceFilter.veggies">Vegetarian</label>
+            <label style="margin-left:15px;"><input type="checkbox" ng-model="filter.preferenceFilter.vegan">Vegan</label>
         </div>
         <div class="row" style="text-align:center">
             <a class="btn btn-success btn-lg btn-filter-mobile-reinitialize" ng-click="cancel()">Validate</a>

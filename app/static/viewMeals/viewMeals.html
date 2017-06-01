@@ -52,7 +52,10 @@
                 <div class="row">
                   <span ng-click="isCollapsed.place = !isCollapsed.place" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.place, 'glyphicon-triangle-right': isCollapsed.place}"></i><span class="text-in-filter"><strong>City</strong></span></span>
                   <div uib-collapse="isCollapsed.place" class="collapsing-filter">
-                    <input ng-autocomplete type="text" ng-model="filter.cityFilter" class="form-control form-location" placeholder="City, suburb" options="{types:'(cities)'}" />
+                    <div class="inner-addon left-addon">
+                      <i class="glyphicon glyphicon-map-marker"></i>
+                      <input ng-autocomplete type="text" ng-model="filter.cityFilter" class="form-control" placeholder="City, suburb" options="{types:'(cities)'}" />
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -66,16 +69,28 @@
                 <div class="row" class="row-margin-filter">
                   <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.period, 'glyphicon-triangle-right': isCollapsed.period}"></i><span class="text-in-filter"><strong>Period</strong></span></span>
                   <div uib-collapse="isCollapsed.period" class="collapsing-filter">
-                    <input type="text" style="margin-bottom: 5px;" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close"
-                      placeholder="from" />
-                    <input type="text" class="form-control filter-desgin calendar-img" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="to" />
+                    <div class="inner-addon left-addon">
+                      <i class="glyphicon glyphicon glyphicon-calendar"></i>
+                      <input type="text" style="margin-bottom: 5px;" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close"
+                        placeholder="From" />
+                    </div>
+                    <div class="inner-addon left-addon">
+                      <i class="glyphicon glyphicon glyphicon-calendar"></i>
+                      <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="To" />
+                    </div>
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
                   <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.price, 'glyphicon-triangle-right': isCollapsed.price}"></i><span class="text-in-filter"><strong>Price</strong></span></span>
                   <div uib-collapse="isCollapsed.price" class="collapsing-filter">
-                    <input type="number" style="margin-bottom: 5px;" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMin.value" placeholder="from" />
-                    <input type="number" class="form-control filter-desgin banknote-img" ng-model="filter.priceFilterMax.value" placeholder="to" />
+                    <div class="inner-addon left-addon">
+                      <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
+                    <input type="number" style="margin-bottom: 5px;" class="form-control" ng-model="filter.priceFilterMin.value" placeholder="From" />
+                    </div>
+                    <div class="inner-addon left-addon">
+                      <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
+                    <input type="number" class="form-control" ng-model="filter.priceFilterMax.value" placeholder="To" />
+                    </div>
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">

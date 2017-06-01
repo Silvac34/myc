@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewProfile', ['dateDropdownService'])
+angular.module('myApp.viewProfile', ['dateDropdownService', 'getAgeService'])
 
 .controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory) {
 
@@ -27,9 +27,6 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
 
   if (userInfo.data._id == $scope.$parent.user._id) {
     $scope.user = $scope.$parent.user;
-    $scope.user.reviews.positive = $scope.user.reviews.positive || 0;
-    $scope.user.reviews.neutral = $scope.user.reviews.neutral || 0;
-    $scope.user.reviews.negative = $scope.user.reviews.negative || 0;
     var cellphone = setValue($scope.user.privateInfo.cellphone);
     var email = setValue($scope.user.privateInfo.email);
     var city_notification = "";
@@ -58,6 +55,10 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   }
 
   $scope.user._created = new Date(parseInt($scope.user._id.substring(0, 8), 16) * 1000);
+  $scope.user.reviews = $scope.user.reviews || {};
+  $scope.user.reviews.positive = $scope.user.reviews.positive || 0;
+  $scope.user.reviews.neutral = $scope.user.reviews.neutral || 0;
+  $scope.user.reviews.negative = $scope.user.reviews.negative || 0;
   var birthdate = setValue($scope.user.birthdate);
   var presentation = setValue($scope.user.presentation);
   var gender = setValue($scope.user.gender);
@@ -295,11 +296,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
   $scope.capitalizeFirstLetter = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  
-  $scope.getDateFromObjectId = function(objectId){
-    return new Date(parseInt(objectId.substring(0,8), 16)*1000);
+
+  $scope.getDateFromObjectId = function(objectId) {
+    return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
   };
-  
+
 }])
 
 .filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {

@@ -238,6 +238,7 @@ footer p {
     margin-bottom: -9px;
     margin-top: -9px;
     width: 50px;
+    height: 50px;
 }
 
 
@@ -1157,34 +1158,8 @@ h2.slogan {
     margin-bottom: 10px;
 }
 
-@media (min-width: 768px) {
-    .panel-profile-reviews {
-        padding: 0px 15px 5px 15px;
-        display: inline-block;
-    }
-}
 
-@media (max-width: 767px) {
-    .panel-profile-reviews {
-        padding: 10px 15px 0px 15px;
-        display: inline-block;
-    }
-}
-
-
-/* on garde ou pas */
-@media (min-width: 768px) {
-    .panel-profile-name-user {
-        float: inherit;
-        margin-top: 5px;
-        vertical-align: sub;
-    }
-}
-
-@media (max-width: 767px) {
-    .panel-profile-name-user {
-        float: inherit;
-        margin-top: 5px;
-        vertical-align: text-bottom;
-    }
+.panel-profile-user {
+    border: 2px solid #31a4e7;
+    border-radius: 6px;
 }

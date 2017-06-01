@@ -396,18 +396,6 @@ footer p {
     background: url("/static/sources/createMeal/cutlery_menu.png") no-repeat 0;
 }
 
-.date-calendar {
-    background: url("/static/sources/calendar.png") no-repeat 0;
-}
-
-.time-calendar {
-    background: url("/static/sources/clock.png") no-repeat 0;
-}
-
-.price-banknote {
-    background: url("/static/sources/banknote.png") no-repeat 0;
-}
-
 
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
@@ -464,7 +452,7 @@ footer p {
 }
 
 .meal-admin-container {
-    transform: translateY(30%);
+    top: 12px;
 }
 
 .meal-admin-dtld-sm {
@@ -775,29 +763,6 @@ footer p {
     margin-left: 5px;
 }
 
-.form-calendar {
-    background: url("/static/sources/calendar.png") no-repeat;
-    text-indent: 30px;
-    margin-top: auto;
-    background-position: 10px 7px;
-    font-size: 80%;
-}
-
-.form-clock {
-    background: url("/static/sources/clock.png") no-repeat;
-    text-indent: 30px;
-    margin-top: auto;
-    background-position: 10px 7px;
-    font-size: 80%;
-}
-
-.form-location {
-    background: url("/static/sources/location.png") no-repeat;
-    text-indent: 30px;
-    margin-top: auto;
-    background-position: 10px 5px;
-    font-size: 80%;
-}
 
 #fieldset-form {
     padding-left: 30px;
@@ -890,21 +855,6 @@ footer p {
 .my-meal-dtld-right {
     padding-left: 0px;
     padding-right: 5px;
-}
-
-.my-meal-dtld-location {
-    background: url("/static/sources/location.png") no-repeat 0;
-    min-height: 24px;
-}
-
-.my-meal-dtld-date {
-    background: url("/static/sources/calendar.png") no-repeat;
-    min-height: 24px;
-}
-
-.my-meal-dtld-time {
-    background: url("/static/sources/clock.png") no-repeat;
-    min-height: 24px;
 }
 
 .my-meal-dtld-menu-label {
@@ -1022,16 +972,6 @@ footer p {
     border-radius: 15px;
 }
 
-.my-meal-dtld-price-guest {
-    color: #3EA93E;
-    background: url("/static/sources/banknote.png") no-repeat;
-    min-height: 24px;
-}
-
-.my-meal-dtld-edit {
-    background: url("/static/sources/edit_square.png") no-repeat;
-    margin-left: -10px;
-}
 
 @media (max-width: 767px) {
     .my-meal-dtld-hidden-txt {

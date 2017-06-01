@@ -38,7 +38,7 @@
                             <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                         </div>
                         <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
-                            <div class="pull-right" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><strong><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I'm going</span><span ng-if="meal.detailedInfo.pending==true">pending</span></strong></div>
+                            <div class="pull-right" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><strong><span ng-if="meal.detailedInfo.subscribed==true">attending</span><span ng-if="meal.detailedInfo.pending==true">pending</span></strong></div>
                         </div>
                     </div>
                     <div class="row">
@@ -110,7 +110,7 @@
                             <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                         </div>
                         <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
-                            <div class="pull-right" ng-class="{'text-info': meal.detailedInfo.subscribed}"><strong><span class="hidden-xs">status : </span><span ng-if="meal.detailedInfo.subscribed==true">I went</span></strong></div>
+                            <div class="pull-right" ng-class="{'text-info': meal.detailedInfo.subscribed}"><strong><span ng-if="meal.detailedInfo.subscribed==true">attended</span></strong></div>
                         </div>
                     </div>
                     <div class="row">

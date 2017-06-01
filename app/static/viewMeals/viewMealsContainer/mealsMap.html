@@ -12,7 +12,7 @@
                         <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
                     </div>
                     <div class="clear10"></div>
-                        <span class="glyphicon glyphicon-piggy-bank"></span> <span class="meal-price text-success" ng-bind-html="meal.priceSentence"></span>
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
                     <div class="clear10"></div>
                       <span ng-if="meal.veggies == true || meal.vegan == true"><img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal</span>
                     <div class="clear10" ng-if="meal.veggies == true || meal.vegan == true"></div>

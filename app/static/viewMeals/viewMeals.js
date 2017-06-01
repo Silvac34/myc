@@ -187,6 +187,8 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   };
 
+  //-------------- FILTERS --------------//
+  
   //code pour faire les filtres selon les weekDays
   $scope.weekDaysFilter = function(meal) { //permet de faire un filtre avec les jours de la semaine selectionnés
     if ($scope.filter.weekDays.some(checkIfWeekDaysSelected) == true) {
@@ -312,6 +314,8 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  
+  //-------------- INITIALIZING --------------//
 
   $state.go("view_meals.mealsList");
   $scope.mapInitialized = false;

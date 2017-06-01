@@ -60,8 +60,10 @@
 .well-resume-rating {
     display: inline-block;
     padding: 2px 4px 0px 4px;
-    background-color: white;
+    background-color: inherit;
     margin: 0px;
+    box-shadow: inherit;
+    border:inherit;
 }
 
 

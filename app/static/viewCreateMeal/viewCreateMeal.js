@@ -61,8 +61,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     var cellphoneStr = $scope.setValue($scope.$parent.$root.user.privateInfo.cellphone); //on initie le téléphone comme un string
   }
 
-  $scope.cellphoneValidation = needToUpdateCellphone();
-
   function needToUpdateCellphone() { // if true --> need to patch, if false --> need to return error, if null subscribe to a meal
     if (check($scope.$parent.$root.user)) {
       if (check($scope.$parent.$root.user.privateInfo)) {

@@ -30,13 +30,20 @@
             <div class="row">
                 <div class="col-sm-8 col-xs-12">
                     <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
-                        <input type="text" class="form-control form-calendar" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
-                            close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon glyphicon-calendar"></i>
+                            <input type="text" class="form-control" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
+                                close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-10">
                     <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}" style="padding-right:5px;">
-                        <input type="text" name="formTime" class="form-control form-clock margin-left-5px-sm-md-lg" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="'outsideClick'" popover-placement="bottom-left" popover-title="{{formPopoverTimepicker.title}}"value="{{editedMeal.time | date:'HH:mm'}}" required>
+                        <div class="inner-addon left-addon margin-left-5px-sm-md-lg">
+                            <i class="glyphicon glyphicon glyphicon-time"></i>
+                            <input type="text" name="formTime" class="form-control" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="'outsideClick'" popover-placement="bottom-left" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}"
+                                required>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,8 +53,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th class="text-center" style="width:80px"><span uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                                <th class="text-center" style="width:113px"><span uib-popover="Arrival time" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/clock.png" height="18px" width="18px"><span></th>
+                                <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                                <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-popover="Arrival time" popover-trigger="mouseenter" popover-placement="top"><span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,7 +95,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group" ng-class="{'has-error': (details.vicinity==undefined)  && createMealForm.$submitted}">
-                        <input type="text" class="form-control form-location" placeholder="Address" ng-autocomplete ng-model="autocompleteAddress" options="options" details="details" required/>
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon glyphicon-map-marker"></i>
+                            <input type="text" class="form-control" placeholder="Address" ng-autocomplete ng-model="autocompleteAddress" options="options" details="details" required/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,11 +119,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-if="cellphoneValidation==false">
+            <div class="row" ng-if="!user.privateInfo.cellphone">
                 <div class="col-sm-6">
                     <div class="form-group" ng-class="{'has-error': (createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)&& createMealForm.$submitted};">
-                        <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone" uib-popover="Private information: displayed only for participants"
-                            popover-trigger="outsideClick" popover-placement="bottom-left" required/>
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon glyphicon-earphone"></i>
+                            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone" uib-popover="Private information: displayed only for participants"
+                                popover-trigger="outsideClick" popover-placement="bottom-left" required/>
+                        </div>
                     </div>
                 </div>
             </div>

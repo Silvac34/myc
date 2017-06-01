@@ -53,8 +53,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                                <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-popover="Arrival time" popover-trigger="mouseenter" popover-placement="top"><span></th>
+                                <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                                <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="Arrival time" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,17 +64,17 @@
                                 <td class="text-center">{{editedMeal.time | date:'HH:mm'}}</td>
                         </tr>
                         <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-popover="People will help you for cooking" popover-trigger="mouseenter">Help cooking</span></td>
+                                <td style="vertical-align:middle"><span uib-tooltip="People will help you for cooking" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cooking</span></td>
                                     <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
                                     <td class="text-center" ng-class="{'has-error': checkTimeCooking() && createMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
                             </tr>
                             <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-popover="People will help you for cleaning" popover-trigger="mouseenter">Help cleaning</span></td>
+                                <td style="vertical-align:middle"><span uib-tooltip="People will help you for cleaning" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cleaning</span></td>
                                 <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                                 <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
                             </tr>
                             <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-popover="People won't help but will pay more to give you a meal price discount" popover-trigger="mouseenter">Simple guest</span></td>
+                                <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
                                 <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                                 <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
                             </tr>
@@ -124,8 +124,8 @@
                     <div class="form-group" ng-class="{'has-error': (createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)&& createMealForm.$submitted};">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-earphone"></i>
-                            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone" uib-popover="Private information: displayed only for participants"
-                                popover-trigger="outsideClick" popover-placement="bottom-left" required/>
+                            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone" uib-tooltip="Private information: displayed only for participants"
+                                tooltip-trigger="outsideClick" tooltip-placement="bottom-left" required/>
                         </div>
                     </div>
                 </div>

@@ -127,7 +127,7 @@
             <div class="panel-body">
                 <div class="col-xs-12">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
+                        <div class="text-primary size-20">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
                     </div>
                     <div class="row" ng-repeat="participant in meal.privateInfo.users">
                         <div ng-if="participant.role[0] == 'admin'" style="padding-top:10px">
@@ -163,7 +163,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Help cooking:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined">{{meal.detailedInfo.requiredGuests.cooks.price}} per pers</span></div>
+                        <div class="text-primary size-20">Help cooking:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined">{{meal.detailedInfo.requiredGuests.cooks.price}} per pers</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -210,7 +210,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Help cleaning:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined">{{meal.detailedInfo.requiredGuests.cleaners.price}} per pers</span></div>
+                        <div class="text-primary size-20">Help cleaning:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined">{{meal.detailedInfo.requiredGuests.cleaners.price}} per pers</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -257,7 +257,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary my-meal-dtld-title">Simple guest:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined">{{meal.detailedInfo.requiredGuests.simpleGuests.price}} per pers</span></div>
+                        <div class="text-primary size-20">Simple guest:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined">{{meal.detailedInfo.requiredGuests.simpleGuests.price}} per pers</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4">

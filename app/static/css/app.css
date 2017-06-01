@@ -683,35 +683,11 @@ footer p {
 }
 
 .meal-dtld-admin-pic {
-    margin: 0 30px 5px 30px;
+    border-radius: 10px;
     width: 60px;
-    border-radius: 24%;
-    float: left;
-}
-
-.meal-dtld-admin-wrapper {
-    width: 100%;
-    overflow: auto;
-}
-
-.meal-dtld-participants-pic {
-    border-radius: 24%;
-    float: left;
-    margin: 5px 0 20px 15px;
-}
-
-.meal-dtld-participants-name {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.meal-dtld-participants-role {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.meal-dtld-menu {
-    font-size: 18px;
+    height: 60px;
+    margin-left: 20px;
+    margin-bottom:10px;
 }
 
 .meal-dtld-helpers-label {
@@ -730,10 +706,6 @@ footer p {
     min-width: 15%;
     text-align: center;
     float: right;
-}
-
-.meal-dtld-helpers-description {
-    font-size: 12px;
 }
 
 .meal-dtld-helpers-description-time {
@@ -896,10 +868,6 @@ footer p {
     color: #3EA93E;
 }
 
-.my-meal-dtld-title {
-    font-size: 20px;
-}
-
 @media (min-width: 768px) {
     .my-meal-dtld-guestList {
         position: relative;
@@ -992,6 +960,10 @@ footer p {
     border-bottom: 1px solid #eeeeee;
 }
 
+.size-20 {
+    font-size: 20px;
+}
+
 .size-18 {
     font-size: 18px;
 }
@@ -1002,6 +974,10 @@ footer p {
 
 .size-14 {
     font-size: 14px;
+}
+
+.size-12 {
+    font-size: 12px;
 }
 
 .margintop7 {
@@ -1157,7 +1133,6 @@ h2.slogan {
     margin-right: 10px;
     margin-bottom: 10px;
 }
-
 
 .panel-profile-user {
     border: 2px solid #31a4e7;

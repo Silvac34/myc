@@ -15,7 +15,7 @@
                 <div class="row meal-info-label">
                     <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time |date:'HH:mm'}}
                 </div>
-                <div class="row meal-info-label" ng-if="meal.veggies == true || meal.vegan == true" >
+                <div class="row meal-info-label" ng-if="meal.veggies == true || meal.vegan == true">
                     <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                 </div>
             </div>
@@ -42,8 +42,8 @@
                                 <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="meal-dtld-helpers-description">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="meal-dtld-helpers-description-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
-                            <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                        <div class="size-12">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="size-12-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
+                            <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@
                                 <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="meal-dtld-helpers-description">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
-                        <div class="meal-dtld-helpers-description" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                        <div class="size-12">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
                     </div>
                 </div>
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
@@ -73,7 +73,7 @@
                                 <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="meal-dtld-helpers-description">I help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>
+                        <div class="size-12">I help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>
                     </div>
                 </div>
             </uib-accordion>
@@ -95,7 +95,8 @@
         </div>
         <div class="clear10"></div>
         <div class="text-center row">
-            <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated, 'disabled': meal.detailedInfo.pending==true}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal" ng-disabled="checkMealDate() == false"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to participate</span><span ng-if="isAuthenticated">Participate</span></a>
+            <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated, 'disabled': meal.detailedInfo.pending==true}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"
+                ng-disabled="checkMealDate() == false"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to participate</span><span ng-if="isAuthenticated">Participate</span></a>
             <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
             <div ng-if="meal.nbRemainingPlaces<=0  && (goToMeal=='false' || goToMeal==null)" class="meal-dtld-full-msg">Damn ! The meal is already full</div>
         </div>
@@ -103,10 +104,31 @@
 
         <div class="row meal-dtld-group">
             <div class="meal-label meal-dtld-group-label">The meal is organized by :</div>
-            <div class="meal-dtld-admin-wrapper">
-                <a href="{{meal.admin.link}}"><img class="img-circle profilePic meal-dtld-admin-pic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                    <div class="meal-admin-name meal-dtld-admin-name">{{meal.admin.first_name}} </br> {{meal.admin.last_name}}</div>
-                </a>
+            <div style="position:relative">
+                <img ng-src="{{meal.admin.picture.data.url}}" class="meal-dtld-admin-pic pull-left" alt="User profile picture" />
+                <div style="position: relative;left: 14px;">
+                    <a ui-sref="profile({userId: meal.admin._id})" ng-click="cancel()"><strong class="text-info size-14">{{meal.admin.first_name}} {{meal.admin.last_name}}</strong></a></br>
+                    <span ng-if="meal.admin.gender"><i class="fa fa-venus-mars"></i> {{meal.admin.gender}}</span><span ng-if="meal.admin.birthdate && meal.admin.gender"> - <span ng-if="meal.admin.birthdate">{{meal.admin.birthdate | ageFilter}} <span class="small">years old</span></span>
+                    </span>
+                    </br>
+                    <span ng-if="meal.admin.country_of_origin">From: {{meal.admin.country_of_origin.name}}</br></span>
+                    <div class="well well-sm well-resume-rating" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
+                        <table style="text-align:center">
+                            <tbody>
+                                <tr>
+                                    <td ng-if="meal.admin.reviews.positive"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                    <td ng-if="meal.admin.reviews.neutral" style="padding:0px 8px"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                    <td ng-if="meal.admin.reviews.negative"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                </tr>
+                                <tr style="font-size:11px">
+                                    <td ng-if="meal.admin.reviews.positive">{{meal.admin.reviews.positive}}</td>
+                                    <td ng-if="meal.admin.reviews.neutral" style="padding:0px 8px">{{meal.admin.reviews.neutral}}</td>
+                                    <td ng-if="meal.admin.reviews.negative">{{meal.admin.reviews.negative}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

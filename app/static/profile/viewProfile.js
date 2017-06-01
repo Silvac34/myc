@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp.viewProfile', ['dateDropdownService', 'getAgeService'])
+angular.module('myApp.viewProfile', ['dateDropdownService'])
 
-.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory) {
+.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', '$state', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory, $state) {
 
   function setValue(variable) {
     if (typeof variable === 'undefined') {
@@ -25,33 +25,38 @@ angular.module('myApp.viewProfile', ['dateDropdownService', 'getAgeService'])
     }
   }
 
-  if (userInfo.data._id == $scope.$parent.user._id) {
-    $scope.user = $scope.$parent.user;
-    var cellphone = setValue($scope.user.privateInfo.cellphone);
-    var email = setValue($scope.user.privateInfo.email);
-    var city_notification = "";
-    var veggies_notification = "";
-    var vegan_notification = "";
-    if ("preferences" in $scope.user.privateInfo) {
-      if ("city_notification" in $scope.user.privateInfo.preferences) {
-        city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
-      }
-      if ("veggies_notification" in $scope.user.privateInfo.preferences) {
-        veggies_notification = setValue($scope.user.privateInfo.preferences.veggies_notification);
-      }
-      if ("vegan_notification" in $scope.user.privateInfo.preferences) {
-        vegan_notification = setValue($scope.user.privateInfo.preferences.vegan_notification);
-      }
-    }
-    else { //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
-      $scope.user.privateInfo.preferences = {
-        "veggies_notification": false,
-        "vegan_notification": false
-      };
-    }
+  if ($scope.$parent.user == undefined) {
+    $state.go('login');
   }
   else {
-    $scope.user = userInfo.data;
+    if (userInfo.data._id == $scope.$parent.user._id) {
+      $scope.user = $scope.$parent.user;
+      var cellphone = setValue($scope.user.privateInfo.cellphone);
+      var email = setValue($scope.user.privateInfo.email);
+      var city_notification = "";
+      var veggies_notification = "";
+      var vegan_notification = "";
+      if ("preferences" in $scope.user.privateInfo) {
+        if ("city_notification" in $scope.user.privateInfo.preferences) {
+          city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+        }
+        if ("veggies_notification" in $scope.user.privateInfo.preferences) {
+          veggies_notification = setValue($scope.user.privateInfo.preferences.veggies_notification);
+        }
+        if ("vegan_notification" in $scope.user.privateInfo.preferences) {
+          vegan_notification = setValue($scope.user.privateInfo.preferences.vegan_notification);
+        }
+      }
+      else { //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
+        $scope.user.privateInfo.preferences = {
+          "veggies_notification": false,
+          "vegan_notification": false
+        };
+      }
+    }
+    else {
+      $scope.user = userInfo.data;
+    }
   }
 
   $scope.user._created = new Date(parseInt($scope.user._id.substring(0, 8), 16) * 1000);

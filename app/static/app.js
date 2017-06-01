@@ -15,7 +15,8 @@ var app = angular.module('myApp', [
   'userServices',
   'angular-loading-bar',
   'ezfb',
-  'getReviewService'
+  'getReviewService', 
+  'getAgeService'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {
@@ -43,7 +44,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         response: function($http) {
           /*var date = new Date();
           var now = date.toISOString();*/
-          return $http.get('/api/meals'/*?where={"time": {"$gte": "' + now + '"} }'*/); //on met en commentaire la requête filtrée pour repas > now
+          return $http.get('/api/meals' /*?where={"time": {"$gte": "' + now + '"} }'*/ ); //on met en commentaire la requête filtrée pour repas > now
         }
       }
     });
@@ -252,4 +253,11 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
 
   $rootScope.navbarCollapsed = true;
 
+}]);
+
+
+app.filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) {
+  return function(birthdate) {
+    return getAgeServiceFactory(birthdate);
+  };
 }]);

@@ -93,8 +93,8 @@
                         <span ng-hide="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking">{{meal.time |date:'HH:mm'}}</span>
                     </div>
                     <div class="meal-info-label">
-                        <span class="glyphicon glyphicon-map-marker"></span> {{meal.privateInfo.address.name}}<span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span>
-                        <span class="hidden-xs">, {{meal.address.town}}, {{meal.address.country}}</span><span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:18px">{{meal.address.town}}, {{meal.address.country}}</span></span>
+                        <span class="glyphicon glyphicon-map-marker"></span> <span>{{meal.privateInfo.address.name}}</span><span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span>
+                        <span class="hidden-xs" style="margin-left:-3px">, {{meal.address.town}}, {{meal.address.country}}</span><span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:18px">{{meal.address.town}}, {{meal.address.country}}</span></span>
                         <span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - {{meal.privateInfo.address.complement}}</span></span>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                     <div class="row" ng-repeat="participant in meal.privateInfo.users">
                         <div ng-if="participant.role[0] == 'admin'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>

@@ -33,7 +33,6 @@
     pointer-events: none;
 }
 
-
 /* align icon */
 
 .left-addon .glyphicon {
@@ -687,7 +686,7 @@ footer p {
     width: 60px;
     height: 60px;
     margin-left: 20px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 .meal-dtld-helpers-label {
@@ -1137,4 +1136,10 @@ h2.slogan {
 .panel-profile-user {
     border: 2px solid #31a4e7;
     border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+    .profile-member-since {
+        font-size: 13px;
+    }
 }

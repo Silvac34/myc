@@ -268,6 +268,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                         "_id": $scope.user._id,
                         "role": $scope.userRole
                     },
+                    "unique": participantId + $scope.user._id + $scope.meal._id,
                     "sent": false
                 });
             }

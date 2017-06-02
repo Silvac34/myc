@@ -376,6 +376,11 @@ schemaReviews = {
     'mealAssociated': {
         'type': 'objectid',
         'required': True
+    },
+    'unique':{ #concat(forUserId, fromUserId, mealAssociatedId)
+        'type': 'string',
+        'required':True,
+        'unique': True
     }
 }
 

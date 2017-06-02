@@ -142,16 +142,13 @@ def sendNotificationPreference(meal, mealPrice):
 def addReviewRatingToUser(userId, rating):
     user = User(_id=ObjectId(userId))
     userDatas = user.getUserPublicInfo()
-    print(userDatas)
     userInfo = {}
     if("reviews" in userDatas):
         numberOfRating = userDatas['reviews'][rating] + 1
         userInfo = {"reviews."+ rating: numberOfRating}
-        print(userInfo)
         user.updateUser(userInfo)
     else:
         userInfo = {"reviews."+ rating: 1}
-        print(userInfo)
         user.updateUser(userInfo)
     
 @Application.app.route('/')

@@ -37,6 +37,7 @@ class BasicAPITest(TestCase):
 	    del self.app
 	    self.db.meals.delete_many({})
 	    self.db.users.delete_many({})
+	    self.db.reviews.delete_many({})
 	    
     def rmAddFieldsItem(self,dictObject):
 	    del dictObject["_created"]
@@ -63,6 +64,7 @@ class APITest1(BasicAPITest):
     def tearDown(self):
 	    super(APITest1, self).tearDown()
 	    
+	
     def test_unauthentificatedUser(self):
 	    resp = self.test_client.post("/api/meals", data="{\"super\":\"toto\"}")
 	    self.assertEqual("401 UNAUTHORIZED", resp.status)
@@ -81,7 +83,6 @@ class APITest1(BasicAPITest):
 	    testMeal["_id"]= dbMeal["_id"]
 	    testMeal["_etag"]= dbMeal["_etag"]
 	    self.assertEqual(dbMeal, testMeal)
-	    
 
 class APITest2(BasicAPITest):
     def setUp(self):
@@ -93,13 +94,15 @@ class APITest2(BasicAPITest):
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[1])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[2])
+        self.db.users.insert(loads(open('../testData/users_testData.json').read())[3])
+        self.db.reviews.insert(loads(open('../testData/reviews_testData.json').read())[0])
+        self.db.reviews.insert(loads(open('../testData/reviews_testData.json').read())[1])
         self.adminUser = User(_id="111111111111111111111111")
         self.otherUser = User(_id="111111111111111111111112")
     
     def tearDown(self):
 	    super(APITest2, self).tearDown()
-	    
-	    
+
     def test_get_all_meals(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"automaticSubscription\": true,\"address\": {\"country_code\": \"FR\",\"lat\": 48.881,\"lng\": 2.341,\"postalCode\": \"75009\",\"town\": \"Paris\"},\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\",\"facebook_id\": \"103194673461647\",\"link\": \"https://www.facebook.com/app_scoped_user_id/103194673461647/\"},\"menu\":{\"title\": \"Jolie piece de boeuf\"},\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false, \"vegan\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"detailedInfo\": {\"subscribed\": true,\"pending\": false,\"requiredGuests\": {\"hosts\": {\"price\":5},\"cooks\":{\"nbRquCooks\":2,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":6.7},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":6.7},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":12.5}}}}"
         resp = self.test_client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
@@ -289,6 +292,47 @@ class APITest2(BasicAPITest):
         resp = self.test_client.get("/api/meals/111111111111111111111111/calculateMealPrice",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("200 OK", resp.status)
         self.assertEquals(resp.data,expected)
+        
+    def test_get_all_reviews(self):
+        jsonAPIExpReview1 = "{ \"_id\": \"592e1cc33187971a43701a44\" , \"forUser\": { \"comment\": \"Mec sympa\", \"rating\": \"positive\", \"_id\": \"577946eb4403f92b93425e6a\" , \"role\": \"admin\" }, \"mealAssociated\": \"58f4183e3187971673aa4cb4\", \"fromUser\": { \"_id\": \"5776d0824403f974b97caf89\", \"role\": \"cleaner\"}, \"unique\": \"577946eb4403f92b93425e6a5776d0824403f974b97caf8958f4183e3187971673aa4cb4\" }"
+        jsonAPIExpReview2 = "{ \"_id\": \"592e1d0d3187971a43701a45\", \"forUser\": { \"comment\": \"je l'aime plus\", \"rating\": \"negative\", \"_id\": \"577946eb4403f92b93425e6a\", \"role\": \"admin\" }, \"mealAssociated\": \"58f4183e3187971673aa4cb4\", \"fromUser\": { \"_id\": \"111111111111111111111112\", \"role\": \"cleaner\"}, \"unique\": \"577946eb4403f92b93425e6a11111111111111111111111258f4183e3187971673aa4cb4\" }"
+        resp = self.test_client.get("/api/reviews",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        resp = self.rmAddFieldsList(json.loads(resp.data))
+        expOutcome1 = json.loads(jsonAPIExpReview1)
+        expOutcome1["_etag"]= resp[0]["_etag"]
+        expOutcome2 = json.loads(jsonAPIExpReview2)
+        expOutcome2["_etag"]= resp[1]["_etag"]
+        self.assertEqual(2, len(resp))
+        self.assertEquals(resp[0],expOutcome1)
+        self.assertEquals(resp[1],expOutcome2)
+        
+    def test_insert_reviews(self):
+        jsonRequestData = "{\"forUser\": { \"comment\": \"Mec sympa\", \"rating\": \"positive\", \"_id\": \"577946eb4403f92b93425e6a\" , \"role\": \"admin\" }, \"mealAssociated\": \"58f4183e3187971673aa4cb4\", \"fromUser\": { \"_id\": \"5776d0824403f974b97caf89\", \"role\": \"cleaner\"}, \"unique\": \"577946eb4403f92b93425e6a5776d0824403f974b97caf8958f4183e3187971673aa4cb1\" }"
+        userReview = self.test_client.get("/api/users/" + json.loads(jsonRequestData)['forUser']['_id'], headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}).data
+        userReviewRating = json.loads(userReview)['reviews']
+        resp = self.test_client.post("/api/reviews", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("201 CREATED", resp.status)
+        dbReview = self.db.reviews.find_one()
+        #self.rmAddFieldsItem(dbReview)
+        testReview = loads(open('../testData/reviews_testData.json').read())[0]
+        testReview["_id"]= dbReview["_id"]
+        #testReview["_etag"]= dbReview["_etag"]
+        self.assertEqual(dbReview, testReview) # on vérifie que le commentaire a bien été envoyé correctement dans la base de donnée
+        userReviewAfterReviewed = self.test_client.get("/api/users/" + json.loads(jsonRequestData)['forUser']['_id'], headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'}).data
+        userReviewRatingAfterReviewed = json.loads(userReviewAfterReviewed)['reviews']
+        self.assertNotEqual(userReviewRating, userReviewRatingAfterReviewed) # on vérifie qu'un changement du nombre de notation a bien été effectué
+        
+    
+    def test_insert_reviews_with_wrong_value(self): #un test qui vérifie qu'on ne peut poster une review que avec 'positive', 'negative' ou 'neutre'
+        jsonRequestData = "{\"forUser\": { \"comment\": \"Mec sympa\", \"rating\": \"Hello\", \"_id\": \"577946eb4403f92b93425e6a\" , \"role\": \"admin\" }, \"mealAssociated\": \"58f4183e3187971673aa4cb4\", \"fromUser\": { \"_id\": \"5776d0824403f974b97caf89\", \"role\": \"cleaner\"}, \"unique\": \"577946eb4403f92b93425e6a5776d0824403f974b97caf8958f4183e3187971673aa4cb1\" }"
+        resp = self.test_client.post("/api/reviews", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("422 UNPROCESSABLE ENTITY", resp.status)
+
+    def test_insert_reviews_duplicated(self): #un test qui vérifie que je ne peux publier qu'une fois par repas et par personne une reviews
+        jsonRequestData = "{\"forUser\": { \"comment\": \"Mec sympa\", \"rating\": \"positive\", \"_id\": \"577946eb4403f92b93425e6a\" , \"role\": \"admin\" }, \"mealAssociated\": \"58f4183e3187971673aa4cb4\", \"fromUser\": { \"_id\": \"5776d0824403f974b97caf89\", \"role\": \"cleaner\"}, \"unique\": \"577946eb4403f92b93425e6a5776d0824403f974b97caf8958f4183e3187971673aa4cb4\" }"
+        resp = self.test_client.post("/api/reviews", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("422 UNPROCESSABLE ENTITY", resp.status)
         
     
 if __name__ == '__main__':

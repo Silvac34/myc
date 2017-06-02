@@ -132,7 +132,7 @@
                     <div class="row" ng-repeat="participant in meal.privateInfo.users">
                         <div ng-if="participant.role[0] == 'admin'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
@@ -178,7 +178,7 @@
                     <div class="row" ng-repeat="participant in meal.privateInfo.users">
                         <div ng-if="participant.role[0] == 'cook' && participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
@@ -225,7 +225,7 @@
                     <div class="row" ng-repeat="participant in meal.privateInfo.users">
                         <div ng-if="participant.role[0] == 'cleaner' && participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>
@@ -272,7 +272,7 @@
                     <div class="row" ng-repeat="participant in meal.privateInfo.users">
                         <div ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a href="{{participant.link}}"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position"> - {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                     </span>
                                     </span>

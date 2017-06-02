@@ -33,11 +33,14 @@
             <form class="form-horizontal" name="updateUserForm">
                 <fieldset>
                     <uib-tabset active="active">
-                        <uib-tab index="0" heading="About me">
+                        <uib-tab index="0">
+                            <uib-tab-heading>
+                                <span class="small-visible-xs">About me</span>
+                            </uib-tab-heading>
                             <div class="clear20"></div>
                             <div class="col-xs-12">
                                 <div class="hidden-sm hidden-md hidden-lg" style="position:relative">
-                                    <img ng-src="{{user.picture.data.url}}" style="border-radius:10px" class="pull-left" alt="User profile picture" />
+                                    <img ng-src="{{user.picture.data.url}}" style="border-radius:10px; width:150px; height:150px" class="pull-left" alt="User profile picture" />
                                     <strong class="text-info size-16" style="position: relative;top: 58px;left: 14px;">{{user.first_name}} {{user.last_name}}</strong></br>
                                     <div class="well well-sm well-resume-rating" style="position: relative;top: 68px;left: 10px;" ng-if="user.reviews.positive || user.reviews.neutral || user.reviews.negative">
                                         <table style="text-align:center">
@@ -104,32 +107,10 @@
                                 </div>
                             </div>
                         </uib-tab>
-                        <uib-tab index="1" heading="Reviews">
-                            <div class="clear20"></div>
-                            <div class="col-xs-12">
-                                <div class="clear10"></div>
-                                <div class="row">
-                                    <span ng-if="reviews.length == 0">Get new reviews by <a class="btn btn-primary btn-xs" ui-sref="create_meal">proposing</a> or <a class="btn btn-primary btn-xs" ui-sref="view_meals">browsing</a> a meal.</span>
-                                    <div ng-if="reviews.length > 0">
-                                        <div class="panel panel-default" ng-repeat="review in reviews">
-                                            <div class="panel-body">
-                                                <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
-                                                <div class="pull-left" style="padding-right:15px">
-                                                    <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
-                                                    <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
-                                                </div>
-                                                <div style="padding-top:20px">
-                                                    <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
-                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span>                                                    &nbsp;"
-                                                    <em>{{review.forUser.comment}}</em>"
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </uib-tab>
-                        <uib-tab index="2" heading="Notifications">
+                        <uib-tab index="1">
+                            <uib-tab-heading>
+                                <span class="small-visible-xs">Notifications</span>
+                            </uib-tab-heading>
                             <div class="clear10"></div>
                             <div class="col-xs-12">
                                 <div class="row">
@@ -184,6 +165,34 @@
                                 </div>
                             </div>
                         </uib-tab>
+                        <uib-tab index="2">
+                            <uib-tab-heading>
+                                <span class="small-visible-xs">Reviews</span>
+                            </uib-tab-heading>
+                            <div class="clear20"></div>
+                            <div class="col-xs-12">
+                                <div class="clear10"></div>
+                                <div class="row">
+                                    <span ng-if="reviews.length == 0">Get new reviews by <a class="btn btn-primary btn-xs" ui-sref="create_meal">proposing</a> or <a class="btn btn-primary btn-xs" ui-sref="view_meals">browsing</a> a meal.</span>
+                                    <div ng-if="reviews.length > 0">
+                                        <div class="panel panel-default" ng-repeat="review in reviews">
+                                            <div class="panel-body">
+                                                <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
+                                                <div class="pull-left" style="padding-right:15px">
+                                                    <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                                    <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                                </div>
+                                                <div style="padding-top:20px">
+                                                    <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
+                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span>                                                    &nbsp;"
+                                                    <em>{{review.forUser.comment}}</em>"
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </uib-tab>
                     </uib-tabset>
                 </fieldset>
             </form>
@@ -202,7 +211,7 @@
                         <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(user.gender)}}</br></span>
                         <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
                         <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
-                        <em class="profile-member-since">Member since {{user._created | date:'MM/yyyy'}}</em>
+                        <em class="small-visible-xs">Member since {{user._created | date:'MM/yyyy'}}</em>
                     </div>
                     <div class="hidden-xs pull-right" style="max-width:490px;padding-right:10px; padding-top:15px" ng-if="user.presentation">
                         "<em>{{user.presentation}}</em>"

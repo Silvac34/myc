@@ -1104,7 +1104,7 @@ h2.slogan {
 /*Profile ------------------------------------------------------ */
 
 .day-container {
-    width: 45px;
+    width: 50px;
     float: left;
     height: 25px;
 }
@@ -1139,7 +1139,7 @@ h2.slogan {
 }
 
 @media (max-width: 767px) {
-    .profile-member-since {
+    .small-visible-xs {
         font-size: 13px;
     }
 }

@@ -211,6 +211,7 @@
                         <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(user.gender)}}</br></span>
                         <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
                         <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
+                        <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}">facebook page</a></br>
                         <em class="small-visible-xs">Member since {{user._created | date:'MM/yyyy'}}</em>
                     </div>
                     <div class="hidden-xs pull-right" style="max-width:490px;padding-right:10px; padding-top:15px" ng-if="user.presentation">

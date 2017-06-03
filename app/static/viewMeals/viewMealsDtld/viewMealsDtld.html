@@ -111,7 +111,7 @@
                     <span ng-if="meal.admin.gender"><i class="fa fa-venus-mars"></i> {{meal.admin.gender}}</span><span ng-if="meal.admin.birthdate && meal.admin.gender"> - <span ng-if="meal.admin.birthdate">{{meal.admin.birthdate | ageFilter}} <span class="small">years old</span></span>
                     </span>
                     </br>
-                    <span ng-if="meal.admin.country_of_origin">From: {{meal.admin.country_of_origin.name}}</br></span>
+                    <span ng-if="meal.admin.country_of_origin">From {{meal.admin.country_of_origin.name}}</br></span>
                     <div class="well well-sm well-resume-rating" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
                         <table style="text-align:center">
                             <tbody>

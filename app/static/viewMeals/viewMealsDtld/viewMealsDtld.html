@@ -43,7 +43,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="size-12">You have to arrive at <span class="size-12-time"><strong>{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</strong> in order to help the host to prepare the meal.</span>
-                            <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept">more info about pricing</a>). You will be informed before the dinner of the final price.</div>
+                            <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You will be informed before the dinner of the final price.</div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="size-12">You will help ordering and cleaning what was used for the meal</div>
-                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept">more info about pricing</a>). You will be informed before the dinner of the final price.</div>
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You will be informed before the dinner of the final price.</div>
                     </div>
                 </div>
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">

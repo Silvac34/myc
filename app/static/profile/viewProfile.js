@@ -59,8 +59,8 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     if (gender != setValueScope($scope.user.gender)) {
       origUser.gender = $scope.user.gender;
     }
-    if (speaking_languages != setValueScope($scope.user.speaking_languages)) {
-      origUser.speaking_languages = $scope.user.speaking_languages;
+    if (spoken_languages != setValueScope($scope.user.spoken_languages)) {
+      origUser.spoken_languages = $scope.user.spoken_languages;
     }
     if ("country_of_origin" in $scope.user) {
       if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
@@ -136,13 +136,13 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     }
   }
 
-  function checkIfSpeakingLanguageIsNew(languageToAdd) {
-    if ($scope.user.speaking_languages == undefined) {
-      $scope.user.speaking_languages = [languageToAdd];
+  function checkIfSpokenLanguageIsNew(languageToAdd) {
+    if ($scope.user.spoken_languages == undefined) {
+      $scope.user.spoken_languages = [languageToAdd];
     }
     else {
-      if ($scope.user.speaking_languages.includes(languageToAdd) == false) {
-        $scope.user.speaking_languages.push(languageToAdd);
+      if ($scope.user.spoken_languages.includes(languageToAdd) == false) {
+        $scope.user.spoken_languages.push(languageToAdd);
       }
     }
   }
@@ -194,7 +194,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     var birthdate = setValue($scope.user.birthdate);
     var presentation = setValue($scope.user.presentation);
     var gender = setValue($scope.user.gender);
-    var speaking_languages = setValue($scope.user.speaking_languages);
+    var spoken_languages = setValue($scope.user.spoken_languages);
     var country_of_origin_name = "";
     if ($scope.user.country_of_origin != undefined) {
       country_of_origin_name = setValue($scope.user.country_of_origin.name);
@@ -224,16 +224,16 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       }
     };
 
-    $scope.addSpeakingLanguage = function($event) {
+    $scope.addSpokenLanguage = function($event) {
       if (event.which === 13 && event.type == "keypress" || event.type == "click") {
-        checkIfSpeakingLanguageIsNew(this.userSpeakingLanguage.name);
+        checkIfSpokenLanguageIsNew(this.userSpokenLanguage.name);
       }
     };
 
-    $scope.removeSpeakingLanguage = function() {
-      var index = $scope.user.speaking_languages.indexOf(this.speaking_language);
+    $scope.removeSpokenLanguage = function() {
+      var index = $scope.user.spoken_languages.indexOf(this.spoken_language);
       if (index > -1) {
-        $scope.user.speaking_languages.splice(index, 1);
+        $scope.user.spoken_languages.splice(index, 1);
       }
     };
 
@@ -260,7 +260,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
             birthdate = setValue($scope.user.birthdate);
             presentation = setValue($scope.user.presentation);
             gender = setValue($scope.user.gender);
-            speaking_languages = setValue($scope.user.speaking_languages);
+            spoken_languages = setValue($scope.user.spoken_languages);
             if ($scope.user.country_of_origin != undefined) {
               country_of_origin_name = setValue($scope.user.country_of_origin.name);
             }

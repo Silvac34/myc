@@ -267,7 +267,7 @@ schemaUsers = {
             }
         }
     },
-    'speaking_languages':{
+    'spoken_languages':{
         'type': 'list'
     },
     'birthdate':{

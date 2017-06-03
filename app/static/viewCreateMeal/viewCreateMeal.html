@@ -10,18 +10,18 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group" ng-class="{'has-error': editedMeal.menu.title==undefined && createMealForm.$submitted};">
-                        <input type="text" class="form-control cutlery-menu" ng-class="{'form-vegetarian': editedMeal.veggies || editedMeal.vegan}" placeholder="Title of your menu" id="inputMenu" ng-model="editedMeal.menu.title" required></textarea>
+                        <input type="text" class="form-control cutlery-menu" placeholder="Title of your menu" id="inputMenu" ng-model="editedMeal.menu.title" required></textarea>
                     </div>
                     <div class="form-group">
                         <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model="editedMeal.menu.description"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
-                            <label>
-                            <input type="checkbox" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian alternative
+                            <label style="margin-right:5px">
+                            <input type="checkbox" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian meal
                         </label>
                             <label class="form-design-vegan">
-                            <input type="checkbox" ng-model="editedMeal.vegan" ng-change="editedMeal.veggies = false">Vegan alternative
+                            <input type="checkbox" ng-model="editedMeal.vegan" ng-change="editedMeal.veggies = false">Vegan meal
                         </label>
                         </div>
                     </div>

@@ -745,13 +745,6 @@ footer p {
     padding-right: 40px;
 }
 
-.form-vegetarian {
-    background: url("/static/sources/vegetarian.png") no-repeat;
-    text-indent: 30px;
-    margin-top: auto;
-    background-position: 7px 5px;
-}
-
 #inputMenu {
     background-size: 24px;
     text-indent: 25px;

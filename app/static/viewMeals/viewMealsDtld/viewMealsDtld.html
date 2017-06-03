@@ -3,11 +3,11 @@
         <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
         <div class="row">
             <div class="col-xs-12 meal-dtld-menu-label text-primary">
-                <strong>{{meal.menu.title}}</strong>
+                <img src="/static/sources/createMeal/cutlery_menu.png" style="position:relative;bottom:2px"> <strong>{{meal.menu.title}}</strong>
             </div>
             <div class="col-xs-12" style="margin:15px">
-                <div class="row" ng-if="meal.menu.description">
-                    Description of the meal : {{meal.menu.description}}
+                <div class="row" ng-if="meal.menu.description" style="margin-right:0px">
+                    Description: <em>{{meal.menu.description}}</em>
                 </div>
                 <div class="row meal-info-label">
                     <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}}, {{meal.address.country}} - {{meal.address.postalCode}}
@@ -42,8 +42,8 @@
                                 <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="size-12">You come to help the host to prepare the meal. </br>Note: You need to be there at <span class="size-12-time">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</span>
-                            <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                        <div class="size-12">You have to arrive at <span class="size-12-time"><strong>{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</strong> in order to help the host to prepare the meal.</span>
+                            <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept">more info about pricing</a>). You will be informed before the dinner of the final price.</div>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@
                                 <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="size-12">At the end of or during the event, you will help to order and clean what was used to prepare the meal</div>
-                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions. You will be inform before the dinner of the final price.</div>
+                        <div class="size-12">You will help ordering and cleaning what was used for the meal</div>
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept">more info about pricing</a>). You will be informed before the dinner of the final price.</div>
                     </div>
                 </div>
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
@@ -98,7 +98,7 @@
             <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated, 'disabled': meal.detailedInfo.pending==true}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"
                 ng-disabled="checkMealDate() == false"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to participate</span><span ng-if="isAuthenticated">Participate</span></a>
             <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
-            <div ng-if="meal.nbRemainingPlaces<=0  && (goToMeal=='false' || goToMeal==null)" class="meal-dtld-full-msg">Damn ! The meal is already full</div>
+            <div ng-if="meal.nbRemainingPlaces<=0  && (goToMeal=='false' || goToMeal==null)" class="meal-dtld-full-msg">The meal is already full</div>
         </div>
         <div class="clear10"></div>
 

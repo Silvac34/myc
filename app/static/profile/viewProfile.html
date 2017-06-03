@@ -216,19 +216,28 @@
     <div ng-if="$parent.user._id != user._id">
         <div class="panel panel-default panel-profile-user">
             <div class="panel-body">
-                <img ng-src="{{user.picture.data.url}}" style="border-radius:10px;width:150px; height:150px;" class="pull-left inline-block-sm-md-lg" alt="User profile picture" />
-                <div style="position:relative; left:10px;" class="inline-block-sm-md-lg pull-right-xs">
-                    <div>
+                <img ng-src="{{user.picture.data.url}}" style="border-radius:10px;" class="pull-left inline-block-sm-md-lg profilePicProfile" alt="User profile picture" />
+                <div style="position:relative; left:10px;" class="inline-block-sm-md-lg">
+                    <div id="profile-full-name-other-user">
                         <strong class="text-info size-16">{{user.first_name}} {{user.last_name}}</strong>
                     </div>
-                    <div style="padding-top:10px">
+                    <div class="hidden-xs" style="padding-top:10px">
                         <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(user.gender)}}</br></span>
                         <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
                         <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
-                        <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br></span>
+                        <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
+                        </span>
                         <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}">Public profile</a></br><span class="hidden-sm hidden-md hidden-lg"></br></span>
-                        <em class="small-visible-xs pull-right-xs">Member since {{user._created | date:'MM/yyyy'}}</em>
+                        <em>Member since {{user._created | date:'MM/yyyy'}}</em>
                     </div>
+                </div>
+                <div id="profile-list-information-other-user" class="hidden-sm hidden-md hidden-lg" style="padding-top:10px">
+                    <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(user.gender)}}</br></span>
+                    <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
+                    <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
+                    <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br></span>
+                    <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}">Public profile</a></br></span>
+                    <em>Member since {{user._created | date:'MM/yyyy'}}</em>
                 </div>
                 <div class="hidden-xs pull-right text-justify inline-block-sm-md-lg" style="max-width:490px; padding: 42px 15px 0px 20px;" ng-if="user.presentation">
                     "<em>{{user.presentation}}</em>"

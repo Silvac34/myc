@@ -1136,21 +1136,31 @@ h2.slogan {
     .small-visible-xs {
         font-size: 13px;
     }
-    .pull-right-xs {
-        float: right !important;
+    .profilePicProfile {
+        width: 150px;
+        height: 150px;
     }
-    .pull-left-xs {
-        float: left !important;
-    }
-
 }
 
 @media (min-width: 768px) {
-    .pull-right-sm-md-lg {
-        float: right !important;
-    }
-    
-    .inline-block-sm-md-lg{
+    .inline-block-sm-md-lg {
         display: inline-block;
     }
+    .profilePicProfile {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    #profile-full-name-other-user {
+        height: 150px;
+        top: 50px;
+        position: relative;
+    }
+}
+
+#profile-list-information-other-user {
+    position: relative;
+    left: 10px;
 }

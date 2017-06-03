@@ -88,6 +88,20 @@
                                         typeahead-show-hint="true" typeahead-min-length="0" autocomplete="off">
                                 </div>
                                 <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="userSpeakingLanguage" placeholder="Speaking languages" uib-typeahead="language as language.name for language in languages | filter:{name:$viewValue} | limitTo:8" class="form-control" typeahead-show-hint="true" typeahead-min-length="0"
+                                            autocomplete="off" ng-keypress="addSpeakingLanguage($event)">
+                                        <span class="input-group-btn">
+                              <button class="btn btn-default" type="button" ng-click="addSpeakingLanguage()">Add</button>
+                            </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div ng-repeat="speaking_language in user.speaking_languages" class="well well-sm profile-city-notification-preference" style="background-color:inherit;border-color:#3eaae8">
+                                        <strong>&nbsp;&nbsp;{{speaking_language}}&nbsp;</strong><span class="glyphicon glyphicon-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeCityNotificationPreference($event)"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <textarea class="form-control" rows="3" placeholder="Introduce yourself" ng-model="user.presentation"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -135,7 +149,7 @@
                                 </div>
                                 <div class="clear10"></div>
                                 <div class="row">
-                                    <div ng-repeat="cities in user.privateInfo.preferences.city_notification" class="well well-sm profile-city-notification-preference">
+                                    <div ng-repeat="cities in user.privateInfo.preferences.city_notification" class="well well-sm profile-city-notification-preference" style="background-color:inherit;border-color:#3eaae8">
                                         <strong>&nbsp;&nbsp;{{cities}}&nbsp;</strong><span class="glyphicon glyphicon-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeCityNotificationPreference($event)"></span>
                                     </div>
                                 </div>

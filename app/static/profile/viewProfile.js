@@ -24,121 +24,135 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       return variable.toString();
     }
   }
-  
+
   function getDataToPerform() {
-      var actionProhibited = false;
-      var origUser = {
-        "privateInfo": {
-          "keep": false
-        }
-      };
-      if (cellphone != setValueScope($scope.user.privateInfo.cellphone)) {
-        if ($scope.user.privateInfo.cellphone == "") {
-          actionProhibited = true;
-        }
-        else {
-          origUser.privateInfo.cellphone = $scope.user.privateInfo.cellphone;
-          origUser.privateInfo.keep = true;
-        }
+    var actionProhibited = false;
+    var origUser = {
+      "privateInfo": {
+        "keep": false
       }
-      if (email != setValueScope($scope.user.privateInfo.email)) {
-        if ($scope.user.privateInfo.email == "") {
-          actionProhibited = true;
-        }
-        else {
-          origUser.privateInfo.email = $scope.user.privateInfo.email;
-          origUser.privateInfo.keep = true;
-        }
-      }
-      if (birthdate != setValueScope($scope.user.birthdate)) {
-        origUser.birthdate = $scope.user.birthdate;
-      }
-      if (presentation != setValueScope($scope.user.presentation)) {
-        origUser.presentation = $scope.user.presentation;
-      }
-      if (gender != setValueScope($scope.user.gender)) {
-        origUser.gender = $scope.user.gender;
-      }
-      if ("country_of_origin" in $scope.user) {
-        if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
-          origUser.country_of_origin = $scope.user.country_of_origin;
-        }
-      }
-      if ("preferences" in $scope.user.privateInfo) {
-        if ("city_notification" in $scope.user.privateInfo.preferences) {
-          if (city_notification != setValueScope($scope.user.privateInfo.preferences.city_notification)) {
-            origUser.privateInfo.preferences = {
-              "city_notification": $scope.user.privateInfo.preferences.city_notification
-            };
-            origUser.privateInfo.keep = true;
-            origUser.privateInfo.user_ref = $scope.user_ref;
-            setDietaryPreferencesToNull(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
-          }
-        }
-        if ("veggies_notification" in $scope.user.privateInfo.preferences) {
-          if (veggies_notification != setValueScope($scope.user.privateInfo.preferences.veggies_notification)) {
-            origUser.privateInfo.preferences = {
-              "veggies_notification": $scope.user.privateInfo.preferences.veggies_notification
-            };
-            origUser.privateInfo.keep = true;
-            origUser.privateInfo.user_ref = $scope.user_ref;
-          }
-        }
-        if ("vegan_notification" in $scope.user.privateInfo.preferences) {
-          if (vegan_notification != setValueScope($scope.user.privateInfo.preferences.vegan_notification)) {
-            origUser.privateInfo.preferences = {
-              "vegan_notification": $scope.user.privateInfo.preferences.vegan_notification
-            };
-            origUser.privateInfo.keep = true;
-            origUser.privateInfo.user_ref = $scope.user_ref;
-          }
-        }
-      }
-      if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
-        delete origUser.privateInfo;
+    };
+    if (cellphone != setValueScope($scope.user.privateInfo.cellphone)) {
+      if ($scope.user.privateInfo.cellphone == "") {
+        actionProhibited = true;
       }
       else {
-        delete origUser.privateInfo.keep;
+        origUser.privateInfo.cellphone = $scope.user.privateInfo.cellphone;
+        origUser.privateInfo.keep = true;
       }
-      if (angular.equals(origUser, {})) {
-        if (actionProhibited == true) {
-          return "this action is prohibited";
-        }
-        else {
-          return null;
+    }
+    if (email != setValueScope($scope.user.privateInfo.email)) {
+      if ($scope.user.privateInfo.email == "") {
+        actionProhibited = true;
+      }
+      else {
+        origUser.privateInfo.email = $scope.user.privateInfo.email;
+        origUser.privateInfo.keep = true;
+      }
+    }
+    if (birthdate != setValueScope($scope.user.birthdate)) {
+      origUser.birthdate = $scope.user.birthdate;
+    }
+    if (presentation != setValueScope($scope.user.presentation)) {
+      origUser.presentation = $scope.user.presentation;
+    }
+    if (gender != setValueScope($scope.user.gender)) {
+      origUser.gender = $scope.user.gender;
+    }
+    if (speaking_languages != setValueScope($scope.user.speaking_languages)) {
+      origUser.speaking_languages = $scope.user.speaking_languages;
+    }
+    if ("country_of_origin" in $scope.user) {
+      if (country_of_origin_name != setValueScope($scope.user.country_of_origin.name)) {
+        origUser.country_of_origin = $scope.user.country_of_origin;
+      }
+    }
+    if ("preferences" in $scope.user.privateInfo) {
+      if ("city_notification" in $scope.user.privateInfo.preferences) {
+        if (city_notification != setValueScope($scope.user.privateInfo.preferences.city_notification)) {
+          origUser.privateInfo.preferences = {
+            "city_notification": $scope.user.privateInfo.preferences.city_notification
+          };
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
+          setDietaryPreferencesToNull(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
         }
       }
+      if ("veggies_notification" in $scope.user.privateInfo.preferences) {
+        if (veggies_notification != setValueScope($scope.user.privateInfo.preferences.veggies_notification)) {
+          origUser.privateInfo.preferences = {
+            "veggies_notification": $scope.user.privateInfo.preferences.veggies_notification
+          };
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
+        }
+      }
+      if ("vegan_notification" in $scope.user.privateInfo.preferences) {
+        if (vegan_notification != setValueScope($scope.user.privateInfo.preferences.vegan_notification)) {
+          origUser.privateInfo.preferences = {
+            "vegan_notification": $scope.user.privateInfo.preferences.vegan_notification
+          };
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
+        }
+      }
+    }
+    if (origUser.privateInfo.keep == false) { //permet de savoir s'il faut garder les privates info à upload ou non
+      delete origUser.privateInfo;
+    }
+    else {
+      delete origUser.privateInfo.keep;
+    }
+    if (angular.equals(origUser, {})) {
       if (actionProhibited == true) {
         return "this action is prohibited";
       }
       else {
-        return origUser;
+        return null;
       }
     }
+    if (actionProhibited == true) {
+      return "this action is prohibited";
+    }
+    else {
+      return origUser;
+    }
+  }
 
-    function addPreferencesToUser() {
-      if ($scope.user.privateInfo.preferences == undefined) {
-        $scope.user.privateInfo.preferences = {};
-      }
+  function addPreferencesToUser() {
+    if ($scope.user.privateInfo.preferences == undefined) {
+      $scope.user.privateInfo.preferences = {};
     }
+  }
 
-    function checkIfCityIsNew(cityToAdd) {
-      if ($scope.user.privateInfo.preferences.city_notification == undefined) {
-        $scope.user.privateInfo.preferences.city_notification = [cityToAdd];
-      }
-      else {
-        if ($scope.user.privateInfo.preferences.city_notification.includes(cityToAdd) == false) {
-          $scope.user.privateInfo.preferences.city_notification.push(cityToAdd);
-        }
+  function checkIfCityIsNew(cityToAdd) {
+    if ($scope.user.privateInfo.preferences.city_notification == undefined) {
+      $scope.user.privateInfo.preferences.city_notification = [cityToAdd];
+    }
+    else {
+      if ($scope.user.privateInfo.preferences.city_notification.includes(cityToAdd) == false) {
+        $scope.user.privateInfo.preferences.city_notification.push(cityToAdd);
       }
     }
-    
-    function setDietaryPreferencesToNull() {
-      if ($scope.user.privateInfo.preferences.city_notification.length == 0) {
-        $scope.user.privateInfo.preferences.veggies_notification = false;
-        $scope.user.privateInfo.preferences.vegan_notification = false;
+  }
+
+  function checkIfSpeakingLanguageIsNew(languageToAdd) {
+    if ($scope.user.speaking_languages == undefined) {
+      $scope.user.speaking_languages = [languageToAdd];
+    }
+    else {
+      if ($scope.user.speaking_languages.includes(languageToAdd) == false) {
+        $scope.user.speaking_languages.push(languageToAdd);
       }
     }
+  }
+
+  function setDietaryPreferencesToNull() {
+    if ($scope.user.privateInfo.preferences.city_notification.length == 0) {
+      $scope.user.privateInfo.preferences.veggies_notification = false;
+      $scope.user.privateInfo.preferences.vegan_notification = false;
+    }
+  }
 
   if ($scope.$parent.user == undefined) {
     $state.go('login');
@@ -180,6 +194,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     var birthdate = setValue($scope.user.birthdate);
     var presentation = setValue($scope.user.presentation);
     var gender = setValue($scope.user.gender);
+    var speaking_languages = setValue($scope.user.speaking_languages);
     var country_of_origin_name = "";
     if ($scope.user.country_of_origin != undefined) {
       country_of_origin_name = setValue($scope.user.country_of_origin.name);
@@ -209,6 +224,19 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       }
     };
 
+    $scope.addSpeakingLanguage = function($event) {
+      if (event.which === 13 && event.type == "keypress" || event.type == "click") {
+        checkIfSpeakingLanguageIsNew(this.userSpeakingLanguage.name);
+      }
+    };
+
+    $scope.removeSpeakingLanguage = function() {
+      var index = $scope.user.speaking_languages.indexOf(this.speaking_language);
+      if (index > -1) {
+        $scope.user.speaking_languages.splice(index, 1);
+      }
+    };
+
     $scope.actualizeUser = function(user_id, _etag) {
       if ($scope.actualized != undefined) {
         delete $scope.actualized;
@@ -232,6 +260,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
             birthdate = setValue($scope.user.birthdate);
             presentation = setValue($scope.user.presentation);
             gender = setValue($scope.user.gender);
+            speaking_languages = setValue($scope.user.speaking_languages);
             if ($scope.user.country_of_origin != undefined) {
               country_of_origin_name = setValue($scope.user.country_of_origin.name);
             }
@@ -260,6 +289,10 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
 
     $http.get("/static/sources/profile/countries.json").then(function(res) {
       $scope.countries = res.data;
+    });
+
+    $http.get("/static/sources/profile/languages.json").then(function(res) {
+      $scope.languages = res.data;
     });
 
     //$scope pour le plugin checkbox messenger

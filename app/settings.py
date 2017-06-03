@@ -267,6 +267,9 @@ schemaUsers = {
             }
         }
     },
+    'speaking_languages':{
+        'type': 'list'
+    },
     'birthdate':{
         'type': 'string'
     },

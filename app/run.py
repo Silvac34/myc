@@ -74,14 +74,14 @@ class User:
     def isSubscribed(self,meal_id=None, meal =None):
         if meal == None:
             meal = Application.app.data.driver.db.meals.find_one({"_id": meal_id})
-        if any (x["_id"] == ObjectId(self._id) for x in meal["privateInfo"]["users"]):
+        if any (x["_id"] == ObjectId(self._id) for x in meal["users"]):
             return True
         else: return False
         
     def isSubscriptionPending(self, meal_id=None, meal =None):
         if meal == None:
             meal = Application.app.data.driver.db.meals.find_one({"_id": meal_id})
-        if any ((x["_id"] == ObjectId(self._id) and x["status"] == "pending")for x in meal["privateInfo"]["users"]):
+        if any ((x["_id"] == ObjectId(self._id) and x["status"] == "pending")for x in meal["users"]):
             return True
         else: 
             return False
@@ -278,7 +278,7 @@ def before_returning_GET_item_meal(response):
 def before_storing_POST_meals (items):
     for meal in items:
         meal["admin"] = g.user_id
-        meal["privateInfo"]["users"]= [{"_id":g.user_id,"role": ["admin"],"status":"accepted"}]
+        meal["users"]= [{"_id":g.user_id,"role": ["admin"],"status":"accepted"}]
         ######### Add Guests #################
         nbCooks = 0
         nbCleaners = 0
@@ -319,7 +319,7 @@ def before_storing_POST_meals (items):
         
 #GET api/meals/private &  GET api/meals/private/<_id>
 def pre_get_privateMeals(request,lookup):
-    lookup.update({"privateInfo.users._id":g.user_id })
+    lookup.update({"users._id":g.user_id })
 
 # GET api/meals/private
 def before_returning_GET_privateMeals(response):
@@ -335,7 +335,7 @@ def before_returning_GET_privateMeals(response):
 def before_returning_GET_item_privateMeals(response):
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-    for user in meal["privateInfo"]["users"]:
+    for user in meal["users"]:
         userToUpdate = User(_id=user["_id"]).getUserPublicInfo()
         userAllInfo = User(_id=user["_id"]).getUserAllInfo()
         if "privateInfo" in userAllInfo:
@@ -351,7 +351,7 @@ def pre_delete_privateMeals(request,lookup):
 def after_delete_privateMeals(item):
     meal = item
     admin = User(_id = meal["admin"]).getUserAllInfo()
-    for user in meal["privateInfo"]["users"]:
+    for user in meal["users"]:
         participant = User(_id=user["_id"]).getUserAllInfo()
         participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
         meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
@@ -430,14 +430,14 @@ def subscribe_to_meal(meal_id):
             local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
             meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if meal["automaticSubscription"] == True: #si acceptation automatique
-                meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"accepted"})
+                meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"accepted"})
                 #code pour envoyer un message à l'hôte que quelqu'un s'est inscrit à son repas
                 if meal["nbRemainingPlaces"] == 0: #si dernière place alors on précise que le meal est full
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". Now, you meal is full."
                 else: 
                     text = "Hi " + admin["first_name"] +", just to inform you that " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + "."
             else: #si acceptation manuelle
-                meal["privateInfo"]["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
+                meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]
                 text = "Hi " + admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate this one."
@@ -471,7 +471,7 @@ def validate_a_subscription(meal_id, participant_id):
         meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
         local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
         meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
-        for participant in meal["privateInfo"]["users"]:
+        for participant in meal["users"]:
             if participant["_id"] == ObjectId(participant_id):
                 role = participant["role"]
                 participantInfo = User(_id = ObjectId(participant_id)).getUserAllInfo()
@@ -480,7 +480,7 @@ def validate_a_subscription(meal_id, participant_id):
                     participant["status"] = "accepted"
                     text = "Hi " + participantInfo["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been approved. To see more details about the meal, click here : " + url_to_send
                 elif validation_result == False:
-                    meal["privateInfo"]["users"].remove(participant)
+                    meal["users"].remove(participant)
                     text = "Hi " + participantInfo["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been denied. Let's try another one!"
                     meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
                     meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
@@ -506,10 +506,10 @@ def unsubscribe_to_meal(meal_id):
         return Response("Meal's admin cannot unsubscribe",status=401)
     else:
         meal["nbRemainingPlaces"] +=  1
-        for u in meal["privateInfo"]["users"]: 
+        for u in meal["users"]: 
             if u["_id"] == user._id:
                 roles = u["role"]
-                meal["privateInfo"]["users"].remove(u)
+                meal["users"].remove(u)
                 participant = User(_id=ObjectId(user._id)).getUserPublicInfo()
                 admin = User(_id = meal["admin"]).getUserAllInfo()
                 admin_user_ref = admin["privateInfo"]["user_ref"]

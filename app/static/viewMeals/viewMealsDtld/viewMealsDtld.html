@@ -26,9 +26,9 @@
                 <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.requestRole.message}}</div>
             </div>
             <div class="meal-dtld-helpers-label meal-dtld-col">
-                <span class="meal-dtld-helpers-position" uib-popover="participants" popover-trigger="mouseenter" popover-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
-                <span class="meal-dtld-helpers-position glyphicon glyphicon-piggy-bank" uib-popover="price" popover-trigger="mouseenter" popover-placement="top" style="font-size:18px"></span>
-                <span class="meal-dtld-helpers-position glyphicon glyphicon-time" uib-popover="arrival time" popover-trigger="mouseenter" popover-placement="top" style="font-size:18px"></span>
+                <span class="meal-dtld-helpers-position" uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
+                <span class="meal-dtld-helpers-position glyphicon glyphicon-piggy-bank" uib-tooltip="price" tooltip-trigger="mouseenter" tooltip-placement="top" style="font-size:18px"></span>
+                <span class="meal-dtld-helpers-position glyphicon glyphicon-time" uib-tooltip="arrival time" tooltip-trigger="mouseenter" tooltip-placement="top" style="font-size:18px"></span>
             </div>
             <uib-accordion close-others="accordionOneAtATime">
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
@@ -85,8 +85,8 @@
             <div ng-if="errorSubscribe.cellphone.status">
                 <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.cellphone.message}}</div>
             </div>
-            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="Cellphone" uib-popover="Private information: displayed only between participants and host"
-                popover-trigger="mouseenter" popover-placement="top" ng-model="user.privateInfo.cellphone">
+            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="Cellphone" uib-tooltip="Private information: displayed only between participants and host"
+                tooltip-trigger="mouseenter" tooltip-placement="top" ng-model="user.privateInfo.cellphone">
             <div class="clear20"></div>
         </div>
         <div class="row col-xs-12">

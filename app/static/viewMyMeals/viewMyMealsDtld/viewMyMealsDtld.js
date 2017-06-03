@@ -9,12 +9,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     function check_loading() {
         $scope.pendingRequest = false;
         if ("privateInfo" in $scope.meal) {
-            if ("users" in $scope.meal.privateInfo) {
-                for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-                    if ($scope.meal.privateInfo.users[i]._id == $scope.user._id) {
-                        $scope.userRole = $scope.meal.privateInfo.users[i].role[0];
+            if ("users" in $scope.meal) {
+                for (var i = 0; i < $scope.meal.users.length; i++) {
+                    if ($scope.meal.users[i]._id == $scope.user._id) {
+                        $scope.userRole = $scope.meal.users[i].role[0];
                     }
-                    if ($scope.meal.privateInfo.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
+                    if ($scope.meal.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
                         $scope.pendingRequest = true;
                     }
                 }
@@ -91,9 +91,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             'validation_result': true
         }).then(function() {
             $scope.pendingRequest = false;
-            for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-                if ($scope.meal.privateInfo.users[i]._id == participant_id) {
-                    $scope.meal.privateInfo.users[i].status = "accepted";
+            for (var i = 0; i < $scope.meal.users.length; i++) {
+                if ($scope.meal.users[i]._id == participant_id) {
+                    $scope.meal.users[i].status = "accepted";
                 }
             }
         });
@@ -104,9 +104,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             'validation_result': false
         }).then(function() {
             $scope.pendingRequest = false;
-            for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-                if ($scope.meal.privateInfo.users[i]._id == participant_id) {
-                    delete $scope.meal.privateInfo.users[i];
+            for (var i = 0; i < $scope.meal.users.length; i++) {
+                if ($scope.meal.users[i]._id == participant_id) {
+                    delete $scope.meal.users[i];
                 }
             }
         });
@@ -275,9 +275,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             $scope.dataForReview[index].forUser[type] = value;
             if (type == "comment") {
                 if ($scope.dataForReview[index].forUser.rating == undefined) {
-                    for (var i = 0; i < $scope.meal.privateInfo.users.length; i++) {
-                        if ($scope.meal.privateInfo.users[i]._id == participantId) {
-                            console.log("you need to grade " + $scope.meal.privateInfo.users[i].first_name);
+                    for (var i = 0; i < $scope.meal.users.length; i++) {
+                        if ($scope.meal.users[i]._id == participantId) {
+                            console.log("you need to grade " + $scope.meal.users[i].first_name);
                         }
                     }
                 }

@@ -26,15 +26,15 @@
             "name": "30 avenue de Trudaine",
             "lat": 48.88092409999999,
             "lng": 2.34052829999996
-        },
-        "users": [{
-            "_id": {
-                "$oid": "111111111111111111111111"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }]
+        }
     },
+    "users": [{
+        "_id": {
+            "$oid": "111111111111111111111111"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -87,21 +87,21 @@
             "name": "3 Impasse Marie Blanche",
             "lat": 48.8856138,
             "lng": 2.3328533999999763
-        },
-        "users": [{
-            "_id": {
-                "$oid": "111111111111111111111111"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }, {
-            "_id": {
-                "$oid": "111111111111111111111112"
-            },
-            "role": ["simpleGuest"],
-            "status": "accepted"
-        }]
+        }
     },
+    "users": [{
+        "_id": {
+            "$oid": "111111111111111111111111"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }, {
+        "_id": {
+            "$oid": "111111111111111111111112"
+        },
+        "role": ["simpleGuest"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -141,13 +141,6 @@
         "country_code": "FR"
     },
     "privateInfo": {
-        "users": [{
-            "_id": {
-                "$oid": "111111111111111111111111"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }],
         "address": {
             "name": "37 rue du général foy",
             "lat": 48.88092409999999,
@@ -155,6 +148,13 @@
         }
 
     },
+    "users": [{
+        "_id": {
+            "$oid": "111111111111111111111111"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -200,15 +200,15 @@
             "name": "37 Rue Lepic",
             "lat": 48.886308,
             "lng": 2.33376039999996
-        },
-        "users": [{
-            "_id": {
-                "$oid": "577946eb4403f92b93425e6a"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }]
+        }
     },
+    "users": [{
+        "_id": {
+            "$oid": "577946eb4403f92b93425e6a"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -258,15 +258,15 @@
             "name": "3 Impasse Marie Blanche",
             "lat": 48.8856138,
             "lng": 2.3328533999999763
-        },
-        "users": [{
-            "_id": {
-                "$oid": "5776d0824403f974b97caf89"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }]
+        }
     },
+    "users": [{
+        "_id": {
+            "$oid": "5776d0824403f974b97caf89"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -317,15 +317,15 @@
             "name": "4 rue du temple",
             "lat": 48.8576169,
             "lng": 2.3527622000000292
-        },
-        "users": [{
-            "_id": {
-                "$oid": "5776d0824403f974b97caf89"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }]
+        }
     },
+    "users": [{
+        "_id": {
+            "$oid": "5776d0824403f974b97caf89"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -384,15 +384,15 @@
             "name": "30 avenue de Trudaine",
             "lat": 48.88092409999999,
             "lng": 2.34052829999996
-        },
-        "users": [{
-            "_id": {
-                "$oid": "5776d0824403f974b97caf89"
-            },
-            "role": ["admin"],
-            "status": "accepted"
-        }]
+        }
     },
+    "users": [{
+        "_id": {
+            "$oid": "5776d0824403f974b97caf89"
+        },
+        "role": ["admin"],
+        "status": "accepted"
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "hosts": {
@@ -441,25 +441,25 @@
             "name": "144 Holmes Rd",
             "lat": -37.765111,
             "lng": 144.90709700000002
-        },
-        "users": [{
-            "status": "accepted",
-            "_id": {
-                "$oid": "111111111111111111111111"
-            },
-            "role": [
-                "admin"
-            ]
-        }, {
-            "status": "pending",
-            "_id": {
-                "$oid": "111111111111111111111112"
-            },
-            "role": [
-                "simpleGuest"
-            ]
-        }]
+        }
     },
+    "users": [{
+        "status": "accepted",
+        "_id": {
+            "$oid": "111111111111111111111111"
+        },
+        "role": [
+            "admin"
+        ]
+    }, {
+        "status": "pending",
+        "_id": {
+            "$oid": "111111111111111111111112"
+        },
+        "role": [
+            "simpleGuest"
+        ]
+    }],
     "detailedInfo": {
         "requiredGuests": {
             "cleaners": {

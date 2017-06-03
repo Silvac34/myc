@@ -127,26 +127,26 @@ schemaMeals = {
                         'type':'string'
                     }
                 }
-            },
-            'users':{
-                'type':'list',
-                'schema': {
-                    'type':'dict',
-                    'schema':{
-                        '_id':{ #mettre data relation
-                        'type':'objectid',
-                        'required':True
-                        },
-                        'role': {
-                            'type': 'list',
-                        'allowed': ["admin", "cook", "cleaner","simpleGuest"]
-                       },
-                       'status': {
-                           'type': 'string',
-                           'allowed': ["accepted", "refused", "pending"]
-                       }
-                    }
-                }
+            }
+        }
+    },
+    'users':{
+        'type':'list',
+        'schema': {
+            'type':'dict',
+            'schema':{
+                '_id':{ #mettre data relation
+                    'type':'objectid',
+                    'required':True
+                    },
+                'role': {
+                    'type': 'list',
+                    'allowed': ["admin", "cook", "cleaner","simpleGuest"]
+                   },
+               'status': {
+                   'type': 'string',
+                   'allowed': ["accepted", "refused", "pending"]
+               }
             }
         }
     },

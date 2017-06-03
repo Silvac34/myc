@@ -11,9 +11,9 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
       $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
         for (var j = 0; j < $scope.meals.length; j++) {
-          for (var i = 0; i < $scope.meals[j].privateInfo.users.length; i++) {
-            if ($scope.meals[j].privateInfo.users[i]._id == userId) {
-              var userRole = $scope.meals[j].privateInfo.users[i].role[0];
+          for (var i = 0; i < $scope.meals[j].users.length; i++) {
+            if ($scope.meals[j].users[i]._id == userId) {
+              var userRole = $scope.meals[j].users[i].role[0];
               if (userRole == "simpleGuests") {
                 $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
               }

@@ -1142,10 +1142,15 @@ h2.slogan {
     .pull-left-xs {
         float: left !important;
     }
+
 }
 
 @media (min-width: 768px) {
     .pull-right-sm-md-lg {
         float: right !important;
+    }
+    
+    .inline-block-sm-md-lg{
+        display: inline-block;
     }
 }

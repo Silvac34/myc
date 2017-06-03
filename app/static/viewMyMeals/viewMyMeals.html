@@ -74,7 +74,7 @@
               <div class="hidden-xs col-sm-2 meal-admin-container">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                 <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
-                <div class="well well-sm well-resume-rating" style="border:initial">
+                <div class="well well-sm well-resume-rating" style="border:initial" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
                   <table style="text-align:center">
                     <tbody>
                       <tr>
@@ -82,7 +82,7 @@
                         <td ng-if="meal.admin.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
                         <td ng-if="meal.admin.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
                       </tr>
-                      <tr style="font-size:11px" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
+                      <tr style="font-size:11px">
                         <td ng-if="meal.admin.reviews.positive" style="padding-right:4px">{{meal.admin.reviews.positive}}</td>
                         <td ng-if="meal.admin.reviews.neutral" style="padding:0px 4px">{{meal.admin.reviews.neutral}}</td>
                         <td ng-if="meal.admin.reviews.negative" style="padding-left:4px">{{meal.admin.reviews.negative}}</td>

@@ -33,6 +33,7 @@
     pointer-events: none;
 }
 
+
 /* align icon */
 
 .left-addon .glyphicon {
@@ -1142,8 +1143,16 @@ h2.slogan {
     .small-visible-xs {
         font-size: 13px;
     }
-    
     .pull-right-xs {
+        float: right !important;
+    }
+    .pull-left-xs {
+        float: left !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .pull-right-sm-md-lg {
         float: right !important;
     }
 }

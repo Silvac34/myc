@@ -6,20 +6,20 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
 
   $scope.meal = meal;
 
-  $scope.meal.users.forEach(function(element){
-    getSpecificUserFactory(element._id).then(function successCallBack(response){
+  $scope.meal.users.forEach(function(element) {
+    getSpecificUserFactory(element._id).then(function successCallBack(response) {
       element["first_name"] = response.first_name;
       element["last_name"] = response.last_name;
       element["gender"] = response.gender;
       element["picture"] = response.picture;
-      if("birthdate" in response){
-        element["birthdate"] = response.birthdate;  
+      if ("birthdate" in response) {
+        element["birthdate"] = response.birthdate;
       }
-      if("country_of_origin" in response){
-        element["country_of_origin"] = response.country_of_origin;  
+      if ("country_of_origin" in response) {
+        element["country_of_origin"] = response.country_of_origin;
       }
-      if("reviews" in response){
-        element["reviews"] = response.reviews;  
+      if ("reviews" in response) {
+        element["reviews"] = response.reviews;
       }
     });
   });

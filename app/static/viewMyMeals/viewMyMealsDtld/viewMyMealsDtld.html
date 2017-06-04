@@ -17,7 +17,7 @@
                     <div class="row" ng-repeat="participant in meal.users">
                         <div ng-if="participant.status == 'pending'" class="my-meal-dtld-list-pending-user">
                             <div>
-                                <strong>Requested role:</strong> <span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span>
+                                <strong>Requested role:</strong> <span style="margin-right:10px"><span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span></span>
                                 <span class="hidden-sm hidden-md hidden-lg"></br></span>
                                 <span class="pull-right-sm-md-lg pull-left-xs" style="padding-top:4px">
                                     <a class="btn btn-success btn-xs" ng-click="validateSubscription(participant._id)">Accept</a>
@@ -53,7 +53,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <a ui-sref="profile({userId: participant._id})"><em><u>see reviews</u></em></a>
+                                        <a ui-sref="profile({userId: participant._id})#{{profileReviews}}"><em><u>see reviews</u></em></a>
                                     </div>
                                     </div>
                                     <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:15px 10px 10px 0px;" ng-if="participant.presentation">
@@ -72,7 +72,7 @@
     <div class="row">
         <div class="col-xs-12 text-center meal-dtld-menu text-info">
             <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Delete</button>
-            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole!='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Unsubscribe</button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalUnsubscribe()" ng-if="userRole!='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Unsubscribe</button>
             <strong style="font-size:large">{{meal.menu.title}}</strong>
         </div>
     </div>

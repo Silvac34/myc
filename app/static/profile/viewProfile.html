@@ -181,7 +181,7 @@
                         </uib-tab>
                         <uib-tab index="2">
                             <uib-tab-heading>
-                                <span class="small-visible-xs">Reviews</span>
+                                <span id="profileReviews" class="small-visible-xs">Reviews</span>
                             </uib-tab-heading>
                             <div class="clear20"></div>
                             <div class="col-xs-12">
@@ -280,7 +280,7 @@
         </div>
         <div ng-if="reviews.length == 0">
             <h4><em>Reviews</em></h4>
-            <div>{{user.first_name}} does not have any reviews yet</div>
+            <div>{{user.first_name}} does not have any reviews yet.</div>
         </div>
     </div>
 </div>

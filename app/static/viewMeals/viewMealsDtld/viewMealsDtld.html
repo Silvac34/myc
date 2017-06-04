@@ -105,50 +105,24 @@
         <div class="clear10"></div>
 
         <div class="row meal-dtld-group">
-            <div class="meal-label meal-dtld-group-label">Participants:</div>
             <div ng-repeat="participant in meal.users">
+                <div class="meal-label meal-dtld-group-label" ng-if="participant.status == 'accepted'"><span ng-if="participant.role[0] == 'admin'">Your host</span><span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span>:</div>
                 <div class="my-meal-dtld-list-pending-user" ng-if="participant.status == 'accepted'">
                     <div>
-                        <span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span>
-                    </div>
-                    <div class="clear10"></div>
-                    <div style="position:relative">
-                        <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" />
+                        <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" />
                         <div style="position:relative; left:10px;">
                             <div>
-                                <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
+                                <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
                             </div>
-                            <div style="padding-top:4px">
-                                <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(participant.gender)}}</br></span>
-                                <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} years old</br></span>
-                                <span ng-if="participant.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{participant.country_of_origin.name}}</br></span>
-                            </div>
-                            <span class="hidden-sm hidden-md hidden-lg" ng-if="!participant.reviews"></br></span>
-                            <div>
-                                <div class="well well-sm well-resume-rating" ng-if="participant.reviews">
-                                    <table style="text-align:center">
-                                        <tbody>
-                                            <tr>
-                                                <td ng-if="participant.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
-                                                <td ng-if="participant.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
-                                                <td ng-if="participant.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
-                                            </tr>
-                                            <tr style="font-size:11px">
-                                                <td ng-if="participant.reviews.positive" style="padding-right:4px">{{participant.reviews.positive}}</td>
-                                                <td ng-if="participant.reviews.neutral" style="padding:0px 4px">{{participant.reviews.neutral}}</td>
-                                                <td ng-if="participant.reviews.negative" style="padding-left:4px">{{participant.reviews.negative}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <a ui-sref="profile({userId: participant._id})"><em><u>see reviews</u></em></a>
-                                </div>
-                            </div>
-                            <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:15px 10px 10px 0px;" ng-if="participant.presentation">
-                                "<em>{{participant.presentation}}</em>"
+                            <div class="small" style="padding-top:4px">
+                                <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{capitalizeFirstLetter(participant.gender)}}</br></span>
+                                <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake"></i> {{participant.birthdate | ageFilter}} years old</br></span>
+                                <span ng-if="participant.country_of_origin"><i class="fa fa-globe"></i> From {{participant.country_of_origin.name}}</br></span>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="clear10"></div>
             </div>
 
             <!--<div style="position:relative" ng-repeat="participant in meal.users">

@@ -8,15 +8,13 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     function check_loading() {
         $scope.pendingRequest = false;
-        if ("privateInfo" in $scope.meal) {
-            if ("users" in $scope.meal) {
-                for (var i = 0; i < $scope.meal.users.length; i++) {
-                    if ($scope.meal.users[i]._id == $scope.user._id) {
-                        $scope.userRole = $scope.meal.users[i].role[0];
-                    }
-                    if ($scope.meal.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
-                        $scope.pendingRequest = true;
-                    }
+        if ("users" in $scope.meal) {
+            for (var i = 0; i < $scope.meal.users.length; i++) {
+                if ($scope.meal.users[i]._id == $scope.user._id) {
+                    $scope.userRole = $scope.meal.users[i].role[0];
+                }
+                if ($scope.meal.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
+                    $scope.pendingRequest = true;
                 }
             }
         }
@@ -70,7 +68,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 animation: true,
                 templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalUnsubscribeMyMealDtld.html',
                 controller: 'modalUnsubscribeInstanceCtrl',
-                size: "sm"
+                size: "sm",
+                resolve: {
+                    meal: function() {
+                        return $scope.meal;
+                    }
+                }
             });
         }
     };
@@ -295,7 +298,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     };
 
     $scope.capitalizeFirstLetter = function(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+        return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
 }]);
@@ -406,16 +409,12 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 
 });
 
-modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state) {
-
-    $scope.unsubscribeMyMeal = function(meal_id) {
-        $http.post('/api/meals/' + meal_id + '/unsubscription').then(function(response) {
-            //rajouter en fonction de la réponse un popup ?
-        });
-    };
+modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
 
     $scope.unsubscribe = function() {
-        $scope.unsubscribeMyMeal($scope.meal._id);
+        $http.post('/api/meals/' + meal._id + '/unsubscription').then(function(response) {
+            //rajouter en fonction de la réponse un popup ?
+        });
         $uibModalInstance.close();
         $state.go('view_meals', {
             reload: true,

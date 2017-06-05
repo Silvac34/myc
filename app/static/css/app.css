@@ -111,6 +111,14 @@
     height: 120px;
 }
 
+.padding-top-10{
+    padding-top:10px;
+}
+
+.padding-top-30{
+    padding-top:30px;
+}
+
 @media (min-width: 768px) {
     .page-separation-title {
         padding: 9px 0 9px 7px;
@@ -471,8 +479,25 @@ footer p {
     margin-bottom: -5px;
 }
 
-.meal-admin-container {
-    top: 12px;
+@media (max-width: 460px) {
+    .meal-admin-container {
+        width: 55px;
+        display: table-cell;
+        vertical-align: bottom;
+        padding-left:0px;
+        padding-right:0px;
+        right:5px;
+    }
+}
+
+@media (min-width: 461px) and (max-width: 767px) {
+    .meal-admin-container {
+        width: 70px;
+        display: table-cell;
+        vertical-align: bottom;
+        padding-left:0px;
+        padding-right:0px;
+    }
 }
 
 .meal-admin-dtld-sm {

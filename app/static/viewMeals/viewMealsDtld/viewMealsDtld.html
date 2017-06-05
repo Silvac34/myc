@@ -42,10 +42,9 @@
                                 <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="size-12">You have to arrive at <span class="size-12-time"><strong>{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</strong> in order to help the host to prepare the meal.</span>
-                            <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>).
-                                You will be informed before the dinner of the final price.</div>
-                        </div>
+                        <div class="size-12">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</strong> in order to help the host to prepare the meal.</div>
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
+                            will be informed before the dinner of the final price.</div>
                     </div>
                 </div>
                 <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
@@ -57,10 +56,10 @@
                                 <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners}}</span>
                                 <span class="meal-dtld-helpers-position text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cleaners.price}}</span>
                                 <span class="meal-dtld-helpers-position"><span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning | date:'HH:mm'}}</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">{{meal.time | date:'HH:mm'}}</span></span>
-                                
+
                             </div>
                         </uib-accordion-heading>
-                        <div class="size-12">You have to arrive at <span class="size-12-time"><strong>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning | date : 'HH:mm'}}</strong> in order to help for ordering and cleaning what was used for the meal.</span>
+                        <div class="size-12"><span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning | date : 'HH:mm'}}</strong> in order to help for</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You will help</span>                            ordering and cleaning what was used for the meal.</div>
                         <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
                             will be informed before the dinner of the final price.</div>
                     </div>
@@ -76,7 +75,7 @@
                                 <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>
-                        <div class="size-12">I help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>
+                        <div class="size-12">You help by paying a little bit more : this money will be redistribuated between those who helped to organize the event</div>
                     </div>
                 </div>
             </uib-accordion>

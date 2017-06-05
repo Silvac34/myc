@@ -38,23 +38,23 @@
                                     </div>
                                     <span class="hidden-sm hidden-md hidden-lg" ng-if="!participant.reviews"></br></span>
                                     <div>
-                                    <div class="well well-sm well-resume-rating" ng-if="participant.reviews.positive || participant.reviews.neutral || participant.reviews.negative">
-                                        <table style="text-align:center">
-                                            <tbody>
-                                                <tr>
-                                                    <td ng-if="participant.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
-                                                    <td ng-if="participant.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
-                                                    <td ng-if="participant.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
-                                                </tr>
-                                                <tr style="font-size:11px">
-                                                    <td ng-if="participant.reviews.positive" style="padding-right:4px">{{participant.reviews.positive}}</td>
-                                                    <td ng-if="participant.reviews.neutral" style="padding:0px 4px">{{participant.reviews.neutral}}</td>
-                                                    <td ng-if="participant.reviews.negative" style="padding-left:4px">{{participant.reviews.negative}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <a ui-sref="profile({userId: participant._id})"><em><u>see reviews</u></em></a>
-                                    </div>
+                                        <div class="well well-sm well-resume-rating" ng-if="participant.reviews.positive || participant.reviews.neutral || participant.reviews.negative">
+                                            <table style="text-align:center">
+                                                <tbody>
+                                                    <tr>
+                                                        <td ng-if="participant.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                                        <td ng-if="participant.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                                        <td ng-if="participant.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                                    </tr>
+                                                    <tr style="font-size:11px">
+                                                        <td ng-if="participant.reviews.positive" style="padding-right:4px">{{participant.reviews.positive}}</td>
+                                                        <td ng-if="participant.reviews.neutral" style="padding:0px 4px">{{participant.reviews.neutral}}</td>
+                                                        <td ng-if="participant.reviews.negative" style="padding-left:4px">{{participant.reviews.negative}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a ui-sref="profile({userId: participant._id})"><em><u>see reviews</u></em></a>
+                                        </div>
                                     </div>
                                     <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:15px 10px 10px 0px;" ng-if="participant.presentation">
                                         "<em>{{participant.presentation}}</em>"
@@ -115,10 +115,14 @@
                         <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                     </div>
                     <div class="meal-info-label">
-                        <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span>
-                        <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking "><span class="glyphicon glyphicon-time meal-clock-display"></span>&nbsp;<span ng-if="userRole=='admin'">Helping cooks: </span>{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}<span ng-if="userRole=='admin'"></br></span></span>
-                        <span ng-show="(userRole=='cleaner' || userRole=='admin') && meal.detailedInfo.requiredGuests.cleaners.timeCleaning"><span class="glyphicon glyphicon-time meal-clock-display"></span>&nbsp;<span ng-if="userRole=='admin'">Helping cleaners: </span>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}<span ng-if="userRole=='admin'"></br></span></span>
-                        <span ng-show="userRole=='simpleGuest' || (userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests) || ((userRole=='admin' ||userRole=='cleaner') && !meal.detailedInfo.requiredGuests.cleaners.timeCleaning) || ((userRole=='admin' || userRole=='cook') && !meal.detailedInfo.requiredGuests.cooks.timeCooking)"><span class="glyphicon glyphicon-time meal-clock-display"></span>
+                        <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}}
+                    </div>
+                    <div class="meal-info-label">
+                        <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking "><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'">Helping cooks: </span>{{meal.detailedInfo.requiredGuests.cooks.timeCooking
+                        |date:'HH:mm'}}<span ng-if="userRole=='admin'"></br></span></span>
+                        <span ng-show="(userRole=='cleaner' || userRole=='admin') && meal.detailedInfo.requiredGuests.cleaners.timeCleaning"><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'">Helping cleaners: </span>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning
+                        |date:'HH:mm'}}<span ng-if="userRole=='admin'"></br></span></span>
+                        <span ng-show="userRole=='simpleGuest' || (userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests) || ((userRole=='admin' ||userRole=='cleaner') && !meal.detailedInfo.requiredGuests.cleaners.timeCleaning) || ((userRole=='admin' || userRole=='cook') && !meal.detailedInfo.requiredGuests.cooks.timeCooking)"><span class="glyphicon glyphicon-time"></span>
                         <span ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests">Simple guests: </span>{{meal.time |date:'HH:mm'}}</span>
                     </div>
                     <div class="meal-info-label">

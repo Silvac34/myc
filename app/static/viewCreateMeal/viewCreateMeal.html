@@ -1,6 +1,6 @@
 <!-- form.html -->
 <div class="container-fluid">
-    <h1 class="general-title text-center">- Create a new meal -</h1>
+    <h1 class="general-title">- Create a new meal -</h1>
     <form class="form-horizontal" name="createMealForm">
         <fieldset id="fieldset-form">
             <div class="row">
@@ -16,7 +16,8 @@
                         <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model="editedMeal.menu.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <div class="checkbox">
+                        <span style="margin-right:10px"><em>Special meal? <span class="small">(don't check if not)</span></em></span>
+                        <div class="checkbox" style="margin-bottom:5px; display:inline-block">
                             <label style="margin-right:5px">
                             <input type="checkbox" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian meal
                         </label>
@@ -59,9 +60,9 @@
                     </thead>
                     <tbody>
                         <tr class="table-meal-border">
-                                <td>Host</td>
+                                <td>Host (you)</td>
                                 <td class="text-center">1</td>
-                                <td class="text-center">{{editedMeal.time | date:'HH:mm'}}</td>
+                                <td class="text-center"></td>
                         </tr>
                         <tr class="table-meal-border">
                                 <td style="vertical-align:middle"><span uib-tooltip="People will help you for cooking" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cooking</span></td>
@@ -74,7 +75,7 @@
                                 <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
                             </tr>
                             <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
+                                <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you and your helpers a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
                                 <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                                 <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
                             </tr>
@@ -86,6 +87,16 @@
                             </tr>
                             </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted}">
+                            <span class="input-group-addon meal-addon-groceries">{{currency_symbol}}</span>
+                            <input type="number" class="form-control" style="width:180px" ng-model="editedMeal.price" placeholder="Price of the groceries" min="0" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -106,16 +117,6 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control" style="font-size:80%" id="inputAddressComplement" placeholder="Additional information (flat number, floor, ...)" ng-model="editedMeal.privateInfo.address.complement">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && createMealForm.$submitted}">
-                            <span class="input-group-addon meal-addon-groceries">{{currency_symbol}}</span>
-                            <input type="number" class="form-control" style="width:180px" ng-model="editedMeal.price" placeholder="Price of the groceries" min="0" />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -150,7 +151,7 @@
                         <div class="form-group">
                             <div class="radio">
                                 <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="true">Yes, sure !</label>
-                                <label class="radio-inline"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="false">No, thanks <span class="small">(You approve each booking request yourself.)</span></label>
+                                <label class="radio-inline"><input type="radio" ng-model="editedMeal.automaticSubscription" ng-value="false">No, thanks. <span class="small">(You approve each booking request yourself)</span></label>
                             </div>
                         </div>
                     </div>
@@ -158,7 +159,7 @@
             </div>
             <div class="clear10"></div>
             <div class="row">
-                <div>Do you want to receive updates about the meal on messenger? <span class="small">(recommended)</span></div>
+                <div>Do you want to receive updates about the meal on messenger? <span class="small">(highly recommended)</span></div>
                 <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
             </div>
             <div class="clear20"></div>

@@ -75,14 +75,14 @@
               <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">Create a meal</a></li>
               <li><a ui-sref="view_meals" ui-sref-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">Browse a meal</a></li>
               <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My meals</a></li>
+              <li><a ui-sref="profile({userId:user._id})" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown">
                 <a uib-dropdown-toggle class="dropdown-toggle">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu">
-                  <li><a ui-sref="profile({userId:user._id})" ng-click="$parent.navbarCollapsed = true">My profile</a></li>
-                  <li class="divider"></li>
+                  <!--<li class="divider"></li>-->
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>

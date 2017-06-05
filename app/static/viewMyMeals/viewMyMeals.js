@@ -14,13 +14,13 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
           for (var i = 0; i < $scope.meals[j].users.length; i++) {
             if ($scope.meals[j].users[i]._id == userId) {
               var userRole = $scope.meals[j].users[i].role[0];
-              if (userRole == "simpleGuests") {
+              if (userRole == "simpleGuest") {
                 $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //enfin, s'il n'y a pas d'aide, c'est le prix invité
               }
-              if (userRole == "cooks") {
+              if (userRole == "cook") {
                 $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; //sinon c'est soit le prix d'aide cuisine
               }
-              if (userRole == "cleaners") {
+              if (userRole == "cleaner") {
                 $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; //ou le prix aide vaisselle
               }
               if (userRole == "admin") {
@@ -44,7 +44,9 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     }
   }
 
+  var hoursToAdd = 7;
   var now = new Date();
+  now.setHours(now.getHours() - hoursToAdd); // on rajoute 7h pour que les meals passe de incoming a previous
 
   $scope.futurMealsFilter = function(meal) {
     return (Date.parse(meal.time) >= now.getTime());

@@ -132,7 +132,12 @@
           </div>
         </div>
       </div>
-      <div ng-hide="myFuturMealsFilter.length" class="text-center text-info">You do not have meals to come</div>
+      <div ng-hide="myFuturMealsFilter.length" class="text-center" style="font-size:medium;">
+        <div class="text-info">You do not have incoming meals but you can</div>
+        <div class="clear20"></div>
+        <a ui-sref="create_meal" class="btn btn-primary">Create a meal</a><span class="hidden-sm hidden-md hidden-lg"></br></span> or <span class="hidden-sm hidden-md hidden-lg"></br></span><a ui-sref="view_meals" class="btn btn-primary">Browse a meal</a>
+      </div>
+    </div>
     </div>
   </uib-tab>
   <uib-tab index="1" heading="Previous meals" class="my-meal-uitab">
@@ -204,7 +209,7 @@
           </div>
         </div>
       </div>
-      <div ng-hide="myPastMealsFilter.length" class="text-center text-info">You didn't participate yet</div>
+      <div ng-hide="myPastMealsFilter.length" class="text-center text-info">You didn't participate yet.</div>
     </div>
   </uib-tab>
 </uib-tabset>

@@ -179,6 +179,8 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
     $scope.isOldMeal = function() {
         var now = new Date;
+        var hoursToAdd = 7;
+        now.setHours(now.getHours() - hoursToAdd);
         var mealTime = new Date($scope.meal.time);
         return now >= mealTime;
     };

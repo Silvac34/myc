@@ -179,6 +179,9 @@ schemaMeals = {
                                 'type':'number',
                                 'min':0
                             },
+                            'timeCleaning':{
+                                'type':'string'
+                            },  
                             'price':{
                                 'type':'number',
                                 'min':0,

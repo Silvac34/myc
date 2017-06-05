@@ -239,7 +239,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.autocomplete;
 
   $scope.checkTimeCooking = function() {
-    if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
@@ -276,10 +275,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       else {
         return false;
       }
-    }
-    else {
-      return false;
-    }
   };
 
   $scope.currency_symbol = "$";

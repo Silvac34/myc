@@ -115,8 +115,11 @@
                         <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                     </div>
                     <div class="meal-info-label">
-                        <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking">{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}</span>
-                        <span ng-hide="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking">{{meal.time |date:'HH:mm'}}</span>
+                        <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span>
+                        <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking "><span class="glyphicon glyphicon-time meal-clock-display"></span>&nbsp;<span ng-if="userRole=='admin'">Helping cooks: </span>{{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}<span ng-if="userRole=='admin'"></br></span></span>
+                        <span ng-show="(userRole=='cleaner' || userRole=='admin') && meal.detailedInfo.requiredGuests.cleaners.timeCleaning"><span class="glyphicon glyphicon-time meal-clock-display"></span>&nbsp;<span ng-if="userRole=='admin'">Helping cleaners: </span>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}<span ng-if="userRole=='admin'"></br></span></span>
+                        <span ng-show="userRole=='simpleGuest' || (userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests) || ((userRole=='admin' ||userRole=='cleaner') && !meal.detailedInfo.requiredGuests.cleaners.timeCleaning) || ((userRole=='admin' || userRole=='cook') && !meal.detailedInfo.requiredGuests.cooks.timeCooking)"><span class="glyphicon glyphicon-time meal-clock-display"></span>
+                        <span ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests">Simple guests: </span>{{meal.time |date:'HH:mm'}}</span>
                     </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-map-marker"></span> <span>{{meal.privateInfo.address.name}}</span><span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span>
@@ -243,7 +246,7 @@
                 </div>
                 <div class="col-xs-4" ng-if="isOldMeal() != true">
                     <div class="row">
-                        <span class="glyphicon glyphicon-time"></span> {{meal.time |date:'HH:mm'}}
+                        <span class="glyphicon glyphicon-time"></span> <span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">{{meal.time |date:'HH:mm'}}</span>
                     </div>
                     <div class="row">
                         Remaining places: {{meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}

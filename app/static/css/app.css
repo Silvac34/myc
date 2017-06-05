@@ -119,6 +119,14 @@
     padding-top:30px;
 }
 
+.top-10{
+    top:10px;
+}
+
+.top-30{
+    top:30px;
+}
+
 @media (min-width: 768px) {
     .page-separation-title {
         padding: 9px 0 9px 7px;

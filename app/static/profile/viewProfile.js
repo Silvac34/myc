@@ -294,6 +294,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     $http.get("/static/sources/profile/languages.json").then(function(res) {
       $scope.languages = res.data;
     });
+    
+    /*$http.get('api/meals?where={"'+ $scope.user._id +'": {"$in": users}}').then(function(res) {
+      console.log(res);
+      $scope.meals = res.data;
+    });*/
 
     //$scope pour le plugin checkbox messenger
     $scope.origin = ENV.fbRedirectURI + "#/profile/" + userInfo.data._id;

@@ -16,7 +16,8 @@
                         <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model="editedMeal.menu.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <span style="margin-right:10px"><em>Special meal? <span class="small">(don't check if not)</span></em></span>
+                        <span style="margin-right:10px"><em>Special meal? <span class="small">(don't check if not)</span></em>
+                        </span>
                         <div class="checkbox" style="margin-bottom:5px; display:inline-block">
                             <label style="margin-right:5px">
                             <input type="checkbox" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian meal
@@ -29,7 +30,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8 col-xs-12">
+                <div class="col-sm-8 col-xs-12" style="max-width:230px">
                     <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-calendar"></i>
@@ -38,9 +39,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-10">
+                <div class="col-sm-4 col-xs-10" style="max-width:100px">
                     <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && createMealForm.Time.$submitted}" style="padding-right:5px;">
-                        <div class="inner-addon left-addon margin-left-5px-sm-md-lg">
+                        <div class="inner-addon left-addon margin-left-15px-sm-md-lg">
                             <i class="glyphicon glyphicon glyphicon-time"></i>
                             <input type="text" name="formTime" class="form-control" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="'outsideClick'" popover-placement="bottom-left" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}"
                                 required>
@@ -49,13 +50,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12" style="margin-right:inherit;margin-left:inherit;padding-right:0px">
-                    <table class="table table-hover" style="line-height:inherit;">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                                <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="Arrival time" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
+                <table class="table table-hover" style="line-height:inherit;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                            <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="Arrival time" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,28 +66,27 @@
                         </tr>
                         <tr class="table-meal-border">
                                 <td style="vertical-align:middle"><span uib-tooltip="People will help you for cooking" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cooking</span></td>
-                                    <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                                    <td class="text-center" ng-class="{'has-error': checkTimeCooking() && createMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
-                            </tr>
-                            <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-tooltip="People will help you for cleaning" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cleaning</span></td>
-                                <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
-                                <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
-                            </tr>
-                            <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you and your helpers a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
-                                <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
-                                <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
-                            </tr>
-                            <tr class="table-meal-border table-meal-border-bottom">
-                                <td>Total</td>
-                                <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}
-                                </td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                    </table>
-                </div>
+                                <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCooks" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                                <td class="text-center" ng-class="{'has-error': checkTimeCooking() && createMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
+                        </tr>
+                        <tr class="table-meal-border">
+                            <td style="vertical-align:middle"><span uib-tooltip="People will help you for cleaning" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cleaning</span></td>
+                            <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                            <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                        </tr>
+                        <tr class="table-meal-border">
+                            <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you and your helpers a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
+                            <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                            <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
+                        </tr>
+                        <tr class="table-meal-border table-meal-border-bottom">
+                            <td>Total</td>
+                            <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}
+                            </td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                </table>
             </div>
             <div class="row">
                 <div class="col-sm-12">

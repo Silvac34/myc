@@ -16,6 +16,12 @@
     }
 }
 
+@media (min-width: 768px) {
+    #section {
+        min-height: 365px
+    }
+}
+
 
 /* enable absolute positioning */
 
@@ -197,15 +203,6 @@ footer p {
     font-size: 2em;
 }
 
-.fa {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 .social_circle {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -219,16 +216,27 @@ footer p {
     font-size: 11px;
 }
 
-.fa-facebook:before {
-    content: "\f09a";
-}
-
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
 .padding-left-15-right-15 {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+
+/* footer_careers -----------------------*/
+
+#footer-careers-photo {
+    width: 200px;
+    border-radius: 18px
+}
+
+@media (min-width: 768px) {
+    .footer-careers-align-photo-text-middle {
+        display: flex;
+        align-items: center
+    }
 }
 
 
@@ -727,7 +735,6 @@ footer p {
     margin-bottom: 20px;
 }
 
-
 .meal-dtld-list-user {
     margin: 5px 15px 0px 15px;
 }
@@ -757,15 +764,14 @@ footer p {
 }
 
 .form-btn-center {
-    width: 150px;
-    margin-right: auto;
-    margin-left: auto;
+    display: table;
+    margin: auto;
     border-radius: 15px;
 }
 
 @media (min-width: 768px) {
-    .margin-left-5px-sm-md-lg {
-        margin-left: 5px;
+    .margin-left-15px-sm-md-lg {
+        margin-left: 15px;
     }
 }
 

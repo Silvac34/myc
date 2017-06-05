@@ -93,11 +93,17 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         $http.post('/api/meals/' + $scope.meal._id + '/subscription/validate/' + participant_id, {
             'validation_result': true
         }).then(function() {
-            $scope.pendingRequest = false;
+            var nbPendingRequest = 0;
             for (var i = 0; i < $scope.meal.users.length; i++) {
                 if ($scope.meal.users[i]._id == participant_id) {
                     $scope.meal.users[i].status = "accepted";
                 }
+                if ($scope.meal.users[i].status == "pending") {
+                    nbPendingRequest += 1;
+                }
+            }
+            if (nbPendingRequest == 0) {
+                $scope.pendingRequest = false;
             }
         });
     };
@@ -106,11 +112,17 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         $http.post('/api/meals/' + $scope.meal._id + '/subscription/validate/' + participant_id, {
             'validation_result': false
         }).then(function() {
-            $scope.pendingRequest = false;
+            var nbPendingRequest = 0;
             for (var i = 0; i < $scope.meal.users.length; i++) {
                 if ($scope.meal.users[i]._id == participant_id) {
                     delete $scope.meal.users[i];
                 }
+                if ($scope.meal.users[i].status == "pending") {
+                    nbPendingRequest += 1;
+                }
+            }
+            if (nbPendingRequest == 0) {
+                $scope.pendingRequest = false;
             }
         });
     };

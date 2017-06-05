@@ -794,12 +794,6 @@ footer p {
     border-radius: 15px;
 }
 
-@media (min-width: 768px) {
-    .margin-left-15px-sm-md-lg {
-        margin-left: 15px;
-    }
-}
-
 .meal-addon-groceries {
     float: left;
     background-color: white;

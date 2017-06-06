@@ -129,14 +129,16 @@ def sendNotificationPreference(meal, mealPrice):
     elif (meal['vegan'] == True):
         users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.vegan_notification": True}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas et qui sont vegan
     else:
-        users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.veggies_notification": False, "privateInfo.preferences.vegan_notification": False}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
+        users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.omnivorous_notification": True}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
     local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+    print("ok")
     for user in users:
-        text = "Hi " + user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
-        payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
-        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+        if(user['_id'] != meal['admin']):
+            text = "Hi " + user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
+            payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
         
 @celery.task()
 def addReviewRatingToUser(userId, rating):

@@ -320,6 +320,9 @@ schemaUsers = {
                     'city_notification':{
                         'type': 'list'
                     },
+                    'omnivorous_notification':{
+                        'type': 'boolean'
+                    },
                     'veggies_notification':{
                         'type': 'boolean'
                     },

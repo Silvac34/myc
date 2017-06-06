@@ -151,8 +151,10 @@
                                     <div class="clear10"></div>
                                     <div class="checkbox" style="bottom:10px">
                                         <span uib-tooltip="Chose a city to receive notifications first" tooltip-placement="right" tooltip-enable="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">
+                            <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.omnivorous_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/>Omnivorous</label>
                             <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.veggies_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/>Vegetarian</label>
-                            <label><input type="checkbox" ng-model="user.privateInfo.preferences.vegan_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">Vegan</label></span>
+                            <label><input type="checkbox" ng-model="user.privateInfo.preferences.vegan_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">Vegan</label>
+                            </span>
                                     </div>
                                 </div>
                                 <div class="clear10"></div>

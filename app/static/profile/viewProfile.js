@@ -94,23 +94,26 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           };
           origUser.privateInfo.keep = true;
           origUser.privateInfo.user_ref = $scope.user_ref;
-          setDietaryPreferencesToNull(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
+          setDietaryPreferencesToTrue(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
+        }
+      }
+      if ("omnivorous_notification" in $scope.user.privateInfo.preferences) {
+        if (omnivorous_notification != setValueScope($scope.user.privateInfo.preferences.omnivorous_notification)) {
+          origUser.privateInfo.preferences["omnivorous_notification"] = $scope.user.privateInfo.preferences.omnivorous_notification;
+          origUser.privateInfo.keep = true;
+          origUser.privateInfo.user_ref = $scope.user_ref;
         }
       }
       if ("veggies_notification" in $scope.user.privateInfo.preferences) {
         if (veggies_notification != setValueScope($scope.user.privateInfo.preferences.veggies_notification)) {
-          origUser.privateInfo.preferences = {
-            "veggies_notification": $scope.user.privateInfo.preferences.veggies_notification
-          };
+          origUser.privateInfo.preferences["veggies_notification"] = $scope.user.privateInfo.preferences.veggies_notification;
           origUser.privateInfo.keep = true;
           origUser.privateInfo.user_ref = $scope.user_ref;
         }
       }
       if ("vegan_notification" in $scope.user.privateInfo.preferences) {
         if (vegan_notification != setValueScope($scope.user.privateInfo.preferences.vegan_notification)) {
-          origUser.privateInfo.preferences = {
-            "vegan_notification": $scope.user.privateInfo.preferences.vegan_notification
-          };
+          origUser.privateInfo.preferences["vegan_notification"] = $scope.user.privateInfo.preferences.vegan_notification;
           origUser.privateInfo.keep = true;
           origUser.privateInfo.user_ref = $scope.user_ref;
         }
@@ -166,10 +169,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     }
   }
 
-  function setDietaryPreferencesToNull() {
+  function setDietaryPreferencesToTrue() {
     if ($scope.user.privateInfo.preferences.city_notification.length == 0) {
-      $scope.user.privateInfo.preferences.veggies_notification = false;
-      $scope.user.privateInfo.preferences.vegan_notification = false;
+      $scope.user.privateInfo.preferences.omnivorous_notification = true;
+      $scope.user.privateInfo.preferences.veggies_notification = true;
+      $scope.user.privateInfo.preferences.vegan_notification = true;
     }
   }
 
@@ -182,11 +186,15 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       var cellphone = setValue($scope.user.privateInfo.cellphone);
       var email = setValue($scope.user.privateInfo.email);
       var city_notification = "";
+      var omnivorous_notification = "";
       var veggies_notification = "";
       var vegan_notification = "";
       if ("preferences" in $scope.user.privateInfo) {
         if ("city_notification" in $scope.user.privateInfo.preferences) {
           city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+        }
+        if ("omnivorous_notification" in $scope.user.privateInfo.preferences) {
+          omnivorous_notification = setValue($scope.user.privateInfo.preferences.omnivorous_notification);
         }
         if ("veggies_notification" in $scope.user.privateInfo.preferences) {
           veggies_notification = setValue($scope.user.privateInfo.preferences.veggies_notification);
@@ -195,10 +203,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           vegan_notification = setValue($scope.user.privateInfo.preferences.vegan_notification);
         }
       }
-      else { //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il ne veut ni les notifications veggies et vegan. Ca permet dans le back la reqûete sql en utilisant celery
+      else { //si l'utilisateur actualise son profil et qu'il n'a pas de préférence alors par défaut il a des notifications sur tout les repas. Ca permet dans le back la reqûete sql en utilisant celery
         $scope.user.privateInfo.preferences = {
-          "veggies_notification": false,
-          "vegan_notification": false
+          "omnivorous_notification": true,
+          "veggies_notification": true,
+          "vegan_notification": true
         };
       }
     }
@@ -362,6 +371,9 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
             if ("preferences" in $scope.user.privateInfo) {
               if ("city_notification" in $scope.user.privateInfo.preferences) {
                 city_notification = setValue($scope.user.privateInfo.preferences.city_notification);
+              }
+              if ("omnivorous_notification" in $scope.user.privateInfo.preferences) {
+                omnivorous_notification = setValue($scope.user.privateInfo.preferences.omnivorous_notification);
               }
               if ("veggies_notification" in $scope.user.privateInfo.preferences) {
                 veggies_notification = setValue($scope.user.privateInfo.preferences.veggies_notification);

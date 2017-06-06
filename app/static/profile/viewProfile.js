@@ -2,7 +2,26 @@
 
 angular.module('myApp.viewProfile', ['dateDropdownService'])
 
-.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', '$state', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory, $state) {
+.config(['$stateProvider', function($stateProvider) {
+
+  $stateProvider.state('profile.mealsList', {
+    views: {
+      'mealsList': {
+        templateUrl: 'static/viewMeals/viewMealsContainer/mealsList.html'
+      }
+    }
+  });
+}])
+
+.controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', '$state', '$uibModal', '$auth', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory, $state, $uibModal, $auth) {
+
+  function getCountry(country_code, jsonData) {
+    for (var i = 0; i < jsonData.length; i++) {
+      if (jsonData[i].code == country_code) {
+        return jsonData[i].name;
+      }
+    }
+  }
 
   function setValue(variable) {
     if (typeof variable === 'undefined') {
@@ -154,11 +173,11 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     }
   }
 
-  if ($scope.$parent.user == undefined) {
+  if ($scope.$parent.user == undefined) { // si l'utilisateur n'est pas connecté
     $state.go('login');
   }
   else {
-    if (userInfo.data._id == $scope.$parent.user._id) {
+    if (userInfo.data._id == $scope.$parent.user._id) { // si l'utilisateur consulte son profil
       $scope.user = $scope.$parent.user;
       var cellphone = setValue($scope.user.privateInfo.cellphone);
       var email = setValue($scope.user.privateInfo.email);
@@ -183,8 +202,84 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
         };
       }
     }
-    else {
+    else { //si l'utilisateur consulte le profil de quelqu'un d'autre
       $scope.user = userInfo.data;
+
+      $http.get('api/meals?where={"users._id": "' + $scope.user._id + '"}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
+        $scope.meals = res.data._items;
+      });
+
+      $state.go("profile.mealsList"); //on active le ui-view de meals-liste
+
+      //on définit le prix du repas qui doit s'afficher
+      $http.get("/static/sources/profile/countries.json").then(function(res) {
+        $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
+          $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
+            for (var j = 0; j < $scope.meals.length; j++) {
+              if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
+                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; // si aide cuisine alors le prix du repas est le prix de l'aide cuisine
+              }
+              else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
+                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; // si pas aide cuisine et aide vaisselle alors le prix du repas est le prix de l'aide vaisselle
+              }
+              else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
+                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //sinon c'est soit le prix d'aide cuisine s'il n'y a ni l'un ni l'autre
+              }
+              else {
+                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.hosts.price; // si le repas n'a pas d'invités (par précaution), c'est le prix de l'hôte
+              }
+              $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10; //sera utilisé pour viewMyMealDtld pour la phrase de variation de prix
+              var currency = result_currency.data[$scope.meals[j].address.country_code];
+              $scope.meals[j].currency_symbol = result_currency_symbol.data[currency].symbol_native; ////récupère correctement la monnaie où s'effectue le repas
+              $scope.meals[j].address.country = getCountry($scope.meals[j].address.country_code, res.data); //récupère correctement le pays
+            }
+          });
+        });
+      });
+
+      $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
+        for (var i = 0; i < $scope.meals.length; i++) {
+          if ($scope.meals[i]._id == meal_id) {
+            if ($scope.meals[i].detailedInfo.subscribed == true) {
+              $state.go("view_my_dtld_meals", {
+                "myMealId": meal_id
+              });
+            }
+            else {
+              var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
+                controller: 'ViewMealsDtldCtrl',
+                size: "lg",
+                windowClass: 'modal-meal-window',
+                resolve: {
+                  meal: function() {
+                    return $scope.meals[i];
+                  },
+                  isAuthenticated: function() {
+                    return $auth.isAuthenticated();
+                  }
+                }
+              });
+              modalInstance.result.then(function(result) {
+                var result_value = result;
+                if (result_value == undefined) {
+                  result_value = {
+                    "manualSubscriptionPending": false,
+                    "pending": false
+                  };
+                }
+                $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
+                for (var i = 0; i < $scope.meals.length; i++) {
+                  if ($scope.meals[i]._id == meal_id) {
+                    $scope.meals[i].detailedInfo.pending = result_value.pending;
+                  }
+                }
+              });
+            }
+          }
+        }
+      };
     }
     $scope.user._created = new Date(parseInt($scope.user._id.substring(0, 8), 16) * 1000);
     $scope.user.reviews = $scope.user.reviews || {};
@@ -294,11 +389,6 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     $http.get("/static/sources/profile/languages.json").then(function(res) {
       $scope.languages = res.data;
     });
-    
-    /*$http.get('api/meals?where={"'+ $scope.user._id +'": {"$in": users}}').then(function(res) {
-      console.log(res);
-      $scope.meals = res.data;
-    });*/
 
     //$scope pour le plugin checkbox messenger
     $scope.origin = ENV.fbRedirectURI + "#/profile/" + userInfo.data._id;

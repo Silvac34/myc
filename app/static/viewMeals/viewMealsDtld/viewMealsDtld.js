@@ -167,99 +167,101 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
   }
 
   $scope.subscribeMealAuth = function(meal_id, role, provider) {
-    if (isAuthenticated) { // si l'user est authentifié
-      if (check($scope.requestRole.name)) {
-        if (needToUpdateCellphone() == true) {
-          $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
-            "privateInfo": {
-              "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
-            }
-          }, {
-            headers: {
-              "If-Match": $scope.$parent.$root.user._etag
-            }
-          }).then(function successCallBack(response) {
-            $scope.user._etag = response.data._etag;
+    if ($scope.checkMealDate() == true) {
+      if (isAuthenticated) { // si l'user est authentifié
+        if (check($scope.requestRole.name)) {
+          if (needToUpdateCellphone() == true) {
+            $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
+              "privateInfo": {
+                "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
+              }
+            }, {
+              headers: {
+                "If-Match": $scope.$parent.$root.user._etag
+              }
+            }).then(function successCallBack(response) {
+              $scope.user._etag = response.data._etag;
+              subscribeMeal(meal_id, role);
+            });
+          }
+          else if (needToUpdateCellphone() == false) {
+            $scope.errorSubscribe.cellphone.status = true;
+            $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
+            console.log("please fill your number");
+          }
+          else {
             subscribeMeal(meal_id, role);
-          });
-        }
-        else if (needToUpdateCellphone() == false) {
-          $scope.errorSubscribe.cellphone.status = true;
-          $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
-          console.log("please fill your number");
+          }
         }
         else {
-          subscribeMeal(meal_id, role);
+          if (!check($scope.$parent.$root.user.privateInfo.cellphone)) {
+            $scope.errorSubscribe.cellphone.status = true;
+            $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
+            console.log("please fill your number");
+          }
+          if (!check($scope.requestRole.name)) {
+            $scope.errorSubscribe.requestRole.status = true;
+            $scope.errorSubscribe.requestRole.message = "You have to select a role to participate";
+            console.log("please choose a role");
+          }
         }
       }
-      else {
-        if (!check($scope.$parent.$root.user.privateInfo.cellphone)) {
-          $scope.errorSubscribe.cellphone.status = true;
-          $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
-          console.log("please fill your number");
-        }
-        if (!check($scope.requestRole.name)) {
-          $scope.errorSubscribe.requestRole.status = true;
-          $scope.errorSubscribe.requestRole.message = "You have to select a role to participate";
-          console.log("please choose a role");
-        }
-      }
-    }
-    else { // si l'user n'est pas authentifié
-      if (check($scope.requestRole.name)) { // on vérifie qu'il a bien demandé un rôle
-        $auth.authenticate(provider) // connection via facebook
-          .then(function(response) {
-            console.debug("success", response);
-            if ($auth.isAuthenticated()) {
-              userServicesFactory().then(function(data) {
-                $rootScope.user = data;
-                $scope.isAuthenticated = true;
-                isAuthenticated = true;
-                $http.get('/api/meals/' + meal_id).then(function successCallBack(responseUser) { // on récupère les infos pour savoir si l'user est inscrit au repas
-                  $scope.meal.detailedInfo.subscribed = responseUser.data.detailedInfo.subscribed; //on actualise l'état subscribed du repas
-                  $scope.meal.detailedInfo.pending = responseUser.data.detailedInfo.pending; // on actualise l'état pending du repas
-                  if (data._id == $scope.meal.admin._id || $scope.meal.detailedInfo.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
-                    $scope.goToMeal = true;
-                    $uibModalInstance.close({
-                      manualSubscriptionPending: false,
-                      pending: false
-                    });
-                    $state.go("view_my_dtld_meals", {
-                      "myMealId": meal_id,
-                      "successSubscribedMessage": true
-                    });
-                  }
-                  if ($scope.meal.detailedInfo.pending == true) { //s'il est en attente sur le repas
-                    $scope.goToMeal = false;
-                    $uibModalInstance.close({
-                      manualSubscriptionPending: true,
-                      pending: true
-                    });
-                  }
-                  else { // s'il n'est ni l'hôte ni inscrit au repas
-                    if (check($scope.$parent.$root.user.privateInfo.cellphone) == true) { // on check si son cellphone est déjà rentré dans notre BDD
-                      subscribeMeal(meal_id, role); // si son tel est dans notre BDD, on l'inscrit au repas
+      else { // si l'user n'est pas authentifié
+        if (check($scope.requestRole.name)) { // on vérifie qu'il a bien demandé un rôle
+          $auth.authenticate(provider) // connection via facebook
+            .then(function(response) {
+              console.debug("success", response);
+              if ($auth.isAuthenticated()) {
+                userServicesFactory().then(function(data) {
+                  $rootScope.user = data;
+                  $scope.isAuthenticated = true;
+                  isAuthenticated = true;
+                  $http.get('/api/meals/' + meal_id).then(function successCallBack(responseUser) { // on récupère les infos pour savoir si l'user est inscrit au repas
+                    $scope.meal.detailedInfo.subscribed = responseUser.data.detailedInfo.subscribed; //on actualise l'état subscribed du repas
+                    $scope.meal.detailedInfo.pending = responseUser.data.detailedInfo.pending; // on actualise l'état pending du repas
+                    if (data._id == $scope.meal.admin._id || $scope.meal.detailedInfo.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
+                      $scope.goToMeal = true;
+                      $uibModalInstance.close({
+                        manualSubscriptionPending: false,
+                        pending: false
+                      });
+                      $state.go("view_my_dtld_meals", {
+                        "myMealId": meal_id,
+                        "successSubscribedMessage": true
+                      });
                     }
-                    else { // si son tel n'est pas dans notre BDD on lui demande de le remplir
-                      $scope.errorSubscribe.cellphone.status = true;
-                      $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
-                      console.log("please fill your number");
+                    if ($scope.meal.detailedInfo.pending == true) { //s'il est en attente sur le repas
+                      $scope.goToMeal = false;
+                      $uibModalInstance.close({
+                        manualSubscriptionPending: true,
+                        pending: true
+                      });
+                    }
+                    else { // s'il n'est ni l'hôte ni inscrit au repas
+                      if (check($scope.$parent.$root.user.privateInfo.cellphone) == true) { // on check si son cellphone est déjà rentré dans notre BDD
+                        subscribeMeal(meal_id, role); // si son tel est dans notre BDD, on l'inscrit au repas
+                      }
+                      else { // si son tel n'est pas dans notre BDD on lui demande de le remplir
+                        $scope.errorSubscribe.cellphone.status = true;
+                        $scope.errorSubscribe.cellphone.message = "Please fill your cellphone number to participate.";
+                        console.log("please fill your number");
 
+                      }
                     }
-                  }
+                  });
                 });
-              });
-            }
-          })
-          .catch(function(response) {
-            console.debug("catch", response);
-          });
-      }
-      else {
-        if (!check($scope.requestRole.name)) {
-          $scope.errorSubscribe.requestRole.status = true;
-          $scope.errorSubscribe.requestRole.message = "You have to select a role to participate";
-          console.log("please choose a role");
+              }
+            })
+            .catch(function(response) {
+              console.debug("catch", response);
+            });
+        }
+        else {
+          if (!check($scope.requestRole.name)) {
+            $scope.errorSubscribe.requestRole.status = true;
+            $scope.errorSubscribe.requestRole.message = "You have to select a role to participate";
+            console.log("please choose a role");
+          }
         }
       }
     }

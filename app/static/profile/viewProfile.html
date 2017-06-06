@@ -238,42 +238,55 @@
             </div>
             <div class="panel-footer hidden-sm hidden-md hidden-lg text-justify" ng-if="user.presentation">"<em>{{user.presentation}}</em>"</div>
         </div>
-        <div ng-if="reviews.length > 0" style="position:relative">
-            <h4 class="pull-left" style="margin-right:20px"><em>Reviews</em></h4>
-            <div class="well well-sm well-resume-rating">
-                <table style="text-align:center">
-                    <tbody>
-                        <tr>
-                            <td><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
-                            <td style="padding:0px 8px"><span class="glyphicon glyphicon-record text-default"></span></td>
-                            <td><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
-                        </tr>
-                        <tr style="font-size:11px">
-                            <td>{{user.reviews.positive}}</td>
-                            <td style="padding:0px 8px">{{user.reviews.neutral}}</td>
-                            <td>{{user.reviews.negative}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel panel-default" ng-repeat="review in reviews">
-                <div class="panel-body">
-                    <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
-                    <div class="pull-left" style="padding-right:15px">
-                        <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
-                        <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+        <uib-tabset active="active">
+            <uib-tab index="0">
+                <uib-tab-heading>
+                    <span class="small-visible-xs">Reviews</span>
+                </uib-tab-heading>
+                <div class="clear10"></div>
+                <div ng-if="reviews.length > 0" style="position:relative">
+                    <div class="well well-sm well-resume-rating">
+                        <table style="text-align:center">
+                            <tbody>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                    <td style="padding:0px 8px"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                    <td><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                </tr>
+                                <tr style="font-size:11px">
+                                    <td>{{user.reviews.positive}}</td>
+                                    <td style="padding:0px 8px">{{user.reviews.neutral}}</td>
+                                    <td>{{user.reviews.negative}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div style="padding-top:20px">
-                        <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
-                            style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;"
-                        <em>{{review.forUser.comment}}</em>"
+                    <div class="panel panel-default" ng-repeat="review in reviews">
+                        <div class="panel-body">
+                            <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
+                            <div class="pull-left" style="padding-right:15px">
+                                <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                            </div>
+                            <div style="padding-top:20px">
+                                <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
+                                    style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;"
+                                <em>{{review.forUser.comment}}</em>"
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div ng-if="reviews.length == 0">
-            <h4><em>Reviews</em></h4>
-            <div>{{user.first_name}} does not have any reviews yet.</div>
-        </div>
+                <div ng-if="reviews.length == 0">
+                    <div>{{user.first_name}} does not have any reviews yet.</div>
+                </div>
+            </uib-tab>
+            <uib-tab index="1">
+                <uib-tab-heading>
+                    <span class="small-visible-xs">Meals</span>
+                </uib-tab-heading>
+                <div class="clear10"></div>
+                <div ui-view="mealsList"></div>
+            </uib-tab>
+        </uib-tabset>
     </div>
 </div>

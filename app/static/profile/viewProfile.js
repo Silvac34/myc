@@ -48,7 +48,8 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     var actionProhibited = false;
     var origUser = {
       "privateInfo": {
-        "keep": false
+        "keep": false,
+        "preferences":[]
       }
     };
     if (cellphone != setValueScope($scope.user.privateInfo.cellphone)) {
@@ -97,6 +98,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           setDietaryPreferencesToTrue(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
         }
       }
+      if("preferences")
       if ("omnivorous_notification" in $scope.user.privateInfo.preferences) {
         if (omnivorous_notification != setValueScope($scope.user.privateInfo.preferences.omnivorous_notification)) {
           origUser.privateInfo.preferences["omnivorous_notification"] = $scope.user.privateInfo.preferences.omnivorous_notification;

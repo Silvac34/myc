@@ -78,7 +78,7 @@
               <li><a ui-sref="profile({userId:user._id})" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li ng-if="isAuthenticated()" uib-dropdown class="dropdown">
+              <li ng-if="isAuthenticated()" uib-dropdown class="dropdown" style="cursor:pointer">
                 <a uib-dropdown-toggle class="dropdown-toggle">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu">

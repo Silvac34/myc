@@ -56,4 +56,30 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     return (Date.parse(meal.time) < now.getTime());
   };
 
+  $scope.countPendingRequestsPerMeal = function(mealId) {
+    var numberOfPendingRequests = 0;
+    $scope.meals.forEach(function(meal) {
+      if (meal._id == mealId) {
+        meal.users.forEach(function(user) {
+          if (user.status == "pending") {
+            numberOfPendingRequests += 1;
+          }
+        });
+      }
+    });
+    return numberOfPendingRequests;
+  };
+
+  $scope.countMealWithPendingRequest = function() {
+    var numberOfMealWithPendingRequest = 0;
+    $scope.meals.forEach(function(meal) {
+      meal.users.forEach(function(user) {
+        if (user.status == "pending") {
+          numberOfMealWithPendingRequest += 1;
+        }
+      });
+    });
+    return numberOfMealWithPendingRequest;
+  };
+
 }]);

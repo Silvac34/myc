@@ -133,7 +133,6 @@ def sendNotificationPreference(meal, mealPrice):
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
     local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
-    print("ok")
     for user in users:
         if(user['_id'] != meal['admin']):
             text = user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)

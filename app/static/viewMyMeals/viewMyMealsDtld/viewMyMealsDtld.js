@@ -2,7 +2,7 @@
 
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', 'userResolve', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, userResolve) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', 'userResolve', '$state',  function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, userResolve, $state) {
 
     $scope.meal = meal.data;
 
@@ -11,7 +11,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         if ("users" in $scope.meal) {
             for (var i = 0; i < $scope.meal.users.length; i++) {
                 if ($scope.meal.users[i]._id == userResolve._id) {
-                    $scope.userRole = $scope.meal.users[i].role[0];
+                    if ($scope.meal.users[i].status == "pending") {
+                        $state.go("view_meals");
+                    }
+                    else {
+                        $scope.userRole = $scope.meal.users[i].role[0];
+                    }
                 }
                 if ($scope.meal.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
                     $scope.pendingRequest = true;
@@ -19,9 +24,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             }
         }
     }
-    
+
     check_loading();
-    
+
     $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $scope.meal._id;
     $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
 

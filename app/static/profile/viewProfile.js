@@ -49,7 +49,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     var origUser = {
       "privateInfo": {
         "keep": false,
-        "preferences":[]
+        "preferences":{}
       }
     };
     if (cellphone != setValueScope($scope.user.privateInfo.cellphone)) {

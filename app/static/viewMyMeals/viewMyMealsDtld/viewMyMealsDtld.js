@@ -117,7 +117,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 if ($scope.meal.users[i]._id == participant_id) {
                     delete $scope.meal.users[i];
                 }
-                if ($scope.meal.users[i].status == "pending") {
+                else if ($scope.meal.users[i].status == "pending") {
                     nbPendingRequest += 1;
                 }
             }

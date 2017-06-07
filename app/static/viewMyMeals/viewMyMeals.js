@@ -73,11 +73,13 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
   $scope.countMealWithPendingRequest = function() {
     var numberOfMealWithPendingRequest = 0;
     $scope.meals.forEach(function(meal) {
-      meal.users.forEach(function(user) {
-        if (user.status == "pending") {
-          numberOfMealWithPendingRequest += 1;
-        }
-      });
+      if (meal.admin._id == $scope.$parent.$root.user._id) {//il faut que l'utilisateur soit bien l'admin du repas
+        meal.users.forEach(function(user) {
+          if (user.status == "pending") {
+            numberOfMealWithPendingRequest += 1;
+          }
+        });
+      }
     });
     return numberOfMealWithPendingRequest;
   };

@@ -2,7 +2,7 @@
 <uib-tabset type="pills">
   <uib-tab index="0" class="my-meal-uitab">
     <uib-tab-heading>
-      Incoming meals <span class="badge">{{countMealWithPendingRequest()}}</span>
+      Incoming meals <span class="badge" ng-if="countMealWithPendingRequest() > 0">{{countMealWithPendingRequest()}}</span>
     </uib-tab-heading>
     <div class="clear20"></div>
     <div class="col-xs-12">
@@ -68,7 +68,7 @@
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                 </div>
-                <div class="row" ng-if="countPendingRequestsPerMeal(meal._id) > 0" style="margin-top:7px">
+                <div class="row" ng-if="countPendingRequestsPerMeal(meal._id) > 0 && meal.admin._id == user._id" style="margin-top:7px">
                   <i class="fa fa-user-plus"></i> <strong class="text-warning">{{countPendingRequestsPerMeal(meal._id)}} pending request<span ng-if="countPendingRequestsPerMeal(meal._id) > 1">s</span></strong>
                 </div>
               </div>

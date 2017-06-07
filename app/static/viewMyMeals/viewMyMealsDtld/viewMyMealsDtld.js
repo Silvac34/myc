@@ -2,7 +2,7 @@
 
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', '$q', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, $q) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', 'userResolve', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, userResolve) {
 
     $scope.meal = meal.data;
 
@@ -10,7 +10,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         $scope.pendingRequest = false;
         if ("users" in $scope.meal) {
             for (var i = 0; i < $scope.meal.users.length; i++) {
-                if ($scope.meal.users[i]._id == $scope.$parent.$parent.$root.user._id) {
+                if ($scope.meal.users[i]._id == userResolve._id) {
                     $scope.userRole = $scope.meal.users[i].role[0];
                 }
                 if ($scope.meal.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
@@ -199,7 +199,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     };
 
     $scope.dataForReview = [];
-    getMealReviewServiceFactory($scope.meal._id, $scope.user._id).then(function successCallBack(response) {
+    getMealReviewServiceFactory($scope.meal._id, userResolve._id).then(function successCallBack(response) {
         if (response.length > 0) {
             $scope.dataForReview = response;
             for (var i = 0; i < $scope.dataForReview.length; i++) {
@@ -283,10 +283,10 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                     },
                     "mealAssociated": $scope.meal._id,
                     "fromUser": {
-                        "_id": $scope.user._id,
+                        "_id": userResolve._id,
                         "role": $scope.userRole
                     },
-                    "unique": participantId + $scope.user._id + $scope.meal._id,
+                    "unique": participantId + userResolve._id + $scope.meal._id,
                     "sent": false
                 });
             }

@@ -15,7 +15,7 @@ var app = angular.module('myApp', [
   'userServices',
   'angular-loading-bar',
   'ezfb',
-  'getReviewService', 
+  'getReviewService',
   'getAgeService'
 ]);
 
@@ -48,7 +48,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         }
       }
     });
-
   $stateProvider
     .state('create_meal', {
       url: '/create_meal',
@@ -58,7 +57,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         requiredLogin: true
       }
     });
-
   $stateProvider
     .state('my_meals', {
       url: '/my_meals',
@@ -87,6 +85,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
       resolve: {
         meal: function($http, $stateParams) {
           return $http.get('/api/meals/private/' + $stateParams.myMealId);
+        },
+        userResolve: function(userServicesFactory){
+          return userServicesFactory();
         }
       },
       cache: false
@@ -184,6 +185,7 @@ app.run(function($rootScope, $state, $auth) {
       if (requiredLogin && !$auth.isAuthenticated()) {
         event.preventDefault();
         $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
+        $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
         $state.go('login');
       }
     });
@@ -195,8 +197,7 @@ app.run(function($rootScope, $state, $auth) {
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb) {
 
-  function authe(provider, toState) {
-    //toState = toState || undefined;
+  function authe(provider) {
     return $q(function(resolve, reject) {
       $auth.authenticate(provider)
         .then(function(response) {
@@ -213,11 +214,11 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     });
   }
 
-  $rootScope.auth = function(provider, toState) {
-    authe(provider, toState).then(function successCallBack() {
+  $rootScope.auth = function(provider, toState, toParams) {
+    authe(provider).then(function successCallBack() {
       toState = toState || undefined;
       if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
-        $state.go(toState);
+        $state.go(toState, toParams);
       }
       else {
         $state.reload();
@@ -239,20 +240,21 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       return $auth.isAuthenticated();
     },
 
-    $scope.status = {
-      isopen: false
-    };
+    $rootScope.navbarCollapsed = true;
 
-  function authVerification() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
+  var authVerification = function() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
     if ($auth.isAuthenticated()) {
       userServicesFactory().then(function(data) {
         $rootScope.user = data;
       });
     }
-  }
+  };
+
   authVerification();
 
-  $rootScope.navbarCollapsed = true;
+  $scope.status = {
+    isopen: false
+  };
 
 }]);
 

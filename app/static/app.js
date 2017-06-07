@@ -83,8 +83,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         successSubscribedMessage: null
       },
       resolve: {
-        meal: function($http, $stateParams) {
-          return $http.get('/api/meals/private/' + $stateParams.myMealId);
+        meal: function($http, $stateParams, $state) {
+          return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response){
+            return response;
+          }, function errorCallback(response){
+            $state.go("view_meals");
+          });
         },
         userResolve: function(userServicesFactory){
           return userServicesFactory();

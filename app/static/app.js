@@ -88,7 +88,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         meal: function($http, $stateParams) {
           return $http.get('/api/meals/private/' + $stateParams.myMealId);
         }
-      }
+      },
+      cache: false
     });
   $stateProvider
     .state('footer_more_contact', {

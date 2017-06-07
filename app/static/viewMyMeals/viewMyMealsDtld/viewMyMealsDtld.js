@@ -2,7 +2,7 @@
 
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory) {
+modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', '$q', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, $q) {
 
     $scope.meal = meal.data;
 
@@ -10,7 +10,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         $scope.pendingRequest = false;
         if ("users" in $scope.meal) {
             for (var i = 0; i < $scope.meal.users.length; i++) {
-                if ($scope.meal.users[i]._id == $scope.user._id) {
+                if ($scope.meal.users[i]._id == $scope.$parent.$parent.$root.user._id) {
                     $scope.userRole = $scope.meal.users[i].role[0];
                 }
                 if ($scope.meal.users[i].status == "pending") { //fait apparaître l'encadré de validation lorsqu'un utilisateur est en attente de confirmation pour participer à un repas
@@ -19,8 +19,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
             }
         }
     }
+    
     check_loading();
-
+    
     $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $scope.meal._id;
     $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
 
@@ -432,7 +433,6 @@ modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $
         $uibModalInstance.close();
         $state.go('view_meals', {
             reload: true,
-            inherit: false,
             notify: false
         });
 

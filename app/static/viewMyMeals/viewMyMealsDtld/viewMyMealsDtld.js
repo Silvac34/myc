@@ -98,7 +98,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 if ($scope.meal.users[i]._id == participant_id) {
                     $scope.meal.users[i].status = "accepted";
                 }
-                if ($scope.meal.users[i].status == "pending") {
+                else if ($scope.meal.users[i].status == "pending") {
                     nbPendingRequest += 1;
                 }
             }

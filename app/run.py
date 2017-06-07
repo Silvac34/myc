@@ -469,7 +469,7 @@ def validate_a_subscription(meal_id, participant_id):
     else:
         admin = admin.getUserAllInfo()
         request_url_split = request.url.split("/")
-        url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + str(meal["_id"])
+        url_to_send = "https://" + request_url_split[2] + "/#!/my_meals/" + str(meal["_id"])
         meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
         local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
         meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format

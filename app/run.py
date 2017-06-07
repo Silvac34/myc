@@ -441,7 +441,7 @@ def subscribe_to_meal(meal_id):
             else: #si acceptation manuelle
                 meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
-                url_to_send = "https://" + request_url_split[2] + "/#/my_meals/" + request_url_split[5]
+                url_to_send = "https://" + request_url_split[2] + "/#!/my_meals/" + request_url_split[5]
                 text = admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate this one."
             Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 

@@ -3,8 +3,9 @@
 var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
 
 modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', 'userResolve', '$state', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, userResolve, $state) {
+
     $scope.meal = meal.data;
-    console.log($scope);
+
     function check_loading() {
         $scope.pendingRequest = false;
         if ("users" in $scope.meal) {
@@ -25,7 +26,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     }
 
     check_loading();
-
     $scope.data_href_comment = ENV.fbRedirectURI + "#/my_meals/" + $scope.meal._id;
     $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "#/view_meals";
 

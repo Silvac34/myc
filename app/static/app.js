@@ -19,10 +19,12 @@ var app = angular.module('myApp', [
   'getAgeService'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {
+app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {
 
+  $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache'; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
+  $httpProvider.defaults.cache = true;
   cfpLoadingBarProvider.includeSpinner = false;
-
+  
   $stateProvider
     .state('welcome', {
       url: '/welcome',
@@ -44,7 +46,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
         response: function($http) {
           /*var date = new Date();
           var now = date.toISOString();*/
-          return $http.get('/api/meals' /*?where={"time": {"$gte": "' + now + '"} }'*/ ); //on met en commentaire la requête filtrée pour repas > now
+          return $http.get('/api/meals' /*?where={"time": {"$gte": "' + now + '"} }'*/); //on met en commentaire la requête filtrée pour repas > now
         }
       }
     });
@@ -87,14 +89,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfp
           return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response){
             return response;
           }, function errorCallback(response){
-            $state.go("view_meals");
+            $state.go("view_meals");//il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
           });
         },
         userResolve: function(userServicesFactory){
           return userServicesFactory();
         }
-      },
-      cache: false
+      }
     });
   $stateProvider
     .state('footer_more_contact', {

@@ -91,6 +91,9 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         successSubscribedMessage: null
       },
       resolve: {
+        userResolve: function(userServicesFactory) {
+          return userServicesFactory();
+        },
         meal: function($http, $stateParams, $state) {
           return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response) {
             return response;
@@ -98,9 +101,6 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
             $state.go("view_meals.mealsList"); //il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
             //ouverture
           });
-        },
-        userResolve: function(userServicesFactory) {
-          return userServicesFactory();
         }
       }
     });
@@ -193,8 +193,12 @@ app.run(function($rootScope, $state, $auth) {
       if (toState.data && toState.data.requiredLogin) {
         requiredLogin = true;
       }
+      if ($auth.isAuthenticated() && requiredLogin == true) { // si on n'est pas connecté et qu'on souhaite accéder à une page privée, on actualise toState et on va sur login (utilisé dans viewMeals.js et viewCreateMeal.js)
+        $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
+        $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
+      }
       // if yes and if this user is not logged in, redirect him to login page
-      if (!$auth.isAuthenticated() && requiredLogin == true) {
+      if (!$auth.isAuthenticated() && requiredLogin == true) { // si on n'est pas connecté et qu'on souhaite accéder à une page privée, on actualise toState et on va sur login (utilisé dans viewMeals.js et viewCreateMeal.js)
         $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
         $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
         event.preventDefault();

@@ -94,8 +94,9 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         meal: function($http, $stateParams, $state) {
           return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response) {
             return response;
-          }, function errorCallback(response) {
+          }, function errorCallback() {
             $state.go("view_meals.mealsList"); //il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
+            //ouverture
           });
         },
         userResolve: function(userServicesFactory) {
@@ -187,6 +188,8 @@ app.run(function($rootScope, $state, $auth) {
       // when the state change, the user load the template at the top of the window
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       $rootScope.fromState = fromState; // on récupère fromState pour l'apparition du plugin checkbox messenger dans create_meal
+      $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
+      $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
       var requiredLogin = false;
       // check if this state need login
       if (toState.data && toState.data.requiredLogin)
@@ -195,8 +198,6 @@ app.run(function($rootScope, $state, $auth) {
       // if yes and if this user is not logged in, redirect him to login page
       if (requiredLogin && !$auth.isAuthenticated()) {
         event.preventDefault();
-        $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
-        $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
         $state.go('login');
       }
     });

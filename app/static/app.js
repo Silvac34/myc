@@ -21,10 +21,17 @@ var app = angular.module('myApp', [
 
 app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {
 
-  $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache'; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
+  if (!$httpProvider.defaults.headers.get) {
+    $httpProvider.defaults.headers.common = {};
+  }
+
+  $httpProvider.defaults.headers.common["If-Modified-Since"] = "0";
+  $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
+  $httpProvider.defaults.headers.common.Pragma = "no-cache"; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
+
   $httpProvider.defaults.cache = true;
   cfpLoadingBarProvider.includeSpinner = false;
-  
+
   $stateProvider
     .state('welcome', {
       url: '/welcome',
@@ -46,7 +53,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         response: function($http) {
           /*var date = new Date();
           var now = date.toISOString();*/
-          return $http.get('/api/meals' /*?where={"time": {"$gte": "' + now + '"} }'*/); //on met en commentaire la requête filtrée pour repas > now
+          return $http.get('/api/meals' /*?where={"time": {"$gte": "' + now + '"} }'*/ ); //on met en commentaire la requête filtrée pour repas > now
         }
       }
     });
@@ -86,13 +93,13 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
       },
       resolve: {
         meal: function($http, $stateParams, $state) {
-          return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response){
+          return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response) {
             return response;
-          }, function errorCallback(response){
-            $state.go("view_meals");//il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
+          }, function errorCallback(response) {
+            $state.go("view_meals"); //il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
           });
         },
-        userResolve: function(userServicesFactory){
+        userResolve: function(userServicesFactory) {
           return userServicesFactory();
         }
       }

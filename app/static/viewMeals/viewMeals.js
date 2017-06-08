@@ -2,7 +2,7 @@
 
 var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'ngSanitize'])
 
-modViewMeals.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+modViewMeals.config(['$stateProvider', function($stateProvider) {
 
   $stateProvider
     .state('view_meals.mealsMap', {

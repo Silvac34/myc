@@ -188,15 +188,15 @@ app.run(function($rootScope, $state, $auth) {
       // when the state change, the user load the template at the top of the window
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       $rootScope.fromState = fromState; // on récupère fromState pour l'apparition du plugin checkbox messenger dans create_meal
-      $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
-      $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
       var requiredLogin = false;
       // check if this state need login
-      if (toState.data && toState.data.requiredLogin)
+      if (toState.data && toState.data.requiredLogin) {
         requiredLogin = true;
-
+      }
       // if yes and if this user is not logged in, redirect him to login page
-      if (requiredLogin && !$auth.isAuthenticated()) {
+      if (!$auth.isAuthenticated() && requiredLogin == true) {
+        $rootScope.toState = toState; //permet de récupérer l'argument toState dans tous les childs scope
+        $rootScope.toParams = toParams; //permet de récupérer l'argument toState dans tous les childs scope
         event.preventDefault();
         $state.go('login');
       }

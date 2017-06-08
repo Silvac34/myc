@@ -26,10 +26,6 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
 
   $scope.meals = response.data['_items']; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
-  if($scope.$parent.$root.toState.name == "view_my_dtld_meals"){
-    $scope.openModalDtld($scope.$parent.$root.toParams.myMealId);
-  }
-
   $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
@@ -37,6 +33,54 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       }, 4000);
     }
   });
+
+  $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
+    for (var i = 0; i < $scope.meals.length; i++) {
+      if ($scope.meals[i]._id == meal_id) {
+        if ($scope.meals[i].detailedInfo.subscribed == true) {
+          $state.go("view_my_dtld_meals", {
+            "myMealId": meal_id
+          });
+        }
+        else {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
+            controller: 'ViewMealsDtldCtrl',
+            size: "lg",
+            windowClass: 'modal-meal-window',
+            resolve: {
+              meal: function() {
+                return $scope.meals[i];
+              },
+              isAuthenticated: function() {
+                return $auth.isAuthenticated();
+              }
+            }
+          });
+          modalInstance.result.then(function(result) {
+            var result_value = result;
+            if (result_value == undefined) {
+              result_value = {
+                "manualSubscriptionPending": false,
+                "pending": false
+              };
+            }
+            $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
+            for (var i = 0; i < $scope.meals.length; i++) {
+              if ($scope.meals[i]._id == meal_id) {
+                $scope.meals[i].detailedInfo.pending = result_value.pending;
+              }
+            }
+          });
+        }
+      }
+    }
+  };
+
+  if ($scope.$parent.$root.toState.name == "view_my_dtld_meals") {
+    $scope.openModalDtld($scope.$parent.$root.toParams.myMealId);
+  }
 
   //on définit le prix du repas qui doit s'afficher
   $http.get("/static/sources/profile/countries.json").then(function(res) {
@@ -85,50 +129,6 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       }
     });
     return numberOfPendingRequests;
-  };
-
-  $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
-    for (var i = 0; i < $scope.meals.length; i++) {
-      if ($scope.meals[i]._id == meal_id) {
-        if ($scope.meals[i].detailedInfo.subscribed == true) {
-          $state.go("view_my_dtld_meals", {
-            "myMealId": meal_id
-          });
-        }
-        else {
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'static/viewMeals/viewMealsDtld/viewMealsDtld.html',
-            controller: 'ViewMealsDtldCtrl',
-            size: "lg",
-            windowClass: 'modal-meal-window',
-            resolve: {
-              meal: function() {
-                return $scope.meals[i];
-              },
-              isAuthenticated: function() {
-                return $auth.isAuthenticated();
-              }
-            }
-          });
-          modalInstance.result.then(function(result) {
-            var result_value = result;
-            if (result_value == undefined) {
-              result_value = {
-                "manualSubscriptionPending": false,
-                "pending": false
-              };
-            }
-            $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
-            for (var i = 0; i < $scope.meals.length; i++) {
-              if ($scope.meals[i]._id == meal_id) {
-                $scope.meals[i].detailedInfo.pending = result_value.pending;
-              }
-            }
-          });
-        }
-      }
-    }
   };
 
   $scope.isCollapsed = {

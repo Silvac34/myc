@@ -44,15 +44,15 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
         for (var j = 0; j < $scope.meals.length; j++) {
           if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
-              $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; // si aide cuisine alors le prix du repas est le prix de l'aide cuisine
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; // si aide cuisine alors le prix du repas est le prix de l'aide cuisine
           }
           else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
-              $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price;  // si pas aide cuisine et aide vaisselle alors le prix du repas est le prix de l'aide vaisselle
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; // si pas aide cuisine et aide vaisselle alors le prix du repas est le prix de l'aide vaisselle
           }
           else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
-              $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //sinon c'est soit le prix d'aide cuisine s'il n'y a ni l'un ni l'autre
+            $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //sinon c'est soit le prix d'aide cuisine s'il n'y a ni l'un ni l'autre
           }
-          else{
+          else {
             $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.hosts.price; // si le repas n'a pas d'invités (par précaution), c'est le prix de l'hôte
           }
           $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10; //sera utilisé pour viewMyMealDtld pour la phrase de variation de prix
@@ -63,8 +63,6 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       });
     });
   });
-  
-  
 
   function getCountry(country_code, jsonData) {
     for (var i = 0; i < jsonData.length; i++) {
@@ -73,6 +71,20 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       }
     }
   }
+
+  $scope.countPendingRequestsPerMeal = function(mealId) {
+    var numberOfPendingRequests = 0;
+    $scope.meals.forEach(function(meal) {
+      if (meal._id == mealId) {
+        meal.users.forEach(function(user) {
+          if (user.status == "pending") {
+            numberOfPendingRequests += 1;
+          }
+        });
+      }
+    });
+    return numberOfPendingRequests;
+  };
 
   $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
     for (var i = 0; i < $scope.meals.length; i++) {
@@ -188,7 +200,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   };
 
   //-------------- FILTERS --------------//
-  
+
   //code pour faire les filtres selon les weekDays
   $scope.weekDaysFilter = function(meal) { //permet de faire un filtre avec les jours de la semaine selectionnés
     if ($scope.filter.weekDays.some(checkIfWeekDaysSelected) == true) {
@@ -314,7 +326,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  
+
   //-------------- INITIALIZING --------------//
 
   $state.go("view_meals.mealsList");

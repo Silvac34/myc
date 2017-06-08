@@ -95,7 +95,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
           return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response) {
             return response;
           }, function errorCallback(response) {
-            $state.go("view_meals"); //il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
+            $state.go("view_meals.mealsList"); //il faudra changer ça dans le sens où l'utilisateur devra accéder à une page pour pouvoir s'inscrire au repas
           });
         },
         userResolve: function(userServicesFactory) {

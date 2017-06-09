@@ -334,22 +334,22 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       return meal; // si on a tout coché
     }
     else if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == false) {
-      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cleaners; // si on a coché que cooks et cleaners
+      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces > 0 && meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaner.nbRemainingPlaces > 0; // si on a coché que cooks et cleaners
     }
     else if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == false && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.simpleGuests; // si on a coché que cooks et simpleGuests
+      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces > 0 && meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces > 0; // si on a coché que cooks et simpleGuests
     }
     else if ($scope.filter.helpingTypeFilter.cooks == false && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.simpleGuests; // si on a coché que cleaners et simpleGuests
+      return meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces > 0 && meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
     }
     else if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == false && $scope.filter.helpingTypeFilter.simpleGuests == false) {
-      return meal.detailedInfo.requiredGuests.cooks; // si on a coché que cleaners et simpleGuests
+      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
     }
     else if ($scope.filter.helpingTypeFilter.cooks == false && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == false) {
-      return meal.detailedInfo.requiredGuests.cleaners; // si on a coché que cleaners et simpleGuests
+      return meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
     }
     else if ($scope.filter.helpingTypeFilter.cooks == false && $scope.filter.helpingTypeFilter.cleaners == false && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal.detailedInfo.requiredGuests.simpleGuests; // si on a coché que cleaners et simpleGuests
+      return meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
     }
     else { //on a rien coché
       return meal;

@@ -9,7 +9,7 @@ import pytz
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
 from bson import ObjectId, json_util
 import requests
-import threading
+from threading import Timer
 import json
 import base64
 import calculator
@@ -154,7 +154,8 @@ def addReviewRatingToUser(userId, rating):
         user.updateUser(userInfo)
     
 @celery.task()
-def sendNoticeIncomingMeal(meal):
+def sendNoticeIncomingMeal(mealId):
+    meal = Meal(_id = ObjectId(mealId)).getInfo()
     admin = User(_id = meal["admin"]).getUserAllInfo()
     for user in meal["users"]:
         participant = User(_id=user["_id"]).getUserAllInfo()
@@ -165,9 +166,9 @@ def sendNoticeIncomingMeal(meal):
         if user["role"][0] == "admin":
             text = participant["first_name"] +", this is a message to remember you that tonight, you host a meal."
         else:#text à mettre en forme
-            text = participant["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been approved. To see more details about the meal, click here : " + url_to_send
+            text = participant["first_name"] +", this is a message to remember you that tonight, you go to a meal."
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-        Timer(60.0, requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload)).start() # Lets send it
+        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     
 @Application.app.route('/')
 def homePage():
@@ -333,16 +334,19 @@ def before_storing_POST_meals (items):
                 price_notification = price["simpleGuestPrice"]
         sendNotificationPreference(meal, price_notification)
         #################
-def hello():
-    print("hello")
+def hello(value):
+    print(value)
 
 #POST api/meals
 def after_storing_POST_meals(items):
     for meal in items:
-        hoursBeforeNotice = 8
-        #timeBeforeNotice = (parser.parse(meal["time"])-datetime.datetime(1970,1,1)).total_seconds() - hoursBeforeNotice*60*60 #le temps doit être en secondes
-        threading.Timer(10, hello()).start()
-        #sendNoticeIncomingMeal(meal)
+        mealId = meal["_id"]
+        time = parser.parse(meal["time"]) - timedelta(hours=8) #on enverra le message 8heures avant que le repas ait lieu
+        time = time.replace(tzinfo=None) #on enlève le timezone pour ne pas dépendre de l'endroit où on est.
+        now = datetime.now() #moment où le repas est publié
+        timeBeforeNotice = (time-now).total_seconds() #le temps doit être en secondes
+        if(timeBeforeNotice > 0): #si le repas est publié assez tôt, on envoie le message, sinon, il ne se passe rien
+            Timer(timeBeforeNotice, sendNoticeIncomingMeal, [mealId]).start()
         
 #GET api/meals/private &  GET api/meals/private/<_id>
 def pre_get_privateMeals(request,lookup):

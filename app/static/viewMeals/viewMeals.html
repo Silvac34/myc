@@ -106,6 +106,22 @@
                     </div>
                   </div>
                 </div>
+                <div class="row" class="row-margin-filter">
+                  <span ng-click="isCollapsed.helpingType = !isCollapsed.helpingType" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.helpingType, 'glyphicon-triangle-right': isCollapsed.helpingType}"></i><span class="text-in-filter"><strong>Type of help</strong></span></span>
+                  <div uib-collapse="isCollapsed.helpingType" class="collapsing-filter">
+                    <div class="checkbox" style="bottom:10px;">
+                      <label>
+                              <input type="checkbox" ng-model="filter.helpingTypeFilter.cooks">Help cooking
+                        </label></br>
+                      <label>
+                            <input type="checkbox" ng-model="filter.helpingTypeFilter.cleaners">Help cleaning
+                        </label>
+                      <label>
+                            <input type="checkbox" ng-model="filter.helpingTypeFilter.simpleGuests">Simple guest
+                        </label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </fieldset>
           </form>

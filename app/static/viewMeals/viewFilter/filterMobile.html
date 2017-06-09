@@ -39,9 +39,15 @@
             </div>
         </div>
         <label class="control-label filter-label col-xs-12">Meal preferences</label>
-        <div class="checkbox">
-            <label style="margin-left:55px;"><input type="checkbox" ng-model="filter.preferenceFilter.veggies">Vegetarian</label>
+        <div class="checkbox text-center">
+            <label><input type="checkbox" ng-model="filter.preferenceFilter.veggies">Vegetarian</label>
             <label style="margin-left:15px;"><input type="checkbox" ng-model="filter.preferenceFilter.vegan">Vegan</label>
+        </div>
+        <label class="control-label filter-label col-xs-12">Type of help</label>
+        <div class="checkbox text-center">
+            <label><input type="checkbox" ng-model="filter.helpingTypeFilter.cooks">Cooking</label>
+            <label style="margin-left:10px;"><input type="checkbox" ng-model="filter.helpingTypeFilter.cleaners">Cleaning</label>
+            <label style="margin-left:10px;"><input type="checkbox" ng-model="filter.helpingTypeFilter.simpleGuests">Simple Guest</label>
         </div>
         <div class="row" style="text-align:center">
             <a class="btn btn-success btn-lg btn-filter-mobile-reinitialize" ng-click="cancel()">Validate</a>

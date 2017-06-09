@@ -157,17 +157,17 @@ def addReviewRatingToUser(userId, rating):
 def sendNoticeIncomingMeal(mealId):
     meal = Meal(_id = ObjectId(mealId)).getInfo()
     if(meal != False): #si le repas n'a pas été annulé
-        admin = User(_id = meal["admin"]).getUserAllInfo()
+        #admin = User(_id = meal["admin"]).getUserAllInfo()
         for user in meal["users"]:
             participant = User(_id=user["_id"]).getUserAllInfo()
             participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
-            meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-            local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
-            meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+            #meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+            #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+            #meal_time_formated = "{%H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if user["role"][0] == "admin":
-                text = participant["first_name"] +", this is a message to remember you that tonight, you host a meal."
+                text = participant["first_name"] +", you host an incoming meal. Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
             else:#text à mettre en forme
-                text = participant["first_name"] +", this is a message to remember you that tonight, you go to a meal."
+                text = participant["first_name"] +", you got an incoming meal! Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId + " (don't forget to bring cash to pay your host)."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
         
@@ -179,13 +179,13 @@ def sendCheersPreviousMeal(mealId):
         for user in meal["users"]:
             participant = User(_id=user["_id"]).getUserAllInfo()
             participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
-            meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-            local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
-            meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+            #meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+            #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+            #meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if user["role"][0] == "admin":
-                text = participant["first_name"] +", thank you for participating."
+                text = participant["first_name"] +", thank you very much for hosting yesterday. If you could let a review to your guests, that would be AMAZING : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
             else:#text à mettre en forme
-                text = participant["first_name"] +", thank you for participating."
+                text = participant["first_name"] +", thank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be INCREDIBLE : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     

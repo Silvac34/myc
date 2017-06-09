@@ -9,6 +9,7 @@ import pytz
 from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
 from bson import ObjectId, json_util
 import requests
+import threading
 import json
 import base64
 import calculator
@@ -151,6 +152,22 @@ def addReviewRatingToUser(userId, rating):
     else:
         userInfo = {"reviews."+ rating: 1}
         user.updateUser(userInfo)
+    
+@celery.task()
+def sendNoticeIncomingMeal(meal):
+    admin = User(_id = meal["admin"]).getUserAllInfo()
+    for user in meal["users"]:
+        participant = User(_id=user["_id"]).getUserAllInfo()
+        participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
+        meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+        local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+        meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+        if user["role"][0] == "admin":
+            text = participant["first_name"] +", this is a message to remember you that tonight, you host a meal."
+        else:#text à mettre en forme
+            text = participant["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been approved. To see more details about the meal, click here : " + url_to_send
+        payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+        Timer(60.0, requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload)).start() # Lets send it
     
 @Application.app.route('/')
 def homePage():
@@ -316,7 +333,16 @@ def before_storing_POST_meals (items):
                 price_notification = price["simpleGuestPrice"]
         sendNotificationPreference(meal, price_notification)
         #################
+def hello():
+    print("hello")
 
+#POST api/meals
+def after_storing_POST_meals(items):
+    for meal in items:
+        hoursBeforeNotice = 8
+        #timeBeforeNotice = (parser.parse(meal["time"])-datetime.datetime(1970,1,1)).total_seconds() - hoursBeforeNotice*60*60 #le temps doit être en secondes
+        threading.Timer(10, hello()).start()
+        #sendNoticeIncomingMeal(meal)
         
 #GET api/meals/private &  GET api/meals/private/<_id>
 def pre_get_privateMeals(request,lookup):
@@ -382,6 +408,7 @@ Application.app.on_pre_PATCH_privateUsers += pre_patch_privateUsers
 Application.app.on_fetched_resource_meals +=  before_returning_GET_meals
 Application.app.on_fetched_item_meals +=  before_returning_GET_item_meal
 Application.app.on_insert_meals +=  before_storing_POST_meals
+Application.app.on_inserted_meals +=  after_storing_POST_meals
 ### reviews resource ##
 Application.app.on_inserted_reviews +=  after_storing_POST_reviews
 ### privateMeals ressource ###

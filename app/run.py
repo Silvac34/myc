@@ -165,9 +165,9 @@ def sendNoticeIncomingMeal(mealId):
             #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
             #meal_time_formated = "{%H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if user["role"][0] == "admin":
-                text = participant["first_name"] +", you host an incoming meal. Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
+                text = participant["first_name"] +",\n you host an incoming meal. Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
             else:#text à mettre en forme
-                text = participant["first_name"] +", you got an incoming meal! Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId + " (don't forget to bring cash to pay your host)."
+                text = participant["first_name"] +",\n you got an incoming meal! Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId + " (don't forget to bring cash to pay your host)."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
         
@@ -183,9 +183,9 @@ def sendCheersPreviousMeal(mealId):
             #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
             #meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if user["role"][0] == "admin":
-                text = participant["first_name"] +", thank you very much for hosting yesterday. If you could let a review to your guests, that would be AMAZING : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
+                text = "Hello " + participant["first_name"] +",\n Thank you very much for hosting yesterday. If you could let reviews to your guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId +". Have a good day."
             else:#text à mettre en forme
-                text = participant["first_name"] +", thank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be INCREDIBLE : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
+                text = participant["first_name"] +",\n thank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId +". Have a good day."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     
@@ -363,10 +363,10 @@ def after_storing_POST_meals(items):
         mealId = meal["_id"]
         now = datetime.now() #moment où le repas est publié
         mealTime = parser.parse(meal["time"]).replace(tzinfo=None)
-        beforeMealTime = mealTime - timedelta(hours=8) #on enverra un message de rappel 8heures avant que le repas ait lieu
-        timeBeforeNotice = (beforeMealTime-now).total_seconds() #durée avant de déclencher le timer du rappel: 8h avant le repas - maintenant (en secondes)
-        if(timeBeforeNotice > 0): #si le repas est publié assez tôt, on envoie le message, sinon, il ne se passe rien
-            Timer(timeBeforeNotice, sendNoticeIncomingMeal, [mealId]).start()
+        #beforeMealTime = mealTime - timedelta(hours=4) #on enverra un message de rappel 8heures avant que le repas ait lieu
+        #timeBeforeNotice = (beforeMealTime-now).total_seconds() #durée avant de déclencher le timer du rappel: 8h avant le repas - maintenant (en secondes)
+        #if(timeBeforeNotice > 0): #si le repas est publié assez tôt, on envoie le message, sinon, il ne se passe rien
+            #Timer(timeBeforeNotice, sendNoticeIncomingMeal, [mealId]).start()
         afterMealTime = mealTime + timedelta(hours=16) #on enverra un message pour remercier les participants 16h après le repas 
         timeForCheering = (afterMealTime - now).total_seconds() #durée avant de déclencher le timer pour les remerciements: 16h après le repas - maintenant (en secondes)
         Timer(timeForCheering, sendCheersPreviousMeal, [mealId]).start()
@@ -413,9 +413,9 @@ def after_delete_privateMeals(item):
         local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
         meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
         if participant["_id"] == admin["_id"]:
-            text = participant["first_name"] +", all participants are now informed that your meal on " + meal_time_formated + " has been canceled."
+            text = participant["first_name"] +",\n all participants are now informed that your meal on " + meal_time_formated + " has been canceled."
         else:
-            text = participant["first_name"] +", " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + meal_time_formated + "." 
+            text = participant["first_name"] +",\n " + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + meal_time_formated + "." 
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
         requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
     
@@ -489,14 +489,14 @@ def subscribe_to_meal(meal_id):
                 meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"accepted"})
                 #code pour envoyer un message à l'hôte que quelqu'un s'est inscrit à son repas
                 if meal["nbRemainingPlaces"] == 0: #si dernière place alors on précise que le meal est full
-                    text = admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". Now, you meal is full."
+                    text = admin["first_name"] +",\n " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". Now, you meal is full."
                 else: 
-                    text = admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + "."
+                    text = admin["first_name"] +",\n " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + "."
             else: #si acceptation manuelle
                 meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#!/my_meals/" + request_url_split[5]
-                text = admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate this one."
+                text = admin["first_name"] +",\n " + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate this one."
             Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
@@ -572,7 +572,7 @@ def unsubscribe_to_meal(meal_id):
                 meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
                 local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
                 meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
-                text = admin["first_name"] +", " + participant["first_name"] + " " + participant["last_name"] + " unsubscribed to your meal on " + meal_time_formated + "."
+                text = admin["first_name"] +",\n " + participant["first_name"] + " " + participant["last_name"] + " unsubscribed to your meal on " + meal_time_formated + "."
                 payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
                 requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
                 break

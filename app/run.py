@@ -367,7 +367,7 @@ def after_storing_POST_meals(items):
         #timeBeforeNotice = (beforeMealTime-now).total_seconds() #durée avant de déclencher le timer du rappel: 8h avant le repas - maintenant (en secondes)
         #if(timeBeforeNotice > 0): #si le repas est publié assez tôt, on envoie le message, sinon, il ne se passe rien
             #Timer(timeBeforeNotice, sendNoticeIncomingMeal, [mealId]).start()
-        afterMealTime = mealTime + timedelta(hours=16) #on enverra un message pour remercier les participants 16h après le repas 
+        afterMealTime = mealTime + timedelta(hours=22) #on enverra un message pour remercier les participants 16h après le repas 
         timeForCheering = (afterMealTime - now).total_seconds() #durée avant de déclencher le timer pour les remerciements: 16h après le repas - maintenant (en secondes)
         Timer(timeForCheering, sendCheersPreviousMeal, [mealId]).start()
         

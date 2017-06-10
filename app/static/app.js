@@ -27,8 +27,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 
   $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
   $httpProvider.defaults.headers.common.Pragma = "no-cache"; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
-
-  $httpProvider.defaults.cache = true;
+  
   cfpLoadingBarProvider.includeSpinner = false;
 
   $stateProvider

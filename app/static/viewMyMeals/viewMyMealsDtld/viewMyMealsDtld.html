@@ -32,7 +32,7 @@
                                         <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
                                     </div>
                                     <div style="padding-top:4px">
-                                        <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(participant.gender)}}</br></span>
+                                        <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                         <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} years old</br></span>
                                         <span ng-if="participant.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{participant.country_of_origin.name}}</br></span>
                                     </div>

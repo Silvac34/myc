@@ -1,4 +1,5 @@
 /* app css stylesheet */
+
 @media (max-width: 767px) {
     .header {
         margin: auto;
@@ -110,20 +111,20 @@
     height: 120px;
 }
 
-.padding-top-10{
-    padding-top:10px;
+.padding-top-10 {
+    padding-top: 10px;
 }
 
-.padding-top-30{
-    padding-top:30px;
+.padding-top-30 {
+    padding-top: 30px;
 }
 
-.top-10{
-    top:10px;
+.top-10 {
+    top: 10px;
 }
 
-.top-30{
-    top:30px;
+.top-30 {
+    top: 30px;
 }
 
 @media (min-width: 768px) {
@@ -491,9 +492,9 @@ footer p {
         width: 55px;
         display: table-cell;
         vertical-align: bottom;
-        padding-left:0px;
-        padding-right:0px;
-        right:5px;
+        padding-left: 0px;
+        padding-right: 0px;
+        right: 5px;
     }
 }
 
@@ -502,8 +503,8 @@ footer p {
         width: 70px;
         display: table-cell;
         vertical-align: bottom;
-        padding-left:0px;
-        padding-right:0px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 }
 

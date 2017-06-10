@@ -12,6 +12,8 @@ var app = angular.module('myApp', [
   'myApp.viewLogin',
   'myApp.viewProfile',
   'myApp.welcome',
+  'myApp.viewLeaveReviews',
+  'myApp.viewManageRequests',
   'userServices',
   'angular-loading-bar',
   'ezfb',
@@ -27,7 +29,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 
   $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
   $httpProvider.defaults.headers.common.Pragma = "no-cache"; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
-  
+
   cfpLoadingBarProvider.includeSpinner = false;
 
   $stateProvider
@@ -163,6 +165,18 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         }
       }
     });
+  $stateProvider
+    .state('manage_requests', {
+      url: '/manage_requests',
+      templateUrl: 'static/viewManageRequests/viewManageRequests.html',
+      controller: 'ViewManageRequestsCtrl'
+    });
+  $stateProvider
+    .state('leave_reviews', {
+      url: '/leave_reviews',
+      templateUrl: 'static/viewLeaveReviews/viewLeaveReviews.html',
+      controller: 'ViewLeaveReviewsCtrl'
+    });
 
   $urlRouterProvider.otherwise('welcome');
 
@@ -278,3 +292,9 @@ app.filter('ageFilter', ['getAgeServiceFactory', function(getAgeServiceFactory) 
     return getAgeServiceFactory(birthdate);
   };
 }]);
+
+app.filter('capitalizeFirstLetter', function() {
+  return function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+});

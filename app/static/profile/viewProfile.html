@@ -215,7 +215,7 @@
                         <strong class="text-info size-16">{{user.first_name}} {{user.last_name}}</strong>
                     </div>
                     <div class="hidden-xs" style="padding-top:10px">
-                        <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(user.gender)}}</br></span>
+                        <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{user.gender | capitalizeFirstLetter}}</br></span>
                         <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
                         <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
                         <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <div id="profile-list-information-other-user" class="hidden-sm hidden-md hidden-lg" style="padding-top:10px">
-                    <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{capitalizeFirstLetter(user.gender)}}</br></span>
+                    <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{user.gender | capitalizeFirstLetter}}</br></span>
                     <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
                     <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
                     <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>

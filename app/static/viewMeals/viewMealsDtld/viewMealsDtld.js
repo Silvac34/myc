@@ -44,10 +44,6 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     });
   }
 
-  $scope.capitalizeFirstLetter = function(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   var setValue = function(variable) {
     if (typeof variable === 'undefined') {
       return undefined;

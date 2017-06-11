@@ -18,7 +18,8 @@ var app = angular.module('myApp', [
   'angular-loading-bar',
   'ezfb',
   'getReviewService',
-  'getAgeService'
+  'getAgeService',
+  'angular.filter'
 ]);
 
 app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {

@@ -72,8 +72,10 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
 
   $scope.countMealWithPendingRequest = function() {
     var numberOfMealWithPendingRequest = 0;
+    var now = new Date;
     $scope.meals.forEach(function(meal) {
-      if (meal.admin._id == $scope.$parent.$root.user._id) {//il faut que l'utilisateur soit bien l'admin du repas
+      var mealTime = new Date(meal.time);
+      if (meal.admin._id == $scope.$parent.$root.user._id && now < mealTime) { //il faut que l'utilisateur soit bien l'admin du repas
         meal.users.forEach(function(user) {
           if (user.status == "pending") {
             numberOfMealWithPendingRequest += 1;

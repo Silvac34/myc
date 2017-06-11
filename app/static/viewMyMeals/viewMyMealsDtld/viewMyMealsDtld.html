@@ -14,8 +14,8 @@
                     <h3 class="panel-title">You have a pending request</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row" ng-repeat="participant in meal.users">
-                        <div ng-if="participant.status == 'pending'" class="my-meal-dtld-list-pending-user">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.status == 'pending'">
+                        <div class="my-meal-dtld-list-pending-user">
                             <div>
                                 <strong>Requested role:</strong> <span style="margin-right:10px"><span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span></span>
                                 <span class="hidden-sm hidden-md hidden-lg"></br></span>
@@ -167,8 +167,8 @@
                     <div class="row">
                         <div class="text-primary size-20">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
                     </div>
-                    <div class="row" ng-repeat="participant in meal.users">
-                        <div ng-if="participant.role[0] == 'admin'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'admin'">
+                        <div style="padding-top:10px">
                             <div class="pull-left">
                                 <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
@@ -214,8 +214,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="row" ng-repeat="participant in meal.users">
-                        <div ng-if="participant.role[0] == 'cook' && participant.status == 'accepted'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'cook'">
+                        <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
@@ -239,7 +239,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div ng-if="participant.role[0] == 'cook' && participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
+                        <div ng-if="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
                 </div>
             </div>
@@ -262,8 +262,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="row" ng-repeat="participant in meal.users">
-                        <div ng-if="participant.role[0] == 'cleaner' && participant.status == 'accepted'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'cleaner' && participant.status == 'accepted'">
+                        <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
@@ -287,7 +287,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div ng-if="participant.role[0] == 'cleaner' && participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
+                        <div ng-if="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
                 </div>
             </div>
@@ -310,8 +310,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <div class="row" ng-repeat="participant in meal.users">
-                        <div ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'accepted'" style="padding-top:10px">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'accepted'">
+                        <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
                                 <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a><span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                     <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
@@ -335,7 +335,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
+                        <div ng-if="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList">Pending request</span></div>
                     </div>
                 </div>
             </div>

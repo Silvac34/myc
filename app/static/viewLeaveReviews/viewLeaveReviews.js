@@ -35,7 +35,7 @@ angular.module('myApp.viewLeaveReviews', [])
                         uniqueList.splice(index, 1);
                     }
                 });
-                initializeReviews(uniqueList);
+                initializeReviews(uniqueList.reverse());
             });
         });
 

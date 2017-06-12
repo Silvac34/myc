@@ -18,7 +18,7 @@
                     <div ng-repeat="meal in dataForReview | groupBy: 'mealAssociated'">
                         <div class="text-info"><img src="static/sources/createMeal/cutlery_menu.png" style="position:relative;bottom:3px"> <strong style="font-size:large">{{meal[0].mealTitle}}</strong></div>
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6" ng-repeat="review in meal" ng-if="review.sent == false">
+                            <div class="col-xs-12" ng-repeat="review in meal" ng-if="review.sent == false">
                                 <div class="clear10" ng-show="$first==true"></div>
                                 <div class="clear10"></div>
                                 <div class="pull-left">

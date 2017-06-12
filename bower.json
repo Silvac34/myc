@@ -22,6 +22,7 @@
     "angular-easyfb": "^1.1.0",
     "ngAutocomplete": "",
     "ngmap": "^1.18.4",
-    "angular-sanitize" : "^1.6.4"
+    "angular-sanitize" : "^1.6.4",
+    "angular-filter": "^0.5.16"
   }
 }

@@ -124,8 +124,8 @@ module.exports = function(grunt) {
             InitStageDB : {
                 command: [
                     'mongo ds129600.mlab.com:29600/mycommuneatydb_stage -u dkohn -p SharEat3santiago --eval "db.users.remove({})"',
+                    'mongo ds131320.mlab.com:29600/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.reviews.remove({})"',
                     'mongo ds129600.mlab.com:29600/mycommuneatydb_stage -u dkohn -p SharEat3santiago --eval "db.meals.remove({})"',
-                    'mongo ds131320.mlab.com:31320/mycommuneatydb_dev -u dkohn -p SharEat3santiago --eval "db.reviews.remove({})"',
                     'mongoimport -h ds129600.mlab.com:29600 -d mycommuneatydb_stage -c meals -u dkohn -p SharEat3santiago --file test/testData/meals_testData.json --jsonArray',
                     'mongoimport -h ds129600.mlab.com:29600 -d mycommuneatydb_stage -c reviews -u dkohn -p SharEat3santiago --file test/testData/reviews_testData.json --jsonArray',
                     'mongoimport -h ds129600.mlab.com:29600 -d mycommuneatydb_stage -c users -u dkohn -p SharEat3santiago --file test/testData/users_testData.json --jsonArray'

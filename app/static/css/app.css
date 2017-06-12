@@ -127,6 +127,20 @@
     top: 30px;
 }
 
+/* function pull xs et sm-md-lg*/
+@media (min-width: 768px) {
+    .pull-right-sm-md-lg{
+        float:right !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .pull-left-xs{
+        float:left !important;
+    }
+}
+
+
 @media (min-width: 768px) {
     .page-separation-title {
         padding: 9px 0 9px 7px;

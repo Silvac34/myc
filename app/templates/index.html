@@ -85,8 +85,8 @@
                 <a uib-dropdown-toggle class="dropdown-toggle">
                   <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
                 <ul uib-dropdown-menu class="dropdown-menu">
-                  <li><a ui-sref="manage_requests" ng-click="$parent.navbarCollapsed=true">Manage requests</a></li>
-                  <li><a ui-sref="leave_reviews" ng-click="$parent.navbarCollapsed=true">Leave reviews</a></li>
+                  <li><a ui-sref="manage_requests" ui-sref-opts="{reload: true}" ng-click="$parent.navbarCollapsed=true">Manage requests</a></li>
+                  <li><a ui-sref="leave_reviews" ui-sref-opts="{reload: true}" ng-click="$parent.navbarCollapsed=true">Leave reviews</a></li>
                   <li class="divider"></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>

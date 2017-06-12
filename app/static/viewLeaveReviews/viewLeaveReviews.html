@@ -4,7 +4,7 @@
         <div class="clear10"></div>
         Loading, please wait...
     </div>
-    <div class="text-info text-center general-title fade-out-success" style="display:grid;min-height:360px" ng-show="dataForReview.length == 0">
+    <div class="text-info text-center general-title" style="display:grid;min-height:360px" ng-show="dataForReview.length == 0">
         <div class="clear10"></div>
         You do not have reviews to leave
     </div>
@@ -12,70 +12,41 @@
         <div class="col-xs-12">
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <h3 class="panel-title">You can leave {{dataForReview.length}} review<span ng-if="dataForReview.length > 1">s</span></h3>
+                    <h3 class="panel-title">How was your experience with those {{dataForReview.length}} person<span ng-if="dataForReview.length > 1">s</span></h3>
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="meal in dataForReview | groupBy: 'mealAssociated'">
                         <div class="text-info"><img src="static/sources/createMeal/cutlery_menu.png" style="position:relative;bottom:3px"> <strong style="font-size:large">{{meal[0].mealTitle}}</strong></div>
-                        <div ng-repeat="review in meal">
-                            {{review}}
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="participant in meal.users" ng-if="participant.status == 'pending'">
-                                    <div class="my-meal-dtld-list-pending-user">
-                                        <div>
-                                            <strong>Requested role:</strong> <span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span>
-                                            <span class="pull-right">
-                                    <a class="btn btn-success btn-xs" ng-click="validateSubscription()">Accept</a>
-                                    <a class="btn btn-danger btn-xs" ng-click="refuseSubscription()">Refuse</a>
-                                    </span>
-                                        </div>
-                                        <div class="clear10"></div>
-                                        <div style="position:relative">
-                                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" />
-                                            <div style="position:relative; left:10px;">
-                                                <div>
-                                                    <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
-                                                </div>
-                                                <div style="padding-top:4px">
-                                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
-                                                    <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} years old</br></span>
-                                                    <span ng-if="participant.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{participant.country_of_origin.name}}</br></span>
-                                                </div>
-                                                <span class="hidden-sm hidden-md hidden-lg" ng-if="!participant.reviews"></br></span>
-                                                <div>
-                                                    <div class="well well-sm well-resume-rating" ng-if="participant.reviews.positive || participant.reviews.neutral || participant.reviews.negative">
-                                                        <table style="text-align:center">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td ng-if="participant.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
-                                                                    <td ng-if="participant.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
-                                                                    <td ng-if="participant.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
-                                                                </tr>
-                                                                <tr style="font-size:11px">
-                                                                    <td ng-if="participant.reviews.positive" style="padding-right:4px">{{participant.reviews.positive}}</td>
-                                                                    <td ng-if="participant.reviews.neutral" style="padding:0px 4px">{{participant.reviews.neutral}}</td>
-                                                                    <td ng-if="participant.reviews.negative" style="padding-left:4px">{{participant.reviews.negative}}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <a ui-sref="profile({userId: participant._id})"><em><u>see reviews</u></em></a>
-                                                    </div>
-                                                </div>
-                                                <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:15px 10px 10px 0px;" ng-if="participant.presentation">
-                                                    "<em>{{participant.presentation}}</em>"
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6" ng-repeat="review in meal" ng-if="review.sent == false">
+                                <div class="clear10" ng-show="$first==true"></div>
+                                <div class="clear10"></div>
+                                <div class="pull-left">
+                                    <a ui-sref="profile({userId: review.forUser.datas._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{review.forUser.datas.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList my-meal-dtld-guestList-old" style="padding-right:5px">{{review.forUser.datas.first_name}} {{review.forUser.datas.last_name}}</a>
                                     </div>
-                                    <div class="clear10"></div>
+                                    <div class="clear10 hidden-sm hidden-md hidden-lg"></div>
+                                    <div class="pull-right-sm-md-lg pull-left-xs" ng-class="{'margintop7': checkAlreadyReviewed(review.unique) == true}">
+                                        <span class="form-group">
+                                            <span ng-hide="getDataForReview(review.unique, 'rating') != 'positive' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'positive' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'positive' && checkAlreadyReviewed(review.unique) == true}"
+                                    uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                        <span ng-hide="getDataForReview(review.unique, 'rating') != 'neutral' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'neutral' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'neutral' && checkAlreadyReviewed(review.unique) == true}"
+                                    uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                        <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'negative')" ng-hide="getDataForReview(review.unique, 'rating') != 'negative' && checkAlreadyReviewed(review.unique) == true"
+                                            ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'negative' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'negative' && checkAlreadyReviewed(review.unique) == true}"
+                                            uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span>
+                                        <input type="text" ng-model="review.forUser.comment" class="form-control my-meal-dtld-input-review" placeholder="Leave a review to {{review.forUser.datas.first_name}}" ng-hide="checkAlreadyReviewed(review.unique) == true">
+                                        <span ng-show="checkAlreadyReviewed(review.unique) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(review.unique, 'comment')}}</em>"</span>
+                                        <a ng-click="sendReview(review.unique, review.forUser.role, 'comment', review.forUser.comment)" ng-hide="checkAlreadyReviewed(review.unique) == true" class="btn btn-default" ng-disabled="!getDataForReview(review.unique, 'rating')"
+                                            uib-tooltip="Grade {{review.forUser.datas.first_name}} first" tooltip-placement="top" tooltip-enable="!getDataForReview(review.unique, 'rating')">Send</a>
+                                        </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="clear10" ng-hide="$last==true"></div>
                         <hr class="clear10" ng-hide="$last==true">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

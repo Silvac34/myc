@@ -307,7 +307,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                     delete $scope.dataForReview[index].sent;
                     $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
                         $scope.dataForReview[index]['sent'] = true; //on ajoute cet attribut pour modifier la vue HTML des références
-                        console.log($scope.dataForReview[index]);
                     }, function errorCallback(response) {
                         $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
                     });

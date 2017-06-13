@@ -157,10 +157,9 @@
     }
 }
 
-.page-separation-title {
-    padding-bottom: 9px;
-    margin: 0 0 10px;
-    border-bottom: 1px solid #eeeeee;
+/* puts the google places autocomplete dropdown results above the bootstrap modal 1050 zindex.*/
+.pac-container {
+    z-index: 1051 !important;
 }
 
 .general-title {
@@ -1229,3 +1228,4 @@ h2.slogan {
     position: relative;
     left: 10px;
 }
+

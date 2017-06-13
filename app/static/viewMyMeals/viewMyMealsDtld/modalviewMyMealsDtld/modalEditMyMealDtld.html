@@ -35,7 +35,7 @@
                             <i class="glyphicon glyphicon glyphicon-calendar"></i>
                         </div>
                         <input type="text" style="text-indent:20px" class="form-control" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="meal.time" is-open="date_popup.opened" datepicker-options="dateOptions"
-                            ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
+                            ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" value="{{meal.time | date:'HH:mm'}}"/>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-10" style="max-width:100px">
@@ -161,7 +161,8 @@
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">
-                        <a class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); editMyMeal()">Edit</a>
+                        <a class="btn btn-default btn-md" ng-click="cancel();" style="margin:0px 10px">Cancel</a>
+                        <a class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); editMyMeal()" style="margin:0px 10px">Edit</a>
                     </div>
                 </div>
             </div>

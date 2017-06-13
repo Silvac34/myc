@@ -200,7 +200,7 @@ LOGIN API
 @Application.app.route('/auth/facebook', methods=['POST'])
 def auth_facebook():
     access_token_url = 'https://graph.facebook.com/v2.9/oauth/access_token'
-    graph_api_url = 'https://graph.facebook.com/v2.9/me?fields=id,email,last_name,first_name,link,gender,picture.type(large),birthday'
+    graph_api_url = 'https://graph.facebook.com/v2.9/me?fields=id,email,last_name,first_name,link,gender,picture.type(large)'
     params = {
         'client_id': request.json['clientId'],
         'redirect_uri': request.json['redirectUri'],
@@ -220,7 +220,6 @@ def auth_facebook():
     currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
-    print(profile)
     if hasattr(currentUser,"picture"):
         if currentUser["picture"] != profile["picture"]:
             userInfo["picture"] = profile["picture"]

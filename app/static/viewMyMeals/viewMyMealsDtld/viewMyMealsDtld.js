@@ -57,7 +57,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 templateUrl: 'static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalEditMyMealDtld.html',
                 controller: 'modalEditInstanceCtrl',
                 size: "lg",
-                scope: $scope
+                resolve: {
+                    _etag: function() {
+                        return $scope.meal._etag;
+                    }, //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+                    meal: function() {
+                        return $scope.meal;
+                    }
+                }
             });
         }
     };
@@ -343,13 +350,14 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 });
 
-modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state) {
-
-    $scope.autocompleteAddress = $scope.meal.privateInfo.address.name + ", " + $scope.meal.address.town;
+modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal, _etag) {
+    $scope.meal = meal;
     $scope.addressComplement = $scope.meal.privateInfo.address.complement;
     $scope.currency_symbol = $scope.meal.price.split(" ")[0];
     $scope.meal.priceToEdit = Number($scope.meal.price.split(" ")[1]);
-    
+    $scope.meal.time = new Date($scope.meal.time);
+    $scope.autocompleteAddress = $scope.meal.privateInfo.address.name + ", " + $scope.meal.address.town+ ", " + $scope.meal.address.country;
+
     $scope.editMyMeal = function(meal_id, _etag) {
         var dataToPerfom = {};
         var config = {
@@ -400,9 +408,12 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 
     //enable animations in the modal
     $scope.animationsEnabled = true;
-
-    /*$scope.meal = meal;
-    $scope.nbCooksInscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
+    /*if ($scope.meal.detailedInfo.requiredGuests.cooks != undefined) {
+        $scope.nbCooksInscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
+    }
+    else{
+      $scope.nbCooksInscribed = 0;  
+    }
     if ($scope.meal.detailedInfo.requiredGuests.cleaners != undefined) {
         $scope.nbCleanersInscribed = $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
     }
@@ -414,7 +425,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     }
     else {
         $scope.nbSimpleGuestsInscribed = 0;
-    }
+    }*/
     $scope.edit = function() {
         if (($scope.nbCooksInscribed <= ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || $scope.nbCooksInscribed == undefined) && ($scope.nbCleanersInscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || $scope.nbCleanersInscribed == undefined) && ($scope.nbSimpleGuestsInscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests || $scope.nbSimpleGuestsInscribed == undefined)) {
             $scope.editMyMeal($scope.meal._id);

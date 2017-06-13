@@ -138,7 +138,7 @@ def sendNotificationPreference(meal, mealPrice):
         if(user['_id'] != meal['admin']):
             text = user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
             payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
         
 @celery.task()
 def addReviewRatingToUser(userId, rating):
@@ -169,7 +169,7 @@ def sendNoticeIncomingMeal(mealId):
             else:#text à mettre en forme
                 text = participant["first_name"] +",\nyou got an incoming meal! Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId + " (don't forget to bring cash to pay your host)."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
         
 @celery.task()
 def sendCheersPreviousMeal(mealId):
@@ -187,8 +187,7 @@ def sendCheersPreviousMeal(mealId):
             else:#text à mettre en forme
                 text = participant["first_name"] +",\nthank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId +". Have a good day."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
-    
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     
 @Application.app.route('/')
 def homePage():
@@ -200,8 +199,8 @@ LOGIN API
 
 @Application.app.route('/auth/facebook', methods=['POST'])
 def auth_facebook():
-    access_token_url = 'https://graph.facebook.com/v2.3/oauth/access_token'
-    graph_api_url = 'https://graph.facebook.com/v2.5/me?fields=id,email,last_name,first_name,link, gender,picture.type(large)'
+    access_token_url = 'https://graph.facebook.com/v2.9/oauth/access_token'
+    graph_api_url = 'https://graph.facebook.com/v2.9/me?fields=id,email,last_name,first_name,link,gender,picture.type(large),birthday'
     params = {
         'client_id': request.json['clientId'],
         'redirect_uri': request.json['redirectUri'],
@@ -221,6 +220,7 @@ def auth_facebook():
     currentUser = user.getUserAllInfo()
     #Store data from facebook
     userInfo = {}
+    print(profile)
     if hasattr(currentUser,"picture"):
         if currentUser["picture"] != profile["picture"]:
             userInfo["picture"] = profile["picture"]
@@ -417,7 +417,7 @@ def after_delete_privateMeals(item):
         else:
             text = participant["first_name"] +",\n" + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + meal_time_formated + "." 
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     
 
 # PATCH api/meals/private/<_id>
@@ -499,7 +499,7 @@ def subscribe_to_meal(meal_id):
                 text = admin["first_name"] +",\n" + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". You chose to validate manually the bookings of your meal. Please, go to " + url_to_send + " to validate this one."
             Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
             payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
             return Response(status=200)
             
 
@@ -541,7 +541,7 @@ def validate_a_subscription(meal_id, participant_id):
                     meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
                     meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
                 payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
                 Application.app.data.driver.db.meals.update_one({"_id":meal_id}, {"$set":meal}) #applique les changements pour le repas
         return Response(status=200)
             
@@ -574,7 +574,7 @@ def unsubscribe_to_meal(meal_id):
                 meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
                 text = admin["first_name"] +",\n" + participant["first_name"] + " " + participant["last_name"] + " unsubscribed to your meal on " + meal_time_formated + "."
                 payload = {'recipient': {'user_ref': admin_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
                 break
         for r in roles :
             meal["detailedInfo"]["requiredGuests"][r + "s"]["nbRemainingPlaces"] +=1
@@ -625,7 +625,7 @@ def webhook():
       #print(sender)
       #payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}} # We're going to send this back
       #print(payload)
-      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_FACEBOOK'], json=payload) # Lets send it
+      #r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     except Exception as e:
       print traceback.format_exc() # something went wrong
   elif request.method == 'GET': # For the initial verification

@@ -34,9 +34,9 @@
                     <div class="form-group" ng-class="{'has-error': createMealForm.formDate.$invalid && createMealForm.formDate.$submitted}">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-calendar"></i>
-                            <input type="text" class="form-control" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
-                                close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
                         </div>
+                        <input type="text" class="form-control" style="text-indent:20px" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
+                            close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-10" style="max-width:100px">

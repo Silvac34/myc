@@ -49,22 +49,18 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         }
     };
 
-
-    //modalEdit to delete a meal
-    /*$scope.openModalEdit = function() {
-
-      $uibModal.open({
-        animation: true,
-        templateUrl: '/static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalEditMyMealDtld.html',
-        controller: 'modalEditInstanceCtrl',
-        size: "lg",
-        resolve: {
-          meal: function() {
-              return $scope.meal;
-            } //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
+    //modalEdit to edit a meal
+    $scope.openModalEdit = function() {
+        if ($scope.isOldMeal() != true) {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'static/viewMyMeals/viewMyMealsDtld/modalviewMyMealsDtld/modalEditMyMealDtld.html',
+                controller: 'modalEditInstanceCtrl',
+                size: "lg",
+                scope: $scope
+            });
         }
-      });
-    };*/
+    };
 
     //modalUnsubscribe to unsubscribe to a meal
     $scope.openModalUnsubscribe = function() {
@@ -347,26 +343,37 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 });
 
-modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
+modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state) {
 
-    $scope.editMyMeal = function(meal_id) {
-        $http.patch('/api/meals/private/' + meal_id).then(function(response) {
+    $scope.autocompleteAddress = $scope.meal.privateInfo.address.name + ", " + $scope.meal.address.town;
+    $scope.addressComplement = $scope.meal.privateInfo.address.complement;
+    $scope.currency_symbol = $scope.meal.price.split(" ")[0];
+    $scope.meal.priceToEdit = Number($scope.meal.price.split(" ")[1]);
+    
+    $scope.editMyMeal = function(meal_id, _etag) {
+        var dataToPerfom = {};
+        var config = {
+            headers: {
+                "If-Match": _etag
+            }
+        };
+        $http.patch('/api/meals/private/' + meal_id, dataToPerfom, config).then(function(response) {
             //rajouter en fonction de la réponse un popup ?
         });
     };
-
     //required for the calendar toolbar (datamodel : editedMeal.time)
 
     $scope.dateOptions = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-        },
+        formatYear: 'yy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+    };
 
-        $scope.clear = function() {
-            $scope.editedMeal.time = null;
-        };
+
+    $scope.clear = function() {
+        $scope.editedMeal.time = null;
+    };
 
     $scope.date_open = function() {
         $scope.date_popup.opened = true;
@@ -377,25 +384,24 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     };
 
     //date formats for datepicker
-    $scope.date_format = 'dd-MMM-yyyy';
+    $scope.date_formats = ['EEEE dd MMMM yyyy', 'dd-MMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.date_format = $scope.date_formats[0];
     $scope.altInputDateFormats = ['M!/d!/yyyy'];
 
     //required for the calendar toolbar (datamodel : editedMeal.time)
 
     $scope.ismeridian = false;
-    $scope.mstep = 15;
+    $scope.mstep = 10;
 
-    $scope.formPopoverTimepickerMM = {
-        title: 'Hora de la cena',
-        templateUrl: 'PopoverTimepickerTemplateMM.html'
+    $scope.formPopoverTimepicker = {
+        title: 'Time of the meal',
+        templateUrl: '../static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'
     };
 
-    $scope.formPopoverTimepickerTimeCooking = {
-        title: 'Llegada de los que ayudan a cocinar',
-        templateUrl: 'PopoverTimepickerTemplateTimeCooking.html'
-    };
+    //enable animations in the modal
+    $scope.animationsEnabled = true;
 
-    $scope.meal = meal;
+    /*$scope.meal = meal;
     $scope.nbCooksInscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
     if ($scope.meal.detailedInfo.requiredGuests.cleaners != undefined) {
         $scope.nbCleanersInscribed = $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
@@ -419,8 +425,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 
     $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
-    }; //funcion to dismiss the modal
-
+    }; //funcion to dismiss the modal*/
 });
 
 modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {

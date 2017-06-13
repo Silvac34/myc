@@ -989,13 +989,20 @@ footer p {
 }
 
 @media (max-width: 767px) {
-    .my-meal-dtld-delete {
+    .my-meal-dtld-edit {
+        position:relative;
+        right: 63px;
+    }
+}
+
+@media (max-width: 767px) {
+    .my-meal-dtld-button {
         margin-top: -22px;
     }
 }
 
 @media (min-width: 768px) {
-    .my-meal-dtld-delete {
+    .my-meal-dtld-button {
         margin-top: -10px;
     }
 }
@@ -1028,6 +1035,10 @@ footer p {
 
 .margintop7 {
     margin-top: 7px;
+}
+
+.marginright10 {
+    margin-right: 10px;
 }
 
 .fade-out-success.ng-hide {

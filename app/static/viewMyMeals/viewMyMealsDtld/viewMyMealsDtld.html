@@ -71,8 +71,9 @@
     <div class="clear10"></div>
     <div class="row">
         <div class="col-xs-12 text-center meal-dtld-menu text-info">
-            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalDelete()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Delete</button>
-            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-delete" ng-click="openModalUnsubscribe()" ng-if="userRole!='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Unsubscribe</button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-button" ng-click="openModalDelete()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Delete</button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-button my-meal-dtld-edit marginright10" ng-click="openModalEdit()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-edit"></span></strong> Edit</button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-button" ng-click="openModalUnsubscribe()" ng-if="userRole!='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> Unsubscribe</button>
             <strong style="font-size:large">{{meal.menu.title}}</strong>
         </div>
     </div>

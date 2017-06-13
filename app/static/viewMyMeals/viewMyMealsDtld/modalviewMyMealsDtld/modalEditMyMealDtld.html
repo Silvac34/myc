@@ -65,17 +65,17 @@
                         </tr>
                         <tr class="table-meal-border">
                                 <td style="vertical-align:middle"><span uib-tooltip="People will help you for cooking" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cooking</span></td>
-                                <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
+                                <td class="text-center"><input type="number" min="{{nbCooksSubscribed}}" class="form-control text-center" id="inputCooks" ng-model="meal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
                                 <td class="text-center" ng-class="{'has-error': checkTimeCooking() && editMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model="meal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
                         </tr>
                         <tr class="table-meal-border">
                             <td style="vertical-align:middle"><span uib-tooltip="People will help you for cleaning" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cleaning</span></td>
-                            <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
+                            <td class="text-center"><input type="number" min="{{nbCleanersSubscribed}}" class="form-control text-center" id="inputCleaners" ng-model="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                             <td class="text-center"><input type="time" class="form-control text-center" ng-model="meal.detailedInfo.requiredGuests.cleaners.timeCleaning"></td>
                         </tr>
                         <tr class="table-meal-border">
                             <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you and your helpers a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
-                            <td class="text-center"><input type="number" min="0" class="form-control text-center" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
+                            <td class="text-center"><input type="number" min="{{nbSimpleGuestsSubscribed}}" class="form-control text-center" id="inputSimpleGuests" ng-model="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                             <td class="text-center" style="vertical-align:middle"><span ng-show="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{meal.time | date:'HH:mm'}}</span></td>
                         </tr>
                         <tr class="table-meal-border table-meal-border-bottom">
@@ -162,7 +162,7 @@
                 <div class="form-group">
                     <div class="form-btn-center">
                         <a class="btn btn-default btn-md" ng-click="cancel();" style="margin:0px 10px">Cancel</a>
-                        <a class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); editMyMeal()" style="margin:0px 10px">Edit</a>
+                        <a class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); edit()" style="margin:0px 10px">Edit</a>
                     </div>
                 </div>
             </div>

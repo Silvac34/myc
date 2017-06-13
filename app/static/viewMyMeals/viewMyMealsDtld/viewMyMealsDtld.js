@@ -322,24 +322,22 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
 modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, _etag, meal) {
 
-    $scope.deleteMyMeal = function(meal_id, _etag) {
-
-        $http.delete('/api/meals/private/' + meal_id, {
+    $scope.delete = function() {
+        var config = {
             headers: {
                 "If-Match": _etag
             }
-        }).then(function(response) {
+        };
+        $http.delete('/api/meals/private/' + meal._id, config).then(function successCallBack(response) {
+            $uibModalInstance.close();
+            $state.go('view_meals', {
+                reload: true,
+                inherit: false,
+                notify: false
+            });
             //rajouter en fonction de la réponse un popup ?
-        });
-    };
-
-    $scope.delete = function() {
-        $scope.deleteMyMeal(meal._id, _etag);
-        $uibModalInstance.close();
-        $state.go('view_meals', {
-            reload: true,
-            inherit: false,
-            notify: false
+        }, function errorCallBack(response) {
+            console.log("We could not delete the meal");
         });
 
     }; //function to validate the modal
@@ -356,19 +354,8 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.currency_symbol = $scope.meal.price.split(" ")[0];
     $scope.meal.priceToEdit = Number($scope.meal.price.split(" ")[1]);
     $scope.meal.time = new Date($scope.meal.time);
-    $scope.autocompleteAddress = $scope.meal.privateInfo.address.name + ", " + $scope.meal.address.town+ ", " + $scope.meal.address.country;
+    $scope.autocompleteAddress = $scope.meal.privateInfo.address.name + ", " + $scope.meal.address.town + ", " + $scope.meal.address.country;
 
-    $scope.editMyMeal = function(meal_id, _etag) {
-        var dataToPerfom = {};
-        var config = {
-            headers: {
-                "If-Match": _etag
-            }
-        };
-        $http.patch('/api/meals/private/' + meal_id, dataToPerfom, config).then(function(response) {
-            //rajouter en fonction de la réponse un popup ?
-        });
-    };
     //required for the calendar toolbar (datamodel : editedMeal.time)
 
     $scope.dateOptions = {
@@ -408,31 +395,43 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
 
     //enable animations in the modal
     $scope.animationsEnabled = true;
-    /*if ($scope.meal.detailedInfo.requiredGuests.cooks != undefined) {
-        $scope.nbCooksInscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
-    }
-    else{
-      $scope.nbCooksInscribed = 0;  
-    }
-    if ($scope.meal.detailedInfo.requiredGuests.cleaners != undefined) {
-        $scope.nbCleanersInscribed = $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
+
+    if ($scope.meal.detailedInfo.requiredGuests.cooks) {
+        $scope.nbCooksSubscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
     }
     else {
-        $scope.nbCleanersInscribed = 0;
+        $scope.nbCooksSubscribed = 0;
     }
-    if ($scope.meal.detailedInfo.requiredGuests.simpleGuests != undefined) {
-        $scope.nbSimpleGuestsInscribed = $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces;
+    if ($scope.meal.detailedInfo.requiredGuests.cleaners) {
+        $scope.nbCleanersSubscribed = $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
     }
     else {
-        $scope.nbSimpleGuestsInscribed = 0;
-    }*/
-    $scope.edit = function() {
-        if (($scope.nbCooksInscribed <= ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - 1) || $scope.nbCooksInscribed == undefined) && ($scope.nbCleanersInscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners || $scope.nbCleanersInscribed == undefined) && ($scope.nbSimpleGuestsInscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests || $scope.nbSimpleGuestsInscribed == undefined)) {
-            $scope.editMyMeal($scope.meal._id);
-            $uibModalInstance.close();
-            $state.reload();
+        $scope.nbCleanersSubscribed = 0;
+    }
+    if ($scope.meal.detailedInfo.requiredGuests.simpleGuests) {
+        $scope.nbSimpleGuestsSubscribed = $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces;
+    }
+    else {
+        $scope.nbSimpleGuestsSubscribed = 0;
+    }
+
+    $scope.edit = function(meal_id, _etag) {
+        if (($scope.meal.detailedInfo.requiredGuests.cooks && $scope.nbCooksSubscribed <= $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks) &&
+            ($scope.meal.detailedInfo.requiredGuests.cleaners && $scope.nbCleanersSubscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners) &&
+            ($scope.meal.detailedInfo.requiredGuests.simpleGuests && $scope.nbSimpleGuestsSubscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests)) {
+            var dataToPerfom = {};
+            var config = {
+                headers: {
+                    "If-Match": _etag
+                }
+            };
+            $http.patch('/api/meals/private/' + meal_id, dataToPerfom, config).then(function successCallBack(response) {
+                $uibModalInstance.close();
+                $state.reload();
+                //rajouter en fonction de la réponse un popup ?
+            });
         }
-    }; //function to validate the modal
+    };
 
     $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');

@@ -422,6 +422,8 @@ def after_delete_privateMeals(item):
 # PATCH api/meals/private/<_id>
 def pre_patch_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
+    print(request)
+    print(lookup)
     
 ### reviews ###
 def after_storing_POST_reviews(items):
@@ -586,6 +588,7 @@ def unsubscribe_to_meal(meal_id):
 def calculate_price_meal(meal_id):
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
+    print(meal)
     priceUnit = meal["price"] / meal["nbGuests"]
     priceTotalCurrent = priceUnit * (meal["nbGuests"] - meal["nbRemainingPlaces"])
     if ("simpleGuests" in meal["detailedInfo"]["requiredGuests"]):

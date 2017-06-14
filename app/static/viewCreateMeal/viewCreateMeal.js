@@ -194,6 +194,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       }
     }
   }
+  
+  $scope.$watch("meal", function(newValue , oldValue){
+    console.log(newValue);
+  });
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
 

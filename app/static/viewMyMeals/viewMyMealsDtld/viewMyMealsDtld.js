@@ -38,9 +38,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 controller: 'modalDeleteInstanceCtrl',
                 size: "sm",
                 resolve: {
-                    _etag: function() {
-                        return $scope.meal._etag;
-                    }, //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
                     meal: function() {
                         return $scope.meal;
                     }
@@ -58,10 +55,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                 controller: 'modalEditInstanceCtrl',
                 size: "lg",
                 resolve: {
-                    _etag: function() {
-                        return $scope.meal._etag;
-                    }, //resolve - {Object.<string, Function>=} - An optional map of dependencies which should be injected into the controller. If any of these dependencies are promises, the router will wait for them all to be resolved or one to be rejected before the controller is instantiated
-                    meal: function() {
+                    editedMeal: function() {
                         return $scope.meal;
                     }
                 }
@@ -320,12 +314,12 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
 
 }]);
 
-modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, _etag, meal) {
+modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
 
     $scope.delete = function() {
         var config = {
             headers: {
-                "If-Match": _etag
+                "If-Match": meal._etag
             }
         };
         $http.delete('/api/meals/private/' + meal._id, config).then(function successCallBack(response) {
@@ -348,13 +342,14 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 
 });
 
-modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal, _etag) {
-    $scope.meal = meal;
-    $scope.addressComplement = $scope.meal.privateInfo.address.complement;
-    $scope.currency_symbol = $scope.meal.price.split(" ")[0];
-    $scope.meal.priceToEdit = Number($scope.meal.price.split(" ")[1]);
-    $scope.meal.time = new Date($scope.meal.time);
-    $scope.autocompleteAddress = $scope.meal.privateInfo.address.name + ", " + $scope.meal.address.town + ", " + $scope.meal.address.country;
+modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, editedMeal, $timeout, $parse, $filter) {
+    $scope.editedMeal = editedMeal;
+    $scope.addressComplement = $scope.editedMeal.privateInfo.address.complement;
+    $scope.currency_symbol = $scope.editedMeal.price.split(" ")[0];
+    $scope.editedMeal.priceToEdit = parseFloat($scope.editedMeal.price.split(" ")[1]);
+    $scope.editedMeal.time = new Date($scope.editedMeal.time);
+    $scope.autocompleteAddress = $scope.editedMeal.privateInfo.address.name + ", " + $scope.editedMeal.address.town + ", " + $scope.editedMeal.address.country;
+    $scope.editedMeal.timeForControl = new Date($scope.editedMeal.time);
 
     //required for the calendar toolbar (datamodel : editedMeal.time)
 
@@ -364,6 +359,70 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
         minDate: new Date(),
         startingDay: 1
     };
+
+    function addAddressFromAutocomplete(dataToPerform) {
+        var precision_needed_for_rounding_lat_lng = 1000;
+        if ($scope.details != undefined) {
+            if (!dataToPerform.address) {
+                dataToPerform["address"] = {};
+            }
+            if ("vicinity" in $scope.details) {
+                dataToPerform.address.town = $scope.details.vicinity;
+            }
+            else {
+                dataToPerform.address.town = $scope.autocompleteAddress.split(",")[0];
+            }
+            if (!dataToPerform.privateInfo) {
+                dataToPerform["privateInfo"] = {};
+            }
+            if (!dataToPerform.privateInfo.address) {
+                dataToPerform.privateInfo["address"] = {};
+            }
+            dataToPerform.privateInfo.address.name = $scope.details.name;
+            dataToPerform.privateInfo.address.lat = $scope.details.geometry.location.lat();
+            dataToPerform.privateInfo.address.lng = $scope.details.geometry.location.lng();
+            dataToPerform.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+            dataToPerform.address.lng = Math.round($scope.details.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+            for (var i = 0; i < $scope.details.address_components.length; i++) {
+                if ($scope.details.address_components[i].types[0] == "postal_code") {
+                    dataToPerform.address.postalCode = $scope.details.address_components[i].long_name;
+                }
+                if ($scope.details.address_components[i].types[0] == "country") {
+                    dataToPerform.address.country_code = $scope.details.address_components[i].short_name;
+                }
+            }
+        }
+    }
+
+    function getDataToPerform(dataToPerform) {
+        $scope.editedMeal;
+        $scope.editMealForm.$$controls.forEach(function(element) { //on effectue une boucle sur chacun des élements contenu dans le formulaire
+            if (element.$viewValue != element.$$lastCommittedViewValue) { // on vérifie si l'élément à été modifié, dans ce cas, on le rajoute dans dataToPerform
+                var parseFunction = $parse(element.$$attr.ngModel);
+                if (element.$$attr.ngModel == "autocompleteAddress") {
+                    addAddressFromAutocomplete(dataToPerform);
+                }
+                else if (element.$$attr.ngModel == "editedMeal.time") {
+                    var oldDate = new Date(element.$modelValue);
+                    if (element.$name == "formDate") {
+                        var newDate = new Date(element.$viewValue);
+                        oldDate.setDate(newDate.getDay());
+                        oldDate.setMonth(newDate.getMonth());
+                        oldDate.setFullYear(newDate.getFullYear());
+                    }
+                    else {
+                        oldDate.setHours(element.$viewValue.split(":")[0]);
+                        oldDate.setMinutes(element.$viewValue.split(":")[1]);
+                    }
+                    parseFunction.assign(dataToPerform, oldDate);
+                }
+                else {
+                    parseFunction.assign(dataToPerform, element.$viewValue);
+                }
+            }
+        });
+        return dataToPerform;
+    }
 
 
     $scope.clear = function() {
@@ -383,52 +442,56 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.date_format = $scope.date_formats[0];
     $scope.altInputDateFormats = ['M!/d!/yyyy'];
 
-    //required for the calendar toolbar (datamodel : editedMeal.time)
+    //required for the calendar toolbar (datamodel : meal.time)
 
     $scope.ismeridian = false;
     $scope.mstep = 10;
 
     $scope.formPopoverTimepicker = {
         title: 'Time of the meal',
-        templateUrl: '../static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'
+        templateUrl: 'static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html',
     };
 
     //enable animations in the modal
     $scope.animationsEnabled = true;
 
-    if ($scope.meal.detailedInfo.requiredGuests.cooks) {
-        $scope.nbCooksSubscribed = $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
+    if ($scope.editedMeal.detailedInfo.requiredGuests.cooks) {
+        $scope.nbCooksSubscribed = $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces;
     }
     else {
         $scope.nbCooksSubscribed = 0;
     }
-    if ($scope.meal.detailedInfo.requiredGuests.cleaners) {
-        $scope.nbCleanersSubscribed = $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
+    if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners) {
+        $scope.nbCleanersSubscribed = $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces;
     }
     else {
         $scope.nbCleanersSubscribed = 0;
     }
-    if ($scope.meal.detailedInfo.requiredGuests.simpleGuests) {
-        $scope.nbSimpleGuestsSubscribed = $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces;
+    if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests) {
+        $scope.nbSimpleGuestsSubscribed = $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces;
     }
     else {
         $scope.nbSimpleGuestsSubscribed = 0;
     }
 
-    $scope.edit = function(meal_id, _etag) {
-        if (($scope.meal.detailedInfo.requiredGuests.cooks && $scope.nbCooksSubscribed <= $scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks) &&
-            ($scope.meal.detailedInfo.requiredGuests.cleaners && $scope.nbCleanersSubscribed <= $scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners) &&
-            ($scope.meal.detailedInfo.requiredGuests.simpleGuests && $scope.nbSimpleGuestsSubscribed <= $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests)) {
-            var dataToPerfom = {};
+    $scope.edit = function() {
+        var dataToPerform = {};
+        getDataToPerform(dataToPerform);
+        var nbRquCooks = Number(document.getElementById("inputCooks").value) || 0;
+        var nbRquCleaners = Number(document.getElementById("inputCleaners").value) || 0;
+        var nbRquSimpleGuests = Number(document.getElementById("inputSimpleGuests").value) || 0;
+        if ($scope.nbCooksSubscribed <= nbRquCooks && $scope.nbCleanersSubscribed <= nbRquCleaners && $scope.nbSimpleGuestsSubscribed <= nbRquSimpleGuests) {
             var config = {
                 headers: {
-                    "If-Match": _etag
+                    "If-Match": $scope.editedMeal._etag
                 }
             };
-            $http.patch('/api/meals/private/' + meal_id, dataToPerfom, config).then(function successCallBack(response) {
+            $http.patch('/api/meals/private/' + $scope.editedMeal._id, dataToPerform.editedMeal, config).then(function successCallBack(response) {
                 $uibModalInstance.close();
                 $state.reload();
                 //rajouter en fonction de la réponse un popup ?
+            }, function errorCallBack(response) {
+                console.log("Something went wrong");
             });
         }
     };

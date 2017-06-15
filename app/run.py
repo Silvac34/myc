@@ -498,9 +498,23 @@ def before_updating_privateMeals(updates, original):
                     updates["nbRemainingPlaces"] += simpleGuestDelta
                 else:
                     updates["nbRemainingPlaces"] = original["nbRemainingPlaces"] + simpleGuestDelta
-    print(updates)
-        
-        
+    
+def after_updating_privateMeals(updates, original):
+    admin = User(_id=ObjectId(original["admin"])).getUserPublicInfo()
+    meal_time_parse = parser.parse(original["time"]) #parse le format de l'heure venant du backend
+    local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+    meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+    for participant in original["users"]:
+        print(participant)
+        if (participant["status"] == "accepted"): #si le participant a été accepté et qu'il n'est pas l'hôte alors on lui envoie un message
+            participantInfo = User(_id = ObjectId(participant["_id"])).getUserAllInfo()
+            participant_user_ref = participantInfo["privateInfo"]["user_ref"]
+            if (participant["role"][0] != "admin"):
+                text = participantInfo["first_name"] + ",\n" + admin["first_name"] + ", your host for the meal on " + meal_time_formated + ", has made a modification. Check it here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(original["_id"])
+            elif(participant["role"][0] == "admin" and len(original["users"]) > 1):
+                text = participantInfo["first_name"] + ",\nWe notified your participants about the modification your made about the meal on " + meal_time_formated + "."
+            payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     
 ### reviews ###
 def after_storing_POST_reviews(items):
@@ -524,6 +538,7 @@ Application.app.on_fetched_item_privateMeals +=  before_returning_GET_item_priva
 Application.app.on_pre_DELETE_privateMeals += pre_delete_privateMeals
 Application.app.on_deleted_item_privateMeals += after_delete_privateMeals
 Application.app.on_update_privateMeals += before_updating_privateMeals
+Application.app.on_updated_privateMeals += after_updating_privateMeals
 Application.app.on_pre_PATCH_privateMeals += pre_patch_privateMeals
 
 

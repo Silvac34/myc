@@ -371,7 +371,6 @@ def after_storing_POST_meals(items):
         
 #GET api/meals/private &  GET api/meals/private/<_id>
 def pre_get_privateMeals(request,lookup):
-    print(g.user_id)
     lookup.update({"users._id":g.user_id })
 
 # GET api/meals/private
@@ -420,7 +419,11 @@ def after_delete_privateMeals(item):
 
 # PATCH api/meals/private/<_id>
 def pre_patch_privateMeals(request,lookup):
-    lookup.update({"admin":g.user_id })
+    meal = Meal(_id=ObjectId(lookup["_id"])).getInfo()
+    for user in meal["users"]:
+        if user["_id"] == g.user_id: #on récupère l'id de celui qui publie le repas et s'il n'est pas hôte / admin alors on abort le process
+            if(user["role"][0] != "admin"):
+                abort(403)
     
 def before_updating_privateMeals(updates, original):
     if ("detailedInfo" in updates): # si on change le nombre d'aide

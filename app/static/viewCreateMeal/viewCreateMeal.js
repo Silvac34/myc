@@ -114,6 +114,11 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     }
   };
 
+  function setDate(dateToSet){
+    dateToSet.setDate($scope.editedMeal.time.getDate());
+    dateToSet.setMonth($scope.editedMeal.time.getMonth());
+    dateToSet.setFullYear($scope.editedMeal.time.getFullYear());
+  }
 
   function createMealWithPhone() {
     getAddressFromAutocomplete();
@@ -121,6 +126,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     if ($scope.editedMeal.menu.title != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+          setDate($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
           }
@@ -130,6 +136,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
           }
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
+            setDate($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
+          }
           if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null || $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
           }
@@ -194,8 +203,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       }
     }
   }
-  
-  $scope.$watch("meal", function(newValue , oldValue){
+
+  $scope.$watch("meal", function(newValue, oldValue) {
     console.log(newValue);
   });
 
@@ -243,29 +252,25 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.autocomplete;
 
   $scope.checkTimeCooking = function() {
-      if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
-        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != 0) {
-              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == undefined) {
+    if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+      if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != 0) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == undefined) {
+              return true;
+            }
+            else {
+              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() > $scope.editedMeal.time.getHours()) {
                 return true;
               }
               else {
-                if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() > $scope.editedMeal.time.getHours()) {
+                if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() == $scope.editedMeal.time.getHours() && $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getMinutes() > $scope.editedMeal.time.getMinutes()) {
                   return true;
                 }
                 else {
-                  if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() == $scope.editedMeal.time.getHours() && $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getMinutes() > $scope.editedMeal.time.getMinutes()) {
-                    return true;
-                  }
-                  else {
-                    return false;
-                  }
+                  return false;
                 }
               }
-            }
-            else {
-              return false;
             }
           }
           else {
@@ -279,6 +284,10 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       else {
         return false;
       }
+    }
+    else {
+      return false;
+    }
   };
 
   $scope.currency_symbol = "$";

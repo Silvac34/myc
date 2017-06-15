@@ -348,6 +348,12 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.currency_symbol = $scope.editedMeal.price.split(" ")[0];
     $scope.editedMeal.priceToEdit = parseFloat($scope.editedMeal.price.split(" ")[1]);
     $scope.editedMeal.time = new Date($scope.editedMeal.time);
+    if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
+        $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = new Date($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
+    }
+    if (editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
+        $scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning = new Date($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
+    }
     $scope.autocompleteAddress = $scope.editedMeal.privateInfo.address.name + ", " + $scope.editedMeal.address.town + ", " + $scope.editedMeal.address.country;
     $scope.editedMeal.timeForControl = new Date($scope.editedMeal.time);
 
@@ -403,18 +409,24 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
                     addAddressFromAutocomplete(dataToPerform);
                 }
                 else if (element.$$attr.ngModel == "editedMeal.time") {
-                    var oldDate = new Date(element.$modelValue);
+                    var newDate = new Date(element.$modelValue);
                     if (element.$name == "formDate") {
-                        var newDate = new Date(element.$viewValue);
-                        oldDate.setDate(newDate.getDay());
-                        oldDate.setMonth(newDate.getMonth());
-                        oldDate.setFullYear(newDate.getFullYear());
+                        var oldDate = new Date(element.$viewValue);
+                        newDate.setDate(oldDate.getDay());
+                        newDate.setMonth(oldDate.getMonth());
+                        newDate.setFullYear(oldDate.getFullYear());
                     }
                     else {
-                        oldDate.setHours(element.$viewValue.split(":")[0]);
-                        oldDate.setMinutes(element.$viewValue.split(":")[1]);
+                        newDate.setHours(element.$viewValue.split(":")[0]);
+                        newDate.setMinutes(element.$viewValue.split(":")[1]);
                     }
-                    parseFunction.assign(dataToPerform, oldDate);
+                    parseFunction.assign(dataToPerform, newDate);
+                }
+                else if (element.$$attr.ngModel == "editedMeal.detailedInfo.requiredGuests.cooks.timeCooking" || element.$$attr.ngModel == "editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning") {
+                    var newDate = new Date($scope.editedMeal.time);
+                    newDate.setHours(element.$viewValue.split(":")[0]);
+                    newDate.setMinutes(element.$viewValue.split(":")[1]);
+                    parseFunction.assign(dataToPerform, newDate);
                 }
                 else {
                     parseFunction.assign(dataToPerform, element.$viewValue);
@@ -474,25 +486,41 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
         $scope.nbSimpleGuestsSubscribed = 0;
     }
 
+
     $scope.edit = function() {
         var dataToPerform = {};
         getDataToPerform(dataToPerform);
         var nbRquCooks = Number(document.getElementById("inputCooks").value) || 0;
         var nbRquCleaners = Number(document.getElementById("inputCleaners").value) || 0;
         var nbRquSimpleGuests = Number(document.getElementById("inputSimpleGuests").value) || 0;
-        if ($scope.nbCooksSubscribed <= nbRquCooks && $scope.nbCleanersSubscribed <= nbRquCleaners && $scope.nbSimpleGuestsSubscribed <= nbRquSimpleGuests) {
-            var config = {
-                headers: {
-                    "If-Match": $scope.editedMeal._etag
+        if ($scope.nbCooksSubscribed <= nbRquCooks && $scope.nbCleanersSubscribed <= nbRquCleaners && $scope.nbSimpleGuestsSubscribed <= nbRquSimpleGuests) { //on vérifie que on ne diminue pas mal le nombre de places restantes là où des personnes se sont déjà inscrites
+            if ((nbRquCooks > 0 && document.getElementById("inputTimeCooking").value != "") || nbRquCooks == 0) { //on vérifie qu'il y a bien une heure si on rajoute une aide cuisine
+                if ((dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && dataToPerform.editedMeal.time && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= dataToPerform.editedMeal.time) || //on vérifie que l'heure d'arrivée d'aide cuisine est bien avant l'heure du repas
+                    dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time ||
+                    !dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
+                    var config = {
+                        headers: {
+                            "If-Match": $scope.editedMeal._etag
+                        }
+                    };
+                    $http.patch('/api/meals/private/' + $scope.editedMeal._id, dataToPerform.editedMeal, config).then(function successCallBack(response) {
+                        $uibModalInstance.close();
+                        $state.reload();
+                        //rajouter en fonction de la réponse un popup ?
+                    }, function errorCallBack(response) {
+                        console.log(response);
+                    });
                 }
-            };
-            $http.patch('/api/meals/private/' + $scope.editedMeal._id, dataToPerform.editedMeal, config).then(function successCallBack(response) {
-                $uibModalInstance.close();
-                $state.reload();
-                //rajouter en fonction de la réponse un popup ?
-            }, function errorCallBack(response) {
-                console.log("Something went wrong");
-            });
+                else {
+                    $scope.editMealForm.$commitViewValue();
+                }
+            }
+            else {
+                $scope.editMealForm.$commitViewValue();
+            }
+        }
+        else {
+            $scope.editMealForm.$commitViewValue();
         }
     };
 
@@ -533,4 +561,4 @@ modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $
     return function(birthdate) {
         return calculateAge(birthdate);
     };
-});
+})

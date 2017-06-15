@@ -66,12 +66,12 @@
                         <tr class="table-meal-border">
                                 <td style="vertical-align:middle"><span uib-tooltip="People will help you for cooking" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cooking</span></td>
                                 <td class="text-center"><input type="number" min="{{nbCooksSubscribed}}" class="form-control text-center" id="inputCooks" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
-                                <td class="text-center" ng-class="{'has-error': checkTimeCooking() && editMealForm.$submitted}"><input type="time" class="form-control text-center" id="inputTimeCooking" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking"></td>
+                                <td class="text-center" ng-class="{'has-error': ((!editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks > 0) || editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time) && editMealForm.$submitted}"><input type="time" class="form-control text-center" name="inputTimeCooking" id="inputTimeCooking" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking" ng-value="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'"></td>
                         </tr>
                         <tr class="table-meal-border">
                             <td style="vertical-align:middle"><span uib-tooltip="People will help you for cleaning" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cleaning</span></td>
                             <td class="text-center"><input type="number" min="{{nbCleanersSubscribed}}" class="form-control text-center" id="inputCleaners" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
-                            <td class="text-center"><input type="time" class="form-control text-center" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning"></td>
+                            <td class="text-center"><input type="time" class="form-control text-center" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning" ng-value="editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning | date:'HH:mm'"></td>
                         </tr>
                         <tr class="table-meal-border">
                             <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you and your helpers a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
@@ -118,14 +118,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-show="(editedMeal.menu.title==undefined || editMealForm.autocomplete.$isEmpty(editMealForm.autocomplete) || editedMeal.price==undefined || (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time))  && editMealForm.$submitted">
+            <div class="row" ng-show="(editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time || editedMeal.menu.title==undefined || editMealForm.autocomplete.$isEmpty(editMealForm.autocomplete) || editedMeal.price==undefined || (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time || (!editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks>0)))  && editMealForm.$submitted">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time">The arrival time for the helping cooks can not be after the beggining of the meal ({{editedMeal.time}})</span>
                     <span>Please fill in the missing field<span ng-if="(editedMeal.menu.title==undefined && details==undefined) || (details==undefined && editedMeal.priceToEdit==undefined) || (editedMeal.menu.title==undefined && editedMeal.priceToEdit==undefined)">s</span> and try again
                     <span
                         ng-if="editedMeal.menu.title==undefined || details==undefined || editedMeal.priceToEdit==undefined">: </span><span ng-if="editedMeal.menu.title==undefined">menu</span><span ng-if="editedMeal.menu.title==undefined && (details==undefined || editedMeal.priceToEdit==undefined)">, </span>
                         <span ng-if="details==undefined">address</span><span ng-if="details==undefined && editedMeal.priceToEdit==undefined">, </span><span ng-if="editedMeal.priceToEdit==undefined">price of the groceries</span></span>
-                        <span ng-show="editMealForm.inputCellphone.$invalid"><br/>Your phone number is not correct</span>
                 </div>
             </div>
             <div class="clear10"></div>
@@ -150,7 +150,7 @@
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">
-                        <input type="button" value="Cancel" class="btn btn-default btn-md" ng-click="cancel();" style="margin:0px 10px"></input>
+                        <input type="button" value="Cancel" class="btn btn-default btn-md" ng-click="editMealForm.$rollbackViewValue();cancel();" style="margin:0px 10px"></input>
                         <input type="button" value="Edit" class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); edit()" style="margin:0px 10px"></input>
                     </div>
                 </div>

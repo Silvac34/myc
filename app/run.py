@@ -6,7 +6,7 @@ from jwt import DecodeError, ExpiredSignature
 from datetime import datetime, timedelta
 from dateutil import parser
 import pytz
-from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for)
+from flask import (request, jsonify, render_template, g, Response, session, escape, redirect, url_for, abort)
 from bson import ObjectId, json_util
 import requests
 from threading import Timer
@@ -353,8 +353,6 @@ def before_storing_POST_meals (items):
                 price_notification = price["simpleGuestPrice"]
         sendNotificationPreference(meal, price_notification)
         #################
-def hello(value):
-    print(value)
 
 #POST api/meals
 def after_storing_POST_meals(items):
@@ -422,8 +420,84 @@ def after_delete_privateMeals(item):
 # PATCH api/meals/private/<_id>
 def pre_patch_privateMeals(request,lookup):
     lookup.update({"admin":g.user_id })
-    print(request)
-    print(lookup)
+
+    
+def before_updating_privateMeals(updates, original):
+    if ("detailedInfo" in updates): # si on change le nombre d'aide
+        requiredGuestsUpdate = updates["detailedInfo"]["requiredGuests"]
+        requiredGuestsMeal = original["detailedInfo"]["requiredGuests"]
+        if ("cooks" in requiredGuestsUpdate):
+            if ("nbRquCooks" in requiredGuestsUpdate["cooks"]): #si on change le nombre d'aide cuisine
+                ##on update le nbRemainingPlaces dans privateInfo
+                if ("cooks" in requiredGuestsMeal and requiredGuestsMeal["cooks"]["nbRquCooks"] > 0): #si il y a déjà des aides cuisines dans le repas proposé (alors nbRquCooks existe déjà)
+                    cookDelta = requiredGuestsUpdate["cooks"]["nbRquCooks"] - requiredGuestsMeal["cooks"]["nbRquCooks"] #cookDelta est la variation du nombre de cooks
+                    if (requiredGuestsMeal["cooks"]["nbRemainingPlaces"] + cookDelta < 0): #si il y a plus d'inscrit que de places qu'on souhaite mettre pour le repas, on abort (protection supplémentaire, vu que le front-end le fait déjà)
+                        abort(403)
+                    else:
+                        requiredGuestsUpdate["cooks"]["nbRemainingPlaces"] = requiredGuestsMeal["cooks"]["nbRemainingPlaces"] + cookDelta #sinon, on rajoute le nombre de Remaining places à actualiser
+                else: #s'il n'y avait pas d'aides cuisines avant
+                    if ("timeCooking" not in requiredGuestsUpdate["cooks"]):
+                        abort(403)
+                    else:
+                        cookDelta = requiredGuestsUpdate["cooks"]["nbRquCooks"] # requiredGuestsMeal["cooks"]["nbRquCooks"] = 0
+                        requiredGuestsUpdate["cooks"]["nbRemainingPlaces"] = cookDelta #on rajoute dans ce qu'il y a à update la key nbRemainingPlaces avec comme value le nbRquCooks (requiredGuestsMeal["cooks"]["nbRemainingPlaces"]=0)
+                ##on update nbGuests
+                if ("nbGuests" in updates): # on ajoute le nbGuests à updates
+                    updates["nbGuests"] += cookDelta
+                else:
+                    updates["nbGuests"] = original["nbGuests"] + cookDelta
+                ##on update nbRemainingPlaces dans meal
+                if ("nbRemainingPlaces" in updates): # on ajoute le nbGuests à updates
+                    updates["nbRemainingPlaces"] += cookDelta
+                else:
+                    updates["nbRemainingPlaces"] = original["nbRemainingPlaces"] + cookDelta
+        if ("cleaners" in requiredGuestsUpdate):
+            if ("nbRquCleaners" in requiredGuestsUpdate["cleaners"]): #si on change le nombre d'aide cuisine
+                ##on update le nbRemainingPlaces dans privateInfo
+                if ("cleaners" in requiredGuestsMeal): #si il y a déjà des aides cuisines dans le repas proposé (alors nbRquCleaners existe déjà)
+                    cleanerDelta = requiredGuestsUpdate["cleaners"]["nbRquCleaners"] - requiredGuestsMeal["cleaners"]["nbRquCleaners"] #cleanerDelta est la variation du nombre de cleaners
+                    if (requiredGuestsMeal["cleaners"]["nbRemainingPlaces"] + cleanerDelta < 0): #si il y a plus d'inscrit que de places qu'on souhaite mettre pour le repas, on abort (protection supplémentaire, vu que le front-end le fait déjà)
+                        abort(403)
+                    else:
+                        requiredGuestsUpdate["cleaners"]["nbRemainingPlaces"] = requiredGuestsMeal["cleaners"]["nbRemainingPlaces"] + cleanerDelta #sinon, on rajoute le nombre de Remaining places à actualiser
+                else: #s'il n'y avait pas d'aides cuisines avant
+                    cleanerDelta = requiredGuestsUpdate["cleaners"]["nbRquCleaners"] # requiredGuestsMeal["cleaners"]["nbRquCleaners"] = 0
+                    requiredGuestsUpdate["cleaners"]["nbRemainingPlaces"] = cleanerDelta #on rajoute dans ce qu'il y a à update la key nbRemainingPlaces avec comme value le nbRquCleaners (requiredGuestsMeal["cleaners"]["nbRemainingPlaces"]=0)
+                ##on update nbGuests
+                if ("nbGuests" in updates): # on ajoute le nbGuests à updates
+                    updates["nbGuests"] += cleanerDelta
+                else:
+                    updates["nbGuests"] = original["nbGuests"] + cleanerDelta
+                ##on update nbRemainingPlaces dans meal
+                if ("nbRemainingPlaces" in updates): # on ajoute le nbGuests à updates
+                    updates["nbRemainingPlaces"] += cleanerDelta
+                else:
+                    updates["nbRemainingPlaces"] = original["nbRemainingPlaces"] + cleanerDelta
+        if ("simpleGuests" in requiredGuestsUpdate):
+            if ("nbRquSimpleGuests" in requiredGuestsUpdate["simpleGuests"]): #si on change le nombre d'aide cuisine
+                ##on update le nbRemainingPlaces dans privateInfo
+                if ("simpleGuests" in requiredGuestsMeal): #si il y a déjà des aides cuisines dans le repas proposé (alors nbRquSimpleGuests existe déjà)
+                    simpleGuestDelta = requiredGuestsUpdate["simpleGuests"]["nbRquSimpleGuests"] - requiredGuestsMeal["simpleGuests"]["nbRquSimpleGuests"] #simpleGuestDelta est la variation du nombre de simpleGuests
+                    if (requiredGuestsMeal["simpleGuests"]["nbRemainingPlaces"] + simpleGuestDelta < 0): #si il y a plus d'inscrit que de places qu'on souhaite mettre pour le repas, on abort (protection supplémentaire, vu que le front-end le fait déjà)
+                        abort(403)
+                    else:
+                        requiredGuestsUpdate["simpleGuests"]["nbRemainingPlaces"] = requiredGuestsMeal["simpleGuests"]["nbRemainingPlaces"] + simpleGuestDelta #sinon, on rajoute le nombre de Remaining places à actualiser
+                else: #s'il n'y avait pas d'aides cuisines avant
+                    simpleGuestDelta = requiredGuestsUpdate["simpleGuests"]["nbRquSimpleGuests"] # requiredGuestsMeal["simpleGuests"]["nbRquSimpleGuests"] = 0
+                    requiredGuestsUpdate["simpleGuests"]["nbRemainingPlaces"] = simpleGuestDelta #on rajoute dans ce qu'il y a à update la key nbRemainingPlaces avec comme value le nbRquSimpleGuests (requiredGuestsMeal["simpleGuests"]["nbRemainingPlaces"]=0)
+                ##on update nbGuests
+                if ("nbGuests" in updates): # on ajoute le nbGuests à updates
+                    updates["nbGuests"] += simpleGuestDelta
+                else:
+                    updates["nbGuests"] = original["nbGuests"] + simpleGuestDelta
+                ##on update nbRemainingPlaces dans meal
+                if ("nbRemainingPlaces" in updates): # on ajoute le nbGuests à updates
+                    updates["nbRemainingPlaces"] += simpleGuestDelta
+                else:
+                    updates["nbRemainingPlaces"] = original["nbRemainingPlaces"] + simpleGuestDelta
+    print(updates)
+        
+        
     
 ### reviews ###
 def after_storing_POST_reviews(items):
@@ -446,6 +520,7 @@ Application.app.on_fetched_resource_privateMeals +=  before_returning_GET_privat
 Application.app.on_fetched_item_privateMeals +=  before_returning_GET_item_privateMeals
 Application.app.on_pre_DELETE_privateMeals += pre_delete_privateMeals
 Application.app.on_deleted_item_privateMeals += after_delete_privateMeals
+Application.app.on_update_privateMeals += before_updating_privateMeals
 Application.app.on_pre_PATCH_privateMeals += pre_patch_privateMeals
 
 
@@ -588,7 +663,6 @@ def unsubscribe_to_meal(meal_id):
 def calculate_price_meal(meal_id):
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
-    print(meal)
     priceUnit = meal["price"] / meal["nbGuests"]
     priceTotalCurrent = priceUnit * (meal["nbGuests"] - meal["nbRemainingPlaces"])
     if ("simpleGuests" in meal["detailedInfo"]["requiredGuests"]):

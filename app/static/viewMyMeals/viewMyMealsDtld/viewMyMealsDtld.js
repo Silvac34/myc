@@ -486,6 +486,21 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
         $scope.nbSimpleGuestsSubscribed = 0;
     }
 
+    function checkTimeCooking(dataToPerform) {
+        if (dataToPerform.editedMeal.detailedInfo && dataToPerform.editedMeal.detailedInfo.requiredGuests && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks) {
+            if (dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && dataToPerform.editedMeal.time && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= dataToPerform.editedMeal.time || //on vérifie que l'heure d'arrivée d'aide cuisine est bien avant l'heure du repas
+                dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time ||
+                !dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
 
     $scope.edit = function() {
         var dataToPerform = {};
@@ -495,9 +510,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
         var nbRquSimpleGuests = Number(document.getElementById("inputSimpleGuests").value) || 0;
         if ($scope.nbCooksSubscribed <= nbRquCooks && $scope.nbCleanersSubscribed <= nbRquCleaners && $scope.nbSimpleGuestsSubscribed <= nbRquSimpleGuests) { //on vérifie que on ne diminue pas mal le nombre de places restantes là où des personnes se sont déjà inscrites
             if ((nbRquCooks > 0 && document.getElementById("inputTimeCooking").value != "") || nbRquCooks == 0) { //on vérifie qu'il y a bien une heure si on rajoute une aide cuisine
-                if ((dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && dataToPerform.editedMeal.time && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= dataToPerform.editedMeal.time) || //on vérifie que l'heure d'arrivée d'aide cuisine est bien avant l'heure du repas
-                    dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking <= $scope.editedMeal.time ||
-                    !dataToPerform.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
+                if (checkTimeCooking(dataToPerform) == true) {
                     var config = {
                         headers: {
                             "If-Match": $scope.editedMeal._etag
@@ -523,6 +536,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
             $scope.editMealForm.$commitViewValue();
         }
     };
+
 
     $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');

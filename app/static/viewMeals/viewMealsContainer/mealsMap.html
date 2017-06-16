@@ -30,8 +30,8 @@
                     </div>
                     <div class="clear10"></div>
                     <div class="text-center">
-                        <a ng-if="meal.detailedInfo.subscribed==false || !meal.detailedInfo.subscribed" ng-click=openModalDtld(meal._id) class="btn btn-primary btn-xs">Subscribe</a>
-                        <a ng-if="meal.detailedInfo.subscribed==true" ng-click=openModalDtld(meal._id) class="btn btn-success btn-xs">See meal</a>
+                        <a ng-if="!datasUserForEachMeal(meal)" ng-click=openModalDtld(meal._id) class="btn btn-primary btn-xs">Subscribe</a>
+                        <a ng-if="datasUserForEachMeal(meal)" ng-click=openModalDtld(meal._id) class="btn btn-success btn-xs">See meal</a>
                     </div>
                     <div class="clear10"></div>
                     <div class="clear10 map-meal-separation"></div>

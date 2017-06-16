@@ -9,7 +9,7 @@
       <div class="row" ng-repeat="meal in myFuturMealsFilter = (meals | filter:futurMealsFilter | orderBy:'time')">
         <div class="col-xs-12">
           <div class="list-group" style="cursor:pointer;">
-            <a ng-if="meal.detailedInfo.pending==false" class="list-group-item list-group-meal my-meal-dtld-panel-success" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
+            <a ng-if="datasUserForEachMeal(meal).status == 'accepted'" class="list-group-item list-group-meal my-meal-dtld-panel-success" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
               <div class="hidden-xs col-sm-2" ng-class="{'top-10':meal.admin.reviews,'top-30':!meal.admin.reviews}">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                 <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -39,7 +39,7 @@
                     <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                   </div>
                   <div class="col-xs-4 col-sm-3 col-lg-2">
-                    <div class="pull-right text-success"><strong>attending</strong></div>
+                    <div class="pull-right text-success"><strong><span ng-if="datasUserForEachMeal(meal).role[0] == 'admin'">hosting</span><span ng-if="datasUserForEachMeal(meal).role[0] != 'admin'">attending</span></strong></div>
                   </div>
                 </div>
                 <div class="row">
@@ -77,7 +77,7 @@
         </div>
         <div class="col-xs-12">
           <div class="list-group" style="cursor:pointer;">
-            <a ng-if="meal.detailedInfo.pending==true" class="list-group-item list-group-meal my-meal-dtld-panel-warning">
+            <a ng-if="datasUserForEachMeal(meal).status == 'pending'" class="list-group-item list-group-meal my-meal-dtld-panel-warning">
               <div class="hidden-xs col-sm-2" ng-class="{'top-10':meal.admin.reviews,'top-30':!meal.admin.reviews}">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                 <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -183,7 +183,7 @@
                     <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                   </div>
                   <div class="col-xs-4 col-sm-3 col-lg-2">
-                    <div class="pull-right text-info"><strong>attended</strong></div>
+                    <div class="pull-right text-info"><strong><span ng-if="datasUserForEachMeal(meal).role[0] == 'admin'">hosted</span><span ng-if="datasUserForEachMeal(meal).role[0] != 'admin'">attended</span></strong></div>
                   </div>
                 </div>
                 <div class="row">
@@ -210,7 +210,7 @@
                   <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
-                  <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                  <img src="static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
                 </div>
               </div>
             </a>

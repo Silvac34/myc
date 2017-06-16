@@ -8,7 +8,7 @@
 <div class="row" ng-repeat="meal in mealsFiltered = (meals | filter: futurMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | filter : helpingTypeFilter | orderBy:'time':reverse)">
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
-            <a class="list-group-item list-group-meal" style="display:inline-table" ng-class="{'my-meal-dtld-panel-success':meal.detailedInfo.subscribed,'my-meal-dtld-panel-warning':meal.detailedInfo.pending}" ng-click=openModalDtld(meal._id)>
+            <a class="list-group-item list-group-meal" style="display:inline-table" ng-class="{'my-meal-dtld-panel-success':datasUserForEachMeal(meal).status == 'accepted','my-meal-dtld-panel-warning':datasUserForEachMeal(meal).status == 'pending'}" ng-click=openModalDtld(meal._id)>
                 <div class="meal-admin-container col-sm-2" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
                     <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                     <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -31,15 +31,15 @@
                 </div>
                 <div class="col-xs-12 col-sm-10" style="display:table-cell">
                     <div class="row">
-                        <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true,'col-xs-12':meal.detailedInfo.subscribed==false && meal.detailedInfo.pending==false}">
+                        <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':datasUserForEachMeal(meal),'col-xs-12':!datasUserForEachMeal(meal)}">
                             <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
-                                <div class="pull-right" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><strong><span ng-if="meal.detailedInfo.subscribed==true && user._id != meal.admin._id">attending</span><span ng-if="meal.detailedInfo.subscribed==true && user._id == meal.admin._id">Hosting</span><span ng-if="meal.detailedInfo.pending==true">pending</span></strong></div>
+                            <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="datasUserForEachMeal(meal)">
+                                <div class="pull-right" ng-class="{'text-success': datasUserForEachMeal(meal).status == 'accepted', 'text-warning': datasUserForEachMeal(meal).status == 'pending'}"><strong><span ng-if="datasUserForEachMeal(meal).status =='accepted' && datasUserForEachMeal(meal).role[0] != 'admin'">attending</span><span ng-if="datasUserForEachMeal(meal).status =='accepted' && datasUserForEachMeal(meal).role[0] == 'admin'">Hosting</span><span ng-if="datasUserForEachMeal(meal).status =='pending'">pending</span></strong></div>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
 <div class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | filter : helpingTypeFilter | orderBy:'-time')">
     <div class="col-xs-12">
         <div class="list-group" style="cursor:pointer;">
-            <a class="list-group-item list-group-meal" style="display:inline-table" ng-class="{'my-meal-dtld-panel-info':meal.detailedInfo.subscribed}" ng-click=openModalDtld(meal._id)>
+            <a class="list-group-item list-group-meal" style="display:inline-table" ng-class="{'my-meal-dtld-panel-info': datasUserForEachMeal(meal).status == 'accepted'}" ng-click=openModalDtld(meal._id)>
                 <div class="meal-admin-container col-sm-2" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
                     <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
                     <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
@@ -108,15 +108,15 @@
                 </div>
                 <div class="col-xs-12 col-sm-10" style="display:table-cell">
                     <div class="row">
-                        <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true,'col-xs-12':meal.detailedInfo.subscribed==false && meal.detailedInfo.pending==false}">
+                        <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':datasUserForEachMeal(meal),'col-xs-12':!datasUserForEachMeal(meal)}">
                             <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
-                                <div class="pull-right" ng-class="{'text-info': meal.detailedInfo.subscribed}"><strong><span ng-if="meal.detailedInfo.subscribed==true && user._id != meal.admin._id">attended</span><span ng-if="meal.detailedInfo.subscribed==true && user._id == meal.admin._id">Hosted</span></strong></div>
+                            <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="datasUserForEachMeal(meal)">
+                                <div class="pull-right" ng-class="{'text-info': datasUserForEachMeal(meal).status == 'accepted'}"><strong><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] != 'admin'">attended</span><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] == 'admin'">Hosted</span></strong></div>
                             </div>
                         </div>
                     </div>

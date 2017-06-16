@@ -97,7 +97,7 @@
         </div>
         <div class="clear10"></div>
         <div class="text-center row">
-            <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated, 'disabled': meal.detailedInfo.pending==true}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"
+            <a class="btn" ng-class="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated, 'disabled': datasUserForEachMeal(meal).status == 'pending'}" ng-click="subscribeMealAuth(meal._id, requestRole.name, 'facebook')" ng-if="meal.nbRemainingPlaces>0 && !goToMeal"
                 ng-disabled="checkMealDate() == false"><span ng-if="!isAuthenticated">Sign In with facebook<br/>to participate</span><span ng-if="isAuthenticated">Participate</span></a>
             <a class="btn btn-success" ng-if="goToMeal" ng-click="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})">See the meal</a>
             <div ng-if="meal.nbRemainingPlaces<=0  && (goToMeal=='false' || goToMeal==null)" class="meal-dtld-full-msg">The meal is already full</div>
@@ -126,7 +126,7 @@
                     <div class="clear10"></div>
                 </div>
             </div>
-            <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks.nbRquCooks != meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces">
+            <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks.nbRquCooks && meal.detailedInfo.requiredGuests.cooks.nbRquCooks > meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces">
                 <div class="meal-label meal-dtld-group-label">Help cooking:</div>
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'cook'">
                     <div class="meal-dtld-list-user">
@@ -147,7 +147,7 @@
                     <div class="clear10"></div>
                 </div>
             </div>
-            <div class="row" ng-if="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners != meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces">
+            <div class="row" ng-if="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners && meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners > meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces">
                 <div class="meal-label meal-dtld-group-label">Help cleaning:</div>
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'cleaner'">
                     <div class="meal-dtld-list-user">
@@ -168,7 +168,7 @@
                     <div class="clear10"></div>
                 </div>
             </div>
-            <div class="row" ng-if="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests != meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces">
+            <div class="row" ng-if="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests > meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces">
                 <div class="meal-label meal-dtld-group-label">Simple guest:</div>
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'simpleGuest'">
                     <div class="meal-dtld-list-user">

@@ -34,10 +34,21 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   });
 
+  $scope.datasUserForEachMeal = function(meal) {
+    if ($scope.$parent.$root.user) {
+      for (var i = 0; i < meal.users.length; i++) {
+        if (meal.users[i]._id == $scope.$parent.$root.user._id) {
+          break;
+        }
+      }
+      return meal.users[i];
+    }
+  };
+
   $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
     for (var i = 0; i < $scope.meals.length; i++) {
       if ($scope.meals[i]._id == meal_id) {
-        if ($scope.meals[i].detailedInfo.subscribed == true) {
+        if ($scope.datasUserForEachMeal($scope.meals[i])) {
           $state.go("view_my_dtld_meals", {
             "myMealId": meal_id
           });
@@ -49,6 +60,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
             controller: 'ViewMealsDtldCtrl',
             size: "lg",
             windowClass: 'modal-meal-window',
+            scope: $scope,
             resolve: {
               meal: function() {
                 return $scope.meals[i];
@@ -63,15 +75,9 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
             if (result_value == undefined) {
               result_value = {
                 "manualSubscriptionPending": false,
-                "pending": false
               };
             }
             $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
-            for (var i = 0; i < $scope.meals.length; i++) {
-              if ($scope.meals[i]._id == meal_id) {
-                $scope.meals[i].detailedInfo.pending = result_value.pending;
-              }
-            }
           });
         }
       }

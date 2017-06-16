@@ -109,7 +109,12 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     else {
       $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
     }
-    $scope.goToMeal = $scope.meal.detailedInfo.subscribed;
+    if($scope.datasUserForEachMeal($scope.meal)){
+      $scope.goToMeal = true;
+    }
+    else{
+      $scope.goToMeal = false;
+    }
   }
 
   function check(value) {
@@ -131,8 +136,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       if ($scope.meal.automaticSubscription == true) {
         $scope.goToMeal = true;
         $uibModalInstance.close({
-          manualSubscriptionPending: false,
-          pending: false
+          manualSubscriptionPending: false
         });
         $state.go("view_my_dtld_meals", {
           "myMealId": meal_id,
@@ -142,8 +146,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       else if ($scope.meal.automaticSubscription == false) {
         $scope.goToMeal = false;
         $uibModalInstance.close({
-          manualSubscriptionPending: true,
-          pending: true
+          manualSubscriptionPending: true
         });
       }
     }, function(response) {
@@ -213,24 +216,20 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                   $scope.isAuthenticated = true;
                   isAuthenticated = true;
                   $http.get('/api/meals/' + meal_id).then(function successCallBack(responseUser) { // on récupère les infos pour savoir si l'user est inscrit au repas
-                    $scope.meal.detailedInfo.subscribed = responseUser.data.detailedInfo.subscribed; //on actualise l'état subscribed du repas
-                    $scope.meal.detailedInfo.pending = responseUser.data.detailedInfo.pending; // on actualise l'état pending du repas
-                    if (data._id == $scope.meal.admin._id || $scope.meal.detailedInfo.subscribed == true) { // s'il est l'hôte ou s'il inscrit on go sur le repas
+                    if (data._id == $scope.meal.admin._id || $scope.datasUserForEachMeal($scope.meal).status == 'accepted') { // s'il est l'hôte ou s'il inscrit on go sur le repas
                       $scope.goToMeal = true;
                       $uibModalInstance.close({
                         manualSubscriptionPending: false,
-                        pending: false
                       });
                       $state.go("view_my_dtld_meals", {
                         "myMealId": meal_id,
                         "successSubscribedMessage": true
                       });
                     }
-                    if ($scope.meal.detailedInfo.pending == true) { //s'il est en attente sur le repas
+                    if ($scope.datasUserForEachMeal($scope.meal).status == 'pending') { //s'il est en attente sur le repas
                       $scope.goToMeal = false;
                       $uibModalInstance.close({
-                        manualSubscriptionPending: true,
-                        pending: true
+                        manualSubscriptionPending: true
                       });
                     }
                     else { // s'il n'est ni l'hôte ni inscrit au repas

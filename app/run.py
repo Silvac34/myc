@@ -283,34 +283,14 @@ def pre_patch_privateUsers(request,lookup):
 ### meals ###
     
 # GET api/meals
-def before_returning_GET_meals(response):
+def before_returning_GET_meals(response): #
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-        if 'user_id' in session:
-            if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
-                if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
-                    meal["detailedInfo"].update({"subscribed" : True, "pending": False})
-                else: 
-                    meal["detailedInfo"].update({"subscribed" : False, "pending": True}) 
-            else: 
-                meal["detailedInfo"].update({"subscribed" : False, "pending": False})
-        else: 
-            meal["detailedInfo"].update({"subscribed" : None, "pending": None})
             
 # GET api/meals/<_id>
-def before_returning_GET_item_meal(response):
+def before_returning_GET_item_meal(response): #
     meal = response
     meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-    if 'user_id' in session:
-        if User(_id=escape(session['user_id'])).isSubscribed(meal_id=meal["_id"]) == True:
-            if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
-                meal["detailedInfo"].update({"subscribed" : True, "pending": False})
-            else: 
-                meal["detailedInfo"].update({"subscribed" : False, "pending": True})  
-        else: 
-            meal["detailedInfo"].update({"subscribed" : False, "pending": False})
-    else: 
-        meal["detailedInfo"].update({"subscribed" : None, "pending": None})
         
 #POST api/meals
 def before_storing_POST_meals (items):
@@ -373,15 +353,10 @@ def after_storing_POST_meals(items):
 def pre_get_privateMeals(request,lookup):
     lookup.update({"users._id":g.user_id })
 
-# GET api/meals/private
+# GET api/meals/private#
 def before_returning_GET_privateMeals(response):
     for meal in response["_items"]:
         meal["admin"] = User(_id=meal["admin"]).getUserPublicInfo()
-        if 'user_id' in session:
-            if User(_id=escape(session['user_id'])).isSubscriptionPending(meal_id=meal["_id"]) == False:
-                meal["detailedInfo"].update({"pending": False})
-            else: 
-                meal["detailedInfo"].update({"pending": True}) 
 
 # GET api/meals/private/<_id>
 def before_returning_GET_item_privateMeals(response):
@@ -527,8 +502,8 @@ def after_storing_POST_reviews(items):
 Application.app.on_pre_GET_privateUsers += pre_get_privateUsers
 Application.app.on_pre_PATCH_privateUsers += pre_patch_privateUsers
 ### meals resource ###
-Application.app.on_fetched_resource_meals +=  before_returning_GET_meals
-Application.app.on_fetched_item_meals +=  before_returning_GET_item_meal
+Application.app.on_fetched_resource_meals +=  before_returning_GET_meals#
+Application.app.on_fetched_item_meals +=  before_returning_GET_item_meal#
 Application.app.on_insert_meals +=  before_storing_POST_meals
 Application.app.on_inserted_meals +=  after_storing_POST_meals
 ### reviews resource ##

@@ -86,4 +86,15 @@ angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar
     return numberOfMealWithPendingRequest;
   };
 
+  $scope.datasUserForEachMeal = function(meal) {
+    if ($scope.$parent.$root.user) {
+      for (var i = 0; i < meal.users.length; i++) {
+        if (meal.users[i]._id == $scope.$parent.$root.user._id) {
+          break;
+        }
+      }
+      return meal.users[i];
+    }
+  };
+
 }]);

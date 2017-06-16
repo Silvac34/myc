@@ -363,20 +363,16 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   //-------------- INITIALIZING --------------//
 
   $state.go("view_meals.mealsList");
-  $scope.mapInitialized = false;
 
   $scope.InitializeMealsMap = function() {
-    if ($scope.mapInitialized == false) {
-      var vm = this;
-      NgMap.getMap("mealsMap").then(function(map) {
-        vm.map = map;
-      });
+    var vm = this;
+    NgMap.getMap("mealsMap").then(function(map) {
+      vm.map = map;
+    });
 
-      $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
-        vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
-      };
-      $scope.mapInitialized = true;
-    }
+    $scope.openInfowindow = function(evt) { //ouvre l'infowindow associé à la carte google
+      vm.map.showInfoWindow(this.id, this.id); //1er argument = infowindow ID, 2eme argument = marker ID. Pour simplifier, j'ai attribué l'ID du repas aux deux.
+    };
   };
 
 }]);

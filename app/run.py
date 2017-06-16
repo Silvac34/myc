@@ -420,10 +420,11 @@ def after_delete_privateMeals(item):
 # PATCH api/meals/private/<_id>
 def pre_patch_privateMeals(request,lookup):
     meal = Meal(_id=ObjectId(lookup["_id"])).getInfo()
-    for user in meal["users"]:
-        if user["_id"] == g.user_id: #on récupère l'id de celui qui publie le repas et s'il n'est pas hôte / admin alors on abort le process
-            if(user["role"][0] != "admin"):
-                abort(403)
+    if meal != False:
+        for user in meal["users"]:
+            if user["_id"] == g.user_id: #on récupère l'id de celui qui publie le repas et s'il n'est pas hôte / admin alors on abort le process
+                if(user["role"][0] != "admin"):
+                    abort(403)
     
 def before_updating_privateMeals(updates, original):
     if ("detailedInfo" in updates): # si on change le nombre d'aide

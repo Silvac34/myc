@@ -64,7 +64,7 @@ class APITest1(BasicAPITest):
     def tearDown(self):
 	    super(APITest1, self).tearDown()
 	    
-	
+    
     def test_unauthentificatedUser(self):
 	    resp = self.test_client.post("/api/meals", data="{\"super\":\"toto\"}")
 	    self.assertEqual("401 UNAUTHORIZED", resp.status)
@@ -102,6 +102,7 @@ class APITest2(BasicAPITest):
     
     def tearDown(self):
 	    super(APITest2, self).tearDown()
+	    
 
     def test_get_all_meals(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"automaticSubscription\": true,\"address\": {\"country_code\": \"FR\",\"lat\": 48.881,\"lng\": 2.341,\"postalCode\": \"75009\",\"town\": \"Paris\"},\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\",\"facebook_id\": \"103194673461647\",\"link\": \"https://www.facebook.com/app_scoped_user_id/103194673461647/\"},\"menu\":{\"title\": \"Jolie piece de boeuf\"},\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false, \"vegan\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"detailedInfo\": {\"subscribed\": true,\"pending\": false,\"requiredGuests\": {\"hosts\": {\"price\":5},\"cooks\":{\"nbRquCooks\":2,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":6.7},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":6.7},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":12.5}}}, \"users\": [{\"_id\": \"111111111111111111111111\",\"role\": [\"admin\"], \"status\": \"accepted\"}]}"
@@ -334,6 +335,32 @@ class APITest2(BasicAPITest):
         resp = self.test_client.post("/api/reviews", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("422 UNPROCESSABLE ENTITY", resp.status)
         
+    def test_patch_private_meal(self):#un test qui modifie un repas
+        respget = self.test_client.get("/api/meals/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        respget = json.loads(respget.data)
+        menuOriginal = respget["menu"]["title"]
+        _etag = respget["_etag"]     
+        jsonRequestData = "{\"menu\": {\"title\": \"modification du titre du repas\"}}"
+        resp = self.test_client.patch("/api/meals/private/111111111111111111111111", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
+        respgetModified = self.test_client.get("/api/meals/private/111111111111111111111111",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        menuModified = json.loads(respgetModified.data)["menu"]["title"]
+        self.assertEqual(menuModified, "modification du titre du repas")
+        self.assertNotEqual(menuModified, menuOriginal)
+        
+    def test_discount_help_not_permit(self): #un test qui vérifie qu'on ne peut diminuer le nombre de place en dessous de nombre de participant déjà inscrit
+        respget = self.test_client.get("/api/meals/private/58f4183e3187971673aa4cb4",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        respget = json.loads(respget.data)
+        _etag = respget["_etag"] 
+        jsonRequestData = "{\"detailedInfo\": {\"requiredGuests\": {\"simpleGuests\":{\"nbRquSimpleGuests\": 0}}}}"
+        resp = self.test_client.patch("/api/meals/private/58f4183e3187971673aa4cb4", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
+        self.assertEqual("403 FORBIDDEN", resp.status)
+        
+    #un test qui vérifie qu'en diminuant ou augmentant les aides, on diminue/augmente aussi nbRemainingPlaces et nbGuests
+    
+    #un test qui vérifie ce qu'il se passe si on n'est pas admin et qu'on essai de modifier un repas
+    
+    #un test qui vérifie qu'on en peut modifier un repas qui n'existe pas
     
 if __name__ == '__main__':
     unittest.main()

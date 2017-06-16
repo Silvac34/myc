@@ -180,7 +180,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   }
 
   function getAddressFromAutocomplete() {
-    var precision_needed_for_rounding_lat_lng = 1000;
+    var precision_needed_for_rounding_lat_lng = 100;
     if ($scope.details != undefined) {
       if ("vicinity" in $scope.details) {
         $scope.editedMeal.address.town = $scope.details.vicinity;
@@ -203,10 +203,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       }
     }
   }
-
-  $scope.$watch("meal", function(newValue, oldValue) {
-    console.log(newValue);
-  });
 
   //required for the calendar toolbar (datamodel : editedMeal.time)
 

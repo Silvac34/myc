@@ -367,7 +367,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     };
 
     function addAddressFromAutocomplete(dataToPerform) {
-        var precision_needed_for_rounding_lat_lng = 1000;
+        var precision_needed_for_rounding_lat_lng = 100;
         if ($scope.details != undefined) {
             if (!dataToPerform.address) {
                 dataToPerform["address"] = {};

@@ -39,7 +39,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
-                                <div class="pull-right" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><strong><span ng-if="meal.detailedInfo.subscribed==true">attending</span><span ng-if="meal.detailedInfo.pending==true">pending</span></strong></div>
+                                <div class="pull-right" ng-class="{'text-success': meal.detailedInfo.subscribed, 'text-warning': meal.detailedInfo.pending==true}"><strong><span ng-if="meal.detailedInfo.subscribed==true && user._id != meal.admin._id">attending</span><span ng-if="meal.detailedInfo.subscribed==true && user._id == meal.admin._id">Hosting</span><span ng-if="meal.detailedInfo.pending==true">pending</span></strong></div>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="meal.detailedInfo.subscribed==true || meal.detailedInfo.pending==true">
-                                <div class="pull-right" ng-class="{'text-info': meal.detailedInfo.subscribed}"><strong><span ng-if="meal.detailedInfo.subscribed==true">attended</span></strong></div>
+                                <div class="pull-right" ng-class="{'text-info': meal.detailedInfo.subscribed}"><strong><span ng-if="meal.detailedInfo.subscribed==true && user._id != meal.admin._id">attended</span><span ng-if="meal.detailedInfo.subscribed==true && user._id == meal.admin._id">Hosted</span></strong></div>
                             </div>
                         </div>
                     </div>

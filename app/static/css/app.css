@@ -86,6 +86,11 @@
 
 /* function clear css to create lines with nothing*/
 
+.clear5 {
+    clear: both;
+    height: 5px;
+}
+
 .clear10 {
     clear: both;
     height: 10px;
@@ -597,6 +602,13 @@ footer p {
     left: 40px;
     top: 7px;
     padding-bottom: 7px;
+}
+
+.map-meal-separation {
+    border-top-style: groove;
+    border-top-color: rgba(56, 52, 52, 0.45);
+    border-top-width: 2px;
+    margin: 5px 0px;
 }
 
 @media (min-width: 768px) {

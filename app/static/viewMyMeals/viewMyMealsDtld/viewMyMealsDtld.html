@@ -26,11 +26,13 @@
                             </div>
                             <div class="clear10"></div>
                             <div style="position:relative">
-                                <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" />
+                                <a ui-sref="profile({userId:participant._id})"><img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" /></a>
                                 <div style="position:relative; left:10px;">
-                                    <div>
-                                        <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
-                                    </div>
+                                    <a ui-sref="profile({userId:participant._id})">
+                                        <div>
+                                            <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
+                                        </div>
+                                    </a>
                                     <div style="padding-top:4px">
                                         <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                         <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} years old</br></span>
@@ -90,7 +92,8 @@
                 </div>
                 <div class="panel-body">
                     <div ng-if="isOldMeal() == false">
-                        <i class="fa fa-share"></i> Invite friends <div class="fb-send" data-href="data_href_publishOnFacebook"></div>
+                        <i class="fa fa-share"></i> Invite friends
+                        <div class="fb-send" data-href="data_href_publishOnFacebook"></div>
                     </div>
                     <div class="meal-info-label">
                         <span ng-if="userRole=='cook'">Inscribed as: <strong class="text-success">" Help cooking "</strong></span>

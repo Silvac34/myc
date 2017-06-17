@@ -97,21 +97,6 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   };
 
-  /*$scope.openModalMapDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
-    var listId = $scope.meals.map(function(x){return x._id});
-    var index = listId.indexOf("meal_id");
-    $uibModal.open({
-      animation: true,
-      templateUrl: 'static/viewMeals/viewMealsContainer/mealsMapDtld.html',
-      size: "lg",
-      resolve: {
-        meal: function() {
-          return $scope.meals[index];
-        }
-      }
-    });
-  };*/
-
   if ($scope.$parent.$root.toState && $scope.$parent.$root.toState.name == "view_my_dtld_meals" && $scope.$parent.$root.fromState && ($scope.$parent.$root.fromState.name == "" || $scope.$parent.$root.fromState.name == "login")) { //permet d'ouvrir le modal associé à un repas que j'essayais d'ouvrir depuis un lien extérieur si je n'étais pas identifier auparavant
     $scope.openModalDtld($scope.$parent.$root.toParams.myMealId);
   }

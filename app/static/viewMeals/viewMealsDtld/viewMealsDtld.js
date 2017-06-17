@@ -148,6 +148,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
         $uibModalInstance.close({
           manualSubscriptionPending: true
         });
+        $state.reload();
       }
     }, function(response) {
       $scope.errorSubscribe.requestRole.status = true;

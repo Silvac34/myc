@@ -14,25 +14,22 @@
                     <h3 class="panel-title">You have a pending request</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.status == 'pending'">
+                    <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="participant in meal.users" ng-if="participant.status == 'pending'">
                         <div class="my-meal-dtld-list-pending-user">
                             <div>
-                                <strong>Requested role:</strong> <span style="margin-right:10px"><span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span></span>
-                                <span class="hidden-sm hidden-md hidden-lg"></br></span>
-                                <span class="pull-right-sm-md-lg pull-left-xs" style="padding-top:4px">
+                                <strong>Requested role:</strong> <span ng-if="participant.role[0] == 'cook'">Help cooking</span><span ng-if="participant.role[0]== 'cleaner'">Help cleaning</span><span ng-if="participant.role[0]== 'simpleGuest'">Simple guest</span>
+                                <span class="pull-right">
                                     <a class="btn btn-success btn-xs" ng-click="validateSubscription(participant._id)">Accept</a>
                                     <a class="btn btn-danger btn-xs" ng-click="refuseSubscription(participant._id)">Refuse</a>
                                     </span>
                             </div>
                             <div class="clear10"></div>
                             <div style="position:relative">
-                                <a ui-sref="profile({userId:participant._id})"><img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" /></a>
+                                <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" />
                                 <div style="position:relative; left:10px;">
-                                    <a ui-sref="profile({userId:participant._id})">
-                                        <div>
-                                            <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
-                                        </div>
-                                    </a>
+                                    <div>
+                                        <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
+                                    </div>
                                     <div style="padding-top:4px">
                                         <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                         <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} years old</br></span>
@@ -63,13 +60,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="clear10"></div>
                         </div>
+                        <div class="clear10"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="clear10"></div>
     <div class="row">
         <div class="col-xs-12 text-center meal-dtld-menu text-info">

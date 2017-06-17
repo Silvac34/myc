@@ -38,17 +38,30 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     if ($scope.$parent.$root.user) {
       for (var i = 0; i < meal.users.length; i++) {
         if (meal.users[i]._id == $scope.$parent.$root.user._id) {
-          break;
+          return meal.users[i];
         }
       }
-      return meal.users[i];
     }
   };
+
+  function checkStatusAccepted(i) {
+    if ($scope.datasUserForEachMeal($scope.meals[i])) {
+      if ($scope.datasUserForEachMeal($scope.meals[i]).status == "accepted") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+  }
 
   $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
     for (var i = 0; i < $scope.meals.length; i++) {
       if ($scope.meals[i]._id == meal_id) {
-        if ($scope.datasUserForEachMeal($scope.meals[i]).status == "accepted") {
+        if (checkStatusAccepted(i)) {
           $state.go("view_my_dtld_meals", {
             "myMealId": meal_id
           });
@@ -83,6 +96,21 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
       }
     }
   };
+
+  /*$scope.openModalMapDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
+    var listId = $scope.meals.map(function(x){return x._id});
+    var index = listId.indexOf("meal_id");
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'static/viewMeals/viewMealsContainer/mealsMapDtld.html',
+      size: "lg",
+      resolve: {
+        meal: function() {
+          return $scope.meals[index];
+        }
+      }
+    });
+  };*/
 
   if ($scope.$parent.$root.toState && $scope.$parent.$root.toState.name == "view_my_dtld_meals" && $scope.$parent.$root.fromState && ($scope.$parent.$root.fromState.name == "" || $scope.$parent.$root.fromState.name == "login")) { //permet d'ouvrir le modal associé à un repas que j'essayais d'ouvrir depuis un lien extérieur si je n'étais pas identifier auparavant
     $scope.openModalDtld($scope.$parent.$root.toParams.myMealId);

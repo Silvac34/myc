@@ -253,13 +253,15 @@ def auth_facebook():
                 if currentUser["privateInfo"]["email"] != profile["email"]:
                     userInfo = {"privateInfo.email" : profile["email"]}
                     user.updateUser(userInfo)
-        else:
-            if("email" in profile):
+            else:
                 userInfo = {"privateInfo.email" : profile["email"]}
                 user.updateUser(userInfo)
-            else:
-                userInfo = {"privateInfo.email" : ""}
-                user.updateUser(userInfo)
+        else:
+            userInfo = {"privateInfo.email" : profile["email"]}
+            user.updateUser(userInfo)
+    else:
+        userInfo = {"privateInfo.email" : ""}
+        user.updateUser(userInfo)
     return jsonify(token=user.token())
     
 @Application.app.route('/auth/logout', methods=['GET'])

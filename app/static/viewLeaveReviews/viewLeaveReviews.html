@@ -16,30 +16,27 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="meal in dataForReview | groupBy: 'mealAssociated'">
-                        <div class="text-info"><img src="static/sources/createMeal/cutlery_menu.png" style="position:relative;bottom:3px"> <strong style="font-size:large">{{meal[0].mealTitle}}</strong></div>
-                        <div class="row">
-                            <div class="row" ng-repeat="review in meal" ng-if="review.sent == false">
-                                <div class="col-xs-12">
-                                    <div class="clear10" ng-show="$first==true"></div>
-                                    <div class="clear10"></div>
-                                    <div class="col-sm-3">
-                                        <a ui-sref="profile({userId: review.forUser.datas._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{review.forUser.datas.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList my-meal-dtld-guestList-old" style="padding-right:5px">{{review.forUser.datas.first_name}} {{review.forUser.datas.last_name}}</a>
+                        <div class="row" ng-repeat="review in meal" ng-if="review.sent == false">
+                            <div class="col-xs-12">
+                                <div class="text-info" ng-if="meal[0].mealTitle; $first"><img src="static/sources/createMeal/cutlery_menu.png" style="position:relative;bottom:3px"> <strong style="font-size:large">{{meal[0].mealTitle}}</strong></div>
+                                <div class="clear10"></div>
+                                <div class="col-sm-3">
+                                    <a ui-sref="profile({userId: review.forUser.datas._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{review.forUser.datas.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList my-meal-dtld-guestList-old" style="padding-right:5px">{{review.forUser.datas.first_name}} {{review.forUser.datas.last_name}}</a>
                                     </div>
                                     <div class="clear10 hidden-sm hidden-md hidden-lg"></div>
                                     <div class="col-sm-9" ng-class="{'margintop7': checkAlreadyReviewed(review.unique) == true}">
                                         <span class="form-group">
                                             <span ng-hide="getDataForReview(review.unique, 'rating') != 'positive' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'positive' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'positive' && checkAlreadyReviewed(review.unique) == true}"
                                     uib-tooltip="Positive" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                            <span ng-hide="getDataForReview(review.unique, 'rating') != 'neutral' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'neutral' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'neutral' && checkAlreadyReviewed(review.unique) == true}"
+                                        <span ng-hide="getDataForReview(review.unique, 'rating') != 'neutral' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'neutral' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'neutral' && checkAlreadyReviewed(review.unique) == true}"
                                     uib-tooltip="Neutral" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
-                                            <span ng-hide="getDataForReview(review.unique, 'rating') != 'negative' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'negative')" ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'negative' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'negative' && checkAlreadyReviewed(review.unique) == true}"
+                                        <span ng-hide="getDataForReview(review.unique, 'rating') != 'negative' && checkAlreadyReviewed(review.unique) == true"><span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(review.unique, review.forUser.role, 'rating', 'negative')" ng-class="{'size-18': getDataForReview(review.unique, 'rating') == 'negative' && checkAlreadyReviewed(review.unique) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(review.unique, 'rating') == 'negative' && checkAlreadyReviewed(review.unique) == true}"
                                                 uib-tooltip="Negative" tooltip-placement="top" style="cursor:pointer"></span></span><br class="hidden-sm hidden-md hidden-lg">
-                                            <input type="text" ng-model="review.forUser.comment" class="form-control my-meal-dtld-input-review" style="width:70%" placeholder="Leave a review to {{review.forUser.datas.first_name}}" ng-hide="checkAlreadyReviewed(review.unique) == true">
-                                            <span ng-show="checkAlreadyReviewed(review.unique) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(review.unique, 'comment')}}</em>"</span>
-                                            <a ng-click="sendReview(review.unique, review.forUser.role, 'comment', review.forUser.comment)" ng-hide="checkAlreadyReviewed(review.unique) == true" class="btn btn-default" ng-disabled="!getDataForReview(review.unique, 'rating')"
-                                                uib-tooltip="Grade {{review.forUser.datas.first_name}} first" tooltip-placement="top" tooltip-enable="!getDataForReview(review.unique, 'rating')">Send</a>
-                                            </span>
-                                    </div>
+                                        <input type="text" ng-model="review.forUser.comment" class="form-control my-meal-dtld-input-review" style="width:70%" placeholder="Leave a review to {{review.forUser.datas.first_name}}" ng-hide="checkAlreadyReviewed(review.unique) == true">
+                                        <span ng-show="checkAlreadyReviewed(review.unique) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(review.unique, 'comment')}}</em>"</span>
+                                        <a ng-click="sendReview(review.unique, review.forUser.role, 'comment', review.forUser.comment)" ng-hide="checkAlreadyReviewed(review.unique) == true" class="btn btn-default" ng-disabled="!getDataForReview(review.unique, 'rating')" uib-tooltip="Grade {{review.forUser.datas.first_name}} first"
+                                            tooltip-placement="top" tooltip-enable="!getDataForReview(review.unique, 'rating')">Send</a>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -49,5 +46,14 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="form-group fade-out-success" ng-show="actualized == true">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span ng-show="actualized == true" class="fade-out-success">Your review was sent</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

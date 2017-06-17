@@ -114,7 +114,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     }
   };
 
-  function setDate(dateToSet){
+  function setDate(dateToSet) {
     dateToSet.setDate($scope.editedMeal.time.getDate());
     dateToSet.setMonth($scope.editedMeal.time.getMonth());
     dateToSet.setFullYear($scope.editedMeal.time.getFullYear());
@@ -126,7 +126,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     if ($scope.editedMeal.menu.title != undefined) {
       if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
         if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-          setDate($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
           if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
           }
@@ -134,17 +133,18 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
             console.log("you are trying to do somehting ilegal with the number of cooks!");
             okToPost = false;
           }
+          setDate($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
-            setDate($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
-          }
           if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null || $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0) {
             delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
           }
           else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
             console.log("you are trying to do somehting ilegal with the number of cleaners!");
             okToPost = false;
+          }
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
+            setDate($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
           }
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {

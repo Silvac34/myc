@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewLeaveReviews', [])
 
-.controller('ViewLeaveReviewsCtrl', ['$scope', '$http', 'getSpecificUserFactory', function($scope, $http, getSpecificUserFactory) {
+.controller('ViewLeaveReviewsCtrl', ['$scope', '$http', 'getSpecificUserFactory', '$timeout', function($scope, $http, getSpecificUserFactory, $timeout) {
 
     if ($scope.$parent.$root.user) {
         var uniqueList = [];
@@ -93,16 +93,20 @@ angular.module('myApp.viewLeaveReviews', [])
             var index = checkIndexDataForReview(unique);
             $scope.dataForReview[index].forUser[type] = value;
             if (type == "comment") {
+                $scope.actualized = true;
+                $timeout(function() {
+                    $scope.actualized = null;
+                }, 8000);
                 if ($scope.dataForReview[index].forUser.rating == undefined) {
                     console.log("you need to grade " + $scope.dataForReview[index].forUser.datas.first_name);
                 }
                 else {
                     delete $scope.dataForReview[index].sent;
+                    var mealTitleToKeep = $scope.dataForReview[index].mealTitle.toString();
                     delete $scope.dataForReview[index].mealTitle;
                     delete $scope.dataForReview[index].forUser.datas;
                     $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
-                        $scope.dataForReview[index]['sent'] = true; //on ajoute cet attribut pour modifier la vue HTML des références
-                        console.log($scope.dataForReview[index]);
+                        $scope.dataForReview.splice(index,1);
                     }, function errorCallback(response) {
                         $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
                     });
@@ -141,6 +145,7 @@ angular.module('myApp.viewLeaveReviews', [])
                 $scope.dataForReview.push(review);
             });
         });
+        $scope.actualized = false;
     }
 
     function checkIndexDataForReview(unique) { //retourne l'index où on doit faire les modifications dans dataForReview

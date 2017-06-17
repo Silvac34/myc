@@ -333,6 +333,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     $scope.addSpokenLanguage = function($event) {
       if (event.which === 13 && event.type == "keypress" || event.type == "click") {
         checkIfSpokenLanguageIsNew(this.userSpokenLanguage.name);
+        delete this.userSpokenLanguage;
       }
     };
 

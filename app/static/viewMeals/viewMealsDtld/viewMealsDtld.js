@@ -109,7 +109,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     else {
       $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
     }
-    if($scope.datasUserForEachMeal($scope.meal)){
+    if($scope.datasUserForEachMeal($scope.meal).status == "accepted"){
       $scope.goToMeal = true;
     }
     else{

@@ -48,7 +48,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
     for (var i = 0; i < $scope.meals.length; i++) {
       if ($scope.meals[i]._id == meal_id) {
-        if ($scope.datasUserForEachMeal($scope.meals[i])) {
+        if ($scope.datasUserForEachMeal($scope.meals[i]).status == "accepted") {
           $state.go("view_my_dtld_meals", {
             "myMealId": meal_id
           });

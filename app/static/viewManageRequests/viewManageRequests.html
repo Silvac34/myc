@@ -29,15 +29,18 @@
                                     </div>
                                     <div class="clear10"></div>
                                     <div style="position:relative">
-                                        <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px" class="pull-left" alt="User profile picture" />
+                                        <a ui-sref="profile({userId:participant._id})"><img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="User profile picture" /></a>
                                         <div style="position:relative; left:10px;">
-                                            <div>
-                                                <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
-                                            </div>
+                                            <a ui-sref="profile({userId:participant._id})">
+                                                <div>
+                                                    <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
+                                                </div>
+                                            </a>
                                             <div style="padding-top:4px">
                                                 <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                                 <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} years old</br></span>
                                                 <span ng-if="participant.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{participant.country_of_origin.name}}</br></span>
+                                                <span ng-if="participant.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span>
                                             </div>
                                             <span class="hidden-sm hidden-md hidden-lg" ng-if="!participant.reviews"></br></span>
                                             <div>
@@ -59,7 +62,8 @@
                                                     <a ui-sref="profile({userId: participant._id})"><em><u>see reviews</u></em></a>
                                                 </div>
                                             </div>
-                                            <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:15px 10px 10px 0px;" ng-if="participant.presentation">
+                                            <div class="clear5 hidden-xs"></div>
+                                            <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:0px 10px 10px 0px;" ng-if="participant.presentation">
                                                 "<em>{{participant.presentation}}</em>"
                                             </div>
                                         </div>

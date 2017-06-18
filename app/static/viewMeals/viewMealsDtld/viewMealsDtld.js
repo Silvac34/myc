@@ -131,6 +131,20 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       return false;
     }
   }
+  
+  function checkStatusPending() {
+    if ($scope.datasUserForEachMeal($scope.meal)) {
+      if ($scope.datasUserForEachMeal($scope.meal).status == "pending") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+  }
 
   function check(value) {
     if (value != undefined) {
@@ -232,7 +246,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                   $scope.isAuthenticated = true;
                   isAuthenticated = true;
                   $http.get('/api/meals/' + meal_id).then(function successCallBack(responseUser) { // on récupère les infos pour savoir si l'user est inscrit au repas
-                    if (data._id == $scope.meal.admin._id || $scope.datasUserForEachMeal($scope.meal).status == 'accepted') { // s'il est l'hôte ou s'il inscrit on go sur le repas
+                    if (data._id == $scope.meal.admin._id || checkStatusAccepted()) { // s'il est l'hôte ou s'il inscrit on go sur le repas
                       $scope.goToMeal = true;
                       $uibModalInstance.close({
                         manualSubscriptionPending: false,
@@ -242,7 +256,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                         "successSubscribedMessage": true
                       });
                     }
-                    if ($scope.datasUserForEachMeal($scope.meal).status == 'pending') { //s'il est en attente sur le repas
+                    if (checkStatusPending()) { //s'il est en attente sur le repas
                       $scope.goToMeal = false;
                       $uibModalInstance.close({
                         manualSubscriptionPending: true

@@ -1082,9 +1082,17 @@ footer p {
 /* welcome---------------------------------------------------*/
 
 h2.slogan {
-    font-size: 20px;
+    font-size: 22px;
     margin-top: -10px;
     font-style: italic;
+    font-family: Gill Sans, Verdana;
+}
+
+h4.sub-slogan {
+    font-size: 18px;
+    float:left;
+    font-weight: bold;
+    font-family: Gill Sans, Verdana;
 }
 
 .row.welcome-how-it-works {

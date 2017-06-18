@@ -612,6 +612,14 @@ footer p {
     margin: 5px 0px;
 }
 
+.list-meal-separation {
+    border-top-style: groove;
+    border-top-color: rgba(56, 52, 52, 0.45);
+    border-top-width: 2px;
+    margin: 5px 0px;
+    border-style: dotted;
+}
+
 @media (min-width: 768px) {
     .map-height {
         height: 577px;

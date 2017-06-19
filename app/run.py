@@ -146,9 +146,13 @@ def addReviewRatingToUser(userId, rating):
     userDatas = user.getUserPublicInfo()
     userInfo = {}
     if("reviews" in userDatas):
-        numberOfRating = userDatas['reviews'][rating] + 1
-        userInfo = {"reviews."+ rating: numberOfRating}
-        user.updateUser(userInfo)
+        if(rating in userDatas["reviews"]):
+            numberOfRating = userDatas['reviews'][rating] + 1
+            userInfo = {"reviews."+ rating: numberOfRating}
+            user.updateUser(userInfo)
+        else:
+            userInfo = {"reviews."+ rating: 1}
+            user.updateUser(userInfo)
     else:
         userInfo = {"reviews."+ rating: 1}
         user.updateUser(userInfo)

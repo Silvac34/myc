@@ -29,13 +29,16 @@ angular.module('myApp.viewManageRequests', [])
         $http.post('/api/meals/' + this.$parent.$parent.meal._id + '/subscription/validate/' + this.$parent.participant._id, {
             'validation_result': true
         }).then(function() {
+            if ($scope.$parent.$root.user.nbDifferentPendingRequest) {
+                $scope.$parent.$root.user.nbDifferentPendingRequest -= 1;
+            }
             var nbPendingRequest = 0;
             users.forEach(function(user) {
                 if (user.status == "pending") {
                     nbPendingRequest += 1;
                 }
             });
-            nbPendingRequest -= 1;//on retire la pending request de l'utilisateur qu'on supprime 
+            nbPendingRequest -= 1; //on retire la pending request de l'utilisateur qu'on supprime 
             if (nbPendingRequest == 0) {
                 $scope.meals.splice(mealIndex, 1);
             }

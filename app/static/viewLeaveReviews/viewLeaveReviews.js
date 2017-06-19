@@ -102,11 +102,13 @@ angular.module('myApp.viewLeaveReviews', [])
                 }
                 else {
                     delete $scope.dataForReview[index].sent;
-                    var mealTitleToKeep = $scope.dataForReview[index].mealTitle.toString();
                     delete $scope.dataForReview[index].mealTitle;
                     delete $scope.dataForReview[index].forUser.datas;
                     $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
-                        $scope.dataForReview.splice(index,1);
+                        $scope.dataForReview.splice(index, 1);
+                        if ($scope.$parent.$root.user.nbDifferentReviewsToLeave) {
+                            $scope.$parent.$root.user.nbDifferentReviewsToLeave -= 1;
+                        }
                     }, function errorCallback(response) {
                         $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
                     });

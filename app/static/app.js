@@ -269,7 +269,6 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
         var uniqueListForRequest = [];
         var now = new Date;
         $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users": {"$not": {"$size": 1}}}]}').then(function(resp) { // on récupère les meals de l'utilisateur dont on consulte le profile où il n'y a pas que lui d'inscrit
-          console.log(resp.data._items);
           resp.data._items.forEach(function(element) {
             var mealDate = new Date(element.time);
             if (mealDate < now) { // on ne peut laisser une review qu'à un meal qui s'est passé

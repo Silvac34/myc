@@ -95,6 +95,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         $http.post('/api/meals/' + $scope.meal._id + '/subscription/validate/' + participant_id, {
             'validation_result': true
         }).then(function() {
+            if ($scope.$parent.$root.user.nbDifferentPendingRequest) {
+                $scope.$parent.$root.user.nbDifferentPendingRequest -= 1;
+            }
             var nbPendingRequest = 0;
             for (var i = 0; i < $scope.meal.users.length; i++) {
                 if ($scope.meal.users[i]._id == participant_id) {
@@ -304,6 +307,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                     delete $scope.dataForReview[index].sent;
                     $http.post('/api/reviews', $scope.dataForReview[index]).then(function successCallBack(response) {
                         $scope.dataForReview[index]['sent'] = true; //on ajoute cet attribut pour modifier la vue HTML des références
+                        if ($scope.$parent.$root.user.nbDifferentReviewsToLeave) {
+                            $scope.$parent.$root.user.nbDifferentReviewsToLeave -= 1;
+                        }
                     }, function errorCallback(response) {
                         $scope.dataForReview[index]['sent'] = false; //s'il y a une erreur dans le process alors les données ne se sont pas envoyées
                     });

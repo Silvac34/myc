@@ -605,7 +605,7 @@ footer p {
 }
 
 .map-meal-separation {
-    border-top-style: groove;
+    border-top-style: dotted;
     border-top-color: rgba(56, 52, 52, 0.45);
     border-top-width: 2px;
     margin: 5px 0px;

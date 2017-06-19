@@ -224,7 +224,7 @@ app.run(function($rootScope, $state, $auth) {
 
 });
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', '$timeout', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb, $timeout) {
 
   function authe(provider) {
     return $q(function(resolve, reject) {
@@ -252,6 +252,39 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       else {
         $state.reload();
       }
+      $timeout(function() {
+        //on récupère les pending requests et on le mets dans le rootscope
+        $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
+          $rootScope.user.nbDifferentPendingRequest = 0;
+          var meals = res.data._items;
+          meals.forEach(function(meal) {
+            meal.users.forEach(function(participant) {
+              if (participant.status == "pending") {
+                $rootScope.user.nbDifferentPendingRequest += 1;
+              }
+            });
+          });
+        });
+        //on récupère les reviews qu'on a besoin de laisser et on les met dans rootscope
+        var uniqueListForRequest = [];
+        var now = new Date;
+        $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users": {"$not": {"$size": 1}}}]}').then(function(resp) { // on récupère les meals de l'utilisateur dont on consulte le profile où il n'y a pas que lui d'inscrit
+          console.log(resp.data._items);
+          resp.data._items.forEach(function(element) {
+            var mealDate = new Date(element.time);
+            if (mealDate < now) { // on ne peut laisser une review qu'à un meal qui s'est passé
+              element.users.forEach(function(participant) {
+                if (participant._id != $rootScope.user._id) { //on enlève les reviews pour moi même
+                  uniqueListForRequest.push('"' + (participant._id + $rootScope.user._id + element._id).toString() + '"');
+                }
+              });
+            }
+          });
+          $http.get('api/reviews?where={"unique": {"$in":[' + uniqueListForRequest + ']}}').then(function successCallBack(response) {
+            $rootScope.user.nbDifferentReviewsToLeave = uniqueListForRequest.length - response.data._items.length;
+          });
+        });
+      }, 0);
     });
   };
 

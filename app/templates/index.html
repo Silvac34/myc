@@ -83,10 +83,10 @@
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown" style="cursor:pointer">
                 <a uib-dropdown-toggle class="dropdown-toggle">
-                  <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret"></span></a>
+                  <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret" ng-if="(user.nbDifferentPendingRequest==0 && user.nbDifferentReviewsToLeave==0) || (!user.nbDifferentPendingRequest && !user.nbDifferentReviewsToLeave)"></span><span class="badge" ng-if="user.nbDifferentPendingRequest>0 || user.nbDifferentReviewsToLeave>0">{{'{{user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave}}'}}</span></a>
                 <ul uib-dropdown-menu class="dropdown-menu">
-                  <li><a ui-sref="manage_requests" ui-sref-opts="{reload: true}" ng-click="$parent.navbarCollapsed=true">Manage requests</a></li>
-                  <li><a ui-sref="leave_reviews" ui-sref-opts="{reload: true}" ng-click="$parent.navbarCollapsed=true">Leave reviews</a></li>
+                  <li><a ui-sref="manage_requests" ui-sref-opts="{reload: true}" ng-click="$parent.navbarCollapsed=true">Manage requests&nbsp; <span class="badge" ng-if="user.nbDifferentPendingRequest>0">{{'{{user.nbDifferentPendingRequest}}'}}</span></a></li>
+                  <li><a ui-sref="leave_reviews" ui-sref-opts="{reload: true}" ng-click="$parent.navbarCollapsed=true">Leave reviews&nbsp; <span class="badge" ng-if="user.nbDifferentReviewsToLeave>0">{{'{{user.nbDifferentReviewsToLeave}}'}}</span></a></li>
                   <li class="divider"></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
@@ -121,12 +121,12 @@
       <button id="single-button" type="button" class="btn btn-default welcome-buttons-auth-header" uib-dropdown-toggle ng-disabled="disabled">
         Hi <strong>{{'{{user.first_name}}'}}</strong> <span class="caret"></span>
       </button>
-          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
             <li role="menuitem" ng-if="isAuthenticated()"><a ui-sref="my_meals">My meals</a></li>
             <li role="menuitem"><a ui-sref="profile({userId:user._id})">My profile</a></li>
             <li class="divider" ng-if="isAuthenticated()"></li>
-            <li role="menuitem"><a ui-sref="manage_requests">Manage requests</a></li>
-            <li role="menuitem"><a ui-sref="leave_reviews">Leave reviews</a></li>
+            <li role="menuitem"><a ui-sref="manage_requests">Manage requests&nbsp; <span class="badge" ng-if="user.nbDifferentPendingRequest>0">{{'{{user.nbDifferentPendingRequest}}'}}</span></a></li>
+            <li role="menuitem"><a ui-sref="leave_reviews">Leave reviews&nbsp; <span class="badge" ng-if="user.nbDifferentReviewsToLeave>0">{{'{{user.nbDifferentReviewsToLeave}}'}}</span></a></li>
             <li role="menuitem"><a ng-click="logout()">Logout</a></li>
           </ul>
         </div>

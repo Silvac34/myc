@@ -35,8 +35,8 @@
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-calendar"></i>
                         </div>
-                        <input type="text" class="form-control" style="text-indent:20px" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions" ng-required="true"
-                            close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
+                        <input type="text" class="form-control" style="text-indent:20px" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions"
+                            ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" />
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-10" style="max-width:100px">
@@ -55,7 +55,7 @@
                         <tr>
                             <th></th>
                             <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                            <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="Arrival time" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
+                            <th class="text-center" style="width:95px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="Arrival time" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
                         </tr>
                     </thead>
                     <tbody>

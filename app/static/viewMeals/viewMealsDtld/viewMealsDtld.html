@@ -136,7 +136,7 @@
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
                                 </div>
                                 <div class="small" style="padding-top:4px">
-                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{capitalizeFirstLetter(participant.gender)}}</br></span>
+                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                     <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake"></i> {{participant.birthdate | ageFilter}} years old</br></span>
                                     <span ng-if="participant.country_of_origin"><i class="fa fa-globe"></i> From {{participant.country_of_origin.name}}</br></span>
                                 </div>
@@ -157,7 +157,7 @@
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
                                 </div>
                                 <div class="small" style="padding-top:4px">
-                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{capitalizeFirstLetter(participant.gender)}}</br></span>
+                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                     <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake"></i> {{participant.birthdate | ageFilter}} years old</br></span>
                                     <span ng-if="participant.country_of_origin"><i class="fa fa-globe"></i> From {{participant.country_of_origin.name}}</br></span>
                                 </div>
@@ -178,7 +178,7 @@
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
                                 </div>
                                 <div class="small" style="padding-top:4px">
-                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{capitalizeFirstLetter(participant.gender)}}</br></span>
+                                    <span ng-if="participant.gender"><i class="fa fa-venus-mars"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
                                     <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake"></i> {{participant.birthdate | ageFilter}} years old</br></span>
                                     <span ng-if="participant.country_of_origin"><i class="fa fa-globe"></i> From {{participant.country_of_origin.name}}</br></span>
                                 </div>

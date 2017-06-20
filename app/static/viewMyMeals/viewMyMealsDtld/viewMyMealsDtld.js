@@ -354,11 +354,15 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.currency_symbol = $scope.editedMeal.price.split(" ")[0];
     $scope.editedMeal.priceToEdit = parseFloat($scope.editedMeal.price.split(" ")[1]);
     $scope.editedMeal.time = new Date($scope.editedMeal.time);
-    if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
-        $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = new Date($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
+    if (editedMeal.detailedInfo.requiredGuests.cooks) {
+        if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
+            $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = new Date($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
+        }
     }
-    if (editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
-        $scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning = new Date($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
+    if (editedMeal.detailedInfo.requiredGuests.cleaners) {
+        if (editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
+            $scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning = new Date($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
+        }
     }
     $scope.autocompleteAddress = $scope.editedMeal.privateInfo.address.name + ", " + $scope.editedMeal.address.town + ", " + $scope.editedMeal.address.country;
     $scope.editedMeal.timeForControl = new Date($scope.editedMeal.time);

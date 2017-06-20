@@ -66,7 +66,8 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-xs" ng-class="{'btn-primary':!datasUserForEachMeal(meal),'btn-success':!datasUserForEachMeal(meal)}" ng-click=openModalDtld(meal._id)>See meal</a>
+                        <a class="btn btn-xs" ng-class="{'btn-primary':!datasUserForEachMeal(meal),'btn-success':datasUserForEachMeal(meal)}" ng-if="meal.nbRemainingPlaces>0 || meal.nbRemainingPlaces<=0 && datasUserForEachMeal(meal).status == 'accepted'" ng-click=openModalDtld(meal._id)>See meal</a>
+                        <span ng-if="meal.nbRemainingPlaces<=0 && !datasUserForEachMeal(meal)"><strong class="text-danger">The meal is already full!</strong><br><br>Please <a class="btn btn-xs btn-facebook" ng-click="auth('facebook', toState)">Sign In</a> if you already subscribed.</span>
                     </div>
                 </div>
             </info-window>

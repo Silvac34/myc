@@ -34,7 +34,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   });
 
-  $scope.datasUserForEachMeal = function(meal) {
+  $scope.datasUserForEachMeal = function(meal) {//function qui retourne l'utilisateur s'il s'est inscrit
     if ($scope.$parent.$root.user) {
       for (var i = 0; i < meal.users.length; i++) {
         if (meal.users[i]._id == $scope.$parent.$root.user._id) {

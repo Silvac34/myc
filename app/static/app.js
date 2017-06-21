@@ -294,7 +294,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       });
     }
     else{
-      window.open("https://mycommuneaty.herokuapp.com");
+      $window.open("https://mycommuneaty.herokuapp.com");
     }
   };
 

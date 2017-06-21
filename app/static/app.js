@@ -243,48 +243,59 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     });
   }
 
+  function isFacebookApp() {
+    var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
+    return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+  }
+
   $rootScope.auth = function(provider, toState, toParams) {
-    authe(provider).then(function successCallBack() {
-      toState = toState || undefined;
-      if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
-        $state.go(toState, toParams);
-      }
-      else {
-        $state.reload();
-      }
-      $timeout(function() {
-        //on récupère les pending requests et on le mets dans le rootscope
-        $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
-          $rootScope.user.nbDifferentPendingRequest = 0;
-          var meals = res.data._items;
-          meals.forEach(function(meal) {
-            meal.users.forEach(function(participant) {
-              if (participant.status == "pending") {
-                $rootScope.user.nbDifferentPendingRequest += 1;
-              }
-            });
-          });
-        });
-        //on récupère les reviews qu'on a besoin de laisser et on les met dans rootscope
-        var uniqueListForRequest = [];
-        var now = new Date;
-        $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users": {"$not": {"$size": 1}}}]}').then(function(resp) { // on récupère les meals de l'utilisateur dont on consulte le profile où il n'y a pas que lui d'inscrit
-          resp.data._items.forEach(function(element) {
-            var mealDate = new Date(element.time);
-            if (mealDate < now) { // on ne peut laisser une review qu'à un meal qui s'est passé
-              element.users.forEach(function(participant) {
-                if (participant._id != $rootScope.user._id) { //on enlève les reviews pour moi même
-                  uniqueListForRequest.push('"' + (participant._id + $rootScope.user._id + element._id).toString() + '"');
+    var loadingFromApp = isFacebookApp();
+    if (loadingFromApp == false) {
+      authe(provider).then(function successCallBack() {
+        toState = toState || undefined;
+        if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
+          $state.go(toState, toParams);
+        }
+        else {
+          $state.reload();
+        }
+        $timeout(function() {
+          //on récupère les pending requests et on le mets dans le rootscope
+          $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
+            $rootScope.user.nbDifferentPendingRequest = 0;
+            var meals = res.data._items;
+            meals.forEach(function(meal) {
+              meal.users.forEach(function(participant) {
+                if (participant.status == "pending") {
+                  $rootScope.user.nbDifferentPendingRequest += 1;
                 }
               });
-            }
+            });
           });
-          $http.get('api/reviews?where={"unique": {"$in":[' + uniqueListForRequest + ']}}').then(function successCallBack(response) {
-            $rootScope.user.nbDifferentReviewsToLeave = uniqueListForRequest.length - response.data._items.length;
+          //on récupère les reviews qu'on a besoin de laisser et on les met dans rootscope
+          var uniqueListForRequest = [];
+          var now = new Date;
+          $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users": {"$not": {"$size": 1}}}]}').then(function(resp) { // on récupère les meals de l'utilisateur dont on consulte le profile où il n'y a pas que lui d'inscrit
+            resp.data._items.forEach(function(element) {
+              var mealDate = new Date(element.time);
+              if (mealDate < now) { // on ne peut laisser une review qu'à un meal qui s'est passé
+                element.users.forEach(function(participant) {
+                  if (participant._id != $rootScope.user._id) { //on enlève les reviews pour moi même
+                    uniqueListForRequest.push('"' + (participant._id + $rootScope.user._id + element._id).toString() + '"');
+                  }
+                });
+              }
+            });
+            $http.get('api/reviews?where={"unique": {"$in":[' + uniqueListForRequest + ']}}').then(function successCallBack(response) {
+              $rootScope.user.nbDifferentReviewsToLeave = uniqueListForRequest.length - response.data._items.length;
+            });
           });
-        });
-      }, 0);
-    });
+        }, 0);
+      });
+    }
+    else{
+      window.open("https://mycommuneaty.herokuapp.com");
+    }
   };
 
   $rootScope.logout = function() {

@@ -9,8 +9,15 @@
       <div class="row">
         <h2 class="slogan">Meet new people with collaborative meals</h2>
       </div>
+      <div ng-if="inApp == true">
+        <div class="clear5"></div>
+        <div class="row" style="margin-right:-30px; margin-left:-30px">
+          <img ng-src="static/sources/welcome/welcome_in_app.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
+          <img ng-src="static/sources/welcome/welcome_in_app_open.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
+        </div>
+      </div>
       <div class="clear20"></div>
-      <div class="row">
+      <div class="row" ng-if="inApp != true">
         <div class="col-xs-6">
           <a ui-sref="create_meal" class="btn btn-primary btn-lg hidden-xs" href="#/create_meal">Click here<br/>to create a meal</a>
           <a ui-sref="create_meal" class="btn btn-primary hidden-sm hidden-md hidden-lg" href="#/create_meal">Create a meal</a>

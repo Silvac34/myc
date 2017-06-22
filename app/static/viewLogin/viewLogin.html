@@ -1,8 +1,15 @@
 <div class="container ng-scope">
   <div class="row">
-        <h2 class="text-center">You need to sign in to keep going</h2>
-<div class="clear20"></div>
-    <div class="form_bg col-sm-4 col-sm-offset-4">
+    <h2 class="text-center">You need to sign in to keep going</h2>
+    <div ng-if="inApp == true">
+      <div class="clear5"></div>
+      <div class="row text-center">
+        <img ng-src="static/sources/login/login_in_app.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
+        <img ng-src="static/sources/login/login_in_app_open.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
+      </div>
+    </div>
+    <div ng-if="inApp != true" class="form_bg col-sm-4 col-sm-offset-4">
+      <div class="clear20"></div>
       <form class="ng-pristine ng-valid">
         <div class="child">
           <button ng-click="auth('facebook', toState, toParams)" class="btn btn-block btn-social btn-facebook" type="button">

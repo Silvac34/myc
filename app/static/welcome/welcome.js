@@ -6,7 +6,9 @@ angular.module('myApp.welcome', ['facebookService'])
     $scope.status = {
         isopenWelcome: false
     };
-    
+    $scope.localStorage = function() {
+        window.open("https://mycommuneaty.herokuapp.com", "_blank");
+    };
     /*$window.fbAsyncInit = function() {
     FB.init({ 
       appId: ENV.appId,

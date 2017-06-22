@@ -91,7 +91,7 @@
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>
               </li>
-              <li ng-if="!isAuthenticated()"><a ng-click="auth('facebook', toState)" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>
+              <li ng-if="!isAuthenticated() && inApp != true"><a ng-click="auth('facebook', toState)" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> Sign In</a></li>
             </ul>
           </div>
         </div>
@@ -111,7 +111,7 @@
         </div>
       </div>
       <div class="col-xs-6" ng-if="$state.includes('welcome')">
-        <div class="welcome-buttons-auth" ng-if="!isAuthenticated()" ng-click="auth('facebook', toState)">
+        <div class="welcome-buttons-auth" ng-if="!isAuthenticated() && inApp != true" ng-click="auth('facebook', toState)">
           <button class="btn btn-block btn-social btn-facebook welcome-buttons-auth-header" type="button">
           <span class="fa fa-facebook"></span> Sign in<span class="hidden-xs"> with Facebook</span>
         </div>

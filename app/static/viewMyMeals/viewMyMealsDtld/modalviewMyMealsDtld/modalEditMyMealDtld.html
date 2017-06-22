@@ -139,8 +139,8 @@
                     <div class="row col-sm-12">
                         <div class="form-group">
                             <div class="radio">
-                                <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="true">Yes, sure !</label>
-                                <label class="radio-inline"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="false">No, thanks. <span class="small">(You approve each booking request yourself)</span></label>
+                                <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="true" ng-if="editedMeal.automaticSubscription == false" ng-class="{'size-18 text-primary': editedMeal.automaticSubscription == true}">Yes, sure !</label>
+                                <label class="radio-inline"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="false" ng-if="editedMeal.automaticSubscription == true" ng-class="{'size-18 text-primary': editedMeal.automaticSubscription == false}">No, thanks. <span class="small">(You approve each booking request yourself)</span></label>
                             </div>
                         </div>
                     </div>

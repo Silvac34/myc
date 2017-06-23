@@ -136,7 +136,7 @@ def sendNotificationPreference(meal, mealPrice):
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
     for user in users:
         if(user['_id'] != meal['admin']):
-            text = "Hello " + user["first_name"] + ", there is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
+            text = "Hello " + user["first_name"] + ",\nThere is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
             payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
         
@@ -169,9 +169,9 @@ def sendNoticeIncomingMeal(mealId):
             #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
             #meal_time_formated = "{%H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if user["role"][0] == "admin":
-                text = "Hello " + participant["first_name"] +",\nyou host an incoming meal. Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
+                text = "Hello " + participant["first_name"] +",\nYou host an incoming meal. Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
             else:#text à mettre en forme
-                text = "Hello " + participant["first_name"] +",\nyou got an incoming meal! Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId + " (don't forget to bring cash to pay your host)."
+                text = "Hello " + participant["first_name"] +",\nYou got an incoming meal! Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId + " (don't forget to bring cash to pay your host)."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
         
@@ -189,7 +189,7 @@ def sendCheersPreviousMeal(mealId):
             if user["role"][0] == "admin":
                 text = "Hello " + participant["first_name"] +",\nThank you very much for hosting yesterday. If you could let reviews to your guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(mealId) +". Have a good day."
             else:#text à mettre en forme
-                text = "Hello " + participant["first_name"] +",\nthank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(mealId) +". Have a good day."
+                text = "Hello " + participant["first_name"] +",\nThank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(mealId) +". Have a good day."
             payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     
@@ -391,7 +391,7 @@ def after_delete_privateMeals(item):
         local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
         meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
         if participant["_id"] == admin["_id"]:
-            text = "Hello " + participant["first_name"] +",\nall participants are now informed that your meal on " + meal_time_formated + " has been canceled."
+            text = "Hello " + participant["first_name"] +",\nAll participants are now informed that your meal on " + meal_time_formated + " has been canceled."
         else:
             text = "Hello " + participant["first_name"] +",\n" + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + meal_time_formated + "." 
         payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
@@ -611,10 +611,10 @@ def validate_a_subscription(meal_id, participant_id):
                 participant_user_ref = participantInfo["privateInfo"]["user_ref"]
                 if validation_result == True:
                     participant["status"] = "accepted"
-                    text = "Hello " + participantInfo["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been approved. To see more details about the meal, click here : " + url_to_send
+                    text = "Hello " + participantInfo["first_name"] + ",\nYour request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been approved. To see more details about the meal, click here : " + url_to_send
                 elif validation_result == False:
                     meal["users"].remove(participant)
-                    text = "Hello " + participantInfo["first_name"] + ", your request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been denied. Let's try another one!"
+                    text = "Hello " + participantInfo["first_name"] + ",\nYour request to participate to " + admin["first_name"] + " " + admin["last_name"] + "'s meal on " + meal_time_formated + " has been denied. Let's try another one!"
                     meal["nbRemainingPlaces"] = meal["nbRemainingPlaces"] + 1 #on rajoute 1 place aux nombres totales de places restantes
                     meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] =  meal["detailedInfo"]["requiredGuests"][role[0] + "s"]["nbRemainingPlaces"] + 1 #On remet la place utiliser par le participant qui était en attente et qui a été refusé
                 payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 

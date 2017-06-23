@@ -393,6 +393,62 @@ schemaReviews = {
     }
 }
 
+schemaRecipes = {
+    '_id': {
+        'type': 'objectid',
+        'readonly': True
+    },
+    'title': {
+        'type': 'string',
+        'required': True,
+        'empty': False
+    },
+    'description': {
+        'type': 'string'
+    },
+    'prices': {
+        'type': 'dict',
+        'schema':{
+            'value':{
+                'type': 'float',
+                'required': True
+            },
+            'retailer':{
+                'type': 'string',
+                'allowed': ["Aldi", "Coles", "Woolworths"]
+            }
+        }
+    },
+    'ingredients':{
+        'type': 'list',
+        'schema':{
+            'name':{
+                'type': 'string',
+                'required': True,
+                'empty': False
+            },
+            'quantity':{
+                'type': 'dict',
+                'required': True,
+                'schema':{
+                    'value':{
+                        'type': 'float',
+                        'required': True
+                    },
+                    'unit':{
+                        'type': 'string',
+                        'allowed': ["cl", "l", "kg", "g"],
+                        'required': True
+                    }
+                }
+            }
+            #'price':{
+            #    'type': 'float'
+            #}
+        }
+    }
+}
+
 meals = {
     # most global settings can be overridden at resource level
     'public_item_methods': ['GET'],
@@ -437,6 +493,15 @@ reviews = {
     }
 }
 
+recipes = {
+    'public_item_methods': ['GET'],
+    'resource_methods' : ['GET', 'POST'],
+    'schema': schemaRecipes,
+    'datasource':{
+        'source': 'recipes'
+    }
+}
+
 privateUsers = {
     'url':'users/private',
     'resource_methods': ['GET'],
@@ -451,6 +516,7 @@ DOMAIN={
     'meals':meals,
     'users':users,
     'reviews':reviews,
+    'recipes':recipes,
     'privateMeals':privateMeals,
     'privateUsers':privateUsers
 }

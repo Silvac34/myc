@@ -492,7 +492,7 @@ def after_updating_privateMeals(updates, original):
     for participant in original["users"]:
         if (participant["status"] == "accepted"): #si le participant a été accepté et qu'il n'est pas l'hôte alors on lui envoie un message
             participantInfo = User(_id = ObjectId(participant["_id"])).getUserAllInfo()
-            if("user_ref" in participant["privateInfo"]):
+            if("user_ref" in participantInfo["privateInfo"]):
                 participant_user_ref = participantInfo["privateInfo"]["user_ref"]
                 if (participant["role"][0] != "admin"):
                     text = "Hello " + participantInfo["first_name"] + ",\n" + admin["first_name"] + ", your host for the meal on " + meal_time_formated + ", has made a modification. Check it here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(original["_id"])
@@ -639,8 +639,6 @@ def unsubscribe_to_meal(meal_id):
     user = User(_id=g.user_id)
     if not user.isSubscribed(meal=meal): 
         return Response("User isn't subscribed",status=403)
-    if user.isSubscriptionPending(meal=meal):
-       return Response("User request is pending",status=403) 
     elif user.isAdmin(meal=meal):
         return Response("Meal's admin cannot unsubscribe",status=401)
     else:

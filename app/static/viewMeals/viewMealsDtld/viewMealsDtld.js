@@ -109,15 +109,15 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     else {
       $scope.requiredGuests.availablePlaces['simpleGuests'] = true;
     }
-    if(checkStatusAccepted()){
+    if (checkStatusAccepted()) {
       $scope.goToMeal = true;
     }
-    else{
+    else {
       $scope.goToMeal = false;
     }
   }
-  
-  
+
+
   function checkStatusAccepted() {
     if ($scope.datasUserForEachMeal($scope.meal)) {
       if ($scope.datasUserForEachMeal($scope.meal).status == "accepted") {
@@ -131,7 +131,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       return false;
     }
   }
-  
+
   function checkStatusPending() {
     if ($scope.datasUserForEachMeal($scope.meal)) {
       if ($scope.datasUserForEachMeal($scope.meal).status == "pending") {
@@ -291,6 +291,15 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       }
     }
   };
+
+  $scope.unsubscribe = function() {
+    $http.post('/api/meals/' + $scope.meal._id + '/unsubscription').then(function(response) {
+      //rajouter en fonction de la réponse un popup ?
+    });
+    $uibModalInstance.close();
+    $state.reload();
+  }; //function to validate the modal
+
 
   function defineMealPriceSentence() {
     $scope.meal.priceSentence = "";

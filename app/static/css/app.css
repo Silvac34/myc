@@ -1132,6 +1132,12 @@ h4.sub-slogan {
     .welcome-well-center {
         height: 100px;
     }
+    .welcome-button-action {
+        padding: 14px 16px;
+        font-size: 18px;
+        line-height: 1.3333333;
+        border-radius: 6px;
+    }
 }
 
 .well-conviviality-background {
@@ -1175,6 +1181,7 @@ h4.sub-slogan {
         list-style-image: url("/static/sources/swirly-arrow.png")
     }
 }
+
 
 /*who we are --------------------------------------------------- */
 

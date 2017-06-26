@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAutocomplete'])
 
-.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', 'ezfb', function($scope, $http, $uibModal, $state, ENV, ezfb) {
+.controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', 'ezfb', '$auth', '$rootScope', 'userServicesFactory', function($scope, $http, $uibModal, $state, ENV, ezfb, $auth, $rootScope, userServicesFactory) {
   //$scope pour le plugin checkbox messenger
   $scope.origin = ENV.fbRedirectURI + "#/create_meal";
   $scope.page_id = ENV.page_id;
@@ -89,28 +89,64 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
     else {
       return false;
     }
-  }
+  };
 
   $scope.createMeal = function() {
-    if ($scope.needToUpdateCellphone() == true) {
-      $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
-        "privateInfo": {
-          "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
-        }
-      }, {
-        headers: {
-          "If-Match": $scope.$parent.$root.user._etag
-        }
-      }).then(function successCallBack(response) {
-        $scope.user._etag = response.data._etag;
-        createMealWithPhone();
-      });
-    }
-    else if ($scope.needToUpdateCellphone() == false) {
-      console.log("please fill your number");
+    if ($scope.isAuthenticated() == false) {
+      $auth.authenticate('facebook') // connection via facebook
+        .then(function(response) {
+          console.debug("success", response);
+          if ($auth.isAuthenticated()) {
+            userServicesFactory().then(function(data) {
+              $rootScope.user = data;
+              if (data.privateInfo.cellphone) {
+                createMealWithPhone();
+              }
+              else {
+                if ($scope.createMealForm.inputCellphone.$modelValue) {
+                  $http.patch('api/users/private/' + $rootScope.user._id, {
+                    "privateInfo": {
+                      "cellphone": $scope.createMealForm.inputCellphone.$modelValue
+                    }
+                  }, {
+                    headers: {
+                      "If-Match": $rootScope.user._etag
+                    }
+                  }).then(function successCallBack(response) {
+                    $scope.user._etag = response.data._etag;
+                    var cellphoneStr = "";
+                    createMealWithPhone();
+                  });
+                }
+                else {
+                  console.log("please fill your number");
+                }
+              }
+            });
+          }
+        });
     }
     else {
-      createMealWithPhone();
+      if ($scope.needToUpdateCellphone() == true) {
+        $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
+          "privateInfo": {
+            "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
+          }
+        }, {
+          headers: {
+            "If-Match": $scope.$parent.$root.user._etag
+          }
+        }).then(function successCallBack(response) {
+          $scope.user._etag = response.data._etag;
+          createMealWithPhone();
+        });
+      }
+      else if ($scope.needToUpdateCellphone() == false) {
+        console.log("please fill your number");
+      }
+      else {
+        createMealWithPhone();
+      }
     }
   };
 

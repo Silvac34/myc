@@ -62,10 +62,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
     .state('create_meal', {
       url: '/create_meal',
       templateUrl: 'static/viewCreateMeal/viewCreateMeal.html',
-      controller: 'ViewCreateMealCtrl',
-      data: {
-        requiredLogin: true
-      }
+      controller: 'ViewCreateMealCtrl'
     });
   $stateProvider
     .state('my_meals', {

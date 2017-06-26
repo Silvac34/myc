@@ -164,7 +164,7 @@
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">
-                        <a class="btn btn-primary btn-md" ng-click="createMealForm.$setSubmitted(); createMeal()">Publish the meal</a>
+                        <a class="btn btn-md" ng-class="{'btn-primary': isAuthenticated(), 'btn-facebook': !isAuthenticated()}" ng-click="createMealForm.$setSubmitted(); createMeal()"><span ng-if="!isAuthenticated()">Sign In with facebook and<br/></span>Publish the meal</a>
                     </div>
                 </div>
             </div>

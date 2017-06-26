@@ -386,19 +386,20 @@ def pre_delete_privateMeals(request,lookup):
 def after_delete_privateMeals(item):
     meal = item
     admin = User(_id = meal["admin"]).getUserAllInfo()
-    for user in meal["users"]:
-        participant = User(_id=user["_id"]).getUserAllInfo()
-        if("user_ref" in participant["privateInfo"]):
-            participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
-            meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-            local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
-            meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
-            if participant["_id"] == admin["_id"]:
-                text = "Hello " + participant["first_name"] +",\nAll participants are now informed that your meal on " + meal_time_formated + " has been canceled."
-            else:
-                text = "Hello " + participant["first_name"] +",\n" + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + meal_time_formated + "." 
-            payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
-            requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
+    if(len(meal["users"]) > 1):
+        for user in meal["users"]:
+            participant = User(_id=user["_id"]).getUserAllInfo()
+            if("user_ref" in participant["privateInfo"]):
+                participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
+                meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+                local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+                meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+                if participant["_id"] == admin["_id"]:
+                    text = "Hello " + participant["first_name"] +",\nAll participants are now informed that your meal on " + meal_time_formated + " has been canceled."
+                else:
+                    text = "Hello " + participant["first_name"] +",\n" + admin["first_name"] + " " + admin["last_name"] + " has canceled the meal on " + meal_time_formated + "." 
+                payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
+                requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     
 
 # PATCH api/meals/private/<_id>

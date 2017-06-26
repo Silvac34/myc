@@ -225,6 +225,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         $scope.editedMeal.address.town = $scope.autocompleteAddress.split(",")[0];
       }
       $scope.editedMeal.privateInfo.address.name = $scope.details.name;
+      $scope.editedMeal.privateInfo.address.utc_offset = $scope.details.utc_offset;
       $scope.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
       $scope.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();
       $scope.editedMeal.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;

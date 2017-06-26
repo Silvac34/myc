@@ -25,7 +25,8 @@
         "address": {
             "name": "30 avenue de Trudaine",
             "lat": 48.88092409999999,
-            "lng": 2.34052829999996
+            "lng": 2.34052829999996,
+            "utc_offset": 120
         }
     },
     "users": [{
@@ -86,7 +87,8 @@
         "address": {
             "name": "3 Impasse Marie Blanche",
             "lat": 48.8856138,
-            "lng": 2.3328533999999763
+            "lng": 2.3328533999999763,
+            "utc_offset": 120
         }
     },
     "users": [{
@@ -144,7 +146,8 @@
         "address": {
             "name": "37 rue du général foy",
             "lat": 48.88092409999999,
-            "lng": 2.3164193999999725
+            "lng": 2.3164193999999725,
+            "utc_offset": 120
         }
 
     },
@@ -199,7 +202,8 @@
         "address": {
             "name": "37 Rue Lepic",
             "lat": 48.886308,
-            "lng": 2.33376039999996
+            "lng": 2.33376039999996,
+            "utc_offset": 120
         }
     },
     "users": [{
@@ -257,7 +261,8 @@
         "address": {
             "name": "3 Impasse Marie Blanche",
             "lat": 48.8856138,
-            "lng": 2.3328533999999763
+            "lng": 2.3328533999999763,
+            "utc_offset": 120
         }
     },
     "users": [{
@@ -316,7 +321,8 @@
         "address": {
             "name": "4 rue du temple",
             "lat": 48.8576169,
-            "lng": 2.3527622000000292
+            "lng": 2.3527622000000292,
+            "utc_offset": 120
         }
     },
     "users": [{
@@ -383,7 +389,8 @@
         "address": {
             "name": "30 avenue de Trudaine",
             "lat": 48.88092409999999,
-            "lng": 2.34052829999996
+            "lng": 2.34052829999996,
+            "utc_offset": 120
         }
     },
     "users": [{
@@ -440,7 +447,8 @@
         "address": {
             "name": "144 Holmes Rd",
             "lat": -37.765111,
-            "lng": 144.90709700000002
+            "lng": 144.90709700000002,
+            "utc_offset": 600
         }
     },
     "users": [{

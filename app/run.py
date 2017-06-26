@@ -132,7 +132,7 @@ def sendNotificationPreference(meal, mealPrice):
     else:
         users = Application.app.data.driver.db.users.find({"privateInfo.preferences.city_notification": {'$in': [ meal["address"]["town"] ]}, "privateInfo.preferences.omnivorous_notification": True}) #recherche tous les utilisateurs qui ont dans leur ville de préférence la ville où est publiée le repas
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-    local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+    local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
     for user in users:
         if((user['_id'] != meal['admin']) and ("user_ref" in user["privateInfo"])):
@@ -166,7 +166,7 @@ def sendNoticeIncomingMeal(mealId):
             participant = User(_id=user["_id"]).getUserAllInfo()
             if ("user_ref" in participant["privateInfo"]):
                 #meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-                #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+                #local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
                 #meal_time_formated = "{%H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
                 if user["role"][0] == "admin":
                     text = "Hello " + participant["first_name"] +",\nYou host an incoming meal. Check out all the informations you need here : https://mycommuneaty.herokuapp.com/#!/my_meals/" + mealId
@@ -185,7 +185,7 @@ def sendCheersPreviousMeal(mealId):
             participant = User(_id=user["_id"]).getUserAllInfo()
             if("user_ref" in participant["privateInfo"]):
                 #meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-                #local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+                #local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
                 #meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
                 if user["role"][0] == "admin":
                     text = "Hello " + participant["first_name"] +",\nThank you very much for hosting yesterday. If you could let reviews to your guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(mealId) +". Have a good day."
@@ -392,7 +392,7 @@ def after_delete_privateMeals(item):
             if("user_ref" in participant["privateInfo"]):
                 participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
                 meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-                local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+                local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
                 meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
                 if participant["_id"] == admin["_id"]:
                     text = "Hello " + participant["first_name"] +",\nAll participants are now informed that your meal on " + meal_time_formated + " has been canceled."
@@ -488,7 +488,7 @@ def before_updating_privateMeals(updates, original):
 def after_updating_privateMeals(updates, original):
     admin = User(_id=ObjectId(original["admin"])).getUserPublicInfo()
     meal_time_parse = parser.parse(original["time"]) #parse le format de l'heure venant du backend
-    local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+    local_meal_time = meal_time_parse + timedelta(minutes=original["privateInfo"]["address"]["utc_offset"]) #on ajoute le delta avec le décallage horaire
     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
     for participant in original["users"]:
         if (participant["status"] == "accepted"): #si le participant a été accepté et qu'il n'est pas l'hôte alors on lui envoie un message
@@ -564,7 +564,7 @@ def subscribe_to_meal(meal_id):
             participant = User(_id=g.user_id).getUserPublicInfo() #info du participant pour envoyer des text messengers
             admin = User(_id = meal["admin"]).getUserAllInfo() #info de l'admin pour envoyer des text messengers
             meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-            local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+            local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
             meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
             if meal["automaticSubscription"] == True: #si acceptation automatique
                 meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"accepted"})
@@ -608,7 +608,7 @@ def validate_a_subscription(meal_id, participant_id):
         request_url_split = request.url.split("/")
         url_to_send = "https://" + request_url_split[2] + "/#!/my_meals/" + str(meal["_id"])
         meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-        local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+        local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
         meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
         for participant in meal["users"]:
             if participant["_id"] == ObjectId(participant_id):
@@ -652,7 +652,7 @@ def unsubscribe_to_meal(meal_id):
                 admin = User(_id = meal["admin"]).getUserAllInfo()
                 if("user_ref" in admin["privateInfo"]):
                     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-                    local_meal_time = meal_time_parse.astimezone(pytz.timezone('Australia/Melbourne')) #pour plus tard, remplacer Australia/Melbourne par timezone locale
+                    local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
                     meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
                     admin_user_ref = admin["privateInfo"]["user_ref"]
                     text = "Hello " + admin["first_name"] +",\n" + participant["first_name"] + " " + participant["last_name"] + " unsubscribed to your meal on " + meal_time_formated + "."

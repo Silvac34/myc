@@ -125,6 +125,9 @@ schemaMeals = {
                     },
                     'complement':{
                         'type':'string'
+                    },
+                    'utc_offset':{
+                        'type':'number'
                     }
                 }
             }

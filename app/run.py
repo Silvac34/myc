@@ -184,14 +184,11 @@ def sendCheersPreviousMeal(mealId):
         for user in meal["users"]:
             participant = User(_id=user["_id"]).getUserAllInfo()
             if("user_ref" in participant["privateInfo"]):
-                #meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
-                #local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
-                #meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
                 if user["role"][0] == "admin":
                     text = "Hello " + participant["first_name"] +",\nThank you very much for hosting yesterday. If you could let reviews to your guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(mealId) +". Have a good day."
                 else:#text à mettre en forme
                     text = "Hello " + participant["first_name"] +",\nThank you very much for your participation at " + admin["first_name"] + "'s meal. If you could let a review to him and the other guests, that would be amazing : https://mycommuneaty.herokuapp.com/#!/my_meals/" + str(mealId) +". Have a good day."
-                participant_user_ref = participant["privateInfo"]["user_ref"] #besoin de rajouter attribut user_ref à chaque fois que quelqu'un veut s'inscrire à un repas
+                participant_user_ref = participant["privateInfo"]["user_ref"] 
                 payload = {'recipient': {'user_ref': participant_user_ref }, 'message': {'text': text}} # We're going to send this back to the 
                 requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
     
@@ -352,7 +349,7 @@ def after_storing_POST_meals(items):
         #timeBeforeNotice = (beforeMealTime-now).total_seconds() #durée avant de déclencher le timer du rappel: 8h avant le repas - maintenant (en secondes)
         #if(timeBeforeNotice > 0): #si le repas est publié assez tôt, on envoie le message, sinon, il ne se passe rien
             #Timer(timeBeforeNotice, sendNoticeIncomingMeal, [mealId]).start()
-        afterMealTime = mealTime + timedelta(hours=22) #on enverra un message pour remercier les participants 16h après le repas 
+        afterMealTime = mealTime + timedelta(minutes=1320) #on enverra un message pour remercier les participants 16h après le repas 
         timeForCheering = (afterMealTime - now).total_seconds() #durée avant de déclencher le timer pour les remerciements: 16h après le repas - maintenant (en secondes)
         Timer(timeForCheering, sendCheersPreviousMeal, [mealId]).start()
         

@@ -191,8 +191,7 @@
                                                 </div>
                                                 <div style="padding-top:20px">
                                                     <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
-                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span>                                                    &nbsp;"
-                                                    <em>{{review.forUser.comment}}</em>"
+                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span><span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,8 +271,7 @@
                             </div>
                             <div style="padding-top:20px">
                                 <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
-                                    style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> &nbsp;"
-                                <em>{{review.forUser.comment}}</em>"
+                                    style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span><span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
                             </div>
                         </div>
                     </div>

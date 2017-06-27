@@ -667,7 +667,7 @@ def unsubscribe_to_meal(meal_id):
 def calculate_price_meal(meal_id):
     meal_id = ObjectId(meal_id)
     meal = Meal(meal_id).getInfo()
-    priceUnit = meal["price"] / meal["nbGuests"]
+    priceUnit = float(meal["price"]) / meal["nbGuests"] #on rajoute float pour avoir un priceUnit à virgule
     priceTotalCurrent = priceUnit * (meal["nbGuests"] - meal["nbRemainingPlaces"])
     if ("simpleGuests" in meal["detailedInfo"]["requiredGuests"]):
         nbSimpleGuests = meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRquSimpleGuests"] - meal["detailedInfo"]["requiredGuests"]["simpleGuests"]["nbRemainingPlaces"]

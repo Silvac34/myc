@@ -1034,6 +1034,10 @@ footer p {
     border-bottom: 1px solid #eeeeee;
 }
 
+.size-32 {
+    font-size: 30px;
+}
+
 .size-20 {
     font-size: 20px;
 }
@@ -1121,17 +1125,6 @@ h4.sub-slogan {
         background: url("/static/sources/welcome/how_to_pay_blue.png") no-repeat 0;
         padding-left: 64px;
     }
-    .welcome-well-left {
-        right: 10px;
-        height: 100px;
-    }
-    .welcome-well-right {
-        left: 10px;
-        height: 100px;
-    }
-    .welcome-well-center {
-        height: 100px;
-    }
     .welcome-button-action {
         padding: 14px 16px;
         font-size: 18px;
@@ -1140,46 +1133,56 @@ h4.sub-slogan {
     }
 }
 
+.well-text-position {
+    position: absolute;
+    z-index: 9999;
+    top: 80px;
+    left: 0px;
+    right: 0px;
+    color: white;
+    text-shadow: 2px 0 0 #555555, -2px 0 0 #555555, 0 2px 0 #555555, 0 -2px 0 #555555, 1px 1px #555555, -1px -1px 0 #555555, 1px -1px 0 #555555, -1px 1px 0 #555555
+}
+
+.well-photo-format {
+    height: 200px;
+    filter: brightness(0.9);
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+}
+
 .well-conviviality-background {
-    background: url("/static/sources/welcome/well/conviviality.png") no-repeat 0;
+    background: url("/static/sources/welcome/well/conviviality.jpg") no-repeat 0;
     background-size: cover;
-    color: black !important;
-    height:200px;
 }
 
 .well-meeting-background {
-    background: url("/static/sources/welcome/well/meeting.png") no-repeat 0;
+    background: url("/static/sources/welcome/well/meeting.jpg") no-repeat 0;
     background-size: cover;
-    color: black !important;
-    height:200px;
 }
 
 .well-sharing-background {
-    background: url("/static/sources/welcome/well/sharing.png") no-repeat 0;
+    background: url("/static/sources/welcome/well/sharing.jpg") no-repeat 0;
     background-size: cover;
-    color: black !important;
-    height:200px;
+    background-position: 0px 0px
 }
 
 .well-new-background {
-    background: url("/static/sources/welcome/well/new.png") no-repeat 0;
+    background: url("/static/sources/welcome/well/new.jpg") no-repeat 0;
     background-size: cover;
-    color: black !important;
-    height:200px;
+    background-position: 0px 0px
 }
 
 .well-community-background {
-    background: url("/static/sources/welcome/well/community.png") no-repeat 0;
+    background: url("/static/sources/welcome/well/community.jpg") no-repeat 0;
     background-size: cover;
-    color: black !important;
-    height:200px;
+    background-position: 0px 0px
 }
 
 .well-authenticity-simplicity-background {
-    background: url("/static/sources/welcome/well/authenticity_simplicity.png") no-repeat 0;
+    background: url("/static/sources/welcome/well/authenticity_simplicity.jpg") no-repeat 0;
     background-size: cover;
-    color: black !important;
-    height:200px;
+    background-position: 0px 0px
 }
 
 @media (max-width: 767px) {

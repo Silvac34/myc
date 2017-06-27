@@ -1136,7 +1136,7 @@ h4.sub-slogan {
 .well-text-position {
     position: absolute;
     z-index: 9999;
-    top: 80px;
+    top: 100px;
     left: 0px;
     right: 0px;
     color: white;
@@ -1144,7 +1144,7 @@ h4.sub-slogan {
 }
 
 .well-photo-format {
-    height: 200px;
+    height: 250px;
     filter: brightness(0.9);
     position: relative;
     z-index: 1;

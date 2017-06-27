@@ -182,7 +182,7 @@
                                 <div class="row">
                                     <span ng-if="reviews.length == 0">Get new reviews by <a class="btn btn-primary btn-xs" ui-sref="create_meal">creating</a> or <a class="btn btn-primary btn-xs" ui-sref="view_meals">browsing</a> a meal.</span>
                                     <div ng-if="reviews.length > 0">
-                                        <div class="panel panel-default" ng-repeat="review in reviews">
+                                        <div class="panel panel-default" ng-repeat="review in reviews | orderBy:'-'">
                                             <div class="panel-body">
                                                 <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                                                 <div class="pull-left" style="padding-right:15px">
@@ -262,7 +262,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="panel panel-default" ng-repeat="review in reviews">
+                    <div class="panel panel-default" ng-repeat="review in reviews | orderBy:'-'">
                         <div class="panel-body">
                             <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                             <div class="pull-left" style="padding-right:15px">

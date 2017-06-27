@@ -1144,36 +1144,42 @@ h4.sub-slogan {
     background: url("/static/sources/welcome/well/conviviality.png") no-repeat 0;
     background-size: cover;
     color: black !important;
+    height:200px;
 }
 
 .well-meeting-background {
     background: url("/static/sources/welcome/well/meeting.png") no-repeat 0;
     background-size: cover;
     color: black !important;
+    height:200px;
 }
 
 .well-sharing-background {
     background: url("/static/sources/welcome/well/sharing.png") no-repeat 0;
     background-size: cover;
     color: black !important;
+    height:200px;
 }
 
 .well-new-background {
     background: url("/static/sources/welcome/well/new.png") no-repeat 0;
     background-size: cover;
     color: black !important;
+    height:200px;
 }
 
 .well-community-background {
     background: url("/static/sources/welcome/well/community.png") no-repeat 0;
     background-size: cover;
     color: black !important;
+    height:200px;
 }
 
 .well-authenticity-simplicity-background {
     background: url("/static/sources/welcome/well/authenticity_simplicity.png") no-repeat 0;
     background-size: cover;
     color: black !important;
+    height:200px;
 }
 
 @media (max-width: 767px) {

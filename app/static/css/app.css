@@ -850,7 +850,7 @@ footer p {
 @media (min-width: 768px) {
     h2.slogan {
         font-size: 40px;
-        margin-top: -220px;
+        margin-top: -200px;
         font-style: italic;
         font-family: Gill Sans, Verdana;
         color: white;
@@ -861,7 +861,7 @@ footer p {
 @media (max-width: 767px) {
     h2.slogan {
         font-size: 22px;
-        margin-top: -150px;
+        margin-top: -130px;
         font-style: italic;
         font-family: Gill Sans, Verdana;
         color: white;
@@ -873,6 +873,12 @@ h4.sub-slogan {
     font-size: 18px;
     font-weight: bold;
     font-family: Gill Sans, Verdana;
+}
+
+#slogan-text {
+    display: inline-block;
+    border: solid 0.5px;
+    padding: 5px 15px;
 }
 
 .row.welcome-how-it-works {

@@ -321,6 +321,8 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   $scope.status = {
     isopen: false
   };
+  
+  $scope.sloganText = "When was the last time you met someone new?";
 
 }]);
 

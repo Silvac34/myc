@@ -132,10 +132,12 @@
   </header>
 
   <section id="section">
-    <div class="container-fluid" style="position:relative" ng-if="$state.includes('welcome')">
-      <h2 class="slogan text-center">When was the last time you met someone new?</h2>
-    </div>
     <div ng-controller="AppCtrl">
+      <div class="container-fluid" style="position:relative" ng-if="$state.includes('welcome')">
+        <h2 class="slogan text-center">
+          <div id="slogan-text" ng-mouseover="sloganText = 'And the last time you ate with someone new?'" ng-mouseleave="sloganText = 'When was the last time you met someone new?'">{{'{{sloganText}}'}}</div>
+        </h2>
+      </div>
       <div ui-view></div>
       <div class="clear20"></div>
     </div>

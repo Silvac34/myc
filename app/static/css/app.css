@@ -1135,12 +1135,11 @@ h4.sub-slogan {
 
 .well-text-position {
     position: absolute;
-    z-index: 9999;
+    z-index: 2;
     top: 100px;
     left: 0px;
     right: 0px;
     color: white;
-    text-shadow: 2px 0 0 #555555, -2px 0 0 #555555, 0 2px 0 #555555, 0 -2px 0 #555555, 1px 1px #555555, -1px -1px 0 #555555, 1px -1px 0 #555555, -1px 1px 0 #555555
 }
 
 .well-photo-format {
@@ -1149,6 +1148,7 @@ h4.sub-slogan {
     position: relative;
     z-index: 1;
     border-radius: 10px;
+    color: transparent;
 }
 
 .well-conviviality-background {
@@ -1156,9 +1156,21 @@ h4.sub-slogan {
     background-size: cover;
 }
 
+.well-conviviality-background:hover {
+    z-index: 3;
+    background: mediumvioletred;
+    color: white;
+}
+
 .well-meeting-background {
     background: url("/static/sources/welcome/well/meeting.jpg") no-repeat 0;
     background-size: cover;
+}
+
+.well-meeting-background:hover {
+    z-index: 3;
+    background: orange;
+    color: white;
 }
 
 .well-sharing-background {
@@ -1167,10 +1179,22 @@ h4.sub-slogan {
     background-position: 0px 0px
 }
 
+.well-sharing-background:hover {
+    z-index: 3;
+    background: #73a839;
+    color: white;
+}
+
 .well-new-background {
     background: url("/static/sources/welcome/well/new.jpg") no-repeat 0;
     background-size: cover;
     background-position: 0px 0px
+}
+
+.well-new-background:hover {
+    z-index: 3;
+    background: orangered;
+    color: white;
 }
 
 .well-community-background {
@@ -1179,10 +1203,22 @@ h4.sub-slogan {
     background-position: 0px 0px
 }
 
+.well-community-background:hover {
+    z-index: 3;
+    background: #178acc;
+    color: white;
+}
+
 .well-authenticity-simplicity-background {
     background: url("/static/sources/welcome/well/authenticity_simplicity.jpg") no-repeat 0;
     background-size: cover;
     background-position: 0px 0px
+}
+
+.well-authenticity-simplicity-background:hover {
+    z-index: 3;
+    background: #033c73;
+    color: white;
 }
 
 @media (max-width: 767px) {

@@ -89,7 +89,7 @@
       </div>
     </div>
   </section>
-  <header ng-class="{'header':$state.includes('welcome')}" id="header">
+  <header ng-class="{'header':$state.includes('welcome') && inApp != true}" id="header">
     <div class="bs-component" ng-if="!$state.includes('welcome')">
       <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile" role="navigation">
         <div class="container-fluid">
@@ -132,14 +132,18 @@
   </header>
 
   <section id="section">
+    <div ng-if="inApp == true" class="text-center" style="position:relative;bottom:32px">
+      <img ng-src="static/sources/welcome/welcome_in_app.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
+      <img ng-src="static/sources/welcome/welcome_in_app_open.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
+    </div>
     <div ng-controller="AppCtrl">
-      <div class="container-fluid" style="position:relative" ng-if="$state.includes('welcome')">
+      <div class="container-fluid" style="position:relative" ng-if="$state.includes('welcome') && inApp != true">
         <h2 class="slogan text-center">
           <div id="slogan-text" ng-mouseover="sloganText = 'And the last time you ate with someone new?'" ng-mouseleave="sloganText = 'When was the last time you met someone new?'">{{'{{sloganText}}'}}</div>
         </h2>
       </div>
       <div ui-view></div>
-      <div class="clear20"></div>
+      <div class="clear20" ng-class="{'welcome-background-separation':($state.includes('welcome') && inApp != true)}"></div>
     </div>
   </section>
 

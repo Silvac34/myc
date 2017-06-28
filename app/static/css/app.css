@@ -2,217 +2,31 @@
 
 @media (max-width: 767px) {
     .header {
-        margin: auto;
-        text-align: center;
-        height: auto;
-        padding-bottom: 100px;
-        margin-top: -70px;
-        background: #fff url("/static/sources/header/photo_header_mobile.jpg") no-repeat center scroll;
+        height: 475px;
+        /*margin-top: -80px;*/
+        background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
+        filter: brightness(0.8);
+        font-size:;
     }
     .welcome-buttons-auth-header {
-        bottom: 10px;
-        opacity: 0.75;
+        /*bottom: 10px;
+        opacity: 0.75;*/
     }
 }
 
 @media (min-width: 768px) {
+    .header {
+        height: 560px;
+        /*margin-top: -80px;*/
+        background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
+        background-size: cover;
+        filter: brightness(0.8);
+    }
     #section {
         min-height: 365px
     }
 }
-
-
-/* enable absolute positioning */
-
-.inner-addon {
-    position: relative;
-}
-
-
-/* style icon */
-
-.inner-addon .glyphicon,
-.inner-addon .fa {
-    position: absolute;
-    padding: 10px;
-    pointer-events: none;
-}
-
-
-/* align icon */
-
-.left-addon .glyphicon {
-    left: 0px;
-}
-
-.left-addon .fa {
-    left: 0px;
-    top: 2px;
-}
-
-.right-addon .glyphicon {
-    right: 0px;
-}
-
-.right-addon .fa {
-    right: 0px;
-    top: 2px;
-}
-
-
-/* add padding  */
-
-.left-addon input {
-    padding-left: 30px;
-}
-
-.right-addon input {
-    padding-right: 30px;
-}
-
-
-/* rating well */
-
-.well-resume-rating {
-    display: inline-block;
-    padding: 2px 4px 0px 4px;
-    background-color: inherit;
-    margin: 0px;
-    box-shadow: inherit;
-    border: inherit;
-}
-
-
-/* function clear css to create lines with nothing*/
-
-.clear5 {
-    clear: both;
-    height: 5px;
-}
-
-.clear10 {
-    clear: both;
-    height: 10px;
-}
-
-.clear20 {
-    clear: both;
-    height: 20px;
-}
-
-.clear30 {
-    clear: both;
-    height: 30px;
-}
-
-.clear40 {
-    clear: both;
-    height: 40px;
-}
-
-.clear120 {
-    clear: both;
-    height: 120px;
-}
-
-.padding-top-10 {
-    padding-top: 10px;
-}
-
-.padding-top-30 {
-    padding-top: 30px;
-}
-
-.top-10 {
-    top: 10px;
-}
-
-.top-30 {
-    top: 30px;
-}
-
-
-/* function pull xs et sm-md-lg*/
-
-@media (min-width: 768px) {
-    .pull-right-sm-md-lg {
-        float: right !important;
-    }
-}
-
-@media (max-width: 767px) {
-    .pull-left-xs {
-        float: left !important;
-    }
-}
-
-@media (min-width: 768px) {
-    .page-separation-title {
-        padding: 9px 0 9px 7px;
-        border-bottom: 1px solid #eeeeee;
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 767px) {
-    .page-separation-title {
-        padding: 5px 0 9px 10px;
-        border-bottom: 1px solid #eeeeee;
-        font-size: 20px;
-    }
-}
-
-
-/* puts the google places autocomplete dropdown results above the bootstrap modal 1050 zindex.*/
-
-.pac-container {
-    z-index: 1051 !important;
-}
-
-.general-title {
-    font-family: Gill Sans, Verdana;
-    font-size: 16px;
-    line-height: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: bold;
-}
-
-.col-centered {
-    float: none;
-    margin: 0 auto;
-}
-
-.menu {
-    list-style: none;
-    border-bottom: 0.1em solid black;
-    margin-bottom: 2em;
-    padding: 0 0 0.5em;
-}
-
-.menu:before {
-    content: "[";
-}
-
-.menu:after {
-    content: "]";
-}
-
-.menu>li {
-    display: inline;
-}
-
-.menu>li:before {
-    content: "|";
-    padding-right: 0.3em;
-}
-
-.menu>li:nth-child(1):before {
-    content: "";
-    padding: 0;
-}
-
 
 /* footer -----------------------*/
 
@@ -313,23 +127,18 @@ footer p {
 }
 
 .welcome-buttons-auth {
-    float: right;
-    margin-top: -60px;
+    /*float: right;
     padding-left: 30px;
     padding-top: 2px;
-    margin-right: 10px;
+    margin-right: 10px;*/
 }
 
 @media (max-width: 767px) {
-    .welcome-plugin-social-fb {
-        top: 10px;
-    }
+    .welcome-plugin-social-fb {}
 }
 
 @media (min-width: 768px) {
-    .welcome-plugin-social-fb {
-        bottom: 50px;
-    }
+    .welcome-plugin-social-fb {}
 }
 
 @media (min-width: 768px) {
@@ -1028,52 +837,6 @@ footer p {
     }
 }
 
-.page-separation {
-    padding-bottom: 4px;
-    margin: -11px 0 7px;
-    border-bottom: 1px solid #eeeeee;
-}
-
-.size-32 {
-    font-size: 30px;
-}
-
-.size-20 {
-    font-size: 20px;
-}
-
-.size-18 {
-    font-size: 18px;
-}
-
-.size-16 {
-    font-size: 16px;
-}
-
-.size-14 {
-    font-size: 14px;
-}
-
-.size-12 {
-    font-size: 12px;
-}
-
-.margintop7 {
-    margin-top: 7px;
-}
-
-.marginright10 {
-    margin-right: 10px;
-}
-
-.fade-out-success.ng-hide {
-    opacity: 0;
-}
-
-.fade-out-success.ng-hide-add {
-    transition: all linear 0.5s;
-}
-
 .my-meal-dtld-list-pending-user {
     margin: 5px 15px 0px 15px;
 }
@@ -1088,10 +851,11 @@ footer p {
 /* welcome---------------------------------------------------*/
 
 h2.slogan {
-    font-size: 22px;
-    margin-top: -10px;
+    font-size: 32px;
+    margin-top: -135px;
     font-style: italic;
     font-family: Gill Sans, Verdana;
+    color: white;
 }
 
 h4.sub-slogan {
@@ -1160,7 +924,7 @@ h4.sub-slogan {
     z-index: 3;
     background: mediumvioletred;
     color: white;
-    display:flex;
+    display: flex;
 }
 
 .well-meeting-background {
@@ -1172,7 +936,7 @@ h4.sub-slogan {
     z-index: 3;
     background: orange;
     color: white;
-    display:flex;
+    display: flex;
 }
 
 .well-sharing-background {
@@ -1185,7 +949,7 @@ h4.sub-slogan {
     z-index: 3;
     background: #73a839;
     color: white;
-    display:flex;
+    display: flex;
 }
 
 .well-new-background {
@@ -1198,7 +962,7 @@ h4.sub-slogan {
     z-index: 3;
     background: orangered;
     color: white;
-    display:flex;
+    display: flex;
 }
 
 .well-community-background {
@@ -1211,7 +975,7 @@ h4.sub-slogan {
     z-index: 3;
     background: #178acc;
     color: white;
-    display:flex;
+    display: flex;
 }
 
 .well-authenticity-simplicity-background {
@@ -1224,7 +988,7 @@ h4.sub-slogan {
     z-index: 3;
     background: #033c73;
     color: white;
-    display:flex;
+    display: flex;
 }
 
 @media (max-width: 767px) {
@@ -1313,4 +1077,395 @@ h4.sub-slogan {
 #profile-list-information-other-user {
     position: relative;
     left: 10px;
+}
+
+
+/* GENERAL CSS*/
+
+/* enable absolute positioning */
+
+.inner-addon {
+    position: relative;
+}
+
+
+/* style icon */
+
+.inner-addon .glyphicon,
+.inner-addon .fa {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+
+/* align icon */
+
+.left-addon .glyphicon {
+    left: 0px;
+}
+
+.left-addon .fa {
+    left: 0px;
+    top: 2px;
+}
+
+.right-addon .glyphicon {
+    right: 0px;
+}
+
+.right-addon .fa {
+    right: 0px;
+    top: 2px;
+}
+
+
+/* add padding  */
+
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
+
+/* rating well */
+
+.well-resume-rating {
+    display: inline-block;
+    padding: 2px 4px 0px 4px;
+    background-color: inherit;
+    margin: 0px;
+    box-shadow: inherit;
+    border: inherit;
+}
+
+
+/* GENERAL function clear css to create lines with nothing*/
+
+.clear5 {
+    clear: both;
+    height: 5px;
+}
+
+.clear10 {
+    clear: both;
+    height: 10px;
+}
+
+.clear20 {
+    clear: both;
+    height: 20px;
+}
+
+.clear30 {
+    clear: both;
+    height: 30px;
+}
+
+.clear40 {
+    clear: both;
+    height: 40px;
+}
+
+.clear120 {
+    clear: both;
+    height: 120px;
+}
+
+.padding-top-10 {
+    padding-top: 10px;
+}
+
+.padding-top-30 {
+    padding-top: 30px;
+}
+
+.top-10 {
+    top: 10px;
+}
+
+.top-30 {
+    top: 30px;
+}
+
+.page-separation {
+    padding-bottom: 4px;
+    margin: -11px 0 7px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.size-32 {
+    font-size: 30px;
+}
+
+.size-20 {
+    font-size: 20px;
+}
+
+.size-18 {
+    font-size: 18px;
+}
+
+.size-16 {
+    font-size: 16px;
+}
+
+.size-14 {
+    font-size: 14px;
+}
+
+.size-12 {
+    font-size: 12px;
+}
+
+.margintop7 {
+    margin-top: 7px;
+}
+
+.marginright10 {
+    margin-right: 10px;
+}
+
+.fade-out-success.ng-hide {
+    opacity: 0;
+}
+
+.fade-out-success.ng-hide-add {
+    transition: all linear 0.5s;
+}
+
+
+/* function pull xs et sm-md-lg*/
+
+@media (min-width: 768px) {
+    .pull-right-sm-md-lg {
+        float: right !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .pull-left-xs {
+        float: left !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .page-separation-title {
+        padding: 9px 0 9px 7px;
+        border-bottom: 1px solid #eeeeee;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-separation-title {
+        padding: 5px 0 9px 10px;
+        border-bottom: 1px solid #eeeeee;
+        font-size: 20px;
+    }
+}
+
+
+/* puts the google places autocomplete dropdown results above the bootstrap modal 1050 zindex.*/
+
+.pac-container {
+    z-index: 1051 !important;
+}
+
+.general-title {
+    font-family: Gill Sans, Verdana;
+    font-size: 16px;
+    line-height: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu>li {
+    display: inline;
+}
+
+.menu>li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu>li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.bluerow,
+.slick-next:before,
+.slick-prev:before{
+    -webkit-font-smoothing: antialiased;
+}
+
+.bluerow {
+    border-bottom: solid 1px #002E4E;
+    background: #0B4060
+}
+
+.bluerow.affix {
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, .6);
+    -moz-box-shadow: 0 0 12px rgba(0, 0, 0, .6);
+    box-shadow: 0 0 12px rgba(0, 0, 0, .6)
+}
+
+.bluerow.affix.affix-trans {
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s
+}
+
+.bluerow.unsticked {
+    top: -70px;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s
+}
+
+.btn-bluerow {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px 70px;
+    border: none;
+    border-right: solid 1px #002E4E;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0
+}
+
+.btn-bluerow:first-child {
+    border-left: solid 1px #002E4E
+}
+
+@media screen and (min-width:768px) {
+    .btn-bluerow {
+        background: #295E7E;
+        margin: 0 1px
+    }
+}
+
+.btn-bluerow:hover {
+    background: #287FB5;
+    color: #fff
+}
+
+.greenrow {
+    padding: 5px 0;
+    background: #B4CB3C
+}
+
+.greenrow a {
+    color: #0B4060;
+    font-size: 18px;
+    font-weight: 600
+}
+
+.btn-bluerow-icon {
+    display: none
+}
+
+@media screen and (max-width:1199px) {
+    .btn-bluerow {
+        padding: 15px 20px
+    }
+}
+
+@media screen and (max-width:767px) {
+    .btn-bluerow {
+        border: 1px solid #fff!important;
+        padding: 0;
+        font-size: 12px;
+        font-weight: 400;
+        width: 33.3%;
+        white-space: normal;
+        background: #002E4E;
+        margin: 0!important
+    }
+    .bluerow .btn-group {
+        width: 100%
+    }
+    .btn-bluerow-text {
+        padding: 8px 5px;
+        display: block
+    }
+    .bluerow {
+        background: 0 0;
+        border: none
+    }
+    .btn-bluerow-icon {
+        display: block;
+        background: #287FB5;
+        color: #fff;
+        text-align: center;
+        font-size: 26px
+    }
+    .greenrow a {
+        font-size: 12px;
+        display: block;
+        border: 1px solid #fff;
+        background: #B4CB3C
+    }
+    .greenrow a:hover {
+        background: #70862a;
+        color: #fff;
+        text-decoration: none
+    }
+    .green-border {
+        border-bottom: solid 1px #70862a
+    }
+    .greenrow {
+        padding: 0;
+        background: 0 0
+    }
+    .greenrow-text {
+        display: block;
+        padding: 5px;
+        background: #B4CB3C;
+        color: #fff;
+        font-size: 15px
+    }
+    .greenrow-text-bottom {
+        padding: 5px 11px;
+        display: block;
+        background: #98ac31;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 400
+    }
 }

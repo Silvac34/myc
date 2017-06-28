@@ -1,28 +1,23 @@
 <div ng-controller="WelcomeCtrl">
+  <div class="bluerow unsticked" ng-if="inApp != true">
+    <div class="container text-center">
+      <div class="btn-group btn-group-justified" role="group">
+        <a ui-sref="create_meal" class="btn btn-bluerow"><span class="btn-bluerow-text">Create a meal</span></a>
+        <a ui-sref="view_meals" class="btn btn-bluerow"><span class="btn-bluerow-text">Browse a meal</span></a>
+      </div>
+    </div>
+  </div>
   <div class="container-fluid">
     <div class="col-xs-12 text-center">
       <div class="clear20 hidden-sm hidden-md hidden-lg"></div>
       <div class="row">
-        <h1 class="general-title" style="text-transform:inherit;font-size:30px">myCommuneaty</h1>
-      </div>
-      <div class="clear20"></div>
-      <div class="row">
-        <h2 class="slogan">Meet new people with collaborative meals</h2>
+        <h2 class="slogan">AND YOU? WHEN WAS THE LAST TIME YOU MET SOMEONE NEW?</h2>
       </div>
       <div ng-if="inApp == true">
         <div class="clear5"></div>
         <div class="row" style="margin-right:-30px; margin-left:-30px">
           <img ng-src="static/sources/welcome/welcome_in_app.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
           <img ng-src="static/sources/welcome/welcome_in_app_open.jpg" style="width: 150px;border: solid 2px #317eac;border-radius: 8px;">
-        </div>
-      </div>
-      <div class="clear20"></div>
-      <div class="row" ng-if="inApp != true">
-        <div class="col-xs-6">
-          <a ui-sref="create_meal" class="btn btn-primary welcome-button-action">Create a meal</a>
-        </div>
-        <div class="col-xs-6">
-          <a ui-sref="view_meals" class="btn btn-primary welcome-button-action" href="#/view_meals">Browse a meal</a>
         </div>
       </div>
       <div class="clear40"></div>

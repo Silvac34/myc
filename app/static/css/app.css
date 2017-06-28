@@ -2,12 +2,11 @@
 
 @media (max-width: 767px) {
     .header {
-        height: 475px;
+        height: 375px;
         /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
-        filter: brightness(0.8);
-        font-size:;
+        filter: brightness(70%) saturate(190%);
     }
     .welcome-buttons-auth-header {
         /*bottom: 10px;
@@ -21,12 +20,14 @@
         /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
-        filter: brightness(0.8);
+        filter: brightness(70%) saturate(190%);
+        /*brightness85%*/
     }
     #section {
         min-height: 365px
     }
 }
+
 
 /* footer -----------------------*/
 
@@ -133,12 +134,8 @@ footer p {
     margin-right: 10px;*/
 }
 
-@media (max-width: 767px) {
-    .welcome-plugin-social-fb {}
-}
-
-@media (min-width: 768px) {
-    .welcome-plugin-social-fb {}
+.welcome-plugin-social-fb {
+    z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -850,12 +847,26 @@ footer p {
 
 /* welcome---------------------------------------------------*/
 
-h2.slogan {
-    font-size: 32px;
-    margin-top: -135px;
-    font-style: italic;
-    font-family: Gill Sans, Verdana;
-    color: white;
+@media (min-width: 768px) {
+    h2.slogan {
+        font-size: 40px;
+        margin-top: -220px;
+        font-style: italic;
+        font-family: Gill Sans, Verdana;
+        color: white;
+        font-weight: lighter;
+    }
+}
+
+@media (max-width: 767px) {
+    h2.slogan {
+        font-size: 22px;
+        margin-top: -150px;
+        font-style: italic;
+        font-family: Gill Sans, Verdana;
+        color: white;
+        font-weight: lighter;
+    }
 }
 
 h4.sub-slogan {
@@ -1081,6 +1092,7 @@ h4.sub-slogan {
 
 
 /* GENERAL CSS*/
+
 
 /* enable absolute positioning */
 
@@ -1320,7 +1332,7 @@ h4.sub-slogan {
 
 .bluerow,
 .slick-next:before,
-.slick-prev:before{
+.slick-prev:before {
     -webkit-font-smoothing: antialiased;
 }
 
@@ -1366,7 +1378,8 @@ h4.sub-slogan {
     border-right: solid 1px #002E4E;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    border-radius: 0
+    border-radius: 0;
+    background: #295E7E;
 }
 
 .btn-bluerow:first-child {
@@ -1375,7 +1388,6 @@ h4.sub-slogan {
 
 @media screen and (min-width:768px) {
     .btn-bluerow {
-        background: #295E7E;
         margin: 0 1px
     }
 }
@@ -1408,25 +1420,15 @@ h4.sub-slogan {
 
 @media screen and (max-width:767px) {
     .btn-bluerow {
-        border: 1px solid #fff!important;
         padding: 0;
-        font-size: 12px;
-        font-weight: 400;
-        width: 33.3%;
-        white-space: normal;
-        background: #002E4E;
-        margin: 0!important
     }
     .bluerow .btn-group {
         width: 100%
     }
     .btn-bluerow-text {
         padding: 8px 5px;
-        display: block
-    }
-    .bluerow {
-        background: 0 0;
-        border: none
+        display: block;
+        font-size: small;
     }
     .btn-bluerow-icon {
         display: block;
@@ -1434,38 +1436,5 @@ h4.sub-slogan {
         color: #fff;
         text-align: center;
         font-size: 26px
-    }
-    .greenrow a {
-        font-size: 12px;
-        display: block;
-        border: 1px solid #fff;
-        background: #B4CB3C
-    }
-    .greenrow a:hover {
-        background: #70862a;
-        color: #fff;
-        text-decoration: none
-    }
-    .green-border {
-        border-bottom: solid 1px #70862a
-    }
-    .greenrow {
-        padding: 0;
-        background: 0 0
-    }
-    .greenrow-text {
-        display: block;
-        padding: 5px;
-        background: #B4CB3C;
-        color: #fff;
-        font-size: 15px
-    }
-    .greenrow-text-bottom {
-        padding: 5px 11px;
-        display: block;
-        background: #98ac31;
-        color: #fff;
-        text-transform: uppercase;
-        font-weight: 400
     }
 }

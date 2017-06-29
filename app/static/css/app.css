@@ -1019,38 +1019,22 @@ h4.sub-slogan {
 }
 
 @media screen and (min-width: 768px) {
-    .hero.mod-different-roles {
-        padding-bottom: 75px;
-        padding-top: 75px
+    .hero.mod-different-roles,
+    .hero.mod-what-about-the-money,
+    .hero.mod-how-it-works {
+        padding-bottom: 100px;
+        padding-top: 50px
     }
 }
 
+.hero.mod-values,
 .hero.mod-how-it-works {
     background-color: white;
     text-align: center;
 }
 
-@media screen and (min-width: 768px) {
-    .hero.mod-how-it-works {
-        padding-bottom: 75px;
-        padding-top: 75px
-    }
-}
-
 .hero.mod-what-about-the-money {
-    background-color: white;
-    text-align: center;
-}
-
-@media screen and (min-width: 768px) {
-    .hero.mod-what-about-the-money {
-        padding-bottom: 75px;
-        padding-top: 75px
-    }
-}
-
-.hero.mod-values {
-    background-color: #ecf0f1;
+    background: #008b8b;
     text-align: center;
 }
 
@@ -1098,6 +1082,16 @@ div.mod-margin-top {
     margin-top: 2em
 }
 
+@media screen and (min-width: 768px) {
+    .hero-content-title-how-it-works,
+    .hero-content-title-values,
+    .hero-content-title-what-about-the-money,
+    .hero-content-title-different-roles {
+        font-size: 56px
+    }
+}
+
+.hero-content-title-values,
 .hero-content-title-how-it-works {
     color: #003f5e;
     font-size: 34px;
@@ -1106,52 +1100,13 @@ div.mod-margin-top {
     margin-bottom: 0.5em
 }
 
-@media screen and (min-width: 768px) {
-    .hero-content-title-how-it-works {
-        font-size: 56px
-    }
-}
-
-.hero-content-title-values {
-    color: #003f5e;
-    font-size: 34px;
-    font-weight: lighter;
-    line-height: 1.1;
-    margin-bottom: 0.5em
-}
-
-@media screen and (min-width: 768px) {
-    .hero-content-title-values {
-        font-size: 56px
-    }
-}
-
-.hero-content-title-what-about-the-money {
-    color: #003f5e;
-    font-size: 34px;
-    font-weight: lighter;
-    line-height: 1.1;
-    margin-bottom: 0.5em
-}
-
-@media screen and (min-width: 768px) {
-    .hero-content-title-what-about-the-money {
-        font-size: 56px;
-    }
-}
-
-.hero-content-title-different-roles {
+.hero-content-title-what-about-the-money,
+.hero-content-title-different-roles{
     color: white;
     font-size: 34px;
     font-weight: lighter;
     line-height: 1.1;
-    margin-bottom: 0.5em;
-}
-
-@media screen and (min-width: 768px) {
-    .hero-content-title-different-roles {
-        font-size: 56px
-    }
+    margin-bottom: 0.5em
 }
 
 hr.mod-short {
@@ -1182,7 +1137,7 @@ hr.mod-info {
     color: white
 }
 
-a.mod-white {
+a.mod-white, h3.mod-white, p.mod-white {
     color: white
 }
 
@@ -1212,6 +1167,7 @@ a.mod-info {
     }
 }
 
+.info-box-title-what-about-the-money,
 .info-box-title-different-roles {
     line-height: 1.2;
     color: white;
@@ -1230,10 +1186,12 @@ a.mod-info {
 }
 
 .info-box.mod-blue {
-    background-color: #3e99d5
+    background-color: #3e99d5;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
 }
 
-.info-box.mod-blue {
+.info-box.mod-green {
+    background-color: #009f9f;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
 }
 

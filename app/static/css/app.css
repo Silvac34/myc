@@ -1021,9 +1021,11 @@ h4.sub-slogan {
 @media screen and (min-width: 768px) {
     .hero.mod-different-roles,
     .hero.mod-what-about-the-money,
-    .hero.mod-how-it-works,
-    .hero.mod-values{
+    .hero.mod-how-it-works{
         padding-bottom: 100px;
+        padding-top: 50px
+    }
+    .hero.mod-values{
         padding-top: 50px
     }
 }

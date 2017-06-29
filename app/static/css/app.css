@@ -1021,7 +1021,8 @@ h4.sub-slogan {
 @media screen and (min-width: 768px) {
     .hero.mod-different-roles,
     .hero.mod-what-about-the-money,
-    .hero.mod-how-it-works {
+    .hero.mod-how-it-works,
+    .hero.mod-values{
         padding-bottom: 100px;
         padding-top: 50px
     }
@@ -1187,6 +1188,11 @@ a.mod-info {
 
 .info-box.mod-blue {
     background-color: #3e99d5;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
+}
+
+.info-box.mod-blue-light {
+    background-color: #53a4da;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
 }
 

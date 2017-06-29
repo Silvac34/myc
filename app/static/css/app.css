@@ -134,7 +134,7 @@ footer p {
     margin-right: 10px;*/
 }
 
-.welcome-background-separation{
+.welcome-background-separation {
     background: rgba(221, 221, 221, 0.22);
 }
 
@@ -854,8 +854,7 @@ footer p {
 @media (min-width: 768px) {
     h2.slogan {
         font-size: 40px;
-        margin-top: -200px;
-        font-style: italic;
+        margin-top: -195px;
         font-family: Gill Sans, Verdana;
         color: white;
         font-weight: lighter;
@@ -866,7 +865,6 @@ footer p {
     h2.slogan {
         font-size: 22px;
         margin-top: -130px;
-        font-style: italic;
         font-family: Gill Sans, Verdana;
         color: white;
         font-weight: lighter;
@@ -882,7 +880,7 @@ h4.sub-slogan {
 #slogan-text {
     display: inline-block;
     border-top: solid 0.5px;
-    padding: 5px 15px;
+    padding: 5px 10px;
     font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     border-bottom: solid 0.5px;
 }
@@ -1020,6 +1018,211 @@ h4.sub-slogan {
     }
 }
 
+/* mise en page de welcomePage */
+
+.hero.mod-different-roles {
+    background-color: #287fb8;
+    background-image: url(/assets/homepage/house-bg-light-df256a5283759e66231bb9c83a2c55ab8c22008e9a9bb91289f3db6144ab70b1.png);
+    background-position: center center;
+    background-size: contain;
+    text-align: center
+}
+
+@media screen and (min-width: 768px) {
+    .hero.mod-different-roles {
+        padding-bottom: 75px;
+        padding-top: 75px
+    }
+}
+
+.hero.mod-how-does-it-work {
+    background-color: white;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .hero.mod-how-does-it-work {
+        padding-bottom: 75px;
+        padding-top: 75px
+    }
+}
+
+.hero {
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 300px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.hero-content {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 1280px;
+}
+
+.hero-content .mod-margin-top {
+    margin-top: 1.5em
+}
+@media screen and (min-width: 768px) {
+    .hero-content {
+        padding: 30px
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .hero-content .mod-margin-top {
+        margin-top: 2em
+    }
+}
+
+div.mod-margin-top {
+    margin-top: 2em
+}
+
+.hero-content-title-how-does-it-work {
+    color: #003f5e;
+    font-size: 34px;
+    font-weight: lighter;
+    line-height: 1.1;
+    margin-bottom: 0.5em
+}
+
+@media screen and (min-width: 768px) {
+    .hero-content-title-how-does-it-work {
+        font-size: 56px
+    }
+}
+
+.hero-content-title-different-roles {
+    color: white;
+    font-size: 34px;
+    font-weight: lighter;
+    line-height: 1.1;
+    margin-bottom: 0.5em
+}
+
+@media screen and (min-width: 768px) {
+    .hero-content-title-different-roles {
+        font-size: 56px
+    }
+}
+
+hr.mod-short {
+    background-color: #27374c;
+    border-width: 0;
+    color: #27374c;
+    height: 2px;
+    margin-bottom: 1em;
+    width: 50px
+}
+
+.info-box hr.mod-short {
+    width: 30px
+}
+
+.info-box.mod-white {
+    background-color: white;
+    color: #34495e
+}
+
+hr.mod-white {
+    background-color: white;
+    color: white
+}
+
+hr.mod-info {
+    background-color: #003f5e;
+    color: white
+}
+
+a.mod-white {
+    color: white
+}
+
+a.mod-info {
+    color: #003f5e;
+}
+
+.info-box-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+@media screen and (min-width: 768px) {
+    .info-box-container {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row
+    }
+}
+
+.info-box-title-different-roles {
+    line-height: 1.2;
+    color: white;
+}
+
+.info-box-title-how-does-it-work {
+    line-height: 1.2;
+    color: #34495e;
+}
+
+.info-box {
+    color: white;
+    margin-top: 10px;
+    padding: 30px;
+    width: 100%
+}
+
+.info-box.mod-blue {
+    background-color: #3e99d5
+}
+
+.info-box.mod-blue {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
+}
+
+.info-box.mod-white {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)
+}
+
+.mod-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.mod-margin-bottom {
+    margin-bottom: 1em
+}
+
+a.mod-underline {
+    text-decoration: underline
+}
+
+a.mod-underline:focus,
+a.mod-underline:hover {
+    text-decoration: none
+}
 
 /*who we are --------------------------------------------------- */
 

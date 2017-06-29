@@ -52,9 +52,22 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
       controller: 'ViewMealsCtrl',
       resolve: {
         response: function($http) {
-          /*var date = new Date();
-          var now = date.toISOString();*/
-          return $http.get('/api/meals' /*?where={"time": {"$gte": "' + now + '"} }'*/ ); //on met en commentaire la requête filtrée pour repas > now
+          var date = new Date();
+          var now = date.toISOString();
+          return $http.get('/api/meals?where={"time": {"$gte": "' + now + '"}}').then(function successCallBack(response) {
+            if (response.data['_items'].length > 0) {
+              return response.data['_items'];
+            }
+            else {
+              return $http.get('/api/meals').then(function successCallBack(responsewithoutfilter) {
+                return responsewithoutfilter.data['_items'];
+              }, function errorCallback(responsewithoutfilter) {
+                console.log(responsewithoutfilter);
+              });
+            }
+          }, function errorCallback(response) {
+            console.log(response);
+          });
         }
       }
     });
@@ -228,7 +241,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
   }
   $rootScope.inApp = isFacebookApp();
-  
+
   function authe(provider) {
     return $q(function(resolve, reject) {
       $auth.authenticate(provider)
@@ -321,7 +334,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   $scope.status = {
     isopen: false
   };
-  
+
   $scope.sloganText = "When was the last time you met someone new?";
 
 }]);

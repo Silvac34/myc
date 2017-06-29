@@ -61,7 +61,7 @@
 <body>
   <section ng-if="$state.includes('welcome')" style="position:relative; top:-60px">
     <div class="col-xs-8 welcome-plugin-social-fb">
-      <div class="general-title text-info" style="text-transform:inherit"><img ng-src="static/sources/logo/logo_with_circle.jpg" style="height:50px"><span class="hidden-xs size-20"> myCommuneaty</span><span class="hidden-sm hidden-md hidden-lg size-12">myCommuneaty</span></div>
+      <div class="general-title text-info" style="text-transform:inherit"><img ng-src="static/sources/logo/logo_with_circle.jpg" style="height:50px"><h1 class="hidden-xs size-20" style="display:initial"> myCommuneaty</h1><h1 class="hidden-sm hidden-md hidden-lg size-12" style="display:initial">myCommuneaty</h1></div>
       <div class="clear10"></div>
       <div class="fb-follow" data-href="https://www.facebook.com/mycommuneaty" data-layout="button" data-size="small" data-show-faces="true"></div>
       <div class="fb-share-button" data-href="https://www.facebook.com/mycommuneaty" data-layout="button" data-size="small" data-mobile-iframe="true">
@@ -139,11 +139,11 @@
     <div ng-controller="AppCtrl">
       <div class="container-fluid" style="position:relative" ng-if="$state.includes('welcome') && inApp != true">
         <h2 class="slogan text-center">
-          <div id="slogan-text" ng-mouseover="sloganText = 'And the last time you ate with someone new?'" ng-mouseleave="sloganText = 'When was the last time you met someone new?'">{{'{{sloganText}}'}}</div>
+          <div id="slogan-text" ng-mouseover="sloganText = 'And the last time you ate with someone new ?'" ng-mouseleave="sloganText = 'When was the last time you met someone new ?'">{{'{{sloganText}}'}}</div>
         </h2>
       </div>
       <div ui-view></div>
-      <div class="clear20" ng-class="{'welcome-background-separation':($state.includes('welcome') && inApp != true)}"></div>
+      <div class="clear20" ng-hide="$state.includes('welcome') && inApp != true"></div>
     </div>
   </section>
 

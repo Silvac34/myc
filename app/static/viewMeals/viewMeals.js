@@ -34,7 +34,7 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     }
   });
 
-  $scope.datasUserForEachMeal = function(meal) {//function qui retourne l'utilisateur s'il s'est inscrit
+  $scope.datasUserForEachMeal = function(meal) { //function qui retourne l'utilisateur s'il s'est inscrit
     if ($scope.$parent.$root.user) {
       for (var i = 0; i < meal.users.length; i++) {
         if (meal.users[i]._id == $scope.$parent.$root.user._id) {
@@ -215,7 +215,9 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     cityFilter: "",
     preferenceFilter: {
       "veggies": false,
-      "vegan": false
+      "vegan": false,
+      "halal": false,
+      "kosher": false
     },
     helpingTypeFilter: {
       "cooks": false,
@@ -332,45 +334,35 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   };
 
   $scope.preferenceFilter = function(meal) {
-    if ($scope.filter.preferenceFilter.veggies == true && $scope.filter.preferenceFilter.vegan == true) {
-      return (meal.veggies == true || meal.vegan == true);
+    var count=0;
+    for (var value in $scope.filter.preferenceFilter) {
+      if ($scope.filter.preferenceFilter[value] == true) {
+        if (meal[value] == true) {
+          return meal;
+        }
+      }
+      else{
+        count += 1;
+      }
     }
-    else {
-      if ($scope.filter.preferenceFilter.veggies == true) {
-        return meal.veggies == true;
-      }
-      else if ($scope.filter.preferenceFilter.vegan == true) {
-        return meal.vegan == true;
-      }
-      else {
-        return meal;
-      }
+    if(count == Object.keys($scope.filter.preferenceFilter).length){
+      return meal;
     }
   };
 
   $scope.helpingTypeFilter = function(meal) {
-    if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal; // si on a tout coché
+        var count=0;
+    for (var value in $scope.filter.helpingTypeFilter) {
+      if ($scope.filter.helpingTypeFilter[value] == true) {
+        if (meal.detailedInfo.requiredGuests[value] && meal.detailedInfo.requiredGuests[value]["nbRemainingPlaces"] > 0) {
+          return meal;
+        }
+      }
+      else{
+        count += 1;
+      }
     }
-    else if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == false) {
-      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces > 0 && meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaner.nbRemainingPlaces > 0; // si on a coché que cooks et cleaners
-    }
-    else if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == false && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces > 0 && meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces > 0; // si on a coché que cooks et simpleGuests
-    }
-    else if ($scope.filter.helpingTypeFilter.cooks == false && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces > 0 && meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
-    }
-    else if ($scope.filter.helpingTypeFilter.cooks == true && $scope.filter.helpingTypeFilter.cleaners == false && $scope.filter.helpingTypeFilter.simpleGuests == false) {
-      return meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
-    }
-    else if ($scope.filter.helpingTypeFilter.cooks == false && $scope.filter.helpingTypeFilter.cleaners == true && $scope.filter.helpingTypeFilter.simpleGuests == false) {
-      return meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
-    }
-    else if ($scope.filter.helpingTypeFilter.cooks == false && $scope.filter.helpingTypeFilter.cleaners == false && $scope.filter.helpingTypeFilter.simpleGuests == true) {
-      return meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces > 0; // si on a coché que cleaners et simpleGuests
-    }
-    else { //on a rien coché
+    if(count == Object.keys($scope.filter.helpingTypeFilter).length){
       return meal;
     }
   };

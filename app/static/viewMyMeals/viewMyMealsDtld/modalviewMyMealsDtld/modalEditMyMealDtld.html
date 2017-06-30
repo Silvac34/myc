@@ -15,14 +15,21 @@
                         <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.menu.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <span style="margin-right:10px"><em>Special meal? <span class="small">(don't check if not)</span></em>
+                        <span style="margin-right:10px"><em>Special meal?  <i class="fa fa-info-circle" uib-tooltip="do not check if not" tooltip-trigger="mouseenter" tooltip-placement="top"></i></em>
                         </span>
                         <div class="checkbox" style="margin-bottom:5px; display:inline-block">
-                            <label style="margin-right:5px">
-                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian meal
+                            <label class="form-design-veggies">
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian
                         </label>
                             <label class="form-design-vegan">
-                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.vegan" ng-change="editedMeal.veggies = false">Vegan meal
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.vegan" ng-change="editedMeal.veggies = false">Vegan
+                        </label>
+                        </label>
+                            <label class="form-design-halal">
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.halal">Halal
+                        </label>
+                            <label class="form-design-kosher">
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.kosher">Kosher
                         </label>
                         </div>
                     </div>

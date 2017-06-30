@@ -16,7 +16,13 @@
                     <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}}
                 </div>
                 <div class="row meal-info-label" ng-if="meal.veggies == true || meal.vegan == true">
-                    <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                    <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                </div>
+                <div class="row" ng-if="meal.halal == true">
+                    <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                </div>
+                <div class="row" ng-if="meal.kosher == true">
+                    <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
                 </div>
             </div>
         </div>

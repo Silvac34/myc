@@ -124,7 +124,13 @@
                         <img src="/static/sources/multiple-users-silhouette.png" style="width:14px; height:14px"> Subscription recapitulatory: <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
                     </div>
                     <div class="meal-info-label" ng-if="meal.veggies == true || meal.vegan == true">
-                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                    </div>
+                    <div class="meal-info-label" ng-if="meal.halal == true">
+                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                    </div>
+                    <div class="meal-info-label" ng-if="meal.kosher == true">
+                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
                     </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}}

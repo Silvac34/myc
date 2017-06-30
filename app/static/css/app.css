@@ -1585,6 +1585,10 @@ a.mod-underline:hover {
     border-left: solid 1px #002E4E
 }
 
+.btn-bluerow:focus {
+    color: lightgrey;
+}
+
 @media screen and (min-width:768px) {
     .btn-bluerow {
         margin: 0 1px

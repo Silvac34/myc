@@ -6,7 +6,7 @@
         /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
-        filter: brightness(70%) saturate(190%);
+        filter: brightness(85%) saturate(190%);
     }
 }
 
@@ -16,7 +16,7 @@
         /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
-        filter: brightness(70%) saturate(190%);
+        filter: brightness(85%) saturate(190%);
     }
     #section {
         min-height: 365px

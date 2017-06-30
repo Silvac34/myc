@@ -598,6 +598,7 @@ footer p {
     margin: 5px 15px 0px 15px;
 }
 
+
 /* create Meal */
 
 .legend {
@@ -637,10 +638,11 @@ footer p {
     border-bottom: 1px solid #dddddd;
 }
 
-@media (min-width: 768px) {
-    .form-design-vegan {
-        margin-left: 15px;
-    }
+.form-design-veggies,
+.form-design-vegan,
+.form-design-halal,
+.form-design-kosher {
+    margin-right: 10px;
 }
 
 
@@ -999,11 +1001,11 @@ h4.sub-slogan {
 @media screen and (min-width: 768px) {
     .hero.mod-different-roles,
     .hero.mod-what-about-the-money,
-    .hero.mod-how-it-works{
+    .hero.mod-how-it-works {
         padding-bottom: 100px;
         padding-top: 50px
     }
-    .hero.mod-values{
+    .hero.mod-values {
         padding-top: 50px
     }
 }
@@ -1082,7 +1084,7 @@ div.mod-margin-top {
 }
 
 .hero-content-title-what-about-the-money,
-.hero-content-title-different-roles{
+.hero-content-title-different-roles {
     color: white;
     font-size: 34px;
     font-weight: lighter;
@@ -1118,7 +1120,9 @@ hr.mod-info {
     color: white
 }
 
-a.mod-white, h3.mod-white, p.mod-white {
+a.mod-white,
+h3.mod-white,
+p.mod-white {
     color: white
 }
 

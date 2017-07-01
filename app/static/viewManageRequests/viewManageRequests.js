@@ -5,7 +5,7 @@ angular.module('myApp.viewManageRequests', [])
 .controller('ViewManageRequestsCtrl', ['$scope', '$http', 'getSpecificUserFactory', function($scope, $http, getSpecificUserFactory) {
     if ($scope.$parent.$root.user) {
         $scope.nbDifferentPendingRequest = 0;
-        $http.get('api/meals?where={"$and": [{"users._id": "' + $scope.$parent.$root.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
+        $http.get('api/meals?where={"$and": [{"admin": "' + $scope.$parent.$root.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
             $scope.meals = res.data._items;
             $scope.meals.forEach(function(meal) {
                 meal.users.forEach(function(user) {

@@ -155,8 +155,8 @@
         </div>
         <div class="row" ng-if="userRole!='admin'">
             <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}" class="hidden-sm hidden-md hidden-lg">
-                <ng-map id="map" center="{{meal.address.lat}},{{meal.address.lng}}" zoom="14" max style="display: block" class="my-meal-dtld-map-height">
-                    <marker position="{{meal.address.lat}},{{meal.address.lng}}" id="{{meal._id}}"></marker>
+                <ng-map id="map" center="{{meal.privateInfo.address.lat}},{{meal.privateInfo.address.lng}}" zoom="14" max style="display: block" class="my-meal-dtld-map-height">
+                    <marker position="{{meal.privateInfo.address.lat}},{{meal.privateInfo.address.lng}}" id="{{meal._id}}"></marker>
                 </ng-map>
             </div>
             <div class="clear10"></div>

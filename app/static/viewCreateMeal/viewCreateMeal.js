@@ -170,6 +170,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
             okToPost = false;
           }
           setDate($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
+          if($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking>$scope.editedMeal.time){
+            okToPost = false;
+          }
         }
         if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
           if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null || $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0) {
@@ -283,45 +286,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.animationsEnabled = true;
 
   $scope.autocomplete;
-
-  $scope.checkTimeCooking = function() {
-    if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
-      if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks != 0) {
-            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking == undefined) {
-              return true;
-            }
-            else {
-              if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() > $scope.editedMeal.time.getHours()) {
-                return true;
-              }
-              else {
-                if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getHours() == $scope.editedMeal.time.getHours() && $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking.getMinutes() > $scope.editedMeal.time.getMinutes()) {
-                  return true;
-                }
-                else {
-                  return false;
-                }
-              }
-            }
-          }
-          else {
-            return false;
-          }
-        }
-        else {
-          return false;
-        }
-      }
-      else {
-        return false;
-      }
-    }
-    else {
-      return false;
-    }
-  };
 
   $scope.currency_symbol = "$";
   $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {

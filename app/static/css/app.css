@@ -2,7 +2,7 @@
 
 @media (max-width: 767px) {
     .header {
-        height: 375px;
+        height: 355px;
         /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
@@ -16,7 +16,7 @@
         /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
-        filter: brightness(85%) saturate(190%);
+        filter: brightness(70%) saturate(190%);
     }
     #section {
         min-height: 365px
@@ -1001,8 +1001,8 @@ h4.sub-slogan {
     .hero.mod-different-roles,
     .hero.mod-what-about-the-money,
     .hero.mod-how-it-works {
-        padding-bottom: 100px;
-        padding-top: 50px
+        padding-top: 50px;
+        padding-bottom: 85px;
     }
     .hero.mod-values {
         padding-top: 50px
@@ -1623,7 +1623,7 @@ a.mod-underline:hover {
 
 @media screen and (max-width:767px) {
     .btn-bluerow {
-        padding: 0;
+        padding: 10px;
     }
     .bluerow .btn-group {
         width: 100%

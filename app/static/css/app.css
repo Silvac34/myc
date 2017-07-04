@@ -598,14 +598,9 @@ footer p {
     margin: 5px 15px 0px 15px;
 }
 
+/* viewCreateMeal ---------------------------------------------------*/
 
-/* create Meal */
-
-.legend {
-    margin-left: 5px;
-}
-
-#fieldset-form {
+.createMealForm {
     padding-left: 30px;
     padding-right: 40px;
 }

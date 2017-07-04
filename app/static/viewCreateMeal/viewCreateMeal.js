@@ -32,7 +32,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
       detailedInfo: {
         "requiredGuests": {}
       },
-      automaticSubscription: true,
+      automaticSubscription: false,
       address: {},
       privateInfo: {
         "address": {}
@@ -159,61 +159,63 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   function createMealWithPhone() {
     getAddressFromAutocomplete();
     var okToPost = true;
-    if ($scope.editedMeal.menu.title != undefined) {
-      if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
-        if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0) {
-            delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
+    if ($scope.editedMeal.menu != undefined) {
+      if ($scope.editedMeal.menu.title != undefined) {
+        if ($scope.editedMeal.detailedInfo.requiredGuests != undefined) {
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cooks != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == null || $scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks == 0) {
+              delete $scope.editedMeal.detailedInfo.requiredGuests.cooks; //si on a essayé de rentrer des aides cuisines mais que finalement on en veut plus, on le supprime
+            }
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
+              console.log("you are trying to do somehting ilegal with the number of cooks!");
+              okToPost = false;
+            }
+            setDate($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > $scope.editedMeal.time) {
+              okToPost = false;
+            }
           }
-          else if ($scope.editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks < 0) {
-            console.log("you are trying to do somehting ilegal with the number of cooks!");
-            okToPost = false;
+          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null || $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0) {
+              delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
+            }
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
+              console.log("you are trying to do somehting ilegal with the number of cleaners!");
+              okToPost = false;
+            }
+            if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
+              setDate($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
+            }
           }
-          setDate($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
-          if($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking>$scope.editedMeal.time){
-            okToPost = false;
+          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
+            if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null || $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == 0) {
+              delete $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le supprime
+            }
+            else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {
+              console.log("you are trying to do somehting ilegal with the number of cleaners!");
+              okToPost = false;
+            }
           }
         }
-        if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == null || $scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners == 0) {
-            delete $scope.editedMeal.detailedInfo.requiredGuests.cleaners; //si on a essayé de rentrer des aides vaisselles mais que finalement on en veut plus, on le supprime
-          }
-          else if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners < 0) {
-            console.log("you are trying to do somehting ilegal with the number of cleaners!");
-            okToPost = false;
-          }
-          if ($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning) {
-            setDate($scope.editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning);
-          }
+        if ($scope.editedMeal.address.town == undefined || $scope.editedMeal.privateInfo.address.name == undefined) {
+          console.log("address is missing");
+          okToPost = false;
         }
-        if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests != undefined) {
-          if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == null || $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests == 0) {
-            delete $scope.editedMeal.detailedInfo.requiredGuests.simpleGuests; //si on a essayé de rentrer des invités simple mais que finalement on en veut plus, on le supprime
-          }
-          else if ($scope.editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests < 0) {
-            console.log("you are trying to do somehting ilegal with the number of cleaners!");
-            okToPost = false;
-          }
+        if ($scope.editedMeal.price == undefined) {
+          console.log("price of the groceries is missing");
+          okToPost = false;
         }
-      }
-      if ($scope.editedMeal.address.town == undefined || $scope.editedMeal.privateInfo.address.name == undefined) {
-        console.log("address is missing");
-        okToPost = false;
-      }
-      if ($scope.editedMeal.price == undefined) {
-        console.log("price of the groceries is missing");
-        okToPost = false;
-      }
-      if (okToPost == true) {
-        $http.post('/api/meals', $scope.editedMeal).then(function(response) {
-            confirmOptIn();
-            $state.go("view_my_dtld_meals", {
-              "myMealId": response.data._id
+        if (okToPost == true) {
+          $http.post('/api/meals', $scope.editedMeal).then(function(response) {
+              confirmOptIn();
+              $state.go("view_my_dtld_meals", {
+                "myMealId": response.data._id
+              });
+            },
+            function(response) {
+              console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
             });
-          },
-          function(response) {
-            console.log(response); //sert à préparer le terrain pour afficher les erreurs qui pourraient avoir lieu lors de la publication d'un repas
-          });
+        }
       }
     }
   }

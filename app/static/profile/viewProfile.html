@@ -186,12 +186,14 @@
                                             <div class="panel-body">
                                                 <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                                                 <div class="pull-left" style="padding-right:15px">
+                                                    <a ui-sref="profile({userId: review.fromUser.datas._id})">
                                                     <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
                                                     <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                                    </a>
                                                 </div>
                                                 <div style="padding-top:20px">
                                                     <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
-                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span><span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
+                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span>                                                    <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span><span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -266,12 +268,15 @@
                         <div class="panel-body">
                             <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                             <div class="pull-left" style="padding-right:15px">
-                                <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
-                                <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                <a ui-sref="profile({userId: review.fromUser.datas._id})">
+                                    <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                    <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                </a>
                             </div>
                             <div style="padding-top:20px">
                                 <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
-                                    style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span><span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
+                                    style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span>
+                                <span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
                             </div>
                         </div>
                     </div>

@@ -68,7 +68,9 @@
                                 <div class="form-group">
                                     <div class="inner-addon left-addon">
                                         <i class="fa fa-venus-mars"></i>
-                                        <input type="text" class="form-control" ng-model="user.gender" placeholder="Gender">
+                                        <select type="text" class="form-control" ng-model="user.gender" placeholder="Gender">
+                                            <option value="male">Male</option><option value="female">Female</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -187,8 +189,8 @@
                                                 <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                                                 <div class="pull-left" style="padding-right:15px">
                                                     <a ui-sref="profile({userId: review.fromUser.datas._id})">
-                                                    <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
-                                                    <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                                        <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                                        <div class="meal-admin meal-admin-name">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
                                                     </a>
                                                 </div>
                                                 <div style="padding-top:20px">

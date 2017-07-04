@@ -598,6 +598,7 @@ footer p {
     margin: 5px 15px 0px 15px;
 }
 
+
 /* viewCreateMeal ---------------------------------------------------*/
 
 .createMealForm {
@@ -1330,6 +1331,10 @@ a.mod-underline:hover {
 
 .left-addon input {
     padding-left: 30px;
+}
+
+.left-addon select {
+    text-indent: 25px;
 }
 
 .right-addon input {

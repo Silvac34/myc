@@ -124,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-if="needToUpdateCellphone()==false">
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group" ng-class="{'has-error': (createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required) && createMealForm.$submitted};">
                         <div class="inner-addon left-addon">
@@ -137,8 +137,9 @@
             </div>
             <div class="row" ng-show="(createMealForm.$invalid || (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time) || createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)  && createMealForm.$submitted">
                 <div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button> Please fill the missing field<span ng-if="createMealForm.$error.required.length > 1">s</span> and try again:
-                    <span ng-repeat="error in createMealForm.$error.required"><span ng-if="error.$name == 'inputMenu'">menu</span><span ng-if="error.$name == 'inputPrice'">price of the groceries</span><span ng-if="error.$name == 'inputAddress'">address</span><span ng-if="error.$name == 'inputTimeCooking'">arrival time for help cooking</span><span ng-show="error.$name == 'inputCellphone'">phone number</span><span ng-hide="$last== true">, </span></span>
+                    <span ng-repeat="error in createMealForm.$error.required"><span ng-show="$first">Please fill the missing field<span ng-if="createMealForm.$error.required.length > 1">s</span> and try again: </span><span ng-if="error.$name == 'inputMenu'">menu</span><span ng-if="error.$name == 'inputPrice'">price of the groceries</span><span ng-if="error.$name == 'inputAddress'">address</span><span ng-if="error.$name == 'inputTimeCooking'">arrival time for help cooking</span><span ng-show="error.$name == 'inputCellphone'">phone number</span><span ng-hide="$last== true">, </span><span ng-show="$last">.</span></span>
+                    <br ng-if="createMealForm.$error.required.length>0">
+                    <span ng-if="createMealForm.inputCellphone.$invalid && createMealForm.inputCellphone.$dirty">Your phone number is incorrect.</span>
                 </div>
             </div>
             <div class="clear10"></div>
@@ -160,10 +161,15 @@
                     </div>
                 </div>
             </div>
-            <div class="clear10"></div>
             <div class="row">
-                <div>Do you want to receive updates about the meal on messenger? <span class="small">(highly recommended)</span></div>
-                <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
+                <div ng-hide="$parent.$root.user.privateInfo.user_ref">
+                    <div class="clear10"></div>
+                    <div>Do you want to receive updates about the meal on messenger? <span class="small">(highly recommended)</span></div>
+                    <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
+                </div>
+                <div class="small text-info" ng-show="$parent.$root.user.privateInfo.user_ref">
+                    You already subscribed for receiving updates through messenger.
+                </div>
             </div>
             <div class="clear20"></div>
             <div class="row">

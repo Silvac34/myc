@@ -47,50 +47,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         return variable.toString();
       }
     };
-
-  function check(value) {
-    if (value != undefined) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-  if (check($scope.$parent.$root.user)) {
-    var cellphoneStr = $scope.setValue($scope.$parent.$root.user.privateInfo.cellphone); //on initie le téléphone comme un string
-  }
-
-  $scope.needToUpdateCellphone = function() { // if true --> need to patch, if false --> need to return error, if null subscribe to a meal
-    if (check($scope.$parent.$root.user)) {
-      if (check($scope.$parent.$root.user.privateInfo)) {
-        if (check($scope.$parent.$root.user.privateInfo.cellphone) || $scope.$parent.$root.user.privateInfo.cellphone == '') {
-          if ($scope.$parent.$root.user.privateInfo.cellphone != '') {
-            if (cellphoneStr != '' && cellphoneStr != undefined) { // si quand on se connecte la première fois le téléphone n'est pas vide alors on n'a pas besoin de faire un patch
-              return null;
-            }
-            else {
-              return true; //si cellphoneStr (cellphone quand on se connecte) est vide ou undefined alors $scope.$parent.$root.user.privateInfo.cellphone 
-              //qui correspond à la modif du cellphone par le user doit être patché
-            }
-          }
-          else {
-            return false;
-          }
-        }
-        else {
-          return false;
-        }
-      }
-      else {
-        return false;
-      }
-    }
-    else {
-      return false;
-    }
-  };
-
+  
   $scope.createMeal = function() {
     if ($scope.isAuthenticated() == false) {
       $auth.authenticate('facebook') // connection via facebook
@@ -114,7 +71,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
                     }
                   }).then(function successCallBack(response) {
                     $scope.user._etag = response.data._etag;
-                    var cellphoneStr = "";
                     createMealWithPhone();
                   });
                 }
@@ -127,7 +83,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         });
     }
     else {
-      if ($scope.needToUpdateCellphone() == true) {
+      if ($scope.createMealForm.inputCellphone.$dirty && $scope.createMealForm.inputCellphone.$valid) {
         $http.patch('api/users/private/' + $scope.$parent.$root.user._id, {
           "privateInfo": {
             "cellphone": $scope.$parent.$root.user.privateInfo.cellphone
@@ -141,7 +97,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
           createMealWithPhone();
         });
       }
-      else if ($scope.needToUpdateCellphone() == false) {
+      else if ($scope.createMealForm.inputCellphone.$invalid) {
         console.log("please fill your number");
       }
       else {
@@ -207,7 +163,9 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         }
         if (okToPost == true) {
           $http.post('/api/meals', $scope.editedMeal).then(function(response) {
-              confirmOptIn();
+              if (!$scope.$parent.$root.user.privateInfo.user_ref) {
+                confirmOptIn();
+              }
               $state.go("view_my_dtld_meals", {
                 "myMealId": response.data._id
               });

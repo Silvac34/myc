@@ -86,7 +86,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         if ($scope.successSubscribedMessage == true) {
             $timeout(function() {
                 $scope.successSubscribedMessage = false;
-            }, 3000);
+            }, 4000);
         }
     }
     successfullySubscribed($stateParams.successSubscribedMessage);

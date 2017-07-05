@@ -167,7 +167,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
                 confirmOptIn();
               }
               $state.go("view_my_dtld_meals", {
-                "myMealId": response.data._id
+                "myMealId": response.data._id,
+                "successSubscribedMessage": true
               });
             },
             function(response) {

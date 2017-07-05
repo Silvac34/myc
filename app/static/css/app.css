@@ -3,7 +3,6 @@
 @media (max-width: 767px) {
     .header {
         height: 355px;
-        /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
         filter: brightness(85%) saturate(190%);
@@ -13,7 +12,6 @@
 @media (min-width: 768px) {
     .header {
         height: 560px;
-        /*margin-top: -80px;*/
         background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
         background-size: cover;
         filter: brightness(70%) saturate(190%);
@@ -62,7 +60,6 @@ footer p {
     display: inline-block;
     font-size: 11px;
 }
-
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
@@ -818,6 +815,13 @@ footer p {
     margin: 0px 10px 10px 0px;
     width: 50px;
     height: 50px;
+}
+
+/* viewMyMealsDtld - Edit ---------------------------------------------------*/
+
+#fieldset-form {
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 

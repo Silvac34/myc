@@ -25,7 +25,6 @@ modViewMeals.config(['$stateProvider', function($stateProvider) {
 modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', '$http', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile, $http) {
 
   $scope.meals = response; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
-  console.log(response);
 
   /*$scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {

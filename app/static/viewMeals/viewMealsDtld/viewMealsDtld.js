@@ -165,7 +165,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       if ($scope.meal.automaticSubscription == true) {
         $scope.goToMeal = true;
         $uibModalInstance.close({
-          manualSubscriptionPending: false
+          'manualSubscriptionPending': false
         });
         $state.go("view_my_dtld_meals", {
           "myMealId": meal_id,
@@ -175,9 +175,9 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
       else if ($scope.meal.automaticSubscription == false) {
         $scope.goToMeal = false;
         $uibModalInstance.close({
-          manualSubscriptionPending: true
+          'manualSubscriptionPending': true
         });
-        $state.reload();
+        $state.go($scope.$state.current.name, {}, {reload:true});
       }
     }, function(response) {
       $scope.errorSubscribe.requestRole.status = true;
@@ -249,7 +249,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                     if (data._id == $scope.meal.admin._id || checkStatusAccepted()) { // s'il est l'hôte ou s'il inscrit on go sur le repas
                       $scope.goToMeal = true;
                       $uibModalInstance.close({
-                        manualSubscriptionPending: false,
+                        "manualSubscriptionPending": false
                       });
                       $state.go("view_my_dtld_meals", {
                         "myMealId": meal_id,
@@ -259,7 +259,7 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
                     if (checkStatusPending()) { //s'il est en attente sur le repas
                       $scope.goToMeal = false;
                       $uibModalInstance.close({
-                        manualSubscriptionPending: true
+                        "manualSubscriptionPending": true
                       });
                     }
                     else { // s'il n'est ni l'hôte ni inscrit au repas
@@ -296,8 +296,10 @@ var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round
     $http.post('/api/meals/' + $scope.meal._id + '/unsubscription').then(function(response) {
       //rajouter en fonction de la réponse un popup ?
     });
-    $uibModalInstance.close();
-    $state.reload();
+    $uibModalInstance.close({
+      'manualSubscriptionPending': false
+    });
+    $state.go($scope.$state.current.name, {}, {reload:true});
   }; //function to validate the modal
 
 

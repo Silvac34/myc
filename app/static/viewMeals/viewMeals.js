@@ -25,14 +25,15 @@ modViewMeals.config(['$stateProvider', function($stateProvider) {
 modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', '$http', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile, $http) {
 
   $scope.meals = response; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
+  console.log(response);
 
-  $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
+  /*$scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
         $scope.manualSubscriptionPending = false;
       }, 4000);
     }
-  });
+  });*/
 
   $scope.datasUserForEachMeal = function(meal) { //function qui retourne l'utilisateur s'il s'est inscrit
     if ($scope.$parent.$root.user) {
@@ -84,13 +85,10 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
             }
           });
           modalInstance.result.then(function(result) {
-            var result_value = result;
-            if (result_value == undefined) {
-              result_value = {
-                "manualSubscriptionPending": false,
-              };
-            }
-            $scope.manualSubscriptionPending = result_value.manualSubscriptionPending;
+            $scope.manualSubscriptionPending = result.manualSubscriptionPending;
+            $timeout(function() {
+              $scope.manualSubscriptionPending = false;
+            }, 4000);
           });
         }
       }
@@ -334,35 +332,35 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
   };
 
   $scope.preferenceFilter = function(meal) {
-    var count=0;
+    var count = 0;
     for (var value in $scope.filter.preferenceFilter) {
       if ($scope.filter.preferenceFilter[value] == true) {
         if (meal[value] == true) {
           return meal;
         }
       }
-      else{
+      else {
         count += 1;
       }
     }
-    if(count == Object.keys($scope.filter.preferenceFilter).length){
+    if (count == Object.keys($scope.filter.preferenceFilter).length) {
       return meal;
     }
   };
 
   $scope.helpingTypeFilter = function(meal) {
-        var count=0;
+    var count = 0;
     for (var value in $scope.filter.helpingTypeFilter) {
       if ($scope.filter.helpingTypeFilter[value] == true) {
         if (meal.detailedInfo.requiredGuests[value] && meal.detailedInfo.requiredGuests[value]["nbRemainingPlaces"] > 0) {
           return meal;
         }
       }
-      else{
+      else {
         count += 1;
       }
     }
-    if(count == Object.keys($scope.filter.helpingTypeFilter).length){
+    if (count == Object.keys($scope.filter.helpingTypeFilter).length) {
       return meal;
     }
   };

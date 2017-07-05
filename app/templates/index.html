@@ -81,7 +81,7 @@
       </button>
         <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem" ng-if="isAuthenticated()"><a ui-sref="my_meals">My meals</a></li>
-          <li role="menuitem"><a ui-sref="profile({userId:user._id})">My profile</a></li>
+          <li role="menuitem"><a ui-sref="profile({userId:user._id})">My profile <i ng-if="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages" class="fa fa-exclamation-triangle"></i></a></li>
           <li class="divider" ng-if="isAuthenticated()"></li>
           <li role="menuitem"><a ui-sref="manage_requests">Manage requests&nbsp; <span class="badge" ng-if="user.nbDifferentPendingRequest>0">{{'{{user.nbDifferentPendingRequest}}'}}</span></a></li>
           <li role="menuitem"><a ui-sref="leave_reviews">Leave reviews&nbsp; <span class="badge" ng-if="user.nbDifferentReviewsToLeave>0">{{'{{user.nbDifferentReviewsToLeave}}'}}</span></a></li>
@@ -109,7 +109,7 @@
               <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">Create a meal</a></li>
               <li><a ui-sref="view_meals" ui-sref-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">Browse a meal</a></li>
               <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My meals</a></li>
-              <li><a ui-sref="profile({userId:user._id})" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My profile</a></li>
+              <li><a ui-sref="profile({userId:user._id})" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My profile <i ng-if="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages" class="fa fa-exclamation-triangle"></i></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown" style="cursor:pointer">

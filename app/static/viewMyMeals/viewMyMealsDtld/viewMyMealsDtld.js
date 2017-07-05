@@ -83,10 +83,14 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     //function pour faire apparaître un well de validation lorsqu'un utilisateur vient de s'inscrire
     function successfullySubscribed(variable) {
         $scope.successSubscribedMessage = variable || false;
+        var delayToDisapear = 4000;
+        if(!$scope.$parent.$root.user.birthdate && !$scope.$parent.$root.user.country_of_origin && !$scope.$parent.$root.user.presentation && !$scope.$parent.$root.user.spoken_languages){
+            delayToDisapear = 15000;
+        }
         if ($scope.successSubscribedMessage == true) {
             $timeout(function() {
                 $scope.successSubscribedMessage = false;
-            }, 4000);
+            }, delayToDisapear);
         }
     }
     successfullySubscribed($stateParams.successSubscribedMessage);

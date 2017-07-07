@@ -61,6 +61,7 @@ footer p {
     font-size: 11px;
 }
 
+
 /* footer_concept -----------------------------------------------*/
 
 .footer-concept,
@@ -94,19 +95,19 @@ footer p {
     overflow: auto;
 }
 
-.wrapper{
+.wrapper {
     background-color: #eff8fd;
 }
 
 @media (max-width: 767px) {
     .wrapper {
-        margin-top:-19px;
+        margin-top: -19px;
     }
 }
 
 @media (min-width: 768px) {
     .wrapper {
-        margin-top:-8px;
+        margin-top: -8px;
     }
 }
 
@@ -170,7 +171,8 @@ footer p {
         max-width: 100%;
     }
 }
-#how-inner-body-content{
+
+#how-inner-body-content {
     margin: 0px 15px;
 }
 
@@ -196,6 +198,7 @@ footer p {
     }
 }
 
+
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
 #team-footer {
@@ -214,97 +217,112 @@ footer p {
     background-size: cover;
 }
 
-.well-team{
+.well-team {
     border: initial;
     margin-bottom: 0px;
-    width:100%;
+    width: 100%;
+}
+
+#bg-info-team {
+    background-color: #0b4060;
+}
+
+#bg-info-history {
+    margin-bottom: -20px;
 }
 
 .thumbnail .caption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  display: block;
-  background: #ffffff;
-  width: 300px;
-  height: 136px;
-  padding: 27px 35px 16px 2px;
-  z-index: 3;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    background: #ffffff;
+    width: 300px;
+    height: 136px;
+    padding: 27px 35px 16px 2px;
+    z-index: 3;
 }
 
 @media (max-width: 991px) {
-  .thumbnail .caption {
-    padding: 2px 24px 16px 2px;
-    width: 252px;
-    height: 87px;
-  }
+    .thumbnail .caption {
+        padding: 2px 24px 16px 2px;
+        width: 252px;
+        height: 87px;
+    }
 }
+
 .thumbnail-1 {
-  max-width: 465px;
-  margin-left: auto;
-  margin-right: auto;
+    max-width: 465px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .thumbnail-1 .caption {
-  background: #ffffff;
-  padding: 45px 5px 41px;
+    background: #ffffff;
+    padding: 45px 5px 41px;
 }
+
 .thumbnail-1 .caption1 {
-  padding: 1px 27px 41px;
-  margin-top: -1px;
+    padding: 1px 27px 41px;
+    margin-top: -1px;
 }
 
 @media (max-width: 767px) {
-.caption1{
- height: 400px;   
-}
+    .caption1 {
+        height: 400px;
+    }
 }
 
 @media (min-width: 768px) {
-.caption1{
- height: 270px;   
-}
+    .caption1 {
+        height: 270px;
+    }
 }
 
 .bg-info .img-bl {
-  overflow: hidden;
-  position: relative;
+    overflow: hidden;
+    position: relative;
 }
+
 .bg-info .img-bl:before {
-  content: '';
-  position: absolute;
-  height: 50px;
-  width: 50px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  border: 700px solid #55284e;
-  bottom: 25px;
-  left: 50%;
-  -moz-transform: translate(-50%, 50%);
-  -ms-transform: translate(-50%, 50%);
-  -o-transform: translate(-50%, 50%);
-  -webkit-transform: translate(-50%, 50%);
-  transform: translate(-50%, 50%);
-  clip: rect(734px, auto, auto, 0px);
-  box-sizing: content-box;
+    content: '';
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 700px solid #55284e;
+    bottom: 25px;
+    left: 50%;
+    -moz-transform: translate(-50%, 50%);
+    -ms-transform: translate(-50%, 50%);
+    -o-transform: translate(-50%, 50%);
+    -webkit-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+    clip: rect(734px, auto, auto, 0px);
+    box-sizing: content-box;
 }
+
 .bg-info .img-bl img {
-  width: 100%;
-}
-.bg-info .img-bl-bg1:before {
-  border-color: #ffffff;
+    width: 100%;
 }
 
 .bg-info .img-bl-bg1:before {
-  border-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.bg-info .img-bl-bg1:before {
+    border-color: #ffffff;
 }
 
 caption {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: #b2ad9d;
-  text-align: left;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #b2ad9d;
+    text-align: left;
 }
+
 
 /* footer_careers -----------------------*/
 
@@ -1694,13 +1712,14 @@ a.mod-underline:hover {
     font-weight: lighter;
 }
 
-.font-weight-normal{
-    font-weight:normal;
+.font-weight-normal {
+    font-weight: normal;
 }
 
 .bold {
     font-weight: bold;
 }
+
 
 /* function pull xs et sm-md-lg*/
 

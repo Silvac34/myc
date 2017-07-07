@@ -121,7 +121,7 @@ footer p {
 
 @media only screen and (max-width: 1024px) {
     /*Main Width Params*/
-    footer-concept,
+    .footer-concept,
     #inner-body {
         width: 100%;
     }
@@ -134,19 +134,19 @@ footer p {
         flex: 1;
     }
     /*footer-concept*/
-    .wrapper footer-concept {
+    .wrapper .footer-concept {
         height: auto !important;
         /*Ibndividual Herro Images*/
     }
-    .wrapper footer-concept#how-it-works-footer-concept {
+    .wrapper .footer-concept#how-it-works-footer-concept {
         height: 250px !important;
         background-size: cover;
         background-position: center center;
     }
-    .wrapper footer-concept#how-it-works-footer-concept img {
+    .wrapper .footer-concept#how-it-works-footer-concept img {
         display: none;
     }
-    .wrapper footer-concept#how-it-works-footer-concept h1 {
+    .wrapper .footer-concept#how-it-works-footer-concept h1 {
         line-height: 60px;
         margin-top: 45px;
     }
@@ -154,7 +154,7 @@ footer p {
         background: #fff;
     }
     /*Images*/
-    .wrapper footer-concept img {
+    .wrapper .footer-concept img {
         width: 100%;
         height: auto;
         display: block;
@@ -186,7 +186,7 @@ footer p {
 }
 
 @media only screen and (max-width: 510px) {
-    footer-concept h1 {
+    .footer-concept h1 {
         font-size: 42px;
     }
     .hiw-image.left img,
@@ -198,11 +198,113 @@ footer p {
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
-.padding-left-15-right-15 {
-    padding-left: 15px;
-    padding-right: 15px;
+#team-footer {
+    min-height: 296px;
+    background: url("/static/sources/footer_information_team/team_team.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
+#history-footer {
+    min-height: 296px;
+    background: url("/static/sources/footer_information_team/team_history.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.well-team{
+    border: initial;
+    margin-bottom: 0px;
+    width:100%;
+}
+
+.thumbnail .caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  background: #ffffff;
+  width: 300px;
+  height: 136px;
+  padding: 27px 35px 16px 2px;
+  z-index: 3;
+}
+
+@media (max-width: 991px) {
+  .thumbnail .caption {
+    padding: 2px 24px 16px 2px;
+    width: 252px;
+    height: 87px;
+  }
+}
+.thumbnail-1 {
+  max-width: 465px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.thumbnail-1 .caption {
+  background: #ffffff;
+  padding: 45px 5px 41px;
+}
+.thumbnail-1 .caption1 {
+  padding: 1px 27px 41px;
+  margin-top: -1px;
+}
+
+@media (max-width: 767px) {
+.caption1{
+ height: 400px;   
+}
+}
+
+@media (min-width: 768px) {
+.caption1{
+ height: 270px;   
+}
+}
+
+.bg-info .img-bl {
+  overflow: hidden;
+  position: relative;
+}
+.bg-info .img-bl:before {
+  content: '';
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 700px solid #55284e;
+  bottom: 25px;
+  left: 50%;
+  -moz-transform: translate(-50%, 50%);
+  -ms-transform: translate(-50%, 50%);
+  -o-transform: translate(-50%, 50%);
+  -webkit-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+  clip: rect(734px, auto, auto, 0px);
+  box-sizing: content-box;
+}
+.bg-info .img-bl img {
+  width: 100%;
+}
+.bg-info .img-bl-bg1:before {
+  border-color: #ffffff;
+}
+
+.bg-info .img-bl-bg1:before {
+  border-color: #ffffff;
+}
+
+caption {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #b2ad9d;
+  text-align: left;
+}
 
 /* footer_careers -----------------------*/
 

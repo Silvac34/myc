@@ -61,6 +61,141 @@ footer p {
     font-size: 11px;
 }
 
+/* footer_concept -----------------------------------------------*/
+
+.footer-concept,
+#inner-body {
+    background: #ffffff;
+    width: 1000px;
+    border: 1px solid #c1bfb7;
+    margin: 0px auto -20px auto;
+    padding-bottom: 20px;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.footer-concept {
+    overflow: hidden;
+    height: 300px;
+}
+
+#inner-body {
+    background-image: url("/about/images/left-nav-bg.png");
+    background-repeat: repeat-y;
+    background-position: -1px 0;
+}
+
+#inner-body-content {
+    width: 80%;
+    padding-top: 25px;
+    float: right;
+    height: auto;
+    overflow: auto;
+}
+
+.wrapper{
+    background-color: #eff8fd;
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        margin-top:-19px;
+    }
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        margin-top:-8px;
+    }
+}
+
+#how-it-works-footer-concept {
+    background: url("/static/sources/footer_information_concept/concept_general.jpg");
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+
+/* iPads (landscape) ----------- */
+
+@media only screen and (max-width: 1024px) {
+    /*Main Width Params*/
+    footer-concept,
+    #inner-body {
+        width: 100%;
+    }
+    /*Flex Columns*/
+    #inner-body {
+        display: -webkit-flex;
+        display: flex;
+    }
+    #inner-body-content {
+        flex: 1;
+    }
+    /*footer-concept*/
+    .wrapper footer-concept {
+        height: auto !important;
+        /*Ibndividual Herro Images*/
+    }
+    .wrapper footer-concept#how-it-works-footer-concept {
+        height: 250px !important;
+        background-size: cover;
+        background-position: center center;
+    }
+    .wrapper footer-concept#how-it-works-footer-concept img {
+        display: none;
+    }
+    .wrapper footer-concept#how-it-works-footer-concept h1 {
+        line-height: 60px;
+        margin-top: 45px;
+    }
+    #inner-body {
+        background: #fff;
+    }
+    /*Images*/
+    .wrapper footer-concept img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .hiw-image.left,
+    .hiw-image.right {
+        float: none;
+        text-align: center;
+    }
+    .hiw-image.left img,
+    .hiw-image.right img {
+        width: 380px;
+        max-width: 100%;
+    }
+}
+#how-inner-body-content{
+    margin: 0px 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    /*Text Reset For Smaller Devices*/
+    p {
+        font-size: 18px !important;
+    }
+    #inner-body-content,
+    #how-inner-body-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    footer-concept h1 {
+        font-size: 42px;
+    }
+    .hiw-image.left img,
+    .hiw-image.right img {
+        width: auto;
+        max-width: 100%;
+    }
+}
+
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
 .padding-left-15-right-15 {
@@ -817,6 +952,7 @@ footer p {
     height: 50px;
 }
 
+
 /* viewMyMealsDtld - Edit ---------------------------------------------------*/
 
 #fieldset-form {
@@ -1452,6 +1588,17 @@ a.mod-underline:hover {
     transition: all linear 0.5s;
 }
 
+.lighter {
+    font-weight: lighter;
+}
+
+.font-weight-normal{
+    font-weight:normal;
+}
+
+.bold {
+    font-weight: bold;
+}
 
 /* function pull xs et sm-md-lg*/
 

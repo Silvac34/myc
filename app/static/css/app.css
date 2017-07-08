@@ -215,10 +215,12 @@ footer p {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    border: inherit;
 }
 
 .well-team {
     border: initial;
+    border-radius: 0px;
     margin-bottom: 0px;
     width: 100%;
 }
@@ -269,13 +271,13 @@ footer p {
 
 @media (max-width: 767px) {
     .caption1 {
-        height: 400px;
+        height: 370px;
     }
 }
 
 @media (min-width: 768px) {
     .caption1 {
-        height: 270px;
+        height: 230px;
     }
 }
 

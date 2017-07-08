@@ -123,6 +123,13 @@ footer p {
     text-align: center;
 }
 
+#concept-price {
+    background: url("/static/sources/footer_information_concept/concept_price.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 296px;
+}
+
 
 /* iPads (landscape) ----------- */
 
@@ -158,6 +165,11 @@ footer p {
         background-size: cover;
         background-position: center center;
     }
+    .wrapper .footer-concept#concept-price {
+        height: 296px;
+        background-size: cover;
+        background-position: center center;
+    }
     .wrapper .footer-concept#how-it-works-footer-concept img {
         display: none;
     }
@@ -189,7 +201,7 @@ footer p {
 
 @media only screen and (max-width: 767px) {
     /*Text Reset For Smaller Devices*/
-    p {
+    p, li, em {
         font-size: 18px !important;
     }
     #inner-body-content,
@@ -252,7 +264,6 @@ footer p {
 #bg-concept-roles-title {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 

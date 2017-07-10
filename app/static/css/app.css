@@ -246,12 +246,13 @@ footer p {
         height: 499px;
         background-color: rgba(255, 255, 255, 0.7);
     }
+    #bg-concept-roles-3 {
+        height: 200px;
+    }
     #bg-concept-roles-2 {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         height: 440px;
     }
     #bg-concept-roles-1 {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         height: 360px;
     }
     .wrapper .footer-concept#how-it-works-footer-concept p {
@@ -282,6 +283,10 @@ footer p {
 #bg-concept-roles-2,
 #bg-concept-roles-title {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#bg-concept-roles-3{
+    box-shadow: 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
 

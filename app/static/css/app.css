@@ -227,7 +227,7 @@ footer p {
 @media (max-width: 767px) {
     #bg-info-concept {
         bottom: 0px;
-        height: 234px;
+        height: 239px;
         background-color: rgba(255, 255, 255, 0.7);
     }
     .wrapper .footer-concept#how-it-works-footer-concept p {
@@ -268,13 +268,13 @@ footer p {
 
 @media (min-width: 429px) and (max-width: 767px) {
     #bg-info-concept-title {
-        height: 145px;
+        height: 140px;
     }
 }
 
 @media (max-width: 428px) {
     #bg-info-concept-title {
-        height: 100px;
+        height: 95px;
     }
 }
 

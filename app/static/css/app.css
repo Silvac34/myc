@@ -39,9 +39,21 @@ footer a:hover {
     color: #fff;
 }
 
+@media (max-width: 767px) {
+  footer a{
+      font-size:20px;
+  }  
+}
+
 footer .h3,
 footer p {
     color: #fff;
+}
+
+@media (max-width: 767px) {
+  footer p{
+      font-size:22px;
+  }  
 }
 
 .fa-2x {

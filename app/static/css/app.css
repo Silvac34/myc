@@ -135,7 +135,7 @@ footer p {
 
 @media only screen and (max-width: 767px) {
     .wrapper .footer-concept#how-it-works-footer-concept {
-        height: 250px !important;
+        height: 385px !important;
         background-size: cover;
         background-position: center center;
     }
@@ -201,7 +201,9 @@ footer p {
 
 @media only screen and (max-width: 767px) {
     /*Text Reset For Smaller Devices*/
-    p, li, em {
+    p,
+    li,
+    em {
         font-size: 18px !important;
     }
     #inner-body-content,
@@ -224,31 +226,21 @@ footer p {
 
 @media (max-width: 767px) {
     #bg-info-concept {
-        height: 229px;
+        bottom: 0px;
+        height: 235px;
         background-color: rgba(255, 255, 255, 0.7);
+    }
+    .wrapper .footer-concept#how-it-works-footer-concept p {
+        color: #003f5e;
+        font-size: 15px !important;
     }
 }
 
 @media (min-width: 768px) {
     #bg-info-concept {
-        height: 479px;
+        height: 499px;
         background-color: rgba(255, 255, 255, 0.7);
     }
-}
-
-#bg-info-concept-title {
-    font-size: 22px;
-    margin-top: 35px;
-    font-weight: normal;
-    color: #003f5e;
-}
-
-.wrapper .footer-concept#how-it-works-footer-concept p {
-    color: #003f5e;
-    font-size: 16px;
-}
-
-@media (min-width: 768px) {
     #bg-concept-roles-2 {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         height: 440px;
@@ -257,6 +249,29 @@ footer p {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         height: 360px;
     }
+    .wrapper .footer-concept#how-it-works-footer-concept p {
+        color: #003f5e;
+        font-size: 19px !important;
+    }
+}
+
+#bg-info-concept-title {
+    font-size: 26px;
+    margin-top: 35px;
+    font-weight: lighter;
+    color: white;
+}
+
+@media (min-width: 429px) and (max-width: 767px) {
+    #bg-info-concept-title {
+        height: 140px;
+    }
+}
+
+@media (max-width: 428px) {
+    #bg-info-concept-title {
+        height: 95px;
+    }
 }
 
 #bg-concept-roles-1,
@@ -264,6 +279,7 @@ footer p {
 #bg-concept-roles-title {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
@@ -1707,6 +1723,11 @@ a.mod-underline:hover {
 .clear40 {
     clear: both;
     height: 40px;
+}
+
+.clear100 {
+    clear: both;
+    height: 100px;
 }
 
 .clear120 {

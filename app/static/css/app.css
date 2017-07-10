@@ -236,7 +236,7 @@ footer p {
     }
     #bg-info-concept-title {
         font-size: 26px;
-        margin-top: 35px;
+        margin-top: 30px;
         color: white;
     }
 }
@@ -268,13 +268,13 @@ footer p {
 
 @media (min-width: 429px) and (max-width: 767px) {
     #bg-info-concept-title {
-        height: 140px;
+        height: 145px;
     }
 }
 
 @media (max-width: 428px) {
     #bg-info-concept-title {
-        height: 95px;
+        height: 100px;
     }
 }
 

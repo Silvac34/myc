@@ -247,8 +247,8 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.animationsEnabled = true;
 
   $scope.autocomplete;
-
-  $scope.currency_symbol = "$";
+  
+  $scope.editedMeal.currency_symbol = "$";
   $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
     $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
       $scope.$watch('details', function getCurrency() {
@@ -259,7 +259,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
             }
           }
           var currency = result_currency.data[country_code];
-          $scope.currency_symbol = result_currency_symbol.data[currency].symbol_native;
+          $scope.editedMeal.currency_symbol = result_currency_symbol.data[currency].symbol_native;
         }
       });
     });

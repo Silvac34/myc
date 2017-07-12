@@ -86,6 +86,11 @@ schemaMeals = {
         'required': True,
         'empty': False
     },
+    'currency_symbol':{
+        'type': 'string',
+        'required': True,
+        'empty': False
+    },
     'nbGuests': {
         'type': 'number',
         'min': 1,

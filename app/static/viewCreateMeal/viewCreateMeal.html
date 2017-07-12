@@ -97,7 +97,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <div class="input-group" ng-class="{'has-error': createMealForm.inputPrice.$invalid && (createMealForm.inputPrice.$touched || createMealForm.$submitted)}">
-                            <span class="input-group-addon meal-addon-groceries">{{currency_symbol}}</span>
+                            <span class="input-group-addon meal-addon-groceries">{{editedMeal.currency_symbol}}</span>
                             <input type="number" name="inputPrice" class="form-control" style="width:180px" ng-model="editedMeal.price" placeholder="Price of the groceries" min="0" required/>
                         </div>
                     </div>

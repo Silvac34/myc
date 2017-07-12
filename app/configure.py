@@ -27,7 +27,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    MONGO_URI= 'mongodb://dkohn:SharEat3santiago@ds131340.mlab.com:31340/mycommuneatydb_prod'#'mongodb://dkohn:SharEat3santiago@ds131320.mlab.com:31320/mycommuneatydb_dev'
+    MONGO_URI= 'mongodb://dkohn:SharEat3santiago@ds131320.mlab.com:31320/mycommuneatydb_dev'
     TOKEN_SECRET= 'kmaillet230191dkohn1003dflklqksdoklc'
     FACEBOOK_SECRET= 'a05904a7ccd49a328f24d60e4d07628a'
     TOKEN_POST_MESSENGER='EAAWHDX9daxYBAP2NU6nCaGZBwBZAYYSr8pR9vzGWmumWsq7lmWySNVE1gvRZCXSWKizxOvmQCfYasklZCM8v5KAb4oFtdGUe9CF26xzbr0ywmHN42fUZBuwGn47jY4WkYMGbFPHcr2K68ZAbonVzFlsJLBiZA9VlusTLtJhhTaNcAZDZD'

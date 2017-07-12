@@ -65,7 +65,7 @@ schemaMeals = {
                 'required': True,
                 'empty': False
             },
-            'country_code':{
+            'country':{
                 'type':'string',
                 'required': True,
                 'empty': False

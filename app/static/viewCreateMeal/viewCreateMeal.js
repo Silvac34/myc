@@ -47,7 +47,7 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         return variable.toString();
       }
     };
-  
+
   $scope.createMeal = function() {
     if ($scope.isAuthenticated() == false) {
       $auth.authenticate('facebook') // connection via facebook
@@ -198,9 +198,6 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
         if ($scope.details.address_components[i].types[0] == "postal_code") {
           $scope.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
         }
-        if ($scope.details.address_components[i].types[0] == "country") {
-          $scope.editedMeal.address.country_code = $scope.details.address_components[i].short_name;
-        }
       }
     }
   }
@@ -247,23 +244,34 @@ angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAut
   $scope.animationsEnabled = true;
 
   $scope.autocomplete;
-  
+
   $scope.editedMeal.currency_symbol = "$";
   $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
     $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
-      $scope.$watch('details', function getCurrency() {
-        if ($scope.details != undefined) {
-          for (var i = 0; i < $scope.details.address_components.length; i++) {
-            if ($scope.details.address_components[i].types[0] == "country") {
-              var country_code = $scope.details.address_components[i].short_name;
+      $http.get("/static/sources/profile/countries.json").then(function(res) {
+        $scope.$watch('details', function getCurrency() {
+          if ($scope.details != undefined) {
+            for (var i = 0; i < $scope.details.address_components.length; i++) {
+              if ($scope.details.address_components[i].types[0] == "country") {
+                var country_code = $scope.details.address_components[i].short_name;
+              }
             }
+            var currency = result_currency.data[country_code];
+            $scope.editedMeal.currency_symbol = result_currency_symbol.data[currency].symbol_native;
+            $scope.editedMeal.address.country = getCountry(country_code, res.data);
           }
-          var currency = result_currency.data[country_code];
-          $scope.editedMeal.currency_symbol = result_currency_symbol.data[currency].symbol_native;
-        }
+        });
       });
     });
   });
+
+  function getCountry(country_code, jsonData) {
+    for (var i = 0; i < jsonData.length; i++) {
+      if (jsonData[i].code == country_code) {
+        return jsonData[i].name;
+      }
+    }
+  }
 
 }]);
 

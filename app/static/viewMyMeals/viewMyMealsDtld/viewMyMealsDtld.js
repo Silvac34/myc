@@ -84,7 +84,7 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     function successfullySubscribed(variable) {
         $scope.successSubscribedMessage = variable || false;
         var delayToDisapear = 4000;
-        if(!$scope.$parent.$root.user.birthdate && !$scope.$parent.$root.user.country_of_origin && !$scope.$parent.$root.user.presentation && !$scope.$parent.$root.user.spoken_languages){
+        if (!$scope.$parent.$root.user.birthdate && !$scope.$parent.$root.user.country_of_origin && !$scope.$parent.$root.user.presentation && !$scope.$parent.$root.user.spoken_languages) {
             delayToDisapear = 15000;
         }
         if ($scope.successSubscribedMessage == true) {
@@ -136,47 +136,38 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         });
     };
 
-    $http.get("/static/sources/profile/countries.json").then(function(res) {
-                $http.get("/api/meals/" + $scope.meal._id + "/calculateMealPrice").then(function(responsePrice) {
-                    $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
-                    $scope.meal.pricePaybackIfFull = $scope.meal.price - $scope.meal.detailedInfo.requiredGuests.hosts.price;
-                    $scope.meal.currentPricePayback = 0;
-                    if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
-                        if (responsePrice.data.cookPrice == "") {
-                            $scope.meal.detailedInfo.requiredGuests.cooks.price = undefined;
-                        }
-                        else {
-                            $scope.meal.currentPricePayback += responsePrice.data.cookPrice * ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces);
-                        }
-                    }
-                    if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
-                        if (responsePrice.data.cleanerPrice == "") {
-                            $scope.meal.detailedInfo.requiredGuests.cleaners.price = undefined;
-                        }
-                        else {
-                            $scope.meal.currentPricePayback += responsePrice.data.cleanerPrice * ($scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces);
-                        }
-                    }
-                    if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
-                        if (responsePrice.data.simpleGuestPrice == "") {
-                            $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = undefined;
-                        }
-                        else {
-                            $scope.meal.currentPricePayback += responsePrice.data.simpleGuestPrice * ($scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces);
-                        }
-                    }
-                    $scope.meal.currentPricePayback = Math.ceil($scope.meal.currentPricePayback*100000)/100000; //problème avec 11.2+5.6 = 16,79999999
-
-        });
-    });
-
-    function getCountry(country_code, jsonData) {
-        for (var i = 0; i < jsonData.length; i++) {
-            if (jsonData[i].code == country_code) {
-                return jsonData[i].name;
+    $http.get("/api/meals/" + $scope.meal._id + "/calculateMealPrice").then(function(responsePrice) {
+        $scope.meal.pricePaybackIfFull = $scope.meal.price - $scope.meal.detailedInfo.requiredGuests.hosts.price;
+        $scope.meal.currentPricePayback = 0;
+        if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
+            if (responsePrice.data.cookPrice == "") {
+                $scope.meal.detailedInfo.requiredGuests.cooks.price = undefined;
+            }
+            else {
+                $scope.meal.currentPricePayback += responsePrice.data.cookPrice * ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces);
             }
         }
-    }
+        if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
+            if (responsePrice.data.cleanerPrice == "") {
+                $scope.meal.detailedInfo.requiredGuests.cleaners.price = undefined;
+            }
+            else {
+                $scope.meal.currentPricePayback += responsePrice.data.cleanerPrice * ($scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces);
+            }
+        }
+        if ("simpleGuests" in $scope.meal.detailedInfo.requiredGuests) {
+            if (responsePrice.data.simpleGuestPrice == "") {
+                $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = undefined;
+            }
+            else {
+                $scope.meal.currentPricePayback += responsePrice.data.simpleGuestPrice * ($scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces);
+            }
+        }
+        $scope.meal.currentPricePayback = Math.ceil($scope.meal.currentPricePayback * 100000) / 100000; //problème avec 11.2+5.6 = 16,79999999
+
+    });
+
+
     var vm = this;
     NgMap.getMap("map").then(function(map) {
         vm.map = map;
@@ -340,6 +331,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.editedMeal = editedMeal;
     $scope.addressComplement = $scope.editedMeal.privateInfo.address.complement;
     $scope.editedMeal.time = new Date($scope.editedMeal.time);
+
     if (editedMeal.detailedInfo.requiredGuests.cooks) {
         if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {
             $scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking = new Date($scope.editedMeal.detailedInfo.requiredGuests.cooks.timeCooking);
@@ -362,35 +354,46 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
         startingDay: 1
     };
 
+    function getCountry(country_code, jsonData) {
+        for (var i = 0; i < jsonData.length; i++) {
+            if (jsonData[i].code == country_code) {
+                return jsonData[i].name;
+            }
+        }
+    }
+
+    $http.get("/static/sources/profile/countries.json").then(function(res) {
+        $scope.countries = res.data;
+    });
+
     function addAddressFromAutocomplete(dataToPerform) {
         var precision_needed_for_rounding_lat_lng = 100;
         if ($scope.details != undefined) {
-            if (!dataToPerform.address) {
-                dataToPerform["address"] = {};
-            }
+            dataToPerform = {"editedMeal" :{"address" : {}}};
             if ("vicinity" in $scope.details) {
-                dataToPerform.address.town = $scope.details.vicinity;
+                dataToPerform.editedMeal.address.town = $scope.details.vicinity;
             }
             else {
-                dataToPerform.address.town = $scope.autocompleteAddress.split(",")[0];
+                dataToPerform.editedMeal.address.town = $scope.autocompleteAddress.split(",")[0];
             }
-            if (!dataToPerform.privateInfo) {
-                dataToPerform["privateInfo"] = {};
+            if (!dataToPerform.editedMeal.privateInfo) {
+                dataToPerform.editedMeal["privateInfo"] = {};
             }
-            if (!dataToPerform.privateInfo.address) {
-                dataToPerform.privateInfo["address"] = {};
+            if (!dataToPerform.editedMeal.privateInfo.address) {
+                dataToPerform.editedMeal.privateInfo["address"] = {};
             }
-            dataToPerform.privateInfo.address.name = $scope.details.name;
-            dataToPerform.privateInfo.address.lat = $scope.details.geometry.location.lat();
-            dataToPerform.privateInfo.address.lng = $scope.details.geometry.location.lng();
-            dataToPerform.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
-            dataToPerform.address.lng = Math.round($scope.details.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+
+            dataToPerform.editedMeal.privateInfo.address.name = $scope.details.name;
+            dataToPerform.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
+            dataToPerform.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();
+            dataToPerform.editedMeal.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+            dataToPerform.editedMeal.address.lng = Math.round($scope.details.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
             for (var i = 0; i < $scope.details.address_components.length; i++) {
                 if ($scope.details.address_components[i].types[0] == "postal_code") {
-                    dataToPerform.address.postalCode = $scope.details.address_components[i].long_name;
+                    dataToPerform.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
                 }
                 if ($scope.details.address_components[i].types[0] == "country") {
-                    dataToPerform.address.country_code = $scope.details.address_components[i].short_name;
+                    dataToPerform.editedMeal.address.country = getCountry($scope.details.address_components[i].short_name, $scope.countries);
                 }
             }
         }

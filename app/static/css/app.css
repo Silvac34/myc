@@ -100,8 +100,6 @@ footer p {
 }
 
 #inner-body {
-    background-image: url("/about/images/left-nav-bg.png");
-    background-repeat: repeat-y;
     background-position: -1px 0;
 }
 
@@ -301,6 +299,10 @@ footer p {
     box-shadow: 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
+#footer-concept-img{
+    height:100px;
+    width:100px;
+}
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 

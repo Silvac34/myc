@@ -128,7 +128,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
   $stateProvider
     .state('footer_information_concept', {
       url: '/information/concept',
-      templateUrl: 'static/footer/information/concept/concept.html',
+      templateUrl: 'static/footer/information/concept/concept.html'
     });
   $stateProvider
     .state('footer_information_FAQ', {

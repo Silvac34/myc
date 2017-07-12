@@ -270,7 +270,37 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       else {
         $state.reload();
       }
-      $timeout(function() {
+      initializeUserLabels();
+    });
+  };
+
+  $rootScope.logout = function() {
+      $auth.logout().then(function() {
+        $http.get('/auth/logout').then(function(response) {
+          console.log(response.data);
+          delete $rootScope.user;
+          $state.go("welcome");
+        });
+      });
+    },
+
+    $rootScope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    },
+
+    $rootScope.navbarCollapsed = true;
+
+  var authVerification = function() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
+    if ($auth.isAuthenticated()) {
+      userServicesFactory().then(function(data) {
+        $rootScope.user = data;
+        initializeUserLabels();
+      });
+    }
+  };
+  
+    var initializeUserLabels = function (){
+    $timeout(function() {
         //on récupère les pending requests et on le mets dans le rootscope
         $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
           $rootScope.user.nbDifferentPendingRequest = 0;
@@ -302,32 +332,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
           });
         });
       }, 0);
-    });
-  };
-
-  $rootScope.logout = function() {
-      $auth.logout().then(function() {
-        $http.get('/auth/logout').then(function(response) {
-          console.log(response.data);
-          delete $rootScope.user;
-          $state.go("welcome");
-        });
-      });
-    },
-
-    $rootScope.isAuthenticated = function() {
-      return $auth.isAuthenticated();
-    },
-
-    $rootScope.navbarCollapsed = true;
-
-  var authVerification = function() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
-    if ($auth.isAuthenticated()) {
-      userServicesFactory().then(function(data) {
-        $rootScope.user = data;
-      });
-    }
-  };
+  }
 
   authVerification();
 

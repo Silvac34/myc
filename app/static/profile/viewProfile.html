@@ -230,7 +230,7 @@
                         <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
                         <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
                         </span>
-                        <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}">Public profile</a></br><span class="hidden-sm hidden-md hidden-lg"></br></span>
+                        <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank">Public profile</a></br><span class="hidden-sm hidden-md hidden-lg"></br></span>
                         <em>Member since {{user._created | date:'MM/yyyy'}}</em>
                     </div>
                 </div>
@@ -240,7 +240,7 @@
                     <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
                     <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
                     </span>
-                    <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}">Public profile</a></br>
+                    <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank">Public profile</a></br>
                     </span>
                     <em>Member since {{user._created | date:'MM/yyyy'}}</em>
                 </div>

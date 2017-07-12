@@ -211,8 +211,7 @@ footer p {
 
 @media only screen and (max-width: 767px) {
     /*Text Reset For Smaller Devices*/
-    p,
-    li{
+    p{
         font-size: 18px !important;
     }
     #inner-body-content,

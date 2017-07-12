@@ -369,49 +369,53 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     function addAddressFromAutocomplete(dataToPerform) {
         var precision_needed_for_rounding_lat_lng = 100;
         if ($scope.details != undefined) {
-            dataToPerform = {"editedMeal" :{"address" : {}}};
+            var dataToAdd = {"address": {}};
             if ("vicinity" in $scope.details) {
-                dataToPerform.editedMeal.address.town = $scope.details.vicinity;
+                dataToAdd.address.town = $scope.details.vicinity;
             }
             else {
-                dataToPerform.editedMeal.address.town = $scope.autocompleteAddress.split(",")[0];
+                dataToAdd.address.town = $scope.autocompleteAddress.split(",")[0];
             }
-            if (!dataToPerform.editedMeal.privateInfo) {
-                dataToPerform.editedMeal["privateInfo"] = {};
+            if (!dataToAdd.privateInfo) {
+                dataToAdd["privateInfo"] = {};
             }
-            if (!dataToPerform.editedMeal.privateInfo.address) {
-                dataToPerform.editedMeal.privateInfo["address"] = {};
+            if (!dataToAdd.privateInfo.address) {
+                dataToAdd.privateInfo["address"] = {};
             }
 
-            dataToPerform.editedMeal.privateInfo.address.name = $scope.details.name;
-            dataToPerform.editedMeal.privateInfo.address.lat = $scope.details.geometry.location.lat();
-            dataToPerform.editedMeal.privateInfo.address.lng = $scope.details.geometry.location.lng();
-            dataToPerform.editedMeal.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
-            dataToPerform.editedMeal.address.lng = Math.round($scope.details.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+            dataToAdd.privateInfo.address.name = $scope.details.name;
+            dataToAdd.privateInfo.address.lat = $scope.details.geometry.location.lat();
+            dataToAdd.privateInfo.address.lng = $scope.details.geometry.location.lng();
+            dataToAdd.address.lat = Math.round($scope.details.geometry.location.lat() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
+            dataToAdd.address.lng = Math.round($scope.details.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
             for (var i = 0; i < $scope.details.address_components.length; i++) {
                 if ($scope.details.address_components[i].types[0] == "postal_code") {
-                    dataToPerform.editedMeal.address.postalCode = $scope.details.address_components[i].long_name;
+                    dataToAdd.address.postalCode = $scope.details.address_components[i].long_name;
                 }
                 if ($scope.details.address_components[i].types[0] == "country") {
-                    dataToPerform.editedMeal.address.country = getCountry($scope.details.address_components[i].short_name, $scope.countries);
+                    dataToAdd.address.country = getCountry($scope.details.address_components[i].short_name, $scope.countries);
                 }
             }
         }
+        $parse("editedMeal.address").assign(dataToPerform, dataToAdd.address);
+        $parse("editedMeal.privateInfo").assign(dataToPerform, dataToAdd.privateInfo);
+        return dataToPerform;
     }
 
-    function getDataToPerform(dataToPerform) {
+    function getDataToPerform() {
+        var dataToPerform = {};
         $scope.editedMeal;
         $scope.editMealForm.$$controls.forEach(function(element) { //on effectue une boucle sur chacun des élements contenu dans le formulaire
             if (element.$viewValue != element.$$lastCommittedViewValue) { // on vérifie si l'élément à été modifié, dans ce cas, on le rajoute dans dataToPerform
                 var parseFunction = $parse(element.$$attr.ngModel);
                 if (element.$$attr.ngModel == "autocompleteAddress") {
-                    addAddressFromAutocomplete(dataToPerform);
+                    dataToPerform = addAddressFromAutocomplete(dataToPerform);
                 }
                 else if (element.$$attr.ngModel == "editedMeal.time") {
                     var newDate = new Date(element.$modelValue);
                     if (element.$name == "formDate") {
                         var oldDate = new Date(element.$viewValue);
-                        newDate.setDate(oldDate.getDay());
+                        newDate.setDate(oldDate.getDate());
                         newDate.setMonth(oldDate.getMonth());
                         newDate.setFullYear(oldDate.getFullYear());
                     }
@@ -502,8 +506,7 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     }
 
     $scope.edit = function() {
-        var dataToPerform = {};
-        getDataToPerform(dataToPerform);
+        var dataToPerform = getDataToPerform();
         var nbRquCooks = Number(document.getElementById("inputCooks").value) || 0;
         var nbRquCleaners = Number(document.getElementById("inputCleaners").value) || 0;
         var nbRquSimpleGuests = Number(document.getElementById("inputSimpleGuests").value) || 0;

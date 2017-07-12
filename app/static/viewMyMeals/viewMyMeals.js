@@ -2,7 +2,7 @@
 
 angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMyMealsDtld', 'ngSanitize'])
 
-.controller('ViewMyMealsCtrl', ['$scope', 'response', '$uibModal', '$http', function($scope, response, $uibModal, $http) {
+.controller('ViewMyMealsCtrl', ['$scope', 'response', '$uibModal', function($scope, response, $uibModal) {
 
   $scope.meals = response.data['_items'];
   var userId = $scope.user._id;

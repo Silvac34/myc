@@ -49,7 +49,7 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
     var origUser = {
       "privateInfo": {
         "keep": false,
-        "preferences":{}
+        "preferences": {}
       }
     };
     if (cellphone != setValueScope($scope.user.privateInfo.cellphone)) {
@@ -98,14 +98,14 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
           setDietaryPreferencesToTrue(); //si la liste des villes pour les notifications devient vide alors on définit comme faux les préférences végétariennes et veganes de l'user
         }
       }
-      if("preferences")
-      if ("omnivorous_notification" in $scope.user.privateInfo.preferences) {
-        if (omnivorous_notification != setValueScope($scope.user.privateInfo.preferences.omnivorous_notification)) {
-          origUser.privateInfo.preferences["omnivorous_notification"] = $scope.user.privateInfo.preferences.omnivorous_notification;
-          origUser.privateInfo.keep = true;
-          origUser.privateInfo.user_ref = $scope.user_ref;
+      if ("preferences")
+        if ("omnivorous_notification" in $scope.user.privateInfo.preferences) {
+          if (omnivorous_notification != setValueScope($scope.user.privateInfo.preferences.omnivorous_notification)) {
+            origUser.privateInfo.preferences["omnivorous_notification"] = $scope.user.privateInfo.preferences.omnivorous_notification;
+            origUser.privateInfo.keep = true;
+            origUser.privateInfo.user_ref = $scope.user_ref;
+          }
         }
-      }
       if ("veggies_notification" in $scope.user.privateInfo.preferences) {
         if (veggies_notification != setValueScope($scope.user.privateInfo.preferences.veggies_notification)) {
           origUser.privateInfo.preferences["veggies_notification"] = $scope.user.privateInfo.preferences.veggies_notification;
@@ -223,30 +223,21 @@ angular.module('myApp.viewProfile', ['dateDropdownService'])
       $state.go("profile.mealsList"); //on active le ui-view de meals-liste
 
       //on définit le prix du repas qui doit s'afficher
-      $http.get("/static/sources/profile/countries.json").then(function(res) {
-        $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
-          $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
-            for (var j = 0; j < $scope.meals.length; j++) {
-              if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
-                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; // si aide cuisine alors le prix du repas est le prix de l'aide cuisine
-              }
-              else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
-                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; // si pas aide cuisine et aide vaisselle alors le prix du repas est le prix de l'aide vaisselle
-              }
-              else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
-                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //sinon c'est soit le prix d'aide cuisine s'il n'y a ni l'un ni l'autre
-              }
-              else {
-                $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.hosts.price; // si le repas n'a pas d'invités (par précaution), c'est le prix de l'hôte
-              }
-              $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10; //sera utilisé pour viewMyMealDtld pour la phrase de variation de prix
-              var currency = result_currency.data[$scope.meals[j].address.country_code];
-              $scope.meals[j].currency_symbol = result_currency_symbol.data[currency].symbol_native; ////récupère correctement la monnaie où s'effectue le repas
-              $scope.meals[j].address.country = getCountry($scope.meals[j].address.country_code, res.data); //récupère correctement le pays
-            }
-          });
-        });
-      });
+      for (var j = 0; j < $scope.meals.length; j++) {
+        if ("cooks" in $scope.meals[j].detailedInfo.requiredGuests) {
+          $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cooks.price; // si aide cuisine alors le prix du repas est le prix de l'aide cuisine
+        }
+        else if ("cleaners" in $scope.meals[j].detailedInfo.requiredGuests) {
+          $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.cleaners.price; // si pas aide cuisine et aide vaisselle alors le prix du repas est le prix de l'aide vaisselle
+        }
+        else if ("simpleGuests" in $scope.meals[j].detailedInfo.requiredGuests) {
+          $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.simpleGuests.price; //sinon c'est soit le prix d'aide cuisine s'il n'y a ni l'un ni l'autre
+        }
+        else {
+          $scope.meals[j].mealPrice = $scope.meals[j].detailedInfo.requiredGuests.hosts.price; // si le repas n'a pas d'invités (par précaution), c'est le prix de l'hôte
+        }
+        $scope.meals[j].priceUnit = Math.ceil(10 * $scope.meals[j].price / $scope.meals[j].nbGuests) / 10; //sera utilisé pour viewMyMealDtld pour la phrase de variation de prix
+      }
 
       $scope.openModalDtld = function(meal_id) { //permet d'ouvrir les modals de chacun de repas associés
         for (var i = 0; i < $scope.meals.length; i++) {

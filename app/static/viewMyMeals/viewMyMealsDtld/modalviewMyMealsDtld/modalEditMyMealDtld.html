@@ -98,9 +98,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group" ng-class="{'has-error': editedMeal.priceToEdit==undefined && editMealForm.$submitted}">
-                            <span class="input-group-addon meal-addon-groceries">{{currency_symbol}}</span>
-                            <input type="number" class="form-control" style="width:180px" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.priceToEdit" placeholder="Price of the groceries" min="0" />
+                        <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && editMealForm.$submitted}">
+                            <span class="input-group-addon meal-addon-groceries">{{editedMeal.currency_symbol}}</span>
+                            <input type="number" class="form-control" style="width:180px" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.price" placeholder="Price of the groceries" min="0" />
                         </div>
                     </div>
                 </div>
@@ -130,10 +130,10 @@
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time">The arrival time for the helping cooks can not be after the beggining of the meal ({{editedMeal.time}})</span>
-                    <span>Please fill in the missing field<span ng-if="(editedMeal.menu.title==undefined && details==undefined) || (details==undefined && editedMeal.priceToEdit==undefined) || (editedMeal.menu.title==undefined && editedMeal.priceToEdit==undefined)">s</span> and try again
+                    <span>Please fill in the missing field<span ng-if="(editedMeal.menu.title==undefined && details==undefined) || (details==undefined && editedMeal.price==undefined) || (editedMeal.menu.title==undefined && editedMeal.price==undefined)">s</span> and try again
                     <span
-                        ng-if="editedMeal.menu.title==undefined || details==undefined || editedMeal.priceToEdit==undefined">: </span><span ng-if="editedMeal.menu.title==undefined">menu</span><span ng-if="editedMeal.menu.title==undefined && (details==undefined || editedMeal.priceToEdit==undefined)">, </span>
-                        <span ng-if="details==undefined">address</span><span ng-if="details==undefined && editedMeal.priceToEdit==undefined">, </span><span ng-if="editedMeal.priceToEdit==undefined">price of the groceries</span></span>
+                        ng-if="editedMeal.menu.title==undefined || details==undefined || editedMeal.price==undefined">: </span><span ng-if="editedMeal.menu.title==undefined">menu</span><span ng-if="editedMeal.menu.title==undefined && (details==undefined || editedMeal.price==undefined)">, </span>
+                        <span ng-if="details==undefined">address</span><span ng-if="details==undefined && editedMeal.price==undefined">, </span><span ng-if="editedMeal.price==undefined">price of the groceries</span></span>
                 </div>
             </div>
             <div class="clear10"></div>

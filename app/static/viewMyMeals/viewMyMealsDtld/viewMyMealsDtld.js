@@ -137,20 +137,15 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
     };
 
     $http.get("/static/sources/profile/countries.json").then(function(res) {
-        $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {
-            $http.get("/static/sources/createMeal/currency_symbol.json").then(function(result_currency_symbol) {
                 $http.get("/api/meals/" + $scope.meal._id + "/calculateMealPrice").then(function(responsePrice) {
                     $scope.meal.address.country = getCountry($scope.meal.address.country_code, res.data);
                     $scope.meal.pricePaybackIfFull = $scope.meal.price - $scope.meal.detailedInfo.requiredGuests.hosts.price;
-                    $scope.meal.price = getCurrencySymbol($scope.meal.price, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-                    $scope.meal.detailedInfo.requiredGuests.hosts.price = getCurrencySymbol(responsePrice.data.hostPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
                     $scope.meal.currentPricePayback = 0;
                     if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
                         if (responsePrice.data.cookPrice == "") {
                             $scope.meal.detailedInfo.requiredGuests.cooks.price = undefined;
                         }
                         else {
-                            $scope.meal.detailedInfo.requiredGuests.cooks.price = getCurrencySymbol(responsePrice.data.cookPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
                             $scope.meal.currentPricePayback += responsePrice.data.cookPrice * ($scope.meal.detailedInfo.requiredGuests.cooks.nbRquCooks - $scope.meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces);
                         }
                     }
@@ -159,7 +154,6 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                             $scope.meal.detailedInfo.requiredGuests.cleaners.price = undefined;
                         }
                         else {
-                            $scope.meal.detailedInfo.requiredGuests.cleaners.price = getCurrencySymbol(responsePrice.data.cleanerPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
                             $scope.meal.currentPricePayback += responsePrice.data.cleanerPrice * ($scope.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners - $scope.meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces);
                         }
                     }
@@ -168,24 +162,13 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
                             $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = undefined;
                         }
                         else {
-                            $scope.meal.detailedInfo.requiredGuests.simpleGuests.price = getCurrencySymbol(responsePrice.data.simpleGuestPrice, $scope.meal.address.country_code, result_currency, result_currency_symbol);
                             $scope.meal.currentPricePayback += responsePrice.data.simpleGuestPrice * ($scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - $scope.meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces);
                         }
                     }
                     $scope.meal.currentPricePayback = Math.ceil($scope.meal.currentPricePayback*100000)/100000; //problème avec 11.2+5.6 = 16,79999999
-                    $scope.meal.currentPricePayback = getCurrencySymbol($scope.meal.currentPricePayback, $scope.meal.address.country_code, result_currency, result_currency_symbol);
-                    $scope.meal.pricePaybackIfFull = getCurrencySymbol($scope.meal.pricePaybackIfFull, $scope.meal.address.country_code, result_currency, result_currency_symbol);
 
-                });
-            });
         });
     });
-
-    function getCurrencySymbol(price, country_code, jsonDataCurrency, jsonDataCurrencySymbol) {
-        var currency = jsonDataCurrency.data[country_code];
-        var currency_symbol = jsonDataCurrencySymbol.data[currency].symbol_native;
-        return currency_symbol + " " + price;
-    }
 
     function getCountry(country_code, jsonData) {
         for (var i = 0; i < jsonData.length; i++) {
@@ -356,8 +339,6 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
 modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, editedMeal, $timeout, $parse, $filter) {
     $scope.editedMeal = editedMeal;
     $scope.addressComplement = $scope.editedMeal.privateInfo.address.complement;
-    $scope.currency_symbol = $scope.editedMeal.price.split(" ")[0];
-    $scope.editedMeal.priceToEdit = parseFloat($scope.editedMeal.price.split(" ")[1]);
     $scope.editedMeal.time = new Date($scope.editedMeal.time);
     if (editedMeal.detailedInfo.requiredGuests.cooks) {
         if (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking) {

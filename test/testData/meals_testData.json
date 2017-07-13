@@ -9,6 +9,7 @@
     "admin": {
         "$oid": "111111111111111111111111"
     },
+    "currency_symbol": "\u20ac",
     "automaticSubscription": true,
     "menu": {
         "title": "Jolie piece de boeuf"
@@ -19,7 +20,7 @@
         "postalCode": "75009",
         "lat": 48.881,
         "lng": 2.341,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -64,6 +65,7 @@
     "_id": {
         "$oid": "111111111111111111111112"
     },
+    "currency_symbol": "\u20ac",
     "price": 60,
     "nbGuests": 11,
     "veggies": false,
@@ -81,7 +83,7 @@
         "postalCode": "75009",
         "lat": 48.886,
         "lng": 2.333,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -129,6 +131,7 @@
     "admin": {
         "$oid": "111111111111111111111111"
     },
+    "currency_symbol": "\u20ac",
     "automaticSubscription": true,
     "menu": {
         "title": "Hachi-parmentier de canard"
@@ -140,7 +143,7 @@
         "postalCode": "75018",
         "lat": 48.880,
         "lng": 2.316,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -185,6 +188,7 @@
     "admin": {
         "$oid": "577946eb4403f92b93425e6a"
     },
+    "currency_symbol": "\u20ac",
     "automaticSubscription": true,
     "menu": {
         "title": "Mozarella Burrata et petits légumes grillés"
@@ -196,7 +200,7 @@
         "postalCode": "75018",
         "lat": 48.886,
         "lng": 2.334,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -244,6 +248,7 @@
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
+    "currency_symbol": "\u20ac",
     "automaticSubscription": true,
     "menu": {
         "title": "Poisson pané"
@@ -255,7 +260,7 @@
         "postalCode": "75009",
         "lat": 48.886,
         "lng": 2.333,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -308,6 +313,7 @@
     "menu": {
         "title": "Beurre blanc"
     },
+    "currency_symbol": "\u20ac",
     "price": 76,
     "nbRemainingPlaces": 9,
     "address": {
@@ -315,7 +321,7 @@
         "postalCode": "75004",
         "lat": 48.858,
         "lng": 2.353,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -373,6 +379,7 @@
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
+    "currency_symbol": "\u20ac",
     "automaticSubscription": true,
     "menu": {
         "title": "Jolie piece de boeuf"
@@ -383,7 +390,7 @@
         "postalCode": "75009",
         "lat": 48.881,
         "lng": 2.341,
-        "country_code": "FR"
+        "country": "france"
     },
     "privateInfo": {
         "address": {
@@ -431,6 +438,7 @@
     "admin": {
         "$oid": "111111111111111111111111"
     },
+    "currency_symbol": "$",
     "menu": {
         "title": "Manual"
     },
@@ -441,7 +449,7 @@
         "postalCode": "3039",
         "lat": -37.765,
         "lng": 144.907,
-        "country_code": "AU"
+        "country": "Australia"
     },
     "privateInfo": {
         "address": {

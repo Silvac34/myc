@@ -24,7 +24,5 @@ angular.module('myApp.welcome', ['facebookService'])
     }, function errorCallBack() {
         console.log("something went wrong");
     });
-
-
-*/
+*/  
 }]);

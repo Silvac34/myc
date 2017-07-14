@@ -1,5 +1,4 @@
-module.exports = require('./config/karma.conf.js');
-/*module.exports = function(config){
+module.exports = function(config){
   config.set({
 
     basePath : './',
@@ -8,8 +7,8 @@ module.exports = require('./config/karma.conf.js');
       'app/static/bower_components/angular/angular.js',
       'app/static/bower_components/angular-route/angular-route.js',
       'app/static/bower_components/angular-mocks/angular-mocks.js',
-      'app/static/components/* * / *.js',
-      'app/static/view* / * * / *.js'
+      'app/static/components/**/*.js',
+      'app/static/view*/**/*.js'
     ],
 
     autoWatch : true,
@@ -31,4 +30,4 @@ module.exports = require('./config/karma.conf.js');
     }
 
   });
-};*/
+};

@@ -40,9 +40,9 @@ footer a:hover {
 }
 
 @media (max-width: 767px) {
-  footer a{
-      font-size:20px;
-  }  
+    footer a {
+        font-size: 20px;
+    }
 }
 
 footer .h3,
@@ -51,9 +51,9 @@ footer p {
 }
 
 @media (max-width: 767px) {
-  footer p{
-      font-size:22px;
-  }  
+    footer p {
+        font-size: 22px;
+    }
 }
 
 .fa-2x {
@@ -211,7 +211,7 @@ footer p {
 
 @media only screen and (max-width: 767px) {
     /*Text Reset For Smaller Devices*/
-    p{
+    p {
         font-size: 18px !important;
     }
     #inner-body-content,
@@ -224,11 +224,6 @@ footer p {
     .footer-concept h1,
     .footer-team h1 {
         font-size: 42px;
-    }
-    .hiw-image.left img,
-    .hiw-image.right img {
-        width: auto;
-        max-width: 100%;
     }
 }
 
@@ -293,14 +288,10 @@ footer p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-#bg-concept-roles-3{
+#bg-concept-roles-3 {
     box-shadow: 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
-#footer-concept-img{
-    height:100px;
-    width:100px;
-}
 
 /* footer_who_we_are && footer_contact_us -----------------------*/
 
@@ -336,24 +327,11 @@ footer p {
     margin-bottom: -20px;
 }
 
-.thumbnail .caption {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: block;
-    background: #ffffff;
-    width: 300px;
-    height: 136px;
-    padding: 27px 35px 16px 2px;
-    z-index: 3;
-}
-
-@media (max-width: 991px) {
-    .thumbnail .caption {
-        padding: 2px 24px 16px 2px;
-        width: 252px;
-        height: 87px;
-    }
+caption {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #b2ad9d;
+    text-align: left;
 }
 
 .thumbnail-1 {
@@ -419,13 +397,6 @@ footer p {
 
 .bg-info .img-bl-bg1:before {
     border-color: #ffffff;
-}
-
-caption {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: #b2ad9d;
-    text-align: left;
 }
 
 
@@ -596,10 +567,6 @@ caption {
     border-bottom-right-radius: 0px
 }
 
-.cutlery-menu {
-    background: url("/static/sources/createMeal/cutlery_menu.png") no-repeat 0;
-}
-
 
 /* View Meals -----------------------------------------------------------------------------------------------------------*/
 
@@ -611,13 +578,6 @@ caption {
 .meal-menu {
     font-size: 16px;
     padding: inherit;
-}
-
-.meal-menu-label {
-    font-size: 16px;
-    padding-left: 22px;
-    height: 25px;
-    margin-bottom: 27px;
 }
 
 .meal-info-label {
@@ -632,27 +592,6 @@ caption {
     max-width: 100%;
     margin-bottom: 10px;
     font-weight: bold;
-}
-
-.meal-date {
-    background: url("/static/sources/calendar.png") no-repeat;
-    min-height: 24px;
-}
-
-.meal-time {
-    background: url("/static/sources/clock.png") no-repeat;
-    min-height: 24px;
-}
-
-.meal-price {
-    font-size: 15px;
-}
-
-.meal-price-label {
-    float: right;
-    padding-top: 0;
-    padding-left: 0;
-    margin-bottom: -5px;
 }
 
 @media (max-width: 460px) {
@@ -677,21 +616,6 @@ caption {
     }
 }
 
-.meal-admin-dtld-sm {
-    padding-right: 0px;
-}
-
-.meal-admin {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.meal-admin.meal-admin-name {
-    margin-top: 15px;
-}
-
-.meal-background {}
-
 @media (min-width: 768px) {
     .meal-clock-display {
         padding-left: 15px
@@ -711,48 +635,6 @@ caption {
 
 .viewmeals-change-view.viewmeals-change-view-mobile {
     margin-left: 10px;
-}
-
-.angular-google-map-container {
-    height: 400px;
-}
-
-.cutlery-menu.map-menu {
-    font-size: 16px;
-    height: 32px;
-    margin-bottom: 10px;
-}
-
-.date-calendar.map-date {
-    height: 24px;
-    text-indent: 30px;
-    line-height: 2;
-    margin-right: 20px;
-    display: inline-block
-}
-
-.time-calendar.map-time {
-    height: 24px;
-    text-indent: 30px;
-    line-height: 2;
-    display: inline-block
-}
-
-.price-banknote.map-price {
-    height: 24px;
-    text-indent: 30px;
-    line-height: 2;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    color: #3EA93E;
-}
-
-.map-text-menu {
-    position: relative;
-    left: 40px;
-    top: 7px;
-    padding-bottom: 7px;
 }
 
 .map-meal-separation {
@@ -781,123 +663,58 @@ caption {
     }
 }
 
-@media (min-width: 768px) {
-    .my-meal-dtld-map-height {
-        height: 236px;
-    }
-}
-
-@media (max-width: 767px) {
-    .my-meal-dtld-map-height {
-        height: 160px;
-    }
-}
-
 .color-text-priceSentence {
     color: initial;
 }
 
+/* viewMeals filter ------------------------------------------------*/
 
-/* viewMyMeals ---------------------------------------------------*/
-
-.list-group-my-meal {
-    display: inline-block;
-    width: 100%;
+.filter-date-checkbox-mobile {
+  width: 14%;
+  float: left;
 }
 
-.my-meal-menu-label {
-    font-size: 16px;
-    padding-left: 22px;
-    height: 25px;
-    margin-bottom: 27px;
+.filter-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 15px;
 }
 
-.my-meal-label {
-    font-size: 12px;
-    color: rgba(56, 52, 52, 0.45);
-    padding-left: 29px;
-    padding-top: 7px;
-    max-width: 100%;
-    margin-bottom: 10px;
-    font-weight: bold;
+.meal-search-filter {
+  float: left;
+  margin-left: 15px;
+  position: absolute;
 }
 
-.my-meal-location {
-    background: url("/static/sources/location.png") no-repeat 0;
-    min-height: 24px;
+.btn-filter-mobile-reinitialize {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.my-meal-date {
-    background: url("/static/sources/calendar.png") no-repeat;
-    min-height: 24px;
+.text-in-filter {
+  padding-left: 4px;
+  font-size: 16px;
 }
 
-.my-meal-time {
-    background: url("/static/sources/clock.png") no-repeat;
-    min-height: 24px;
+.collapsing-filter {
+  padding-left: 20px;
+  padding-bottom: 15px;
+  margin-left: -20px;
+  margin-top: 8px;
 }
 
-.my-meal-price {
-    font-size: 14px;
-    font-weight: 700;
-    color: #3EA93E;
-    text-align: right;
+.row-margin-filter {
+  margin-right: -5px;
+  margin-left: -10px;
 }
-
-.my-meal-price-label {
-    text-align: right;
-    padding-top: 0;
-    padding-left: 0;
-    margin-bottom: -5px;
-}
-
-.my-meal-admin {
-    transform: translateY(70%);
-    padding-right: 0px;
-}
-
-.my-meal-admin-dtld-sm {
-    padding-right: 0px;
-}
-
-.my-meal-admin-name {
-    margin-top: 15px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
 
 /* viewMealsDtld ---------------------------------------------------*/
-
-@media (min-width: 768px) {
-    .modal-meal-window .modal-dialog {
-        top: 17%;
-        left: 27.5%;
-        position: initial;
-        max-width: 67.5%;
-        overflow-y: scroll;
-    }
-}
-
-.meal-dtld-left {
-    padding-left: 5px;
-    padding-right: 0px;
-}
-
-.meal-dtld-right {
-    padding-left: 0px;
-    padding-right: 5px;
-}
 
 .meal-dtld-group {
     border-top-style: groove;
     border-top-color: rgba(56, 52, 52, 0.45);
     border-top-width: 2px;
     margin: 5px 0px;
-}
-
-.meal-dtld-admin-name {
-    float: left;
 }
 
 .meal-dtld-group-label {
@@ -932,11 +749,6 @@ caption {
     float: right;
 }
 
-.meal-dtld-helpers-description-time {
-    font-weight: bold;
-    font-size: 14px;
-}
-
 .meal-dtld-helpers {
     width: 100%;
 }
@@ -946,17 +758,16 @@ caption {
     position: absolute;
 }
 
-.meal-dtld-full-msg {
-    color: red;
-    margin-bottom: 20px;
-}
-
 .meal-dtld-list-user {
     margin: 5px 15px 0px 15px;
 }
 
 
 /* viewCreateMeal ---------------------------------------------------*/
+
+.cutlery-menu {
+    background: url("/static/sources/createMeal/cutlery_menu.png") no-repeat 0;
+}
 
 .createMealForm {
     padding-left: 30px;
@@ -1008,37 +819,6 @@ caption {
     padding-bottom: 3px;
 }
 
-.my-meal-uitab {
-    margin-left: 10px;
-}
-
-.my-meal-dtld-label {
-    font-size: 13px;
-    padding-left: 29px;
-    padding-top: 7px;
-    max-width: 100%;
-    margin-bottom: 10px;
-}
-
-.my-meal-dtld-left {
-    padding-left: 5px;
-    padding-right: 0px;
-}
-
-.my-meal-dtld-right {
-    padding-left: 0px;
-    padding-right: 5px;
-}
-
-.my-meal-dtld-menu-label {
-    font-size: 16px;
-    height: 25px;
-    margin-bottom: 20px;
-    margin-top: 5px;
-    text-align: center;
-    min-width: 100%;
-}
-
 .my-meal-dtld-panel {
     margin-left: 20px;
     margin-right: 20px;
@@ -1079,6 +859,26 @@ caption {
         position: relative;
         top: 8px;
     }
+    .my-meal-dtld-text-review {
+        margin: 0px 10px;
+        display: inline-block;
+        width: 425px;
+    }
+    .my-meal-dtld-cellphone-position {
+        position: relative;
+        top: 8px;
+    }
+    .my-meal-dtld-input-review {
+        margin: 0px 10px;
+        display: inline-block;
+        width: 320px;
+    }
+    .my-meal-dtld-map-height {
+        height: 236px;
+    }
+    .my-meal-dtld-button {
+        margin-top: -10px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1086,48 +886,25 @@ caption {
         position: relative;
         top: 8px;
     }
-}
-
-@media (min-width: 768px) {
-    .my-meal-dtld-cellphone-position {
-        position: relative;
-        top: 8px;
-    }
-}
-
-@media (max-width: 767px) {
     .my-meal-dtld-cellphone-position {
         position: relative;
         top: -4px;
     }
-}
-
-@media (min-width: 768px) {
-    .my-meal-dtld-input-review {
-        margin: 0px 10px;
-        display: inline-block;
-        width: 320px;
-    }
-}
-
-@media (max-width: 767px) {
     .my-meal-dtld-input-review {
         margin: 10px 0px;
         display: inline-block;
         width: 100%;
     }
-}
-
-@media (min-width: 768px) {
-    .my-meal-dtld-text-review {
-        margin: 0px 10px;
-        display: inline-block;
-        width: 425px;
+    .my-meal-dtld-map-height {
+        height: 160px;
     }
-}
-
-@media (max-width: 767px) {
-    .my-meal-dtld-text-review {}
+    .my-meal-dtld-edit {
+        position: relative;
+        right: 63px;
+    }
+    .my-meal-dtld-button {
+        margin-top: -22px;
+    }
 }
 
 .my-meal-dtld-glyphicon-position {
@@ -1142,39 +919,8 @@ caption {
     border-radius: 15px;
 }
 
-@media (max-width: 767px) {
-    .my-meal-dtld-hidden-txt {
-        visibility: hidden;
-    }
-}
-
-@media (max-width: 767px) {
-    .my-meal-dtld-edit {
-        position: relative;
-        right: 63px;
-    }
-}
-
-@media (max-width: 767px) {
-    .my-meal-dtld-button {
-        margin-top: -22px;
-    }
-}
-
-@media (min-width: 768px) {
-    .my-meal-dtld-button {
-        margin-top: -10px;
-    }
-}
-
 .my-meal-dtld-list-pending-user {
     margin: 5px 15px 0px 15px;
-}
-
-.my-meal-dtld-profilePic-pending-validation {
-    margin: 0px 10px 10px 0px;
-    width: 50px;
-    height: 50px;
 }
 
 
@@ -1205,49 +951,11 @@ caption {
     }
 }
 
-h4.sub-slogan {
-    font-size: 18px;
-    font-weight: bold;
-}
-
 #slogan-text {
     display: inline-block;
     border-top: solid 0.5px;
     padding: 5px 10px;
     border-bottom: solid 0.5px;
-}
-
-.row.welcome-how-it-works {
-    border-bottom-style: solid;
-    border-bottom-width: thin;
-    border-bottom-color: #317eac;
-}
-
-.welcome-images {
-    border-style: solid;
-    border-width: thin;
-    border-color: #317eac;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-.welcome-how-does-it-work-text {
-    margin-top: 12px;
-    margin-right: -8px;
-    margin-left: -8px;
-}
-
-@media (min-width: 768px) {
-    .welcome-how-to-pay {
-        background: url("/static/sources/welcome/how_to_pay_blue.png") no-repeat 0;
-        padding-left: 64px;
-    }
-    .welcome-button-action {
-        padding: 14px 16px;
-        font-size: 18px;
-        line-height: 1.3333333;
-        border-radius: 6px;
-    }
 }
 
 .well-text-position {
@@ -1343,13 +1051,6 @@ h4.sub-slogan {
     color: white;
     display: flex;
 }
-
-@media (max-width: 767px) {
-    .welcome-ul {
-        list-style-image: url("/static/sources/swirly-arrow.png")
-    }
-}
-
 
 /* mise en page de welcomePage */
 
@@ -1569,14 +1270,72 @@ a.mod-underline:hover {
 }
 
 
-/*who we are --------------------------------------------------- */
+.bluerow {
+    border-bottom: solid 1px #002E4E;
+    background: #0B4060;
+    -webkit-font-smoothing: antialiased;
+}
 
-.who_we_are_pic {
-    height: 250px;
-    border-radius: 200px;
-    border-color: #0B4060;
-    border-style: solid;
-    border-width: 2px;
+.bluerow.unsticked {
+    top: -70px;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s
+}
+
+.btn-bluerow {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px 70px;
+    border: none;
+    border-right: solid 1px #002E4E;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background: #295E7E;
+}
+
+.btn-bluerow:first-child {
+    border-left: solid 1px #002E4E
+}
+
+.btn-bluerow:focus {
+    color: lightgrey;
+}
+
+@media screen and (min-width:768px) {
+    .btn-bluerow {
+        margin: 0 1px
+    }
+}
+
+.btn-bluerow:hover {
+    background: #287FB5;
+    color: #fff
+}
+
+@media screen and (max-width:1199px) {
+    .btn-bluerow {
+        padding: 15px 20px
+    }
+}
+
+@media screen and (max-width:767px) {
+    .btn-bluerow {
+        padding: 10px;
+    }
+    .bluerow .btn-group {
+        width: 100%
+    }
+    .btn-bluerow-text {
+        padding: 8px 5px;
+        display: block;
+        font-size: small;
+    }
 }
 
 
@@ -1599,10 +1358,6 @@ a.mod-underline:hover {
     width: 70px;
     float: left;
     height: 25px;
-}
-
-.country-flag {
-    width: 23px;
 }
 
 .profile-city-notification-preference {
@@ -1772,12 +1527,6 @@ a.mod-underline:hover {
     top: 30px;
 }
 
-.page-separation {
-    padding-bottom: 4px;
-    margin: -11px 0 7px;
-    border-bottom: 1px solid #eeeeee;
-}
-
 .size-32 {
     font-size: 32px;
 }
@@ -1794,6 +1543,10 @@ a.mod-underline:hover {
     font-size: 16px;
 }
 
+.size-15 {
+    font-size: 15px;
+}
+
 .size-14 {
     font-size: 14px;
 }
@@ -1806,8 +1559,16 @@ a.mod-underline:hover {
     margin-top: 7px;
 }
 
+.margintop15 {
+    margin-top: 15px;
+}
+
 .marginright10 {
     margin-right: 10px;
+}
+
+.marginleft10 {
+    margin-left: 10px;
 }
 
 .fade-out-success.ng-hide {
@@ -1845,23 +1606,6 @@ a.mod-underline:hover {
     }
 }
 
-@media (min-width: 768px) {
-    .page-separation-title {
-        padding: 9px 0 9px 7px;
-        border-bottom: 1px solid #eeeeee;
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 767px) {
-    .page-separation-title {
-        padding: 5px 0 9px 10px;
-        border-bottom: 1px solid #eeeeee;
-        font-size: 20px;
-    }
-}
-
-
 /* puts the google places autocomplete dropdown results above the bootstrap modal 1050 zindex.*/
 
 .pac-container {
@@ -1875,151 +1619,4 @@ a.mod-underline:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-}
-
-.col-centered {
-    float: none;
-    margin: 0 auto;
-}
-
-.menu {
-    list-style: none;
-    border-bottom: 0.1em solid black;
-    margin-bottom: 2em;
-    padding: 0 0 0.5em;
-}
-
-.menu:before {
-    content: "[";
-}
-
-.menu:after {
-    content: "]";
-}
-
-.menu>li {
-    display: inline;
-}
-
-.menu>li:before {
-    content: "|";
-    padding-right: 0.3em;
-}
-
-.menu>li:nth-child(1):before {
-    content: "";
-    padding: 0;
-}
-
-.bluerow,
-.slick-next:before,
-.slick-prev:before {
-    -webkit-font-smoothing: antialiased;
-}
-
-.bluerow {
-    border-bottom: solid 1px #002E4E;
-    background: #0B4060
-}
-
-.bluerow.affix {
-    top: 50px;
-    left: 0;
-    right: 0;
-    z-index: 9;
-    -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, .6);
-    -moz-box-shadow: 0 0 12px rgba(0, 0, 0, .6);
-    box-shadow: 0 0 12px rgba(0, 0, 0, .6)
-}
-
-.bluerow.affix.affix-trans {
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -ms-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s
-}
-
-.bluerow.unsticked {
-    top: -70px;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -ms-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s
-}
-
-.btn-bluerow {
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 15px 70px;
-    border: none;
-    border-right: solid 1px #002E4E;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    background: #295E7E;
-}
-
-.btn-bluerow:first-child {
-    border-left: solid 1px #002E4E
-}
-
-.btn-bluerow:focus {
-    color: lightgrey;
-}
-
-@media screen and (min-width:768px) {
-    .btn-bluerow {
-        margin: 0 1px
-    }
-}
-
-.btn-bluerow:hover {
-    background: #287FB5;
-    color: #fff
-}
-
-.greenrow {
-    padding: 5px 0;
-    background: #B4CB3C
-}
-
-.greenrow a {
-    color: #0B4060;
-    font-size: 18px;
-    font-weight: 600
-}
-
-.btn-bluerow-icon {
-    display: none
-}
-
-@media screen and (max-width:1199px) {
-    .btn-bluerow {
-        padding: 15px 20px
-    }
-}
-
-@media screen and (max-width:767px) {
-    .btn-bluerow {
-        padding: 10px;
-    }
-    .bluerow .btn-group {
-        width: 100%
-    }
-    .btn-bluerow-text {
-        padding: 8px 5px;
-        display: block;
-        font-size: small;
-    }
-    .btn-bluerow-icon {
-        display: block;
-        background: #287FB5;
-        color: #fff;
-        text-align: center;
-        font-size: 26px
-    }
 }

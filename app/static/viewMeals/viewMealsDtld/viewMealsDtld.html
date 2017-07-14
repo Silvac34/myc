@@ -49,7 +49,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="size-12">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</strong> in order to help the host to prepare the meal.</div>
-                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="size-15 text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
                             will be informed before the dinner of the final price.</div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="size-12"><span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning | date : 'HH:mm'}}</strong> in order to help for</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You will help</span>                            ordering and cleaning what was used for the meal.</div>
-                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="meal-price text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="size-15 text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
                             will be informed before the dinner of the final price.</div>
                     </div>
                 </div>

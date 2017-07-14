@@ -11,7 +11,7 @@
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':datasUserForEachMeal(meal).status == 'accepted','my-meal-dtld-panel-warning':datasUserForEachMeal(meal).status == 'pending'}" ng-click=openModalDtld(meal._id)>
                 <div class="meal-admin-container col-sm-2 hidden-xs" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
                     <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                    <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                    <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                     <div class="well well-sm well-resume-rating" style="border:initial">
                         <table style="text-align:center">
                             <tbody>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-top:7px;">
-                        <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
                     </div>
                     <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                         <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
@@ -121,123 +121,123 @@
         </div>
     </div>
 </div>
-<div ng-if="mealsFiltered.length == 0">
-    <div class="clear120"></div>
-    <div style="border:dashed 1px #3a87ad" class="col-xs-4 col-xs-offset-4"></div>
-    <div class="clear20"></div>
-    <div class="general-title text-info" style="font-size:small">Previous meals</div>
-    <div class="clear20"></div>
-    <div class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | filter : helpingTypeFilter | orderBy:'-time')">
-        <div class="col-xs-12">
-            <div class="list-group" style="cursor:pointer;">
-                <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-info': datasUserForEachMeal(meal).status == 'accepted'}" ng-click=openModalDtld(meal._id)>
-                    <div class="meal-admin-container col-sm-2 hidden-xs" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
-                        <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                        <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
-                        <div class="well well-sm well-resume-rating" style="border:initial">
-                            <table style="text-align:center">
-                                <tbody>
-                                    <tr>
-                                        <td ng-if="meal.admin.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
-                                        <td ng-if="meal.admin.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
-                                        <td ng-if="meal.admin.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
-                                    </tr>
-                                    <tr style="font-size:11px" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
-                                        <td ng-if="meal.admin.reviews.positive" style="padding-right:4px">{{meal.admin.reviews.positive}}</td>
-                                        <td ng-if="meal.admin.reviews.neutral" style="padding:0px 4px">{{meal.admin.reviews.neutral}}</td>
-                                        <td ng-if="meal.admin.reviews.negative" style="padding-left:4px">{{meal.admin.reviews.negative}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+<div ng-if="mealsFiltered.length == 0" class="row" ng-repeat="meal in mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | filter : helpingTypeFilter | orderBy:'-time')">
+    <div ng-if="$first==true">
+        <div class="clear120"></div>
+        <div style="border:dashed 1px #3a87ad" class="col-xs-4 col-xs-offset-4"></div>
+        <div class="clear20"></div>
+        <div class="general-title text-info" style="font-size:small">Previous meals</div>
+        <div class="clear20"></div>
+    </div>
+    <div class="col-xs-12">
+        <div class="list-group" style="cursor:pointer;">
+            <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-info': datasUserForEachMeal(meal).status == 'accepted'}" ng-click=openModalDtld(meal._id)>
+                <div class="meal-admin-container col-sm-2 hidden-xs" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
+                    <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                    <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                    <div class="well well-sm well-resume-rating" style="border:initial">
+                        <table style="text-align:center">
+                            <tbody>
+                                <tr>
+                                    <td ng-if="meal.admin.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                    <td ng-if="meal.admin.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                    <td ng-if="meal.admin.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                </tr>
+                                <tr style="font-size:11px" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
+                                    <td ng-if="meal.admin.reviews.positive" style="padding-right:4px">{{meal.admin.reviews.positive}}</td>
+                                    <td ng-if="meal.admin.reviews.neutral" style="padding:0px 4px">{{meal.admin.reviews.neutral}}</td>
+                                    <td ng-if="meal.admin.reviews.negative" style="padding-left:4px">{{meal.admin.reviews.negative}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-10" style="display:table-cell">
+                    <div class="row">
+                        <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':datasUserForEachMeal(meal),'col-xs-12':!datasUserForEachMeal(meal)}">
+                            <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
+                            <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
+                            <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
+                            <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="datasUserForEachMeal(meal)">
+                                <div class="pull-right" ng-class="{'text-info': datasUserForEachMeal(meal).status == 'accepted'}"><strong><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] != 'admin'">attended</span><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] == 'admin'">Hosted</span></strong></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-10" style="display:table-cell">
-                        <div class="row">
-                            <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':datasUserForEachMeal(meal),'col-xs-12':!datasUserForEachMeal(meal)}">
-                                <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
-                                <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
-                                <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
-                                <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <div class="row meal-info-label">
+                                <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:15px" ng-if="meal.address.postalCode">{{meal.address.postalCode}}</span></span>
+                                <span class="hidden-xs" ng-if="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
                             </div>
+                            <div class="row meal-info-label">
+                                <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time
+                                |date:'HH:mm'}}
+                            </div>
+                        </div>
+                        <div class="col-xs-2" style="margin-top:-8px;">
                             <div class="row">
-                                <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="datasUserForEachMeal(meal)">
-                                    <div class="pull-right" ng-class="{'text-info': datasUserForEachMeal(meal).status == 'accepted'}"><strong><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] != 'admin'">attended</span><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] == 'admin'">Hosted</span></strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-10">
-                                <div class="row meal-info-label">
-                                    <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:15px" ng-if="meal.address.postalCode">{{meal.address.postalCode}}</span></span>
-                                    <span class="hidden-xs" ng-if="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
-                                </div>
-                                <div class="row meal-info-label">
-                                    <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}} <span class="hidden-sm hidden-md hidden-lg"></br></span><span class="glyphicon glyphicon-time meal-clock-display"></span> {{meal.time
-                                    |date:'HH:mm'}}
-                                </div>
-                            </div>
-                            <div class="col-xs-2" style="margin-top:-8px;">
-                                <div class="row">
-                                    <div ng-style="getStyle()" style="float:right;width:51px;text-align:center">
-                                        <div ng-style="getStyle()" class="" style="font-size: 11px;top:32px;position:relative;font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
-                                        <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:7px;">
-                            <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
-                        </div>
-                        <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
-                            <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
-                        </div>
-                        <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
-                            <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
-                        </div>
-                        <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
-                            <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
-                        </div>
-                        <div class="row hidden-sm hidden-md hidden-lg">
-                            <div class="clear5"></div>
-                            <div class="clear5 list-meal-separation"></div>
-                            <div>
-                                <strong><em>The host</em></strong>
-                            </div>
-                            <div class="clear10"></div>
-                            <div>
-                                <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
-                                <div style="position:relative; left:10px;">
-                                    <div>
-                                        <strong class="text-info">{{meal.admin.first_name}} {{meal.admin.last_name}}</strong>
-                                    </div>
-                                    <div class="small" style="padding-top:4px">
-                                        <span ng-if="meal.admin.gender"><i class="fa fa-venus-mars"></i> {{meal.admin.gender | capitalizeFirstLetter}}</br></span>
-                                        <span ng-if="meal.admin.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.admin.birthdate | ageFilter}} years old</br></span>
-                                        <span ng-if="meal.admin.country_of_origin"><i class="fa fa-globe"></i> From {{meal.admin.country_of_origin.name}}</br></span>
-                                    </div>
-                                    <div class="clear5"></div>
-                                    <div class="well well-sm well-resume-rating" style="border:initial; margin-left:-11px; margin-top:-20px" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
-                                        <table style="text-align:center">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding:0px 4px" ng-if="meal.admin.reviews.positive"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
-                                                    <td style="padding:0px 4px" ng-if="meal.admin.reviews.neutral"><span class="glyphicon glyphicon-record text-default"></span></td>
-                                                    <td style="padding:0px 4px" ng-if="meal.admin.reviews.negative"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
-                                                </tr>
-                                                <tr style="font-size:11px">
-                                                    <td style="padding:0px 4px" ng-if="meal.admin.reviews.positive">{{meal.admin.reviews.positive}}</td>
-                                                    <td style="padding:0px 4px" ng-if="meal.admin.reviews.neutral">{{meal.admin.reviews.neutral}}</td>
-                                                    <td style="padding:0px 4px" ng-if="meal.admin.reviews.negative">{{meal.admin.reviews.negative}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div ng-style="getStyle()" style="float:right;width:51px;text-align:center">
+                                    <div ng-style="getStyle()" class="" style="font-size: 11px;top:32px;position:relative;font-weight:bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                                    <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </a>
-            </div>
+                    <div class="row" style="margin-top:7px;">
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                    </div>
+                    <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                    </div>
+                    <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                    </div>
+                    <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
+                    </div>
+                    <div class="row hidden-sm hidden-md hidden-lg">
+                        <div class="clear5"></div>
+                        <div class="clear5 list-meal-separation"></div>
+                        <div>
+                            <strong><em>The host</em></strong>
+                        </div>
+                        <div class="clear10"></div>
+                        <div>
+                            <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
+                            <div style="position:relative; left:10px;">
+                                <div>
+                                    <strong class="text-info">{{meal.admin.first_name}} {{meal.admin.last_name}}</strong>
+                                </div>
+                                <div class="small" style="padding-top:4px">
+                                    <span ng-if="meal.admin.gender"><i class="fa fa-venus-mars"></i> {{meal.admin.gender | capitalizeFirstLetter}}</br></span>
+                                    <span ng-if="meal.admin.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.admin.birthdate | ageFilter}} years old</br></span>
+                                    <span ng-if="meal.admin.country_of_origin"><i class="fa fa-globe"></i> From {{meal.admin.country_of_origin.name}}</br></span>
+                                </div>
+                                <div class="clear5"></div>
+                                <div class="well well-sm well-resume-rating" style="border:initial; margin-left:-11px; margin-top:-20px" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
+                                    <table style="text-align:center">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:0px 4px" ng-if="meal.admin.reviews.positive"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                                <td style="padding:0px 4px" ng-if="meal.admin.reviews.neutral"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                                <td style="padding:0px 4px" ng-if="meal.admin.reviews.negative"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                            </tr>
+                                            <tr style="font-size:11px">
+                                                <td style="padding:0px 4px" ng-if="meal.admin.reviews.positive">{{meal.admin.reviews.positive}}</td>
+                                                <td style="padding:0px 4px" ng-if="meal.admin.reviews.neutral">{{meal.admin.reviews.neutral}}</td>
+                                                <td style="padding:0px 4px" ng-if="meal.admin.reviews.negative">{{meal.admin.reviews.negative}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>

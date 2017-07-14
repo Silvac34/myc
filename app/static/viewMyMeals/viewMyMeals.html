@@ -1,6 +1,6 @@
 <div class="clear10"></div>
 <uib-tabset type="pills">
-  <uib-tab index="0" class="my-meal-uitab">
+  <uib-tab index="0" class="marginleft10">
     <uib-tab-heading>
       Incoming meals <span class="badge" ng-if="countMealWithPendingRequest() > 0">{{countMealWithPendingRequest()}}</span>
     </uib-tab-heading>
@@ -12,7 +12,7 @@
             <a ng-if="datasUserForEachMeal(meal).status == 'accepted'" class="list-group-item list-group-meal my-meal-dtld-panel-success" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
               <div class="hidden-xs col-sm-2" ng-class="{'top-10':meal.admin.reviews,'top-30':!meal.admin.reviews}">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                 <div class="well well-sm well-resume-rating" style="border:initial">
                   <table style="text-align:center">
                     <tbody>
@@ -63,7 +63,7 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
@@ -86,7 +86,7 @@
             <a ng-if="datasUserForEachMeal(meal).status == 'pending'" class="list-group-item list-group-meal my-meal-dtld-panel-warning">
               <div class="hidden-xs col-sm-2" ng-class="{'top-10':meal.admin.reviews,'top-30':!meal.admin.reviews}">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                 <div class="well well-sm well-resume-rating" style="border:initial" ng-if="meal.admin.reviews.positive || meal.admin.reviews.neutral || meal.admin.reviews.negative">
                   <table style="text-align:center">
                     <tbody>
@@ -135,7 +135,7 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
@@ -159,7 +159,7 @@
     </div>
     </div>
   </uib-tab>
-  <uib-tab index="1" heading="Previous meals" class="my-meal-uitab">
+  <uib-tab index="1" heading="Previous meals" class="marginleft10">
     <div class="clear20"></div>
     <div class="col-xs-12">
       <div class="row" ng-repeat="meal in myPastMealsFilter = (meals | filter: pastMealsFilter | orderBy:'-time')">
@@ -168,7 +168,7 @@
             <a class="list-group-item list-group-meal my-meal-dtld-panel-info" ui-sref="view_my_dtld_meals({myMealId: meal._id})">
               <div class="hidden-xs col-sm-2" ng-class="{'top-10':meal.admin.reviews,'top-30':!meal.admin.reviews}">
                 <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
-                <div class="meal-admin meal-admin-name">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
+                <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                 <div class="well well-sm well-resume-rating" style="border:initial">
                   <table style="text-align:center">
                     <tbody>
@@ -219,7 +219,7 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="meal-price text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal

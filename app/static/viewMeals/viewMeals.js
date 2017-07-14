@@ -376,6 +376,18 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
     for (var i = 0; i < $scope.filter.weekDays.length; i++) {
       $scope.filter.weekDays[i].selected = false;
     }
+    $scope.filter.dateFilterMin.value = null;
+    $scope.filter.dateFilterMax.value = null;
+    $scope.filter.priceFilterMin.value = null;
+    $scope.filter.priceFilterMax.value = null;
+    $scope.filter.cityFilter = "";
+    $scope.filter.preferenceFilter.veggies = false;
+    $scope.filter.preferenceFilter.vegan = false;
+    $scope.filter.preferenceFilter.halal = false;
+    $scope.filter.preferenceFilter.kosher = false;
+    $scope.filter.helpingTypeFilter.cooks = false;
+    $scope.filter.helpingTypeFilter.cleaners = false;
+    $scope.filter.helpingTypeFilter.simpleGuests = false;
     $uibModalInstance.close();
   };
 

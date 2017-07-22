@@ -135,14 +135,14 @@ You then have to enter the following command to create an Heroku app, and provid
 with the proper environment (buildpacks)
 
 ```
-heroku create shareat123-prod
-heroku buildpacks:set heroku/python --app shareat123-prod
-heroku buildpacks:add --index 2 heroku/nodejs --app shareat123-prod
+heroku create mycommuneaty
+heroku buildpacks:set heroku/python --app mycommuneaty
+heroku buildpacks:add --index 2 heroku/nodejs --app mycommuneaty
 ```
 The following command set the environment variable so that we know that we are
 in the staging environment
 ```
-heroku config:set APP_SETTINGS=ProductionConfig --app shareat123-prod
+heroku config:set APP_SETTINGS=ProductionConfig --app mycommuneaty
 ```
 
 ###Deploy the app
@@ -171,14 +171,14 @@ Your app will be available at https://shareat123-stage.herokuapp.com
 
 To deploy the app to the production environment
 ```
-git remote add prod git@heroku.com:shareat123-prod.git
+git remote add prod git@heroku.com:mycommuneaty.git
 grunt ProdDim
 ```
 The grunt command build the app of the current branch with the production configuration, push it to the production
 environment and reinitialise the config.js file for the DevDim environment. These 
 actions are defined in the Gruntfile.js
 
-Your app will be available at https://shareat123-prod.herokuapp.com
+Your app will be available at https://mycommuneaty.herokuapp.com
 
 ##Development and Deployment Workflow :
 

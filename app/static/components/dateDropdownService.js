@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('dateDropdownService', []);
+export default angular.module('dateDropdownService', [])
 
-app.factory('rsmdateutils', function() {
+.factory('rsmdateutils', function() {
     var that = this,
         dayRange = [1, 31],
 
@@ -45,8 +45,6 @@ app.factory('rsmdateutils', function() {
             name: 'December'
         }];
 
-
-
     function changeDate(date) {
         if (date.day > 28) {
             date.day--;
@@ -57,7 +55,7 @@ app.factory('rsmdateutils', function() {
             date.month--;
             return date;
         }
-    };
+    }
 
     return {
         checkDate: function(date) {
@@ -97,7 +95,7 @@ app.factory('rsmdateutils', function() {
     };
 })
 
-app.directive('datedropdowns', ['rsmdateutils', function(rsmdateutils) {
+.directive('datedropdowns', ['rsmdateutils', function(rsmdateutils) {
     return {
         restrict: 'A',
         replace: true,

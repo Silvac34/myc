@@ -1,21 +1,22 @@
 'use strict';
 
-var app = angular.module('facebookService', []);
+export default angular.module('facebookService', [])
 
-app.factory('getEventFacebook', function($q) {
+.factory('getEventFacebook', ['$q', function($q) {
     return {
         getEvent: function(user_id) {
             var deferred = $q.defer();
-            FB.api('/'+user_id+'/events', {
+            FB.api('/' + user_id + '/events', {
                 fields: 'data'
             }, function(response) {
                 if (!response || response.error) {
                     deferred.reject('Error occured');
-                } else {
+                }
+                else {
                     deferred.resolve(response);
                 }
             });
             return deferred.promise;
         }
-    }
-});
+    };
+}]);

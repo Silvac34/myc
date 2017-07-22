@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewLeaveReviews', [])
+export default angular.module('myApp.viewLeaveReviews', [])
 
 .controller('ViewLeaveReviewsCtrl', ['$scope', '$http', 'getSpecificUserFactory', '$timeout', function($scope, $http, getSpecificUserFactory, $timeout) {
 

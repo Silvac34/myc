@@ -1,8 +1,8 @@
 'use strict';
 
-var modMyMealsDetailed = angular.module('myApp.viewMyMealsDtld', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'ngAnimate', 'ngMap']);
+export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
 
-modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', 'userResolve', '$state', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, userResolve, $state) {
+.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$stateParams', '$uibModal', 'ENV', '$timeout', 'meal', 'NgMap', 'getMealReviewServiceFactory', 'userResolve', '$state', function($scope, $http, $stateParams, $uibModal, ENV, $timeout, meal, NgMap, getMealReviewServiceFactory, userResolve, $state) {
 
     $scope.meal = meal.data;
 
@@ -297,9 +297,9 @@ modMyMealsDetailed.controller('ViewMyMealsDtldCtrl', ['$scope', '$http', '$state
         }
     };
 
-}]);
+}])
 
-modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
+.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
 
     $scope.delete = function() {
         var config = {
@@ -325,9 +325,9 @@ modMyMealsDetailed.controller('modalDeleteInstanceCtrl', function($scope, $http,
         $uibModalInstance.dismiss('cancel');
     }; //funcion to dismiss the modal
 
-});
+})
 
-modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, editedMeal, $timeout, $parse, $filter) {
+.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, editedMeal, $timeout, $parse, $filter) {
     $scope.editedMeal = editedMeal;
     $scope.addressComplement = $scope.editedMeal.privateInfo.address.complement;
     $scope.editedMeal.time = new Date($scope.editedMeal.time);
@@ -543,9 +543,9 @@ modMyMealsDetailed.controller('modalEditInstanceCtrl', function($scope, $http, $
     $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
     }; //funcion to dismiss the modal*/
-});
+})
 
-modMyMealsDetailed.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
+.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
 
     $scope.unsubscribe = function() {
         $http.post('/api/meals/' + meal._id + '/unsubscription').then(function(response) {

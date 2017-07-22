@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('currencySymbolService', []);
+export default angular.module('currencySymbolService', [])
 
-app.factory('currencySymbolFactory', ['$http', '$q', function($http, $q) {
+.factory('currencySymbolFactory', ['$http', '$q', function($http, $q) {
     return function getCurrencySymbol(country_code) {
         var myPromise = $q.defer();
         return $http.get("/static/sources/createMeal/currency.json").then(function(result_currency) {

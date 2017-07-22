@@ -1,28 +1,9 @@
 'use strict';
-
-var modViewMeals = angular.module('myApp.viewMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMealsDtld', 'ngMap', 'ngSanitize'])
-
-modViewMeals.config(['$stateProvider', function($stateProvider) {
-
-  $stateProvider
-    .state('view_meals.mealsMap', {
-      views: {
-        'mealsMap': {
-          templateUrl: 'static/viewMeals/viewMealsContainer/mealsMap.html',
-        }
-      }
-    })
-    .state('view_meals.mealsList', {
-      views: {
-        'mealsList': {
-          templateUrl: 'static/viewMeals/viewMealsContainer/mealsList.html',
-        }
-      }
-    });
-}]);
+var angular = require('angular');
+export default angular.module('myApp.viewMeals', ['myApp.viewMealsDtld', 'ngMap', 'ngSanitize'])
 
 
-modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', '$filter', '$compile', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap, $filter, $compile) {
+.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap) {
 
   $scope.meals = response; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
@@ -365,9 +346,9 @@ modViewMeals.controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$aut
     };
   };
 
-}]);
+}])
 
-modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstance) {
+.controller('filterMealModalCtrl', ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
   $scope.cancel = function() {
     $uibModalInstance.close();
   };
@@ -391,4 +372,4 @@ modViewMeals.controller('filterMealModalCtrl', function($scope, $uibModalInstanc
     $uibModalInstance.close();
   };
 
-});
+}]);

@@ -1,6 +1,6 @@
 'use strict';
 
-var modMealsDetailed = angular.module('myApp.viewMealsDtld', ['angular-svg-round-progressbar', 'ui.bootstrap'])
+export default angular.module('myApp.viewMealsDtld', [])
 
 .controller('ViewMealsDtldCtrl', ['$scope', '$http', 'meal', '$uibModalInstance', '$state', 'isAuthenticated', '$auth', 'userServicesFactory', '$rootScope', 'ENV', 'ezfb', 'getSpecificUserFactory', function($scope, $http, meal, $uibModalInstance, $state, isAuthenticated, $auth, userServicesFactory, $rootScope, ENV, ezfb, getSpecificUserFactory) {
 

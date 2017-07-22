@@ -12,55 +12,59 @@
   <title>myCommuneaty</title>
   <meta name="description" content="myCommuneaty: more than a meal, meet new people with collaborative meals">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../static/css/bootstrap.css">
+  <!--<link rel="stylesheet" href="../static/css/bootstrap.css">
   <link rel="stylesheet" href="../static/css/app.css">
-  <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">-->
   <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/dist/css/app.bundle.css">
+  <link rel="stylesheet" href="../static/dist/css/bootstrap.bundle.css">
   <!-- permet d'obtenir la loading bar pour les transitions-->
   <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
   <link rel="icon" type="image/png" href="../static/sources/logo/logo.ico" />
-
-  <script src="../static/bower_components/angular/angular.min.js"></script>
+  <!--<script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
   <script src="../static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="../static/bower_components/satellizer/satellizer.min.js"></script>
   <script src="../static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="../static/bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
-  <script src="../static/bower_components/angular-filter/dist/angular-filter.min.js"></script>
-  <script src="../static/components/dateDropdownService.js"></script>
-  <script src="../static/app.js"></script>
-  <script src="../static/config.js"></script>
-  <script src="../static/viewCreateMeal/viewCreateMeal.js"></script>
+  <script src="../static/bower_components/angular-animate/angular-animate.min.js"></script>-->
+  
+  <!--<script src="../static/bower_components/angular-filter/dist/angular-filter.min.js"></script>-->
+  <script type="text/javascript" src="../static/dist/vendor.bundle.js"></script>
+  <script type="text/javascript" src="../static/dist/app.bundle.js"></script>
+  <script type="text/javascript" src="../static/config.js"></script>
+  <script type="text/javascript" src="../static/bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+  <!--<script src="../static/viewCreateMeal/viewCreateMeal.js"></script>
   <script src="../static/viewMeals/viewMeals.js"></script>
   <script src="../static/viewMeals/viewMealsDtld/viewMealsDtld.js"></script>
-  <script src="../static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.js"></script>
   <script src="../static/viewMyMeals/viewMyMeals.js"></script>
+  <script src="../static/viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.js"></script>
   <script src="../static/viewLogin/viewLogin.js"></script>
   <script src="../static/welcome/welcome.js"></script>
   <script src="../static/profile/viewProfile.js"></script>
   <script src="../static/viewManageRequests/viewManageRequests.js"></script>
   <script src="../static/viewLeaveReviews/viewLeaveReviews.js"></script>
-  <script src="../static/components/userServices.js"></script>
   <script src="../static/components/getAgeService.js"></script>
+  <script src="../static/components/userServices.js"></script>
   <script src="../static/components/getReviewService.js"></script>
   <script src="../static/components/currencySymbolService.js"></script>
+  <script src="../static/components/dateDropdownService.js"></script>
   <script src="../static/components/facebookService.js"></script>
-  <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script>
+  <script type='text/javascript' src='../static/bower_components/angular-loading-bar/build/loading-bar.js'></script>-->
   <!-- permet d'obtenir la loading bar pour les transitions-->
-  <script src="../static/bower_components/angular-easyfb/build/angular-easyfb.min.js"></script>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M"></script>
+  <!--<script src="../static/bower_components/angular-easyfb/build/angular-easyfb.min.js"></script>
   <script src="../static/bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
-  <script src="../static/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
-
-
+  <script src="../static/bower_components/ngmap/build/scripts/ng-map.min.js"></script>-->
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M"></script>
 
 </head>
 
 <body>
   <section ng-if="$state.includes('welcome')" style="position:relative; top:-60px">
     <div class="col-xs-8 welcome-plugin-social-fb">
-      <div class="general-title text-info" style="text-transform:inherit"><img ng-src="static/sources/logo/logo_with_circle.jpg" style="height:50px"><h1 class="hidden-xs size-20" style="display:initial"> myCommuneaty</h1><h1 class="hidden-sm hidden-md hidden-lg size-12" style="display:initial">myCommuneaty</h1></div>
+      <div class="general-title text-info" style="text-transform:inherit"><img ng-src="static/sources/logo/logo_with_circle.jpg" style="height:50px">
+        <h1 class="hidden-xs size-20" style="display:initial"> myCommuneaty</h1>
+        <h1 class="hidden-sm hidden-md hidden-lg size-12" style="display:initial">myCommuneaty</h1>
+      </div>
       <div class="clear10"></div>
       <div class="clear5"></div>
       <div class="fb-follow" data-href="https://www.facebook.com/mycommuneaty" data-layout="button" data-size="small" data-show-faces="true"></div>

@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('getReviewService', []);
+export default angular.module('getReviewService', [])
 
-app.factory('getMealReviewServiceFactory', ['$http', function($http) {
+.factory('getMealReviewServiceFactory', ['$http', function($http) {
 
     return function getReviews(mealId, userId) { //récupère les commentaires propres à un repas fait par un user specific
         return $http.get('/api/reviews?where={"mealAssociated": "' + mealId + '", "fromUser._id": "' + userId + '"}').then(function successCallback(result) {
@@ -16,9 +16,9 @@ app.factory('getMealReviewServiceFactory', ['$http', function($http) {
         });
     };
 
-}]);
+}])
 
-app.factory('getUserReviewServiceFactory', ['$http', function($http) {
+.factory('getUserReviewServiceFactory', ['$http', function($http) {
 
     return function getReviews(participantId) { //récupère les commentaires fait à un utiisateur en particulier
         return $http.get('/api/reviews?where={"forUser._id": "' + participantId + '"}').then(function successCallback(result) {

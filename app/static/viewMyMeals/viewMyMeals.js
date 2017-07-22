@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewMyMeals', ['ui.router', 'angular-svg-round-progressbar', 'ui.bootstrap', 'myApp.viewMyMealsDtld', 'ngSanitize'])
+export default angular.module('myApp.viewMyMeals', ['myApp.viewMyMealsDtld', 'ngSanitize'])
 
 .controller('ViewMyMealsCtrl', ['$scope', 'response', '$uibModal', function($scope, response, $uibModal) {
 

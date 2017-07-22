@@ -1,27 +1,8 @@
 'use strict';
 
-angular.module('myApp.viewProfile', ['dateDropdownService'])
-
-.config(['$stateProvider', function($stateProvider) {
-
-  $stateProvider.state('profile.mealsList', {
-    views: {
-      'mealsList': {
-        templateUrl: 'static/viewMeals/viewMealsContainer/mealsList.html'
-      }
-    }
-  });
-}])
+export default angular.module('myApp.viewProfile', ['dateDropdownService'])
 
 .controller('ViewProfileCtrl', ['$scope', '$http', 'userInfo', 'ENV', 'ezfb', '$timeout', 'getUserReviewServiceFactory', 'getSpecificUserFactory', '$state', '$uibModal', '$auth', function($scope, $http, userInfo, ENV, ezfb, $timeout, getUserReviewServiceFactory, getSpecificUserFactory, $state, $uibModal, $auth) {
-
-  function getCountry(country_code, jsonData) {
-    for (var i = 0; i < jsonData.length; i++) {
-      if (jsonData[i].code == country_code) {
-        return jsonData[i].name;
-      }
-    }
-  }
 
   function setValue(variable) {
     if (typeof variable === 'undefined') {

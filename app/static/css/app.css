@@ -667,46 +667,48 @@ caption {
     color: initial;
 }
 
+
 /* viewMeals filter ------------------------------------------------*/
 
 .filter-date-checkbox-mobile {
-  width: 14%;
-  float: left;
+    width: 14%;
+    float: left;
 }
 
 .filter-label {
-  font-size: 16px;
-  margin-bottom: 10px;
-  margin-top: 15px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 15px;
 }
 
 .meal-search-filter {
-  float: left;
-  margin-left: 15px;
-  position: absolute;
+    float: left;
+    margin-left: 15px;
+    position: absolute;
 }
 
 .btn-filter-mobile-reinitialize {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .text-in-filter {
-  padding-left: 4px;
-  font-size: 16px;
+    padding-left: 4px;
+    font-size: 16px;
 }
 
 .collapsing-filter {
-  padding-left: 20px;
-  padding-bottom: 15px;
-  margin-left: -20px;
-  margin-top: 8px;
+    padding-left: 20px;
+    padding-bottom: 15px;
+    margin-left: -20px;
+    margin-top: 8px;
 }
 
 .row-margin-filter {
-  margin-right: -5px;
-  margin-left: -10px;
+    margin-right: -5px;
+    margin-left: -10px;
 }
+
 
 /* viewMealsDtld ---------------------------------------------------*/
 
@@ -1052,6 +1054,7 @@ caption {
     display: flex;
 }
 
+
 /* mise en page de welcomePage */
 
 .hero.mod-different-roles {
@@ -1269,7 +1272,6 @@ a.mod-underline:hover {
     text-decoration: none
 }
 
-
 .bluerow {
     border-bottom: solid 1px #002E4E;
     background: #0B4060;
@@ -1288,8 +1290,8 @@ a.mod-underline:hover {
 .btn-bluerow {
     color: #fff;
     text-transform: uppercase;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 16px !important;
+    font-weight: 700 !important;
     padding: 15px 70px;
     border: none;
     border-right: solid 1px #002E4E;
@@ -1606,6 +1608,7 @@ a.mod-underline:hover {
     }
 }
 
+
 /* puts the google places autocomplete dropdown results above the bootstrap modal 1050 zindex.*/
 
 .pac-container {
@@ -1619,4 +1622,28 @@ a.mod-underline:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
+}
+
+
+/* bootstrap-social */
+
+.btn-social {
+    position: relative;
+    padding-left: 44px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.btn-social>:first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2)
 }

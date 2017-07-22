@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('getAgeService', []);
+export default angular.module('getAgeService', [])
 
-app.factory('getAgeServiceFactory', function() {
+.factory('getAgeServiceFactory', function() {
 
     function calculateAge(birthday) { // birthday is a date
         var now = new Date;

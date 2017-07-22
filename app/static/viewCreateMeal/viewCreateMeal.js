@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAutocomplete'])
+export default angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate', 'ezfb', 'ngAutocomplete'])
 
 .controller('ViewCreateMealCtrl', ['$scope', '$http', '$uibModal', '$state', 'ENV', 'ezfb', '$auth', '$rootScope', 'userServicesFactory', function($scope, $http, $uibModal, $state, ENV, ezfb, $auth, $rootScope, userServicesFactory) {
   //$scope pour le plugin checkbox messenger

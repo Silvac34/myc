@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.viewManageRequests', [])
+export default angular.module('myApp.viewManageRequests', [])
 
 .controller('ViewManageRequestsCtrl', ['$scope', '$http', 'getSpecificUserFactory', function($scope, $http, getSpecificUserFactory) {
     if ($scope.$parent.$root.user) {

@@ -1,9 +1,47 @@
 'use strict';
+const angular = require('angular');
+//css//
+//require('./dist/bootstrap.bundle.js');
+require('./css/app.css');
+require('./bower_components/font-awesome/css/font-awesome.min.css');
+//controllers//
+require('./welcome/welcome.js');
+require('./viewCreateMeal/viewCreateMeal.js');
+require('./viewMeals/viewMeals.js');
+require('./viewMeals/viewMealsDtld/viewMealsDtld.js');
+require('./viewMyMeals/viewMyMeals.js');
+require('./viewMyMeals/viewMyMealsDtld/viewMyMealsDtld.js');
+require('./viewLogin/viewLogin.js');
+require('./profile/viewProfile.js');
+require('./viewLeaveReviews/viewLeaveReviews.js');
+require('./viewManageRequests/viewManageRequests.js');
+//components//
+require('./components/getAgeService.js');
+require('./components/currencySymbolService.js');
+require('./components/dateDropdownService.js');
+require('./components/facebookService.js');
+require('./components/getReviewService.js');
+require('./components/userServices.js');
+//bower-components//
+/*require('./bower_components/angular/angular.min.js');
+require('./bower_components/angular-sanitize/angular-sanitize.min.js');
+require('./bower_components/angular-ui-router/release/angular-ui-router.min.js');
+require('./bower_components/satellizer/satellizer.min.js');
+require('./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js');
+require('./bower_components/angular-animate/angular-animate.min.js');
+require('./bower_components/angular-svg-round-progressbar/build/roundProgress.min.js');
+require('./bower_components/angular-filter/dist/angular-filter.min.js');
+require('./bower_components/angular-loading-bar/build/loading-bar.js');
+require('./bower_components/angular-easyfb/build/angular-easyfb.min.js');
+require('./bower_components/ngAutocomplete/src/ngAutocomplete.js');
+require('./bower_components/ngmap/build/scripts/ng-map.min.js');*/
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'config',
+  'angular-svg-round-progressbar',
   'ui.bootstrap',
+  'ngAnimate',
   'ui.router',
   'satellizer',
   'myApp.viewCreateMeal',
@@ -51,7 +89,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
       templateUrl: 'static/viewMeals/viewMeals.html',
       controller: 'ViewMealsCtrl',
       resolve: {
-        response: function($http) {
+        response: ['$http', function($http) {
           var date = new Date();
           var now = date.toISOString();
           return $http.get('/api/meals?where={"time": {"$gte": "' + now + '"}}').then(function successCallBack(response) {
@@ -68,6 +106,21 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
           }, function errorCallback(response) {
             console.log(response);
           });
+        }]
+      }
+    });
+  $stateProvider
+    .state('view_meals.mealsMap', {
+      views: {
+        'mealsMap': {
+          templateUrl: 'static/viewMeals/viewMealsContainer/mealsMap.html',
+        }
+      }
+    })
+    .state('view_meals.mealsList', {
+      views: {
+        'mealsList': {
+          templateUrl: 'static/viewMeals/viewMealsContainer/mealsList.html',
         }
       }
     });
@@ -86,9 +139,9 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         requiredLogin: true
       },
       resolve: {
-        response: function($http) {
+        response: ['$http', function($http) {
           return $http.get('/api/meals/private');
-        }
+        }]
       }
     });
   $stateProvider
@@ -103,16 +156,16 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         successSubscribedMessage: null
       },
       resolve: {
-        userResolve: function(userServicesFactory) {
+        userResolve: ['userServicesFactory', function(userServicesFactory) {
           return userServicesFactory();
-        },
-        meal: function($http, $stateParams, $state) {
+        }],
+        meal: ['$http', '$stateParams', '$state', function($http, $stateParams, $state) {
           return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response) {
             return response;
           }, function errorCallback() {
             $state.go("view_meals.mealsList");
           });
-        }
+        }]
       }
     });
   $stateProvider
@@ -171,11 +224,18 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
       templateUrl: 'static/profile/viewProfile.html',
       controller: 'ViewProfileCtrl',
       resolve: {
-        userInfo: function($http, $stateParams) {
+        userInfo: ['$http', '$stateParams', function($http, $stateParams) {
           return $http.get('/api/users/' + $stateParams.userId);
-        }
+        }]
       }
     });
+  $stateProvider.state('profile.mealsList', {
+    views: {
+      'mealsList': {
+        templateUrl: 'static/viewMeals/viewMealsContainer/mealsList.html'
+      }
+    }
+  });
   $stateProvider
     .state('manage_requests', {
       url: '/manage_requests',
@@ -205,7 +265,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 }]);
 
 
-app.run(function($rootScope, $state, $auth) {
+app.run(['$rootScope', '$state', '$auth', function($rootScope, $state, $auth) {
   $rootScope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams) {
       // when the state change, the user load the template at the top of the window
@@ -232,7 +292,7 @@ app.run(function($rootScope, $state, $auth) {
   // enable to get the state in the view
   $rootScope.$state = $state;
 
-});
+}]);
 
 app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', '$timeout', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb, $timeout) {
 
@@ -298,41 +358,41 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
       });
     }
   };
-  
-    var initializeUserLabels = function (){
+
+  var initializeUserLabels = function() {
     $timeout(function() {
-        //on récupère les pending requests et on le mets dans le rootscope
-        $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
-          $rootScope.user.nbDifferentPendingRequest = 0;
-          var meals = res.data._items;
-          meals.forEach(function(meal) {
-            meal.users.forEach(function(participant) {
-              if (participant.status == "pending") {
-                $rootScope.user.nbDifferentPendingRequest += 1;
-              }
-            });
-          });
-        });
-        //on récupère les reviews qu'on a besoin de laisser et on les met dans rootscope
-        var uniqueListForRequest = [];
-        var now = new Date;
-        $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users": {"$not": {"$size": 1}}}]}').then(function(resp) { // on récupère les meals de l'utilisateur dont on consulte le profile où il n'y a pas que lui d'inscrit
-          resp.data._items.forEach(function(element) {
-            var mealDate = new Date(element.time);
-            if (mealDate < now) { // on ne peut laisser une review qu'à un meal qui s'est passé
-              element.users.forEach(function(participant) {
-                if (participant._id != $rootScope.user._id) { //on enlève les reviews pour moi même
-                  uniqueListForRequest.push('"' + (participant._id + $rootScope.user._id + element._id).toString() + '"');
-                }
-              });
+      //on récupère les pending requests et on le mets dans le rootscope
+      $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users.status": "pending"} ]}').then(function(res) { // on récupère les meals de l'utilisateur dont on consulte le profil
+        $rootScope.user.nbDifferentPendingRequest = 0;
+        var meals = res.data._items;
+        meals.forEach(function(meal) {
+          meal.users.forEach(function(participant) {
+            if (participant.status == "pending") {
+              $rootScope.user.nbDifferentPendingRequest += 1;
             }
           });
-          $http.get('api/reviews?where={"unique": {"$in":[' + uniqueListForRequest + ']}}').then(function successCallBack(response) {
-            $rootScope.user.nbDifferentReviewsToLeave = uniqueListForRequest.length - response.data._items.length;
-          });
         });
-      }, 0);
-  }
+      });
+      //on récupère les reviews qu'on a besoin de laisser et on les met dans rootscope
+      var uniqueListForRequest = [];
+      var now = new Date;
+      $http.get('api/meals?where={"$and": [{"users._id": "' + $rootScope.user._id + '"}, {"users": {"$not": {"$size": 1}}}]}').then(function(resp) { // on récupère les meals de l'utilisateur dont on consulte le profile où il n'y a pas que lui d'inscrit
+        resp.data._items.forEach(function(element) {
+          var mealDate = new Date(element.time);
+          if (mealDate < now) { // on ne peut laisser une review qu'à un meal qui s'est passé
+            element.users.forEach(function(participant) {
+              if (participant._id != $rootScope.user._id) { //on enlève les reviews pour moi même
+                uniqueListForRequest.push('"' + (participant._id + $rootScope.user._id + element._id).toString() + '"');
+              }
+            });
+          }
+        });
+        $http.get('api/reviews?where={"unique": {"$in":[' + uniqueListForRequest + ']}}').then(function successCallBack(response) {
+          $rootScope.user.nbDifferentReviewsToLeave = uniqueListForRequest.length - response.data._items.length;
+        });
+      });
+    }, 0);
+  };
 
   authVerification();
 

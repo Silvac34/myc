@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.welcome', ['facebookService'])
+export default angular.module('myApp.welcome', ['facebookService'])
 
 .controller('WelcomeCtrl', ['$scope', 'getEventFacebook', 'ENV', '$window', function($scope, getEventFacebook, ENV, $window) {
     $scope.status = {

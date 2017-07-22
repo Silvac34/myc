@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('userServices', []);
+export default angular.module('userServices', [])
 
-app.factory('userServicesFactory', ['$http', function($http) {
+.factory('userServicesFactory', ['$http', function($http) {
 
     return function getUserInfo() {
         return $http.get('/api/users/private').then(function successCallback(result) {
@@ -16,9 +16,9 @@ app.factory('userServicesFactory', ['$http', function($http) {
         });
     };
 
-}]);
+}])
 
-app.factory('getSpecificUserFactory', ['$http', function($http) {
+.factory('getSpecificUserFactory', ['$http', function($http) {
 
     return function getUserInfo(userId) {
         return $http.get('/api/users?where={"_id": "' + userId + '"}').then(function successCallback(result) {

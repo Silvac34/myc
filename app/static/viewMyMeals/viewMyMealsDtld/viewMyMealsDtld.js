@@ -26,8 +26,7 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
     }
 
     check_loading();
-    $scope.data_href_comment = ENV.fbRedirectURI + "!#/my_meals/" + $scope.meal._id;
-    $scope.data_href_publishOnFacebook = ENV.fbRedirectURI + "!#/view_meals";
+    $scope.data_href = ENV.fbRedirectURI + "#!/my_meals/" + $scope.meal._id;
 
     //modalDelete to delete a meal
     $scope.openModalDelete = function() {
@@ -167,8 +166,9 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
 
     });
 
-
+    
     var vm = this;
+    //rajouter if user != admin
     NgMap.getMap("map").then(function(map) {
         vm.map = map;
     });

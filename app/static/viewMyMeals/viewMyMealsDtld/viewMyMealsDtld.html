@@ -99,7 +99,7 @@
                 <div class="panel-body">
                     <div ng-if="isOldMeal() == false">
                         <i class="fa fa-share"></i> Invite friends
-                        <div class="fb-send" data-href="data_href_publishOnFacebook"></div>
+                        <div class="fb-send" data-href="{{data_href}}"></div>
                     </div>
                     <div class="meal-info-label">
                         <span ng-if="userRole=='cook'">Inscribed as: <strong class="text-success">" Help cooking "</strong></span>
@@ -358,7 +358,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="fb-comments" data-href="{{data_href_comment}}" data-width="100%" data-numposts="5"></div>
+            <div class="fb-comments" data-href="{{data_href}}" data-width="100%" data-numposts="5"></div>
         </div>
     </div>
     <div class="row my-meal-btn-center">

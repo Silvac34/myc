@@ -14,12 +14,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--<link rel="stylesheet" href="../static/css/bootstrap.css">
   <link rel="stylesheet" href="../static/css/app.css">
-  <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">-->
-  <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/bower_components/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">-->
   <link rel="stylesheet" href="../static/dist/css/app.bundle.css">
-  <link rel="stylesheet" href="../static/dist/css/bootstrap.bundle.css">
+  <!--<link rel="stylesheet" href="../static/dist/css/bootstrap.bundle.css">-->
   <!-- permet d'obtenir la loading bar pour les transitions-->
-  <link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+  <!--<link rel='stylesheet' href='../static/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />-->
   <link rel="icon" type="image/png" href="../static/sources/logo/logo.ico" />
   <!--<script src="../static/bower_components/angular/angular.min.js"></script>
   <script src="../static/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
@@ -112,7 +112,7 @@
               <li><a ui-sref="create_meal" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">Create a meal</a></li>
               <li><a ui-sref="view_meals" ui-sref-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">Browse a meal</a></li>
               <li><a ui-sref="my_meals" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My meals</a></li>
-              <li><a ui-sref="profile({userId:user._id})" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My profile <i ng-if="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages" class="fa fa-exclamation-triangle"></i></a></li>
+              <li><a ui-sref="profile({userId:user._id})" class="pointer" data-toggle="collapse" data-target="navbar-collapse" ng-click="navbarCollapsed=true" id="navbar-button-position">My profile <i ng-if="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages" class="fa fa-exclamation-triangle"></i></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown" style="cursor:pointer">

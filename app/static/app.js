@@ -2,8 +2,9 @@
 const angular = require('angular');
 //css//
 //require('./dist/bootstrap.bundle.js');
-require('./css/app.css');
-require('./bower_components/font-awesome/css/font-awesome.min.css');
+//require('./css/app.css');
+require('font-awesome-webpack!./css/font-awesome/font-awesome.config.js');
+//require('./bower_components/font-awesome/css/font-awesome.min.css');
 //controllers//
 require('./welcome/welcome.js');
 require('./viewCreateMeal/viewCreateMeal.js');
@@ -68,7 +69,8 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 
   $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
   $httpProvider.defaults.headers.common.Pragma = "no-cache"; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
-
+  
+  //enlève le spinner de la loadingbar
   cfpLoadingBarProvider.includeSpinner = false;
 
   $stateProvider
@@ -223,6 +225,9 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
       url: '/profile/:userId',
       templateUrl: 'static/profile/viewProfile.html',
       controller: 'ViewProfileCtrl',
+      data: {
+        requiredLogin: true
+      },
       resolve: {
         userInfo: ['$http', '$stateParams', function($http, $stateParams) {
           return $http.get('/api/users/' + $stateParams.userId);
@@ -265,7 +270,29 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 }]);
 
 
-app.run(['$rootScope', '$state', '$auth', function($rootScope, $state, $auth) {
+app.run(['$rootScope', '$state', '$auth', '$transitions', function($rootScope, $state, $auth, $transitions) {
+  $rootScope.$state = $state;
+  var matchSuccess = {};
+
+  var matchOnBefore = {
+    to: function(state) {
+      return state.data != null && state.data.requiredLogin === true;
+    }
+  };
+
+  $transitions.onBefore(matchOnBefore, function(trans) {
+    if ($auth.isAuthenticated() != true) {
+      return trans.router.stateService.target("login");
+    }
+  });
+
+  $transitions.onSuccess(matchSuccess, function($transitions) {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    $rootScope.fromState = $transitions.$from();
+    $rootScope.fromState = $transitions.$to();
+  });
+
+  /* 
   $rootScope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams) {
       // when the state change, the user load the template at the top of the window
@@ -288,9 +315,9 @@ app.run(['$rootScope', '$state', '$auth', function($rootScope, $state, $auth) {
         $state.go('login');
       }
     });
-
+*/
   // enable to get the state in the view
-  $rootScope.$state = $state;
+
 
 }]);
 

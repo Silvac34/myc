@@ -7,13 +7,13 @@ export default angular.module('myApp.viewMeals', ['myApp.viewMealsDtld', 'ngMap'
 
   $scope.meals = response; //récupère les données passées lorsqu'on charge la page (chargement lors de loading de la page)
 
-  /*$scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
+  $scope.$watch("manualSubscriptionPending", function(newValue, oldValue) { //permet de savoir si dans les données chargées, il y a des meals en attente de validation
     if (newValue == true && oldValue == undefined) {
       $timeout(function() {
         $scope.manualSubscriptionPending = false;
       }, 4000);
     }
-  });*/
+  });
 
   $scope.datasUserForEachMeal = function(meal) { //function qui retourne l'utilisateur s'il s'est inscrit
     if ($scope.$parent.$root.user) {

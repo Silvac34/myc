@@ -4,11 +4,14 @@ body {
     padding-top: 70px;
 }
 
+.header {
+    background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
+    background-size: cover;
+}
+
 @media (max-width: 767px) {
     .header {
         height: 355px;
-        background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
-        background-size: cover;
         filter: brightness(85%) saturate(190%);
     }
 }
@@ -16,8 +19,6 @@ body {
 @media (min-width: 768px) {
     .header {
         height: 560px;
-        background: #fff url("/static/sources/header/photo_header.jpg") no-repeat center;
-        background-size: cover;
         filter: brightness(70%) saturate(190%);
     }
     #section {
@@ -434,6 +435,7 @@ caption {
 #loading-bar .bar {
     background: #033c73;
 }
+
 
 /* Navbar ------------------------------------------------------------------------------------ */
 

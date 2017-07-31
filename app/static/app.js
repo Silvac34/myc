@@ -69,7 +69,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 
   $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
   $httpProvider.defaults.headers.common.Pragma = "no-cache"; // ajoute le header à chaque requête http pour que chrome n'utilse pas son cache pour sauvegarder les données (permet d'afficher correctement les pendings requests)
-  
+
   //enlève le spinner de la loadingbar
   cfpLoadingBarProvider.includeSpinner = false;
 
@@ -161,11 +161,18 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
         userResolve: ['userServicesFactory', function(userServicesFactory) {
           return userServicesFactory();
         }],
-        meal: ['$http', '$stateParams', '$state', function($http, $stateParams, $state) {
+        meal: ['$http', '$stateParams', '$state', '$rootScope', function($http, $stateParams, $state, $rootScope) {
           return $http.get('/api/meals/private/' + $stateParams.myMealId).then(function successCallBack(response) {
             return response;
           }, function errorCallback() {
-            $state.go("view_meals.mealsList");
+            $rootScope.toParamsMealId = {
+              "myMealId": $stateParams.myMealId
+            };
+            $state.go("view_meals.mealsList", {
+              reload: true,
+              inherit: false,
+              notify: false
+            });
           });
         }]
       }
@@ -271,25 +278,34 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 
 
 app.run(['$rootScope', '$state', '$auth', '$transitions', function($rootScope, $state, $auth, $transitions) {
-  $rootScope.$state = $state;
   var matchSuccess = {};
+  $rootScope.$state = $state;
 
-  var matchOnBefore = {
+  var matchNotLogged = {
     to: function(state) {
       return state.data != null && state.data.requiredLogin === true;
     }
   };
 
-  $transitions.onBefore(matchOnBefore, function(trans) {
+  $transitions.onBefore(matchNotLogged, function(trans) { //on fait une redirection qui est du coup intercepté avant l'auth et donc on repart sur login. Besoin d'utiliser on start dedans onbefore?
     if ($auth.isAuthenticated() != true) {
+      $rootScope.fromState = trans.$from();
+      $rootScope.toState = trans.$to();
+      if (trans.$to().name == "view_my_dtld_meals") {
+        $rootScope.toParamsMealId = {
+          "myMealId": trans._targetState._params.myMealId
+        };
+      }
       return trans.router.stateService.target("login");
     }
   });
 
   $transitions.onSuccess(matchSuccess, function($transitions) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    $rootScope.fromState = $transitions.$from();
-    $rootScope.fromState = $transitions.$to();
+    if ($transitions.$to().name != "login") {
+      $rootScope.fromState = $transitions.$from();
+      $rootScope.toState = $transitions.$to();
+    }
   });
 
   /* 
@@ -352,7 +368,14 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     authe(provider).then(function successCallBack() {
       toState = toState || undefined;
       if (toState != undefined) { //permet à l'utilisateur de se retrouver sur la page qu'il a cliqué avant d'avoir besoin de s'identifier
-        $state.go(toState, toParams);
+        if (toState == "profile") {
+          $state.go(toState, {
+            "userId": $scope.user._id
+          });
+        }
+        else {
+          $state.go(toState, toParams);
+        }
       }
       else {
         $state.reload();

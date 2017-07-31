@@ -75,8 +75,8 @@ export default angular.module('myApp.viewMeals', ['myApp.viewMealsDtld', 'ngMap'
     }
   };
 
-  if ($scope.$parent.$root.toState && $scope.$parent.$root.toState.name == "view_my_dtld_meals" && $scope.$parent.$root.fromState && ($scope.$parent.$root.fromState.name == "" || $scope.$parent.$root.fromState.name == "login")) { //permet d'ouvrir le modal associé à un repas que j'essayais d'ouvrir depuis un lien extérieur si je n'étais pas identifier auparavant
-    $scope.openModalDtld($scope.$parent.$root.toParams.myMealId);
+  if ($scope.toState == "view_meals.view_meals.mealsList" && $scope.toParamsMealId && ($scope.fromState == "" || $scope.fromState == "login")) { //permet d'ouvrir le modal associé à un repas que j'essayais d'ouvrir depuis un lien extérieur si je n'étais pas identifier auparavant
+    $scope.openModalDtld($scope.toParamsMealId.myMealId);
   }
 
   //on définit le prix du repas qui doit s'afficher

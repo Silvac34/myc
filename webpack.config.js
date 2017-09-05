@@ -14,8 +14,9 @@ module.exports = {
     entry: {
         bootstrap: bootstrapConfig,
         app: './app.js',
-        vendor: ['angular', 'angular-sanitize', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap']
+        vendor: ['angular', 'angular-sanitize', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate']
     },
+    devtool: 'inline-source-map',
     output: {
         path: __dirname + '/app/static/dist',
         filename: '[name].bundle.js'

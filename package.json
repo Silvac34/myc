@@ -24,6 +24,7 @@
     "satellizer": "^0.15.5"
   },
   "devDependencies": {
+    "angular-translate": "^2.15.2",
     "bootstrap": "^3.3.7",
     "bootstrap-loader": "^2.1.0",
     "bootstrap-sass": "^3.3.7",

@@ -58,7 +58,8 @@ var app = angular.module('myApp', [
   'ezfb',
   'getReviewService',
   'getAgeService',
-  'angular.filter'
+  'angular.filter'//,
+  //'pascalprecht.translate'
 ]);
 
 app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {

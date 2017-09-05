@@ -139,6 +139,17 @@ def sendNotificationPreference(meal, mealPrice):
             text = "Hello " + user["first_name"] + ",\nThere is a meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
             payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
+
+#@celery.task()
+def sendNotificationTeam(meal, mealPrice):
+    users = Application.app.data.driver.db.users.find({"_id": {'$in': [ ObjectId("58de100f1b2a09000c78096a"),ObjectId("58de2fb4564953000c5918a9")]}}) #envoie un message à dimitri et maylis quand un repas est publié
+    meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend
+    local_meal_time = meal_time_parse + timedelta(minutes=meal["privateInfo"]["address"]["utc_offset"]) #on ajoute le décallage horaire
+    meal_time_formated = "{:%A, %B %d at %H:%M}".format(local_meal_time) #on met l'heure du repas sous bon format
+    for user in users:
+        text = "Hello " + user["first_name"] + ",\nThere is a new meal on " + meal_time_formated + " in " + meal["address"]["town"] + ". The menu is: \"" + meal["menu"]["title"] + "\" and for about $" + str(mealPrice)
+        payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
+        requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
         
 @celery.task()
 def addReviewRatingToUser(userId, rating):
@@ -337,6 +348,7 @@ def before_storing_POST_meals (items):
             if price_notification == None:
                 price_notification = price["simpleGuestPrice"]
         sendNotificationPreference(meal, price_notification)
+        sendNotificationTeam(meal, price_notification)
         #################
 
 #POST api/meals

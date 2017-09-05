@@ -140,7 +140,7 @@ def sendNotificationPreference(meal, mealPrice):
             payload = {'recipient': {'user_ref': user["privateInfo"]["user_ref"] }, 'message': {'text': text}} # We're going to send this back to the 
             requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token=' + Application.app.config['TOKEN_POST_MESSENGER'], json=payload) # Lets send it
 
-#@celery.task()
+@celery.task()
 def sendNotificationTeam(meal, mealPrice):
     users = Application.app.data.driver.db.users.find({"_id": {'$in': [ ObjectId("58de100f1b2a09000c78096a"),ObjectId("58de2fb4564953000c5918a9")]}}) #envoie un message à dimitri et maylis quand un repas est publié
     meal_time_parse = parser.parse(meal["time"]) #parse le format de l'heure venant du backend

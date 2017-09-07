@@ -37,6 +37,114 @@ require('./bower_components/angular-easyfb/build/angular-easyfb.min.js');
 require('./bower_components/ngAutocomplete/src/ngAutocomplete.js');
 require('./bower_components/ngmap/build/scripts/ng-map.min.js');*/
 
+var translationsEN = {
+  "WELCOME": {
+    "CREATE_A_MEAL": 'create a meal',
+    "BROWSE_A_MEAL": 'browse a meal',
+    "HOW_IT_WORKS": 'How it works',
+    "PUBLICATION": {
+      "TITLE": 'Publication',
+      "PARAGRAPH": 'A member publishes a meal, choosing the number of participants and their roles.'
+    },
+    "SUBSCRIPTION": {
+      "TITLE": 'Subscription',
+      "PARAGRAPH": 'Others members subscribe, selecting the role they want to take.'
+    },
+    "PARTICIPATION": {
+      "TITLE": 'Participation',
+      "PARAGRAPH": 'Let’s enjoy, preparing together and eating together the meal.'
+    },
+    "DIFFERENT_ROLES": {
+      "TITLE": '4 different roles',
+      "HOST": {
+        "NAME": 'Host',
+        "DESCRIPTION": 'The Host is the one who organizes the meal and receives at home. He is in charge of the groceries.'
+      },
+      "HELP_COOKING": {
+        "NAME": 'Help cooking',
+        "DESCRIPTION": 'The Help cooking are helpers guests. They will arrive earlier in order to help the host to cook.'
+      },
+      "HELP_CLEANING": {
+        "NAME": 'Help cleaning',
+        "DESCRIPTION": 'The Help cleaning are helpers guests. They will help the host to clean the dishes and order.'
+      },
+      "SIMPLE_GUEST": {
+        "NAME": 'Simple guest',
+        "DESCRIPTION": 'The Simple guests are guests. They won’t help the host but they will pay a little bit more.'
+      },
+    },
+    "WHAT_ABOUT_MONEY": {
+      "TITLE": 'What about the money ?',
+      "PARAGRAPH": 'The price of the groceries is shared between the participants.',
+      "WITHOUT_SIMPLE_GUEST": {
+        "TITLE": 'Without simple guests',
+        "PARAGRAPH": 'Everybody pays the same.'
+      },
+      "WITH_SIMPLE_GUEST": {
+        "TITLE": 'With simple guests',
+        "PARAGRAPH": 'Simple guests pay a little bit more and this surplus is shared between the host and the helpers.'
+      },
+      "PARAGRAPH_2": 'You pay directly to the host who bought the groceries. <strong>THERE ARE NO WEBSITE FEES. Our service is completely free.</strong>'
+    },
+    "VALUES": {
+      "TITLE": 'values',
+      "MEETING": {
+        "NAME": 'MEETING',
+        "DESCRIPTION": 'Meet gorgeous people from all over the world'
+      },
+      "SHARING": {
+        "NAME": 'SHARING',
+        "DESCRIPTION": 'Share together the meal but also its preparation and the price of the groceries'
+      },
+      "AUTHENTICITY_SIMPLICITY": {
+        "NAME": 'AUTHENTICITY<br>& SIMPLICITY',
+        "DESCRIPTION": 'Enjoy homemade food. All level of cookers are welcomed to organize meals'
+      },
+      "FRIENDLINESS": {
+        "NAME": 'FRIENDLINESS',
+        "DESCRIPTION": 'Organize or participate to meals from three participants to many more'
+      },
+      "COMMUNITY": {
+        "NAME": 'COMMUNITY',
+        "DESCRIPTION": 'Join events where all the members of myCommuneaty are invited'
+      },
+      "NEW": {
+        "NAME": 'NEW',
+        "DESCRIPTION": 'Join us to start together this amazing adventure, launched in April 2017'
+      }
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+var translationsFR = {
+  "WELCOME": {
+    "CREATE_A_MEAL": 'créer un repas',
+    "BROWSE_A_MEAL": 'browse a meal',
+    "HOW_IT_WORKS": 'How it works',
+    "PUBLICATION": {
+      "TITLE": 'Publication',
+      "PARAGRAPH": 'A member publishes a meal, choosing the number of participants and their roles.'
+    }
+  }
+};
+
+var translationsES = {
+  "WELCOME": {
+    "CREATE_A_MEAL": 'crear una cena',
+    "BROWSE_A_MEAL": 'browse a meal',
+    "HOW_IT_WORKS": 'How it works',
+    "PUBLICATION": 'Publication'
+  }
+};
+
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'config',
@@ -58,11 +166,11 @@ var app = angular.module('myApp', [
   'ezfb',
   'getReviewService',
   'getAgeService',
-  'angular.filter'//,
-  //'pascalprecht.translate'
+  'angular.filter',
+  'pascalprecht.translate'
 ]);
 
-app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider) {
+app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', '$translateProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider, $translateProvider) {
 
   if (!$httpProvider.defaults.headers.get) {
     $httpProvider.defaults.headers.common = {};
@@ -275,6 +383,12 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
     version: 'v2.6'
   });
 
+  $translateProvider.translations('en', translationsEN);
+  $translateProvider.translations('fr', translationsFR);
+  $translateProvider.translations('es', translationsES);
+  $translateProvider.preferredLanguage('en');
+  $translateProvider.fallbackLanguage('en');
+
 }]);
 
 
@@ -338,7 +452,7 @@ app.run(['$rootScope', '$state', '$auth', '$transitions', function($rootScope, $
 
 }]);
 
-app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', '$timeout', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb, $timeout) {
+app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '$http', '$rootScope', '$q', '$window', 'ezfb', '$timeout', '$translate', function($scope, $auth, $state, userServicesFactory, $http, $rootScope, $q, $window, ezfb, $timeout, $translate) {
 
   function isFacebookApp() {
     var ua = $window.navigator.userAgent || $window.navigator.vendor || $window.opera;
@@ -452,6 +566,10 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
   };
 
   $scope.sloganText = "When was the last time you met someone new?";
+
+  $rootScope.changeLanguage = function(langKey) { // permet de changer la langue depuis index.html en cliquant sur un des drapeaux
+    $translate.use(langKey);
+  };
 
 }]);
 

@@ -27,7 +27,7 @@
   <script src="../static/bower_components/satellizer/satellizer.min.js"></script>
   <script src="../static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="../static/bower_components/angular-animate/angular-animate.min.js"></script>-->
-  
+
   <!--<script src="../static/bower_components/angular-filter/dist/angular-filter.min.js"></script>-->
   <script type="text/javascript" src="../static/dist/vendor.bundle.js"></script>
   <script type="text/javascript" src="../static/dist/app.bundle.js"></script>
@@ -156,7 +156,7 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <p class="text-uppercase"><strong>Information</strong></p>
 
           <a ui-sref="footer_information_concept">Concept</a>
@@ -166,7 +166,7 @@
           <a ui-sref="footer_information_FAQ">FAQ</a><br>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <hr class="visible-xs-block">
           <p class="text-uppercase"><strong>Support</strong></p>
           <a ui-sref="footer_legal_guidelines">Guidelines</a>
@@ -179,7 +179,7 @@
 
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <hr class="visible-xs-block">
           <p class="text-uppercase"><strong>more</strong></p>
 
@@ -189,17 +189,16 @@
           <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
           <a ui-sref="footer_more_contact">Contact us</a><br>
         </div>
-        <!--
-      <div class="col-sm-3">
-        <hr class="visible-xs-block">
-        <p class="text-uppercase"><strong>Language</strong></p>
+        
+        <div class="col-sm-3">
+          <hr class="visible-xs-block">
+          <p class="text-uppercase"><strong>Language</strong></p>
 
-        <a href="/index-de.html" title="deutsch" class="languageSelector" data-lang="de" data-href="/index-de.html"><img src="/gfx/2015/icons/de.png"></a> &nbsp;
-        <a href="/index-fr.html" title="fran&amp;ccedil;ais" class="languageSelector" data-lang="fr" data-href="/index-fr.html"><img src="/gfx/2015/icons/fr.gif"></a> &nbsp;
-        <a href="/index-es.html" title="español" class="languageSelector" data-lang="es" data-href="/index-es.html"><img src="/gfx/2015/icons/es.png"></a> &nbsp;
-      </div>
-    </div>
-    -->
+          <a title="english" class="pointer" ng-click="changeLanguage('en')"><img ng-src="static/sources/footer_language/english.png"></a> &nbsp;
+          <a title="français" class="pointer" ng-click="changeLanguage('fr')"><img ng-src="static/sources/footer_language/french.png"></a> &nbsp;
+          <a title="español" class="pointer" ng-click="changeLanguage('es')"><img ng-src="static/sources/footer_language/spanish.png"></a> &nbsp;
+        </div>
+
       </div>
     </div>
     <div class="clear20"></div>

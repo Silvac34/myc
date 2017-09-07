@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+const path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var chunk = {
     name: "vendor",
@@ -17,8 +18,15 @@ module.exports = {
         vendor: ['angular', 'angular-sanitize', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate']
     },
     devtool: 'inline-source-map',
+    /*devServer: {
+        contentBase: path.join(__dirname, "/app/static/dist"),
+        hot: true,
+        compress: true,
+        public: 'shareat-dimitrikohn.c9users.io',
+        stats: "errors-only"
+    },*/
     output: {
-        path: __dirname + '/app/static/dist',
+        path: path.resolve(__dirname + '/app/static/dist'),
         filename: '[name].bundle.js'
     },
     module: {

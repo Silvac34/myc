@@ -113,6 +113,71 @@ var translationsEN = {
         "DESCRIPTION": 'Join us to start together this amazing adventure, launched in April 2017'
       }
     }
+  },
+
+  "CREATE_A_MEAL": {
+    "TITLE": '- Create a new meal -',
+    "FORM": {
+      "PUBLIC_INFO": 'Public information',
+      "MENU_TITLE": 'Title of your menu',
+      "MENU_DESCRIPTION": 'Menu description (optional)',
+      "SPECIAL_MEAL": {
+        "TITLE": 'Special meal? ',
+        "TOOLTIP": 'do not check if not'
+      },
+      "VEGETARIAN": 'Vegetarian',
+      "VEGAN": 'Vegan',
+      "KOSHER": 'Kosher',
+      "HALAL": 'Halal',
+      "DATE": 'Date',
+      "PARTICIPANTS": 'Participants',
+      "ARRIVAL_TIME": 'Arrival time',
+      "HOST": {
+        "NAME": 'Host (you)'
+      },
+      "HELP_COOKING": {
+        "NAME": 'Help cooking',
+        "TOOLTIP": 'People will help you for cooking'
+      },
+      "HELP_CLEANING": {
+        "NAME": 'Help cleaning',
+        "TOOLTIP": 'People will help you for cleaning'
+      },
+      "SIMPLE_GUEST": {
+        "NAME": 'Simple Guest',
+        "TOOLTIP": 'People will help you for cleaning'
+      },
+      "GROCERIES_PRICE": 'Price of the groceries',
+      "PRIVATE_INFO": 'Private information: displayed only to participants',
+      "ADDRESS": 'Address',
+      "ADDRESS_COMPLEMENT": 'Additional information (flat number, floor, ...)',
+      "CELLPHONE": {
+        "NAME": 'Cellphone',
+        "TOOLTIP": 'Private information: displayed only for participants'
+      },
+      "ERROR": {
+        "TITLE": 'Please fill the missing field<span ng-if="createMealForm.$error.required.length > 1">s</span> and try again: ',
+        "MENU": 'Menu',
+        "GROCERIES_PRICE": 'price of the groceries',
+        "ADDRESS": 'Address',
+        "ARRIVAL_TIME_HELP_COOKING": 'arrival time for help cooking',
+        "CELLPHONE": 'phone number',
+        "INCORRECT_CELLPHONE": 'Your phone number is incorrect.'
+      },
+      "NOTIFICATIONS": {
+        "TITLE": 'Notifications',
+        "AUTOMATIC_BOOKING":{
+          "TITLE": 'Automatically approve bookings?',
+          "NO": 'No, thanks. ',
+          "NO_TOOLTIP": 'You approve each booking request yourself',
+          "YES": 'Yes, sure !'
+        },
+        "MESSENGER": 'Do you want to receive updates about the meal on messenger? <span class="small">(highly recommended)</span>',
+        "MESSENGER_ALREADY": 'You already subscribed for receiving updates through messenger.',
+      },
+      "PUBLISH": 'Publish the meal',
+      "PUBLISH_NOT_CONNECTED": 'Sign In with facebook and<br/></span>Publish the meal',
+    }
   }
 };
 
@@ -132,6 +197,18 @@ var translationsFR = {
     "PUBLICATION": {
       "TITLE": 'Publication',
       "PARAGRAPH": 'A member publishes a meal, choosing the number of participants and their roles.'
+    }
+  },
+  "CREATE_A_MEAL": {
+    "TITLE": '- Create a new meal -',
+    "FORM": {
+      "PUBLIC_INFO": 'Public information',
+      "MENU_TITLE": 'Title of your menu',
+      "MENU_DESCRIPTION": 'Menu description (optional)',
+      "SPECIAL_MEAL": {
+        "TITLE": 'repas particulier? ',
+        "TOOLTIP": 'ne pas chequer'
+      }
     }
   }
 };

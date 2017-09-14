@@ -234,12 +234,6 @@ export default angular.module('myApp.viewCreateMeal', ['ui.router', 'ngAnimate',
   $scope.ismeridian = false;
   $scope.mstep = 10;
 
-  $scope.formPopoverTimepicker = {
-    title: 'Time of the meal',
-    templateUrl: '../static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'
-  };
-
-
   //enable animations in the modal
   $scope.animationsEnabled = true;
 

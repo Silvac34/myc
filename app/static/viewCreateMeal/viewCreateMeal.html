@@ -48,7 +48,7 @@
                     <div class="form-group" ng-class="{'has-error': createMealForm.formTime.$invalid && (createMealForm.formTime.$touched || createMealForm.$submitted)}" style="padding-right:5px;">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-time"></i>
-                            <input type="text" name="formTime" class="form-control" uib-popover-template="formPopoverTimepicker.templateUrl" popover-trigger="'outsideClick'" popover-placement="bottom-left" popover-title="{{formPopoverTimepicker.title}}" value="{{editedMeal.time | date:'HH:mm'}}"
+                            <input type="text" name="formTime" class="form-control" uib-popover-template="'../static/viewCreateMeal/viewCreateMealModal/PopoverTimepickerTemplate.html'" popover-trigger="'outsideClick'" popover-placement="bottom-left" popover-title="{{'CREATE_A_MEAL.FORM.TIMEPICKER_TITLE'|translate}}" value="{{editedMeal.time | date:'HH:mm'}}"
                                 required>
                         </div>
                     </div>

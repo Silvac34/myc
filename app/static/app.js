@@ -132,6 +132,7 @@ var translationsEN = {
       "KOSHER": 'Kosher',
       "HALAL": 'Halal',
       "DATE": 'Date',
+      "TIMEPICKER_TITLE": 'Time of the meal',
       "PARTICIPANTS": 'Participants',
       "ARRIVAL_TIME": 'Arrival time',
       "HOST": {

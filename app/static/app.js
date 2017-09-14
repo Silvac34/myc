@@ -84,7 +84,8 @@ var translationsEN = {
         "TITLE": 'With simple guests',
         "PARAGRAPH": 'Simple guests pay a little bit more and this surplus is shared between the host and the helpers.'
       },
-      "PARAGRAPH_2": 'You pay directly to the host who bought the groceries. <strong>THERE ARE NO WEBSITE FEES. Our service is completely free.</strong>'
+      "PARAGRAPH_2": 'You pay directly to the host who bought the groceries.',
+      "PARAGRAPH_2_STRONG": 'THERE ARE NO WEBSITE FEES. Our service is completely free.'
     },
     "VALUES": {
       "TITLE": 'values',
@@ -97,7 +98,8 @@ var translationsEN = {
         "DESCRIPTION": 'Share together the meal but also its preparation and the price of the groceries'
       },
       "AUTHENTICITY_SIMPLICITY": {
-        "NAME": 'AUTHENTICITY<br>& SIMPLICITY',
+        "NAME_1": 'AUTHENTICITY',
+        "NAME_2": '& SIMPLICITY',
         "DESCRIPTION": 'Enjoy homemade food. All level of cookers are welcomed to organize meals'
       },
       "FRIENDLINESS": {
@@ -156,7 +158,9 @@ var translationsEN = {
         "TOOLTIP": 'Private information: displayed only for participants'
       },
       "ERROR": {
-        "TITLE": 'Please fill the missing field<span ng-if="createMealForm.$error.required.length > 1">s</span> and try again: ',
+        "TITLE_1": 'Please fill the missing field',
+        "TITLE_2": 's', //if there are more than 1 error field
+        "TITLE_3": 'and try again: ',
         "MENU": 'Menu',
         "GROCERIES_PRICE": 'price of the groceries',
         "ADDRESS": 'Address',
@@ -172,11 +176,12 @@ var translationsEN = {
           "NO_TOOLTIP": 'You approve each booking request yourself',
           "YES": 'Yes, sure !'
         },
-        "MESSENGER": 'Do you want to receive updates about the meal on messenger? <span class="small">(highly recommended)</span>',
+        "MESSENGER_1": 'Do you want to receive updates about the meal on messenger?',
+        "MESSENGER_2": '(highly recommended)',
         "MESSENGER_ALREADY": 'You already subscribed for receiving updates through messenger.',
       },
       "PUBLISH": 'Publish the meal',
-      "PUBLISH_NOT_CONNECTED": 'Sign In with facebook and<br/></span>Publish the meal',
+      "PUBLISH_NOT_CONNECTED": 'Sign In with facebook and',
     }
   }
 };
@@ -460,6 +465,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
     version: 'v2.6'
   });
 
+  $translateProvider.useSanitizeValueStrategy('escape'); //change 'escape' to 'sanitize' when angular-translate v3 will be released
   $translateProvider.translations('en', translationsEN);
   $translateProvider.translations('fr', translationsFR);
   $translateProvider.translations('es', translationsES);

@@ -137,7 +137,7 @@
             </div>
             <div class="row" ng-show="(createMealForm.$invalid || (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time) || createMealForm.inputCellphone.$invalid || createMealForm.inputCellphone.$error.required)  && createMealForm.$submitted">
                 <div class="alert alert-dismissible alert-danger">
-                    <span ng-repeat="error in createMealForm.$error.required"><span ng-show="$first" translate>{{'CREATE_A_MEAL.FORM.ERROR.TITLE'}}</span><span ng-if="error.$name == 'inputMenu'" translate>CREATE_A_MEAL.FORM.ERROR.MENU</span>
+                    <span ng-repeat="error in createMealForm.$error.required"><span ng-show="$first"><span translate>CREATE_A_MEAL.FORM.ERROR.TITLE_1</span><span ng-if="createMealForm.$error.required.length > 1" translate>CREATE_A_MEAL.FORM.ERROR.TITLE_2</span> <span translate>CREATE_A_MEAL.FORM.ERROR.TITLE_3</span></span> <span ng-if="error.$name == 'inputMenu'" translate>CREATE_A_MEAL.FORM.ERROR.MENU</span>
                     <span
                         ng-if="error.$name == 'inputPrice'" translate>CREATE_A_MEAL.FORM.ERROR.GROCERIES_PRICE</span><span ng-if="error.$name == 'inputAddress'" translate>CREATE_A_MEAL.FORM.ERROR.ADDRESS</span><span ng-if="error.$name == 'inputTimeCooking'" translate>CREATE_A_MEAL.FORM.ERROR.ARRIVAL_TIME_HELP_COOKING</span><span ng-show="error.$name == 'inputCellphone'" translate>CREATE_A_MEAL.FORM.ERROR.CELLPHONE</span>
                         <span
@@ -168,7 +168,7 @@
             <div class="row">
                 <div ng-hide="$parent.$root.user.privateInfo.user_ref">
                     <div class="clear10"></div>
-                    <div translate>{{' CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER '}}</div>
+                    <div><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_1</span> <span class="small" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2</span></div>
                     <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
                 </div>
                 <div class="small text-info" ng-show="$parent.$root.user.privateInfo.user_ref" translate>
@@ -179,8 +179,7 @@
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">
-                        <a class="btn btn-md btn-facebook" ng-if="!isAuthenticated()" ng-click="createMealForm.$setSubmitted(); createMeal()" translate>{{' CREATE_A_MEAL.FORM.PUBLISH_NOT_CONNECTED '}}</a>
-                        <a class="btn btn-md btn-primary" ng-if="isAuthenticated()" ng-click="createMealForm.$setSubmitted(); createMeal()" translate>{{' CREATE_A_MEAL.FORM.PUBLISH '}}</a>
+                        <a class="btn btn-md" ng-class="{'btn-facebook': !isAuthenticated(), 'btn-primary': isAuthenticated()}" ng-click="createMealForm.$setSubmitted(); createMeal()"><span translate ng-if="!isAuthenticated()">CREATE_A_MEAL.FORM.PUBLISH_NOT_CONNECTED</span><br ng-if="!isAuthenticated()"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></a>
                     </div>
                 </div>
             </div>

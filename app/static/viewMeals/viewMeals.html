@@ -1,8 +1,8 @@
 <div class="container-fluid">
-  <h1 class="general-title hidden-xs" style="margin-bottom:20px;">- Incoming meals -
+  <h1 class="general-title hidden-xs" style="margin-bottom:20px;"><span translate>VIEW_MEALS.TITLE</span>
     <div class="meal-search-sort">
-      <span class="meal-search-title-count">Order by</span>
-      <div class="btn-group" uib-dropdown uib-popover="Starting time" popover-trigger="mouseenter" popover-placement="top">
+      <span class="meal-search-title-count" translate>VIEW_MEALS.ORDER_BY.NAME</span>
+      <div class="btn-group" uib-dropdown uib-popover="{{'VIEW_MEALS.ORDER_BY.POPOVER'|translate}}" popover-trigger="mouseenter" popover-placement="top">
         <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
         <ul uib-dropdown-menu class="dropdown-menu sort-menu" data-toggle="dropdown">
           <li class="asc">
@@ -14,16 +14,16 @@
         </ul>
       </div>
     </div>
-    </h2>
-    <div class="row hidden-sm hidden-md hidden-lg" style="padding-bottom:10px">
+    </h1>
+    <div class="row visible-xs" style="padding-bottom:10px">
       <div class="meal-search-filter">
-        <a class="btn btn-primary btn-sm" ng-click="openModalFilter()">Filters</a>
-        <span ui-sref="view_meals.mealsMap" ng-click="InitializeMealsMap()" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>Map</em></strong></span>
-        <span ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile"><strong><em>List</em></strong></span>
+        <a class="btn btn-primary btn-sm" ng-click="openModalFilter()" translate>VIEW_MEALS.FILTERS.NAME</a>
+        <span ui-sref="view_meals.mealsMap" ng-click="InitializeMealsMap()" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile italic bold" translate>VIEW_MEALS.MAP</span>
+        <span ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view viewmeals-change-view-mobile bold italic" translate>VIEW_MEALS.LIST</span>
       </div>
       <div class="meal-search-sort">
-        <span class="meal-search-title-count">Order by</span>
-        <div class="btn-group" uib-dropdown uib-popover="Starting time" popover-trigger="mouseenter" popover-placement="top">
+        <span class="meal-search-title-count" translate>VIEW_MEALS.ORDER_BY.NAME</span>
+        <div class="btn-group" uib-dropdown uib-popover="{{'VIEW_MEALS.ORDER_BY.POPOVER'|translate}}" popover-trigger="mouseenter" popover-placement="top">
           <a class="tip btn order-date ng-class: SortOrder;" uib-dropdown-toggle></a>
           <ul uib-dropdown-menu class="dropdown-menu sort-menu" data-toggle="dropdown">
             <li class="asc">
@@ -40,26 +40,26 @@
 
     <div class="row">
       <div class="col-sm-3 hidden-xs">
-        <div ui-sref="view_meals.mealsMap" ng-click="InitializeMealsMap()" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view"><strong><em>See meals on a map</em></strong></div>
-        <div ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view"><strong><em>See the list of meals</em></strong></div>
+        <div ui-sref="view_meals.mealsMap" ng-click="InitializeMealsMap()" ng-show="$state.includes('view_meals.mealsList')" class="text-center text-primary viewmeals-change-view italic bold" translate>VIEW_MEALS.CHANGE_VIEW_MAP</div>
+        <div ui-sref="view_meals.mealsList" ng-show="$state.includes('view_meals.mealsMap')" class="text-center text-primary viewmeals-change-view italic bold" translate>VIEW_MEALS.CHANGE_VIEW_LIST</div>
         <div class="panel panel-info" style="padding-bottom:20px;">
           <div class="panel-heading">
-            <h3 class="panel-title">Filter by</h3>
+            <h3 class="panel-title" translate>VIEW_MEALS.FILTERS.FILTER_BY</h3>
           </div>
           <form class="form-horizontal">
             <fieldset>
               <div class="panel-body" style="padding-bottom:5px;margin-right:15px;margin-left:15px">
                 <div class="row">
-                  <span ng-click="isCollapsed.place = !isCollapsed.place" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.place, 'glyphicon-triangle-right': isCollapsed.place}"></i><span class="text-in-filter"><strong>City</strong></span></span>
+                  <span ng-click="isCollapsed.place = !isCollapsed.place" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.place, 'glyphicon-triangle-right': isCollapsed.place}"></i><span class="text-in-filter bold" translate>VIEW_MEALS.FILTERS.CITY.TITLE</span></span>
                   <div uib-collapse="isCollapsed.place" class="collapsing-filter">
                     <div class="inner-addon left-addon">
                       <i class="glyphicon glyphicon-map-marker"></i>
-                      <input ng-autocomplete type="text" ng-model="filter.cityFilter" class="form-control" placeholder="City, suburb" options="{types:'(cities)'}" />
+                      <input ng-autocomplete type="text" ng-model="filter.cityFilter" class="form-control" placeholder="{{'VIEW_MEALS.FILTERS.CITY.PLACEHOLDER'|translate}}" options="{types:'(cities)'}" />
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.weekDays, 'glyphicon-triangle-right': isCollapsed.weekDays}"></i><span class="text-in-filter"><strong>Day</strong></span></span>
+                  <span ng-click="isCollapsed.weekDays = !isCollapsed.weekDays" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.weekDays, 'glyphicon-triangle-right': isCollapsed.weekDays}"></i><span class="text-in-filter bold" translate>VIEW_MEALS.FILTERS.DAY.TITLE</span></span>
                   <div uib-collapse="isCollapsed.weekDays" class="collapsing-filter">
                     <div ng-repeat="day in filter.weekDays">
                       <div class="row" style="margin:0px 5px"><span class="pull-left"><input type="checkbox" ng-model=day.selected> {{day.label}}</span><span class="pull-right"></span></div>
@@ -67,62 +67,62 @@
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
-                  <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.period, 'glyphicon-triangle-right': isCollapsed.period}"></i><span class="text-in-filter"><strong>Period</strong></span></span>
+                  <span ng-click="isCollapsed.period = !isCollapsed.period" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.period, 'glyphicon-triangle-right': isCollapsed.period}"></i><span class="text-in-filter bold" translate>VIEW_MEALS.FILTERS.PERIOD.TITLE</span></span>
                   <div uib-collapse="isCollapsed.period" class="collapsing-filter">
                     <div class="inner-addon left-addon">
                       <i class="glyphicon glyphicon glyphicon-calendar"></i>
                     </div>
-                    <input type="text" style="margin-bottom: 5px; text-indent:20px" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" placeholder="From" />
+                    <input type="text" style="margin-bottom: 5px; text-indent:20px" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" placeholder="{{'VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_FROM'|translate}}" />
                     <div class="inner-addon left-addon">
                       <i class="glyphicon glyphicon glyphicon-calendar"></i>
                     </div>
-                      <input type="text" class="form-control" style="text-indent:20px" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="To" />
+                      <input type="text" class="form-control" style="text-indent:20px" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" placeholder="{{'VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_TO'|translate}}" />
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
-                  <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.price, 'glyphicon-triangle-right': isCollapsed.price}"></i><span class="text-in-filter"><strong>Price</strong></span></span>
+                  <span ng-click="isCollapsed.price = !isCollapsed.price" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.price, 'glyphicon-triangle-right': isCollapsed.price}"></i><span class="text-in-filter bold" translate>VIEW_MEALS.FILTERS.PRICE.TITLE</span></span>
                   <div uib-collapse="isCollapsed.price" class="collapsing-filter">
                     <div class="inner-addon left-addon">
                       <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
-                      <input type="number" style="margin-bottom: 5px;" class="form-control" ng-model="filter.priceFilterMin.value" placeholder="From" />
+                      <input type="number" style="margin-bottom: 5px;" class="form-control" ng-model="filter.priceFilterMin.value" placeholder="{{'VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM'|translate}}" />
                     </div>
                     <div class="inner-addon left-addon">
                       <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
-                      <input type="number" class="form-control" ng-model="filter.priceFilterMax.value" placeholder="To" />
+                      <input type="number" class="form-control" ng-model="filter.priceFilterMax.value" placeholder="{{'VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO'|translate}}" />
                     </div>
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
-                  <span ng-click="isCollapsed.preference = !isCollapsed.preference" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.preference, 'glyphicon-triangle-right': isCollapsed.preference}"></i><span class="text-in-filter"><strong>Preferences</strong></span></span>
+                  <span ng-click="isCollapsed.preference = !isCollapsed.preference" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.preference, 'glyphicon-triangle-right': isCollapsed.preference}"></i><span class="text-in-filter bold" translate>VIEW_MEALS.FILTERS.PREFERENCES.TITLE</span></span>
                   <div uib-collapse="isCollapsed.preference" class="collapsing-filter">
                     <div class="checkbox" style="bottom:10px;">
                       <label>
-                              <input type="checkbox" ng-model="filter.preferenceFilter.veggies">Vegetarian
+                              <input type="checkbox" ng-model="filter.preferenceFilter.veggies"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.VEGETARIAN</span>
                         </label></br>
                       <label>
-                            <input type="checkbox" ng-model="filter.preferenceFilter.vegan">Vegan
+                            <input type="checkbox" ng-model="filter.preferenceFilter.vegan"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.VEGAN</span>
                         </label></br>
                       <label>
-                            <input type="checkbox" ng-model="filter.preferenceFilter.halal">Halal
+                            <input type="checkbox" ng-model="filter.preferenceFilter.halal"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.HALAL</span>
                         </label></br>
                       <label>
-                            <input type="checkbox" ng-model="filter.preferenceFilter.kosher">Kosher
+                            <input type="checkbox" ng-model="filter.preferenceFilter.kosher"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.KOSHER</span>
                         </label>
                     </div>
                   </div>
                 </div>
                 <div class="row" class="row-margin-filter">
-                  <span ng-click="isCollapsed.helpingType = !isCollapsed.helpingType" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.helpingType, 'glyphicon-triangle-right': isCollapsed.helpingType}"></i><span class="text-in-filter"><strong>Type of help</strong></span></span>
+                  <span ng-click="isCollapsed.helpingType = !isCollapsed.helpingType" style="cursor:pointer;"><i class="glyphicon text-danger" ng-class="{'glyphicon-triangle-bottom': !isCollapsed.helpingType, 'glyphicon-triangle-right': isCollapsed.helpingType}"></i><span class="text-in-filter bold" translate>VIEW_MEALS.FILTERS.HELP_TYPE.TITLE</span></span>
                   <div uib-collapse="isCollapsed.helpingType" class="collapsing-filter">
                     <div class="checkbox" style="bottom:10px;">
                       <label>
-                              <input type="checkbox" ng-model="filter.helpingTypeFilter.cooks">Help cooking
+                              <input type="checkbox" ng-model="filter.helpingTypeFilter.cooks"><span translate>VIEW_MEALS.FILTERS.HELP_TYPE.HELP_COOKING</span>
                         </label></br>
                       <label>
-                            <input type="checkbox" ng-model="filter.helpingTypeFilter.cleaners">Help cleaning
+                            <input type="checkbox" ng-model="filter.helpingTypeFilter.cleaners"><span translate>VIEW_MEALS.FILTERS.HELP_TYPE.HELP_CLEANING</span>
                         </label></br>
                       <label>
-                            <input type="checkbox" ng-model="filter.helpingTypeFilter.simpleGuests">Simple guest
+                            <input type="checkbox" ng-model="filter.helpingTypeFilter.simpleGuests"><span translate>VIEW_MEALS.FILTERS.HELP_TYPE.SIMPLE_GUEST</span>
                         </label>
                     </div>
                   </div>
@@ -136,7 +136,7 @@
         <div class="row fade-out-success" ng-show="manualSubscriptionPending==true">
           <div class="col-xs-12">
             <div class="alert alert-dismissible alert-warning">
-              <button type="button" class="close" data-dismiss="alert">&times;</button> Your request has been sent to the host.
+              <button type="button" class="close" data-dismiss="alert">&times;</button> <span translate>VIEW_MEALS.REQUEST_SUCCESS</span>
             </div>
           </div>
         </div>

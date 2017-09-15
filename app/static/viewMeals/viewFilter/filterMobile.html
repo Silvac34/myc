@@ -1,69 +1,69 @@
 <div class="container-fluid" id="modalFilterMobile">
     <button type="button" class="close" ng-click="cancel()" style="padding: 10px;">&times;</button>
     <div class="row">
-        <label class="control-label filter-label col-xs-12" style="margin-top:0px">Chose a city</label>
+        <label class="control-label filter-label col-xs-12" style="margin-top:0px" translate>VIEW_MEALS.FILTERS.CITY.TITLE_MOBILE</label>
         <div class="col-xs-12">
             <div class="inner-addon left-addon">
                 <i class="glyphicon glyphicon glyphicon-map-marker"></i>
-                <input ng-autocomplete type="text" class="form-control" placeholder="City" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details" />
+                <input ng-autocomplete type="text" class="form-control" placeholder="{{'VIEW_MEALS.FILTERS.CITY.PLACEHOLDER'|translate}}" ng-model="filter.placeFilter" options="{types:'(cities)'}" details="details" />
             </div>
         </div>
     </div>
     <div class="row">
-        <label class="control-label filter-label col-xs-12">Chose the days of the week</label>
+        <label class="control-label filter-label col-xs-12" translate>VIEW_MEALS.FILTERS.DAY.TITLE_MOBILE</label>
         <div class="filter-date-checkbox-mobile text-center" ng-repeat="day in filter.weekDays">
             <label><input type="checkbox" ng-model=day.selected></br>{{day.label | limitTo:3}}</label>
         </div>
     </div>
     <div class="row">
-        <label class="control-label filter-label col-xs-12">Chose a period</label>
+        <label class="control-label filter-label col-xs-12" translate>VIEW_MEALS.FILTERS.PERIOD.TITLE_MOBILE</label>
         <div class="col-xs-6">
             <div class="inner-addon left-addon">
                 <i class="glyphicon glyphicon glyphicon-calendar"></i>
             </div>
-            <input type="text" class="form-control" style="text-indent:20px" placeholder="From" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" />
+            <input type="text" class="form-control" style="text-indent:20px" placeholder="{{'VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_FROM'|translate}}" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMin_open()" ng-model="filter.dateFilterMin.value" is-open="filter.dateFilterMin.opened" close-text="Close" />
         </div>
         <div class="col-xs-6">
             <div class="inner-addon left-addon">
                 <i class="glyphicon glyphicon glyphicon-calendar"></i>
             </div>
-                <input type="text" class="form-control" style="text-indent:20px" placeholder="To" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" />
+                <input type="text" class="form-control" style="text-indent:20px" placeholder="{{'VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_TO'|translate}}" uib-datepicker-popup="dd.MM.yyyy" ng-click="dateFilterMax_open()" ng-model="filter.dateFilterMax.value" is-open="filter.dateFilterMax.opened" close-text="Close" />
         </div>
     </div>
     <div class="row">
-        <label class="control-label filter-label col-xs-12">Chose a price range</label>
+        <label class="control-label filter-label col-xs-12" translate>VIEW_MEALS.FILTERS.PRICE.TITLE_MOBILE</label>
         <div class="col-xs-6">
             <div class="inner-addon left-addon">
                 <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
-                <input type="number" class="form-control" ng-model="filter.priceFilterMin.value" placeholder="From" />
+                <input type="number" class="form-control" ng-model="filter.priceFilterMin.value" placeholder="{{'VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM'|translate}}" />
             </div>
         </div>
         <div class="col-xs-6">
             <div class="inner-addon left-addon">
                 <i class="glyphicon glyphicon glyphicon-piggy-bank"></i>
-                <input type="number" class="form-control" ng-model="filter.priceFilterMax.value" placeholder="To" />
+                <input type="number" class="form-control" ng-model="filter.priceFilterMax.value" placeholder="{{'VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO'|translate}}" />
             </div>
         </div>
     </div>
     <div class="row">
-        <label class="control-label filter-label col-xs-12">Meal preferences</label>
+        <label class="control-label filter-label col-xs-12" translate>VIEW_MEALS.FILTERS.PREFERENCES.TITLE_MOBILE</label>
         <div class="checkbox text-center">
-            <label><input type="checkbox" ng-model="filter.preferenceFilter.veggies">Vegetarian</label>
-            <label style="margin-left:5px;"><input type="checkbox" ng-model="filter.preferenceFilter.vegan">Vegan</label>
-            <label style="margin-left:5px;"><input type="checkbox" ng-model="filter.preferenceFilter.halal">Halal</label>
-            <label style="margin-left:5px;"><input type="checkbox" ng-model="filter.preferenceFilter.kosher">Kosher</label>
+            <label><input type="checkbox" ng-model="filter.preferenceFilter.veggies"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.VEGETARIAN</span></label>
+            <label style="margin-left:5px;"><input type="checkbox" ng-model="filter.preferenceFilter.vegan"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.VEGAN</span></label>
+            <label style="margin-left:5px;"><input type="checkbox" ng-model="filter.preferenceFilter.halal"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.HALAL</span></label>
+            <label style="margin-left:5px;"><input type="checkbox" ng-model="filter.preferenceFilter.kosher"><span translate>VIEW_MEALS.FILTERS.PREFERENCES.KOSHER</span></label>
         </div>
     </div>
     <div class="row">
-        <label class="control-label filter-label col-xs-12">Type of help</label>
+        <label class="control-label filter-label col-xs-12" translate>VIEW_MEALS.FILTERS.HELP_TYPE.TITLE</label>
         <div class="checkbox text-center">
-            <label><input type="checkbox" ng-model="filter.helpingTypeFilter.cooks">Cooking</label>
-            <label style="margin-left:10px;"><input type="checkbox" ng-model="filter.helpingTypeFilter.cleaners">Cleaning</label>
-            <label style="margin-left:10px;"><input type="checkbox" ng-model="filter.helpingTypeFilter.simpleGuests">Simple Guest</label>
+            <label><input type="checkbox" ng-model="filter.helpingTypeFilter.cooks"><span translate>VIEW_MEALS.FILTERS.HELP_TYPE.HELP_COOKING_MOBILE</span></label>
+            <label style="margin-left:10px;"><input type="checkbox" ng-model="filter.helpingTypeFilter.cleaners"><span translate>VIEW_MEALS.FILTERS.HELP_TYPE.HELP_CLEANING_MOBILE</span></label>
+            <label style="margin-left:10px;"><input type="checkbox" ng-model="filter.helpingTypeFilter.simpleGuests"><span translate>VIEW_MEALS.FILTERS.HELP_TYPE.SIMPLE_GUEST</span></label>
         </div>
         <div class="row" style="text-align:center">
-            <a class="btn btn-success btn-lg btn-filter-mobile-reinitialize" ng-click="cancel()">Validate</a>
-            <a class="btn btn-default btn-lg btn-filter-mobile-reinitialize" ng-click="clearAndCloseFilterMobile()">Reinitialize</a>
+            <a class="btn btn-success btn-lg btn-filter-mobile-reinitialize" ng-click="cancel()" translate>VIEW_MEALS.FILTERS.VALIDATE</a>
+            <a class="btn btn-default btn-lg btn-filter-mobile-reinitialize" ng-click="clearAndCloseFilterMobile()" translate>VIEW_MEALS.FILTERS.REINITIALIZE</a>
         </div>
     </div>
 </div>

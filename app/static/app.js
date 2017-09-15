@@ -171,7 +171,7 @@ var translationsEN = {
       },
       "NOTIFICATIONS": {
         "TITLE": 'Notifications',
-        "AUTOMATIC_BOOKING":{
+        "AUTOMATIC_BOOKING": {
           "TITLE": 'Automatically approve bookings?',
           "NO": 'No, thanks. ',
           "NO_TOOLTIP": 'You approve each booking request yourself',
@@ -184,7 +184,63 @@ var translationsEN = {
       "PUBLISH": 'Publish the meal',
       "PUBLISH_NOT_CONNECTED": 'Sign In with facebook and',
     }
-  }
+  },
+  "VIEW_MEALS": {
+    "TITLE": '- Incoming meals -',
+    "ORDER_BY": {
+      "NAME": 'Order by',
+      "POPOVER": 'Starting time'
+    },
+    "FILTERS": {
+      "NAME": 'Filters',
+      "FILTER_BY": 'Filter by',
+      "CITY": {
+        "TITLE": 'City',
+        "PLACEHOLDER": 'City, Suburb...',
+        "TITLE_MOBILE": 'Chose a city'
+      },
+      "DAY": {
+        "TITLE": 'Day',
+        "TITLE_MOBILE": 'Chose the days of the week',
+      },
+      "PERIOD": {
+        "TITLE": 'Period',
+        "TITLE_MOBILE": 'Chose a period',
+        "PLACEHOLDER_FROM": 'From',
+        "PLACEHOLDER_TO": 'To'
+      },
+      "PRICE": {
+        "TITLE": 'Price',
+        "TITLE_MOBILE": 'Chose a price range',
+        "PLACEHOLDER_FROM": "@:VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_FROM",
+        "PLACEHOLDER_TO": "@:VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_TO"
+      },
+      "PREFERENCES": {
+        "TITLE": 'Preferences',
+        "TITLE_MOBILE": 'Meal preferences',
+        "VEGETARIAN": "@:CREATE_A_MEAL.FORM.VEGETARIAN",
+        "VEGAN": "@:CREATE_A_MEAL.FORM.VEGAN",
+        "KOSHER": "@:CREATE_A_MEAL.FORM.KOSHER",
+        "HALAL": "@:CREATE_A_MEAL.FORM.HALAL",
+      },
+      "HELP_TYPE": {
+        "TITLE": 'Type of help',
+        "HELP_COOKING": "@:CREATE_A_MEAL.FORM.HELP_COOKING.NAME",
+        "HELP_COOKING_MOBILE": "Cooking",
+        "HELP_CLEANING": "@:CREATE_A_MEAL.FORM.HELP_CLEANING.NAME",
+        "HELP_CLEANING_MOBILE": "Cleaning",
+        "SIMPLE_GUEST": "@:CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME",
+      },
+      "VALIDATE": 'Validate',
+      "REINITIALIZE": 'Reinitialize'
+    },
+    "MAP": 'Map',
+    "LIST": 'List',
+    "CHANGE_VIEW_MAP": 'See meals on a map',
+    "CHANGE_VIEW_LIST": 'See the list of meals',
+    "REQUEST_SUCCESS": "Your request has been sent to the host."
+  },
+
 };
 
 

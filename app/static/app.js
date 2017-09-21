@@ -346,7 +346,7 @@ var translationsEN = {
 
 var translationsFR = {
   "WELCOME": {
-    "CREATE_A_MEAL": 'créer un repas',
+    "CREATE_A_MEAL": 'create a meal',
     "BROWSE_A_MEAL": 'browse a meal',
     "HOW_IT_WORKS": 'How it works',
     "PUBLICATION": {
@@ -370,7 +370,7 @@ var translationsFR = {
 
 var translationsES = {
   "WELCOME": {
-    "CREATE_A_MEAL": 'crear una cena',
+    "CREATE_A_MEAL": 'create a meal',
     "BROWSE_A_MEAL": 'browse a meal',
     "HOW_IT_WORKS": 'How it works',
     "PUBLICATION": 'Publication'

@@ -424,9 +424,6 @@ def before_updating_privateMeals(updates, original):
     if ("detailedInfo" in updates): # si on change le nombre d'aide
         requiredGuestsUpdate = updates["detailedInfo"]["requiredGuests"]
         requiredGuestsMeal = original["detailedInfo"]["requiredGuests"]
-        cookDelta = 0
-        cleanerDelta = 0
-        simpleGuestDelta = 0
         ##on définit le nombre total d'aide pour pouvoir calculer les prix
         if ("cooks" in requiredGuestsMeal):
             if("cooks" in requiredGuestsUpdate):
@@ -450,10 +447,23 @@ def before_updating_privateMeals(updates, original):
         else:
             nbSimpleGuests = 0
         price = calculator.resolve(nbSimpleGuests, nbCooks, nbCleaners, original["price"]) #obtention du nouveau prix par type d'aide
+        #on actualise le prix de l'hôte
         requiredGuestsUpdate["hosts"] = {"price": price["hostPrice"]}
-        #requiredGuestsUpdate["cooks"] = {"price": price["cookPrice"]}
-        #requiredGuestsUpdate["cleaners"] = {"price": price["cleanerPrice"]}
-        #requiredGuestsUpdate["simpleGuests"] = {"price": price["simpleGuestPrice"]}
+        if (nbCooks > 0):
+            if("cooks" in requiredGuestsUpdate):
+                requiredGuestsUpdate["cooks"]["price"] = price["cookPrice"]
+            else:
+               requiredGuestsUpdate["cooks"] = {"price": price["cookPrice"]}
+        if (nbCleaners > 0):
+            if("cleaners" in requiredGuestsUpdate):
+                requiredGuestsUpdate["cleaners"]["price"] = price["cleanerPrice"]
+            else:
+                requiredGuestsUpdate["cleaners"] = {"price": price["cleanerPrice"]}
+        if (nbSimpleGuests > 0):
+            if("simpleGuests" in requiredGuestsUpdate):
+                requiredGuestsUpdate["simpleGuests"]["price"] = price["simpleGuestPrice"]
+            else:
+                requiredGuestsUpdate["simpleGuests"] = {"price": price["simpleGuestPrice"]}
         if ("cooks" in requiredGuestsUpdate):
             if ("nbRquCooks" in requiredGuestsUpdate["cooks"]): #si on change le nombre d'aide cuisine
                 ##on update le nbRemainingPlaces dans privateInfo
@@ -523,9 +533,6 @@ def before_updating_privateMeals(updates, original):
                     updates["nbRemainingPlaces"] += simpleGuestDelta
                 else:
                     updates["nbRemainingPlaces"] = original["nbRemainingPlaces"] + simpleGuestDelta
-        print(cookDelta)
-        print(cleanerDelta)
-        print(simpleGuestDelta)
         
     
 def after_updating_privateMeals(updates, original):

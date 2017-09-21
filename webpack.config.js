@@ -17,7 +17,7 @@ module.exports = {
         app: './app.js',
         vendor: ['angular', 'angular-sanitize', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate']
     },
-    devtool: 'inline-source-map',
+    //devtool: 'inline-source-map',
     /*devServer: {
         contentBase: path.join(__dirname, "/app/static/dist"),
         hot: true,

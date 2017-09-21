@@ -2,7 +2,7 @@
 
 export default angular.module('myApp.welcome', ['facebookService'])
 
-.controller('WelcomeCtrl', ['$scope', 'getEventFacebook', 'ENV', '$window', function($scope, getEventFacebook, ENV, $window) {
+.controller('WelcomeCtrl', ['$scope', /*'getEventFacebook', 'ENV', '$window',*/ function($scope/*, getEventFacebook, ENV, $window*/) {
     $scope.status = {
         isopenWelcome: false
     };

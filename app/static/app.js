@@ -699,6 +699,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
         .then(function(response) {
           console.debug("success", response);
           if ($auth.isAuthenticated()) {
+            console.log("authe");
             resolve(userServicesFactory().then(function(data) {
               $rootScope.user = data;
             }));
@@ -750,6 +751,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
 
   var authVerification = function() { // fonction qui permet de vérifier que l'utilisateur est bien déconnecté. S'il ne l'est pas alors on récupère ses données
     if ($auth.isAuthenticated()) {
+      console.log("authVerification");
       userServicesFactory().then(function(data) {
         $rootScope.user = data;
         initializeUserLabels();

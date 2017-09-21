@@ -21,26 +21,28 @@
                     </div>
                     <div class="clear5"></div>
                     <div>
-                        <i class="glyphicon glyphicon-piggy-bank"></i> From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong>
+                        <i class="glyphicon glyphicon-piggy-bank"></i> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span><strong class="size-15 text-success"> {{meal.currency_symbol}} {{meal.mealPrice}}</strong>
                     </div>
-                    <div ng-if="meal.veggies == true || meal.vegan == true">
+                    <div ng-if="meal.veggies == true">
                         <div class="clear5"></div>
-                        <img ng-src="static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                        <img ng-src="static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+                    </div>
+                    <div ng-if="meal.vegan == true">
+                        <div class="clear5"></div>
+                        <img ng-src="static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
                     </div>
                     <div ng-if="meal.halal == true">
                         <div class="clear5"></div>
-                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
                     </div>
                     <div ng-if="meal.kosher == true">
                         <div class="clear5"></div>
-                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
+                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
                     </div>
                     <div class="row">
                         <div class="clear10"></div>
                         <div class="clear10 map-meal-separation"></div>
-                        <div>
-                            <strong>The host:</strong>
-                        </div>
+                        <div class="bold italic" translate>VIEW_MEALS.HOST</div>
                         <div class="clear10"></div>
                         <div>
                             <a ui-sref="profile({userId:meal.admin._id})"><img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" /></a>

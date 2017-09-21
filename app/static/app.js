@@ -212,8 +212,8 @@ var translationsEN = {
       "PRICE": {
         "TITLE": 'Price',
         "TITLE_MOBILE": 'Chose a price range',
-        "PLACEHOLDER_FROM": "@:VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_FROM",
-        "PLACEHOLDER_TO": "@:VIEW_MEALS.FILTERS.PERIOD.PLACEHOLDER_TO"
+        "PLACEHOLDER_FROM": "From",
+        "PLACEHOLDER_TO": "To"
       },
       "PREFERENCES": {
         "TITLE": 'Preferences',
@@ -238,9 +238,76 @@ var translationsEN = {
     "LIST": 'List',
     "CHANGE_VIEW_MAP": 'See meals on a map',
     "CHANGE_VIEW_LIST": 'See the list of meals',
-    "REQUEST_SUCCESS": "Your request has been sent to the host."
+    "REQUEST_SUCCESS": "Your request has been sent to the host.",
+    "NO_INCOMING_MEALS_1": 'There are no incoming meals but you can',
+    "CREATE_YOUR_MEAL": 'Create your own meal',
+    "NO_INCOMING_MEALS_2": 'and enjoy meeting new people from all over the world',
+    "ATTENDING": 'Attending',
+    "PENDING": 'Pending',
+    "ATTENDED": 'Attended',
+    "HOSTING": 'Hosting',
+    "HOSTED": 'Hosted',
+    "VEGETARIAN_MEAL": 'Vegetarian meal',
+    "VEGAN_MEAL": 'Vegan meal',
+    "HALAL_MEAL": 'Halal meal',
+    "KOSHER_MEAL": 'Kosher meal',
+    "HOST": 'The host'
   },
-
+  "PROFILE": {
+    "RECOMMENDATION": 'We recomend you to complete your profile. Someone with a complete profile is more trustworthy than someone without.',
+    "ABOUT_ME": {
+      "TITLE": 'About me',
+      "BIRTHDATE": 'Birthdate:',
+      "GENDER": {
+        "NAME": 'Gender',
+        "MALE": 'Male',
+        "FEMALE": 'Female'
+      },
+      "EMAIL": 'Email',
+      "CELLPHONE": "@:CREATE_A_MEAL.FORM.CELLPHONE",
+      "COUNTRY_OF_ORIGIN": 'Native country',
+      "SPOKEN_LANGUAGES": {
+        "NAME": 'Spoken languages',
+        "ADD": 'Add',
+      },
+      "PRESENTATION": 'Introduce yourself'
+    },
+    "NOTIFICATIONS":{
+      "TITLE": 'Notifications',
+      "PARAGRAPHE": 'Do you want to receive notifications through messenger about new meals?',
+      "PARAGRAPHE_1": "@:CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2",
+      "CITY_OF_INTEREST": {
+        "TITLE": 'Select the cities of your interest:',
+        "WARNING": 'Be aware that for some big cities (Melbourne, Santiago, ...) the name of the city refers only to the city center and not the neighbourhood suburbs.',
+        "PLACEHOLDER": "@:VIEW_MEALS.FILTERS.CITY.PLACEHOLDER",
+        "ADD": "@:PROFILE.ABOUT_ME.SPOKEN_LANGUAGES.ADD"
+      },
+      "DIATERY_PREFERENCES": {
+        "TITLE": 'Dietary preferences:',
+        "OMNIVOROUS": 'Omnivorous',
+        "VEGETARIAN": "@:CREATE_A_MEAL.FORM.VEGETARIAN",
+        "VEGAN": "@:CREATE_A_MEAL.FORM.VEGAN",
+      }
+    },
+    "ACTUALIZE": {
+      "ACTION": 'Actualize',
+      "MESSAGE_SUCCESS": 'Your profile was actualized',
+      "MESSAGE_ERROR": 'We had a problem actualizing your profile. Please, get in touch with',
+      "MESSAGE_ERROR_CELLPHONE_EMAIL": 'Email and cellphone are required to participate'
+    },
+    "YEARS_OLD": 'Years old',
+    "COUNTRY_OF_ORIGIN": 'From {{country_of_origin_name}}',
+    "PUBLIC_PROFILE": 'Public profile',
+    'MEMBERSHIP': 'Member since {{member_since}}',
+    "REVIEWS": {
+      "TITLE": 'Reviews',
+      "NO_REVIEWS_YET": '{{user_first_name}} does not have any reviews yet.',
+      "NO_COMMENT": '{{review_fromUser_datas_first_name}} had a {{review_forUser_rating}} experience with {{user_first_name}}.'
+    },
+    "MEALS":{
+      "TITLE": 'Meals'
+    }
+  }
 };
 
 

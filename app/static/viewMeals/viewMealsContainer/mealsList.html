@@ -1,9 +1,9 @@
 <div ng-if="mealsFiltered.length == 0" class="text-center" style="font-size:large;">
-    <div class="text-info" style="margin-top:23px">There are no incoming meals but you can</div>
+    <div class="text-info" style="margin-top:23px" translate>VIEW_MEALS.NO_INCOMING_MEALS_1</div>
     <div class="clear20"></div>
-    <a ui-sref="create_meal" class="btn btn-primary" href="#/create_meal">Create your own meal</a>
+    <a ui-sref="create_meal" class="btn btn-primary" href="#/create_meal" translate>VIEW_MEALS.CREATE_YOUR_MEAL</a>
     <div class="clear20"></div>
-    <div class="text-info">and enjoy meeting new people from all over the world <span class="glyphicon glyphicon-thumbs-up" style="left:5px;top:2px"></span></div>
+    <div class="text-info" translate>VIEW_MEALS.NO_INCOMING_MEALS_2 <span class="glyphicon glyphicon-thumbs-up" style="left:5px;top:2px"></span></div>
 </div>
 <div class="row" ng-repeat="meal in mealsFiltered = (meals | filter: futurMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | filter : helpingTypeFilter | orderBy:'time':reverse)">
     <div class="col-xs-12">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="datasUserForEachMeal(meal)">
-                                <div class="pull-right" ng-class="{'text-success': datasUserForEachMeal(meal).status == 'accepted', 'text-warning': datasUserForEachMeal(meal).status == 'pending'}"><strong><span ng-if="datasUserForEachMeal(meal).status =='accepted' && datasUserForEachMeal(meal).role[0] != 'admin'">attending</span><span ng-if="datasUserForEachMeal(meal).status =='accepted' && datasUserForEachMeal(meal).role[0] == 'admin'">Hosting</span><span ng-if="datasUserForEachMeal(meal).status =='pending'">pending</span></strong></div>
+                                <div class="pull-right" ng-class="{'text-success': datasUserForEachMeal(meal).status == 'accepted', 'text-warning': datasUserForEachMeal(meal).status == 'pending'}"><strong><span ng-if="datasUserForEachMeal(meal).status =='accepted' && datasUserForEachMeal(meal).role[0] != 'admin'" translate>VIEW_MEALS.ATTENDING</span><span ng-if="datasUserForEachMeal(meal).status =='accepted' && datasUserForEachMeal(meal).role[0] == 'admin'" translate>VIEW_MEALS.HOSTING</span><span ng-if="datasUserForEachMeal(meal).status =='pending'" translate>VIEW_MEALS.PENDING</span></strong></div>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                     <div class="row" ng-if="countPendingRequestsPerMeal(meal._id) > 0 && meal.admin._id == user._id" style="margin-top:7px">
                         <i class="fa fa-user-plus"></i> <strong class="text-warning">{{countPendingRequestsPerMeal(meal._id)}} pending request<span ng-if="countPendingRequestsPerMeal(meal._id) > 1">s</span></strong>
                     </div>
-                    <div class="row hidden-sm hidden-md hidden-lg">
+                    <div class="row visible-xs">
                         <div class="clear5"></div>
                         <div class="clear5 list-meal-separation"></div>
                         <div>
@@ -155,14 +155,14 @@
                 <div class="col-xs-12 col-sm-10" style="display:table-cell">
                     <div class="row">
                         <div class="meal-menu text-left" ng-class="{'col-xs-8 col-sm-9 col-lg-10':datasUserForEachMeal(meal),'col-xs-12':!datasUserForEachMeal(meal)}">
-                            <strong class="hidden-sm hidden-md hidden-lg">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
+                            <strong class="visible-xs">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-md hidden-lg">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
                             <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                         </div>
                         <div class="row">
                             <div class="col-xs-4 col-sm-3 col-lg-2" ng-if="datasUserForEachMeal(meal)">
-                                <div class="pull-right" ng-class="{'text-info': datasUserForEachMeal(meal).status == 'accepted'}"><strong><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] != 'admin'">attended</span><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] == 'admin'">Hosted</span></strong></div>
+                                <div class="pull-right" ng-class="{'text-info': datasUserForEachMeal(meal).status == 'accepted'}"><strong><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] != 'admin'" translate>VIEW_MEALS.ATTENDED</span><span ng-if="datasUserForEachMeal(meal).status == 'accepted' && datasUserForEachMeal(meal).role[0] == 'admin'" translate>VIEW_MEALS.HOSTED</span></strong></div>
                             </div>
                         </div>
                     </div>
@@ -187,23 +187,24 @@
                         </div>
                     </div>
                     <div class="row" style="margin-top:7px;">
-                        <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span><strong class="size-15 text-success"> {{meal.currency_symbol}} {{meal.mealPrice}}</strong>
                     </div>
-                    <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
-                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                    <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+                    </div>
+                    <div class="row" ng-if="meal.vegan == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
                     </div>
                     <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
-                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
                     </div>
                     <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
-                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
+                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
                     </div>
                     <div class="row hidden-sm hidden-md hidden-lg">
                         <div class="clear5"></div>
                         <div class="clear5 list-meal-separation"></div>
-                        <div>
-                            <strong><em>The host</em></strong>
-                        </div>
+                        <div class="bold italic" translate>VIEW_MEALS.HOST</div>
                         <div class="clear10"></div>
                         <div>
                             <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
@@ -213,7 +214,7 @@
                                 </div>
                                 <div class="small" style="padding-top:4px">
                                     <span ng-if="meal.admin.gender"><i class="fa fa-venus-mars"></i> {{meal.admin.gender | capitalizeFirstLetter}}</br></span>
-                                    <span ng-if="meal.admin.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.admin.birthdate | ageFilter}} years old</br></span>
+                                    <span ng-if="meal.admin.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.admin.birthdate | ageFilter}} years old</br></span><!-- à remplacer que je ferais le profil-->
                                     <span ng-if="meal.admin.country_of_origin"><i class="fa fa-globe"></i> From {{meal.admin.country_of_origin.name}}</br></span>
                                 </div>
                                 <div class="clear5"></div>

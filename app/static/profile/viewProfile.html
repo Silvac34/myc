@@ -1,9 +1,7 @@
 <div class="container-fluid">
     <div class="row fade-out-success" ng-show="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages">
         <div class="col-xs-12">
-            <div class="alert alert-dismissible alert-info text-justify">
-                <strong>We recomend you to complete your profile. Someone with a complete profile is more trustworthy than someone without.</strong>
-            </div>
+            <div class="alert alert-dismissible alert-info text-justify bold" translate>PROFILE.RECOMMENDATION</div>
         </div>
     </div>
     <script type="text/ng-template" id="customTemplate.html">
@@ -39,10 +37,10 @@
         <div class="col-sm-9 col-xs-12">
             <form class="form-horizontal" name="updateUserForm">
                 <fieldset>
-                    <uib-tabset active="active">
+                    <uib-tabset active="activeForm">
                         <uib-tab index="0">
                             <uib-tab-heading>
-                                <span class="small-visible-xs">About me</span>
+                                <span class="small-visible-xs" translate>PROFILE.ABOUT_ME.TITLE</span>
                             </uib-tab-heading>
                             <div class="clear20"></div>
                             <div class="col-xs-12">
@@ -68,118 +66,90 @@
                                 </div>
                                 <div class="clear10"></div>
                                 <div class="form-group">
-                                    <div class="hidden-sm hidden-md hidden-lg">Birthdate:</div>
-                                    <div><span style="float:left;margin-right:10px" class="hidden-xs">Birthdate: </span><input datedropdowns ng-model="user.birthdate" day-div-class="day-container" month-div-class="month-container" year-div-class="year-container"
-                                        /></div>
+                                    <div class="visible-xs" translate>PROFILE.ABOUT_ME.BIRTHDATE</div>
+                                    <div><span style="float:left;margin-right:10px" class="hidden-xs" translate>PROFILE.ABOUT_ME.BIRTHDATE </span><input datedropdowns ng-model="user.birthdate" day-div-class="day-container" month-div-class="month-container"
+                                            year-div-class="year-container" /></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="inner-addon left-addon">
                                         <i class="fa fa-venus-mars"></i>
-                                        <select type="text" class="form-control" ng-model="user.gender" placeholder="Gender">
-                                            <option value="male">Male</option><option value="female">Female</option>
+                                        <select type="text" class="form-control" ng-model="user.gender" placeholder="{{'PROFILE.ABOUT_ME.GENDER.NAME'|translate}}">
+                                            <option value="male" translate>PROFILE.ABOUT_ME.GENDER.MALE</option><option value="female" translate>PROFILE.ABOUT_ME.GENDER.FEMALE</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="inner-addon left-addon">
                                         <i class="fa fa-at"></i>
-                                        <input type="text" class="form-control" ng-model="user.privateInfo.email" placeholder="Email">
+                                        <input type="text" class="form-control" ng-model="user.privateInfo.email" placeholder="{{'PROFILE.ABOUT_ME.EMAIL'|translate}}">
                                     </div>
                                 </div>
                                 <div class="form-group" ng-class="{'has-error': updateUserForm.inputCellphone.$invalid && userUpdateForm.$submitted};">
                                     <div class="inner-addon left-addon">
                                         <i class="glyphicon glyphicon-earphone"></i>
-                                        <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="Cellphone" ng-model="user.privateInfo.cellphone">
+                                        <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="{{'PROFILE.ABOUT_ME.CELLPHONE'|translate}}" ng-model="user.privateInfo.cellphone">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" ng-model="user.country_of_origin" placeholder="Native country" uib-typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo:8" typeahead-template-url="customTemplate.html" class="form-control"
-                                        typeahead-show-hint="true" typeahead-min-length="0" autocomplete="off">
+                                    <input type="text" ng-model="user.country_of_origin" placeholder="{{'PROFILE.ABOUT_ME.COUNTRY_OF_ORIGIN'|translate}}" uib-typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo:8" typeahead-template-url="customTemplate.html"
+                                        class="form-control" typeahead-show-hint="true" typeahead-min-length="0" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group pull-left" style="width:195px; margin-right:10px; margin-bottom:10px">
-                                        <input type="text" ng-model="userSpokenLanguage" placeholder="Spoken languages" uib-typeahead="language as language.name for language in languages | filter:{name:$viewValue} | limitTo:8" class="form-control" typeahead-show-hint="true" typeahead-min-length="0"
-                                            autocomplete="off" ng-keypress="addSpokenLanguage($event)">
-                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addSpokenLanguage()">Add</button></span>
+                                        <input type="text" ng-model="userSpokenLanguage" placeholder="{{'PROFILE.ABOUT_ME.SPOKEN_LANGUAGES.NAME'|translate}}" uib-typeahead="language as language.name for language in languages | filter:{name:$viewValue} | limitTo:8" class="form-control" typeahead-show-hint="true"
+                                            typeahead-min-length="0" autocomplete="off" ng-keypress="addSpokenLanguage($event)">
+                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addSpokenLanguage()" translate>PROFILE.ABOUT_ME.SPOKEN_LANGUAGES.ADD</button></span>
                                     </div>
                                     <div ng-repeat="spoken_language in user.spoken_languages" class="well well-sm profile-city-notification-preference" style="background-color:inherit;border-color:#3eaae8">
                                         <strong>&nbsp;&nbsp;{{spoken_language}}&nbsp;</strong><span class="glyphicon glyphicon-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeSpokenLanguage($event)"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="3" placeholder="Introduce yourself" ng-model="user.presentation" style="margin-top:-10px"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag); confirmOptIn()">Actualize</button>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group fade-out-success" ng-if="updateUserForm.$submitted" ng-show="actualized != null">
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
-                                            <div class="alert alert-dismissible" ng-class="{'alert-success': actualized == true, 'alert-danger': (actualized == false || actualized == 'error')}">
-                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                <span ng-show="actualized == true" class="fade-out-success">Your profile was actualized</span>
-                                                <span ng-show="actualized == false" class="fade-out-success">We had a problem actualizing your profile. Please, get in touch with <a href="mailto:dimitri.kohn@centrale-marseille.fr?subject=myCommuneaty: error Actualizing profile">Dimitri</a></span>
-                                                <span ng-show="actualized == 'error'" class="fade-out-success">email and cellphone are required to participate</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <textarea class="form-control" rows="3" placeholder="{{'PROFILE.ABOUT_ME.PRESENTATION'|translate}}" ng-model="user.presentation" style="margin-top:-10px"></textarea>
                                 </div>
                             </div>
                         </uib-tab>
                         <uib-tab index="1">
                             <uib-tab-heading>
-                                <span class="small-visible-xs">Notifications</span>
+                                <span class="small-visible-xs" translate>PROFILE.NOTIFICATIONS.TITLE</span>
                             </uib-tab-heading>
                             <div class="clear10"></div>
                             <div class="col-xs-12">
                                 <div class="row">
-                                    <em>Do you want to receive notifications through messenger about new meals?</em><span class="small"> (highly recommended)</span>
+                                    <em translate>PROFILE.NOTIFICATIONS.PARAGRAPHE</em> <span class="small" translate>PROFILE.NOTIFICATIONS.PARAGRAPHE_1</span>
                                 </div>
                                 <div class="clear10"></div>
                                 <div class="row" ng-hide="user.privateInfo.preferences.city_notification.length == 0" style="margin-top:-10px">
                                     <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
                                 </div>
                                 <div class="row">
-                                    <div>Select the cities of your interest:</div>
+                                    <div translate>PROFILE.NOTIFICATIONS.CITY_OF_INTEREST.TITLE</div>
                                     <div class="pull-left small">
-                                        <i class="glyphicon glyphicon-alert"></i> <em>Be aware that for some big cities (Melbourne, Santiago, ...) the name of the city refers only to the city center and not the neighbourhood suburbs.</em>
+                                        <i class="glyphicon glyphicon-alert"></i> <em translate>PROFILE.NOTIFICATIONS.CITY_OF_INTEREST.WARNING</em>
                                     </div>
                                     <div class="clear10"></div>
                                     <div class="input-group pull-left" style="width:290px; margin-right:10px; margin-bottom:10px">
                                         <span class="input-group-addon" style="background-color:white"><i class="glyphicon glyphicon-map-marker"></i></span>
                                         <input ng-autocomplete type="text" ng-model="autocomplete" class="form-control pull-left" placeholder="City, suburb" options="{types:'(cities)'}" details="details" autocomplete="off" style="margin-right:20px" ng-keypress="addCityNotificationPreference($event)"
                                         />
-                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addCityNotificationPreference()">Add</button></span>
+                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addCityNotificationPreference()" translate>PROFILE.NOTIFICATIONS.CITY_OF_INTEREST.ADD</button></span>
                                     </div>
                                     <div ng-repeat="cities in user.privateInfo.preferences.city_notification" class="well well-sm profile-city-notification-preference" style="background-color:inherit;border-color:#3eaae8">
                                         <strong>&nbsp;&nbsp;{{cities}}&nbsp;</strong><span class="glyphicon glyphicon-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeCityNotificationPreference($event)"></span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div>Dietary preferences:</div>
+                                    <div translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.TITLE</div>
                                     <div class="clear10"></div>
                                     <div class="checkbox" style="bottom:10px">
                                         <span uib-tooltip="Chose a city to receive notifications first" tooltip-placement="right" tooltip-enable="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">
-                            <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.omnivorous_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/>Omnivorous</label>
-                            <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.veggies_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/>Vegetarian</label>
-                            <label><input type="checkbox" ng-model="user.privateInfo.preferences.vegan_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">Vegan</label>
-                            </span>
+                            <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.omnivorous_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/><span translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.OMNIVOROUS</span></label>
+                                        <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.veggies_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/><span translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.VEGETARIAN</span></label>
+                                        <label><input type="checkbox" ng-model="user.privateInfo.preferences.vegan_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"><span translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.VEGAN</span></label>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="clear10"></div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag); confirmOptIn()">Actualize</button>
-                                </div>
-                            </div>
-                            <div class="form-group fade-out-success" ng-if="updateUserForm.$submitted" ng-show="actualized != null">
-                                <div class="col-xs-12 col-sm-6 col-md-4">
-                                    <div class="alert alert-dismissible" ng-class="{'alert-success': actualized == true, 'alert-danger': (actualized == false || actualized == 'error')}">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <span ng-show="actualized == true" class="fade-out-success">Your profile was actualized.</span>
-                                        <span ng-show="actualized == false" class="fade-out-success">We had a problem actualizing your profile. Please, get in touch with <a href="mailto:dimitri.kohn@centrale-marseille.fr?subject=myCommuneaty: error Actualizing profile">Dimitri.</a></span>
-                                        <span ng-show="actualized == 'error'" class="fade-out-success">email and cellphone are required to participate.</span>
-                                    </div>
-                                </div>
                             </div>
                         </uib-tab>
                         <uib-tab index="2">
@@ -213,6 +183,23 @@
                     </uib-tabset>
                 </fieldset>
             </form>
+            <div ng-hide="activeForm == 2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag); confirmOptIn()" translate>PROFILE.ACTUALIZE.ACTION</button>
+                </div>
+                <div class="row">
+                    <div class="form-group fade-out-success" ng-if="updateUserForm.$submitted" ng-show="actualized != null">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="alert alert-dismissible" ng-class="{'alert-success': actualized == true, 'alert-danger': (actualized == false || actualized == 'error')}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span ng-show="actualized == true" class="fade-out-success" translate>PROFILE.ACTUALIZE.MESSAGE_SUCCESS</span>
+                                <span ng-show="actualized == false" class="fade-out-success"><span translate>PROFILE.ACTUALIZE.MESSAGE_ERROR</span> <a href="mailto:dimitri.kohn@centrale-marseille.fr?subject=myCommuneaty: error Actualizing profile">Dimitri</a></span>
+                                <span ng-show="actualized == 'error'" class="fade-out-success" translate>PROFILE.ACTUALIZE.MESSAGE_ERROR_CELLPHONE_EMAIL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -225,24 +212,24 @@
                         <strong class="text-info size-16">{{user.first_name}} {{user.last_name}}</strong>
                     </div>
                     <div class="hidden-xs" style="padding-top:10px">
-                        <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{user.gender | capitalizeFirstLetter}}</br></span>
-                        <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
-                        <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
+                        <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i>  {{user.gender | capitalizeFirstLetter}}</br></span>
+                        <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span></br></span>
+                        <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{user.country_of_origin.name}}'}"></span></br></span>
                         <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
                         </span>
-                        <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank">Public profile</a></br><span class="hidden-sm hidden-md hidden-lg"></br></span>
-                        <em>Member since {{user._created | date:'MM/yyyy'}}</em>
+                        <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank" translate>PROFILE.PUBLIC_PROFILE</a></br><span class="hidden-sm hidden-md hidden-lg"></br></span>
+                        <em translate="PROFILE.MEMBERSHIP" translate-values="{ member_since: '{{user._created | date:'MM/yyyy'}}'}"></em>
                     </div>
                 </div>
                 <div id="profile-list-information-other-user" class="hidden-sm hidden-md hidden-lg" style="padding-top:10px">
                     <span ng-if="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{user.gender | capitalizeFirstLetter}}</br></span>
-                    <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} years old</br></span>
-                    <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> From {{user.country_of_origin.name}}</br></span>
+                    <span ng-if="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span></br></span>
+                    <span ng-if="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{user.country_of_origin.name}}'}"></span></br></span>
                     <span ng-if="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
                     </span>
-                    <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank">Public profile</a></br>
+                    <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank" translate>PROFILE.PUBLIC_PROFILE</a></br>
                     </span>
-                    <em>Member since {{user._created | date:'MM/yyyy'}}</em>
+                    <em translate="PROFILE.MEMBERSHIP" translate-values="{ member_since: '{{user._created | date:'MM/yyyy'}}'}"></em>
                 </div>
                 <div class="hidden-xs pull-right text-justify inline-block-sm-md-lg" style="max-width:490px; padding: 42px 15px 0px 20px;" ng-if="user.presentation">
                     "<em>{{user.presentation}}</em>"
@@ -253,7 +240,7 @@
         <uib-tabset active="active">
             <uib-tab index="0">
                 <uib-tab-heading>
-                    <span class="small-visible-xs">Reviews</span>
+                    <span class="small-visible-xs" translate>PROFILE.REVIEWS.TITLE</span>
                 </uib-tab-heading>
                 <div class="clear10"></div>
                 <div ng-if="reviews.length > 0" style="position:relative">
@@ -285,18 +272,18 @@
                             <div style="padding-top:20px">
                                 <span class="glyphicon" ng-class="{'glyphicon-plus-sign text-success': review.forUser.rating == 'positive', 'glyphicon-record text-default': review.forUser.rating == 'neutral', 'glyphicon-minus-sign text-danger': review.forUser.rating == 'negative'}"
                                     style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span ng-if="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span>
-                                <span ng-if="!review.forUser.comment">&nbsp;<em>{{review.fromUser.datas.first_name}} had a {{review.forUser.rating}} experience with {{user.first_name}}.</em></span>
+                                <span ng-if="!review.forUser.comment">&nbsp;<em translate="PROFILE.REVIEWS.NO_COMMENT" translate-values="{ review_fromUser_datas_first_name: '{{review.fromUser.datas.first_name}}', review_forUser_rating: '{{review.forUser.rating}}', user_first_name: '{{user.first_name}}' }"></em></span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div ng-if="reviews.length == 0">
-                    <div>{{user.first_name}} does not have any reviews yet.</div>
+                    <div translate="PROFILE.REVIEWS.NO_REVIEWS_YET" translate-values="{ user_first_name: '{{user.first_name}}'}"></div>
                 </div>
             </uib-tab>
             <uib-tab index="1">
                 <uib-tab-heading>
-                    <span class="small-visible-xs">Meals</span>
+                    <span class="small-visible-xs" translate>PROFILE.MEALS.TITLE</span>
                 </uib-tab-heading>
                 <div class="clear10"></div>
                 <div ui-view="mealsList"></div>

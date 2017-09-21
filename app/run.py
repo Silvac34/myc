@@ -424,6 +424,36 @@ def before_updating_privateMeals(updates, original):
     if ("detailedInfo" in updates): # si on change le nombre d'aide
         requiredGuestsUpdate = updates["detailedInfo"]["requiredGuests"]
         requiredGuestsMeal = original["detailedInfo"]["requiredGuests"]
+        cookDelta = 0
+        cleanerDelta = 0
+        simpleGuestDelta = 0
+        ##on définit le nombre total d'aide pour pouvoir calculer les prix
+        if ("cooks" in requiredGuestsMeal):
+            if("cooks" in requiredGuestsUpdate):
+                nbCooks = requiredGuestsUpdate["cooks"]["nbRquCooks"]
+            else:
+                nbCooks = requiredGuestsMeal["cooks"]["nbRquCooks"]
+        else:
+            nbCooks = 0
+        if ("cleaners" in requiredGuestsMeal):
+            if ("cleaners" in requiredGuestsUpdate):
+                nbCleaners = requiredGuestsUpdate["cleaners"]["nbRquCleaners"]
+            else:
+                nbCleaners = requiredGuestsMeal["cleaners"]["nbRquCleaners"]
+        else:
+            nbCleaners = 0
+        if ("simpleGuests" in requiredGuestsMeal):
+            if ("simpleGuests" in requiredGuestsUpdate):
+                nbSimpleGuests = requiredGuestsUpdate["simpleGuests"]["nbRquSimpleGuests"]
+            else:
+                nbSimpleGuests = requiredGuestsMeal["simpleGuests"]["nbRquSimpleGuests"]
+        else:
+            nbSimpleGuests = 0
+        price = calculator.resolve(nbSimpleGuests, nbCooks, nbCleaners, original["price"]) #obtention du nouveau prix par type d'aide
+        requiredGuestsUpdate["hosts"] = {"price": price["hostPrice"]}
+        #requiredGuestsUpdate["cooks"] = {"price": price["cookPrice"]}
+        #requiredGuestsUpdate["cleaners"] = {"price": price["cleanerPrice"]}
+        #requiredGuestsUpdate["simpleGuests"] = {"price": price["simpleGuestPrice"]}
         if ("cooks" in requiredGuestsUpdate):
             if ("nbRquCooks" in requiredGuestsUpdate["cooks"]): #si on change le nombre d'aide cuisine
                 ##on update le nbRemainingPlaces dans privateInfo
@@ -434,7 +464,7 @@ def before_updating_privateMeals(updates, original):
                     else:
                         requiredGuestsUpdate["cooks"]["nbRemainingPlaces"] = requiredGuestsMeal["cooks"]["nbRemainingPlaces"] + cookDelta #sinon, on rajoute le nombre de Remaining places à actualiser
                 else: #s'il n'y avait pas d'aides cuisines avant
-                    if ("timeCooking" not in requiredGuestsUpdate["cooks"]):
+                    if ("timeCooking" not in (requiredGuestsUpdate["cooks"] and requiredGuestsMeal["cooks"])):
                         abort(403)
                     else:
                         cookDelta = requiredGuestsUpdate["cooks"]["nbRquCooks"] # requiredGuestsMeal["cooks"]["nbRquCooks"] = 0
@@ -493,6 +523,10 @@ def before_updating_privateMeals(updates, original):
                     updates["nbRemainingPlaces"] += simpleGuestDelta
                 else:
                     updates["nbRemainingPlaces"] = original["nbRemainingPlaces"] + simpleGuestDelta
+        print(cookDelta)
+        print(cleanerDelta)
+        print(simpleGuestDelta)
+        
     
 def after_updating_privateMeals(updates, original):
     admin = User(_id=ObjectId(original["admin"])).getUserPublicInfo()

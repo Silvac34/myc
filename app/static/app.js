@@ -139,15 +139,15 @@ var translationsEN = {
         "NAME": 'Host (you)'
       },
       "HELP_COOKING": {
-        "NAME": 'Help cooking',
+        "NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
         "TOOLTIP": 'People will help you for cooking'
       },
       "HELP_CLEANING": {
-        "NAME": 'Help cleaning',
+        "NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
         "TOOLTIP": 'People will help you for cleaning'
       },
       "SIMPLE_GUEST": {
-        "NAME": 'Simple Guest',
+        "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
         "TOOLTIP": 'People will help you for cleaning'
       },
       "GROCERIES_PRICE": 'Price of the groceries',
@@ -225,11 +225,11 @@ var translationsEN = {
       },
       "HELP_TYPE": {
         "TITLE": 'Type of help',
-        "HELP_COOKING": "@:CREATE_A_MEAL.FORM.HELP_COOKING.NAME",
+        "HELP_COOKING": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
         "HELP_COOKING_MOBILE": "Cooking",
-        "HELP_CLEANING": "@:CREATE_A_MEAL.FORM.HELP_CLEANING.NAME",
+        "HELP_CLEANING": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
         "HELP_CLEANING_MOBILE": "Cleaning",
-        "SIMPLE_GUEST": "@:CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME",
+        "SIMPLE_GUEST": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
       },
       "VALIDATE": 'Validate',
       "REINITIALIZE": 'Reinitialize'
@@ -251,7 +251,33 @@ var translationsEN = {
     "VEGAN_MEAL": 'Vegan meal',
     "HALAL_MEAL": 'Halal meal',
     "KOSHER_MEAL": 'Kosher meal',
-    "HOST": 'The host'
+    "HOST": 'The host',
+    "ACTION_BUTTON": {
+      "SEE_MEAL": 'See meal',
+      "MEAL_FULL": 'The meal is already full!',
+      "SIGN_IN_1": 'Please',
+      "SIGN_IN_2": 'Sign In',
+      "SIGN_IN_3": 'if you already subscribed.',
+    }
+  },
+  "VIEW_MEALS_DTLD": {
+    "DESCRIPTION": 'Description',
+    "VEGETARIAN_MEAL": "@:VIEW_MEALS.VEGETARIAN_MEAL",
+    "VEGAN_MEAL": "@:VIEW_MEALS.VEGAN_MEAL",
+    "HALAL_MEAL": "@:VIEW_MEALS.HALAL_MEAL",
+    "KOSHER_MEAL": "@:VIEW_MEALS.KOSHER_MEAL",
+    "INSCRIPTION": {
+      "TITLE": 'Inscription as :',
+      "TOOLTIP": {
+        "PARTICIPANTS": "@:CREATE_A_MEAL.PARTICIPANTS",
+        "PRICE": "@:VIEW_MEALS.FILTERS.PRICE.TITLE",
+        "ARRIVAL_TIME": "@:CREATE_A_MEAL.ARRIVAL_TIME"
+      },
+      "HELP_COOKING":{
+        "NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+        "DESCRIPTION": ''
+      }
+    }
   },
   "PROFILE": {
     "RECOMMENDATION": 'We recomend you to complete your profile. Someone with a complete profile is more trustworthy than someone without.',
@@ -272,7 +298,7 @@ var translationsEN = {
       },
       "PRESENTATION": 'Introduce yourself'
     },
-    "NOTIFICATIONS":{
+    "NOTIFICATIONS": {
       "TITLE": 'Notifications',
       "PARAGRAPHE": 'Do you want to receive notifications through messenger about new meals?',
       "PARAGRAPHE_1": "@:CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2",
@@ -304,7 +330,7 @@ var translationsEN = {
       "NO_REVIEWS_YET": '{{user_first_name}} does not have any reviews yet.',
       "NO_COMMENT": '{{review_fromUser_datas_first_name}} had a {{review_forUser_rating}} experience with {{user_first_name}}.'
     },
-    "MEALS":{
+    "MEALS": {
       "TITLE": 'Meals'
     }
   }

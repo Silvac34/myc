@@ -7,7 +7,7 @@
             </div>
             <div class="col-xs-12" style="margin:15px">
                 <div class="row" ng-if="meal.menu.description" style="margin-right:0px">
-                    Description: <em>{{meal.menu.description}}</em>
+                    <span translate>VIEW_MEALS_DTLD.DESCRIPTION</span>: <em>{{meal.menu.description}}</em>
                 </div>
                 <div class="row meal-info-label">
                     <span class="glyphicon glyphicon-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span ng-if="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
@@ -15,33 +15,36 @@
                 <div class="row meal-info-label">
                     <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}}
                 </div>
-                <div class="row meal-info-label" ng-if="meal.veggies == true || meal.vegan == true">
-                    <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                <div class="row meal-info-label" ng-if="meal.veggies == true">
+                    <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS_DTLD.VEGETARIAN_MEAL</span> 
                 </div>
-                <div class="row" ng-if="meal.halal == true">
-                    <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                <div class="row meal-info-label" ng-if="meal.vegan == true">
+                    <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS_DTLD.VEGAN_MEAL</span> 
                 </div>
-                <div class="row" ng-if="meal.kosher == true">
-                    <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
+                <div class="row meal-info-label" ng-if="meal.halal == true">
+                    <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS_DTLD.HALAL_MEAL</span> 
+                </div>
+                <div class="row meal-info-label" ng-if="meal.kosher == true">
+                    <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS_DTLD.KOSHER_MEAL</span> 
                 </div>
             </div>
         </div>
         <div class="row meal-dtld-group">
-            <div class="meal-label meal-dtld-group-label">Inscription as :</div>
+            <div class="meal-label meal-dtld-group-label" translate>VIEW_MEALS_DTLD.INSCRIPTION.TITLE</div>
             <div ng-if="errorSubscribe.requestRole.status">
                 <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.requestRole.message}}</div>
             </div>
             <div class="meal-dtld-helpers-label meal-dtld-col">
-                <span class="meal-dtld-helpers-position" uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
-                <span class="meal-dtld-helpers-position glyphicon glyphicon-piggy-bank" uib-tooltip="price" tooltip-trigger="mouseenter" tooltip-placement="top" style="font-size:18px"></span>
-                <span class="meal-dtld-helpers-position glyphicon glyphicon-time" uib-tooltip="arrival time" tooltip-trigger="mouseenter" tooltip-placement="top" style="font-size:18px"></span>
+                <span class="meal-dtld-helpers-position" uib-tooltip="{{'VIEW_MEALS_DTLD.INSCRIPTION.TOOLTIP.PARTICIPANTS'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span>
+                <span class="meal-dtld-helpers-position glyphicon glyphicon-piggy-bank" uib-tooltip="{{'VIEW_MEALS_DTLD.INSCRIPTION.TOOLTIP.PRICE'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top" style="font-size:18px"></span>
+                <span class="meal-dtld-helpers-position glyphicon glyphicon-time" uib-tooltip="{{'VIEW_MEALS_DTLD.INSCRIPTION.TOOLTIP.ARRIVAL_TIME'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top" style="font-size:18px"></span>
             </div>
             <uib-accordion close-others="accordionOneAtATime">
-                <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks">
+                <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cooks && meal.detailedInfo.requiredGuests.cooks.nbRquCooks > 0">
                     <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cook" ng-disabled="!requiredGuests.availablePlaces.cooks" ng-click="status.open1=true">
                     <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open1" is-disabled="!requiredGuests.availablePlaces.cooks">
                         <uib-accordion-heading>
-                            <div class="meal-dtld-helpers-label">Help cooking
+                            <div class="meal-dtld-helpers-label"><span translate>VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.NAME</span>
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
                                 <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks - meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.cooks.nbRquCooks}}</span>
                                 <span class="meal-dtld-helpers-position text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cooks.price}}</span>
@@ -49,11 +52,11 @@
                             </div>
                         </uib-accordion-heading>
                         <div class="size-12">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cooks.timeCooking | date : 'HH:mm'}}</strong> in order to help the host to prepare the meal.</div>
-                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="size-15 text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cooks.price">The price can vary <strong class="size-15 text-success">from <span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> to <span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.priceUnit}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
                             will be informed before the dinner of the final price.</div>
                     </div>
                 </div>
-                <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners">
+                <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.cleaners && meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners > 0">
                     <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="cleaner" ng-disabled="!requiredGuests.availablePlaces.cleaners" ng-click="status.open2=true">
                     <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open2" is-disabled="!requiredGuests.availablePlaces.cleaners">
                         <uib-accordion-heading>
@@ -65,19 +68,19 @@
 
                             </div>
                         </uib-accordion-heading>
-                        <div class="size-12"><span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning | date : 'HH:mm'}}</strong> in order to help for</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You will help</span>                            ordering and cleaning what was used for the meal.</div>
-                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="size-15 text-success" ng-bind-html="meal.priceSentence"></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
+                        <div class="size-12"><span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You have to arrive at <strong>{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning | date : 'HH:mm'}}</strong> in order to help for</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">You will help</span> ordering and cleaning what was used for the meal.</div>
+                        <div class="size-12" ng-if="meal.priceUnit != meal.detailedInfo.requiredGuests.cleaners.price">The price can vary <strong class="size-15 text-success">from <span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> to <span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.priceUnit}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong> according to the inscriptions (<a ui-sref="footer_information_concept" ng-click="cancel()">more info about pricing</a>). You
                             will be informed before the dinner of the final price.</div>
                     </div>
                 </div>
-                <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
+                <div style="overflow:auto" ng-if="meal.detailedInfo.requiredGuests.simpleGuests && meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests > 0">
                     <input class="pull-left meal-dtld-helpers-radio" type="radio" ng-model="$parent.requestRole.name" value="simpleGuest" ng-disabled="!requiredGuests.availablePlaces.simpleGuests" ng-click="status.open3=true">
                     <div uib-accordion-group class="panel-default pull-left meal-dtld-helpers" is-open="status.open3" is-disabled="!requiredGuests.availablePlaces.simpleGuests">
                         <uib-accordion-heading>
                             <div class="meal-dtld-helpers-label">Simple guest
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open3, 'glyphicon-chevron-right': !status.open3}"></i>
                                 <span class="meal-dtld-helpers-position">{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests - meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}/{{meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests}}</span>
-                                <span class="meal-dtld-helpers-position text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.simpleGuests.price}}</span>
+                                <span class="meal-dtld-helpers-position text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></span>
                                 <span class="meal-dtld-helpers-position">{{meal.time | date:'HH:mm'}}</span>
                             </div>
                         </uib-accordion-heading>

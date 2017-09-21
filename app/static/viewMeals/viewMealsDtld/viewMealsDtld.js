@@ -302,19 +302,6 @@ export default angular.module('myApp.viewMealsDtld', [])
     $state.go($scope.$state.current.name, {}, {reload:true});
   }; //function to validate the modal
 
-
-  function defineMealPriceSentence() {
-    $scope.meal.priceSentence = "";
-    if ("cooks" in $scope.meal.detailedInfo.requiredGuests) {
-      $scope.meal.priceSentence = 'from ' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cooks.price + ' to ' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit;
-    }
-    if ("cleaners" in $scope.meal.detailedInfo.requiredGuests) {
-      $scope.meal.priceSentence = 'from ' + $scope.meal.currency_symbol + ' ' + $scope.meal.detailedInfo.requiredGuests.cleaners.price + ' to ' + $scope.meal.currency_symbol + ' ' + $scope.meal.priceUnit;
-    }
-  }
-
-  defineMealPriceSentence();
-
   //Initialize variable
   $scope.isAuthenticated = isAuthenticated;
   $scope.requestRole = {};

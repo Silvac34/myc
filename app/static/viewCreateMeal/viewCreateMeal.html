@@ -3,7 +3,7 @@
     <form class="form-horizontal createMealForm" name="createMealForm" novalidate>
         <fieldset>
             <div class="row">
-                <h4><em translate>CREATE_A_MEAL.FORM.PUBLIC_INFO</em></h4>
+                <h4 class="italic" translate>CREATE_A_MEAL.FORM.PUBLIC_INFO</h4>
             </div>
             <div class="clear10"></div>
             <div class="row">
@@ -85,7 +85,7 @@
                             <td class="text-center" style="vertical-align:middle"><span ng-show="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests">{{editedMeal.time | date:'HH:mm'}}</span></td>
                         </tr>
                         <tr class="table-meal-border table-meal-border-bottom">
-                            <td>Total</td>
+                            <td translate>CREATE_A_MEAL.FORM.TOTAL</td>
                             <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}
                             </td>
                             <td></td>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="row">
-                <h4><em translate>CREATE_A_MEAL.FORM.PRIVATE_INFO</em></h4>
+                <h4 class="italic" translate>CREATE_A_MEAL.FORM.PRIVATE_INFO</h4>
             </div>
             <div class="clear10"></div>
             <div class="row">
@@ -148,7 +148,7 @@
             </div>
             <div class="clear10"></div>
             <div class="row">
-                <h4><em translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.TITLE</em></h4>
+                <h4 class="italic" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.TITLE</h4>
             </div>
             <div class="clear10"></div>
             <div class="row">

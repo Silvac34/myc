@@ -191,6 +191,7 @@ var translationsEN = {
         "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
         "TOOLTIP": 'People will help you for cleaning'
       },
+      "TOTAL": 'Total',
       "GROCERIES_PRICE": 'Price of the groceries',
       "PRIVATE_INFO": 'Private information: displayed only to participants',
       "ADDRESS": 'Address',
@@ -513,7 +514,28 @@ var translationsEN = {
       "REMAINING_PLACES": 'Remaining places: {{nb_remaining_places}}',
       "PENDING_REQUEST": "@: VIEW_MY_MEALS.PENDING_REQUEST"
     },
-    "BACK_TO_MY_MEALS": 'Back to my meals'
+    "BACK_TO_MY_MEALS": 'Back to my meals',
+    "MODAL": {
+      "ACTION_BUTTON": {
+        "NO": 'No',
+        "YES": 'Yes'
+      },
+      "DELETE": {
+        "TITLE": 'Cancel the meal',
+        "PARAGRAPH": 'Are you sure that you want to cancel the event?',
+      },
+      "UNSUBSCRIBE": {
+        "TITLE": 'Unsubscribe from the meal',
+        "PARAGRAPH": 'Are you sure you want to unsubscribe from the meal?',
+      },
+      "EDIT":{
+        "ERROR_COOKING_TIME": 'The arrival time for the helping cooks can not be after the beggining of the meal',
+        "ACTION_BUTTON":{
+          "CANCEL": 'Cancel',
+          "EDIT": 'Edit'
+        }
+      }
+    }
   }
 };
 

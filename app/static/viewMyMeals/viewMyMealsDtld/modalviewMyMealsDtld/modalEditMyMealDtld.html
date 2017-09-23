@@ -4,33 +4,33 @@
         <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
         <fieldset id="fieldset-form">
             <div class="row">
-                <h4><em>Public information</em></h4>
+                <h4 class="italic" translate>CREATE_A_MEAL.FORM.PUBLIC_INFO</h4>
             </div>
             <div class="clear10"></div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group" ng-class="{'has-error': editedMeal.menu.title==undefined && editMealForm.$submitted};">
-                        <input type="text" class="form-control cutlery-menu" placeholder="Title of your menu" id="inputMenu" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.menu.title" required></textarea>
+                        <input type="text" class="form-control cutlery-menu" placeholder="{{'CREATE_A_MEAL.FORM.MENU_TITLE'|translate}}" id="inputMenu" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.menu.title" required></textarea>
                     </div>
                     <div class="form-group">
-                        <textarea type="text" class="form-control" placeholder="Menu description (optional)" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.menu.description"></textarea>
+                        <textarea type="text" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.MENU_DESCRIPTION'|translate}}" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.menu.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <span style="margin-right:10px"><em>Special meal?  <i class="fa fa-info-circle" uib-tooltip="do not check if not" tooltip-trigger="mouseenter" tooltip-placement="top"></i></em>
+                        <span style="margin-right:10px"><em translate>CREATE_A_MEAL.FORM.SPECIAL_MEAL.TITLE</em>&nbsp; <i class="fa fa-info-circle" uib-tooltip="{{'CREATE_A_MEAL.FORM.SPECIAL_MEAL.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"></i>
                         </span>
                         <div class="checkbox" style="margin-bottom:5px; display:inline-block">
                             <label class="form-design-veggies">
-                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false">Vegetarian
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.veggies" ng-change="editedMeal.vegan = false"><span translate>CREATE_A_MEAL.FORM.VEGETARIAN</span>
                         </label>
                             <label class="form-design-vegan">
-                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.vegan" ng-change="editedMeal.veggies = false">Vegan
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.vegan" ng-change="editedMeal.veggies = false"><span translate>CREATE_A_MEAL.FORM.VEGAN</span>
                         </label>
-                        </label>
+                            </label>
                             <label class="form-design-halal">
-                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.halal">Halal
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.halal"><span translate>CREATE_A_MEAL.FORM.HALAL</span>
                         </label>
                             <label class="form-design-kosher">
-                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.kosher">Kosher
+                            <input type="checkbox" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.kosher"><span translate>CREATE_A_MEAL.FORM.KOSHER</span>
                         </label>
                         </div>
                     </div>
@@ -42,16 +42,15 @@
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-calendar"></i>
                         </div>
-                        <input type="text" style="text-indent:20px" class="form-control" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.time" is-open="date_popup.opened" datepicker-options="dateOptions"
-                            ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats" placeholder="Date" value="{{editedMeal.time | date:'HH:mm'}}"/>
+                        <input type="text" style="text-indent:20px" class="form-control" name="formDate" uib-datepicker-popup="{{date_format}}" popup-placement="bottom-left" ng-click="date_open()" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.time" is-open="date_popup.opened"
+                            datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputDateFormats" placeholder="{{'CREATE_A_MEAL.FORM.DATE'|translate}}" value="{{editedMeal.time | date:'HH:mm'}}" />
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-10" style="max-width:100px; padding-right:13px">
                     <div class="form-group" ng-class="{'has-error': editMealForm.formTime.$invalid && editMealForm.Time.$submitted}">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-time"></i>
-                            <input type="time" name="formTime" class="form-control" ng-model="editedMeal.time" ng-value="editedMeal.time | date:'HH:mm'" ng-model-options="{updateOn: 'submit'}" style="padding-right:0px"
-                                required>
+                            <input type="time" name="formTime" class="form-control" ng-model="editedMeal.time" ng-value="editedMeal.time | date:'HH:mm'" ng-model-options="{updateOn: 'submit'}" style="padding-right:0px" required>
                         </div>
                     </div>
                 </div>
@@ -61,33 +60,33 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-tooltip="participants" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                            <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="Arrival time" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
+                            <th class="text-center" style="width:80px; padding-bottom:11px"><span uib-tooltip="{{'CREATE_A_MEAL.FORM.PARTICIPANTS'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/static/sources/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                            <th class="text-center" style="width:113px"><span class="glyphicon glyphicon-time" style="font-size:18px" uib-tooltip="{{'CREATE_A_MEAL.FORM.ARRIVAL_TIME'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"><span></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="table-meal-border">
-                                <td>Host (you)</td>
+                                <td translate>CREATE_A_MEAL.FORM.HOST.NAME</td>
                                 <td class="text-center">1</td>
                                 <td class="text-center"></td>
                         </tr>
                         <tr class="table-meal-border">
-                                <td style="vertical-align:middle"><span uib-tooltip="People will help you for cooking" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cooking</span></td>
+                                <td style="vertical-align:middle"><span uib-tooltip="{{'CREATE_A_MEAL.FORM.HELP_COOKING.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_COOKING.NAME</span></td>
                                 <td class="text-center"><input type="number" min="{{nbCooksSubscribed}}" class="form-control text-center" id="inputCooks" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks"></td>
                                 <td class="text-center" ng-class="{'has-error': ((!editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks > 0) || editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time) && editMealForm.$submitted}"><input type="time" class="form-control text-center" name="inputTimeCooking" id="inputTimeCooking" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking" ng-value="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking | date:'HH:mm'"></td>
                         </tr>
                         <tr class="table-meal-border">
-                            <td style="vertical-align:middle"><span uib-tooltip="People will help you for cleaning" tooltip-trigger="mouseenter" tooltip-placement="top-left">Help cleaning</span></td>
+                            <td style="vertical-align:middle"><span uib-tooltip="{{'CREATE_A_MEAL.FORM.HELP_CLEANING.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_CLEANING.NAME</span></td>
                             <td class="text-center"><input type="number" min="{{nbCleanersSubscribed}}" class="form-control text-center" id="inputCleaners" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners"></td>
                             <td class="text-center"><input type="time" class="form-control text-center" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning" ng-value="editedMeal.detailedInfo.requiredGuests.cleaners.timeCleaning | date:'HH:mm'"></td>
                         </tr>
                         <tr class="table-meal-border">
-                            <td style="vertical-align:middle"><span uib-tooltip="People won't help but will pay more to give you and your helpers a meal price discount" tooltip-trigger="mouseenter" tooltip-placement="top-left">Simple guest</span></td>
+                            <td style="vertical-align:middle"><span uib-tooltip="{{'CREATE_A_MEAL.FORM.SIMPLE_GUEST.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top-left" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</span></td>
                             <td class="text-center"><input type="number" min="{{nbSimpleGuestsSubscribed}}" class="form-control text-center" id="inputSimpleGuests" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests"></td>
                             <td class="text-center" style="vertical-align:middle"></td>
                         </tr>
                         <tr class="table-meal-border table-meal-border-bottom">
-                            <td>Total</td>
+                            <td translate>CREATE_A_MEAL.FORM.TOTAL</td>
                             <td class="text-center">{{editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks + editedMeal.detailedInfo.requiredGuests.cleaners.nbRquCleaners + editedMeal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests + 1}}
                             </td>
                             <td></td>
@@ -100,13 +99,13 @@
                     <div class="form-group">
                         <div class="input-group" ng-class="{'has-error': editedMeal.price==undefined && editMealForm.$submitted}">
                             <span class="input-group-addon meal-addon-groceries">{{editedMeal.currency_symbol}}</span>
-                            <input type="number" class="form-control" style="width:180px" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.price" placeholder="Price of the groceries" min="0" />
+                            <input type="number" class="form-control" style="width:180px" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.price" placeholder="{{'CREATE_A_MEAL.FORM.GROCERIES_PRICE' | translate}}" min="0" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <h4><em>Private information: displayed only to participants</em></h4>
+                <h4 class="italic" translate>CREATE_A_MEAL.FORM.PRIVATE_INFO</h4>
             </div>
             <div class="clear10"></div>
             <div class="row">
@@ -114,7 +113,7 @@
                     <div class="form-group" ng-class="{'has-error': editMealForm.autocomplete.$isEmpty(editMealForm.autocomplete) && editMealForm.$submitted}">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon glyphicon-map-marker"></i>
-                            <input type="text" name="autocomplete" class="form-control" placeholder="Address" ng-autocomplete ng-model-options="{updateOn: 'submit'}" ng-model="autocompleteAddress" options="options" details="details" required/>
+                            <input type="text" name="autocomplete" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS'|translate}}" ng-autocomplete ng-model-options="{updateOn: 'submit'}" ng-model="autocompleteAddress" options="options" details="details" required/>
                         </div>
                     </div>
                 </div>
@@ -122,33 +121,35 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="font-size:80%" id="inputAddressComplement" ng-model-options="{updateOn: 'submit'}" ng-model="addressComplement" placeholder="Additional information (flat number, floor, ...)" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.privateInfo.address.complement">
+                        <input type="text" class="form-control" style="font-size:80%" id="inputAddressComplement" ng-model-options="{updateOn: 'submit'}" ng-model="addressComplement" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS_COMPLEMENT'|translate}}" ng-model-options="{updateOn: 'submit'}"
+                            ng-model="editedMeal.privateInfo.address.complement">
                     </div>
                 </div>
             </div>
             <div class="row" ng-show="(editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time || editedMeal.menu.title==undefined || editMealForm.autocomplete.$isEmpty(editMealForm.autocomplete) || editedMeal.price==undefined || (editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time || (!editedMeal.detailedInfo.requiredGuests.cooks.timeCooking && editedMeal.detailedInfo.requiredGuests.cooks.nbRquCooks>0)))  && editMealForm.$submitted">
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time">The arrival time for the helping cooks can not be after the beggining of the meal ({{editedMeal.time}})</span>
-                    <span>Please fill in the missing field<span ng-if="(editedMeal.menu.title==undefined && details==undefined) || (details==undefined && editedMeal.price==undefined) || (editedMeal.menu.title==undefined && editedMeal.price==undefined)">s</span> and try again
-                    <span
-                        ng-if="editedMeal.menu.title==undefined || details==undefined || editedMeal.price==undefined">: </span><span ng-if="editedMeal.menu.title==undefined">menu</span><span ng-if="editedMeal.menu.title==undefined && (details==undefined || editedMeal.price==undefined)">, </span>
-                        <span ng-if="details==undefined">address</span><span ng-if="details==undefined && editedMeal.price==undefined">, </span><span ng-if="editedMeal.price==undefined">price of the groceries</span></span>
+                    <span ng-if="editedMeal.detailedInfo.requiredGuests.cooks.timeCooking > editedMeal.time"><span translate>VIEW_MY_MEALS_DTLD.MODAL.EDIT.ERROR_COOKING_TIME</span> ({{editedMeal.time}})</span>
+                    <span><span translate>CREATE_A_MEAL.FORM.ERROR.TITLE_1</span><span ng-if="(editedMeal.menu.title==undefined && details==undefined) || (details==undefined && editedMeal.price==undefined) || (editedMeal.menu.title==undefined && editedMeal.price==undefined)"
+                        translate>CREATE_A_MEAL.FORM.ERROR.TITLE_2</span> <span translate>CREATE_A_MEAL.FORM.ERROR.TITLE_3</span>
+                    <span ng-if="editedMeal.menu.title==undefined || details==undefined || editedMeal.price==undefined">: </span><span ng-if="editedMeal.menu.title==undefined" translate>CREATE_A_MEAL.FORM.ERROR.MENU</span><span ng-if="editedMeal.menu.title==undefined && (details==undefined || editedMeal.price==undefined)">, </span>
+                    <span ng-if="details==undefined" translate>CREATE_A_MEAL.FORM.ERROR.ADDRESS</span><span ng-if="details==undefined && editedMeal.price==undefined">, </span><span ng-if="editedMeal.price==undefined" translate>CREATE_A_MEAL.FORM.ERROR.GROCERIES_PRICE</span></span>
                 </div>
             </div>
             <div class="clear10"></div>
             <div class="row">
-                <h4><em>Notifications</em></h4>
+                <h4 class="italic" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.TITLE</h4>
             </div>
             <div class="clear10"></div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="row">Automatically approve bookings?</div>
+                    <div class="row" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.TITLE</div>
                     <div class="row col-sm-12">
                         <div class="form-group">
                             <div class="radio">
-                                <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="true" ng-if="editedMeal.automaticSubscription == false" ng-class="{'size-18 text-primary': editedMeal.automaticSubscription == true}">Yes, sure !</label>
-                                <label class="radio-inline"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="false" ng-if="editedMeal.automaticSubscription == true" ng-class="{'size-18 text-primary': editedMeal.automaticSubscription == false}">No, thanks. <span class="small">(You approve each booking request yourself)</span></label>
+                                <label class="radio-inline"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="false" ng-if="editedMeal.automaticSubscription == true" ng-class="{'size-18 text-primary': editedMeal.automaticSubscription == false}"><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO</span></label>
+                                <i class="fa fa-info-circle" uib-tooltip="{{'CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO_TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"></i>
+                                    <label class="radio-inline" style="margin-left:10px"><input type="radio" ng-model-options="{updateOn: 'submit'}" ng-model="editedMeal.automaticSubscription" ng-value="true" ng-if="editedMeal.automaticSubscription == false" ng-class="{'size-18 text-primary': editedMeal.automaticSubscription == true}"><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.YES</span></label>
                             </div>
                         </div>
                     </div>
@@ -158,8 +159,8 @@
             <div class="row">
                 <div class="form-group">
                     <div class="form-btn-center">
-                        <input type="button" value="Cancel" class="btn btn-default btn-md" ng-click="editMealForm.$rollbackViewValue();cancel();" style="margin:0px 10px"></input>
-                        <input type="button" value="Edit" class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); edit()" style="margin:0px 10px"></input>
+                        <input type="button" value="{{'VIEW_MY_MEALS_DTLD.MODAL.EDIT.ACTION_BUTTON.CANCEL'|translate}}" class="btn btn-default btn-md" ng-click="editMealForm.$rollbackViewValue();cancel();" style="margin:0px 10px"></input>
+                        <input type="button" value="{{'VIEW_MY_MEALS_DTLD.MODAL.EDIT.ACTION_BUTTON.EDIT'|translate}}" class="btn btn-primary btn-md" ng-click="editMealForm.$setSubmitted(); edit()" style="margin:0px 10px"></input>
                     </div>
                 </div>
             </div>

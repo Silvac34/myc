@@ -64,16 +64,19 @@
                         </div>
                     </div>
                     <div class="row" style="margin-top:7px;">
-                        <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
-                    </div>
-                    <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
-                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
+                        <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                     </div>
                     <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
-                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> Halal meal
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+                    </div>
+                    <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
+                    </div>
+                    <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
+                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
                     </div>
                     <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
-                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> Kosher meal
+                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
                     </div>
                     <div class="row" ng-if="countPendingRequestsPerMeal(meal._id) > 0 && meal.admin._id == user._id" style="margin-top:7px">
                         <i class="fa fa-user-plus"></i> <strong class="text-warning">{{countPendingRequestsPerMeal(meal._id)}} pending request<span ng-if="countPendingRequestsPerMeal(meal._id) > 1">s</span></strong>

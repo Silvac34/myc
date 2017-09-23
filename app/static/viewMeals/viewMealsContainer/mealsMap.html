@@ -21,7 +21,7 @@
                     </div>
                     <div class="clear5"></div>
                     <div>
-                        <i class="glyphicon glyphicon-piggy-bank"></i> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span><strong class="size-15 text-success"> {{meal.currency_symbol}} {{meal.mealPrice}}</strong>
+                        <i class="glyphicon glyphicon-piggy-bank"></i> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong>
                     </div>
                     <div ng-if="meal.veggies == true">
                         <div class="clear5"></div>

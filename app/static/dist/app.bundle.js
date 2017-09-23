@@ -1130,7 +1130,7 @@ var translationsEN = {
     }
   },
   "VIEW_MEALS": {
-    "TITLE": '- Incoming meals -',
+    "TITLE": 'Incoming meals',
     "ORDER_BY": {
       "NAME": 'Order by',
       "POPOVER": 'Starting time'
@@ -1326,6 +1326,33 @@ var translationsEN = {
     "MEALS": {
       "TITLE": 'Meals'
     }
+  },
+  "LOGIN": {
+    "PARAGRAPH": 'You need to sign in to keep going',
+    "SIGN_IN": "@: VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE_NOT_CONNECTED_1"
+  },
+  "VIEW_MY_MEALS": {
+    "INCOMING_MEALS": "@: VIEW_MEALS.TITLE",
+    "PREVIOUS_MEALS": 'Previous meals',
+    "VEGETARIAN_MEAL": "@: VIEW_MEALS.VEGETARIAN_MEAL",
+    "VEGAN_MEAL": "@: VIEW_MEALS.VEGAN_MEAL",
+    "HALAL_MEAL": "@: VIEW_MEALS.HALAL_MEAL",
+    "KOSHER_MEAL": "@: VIEW_MEALS.KOSHER_MEAL",
+    "PENDING_REQUEST": 'Pending request',
+    "PENDING_REQUESTS": 'Pending requests',
+    "PRICE_FROM": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM",
+    "STATUS": {
+      "PENDING": "@: VIEW_MEALS.PENDING",
+      "ATTENDING": "@: VIEW_MEALS.ATTENDING",
+      "ATTENDED": "@: VIEW_MEALS.ATTENDED",
+      "HOSTING": "@: VIEW_MEALS.HOSTING",
+      "HOSTED": "@: VIEW_MEALS.HOSTED",
+    },
+    "NO_INCOMING_MEALS_1": 'You do not have incoming meals but you can',
+    "NO_INCOMING_MEALS_2": "@: WELCOME.CREATE_A_MEAL",
+    "NO_INCOMING_MEALS_3": 'or',
+    "NO_INCOMING_MEALS_4": "@: WELCOME.BROWSE_A_MEAL",
+    "NO_PARTICIPATION_YET": 'You didn\'t participate yet.'
   }
 };
 

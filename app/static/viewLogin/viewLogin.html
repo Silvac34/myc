@@ -1,13 +1,13 @@
 <div class="container ng-scope" style="min-height:250px">
   <div class="row">
     <div class="clear20 hidden-xs"></div>
-    <h2 class="text-center general-title" style="line-height:1.8">You need to sign in to keep going</h2>
+    <h2 class="text-center general-title" style="line-height:1.8" translate>LOGIN.PARAGRAPH</h2>
     <div ng-if="inApp != true" class="form_bg col-sm-4 col-sm-offset-4">
       <div class="clear20"></div>
       <form class="ng-pristine ng-valid">
         <div class="child text-center">
           <button ng-click="auth('facebook', toState.name, toParamsMealId)" class="btn btn-social btn-facebook" type="button">
-            <span class="fa fa-facebook"></span> Sign in with Facebook 
+            <span class="fa fa-facebook"></span> <span translate>LOGIN.SIGN_IN</span>
         </button></div>
       </form>
     </div>

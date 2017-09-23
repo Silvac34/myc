@@ -38,6 +38,47 @@ require('./bower_components/ngAutocomplete/src/ngAutocomplete.js');
 require('./bower_components/ngmap/build/scripts/ng-map.min.js');*/
 
 var translationsEN = {
+  "INDEX": {
+    "ACTION_BUTTON": {
+      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
+      "SIGN_IN_2": 'with facebook',
+    },
+    "HELLO": 'Hi',
+    "MY_MEALS": 'My meals',
+    "PROFILE": 'My profile ',
+    "MANAGE_REQUESTS": 'Manage requests',
+    "LEAVE_REVIEWS": 'Leave reviews',
+    "LOGOUT": 'Logout',
+    "CREATE_A_MEAL": 'Create a meal',
+    "BROWSE_A_MEAL": 'Browse a meal',
+    "SLOGAN_1": 'And the last time you ate with someone new ?',
+    "SLOGAN_2": 'When was the last time you met someone new ?',
+    "FOOTER": {
+      "INFORMATION": {
+        "TITLE": 'Information',
+        "CONCEPT": 'Concept',
+        "TEAM_HISTORY": 'Team & History',
+        "FAQ": 'FAQ'
+      },
+      "SUPPORT": {
+        "TITLE": 'Support',
+        "GUIDELINES": 'Guidelines',
+        "GENERAL_POLICIES": 'General Policies',
+        "PRIVACY_POLICY": 'Privacy Policy',
+        "TERMS_OF_USE": 'Terms of use'
+      },
+      "MORE": {
+        "TITLE": 'More',
+        "PHOTO_GALLERY": 'Photo gallery',
+        "CAREERS_FEEDBACKS": 'Careers & Feedbacks',
+        "CONTACT_US": 'Contact us'
+      },
+      "LANGUAGE": {
+        "TITLE": 'Language'
+      },
+      "SHARE": 'Share myCommuneaty on'
+    }
+  },
   "WELCOME": {
     "CREATE_A_MEAL": 'create a meal',
     "BROWSE_A_MEAL": 'browse a meal',
@@ -319,7 +360,7 @@ var translationsEN = {
       "SIGN_IN_2": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
       "SIGN_IN_3": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3"
     },
-    "PARTICIPANTS":{
+    "PARTICIPANTS": {
       "AGE": "@: PROFILE.YEARS_OLD",
       "COUNTRY_OF_ORIGIN": 'From {{country_of_origin_name}}',
       "HOST": 'Your host:',

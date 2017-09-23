@@ -63,7 +63,7 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
@@ -135,7 +135,7 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal
@@ -219,7 +219,7 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success">{{meal.currency_symbol}} {{meal.mealPrice}}</strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span>From <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true || meal.vegan == true" style="margin-top:7px">
                   <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span ng-if="meal.veggies==true">Vegetarian</span><span ng-if="meal.vegan==true">Vegan</span> meal

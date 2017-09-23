@@ -273,10 +273,59 @@ var translationsEN = {
         "PRICE": "@:VIEW_MEALS.FILTERS.PRICE.TITLE",
         "ARRIVAL_TIME": "@:CREATE_A_MEAL.ARRIVAL_TIME"
       },
-      "HELP_COOKING":{
+      "HELP_COOKING": {
         "NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
-        "DESCRIPTION": ''
+        "DESCRIPTION_TIME_1": 'You have to arrive at',
+        "DESCRIPTION_TIME_2": 'in order to help the host to prepare the meal.',
+        "DESCRIPTION_PRICE_1": 'The price can vary',
+        "DESCRIPTION_PRICE_2": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM",
+        "DESCRIPTION_PRICE_3": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO",
+        "DESCRIPTION_PRICE_4": 'according to the inscriptions',
+        "DESCRIPTION_PRICE_5": 'more info about pricing',
+        "DESCRIPTION_PRICE_6": 'You will be informed before the dinner of the final price.',
+      },
+      "HELP_CLEANING": {
+        "NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+        "DESCRIPTION_TIME_1": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_TIME_1",
+        "DESCRIPTION_TIME_2": 'in order to help for',
+        "DESCRIPTION_TIME_3": 'You will help',
+        "DESCRIPTION_TIME_4": 'ordering and cleaning what was used for the meal.',
+        "DESCRIPTION_PRICE_1": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_1",
+        "DESCRIPTION_PRICE_2": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM",
+        "DESCRIPTION_PRICE_3": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO",
+        "DESCRIPTION_PRICE_4": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_4",
+        "DESCRIPTION_PRICE_5": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_5",
+        "DESCRIPTION_PRICE_6": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_6",
+      },
+      "SIMPLE_GUEST": {
+        "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+        "DESCRIPTION": 'You help by paying a little bit more : this money will be redistribuated between those who helped to organize the event'
+      },
+      "CELLPHONE": {
+        "DESCRIPTION": 'Info required',
+        "TOOLTIP": 'Private information displayed only between participants and host',
+        "PLACEHOLDER": "@: CREATE_A_MEAL.FORM.CELLPHONE.NAME"
       }
+    },
+    "NOTIFICATIONS": 'Do you want to receive updates about the meal on messenger? (recommended)',
+    "ACTION_BUTTON": {
+      "SUBSCRIBE_NOT_CONNECTED_1": 'Sign In with facebook',
+      "SUBSCRIBE_NOT_CONNECTED_2": 'to participate',
+      "SUBSCRIBE": 'Participate',
+      "SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",
+      "CANCEL": 'Cancel my request',
+      "MEAL_FULL": "@: VIEW_MEALS.ACTION_BUTTON.MEAL_FULL",
+      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1",
+      "SIGN_IN_2": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
+      "SIGN_IN_3": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3"
+    },
+    "PARTICIPANTS":{
+      "AGE": "@: PROFILE.YEARS_OLD",
+      "COUNTRY_OF_ORIGIN": 'From {{country_of_origin_name}}',
+      "HOST": 'Your host:',
+      "HELP_COOKING": 'Help cooking:',
+      "HELP_CLEANING": 'Help cleaning:',
+      "SIMPLE_GUEST": 'Simple guest:',
     }
   },
   "PROFILE": {
@@ -290,7 +339,7 @@ var translationsEN = {
         "FEMALE": 'Female'
       },
       "EMAIL": 'Email',
-      "CELLPHONE": "@:CREATE_A_MEAL.FORM.CELLPHONE",
+      "CELLPHONE": "@:CREATE_A_MEAL.FORM.CELLPHONE.NAME",
       "COUNTRY_OF_ORIGIN": 'Native country',
       "SPOKEN_LANGUAGES": {
         "NAME": 'Spoken languages',

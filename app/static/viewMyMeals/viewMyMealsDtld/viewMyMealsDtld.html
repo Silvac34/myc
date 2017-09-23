@@ -107,19 +107,19 @@
                         <span ng-if="userRole=='simpleGuest'">Inscribed as: <strong class="text-success">" Simple Guest "</strong></span>
                     </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Total price of the groceries: <strong class="text-success">{{meal.currency_symbol}} {{meal.price}}</strong>
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Total price of the groceries: <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong>
                     </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
                         <span class="glyphicon glyphicon-thumbs-up"></span> Total participants payback</br>
-                        <span style="padding-left:30px;">If the meal is full: <strong class="text-success">{{meal.currency_symbol}} {{meal.pricePaybackIfFull}}</strong></span></br>
-                        <span style="padding-left:30px;">Currently: <strong class="text-success">{{meal.currency_symbol}} {{meal.currentPricePayback}}</strong></span>
+                        <span style="padding-left:30px;">If the meal is full: <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{Meal.currency_symbol}} </span>{{meal.pricePaybackIfFull}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span></br>
+                        <span style="padding-left:30px;">Currently: <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.currentPricePayback}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                     </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-piggy-bank"></span>
-                        <span ng-if="userRole=='admin'">Price of your meal: <strong class="text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.hosts.price}}</strong></span>
-                        <span ng-if="userRole=='cook'"><strong class="text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cooks.price}}</strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
-                        <span ng-if="userRole=='cleaner'"><strong class="text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cleaners.price}}</strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
-                        <span ng-if="userRole=='simpleGuest'"><strong class="text-success">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.simpleGuests.price}}</strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
+                        <span ng-if="userRole=='admin'">Price of your meal: <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.hosts.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                        <span ng-if="userRole=='cook'"><strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
+                        <span ng-if="userRole=='cleaner'"><strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
+                        <span ng-if="userRole=='simpleGuest'"><strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong> left to pay to {{meal.admin.first_name}} {{meal.admin.last_name}}</span>
                     </div>
                     <div class="meal-info-label" ng-if="userRole=='admin'">
                         <img src="/static/sources/multiple-users-silhouette.png" style="width:14px; height:14px"> Subscription recapitulatory: <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
@@ -181,7 +181,7 @@
             <div class="panel-body">
                 <div class="col-xs-12">
                     <div class="row">
-                        <div class="text-primary size-20">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.hosts.price}}</span></div>
+                        <div class="text-primary size-20">Your host:<span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.hosts.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></span></div>
                     </div>
                     <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'admin'">
                         <div style="padding-top:10px">
@@ -218,7 +218,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary size-20">Help cooking:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cooks.price}} per pers</span></div>
+                        <div class="text-primary size-20">Help cooking:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> per pers</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4" ng-if="isOldMeal() != true">
@@ -266,7 +266,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary size-20">Help cleaning:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.cleaners.price}} per pers</span></div>
+                        <div class="text-primary size-20">Help cleaning:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> per pers</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4" ng-if="isOldMeal() != true">
@@ -314,7 +314,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary size-20">Simple guest:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined">{{meal.currency_symbol}} {{meal.detailedInfo.requiredGuests.simpleGuests.price}} per pers</span></div>
+                        <div class="text-primary size-20">Simple guest:<span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> per pers</span></div>
                     </div>
                 </div>
                 <div class="col-xs-4" ng-if="isOldMeal() != true">

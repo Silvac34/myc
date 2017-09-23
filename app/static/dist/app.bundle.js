@@ -1353,6 +1353,70 @@ var translationsEN = {
     "NO_INCOMING_MEALS_3": 'or',
     "NO_INCOMING_MEALS_4": "@: WELCOME.BROWSE_A_MEAL",
     "NO_PARTICIPATION_YET": 'You didn\'t participate yet.'
+  },
+  "VIEW_MY_MEALS_DTLD": {
+    "MESSAGE": {
+      "WELL_DONE": 'Well done!',
+      "SUBSCRIBED": 'You successfully subscribed to the meal.',
+      "PUBLISHED": 'You successfully published your meal.',
+      "INCOMPLETE_PROFILE_1": 'We advise you to',
+      "INCOMPLETE_PROFILE_2": 'complete your',
+      "INCOMPLETE_PROFILE_3": 'profile',
+      "INCOMPLETE_PROFILE_4": 'in order to make your meal more friendly.',
+    },
+    "PENDING_REQUEST": {
+      "TITLE": 'You have a pending request',
+      "REQUESTED_ROLE": 'Requested role:',
+      "HELP_COOKING": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+      "HELP_CLEANING": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+      "SIMPLE_GUEST": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+      "ACTION_BUTTON": {
+        "ACCEPT": 'Accept',
+        "REFUSE": 'Refuse',
+      },
+      "SEE_REVIEWS": 'see reviews'
+    },
+    "ACTION_BUTTON": {
+      "DELETE": 'Delete',
+      "EDIT": 'Edit',
+      "UNSUBSCRIBE": 'Unsubscribe'
+    },
+    "MEAL_INFORMATIONS": {
+      "TITLE": "Important information",
+      "INVITE_FRIENDS": 'Invite friends',
+      "INSCRIBED_AS": 'Inscribed as:',
+      "TOTAL_GROCERIES": 'Total price of the groceries:',
+      "TOTAL_PAYBACK": 'Total participants payback',
+      "PRICE_MEAL_FULL": 'If the meal is full:',
+      "PRICE_CURRENT": 'Currentyl:',
+      "PRICE_MEAL": 'Price of your meal:',
+      "PRICE_LEFT_TO_PAY": 'left to pay to {{meal_admin_first_name}} {{meal_admin_last_name}}',
+      "SUBSCRIPTION_RECAPITULATORY": 'Subscription recapitulatory:',
+      "VEGETARIAN_MEAL": "@: VIEW_MEALS.VEGETARIAN_MEAL",
+      "VEGAN_MEAL": "@: VIEW_MEALS.VEGAN_MEAL",
+      "HALAL_MEAL": "@: VIEW_MEALS.HALAL_MEAL",
+      "KOSHER_MEAL": "@: VIEW_MEALS.KOSHER_MEAL",
+      "HELP_COOKING": "@: VIEW_MEALS_DTLD.PARTICIPANTS.HELP_COOKING",
+      "HELP_CLEANING": "@: VIEW_MEALS_DTLD.PARTICIPANTS.HELP_CLEANING",
+      "SIMPLE_GUEST": "@: VIEW_MEALS_DTLD.PARTICIPANTS.SIMPLE_GUEST",
+    },
+    "PARTICIPANTS": {
+      "TITLE": "@: CREATE_A_MEAL.FORM.PARTICIPANTS",
+      "HOST": "@: VIEW_MEALS_DTLD.PARTICIPANTS.HOST",
+      "LEAVE_REVIEWS": {
+        "TITLE": 'How was your experience with {{participant_first_name}}?',
+        "POSITIVE": 'Positive',
+        "NEUTRAL": 'Neutral',
+        "NEGATIVE": 'Negative',
+        "PLACEHOLDER": 'Leave a review to {{first_name}}',
+        "GRADE_FIRST": 'Grade {{first_name}} first',
+        "SEND": 'send'
+      },
+      "PER_PERS": 'per pers',
+      "REMAINING_PLACES": 'Remaining places: {{nb_remaining_places}}',
+      "PENDING_REQUEST": "@: VIEW_MY_MEALS.PENDING_REQUEST"
+    },
+    "BACK_TO_MY_MEALS": 'Back to my meals'
   }
 };
 

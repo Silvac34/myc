@@ -10089,6 +10089,10 @@ a.mod-underline:hover {
   font-weight: bold;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .italic {
   font-style: italic;
 }

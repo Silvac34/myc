@@ -1431,14 +1431,21 @@ var translationsEN = {
         "TITLE": 'Unsubscribe from the meal',
         "PARAGRAPH": 'Are you sure you want to unsubscribe from the meal?',
       },
-      "EDIT":{
+      "EDIT": {
         "ERROR_COOKING_TIME": 'The arrival time for the helping cooks can not be after the beggining of the meal',
-        "ACTION_BUTTON":{
+        "ACTION_BUTTON": {
           "CANCEL": 'Cancel',
           "EDIT": 'Edit'
         }
       }
     }
+  },
+  "VIEW_LEAVE_REVIEWS": {
+    "LOADING": 'Loading, please wait...',
+    "NO_REVIEWS": 'You do not have reviews to leave',
+    "TITLE_1": 'How was your experience with',
+    "TITLE_2": 'those {{dataForReview_length}} persons',
+    "REVIEW_SENT": 'Your review was sent'
   }
 };
 

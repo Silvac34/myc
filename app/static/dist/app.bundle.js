@@ -1480,11 +1480,11 @@ var translationsEN = {
       },
       "GROCERIES_PRICE": {
         "TITLE": 'The price of the groceries is determined by the host. We encourage him to be the more accurate possible. This price is then shared between all the participants according to their role.',
-        "WITHOUT_SIMPLE_GUEST":{
+        "WITHOUT_SIMPLE_GUEST": {
           "TITLE": 'Without simple guests',
           "DESCRIPTION": 'Everybody helps so everybody pays the same. So, the price of the groceries is simply divided by the number of participants.'
         },
-        "WITH_SIMPLE_GUEST":{
+        "WITH_SIMPLE_GUEST": {
           "TITLE": 'With simple guests',
           "DESCRIPTION": 'Each of the simple guests pay 25% more and the surplus generated is redistributed at 50% to the host and at 50% to the others helpers. If there are more than 4 simple guests, then the host won’t pay and the additional surplus will be shared equitably between the helpers, reducing again the final price of their meal.'
         },
@@ -1492,7 +1492,7 @@ var translationsEN = {
         "CONCLUSION_2": 'There are no website fees. Our service is completely free.',
       }
     },
-    "TEAM_HISTORY":{
+    "TEAM_HISTORY": {
       "MAYLIS_DESCRIPTION": '"Hi ! I am Maylis from France. I love meeting people from all over the world. That\'s why I am already in different social websites and so happy to be involved in myCommuneaty. I write the website contents and promote the concept."',
       "DIMITRI_DESCRIPTION": '"Hey there ! I love to eat and meet new people. I studied engineering and I am still learning about programming. When you click on a button, I probably programmed it, so if something goes wrong, let me know."',
       "PARAGRAPH_1": 'Everything started with Dimitri’s desire for realizing an entrepreneurship related with food. This desire became an idea and then a project thanks to Maylis and Kevin.',
@@ -1500,7 +1500,7 @@ var translationsEN = {
       "PARAGRAPH_3": 'In January 2017, unfortunately, Kevin had to leave the project to focus in his new professional career.',
       "PARAGRAPH_4": 'In April 2017, we were happy to present the first website version. We keep working hard on this project and would be happy to receive your feedbacks, comments or ideas. So, please feel free to contact and join us !'
     },
-    "GENERAL_POLICIES":{
+    "GENERAL_POLICIES": {
       "TITLE": 'General policies',
       "PARAGRAPH_1_1": 'The following policies are in place to ensure that myCommuneaty remains a fun and safe place for everyone.',
       "PARAGRAPH_1_NOTE": 'Note: the policies below are enforced under Terms of Use sections 4.1 and 4.2 and provided for further insight. Review the myCommuneaty',
@@ -1508,7 +1508,7 @@ var translationsEN = {
       "PARAGRAPH_1_2": 'in its entirety for complete details. Please also see our',
       "PARAGRAPH_1_PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
       "PARAGRAPH_1_3": 'Violations of these policies may result in a range of actions including, but not limited to:',
-      "PARAGRAPH_1_LIST":{
+      "PARAGRAPH_1_LIST": {
         "BULLET_1": 'Removal of violating content',
         "BULLET_2": 'Warning',
         "BULLET_3": 'Removal of access to elements of the site or features',
@@ -1519,19 +1519,19 @@ var translationsEN = {
         "BULLET_1_1": 'Don’t spam',
         "BULLET_1_2": 'We value human interaction and want the content on our site and sent to our members to be personalized and valuable. Copying and pasting the same message across the site, in member-to-member messages, Groups, Local discussions or Event listings is not permitted. Messaging many members that have not shown an intent to receive the type of message your sending may also be considered spam.',
         "BULLET_2_1": 'Don’t look for a date',
-        "BULLET_2_2": 'Our members join myCommuneaty to create friendships. Don’t contact other members for dating, or use the site to find sexual partners. We take reports of unwanted sexual advances, both online and offline, seriously and they may be considered violations of our Conduct policy. Respect others’ boundaries. If another member lets you know they are uncomfortable, respect their feelings and take a step back.', 
+        "BULLET_2_2": 'Our members join myCommuneaty to create friendships. Don’t contact other members for dating, or use the site to find sexual partners. We take reports of unwanted sexual advances, both online and offline, seriously and they may be considered violations of our Conduct policy. Respect others’ boundaries. If another member lets you know they are uncomfortable, respect their feelings and take a step back.',
         "BULLET_3_1": 'Don’t intimidate, stalk, or harass',
-        "BULLET_3_2": 'Stalking, intimidation, threats, and harassment of other members is prohibited. Harassment is defined as a pattern of offensive behavior that appears to have the purpose of adversely affecting a targeted person or persons. Examples of harassment include making threats, repeated unwanted contacts with a person, and posting the personal information of another person. myCommuneaty reserves the right to take action (see above) on profiles we believe may pose a threat to community.', 
+        "BULLET_3_2": 'Stalking, intimidation, threats, and harassment of other members is prohibited. Harassment is defined as a pattern of offensive behavior that appears to have the purpose of adversely affecting a targeted person or persons. Examples of harassment include making threats, repeated unwanted contacts with a person, and posting the personal information of another person. myCommuneaty reserves the right to take action (see above) on profiles we believe may pose a threat to community.',
         "BULLET_4_1": 'Do create only one profile',
-        "BULLET_4_2": 'Duplicate, fake, and joke profiles are not allowed. The first profile that you create must be you and is the only one that you may have. Our trust network needs everyone to stand by their reputation.', 
+        "BULLET_4_2": 'Duplicate, fake, and joke profiles are not allowed. The first profile that you create must be you and is the only one that you may have. Our trust network needs everyone to stand by their reputation.',
         "BULLET_5_1": 'Be yourself',
-        "BULLET_5_2": 'Misrepresenting yourself as someone else is prohibited. This includes representation as an agent, representative, or affiliate of myCommuneaty.', 
+        "BULLET_5_2": 'Misrepresenting yourself as someone else is prohibited. This includes representation as an agent, representative, or affiliate of myCommuneaty.',
         "BULLET_6_1": 'Keep it legal',
-        "BULLET_6_2": 'Don’t engage in nor encourage illegal activity; don’t violate any applicable law or regulation.', 
+        "BULLET_6_2": 'Don’t engage in nor encourage illegal activity; don’t violate any applicable law or regulation.',
         "BULLET_7_1": 'Do use myCommuneaty properly',
-        "BULLET_7_2": 'Using myCommuneaty in a way that could interfere with other members from fully enjoying the site or that could impair the functioning of the site is prohibited. This includes behavior that causes excessive reports, flags, or blocks from other members. We may prohibit proactive outreach on communications that are flagged by myCommuneaty members or that we believe harm the experience for other members. Additionally, posting anything to the site that includes viruses, corrupted data, or other potentially harmful code. Attempting to circumvent myCommuneaty systems, or using these systems in a manner which undermines their intent, is prohibited.', 
+        "BULLET_7_2": 'Using myCommuneaty in a way that could interfere with other members from fully enjoying the site or that could impair the functioning of the site is prohibited. This includes behavior that causes excessive reports, flags, or blocks from other members. We may prohibit proactive outreach on communications that are flagged by myCommuneaty members or that we believe harm the experience for other members. Additionally, posting anything to the site that includes viruses, corrupted data, or other potentially harmful code. Attempting to circumvent myCommuneaty systems, or using these systems in a manner which undermines their intent, is prohibited.',
         "BULLET_8_1": 'Don’t force your beliefs and lifestyle choices on others',
-        "BULLET_8_2": 'myCommuneaty is proud of the diversity of its members. Using our platform to recruit other members to join your lifestyle or belief system may be a violation of our Conduct policy. Don’t make the adoption of your lifestyle or belief system a condition of your meal offer. While certain house rules are expected, if we believe that the conditions imposed on the members introduce risk, harms the experience of our members, or damages the reputation of myCommuneaty, we reserve the right to prohibit the requirement.', 
+        "BULLET_8_2": 'myCommuneaty is proud of the diversity of its members. Using our platform to recruit other members to join your lifestyle or belief system may be a violation of our Conduct policy. Don’t make the adoption of your lifestyle or belief system a condition of your meal offer. While certain house rules are expected, if we believe that the conditions imposed on the members introduce risk, harms the experience of our members, or damages the reputation of myCommuneaty, we reserve the right to prohibit the requirement.'
       },
       "CONTENT_POLICY": {
         "TITLE": 'Content policy',
@@ -1539,27 +1539,69 @@ var translationsEN = {
         "BULLET_1_1": 'Hate speech and offensive language',
         "BULLET_1_2": 'Hate speech, particularly speech that disparages any ethnic, racial, sexual or religious group by stereotypical depiction or is otherwise abusive or inflammatory, including content that contains offensive language or images',
         "BULLET_2_1": 'Sexually explicit content',
-        "BULLET_2_2": 'Contains nudity, sexually explicit content or is otherwise obscene, sexually exploitive of minors, pornographic, indecent, lewd, or suggestive', 
-        
+        "BULLET_2_2": 'Contains nudity, sexually explicit content or is otherwise obscene, sexually exploitive of minors, pornographic, indecent, lewd, or suggestive',
+
         "BULLET_3_1": 'Personally identifiable information',
-        "BULLET_3_2": 'Contains private or personal information about another person, such as phone number or address', 
+        "BULLET_3_2": 'Contains private or personal information about another person, such as phone number or address',
         "BULLET_4_1": 'Illegal and infringing',
-        "BULLET_4_2": 'Unlawful content or content for which myCommuneaty has received a court order to remove, or content that infringes on the rights of a third party, including intellectual property, privacy, publicity or contractual rights', 
+        "BULLET_4_2": 'Unlawful content or content for which myCommuneaty has received a court order to remove, or content that infringes on the rights of a third party, including intellectual property, privacy, publicity or contractual rights',
         "BULLET_5_1": 'Glamorizing violence',
-        "BULLET_5_2": 'Incites violence or characterizes violence as acceptable, glamorous or desirable', 
+        "BULLET_5_2": 'Incites violence or characterizes violence as acceptable, glamorous or desirable',
         "BULLET_6_1": 'Commercial or promotional',
-        "BULLET_6_2": 'Contains unsolicited promotions, political campaigning, advertising or solicitations - including content used to promote a business or product - without our prior written consent', 
-        },
-        "REFERENCE_POLICY":{
-          "TITLE": 'Reference policy',
-          "PARAGRAPH": 'The referencing system allows members to share information about their interactions with other members, enabling the community to make more informed decisions. References should be accurate and relevant to the experience with the recipient. Any activities that undermine the integrity of the reference system are a violation of myCommuneaty’s Policies and Terms of Use. myCommuneaty does not generally interfere with reference content left by members. In extremely rare circumstances, myCommuneaty may censor, temporarily hide, or remove reference content if it violates our Reference Guidelines.'
-        },
-        "REPORTING_VIOLATIONS":{
-          "TITLE": 'Reporting violations of myCommuneaty policies',
-          "PARAGRAPH": 'If you feel another person is violating this policy, please',
-          "CONTACT_US": "contact us"
-        },
-    }
+        "BULLET_6_2": 'Contains unsolicited promotions, political campaigning, advertising or solicitations - including content used to promote a business or product - without our prior written consent'
+      },
+      "REFERENCE_POLICY": {
+        "TITLE": 'Reference policy',
+        "PARAGRAPH": 'The referencing system allows members to share information about their interactions with other members, enabling the community to make more informed decisions. References should be accurate and relevant to the experience with the recipient. Any activities that undermine the integrity of the reference system are a violation of myCommuneaty’s Policies and Terms of Use. myCommuneaty does not generally interfere with reference content left by members. In extremely rare circumstances, myCommuneaty may censor, temporarily hide, or remove reference content if it violates our Reference Guidelines.'
+      },
+      "REPORTING_VIOLATIONS": {
+        "TITLE": 'Reporting violations of myCommuneaty policies',
+        "PARAGRAPH": 'If you feel another person is violating this policy, please',
+        "CONTACT_US": "contact us"
+      }
+    },
+    "GUIDELINES": {
+      "TITLE": 'Guidelines',
+      "GENERAL_POLICIES": "@: INDEX.FOOTER.SUPPORT.GENERAL_POLICIES",
+      "PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
+      "CONTACT_US": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+      "AND": 'and',
+      "OR": 'or',
+      "BULLET_1_1": 'Be considerate and respectful',
+      "BULLET_1_2": 'is a core myCommuneaty principle that requires people to treat other people in the myCommuneaty community with civility, respect and consideration – both online and offline. Respect opposing or differing opinions and beliefs. Try to listen to and understand others with whom you may disagree. Encourage others in the community to also be welcoming and respectful. Following these simple guidelines will help make this community a better place for us all.',
+      "BULLET_2_1": 'Respect others',
+      "BULLET_2_2": 'myCommuneaty is a meeting place for people of different cultures, lifestyles and ideals. By joining our community, you promise to communicate with respect and consideration, even if you encounter someone you disagree with.',
+      "BULLET_3_1": 'Work together to resolve disputes',
+      "BULLET_3_2": 'myCommuneaty members are always encouraged to work through their member disputes and problems together with the other members. Working together with others and appreciating different viewpoints are important aspects of the myCommuneaty experience.',
+      "BULLET_4_1": 'Don’t attack members or their content',
+      "BULLET_4_2": 'Personal attacks are not allowed on myCommuneaty, nor are disrespectful or insulting attacks directed at other people and their contributions to the community. See myCommuneaty',
+      "BULLET_4_3": 'for more information.',
+      "BULLET_5_1": 'Use good judgment and be empathetic',
+      "BULLET_5_2": 'When interacting with others on myCommuneaty, try to see the world from their perspective. People contribute to the myCommuneaty community in their own way. Disputes between members can occur when differing cultural norms create a misunderstanding, as many things are acceptable in some cultures and unacceptable in others.',
+      "BULLET_6_1": 'Member interactions',
+      "BULLET_6_2": 'It is okay to disagree. In fact, alternative points of view are a key part of cultural exchange as long as your comments are civil, respectful and polite. Remember to give the impression of assuming goodwill on the part of the person with whom you are disagreeing.',
+      "BULLET_7_1": 'Retaliation is not okay',
+      "BULLET_7_2": 'It is never okay to violate myCommuneaty',
+      "BULLET_7_3": 'even in response to another person who has done so.',
+      "BULLET_8_1": 'Safety is a cornerstone of the myCommuneaty community',
+      "BULLET_8_2": 'Member safety is very important to myCommuneaty and the health of the community.',
+      "BULLET_9_1": 'Report violations',
+      "BULLET_9_2": 'If you feel another person is violating myCommuneaty',
+      "BULLET_9_3": 'please'
+    },
+    "CAREERS_FEEDBACKS": {
+      "TITLE": 'Careers & Feedbacks',
+      "PARAGRAPH_1": 'We are looking for volunteers who could widespread the concept of myCommuneaty or help for the development of our platform (angularJs, html & css, flask/python) and for its design.',
+      "PARAGRAPH_2": 'In addition, we are always happy to receive constructive feedbacks, comments or ideas. So, please feel free to contact us by',
+    },
+    "CONTACT_US": {
+      "TITLE": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+      "EMAIL": 'By email',
+      "FACEBOOK": 'On facebook'
+    },
+    "PRIVACY_POLICY": 'pending',
+    "TERMS_OF_USE": 'pending'
   }
 };
 

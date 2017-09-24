@@ -543,6 +543,13 @@ var translationsEN = {
     "TITLE_1": 'How was your experience with',
     "TITLE_2": 'those {{dataForReview_length}} persons',
     "REVIEW_SENT": 'Your review was sent'
+  },
+  "VIEW_MANAGE_REQUESTS":{
+    "LOADING": "@: VIEW_LEAVE_REVIEWS.LOADING",
+    "NO_PENDING_REQUESTS": 'You do not have pending request',
+    "TITLE_1": 'You have {{nbDifferentPendingRequest}} pending request',
+    "TITLE_2": 'You have {{nbDifferentPendingRequest}} pending requests',
+    "TITLE_3": 'for {{meals_length}} different meals',
   }
 };
 

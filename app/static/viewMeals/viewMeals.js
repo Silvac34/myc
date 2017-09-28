@@ -1,6 +1,6 @@
 'use strict';
 var angular = require('angular');
-export default angular.module('myApp.viewMeals', ['myApp.viewMealsDtld', 'ngMap', 'ngSanitize'])
+export default angular.module('myApp.viewMeals', ['myApp.viewMealsDtld', 'ngMap'])
 
 
 .controller('ViewMealsCtrl', ['$scope', '$state', '$uibModal', '$auth', 'response', '$timeout', 'NgMap', function($scope, $state, $uibModal, $auth, response, $timeout, NgMap) {

@@ -1,6 +1,6 @@
 'use strict';
 
-export default angular.module('myApp.viewMyMeals', ['myApp.viewMyMealsDtld', 'ngSanitize'])
+export default angular.module('myApp.viewMyMeals', ['myApp.viewMyMealsDtld'])
 
 .controller('ViewMyMealsCtrl', ['$scope', 'response', '$uibModal', function($scope, response, $uibModal) {
 

@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 const path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 var chunk = {
     name: "vendor",
-    filename: "vendor.bundle.js"
+    filename: "vendor.bundle.js",
 };
 var isProd = process.env.NODE_ENV === 'production'; //true or false -- undefined jusqu'à présent
 
@@ -15,16 +16,9 @@ module.exports = {
     entry: {
         bootstrap: bootstrapConfig,
         app: './app.js',
-        vendor: ['angular', 'angular-sanitize', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate']
-    },
+        vendor: ['angular', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate'],
+    },//
     //devtool: 'inline-source-map',
-    /*devServer: {
-        contentBase: path.join(__dirname, "/app/static/dist"),
-        hot: true,
-        compress: true,
-        public: 'shareat-dimitrikohn.c9users.io',
-        stats: "errors-only"
-    },*/
     output: {
         path: path.resolve(__dirname + '/app/static/dist'),
         filename: '[name].bundle.js'
@@ -49,5 +43,6 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('/css/app.bundle.css'),
         new webpack.optimize.CommonsChunkPlugin(chunk),
+        new CleanWebpackPlugin(['app/static/dist']),
     ]
 };

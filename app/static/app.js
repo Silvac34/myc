@@ -37,6 +37,7 @@ require('./bower_components/angular-easyfb/build/angular-easyfb.min.js');
 require('./bower_components/ngAutocomplete/src/ngAutocomplete.js');
 require('./bower_components/ngmap/build/scripts/ng-map.min.js');*/
 
+
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'config',

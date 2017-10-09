@@ -25,17 +25,17 @@ require('./components/getReviewService.js');
 require('./components/userServices.js');
 //bower-components//
 /*require('./bower_components/angular/angular.min.js');
-require('./bower_components/angular-sanitize/angular-sanitize.min.js');
-require('./bower_components/angular-ui-router/release/angular-ui-router.min.js');
+require('./bower_components/angular-ui-router/release/angular-ui-router.min.js');*/
 require('./bower_components/satellizer/satellizer.min.js');
-require('./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js');
+/*require('./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js');*/
 require('./bower_components/angular-animate/angular-animate.min.js');
 require('./bower_components/angular-svg-round-progressbar/build/roundProgress.min.js');
 require('./bower_components/angular-filter/dist/angular-filter.min.js');
 require('./bower_components/angular-loading-bar/build/loading-bar.js');
 require('./bower_components/angular-easyfb/build/angular-easyfb.min.js');
 require('./bower_components/ngAutocomplete/src/ngAutocomplete.js');
-require('./bower_components/ngmap/build/scripts/ng-map.min.js');*/
+require('./bower_components/ngmap/build/scripts/ng-map.min.js');
+require('../../node_modules/angular-translate/dist/angular-translate.min.js');
 
 
 // Declare app level module which depends on views, and components

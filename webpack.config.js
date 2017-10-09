@@ -16,7 +16,10 @@ module.exports = {
     entry: {
         bootstrap: bootstrapConfig,
         app: './app.js',
-        vendor: ['angular', '@uirouter/angularjs', 'satellizer', 'angular-ui-bootstrap', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate'],
+        //vendor: ['angular', 'angular-ui-bootstrap', '@uirouter/angularjs']/*, 'satellizer', 'angular-animate', 'angular-filter', 'angular-loading-bar', 'angular-easyfb', 'ng-autocomplete', 'ngmap', 'angular-translate'],*/
+        vendor: ['angular'],
+        angular_bootstrap: ['angular-ui-bootstrap'],
+        angular_ui_router: ['@uirouter/angularjs'],
     },//
     //devtool: 'inline-source-map',
     output: {

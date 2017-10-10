@@ -1,15 +1,15 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-var chunk = {
+const chunk = {
     name: "vendor",
     filename: "vendor.bundle.js",
 };
-var isProd = process.env.NODE_ENV === 'production'; //true or false -- undefined jusqu'à présent
+const isProd = process.env.NODE_ENV === 'production'; //true or false -- undefined jusqu'à présent
 
-var bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
-var bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
+const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
+const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
 module.exports = {
     context: __dirname + '/app/static',
@@ -20,7 +20,7 @@ module.exports = {
         vendor: ['angular'],
         angular_bootstrap: ['angular-ui-bootstrap'],
         angular_ui_router: ['@uirouter/angularjs'],
-    },//
+    }, //
     //devtool: 'inline-source-map',
     output: {
         path: path.resolve(__dirname + '/app/static/dist'),

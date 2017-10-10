@@ -26,8 +26,8 @@ require('./components/userServices.js');
 //bower-components//
 /*require('./bower_components/angular/angular.min.js');
 require('./bower_components/angular-ui-router/release/angular-ui-router.min.js');*/
-require('./bower_components/satellizer/satellizer.min.js');
 /*require('./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js');*/
+require('./bower_components/satellizer/satellizer.min.js');
 require('./bower_components/angular-animate/angular-animate.min.js');
 require('./bower_components/angular-svg-round-progressbar/build/roundProgress.min.js');
 require('./bower_components/angular-filter/dist/angular-filter.min.js');

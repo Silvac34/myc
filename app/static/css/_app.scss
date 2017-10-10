@@ -476,7 +476,6 @@ caption {
 
 /* View Meals -------------------------------------------------------------------------------- */
 
-
 /* Sort */
 
 .meal-search-title-count {
@@ -1075,6 +1074,18 @@ caption {
     text-align: center
 }
 
+.hero.mod-start-now {
+    background: #fff url("/static/sources/welcome/welcome_start_now.jpg") no-repeat center;
+    background-size: cover;
+}
+
+
+@media screen and (max-width: 767px) {
+    .hero.mod-start-now {
+        height: 355px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .hero.mod-different-roles,
     .hero.mod-what-about-the-money,
@@ -1084,6 +1095,11 @@ caption {
     }
     .hero.mod-values {
         padding-top: 50px
+    }
+    .hero.mod-start-now {
+        padding-top: 50px;
+        height: 560px;
+        margin: 20px 0px -20px 0px;
     }
 }
 
@@ -1146,7 +1162,8 @@ div.mod-margin-top {
     .hero-content-title-how-it-works,
     .hero-content-title-values,
     .hero-content-title-what-about-the-money,
-    .hero-content-title-different-roles {
+    .hero-content-title-different-roles,
+    .hero-content-title-start-now {
         font-size: 56px
     }
 }
@@ -1161,6 +1178,7 @@ div.mod-margin-top {
 }
 
 .hero-content-title-what-about-the-money,
+.hero-content-title-start-now,
 .hero-content-title-different-roles {
     color: white;
     font-size: 34px;
@@ -1353,6 +1371,15 @@ a.mod-underline:hover {
     }
 }
 
+.btn-start-now {
+    border: 1px solid #e6e6e6 !important;
+    color: white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+.btn-start-now:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
 
 /*Profile ------------------------------------------------------ */
 
@@ -1405,6 +1432,9 @@ a.mod-underline:hover {
         width: 200px;
         height: 200px;
     }
+    .size-20-sm {
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1422,7 +1452,6 @@ a.mod-underline:hover {
 
 
 /* GENERAL CSS*/
-
 
 /* enable absolute positioning */
 

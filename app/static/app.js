@@ -571,6 +571,11 @@ var translationsEN = {
       "PARAGRAPH_2": 'You pay directly to the host who bought the groceries.',
       "PARAGRAPH_2_STRONG": 'THERE ARE NO WEBSITE FEES. Our service is completely free.'
     },
+    "START_NOW":{
+      "TITLE": 'Start now',
+      "CREATE_A_MEAL": "@: INDEX.CREATE_A_MEAL",
+      "BROWSE_A_MEAL": "@: INDEX.BROWSE_A_MEAL"
+    },
     "VALUES": {
       "TITLE": 'values',
       "MEETING": {

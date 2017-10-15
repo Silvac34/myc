@@ -589,17 +589,31 @@ Custom End Points
 def subscribe_to_meal(meal_id):
     meal_id = ObjectId(meal_id)
     rquData = json.loads(request.data)
-    dataSchema = {
-        "requestRole":{
-            "type": "string",
-            "allowed":["cook","cleaner","simpleGuest"]
+    meal = Meal(meal_id).getInfo()
+    if (meal["automaticSubscription"] == False):
+        dataSchema = {
+            "requestRole":{
+                "type": "string",
+                "allowed":["cook","cleaner","simpleGuest"],
+                "required": True
+            },
+            "request_message":{
+                "type": "string",
+                "required": True
+            }
         }
-    }
+    else:
+        dataSchema = {
+            "requestRole":{
+                "type": "string",
+                "allowed":["cook","cleaner","simpleGuest"],
+                "required": True
+            }
+        }
     v= Validator(dataSchema)
     if not v.validate(rquData):
         return Response(status=400)
     else:
-        meal = Meal(meal_id).getInfo()
         if not meal:
             return Response("Meal doesn't exist",status =404)
         if meal["nbRemainingPlaces"]<=0: 
@@ -624,7 +638,7 @@ def subscribe_to_meal(meal_id):
                 else: 
                     text = "Hello " + admin["first_name"] +",\n" + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + "."
             else: #si acceptation manuelle
-                meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending"})
+                meal["users"].append({"_id":g.user_id,"role":[rquData["requestRole"]],"status":"pending", "request_message": rquData["request_message"]})
                 request_url_split = request.url.split("/")
                 url_to_send = "https://" + request_url_split[2] + "/#!/my_meals/" + request_url_split[5]
                 text = "Hello " + admin["first_name"] +",\n" + participant["first_name"] + " " + participant["last_name"] + " subscribed to your meal on " + meal_time_formated + ". Please, go to " + url_to_send + " to validate this one."

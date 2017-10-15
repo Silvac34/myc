@@ -309,7 +309,7 @@
     "admin": {
         "$oid": "5776d0824403f974b97caf89"
     },
-    "automaticSubscription": true,
+    "automaticSubscription": false,
     "menu": {
         "title": "Beurre blanc"
     },

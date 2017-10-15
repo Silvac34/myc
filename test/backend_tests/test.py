@@ -88,6 +88,7 @@ class APITest2(BasicAPITest):
         super(APITest2, self).setUp()
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[0])
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[1])
+        self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[5])
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[6])
         self.db.meals.insert(loads(open('../testData/meals_testData.json').read())[7])
         self.db.users.insert(loads(open('../testData/users_testData.json').read())[0])
@@ -101,7 +102,7 @@ class APITest2(BasicAPITest):
     
     def tearDown(self):
 	    super(APITest2, self).tearDown()
-	    
+	   
     def test_get_all_meals(self):
         jsonAPIExpMeal1 = "{\"_id\": \"111111111111111111111111\",\"automaticSubscription\": true,\"currency_symbol\": \"\u20ac\",\"address\": {\"country\": \"france\",\"lat\": 48.881,\"lng\": 2.341,\"postalCode\": \"75009\",\"town\": \"Paris\"},\"admin\":{\"_id\": \"111111111111111111111111\",\"picture\": {\"data\": {\"url\": \"https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30\",\"is_silhouette\": false}},\"first_name\": \"Jennifer\",\"last_name\": \"TestosUser\",\"gender\": \"female\",\"facebook_id\": \"103194673461647\",\"link\": \"https://www.facebook.com/app_scoped_user_id/103194673461647/\"},\"menu\":{\"title\": \"Jolie piece de boeuf\"},\"price\": 100,\"nbGuests\": 10,\"nbRemainingPlaces\": 9,\"veggies\": false, \"vegan\": false,\"time\": \"2016-11-20T17:00:00.000Z\",\"detailedInfo\": {\"requiredGuests\": {\"hosts\": {\"price\":5},\"cooks\":{\"nbRquCooks\":2,\"nbRemainingPlaces\":2,\"timeCooking\":\"2016-07-13T18:00:39.303Z\",\"price\":6.7},\"cleaners\":{\"nbRquCleaners\":1,\"nbRemainingPlaces\":1,\"price\":6.7},\"simpleGuests\":{\"nbRquSimpleGuests\":6,\"nbRemainingPlaces\":6,\"price\":12.5}}}, \"users\": [{\"_id\": \"111111111111111111111111\",\"role\": [\"admin\"], \"status\": \"accepted\"}]}"
         resp = self.test_client.get("/api/meals",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
@@ -109,7 +110,7 @@ class APITest2(BasicAPITest):
         resp = self.rmAddFieldsList(json.loads(resp.data))
         expOutcome1 = json.loads(jsonAPIExpMeal1)
         expOutcome1["_etag"]= resp[0]["_etag"]
-        self.assertEqual(4, len(resp))
+        self.assertEqual(5, len(resp))
         self.assertEquals(resp[0],expOutcome1)
         
     def test_get_detailed_info_subscribed(self):
@@ -141,11 +142,21 @@ class APITest2(BasicAPITest):
         dbMeal = self.db.meals.find_one({"_id":ObjectId("111111111111111111111111")})
         self.assertEqual(dbMeal, testMeal)
 
-    def test_subscribe_meal_UserSubscribed(self):
+    def test_subscribe_meal_UserSubscribed_automaticSubscription(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
         resp = self.test_client.post("/api/meals/111111111111111111111111/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
         self.assertEqual("400 BAD REQUEST", resp.status)
         self.assertEqual("User already registered", resp.data)
+
+    def test_subscribe_meal_UserSubscribed_manualSubscription_withoutRequestMessage(self):
+        jsonRequestData = "{\"requestRole\": \"cook\"}"
+        resp = self.test_client.post("/api/meals/57865c1a4403f908ba2fbd22/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("400 BAD REQUEST", resp.status)
+
+    def test_subscribe_meal_UserSubscribed_manualSubscription_withRequestMessage(self):
+        jsonRequestData = "{\"requestRole\": \"cook\", \"request_message\": \"coucou, je souhaite participer au repas\"}"
+        resp = self.test_client.post("/api/meals/57865c1a4403f908ba2fbd22/subscription", data=jsonRequestData, headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})
+        self.assertEqual("200 OK", resp.status)
 
     def test_subscribe_meal_fullRole(self):
         jsonRequestData = "{\"requestRole\": \"cook\"}"
@@ -213,7 +224,7 @@ class APITest2(BasicAPITest):
         respDelete = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'If-Match': _etag,'Content-Type':'application/json'})
         self.assertEqual("204 NO CONTENT", respDelete.status)
         meals = self.db.meals.find()
-        self.assertEqual( 3,meals.count())
+        self.assertEqual(4,meals.count())
         self.assertEqual(ObjectId("111111111111111111111111"),meals[0]["_id"])
         
     def test_delete_meal_not_admin(self):
@@ -222,7 +233,7 @@ class APITest2(BasicAPITest):
         _etag = respget["_etag"]
         resp = self.test_client.delete("/api/meals/private/111111111111111111111112",headers = {'Authorization': 'Bearer {0}'.format(self.otherUser.token()),'If-Match':_etag,'Content-Type':'application/json'})
         self.assertEqual("404 NOT FOUND", resp.status)
-        self.assertEqual( 4,self.db.meals.find().count())
+        self.assertEqual(5,self.db.meals.find().count())
         
     def test_get_private_user(self):
         resp = self.test_client.get("/api/users/private/111111111111111111111111", headers = {'Authorization': 'Bearer {0}'.format(self.adminUser.token()),'Content-Type':'application/json'})

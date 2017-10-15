@@ -155,9 +155,10 @@ export default angular.module('myApp.viewMealsDtld', [])
     }
   }
 
-  function subscribeMeal(meal_id, role) {
+  function subscribeMeal(meal_id, role, request_message) {
     $http.post('/api/meals/' + meal_id + '/subscription', {
-      "requestRole": role
+      "requestRole": role,
+      "request_message": request_message
     }).then(function(response) {
       confirmOptIn();
       $scope.meal.nbRemainingPlaces -= 1;
@@ -195,7 +196,7 @@ export default angular.module('myApp.viewMealsDtld', [])
     });
   }
 
-  $scope.subscribeMealAuth = function(meal_id, role, provider) {
+  $scope.subscribeMealAuth = function(meal_id, role, request_message, provider) {
     if ($scope.checkMealDate() == true) {
       if (isAuthenticated) { // si l'user est authentifié
         if (check($scope.requestRole.name)) {
@@ -210,7 +211,7 @@ export default angular.module('myApp.viewMealsDtld', [])
               }
             }).then(function successCallBack(response) {
               $scope.user._etag = response.data._etag;
-              subscribeMeal(meal_id, role);
+              subscribeMeal(meal_id, role, request_message);
             });
           }
           else if (needToUpdateCellphone() == false) {
@@ -219,7 +220,7 @@ export default angular.module('myApp.viewMealsDtld', [])
             console.log("please fill your number");
           }
           else {
-            subscribeMeal(meal_id, role);
+            subscribeMeal(meal_id, role, request_message);
           }
         }
         else {
@@ -264,7 +265,7 @@ export default angular.module('myApp.viewMealsDtld', [])
                     }
                     else { // s'il n'est ni l'hôte ni inscrit au repas
                       if (check($scope.$parent.$root.user.privateInfo.cellphone) == true) { // on check si son cellphone est déjà rentré dans notre BDD
-                        subscribeMeal(meal_id, role); // si son tel est dans notre BDD, on l'inscrit au repas
+                        subscribeMeal(meal_id, role, request_message); // si son tel est dans notre BDD, on l'inscrit au repas
                       }
                       else { // si son tel n'est pas dans notre BDD on lui demande de le remplir
                         $scope.errorSubscribe.cellphone.status = true;
@@ -305,6 +306,7 @@ export default angular.module('myApp.viewMealsDtld', [])
   //Initialize variable
   $scope.isAuthenticated = isAuthenticated;
   $scope.requestRole = {};
+  $scope.request_message;
   $scope.requiredGuests = {
     availablePlaces: {}
   };

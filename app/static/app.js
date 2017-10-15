@@ -573,8 +573,8 @@ var translationsEN = {
     },
     "START_NOW":{
       "TITLE": 'Start now',
-      "CREATE_A_MEAL": "@: INDEX.CREATE_A_MEAL",
-      "BROWSE_A_MEAL": "@: INDEX.BROWSE_A_MEAL"
+      "CREATE_A_MEAL": "@:INDEX.CREATE_A_MEAL",
+      "BROWSE_A_MEAL": "@:INDEX.BROWSE_A_MEAL"
     },
     "VALUES": {
       "TITLE": 'values',
@@ -768,8 +768,8 @@ var translationsEN = {
         "DESCRIPTION_TIME_1": 'You have to arrive at',
         "DESCRIPTION_TIME_2": 'in order to help the host to prepare the meal.',
         "DESCRIPTION_PRICE_1": 'The price can vary',
-        "DESCRIPTION_PRICE_2": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM",
-        "DESCRIPTION_PRICE_3": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO",
+        "DESCRIPTION_PRICE_2": 'from',
+        "DESCRIPTION_PRICE_3": 'to',
         "DESCRIPTION_PRICE_4": 'according to the inscriptions',
         "DESCRIPTION_PRICE_5": 'more info about pricing',
         "DESCRIPTION_PRICE_6": 'You will be informed before the dinner of the final price.',
@@ -781,8 +781,8 @@ var translationsEN = {
         "DESCRIPTION_TIME_3": 'You will help',
         "DESCRIPTION_TIME_4": 'ordering and cleaning what was used for the meal.',
         "DESCRIPTION_PRICE_1": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_1",
-        "DESCRIPTION_PRICE_2": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM",
-        "DESCRIPTION_PRICE_3": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO",
+        "DESCRIPTION_PRICE_2": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_2",
+        "DESCRIPTION_PRICE_3": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_3",
         "DESCRIPTION_PRICE_4": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_4",
         "DESCRIPTION_PRICE_5": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_5",
         "DESCRIPTION_PRICE_6": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_6",

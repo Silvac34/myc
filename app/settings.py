@@ -160,6 +160,9 @@ schemaMeals = {
                'status': {
                    'type': 'string',
                    'allowed': ["accepted", "refused", "pending"]
+               },
+               'request_message': {
+                   'type': 'string'
                }
             }
         }

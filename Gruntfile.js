@@ -103,6 +103,7 @@ module.exports = function(grunt) {
         shell: {
             PushProdBuild: {
                 command: [
+                    'webpack -p',
                     'git push --force prod buildingAndDeploy:master',
                     //'heroku addons --remote prod | grep heroku-redis',
                     //'heroku addons:create heroku-redis:hobby-dev -a mycommuneaty',
@@ -113,6 +114,7 @@ module.exports = function(grunt) {
             },
             PushStageBuild: {
                 command: [
+                    'webpack -p',
                     'git push --force stage buildingAndDeploy:master',
                     //'heroku addons | grep heroku-redis',
                     //'heroku addons:create heroku-redis:hobby-dev -a shareat123-stage',

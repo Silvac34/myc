@@ -816,6 +816,10 @@ var translationsEN = {
       "HELP_COOKING": 'Help cooking:',
       "HELP_CLEANING": 'Help cleaning:',
       "SIMPLE_GUEST": 'Simple guest:',
+    },
+    "REQUEST_MESSAGE": {
+      "PLACEHOLDER": 'Add a message to your request for the host',
+      "ERROR": 'Please write a small message to {{admin_first_name}} to introduce yourself'
     }
   },
   "PROFILE": {

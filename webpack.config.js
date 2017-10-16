@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const chunk = {
     name: "vendor",
     filename: "vendor.bundle.js",
@@ -47,5 +48,6 @@ module.exports = {
         new ExtractTextPlugin('/css/app.bundle.css'),
         new webpack.optimize.CommonsChunkPlugin(chunk),
         new CleanWebpackPlugin(['app/static/dist']),
+        new UglifyJSPlugin()
     ]
 };

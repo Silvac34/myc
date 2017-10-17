@@ -92,7 +92,7 @@
         <div ng-show="viewMealsDtldForm.requestMessage.$error.required && viewMealsDtldForm.$submitted">
             <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()"><span translate="VIEW_MEALS_DTLD.REQUEST_MESSAGE.ERROR" translate-values="{ admin_first_name: '{{meal.admin.first_name}}'}"></span></div>
         </div>
-        <div class="form-group" ng-if="meal.automaticSubscription == false || checkMealDate() == false" ng-hide="datasUserForEachMeal(meal).status == 'pending'" ng-class="{'has-error': (viewMealsDtldForm.requestMessage.$error.required && viewMealsDtldForm.$submitted)}">
+        <div class="form-group" ng-if="meal.automaticSubscription == false" ng-hide="datasUserForEachMeal(meal).status == 'pending' || checkMealDate() == false" ng-class="{'has-error': (viewMealsDtldForm.requestMessage.$error.required && viewMealsDtldForm.$submitted)}">
             <textarea name="requestMessage" type="text" class="form-control" rows="2" placeholder="{{'VIEW_MEALS_DTLD.REQUEST_MESSAGE.PLACEHOLDER' | translate}}" ng-model="$parent.request_message" ng-required="meal.automaticSubscription == false"></textarea>
         </div>
         <div class="clear10"></div>

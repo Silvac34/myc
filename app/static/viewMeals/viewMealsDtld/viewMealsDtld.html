@@ -90,10 +90,10 @@
             </uib-accordion>
         </div>
         <div ng-show="viewMealsDtldForm.requestMessage.$error.required && viewMealsDtldForm.$submitted">
-            <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()" translate="VIEW_MEALS_DTLD.REQUEST_MESSAGE.ERROR" translate-values="{ admin_first_name: '{{meal.admin.first_name}}'}"></div>
+            <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()"><span translate="VIEW_MEALS_DTLD.REQUEST_MESSAGE.ERROR" translate-values="{ admin_first_name: '{{meal.admin.first_name}}'}"></span></div>
         </div>
         <div class="form-group" ng-if="meal.automaticSubscription == false" ng-hide="datasUserForEachMeal(meal).status == 'pending'" ng-class="{'has-error': (viewMealsDtldForm.requestMessage.$error.required && viewMealsDtldForm.$submitted)}">
-            <textarea name="requestMessage" type="text" class="form-control" rows="2" placeholder="{{VIEW_MEALS_DTLD.REQUEST_MESSAGE.PLACEHOLDER | translate}}" ng-model="$parent.request_message" ng-required="meal.automaticSubscription == false"></textarea>
+            <textarea name="requestMessage" type="text" class="form-control" rows="2" placeholder="{{'VIEW_MEALS_DTLD.REQUEST_MESSAGE.PLACEHOLDER' | translate}}" ng-model="$parent.request_message" ng-required="meal.automaticSubscription == false"></textarea>
         </div>
         <div class="clear10"></div>
         <div ng-if="cellphoneValidation==false && isAuthenticated">
@@ -103,7 +103,7 @@
             <div ng-if="errorSubscribe.cellphone.status">
                 <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.cellphone.message}}</div>
             </div>
-            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="{{VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.PLACEHOLDER | translate}}"
+            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="{{'VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.PLACEHOLDER' | translate}}"
                 ng-model="user.privateInfo.cellphone">
             <div class="clear20"></div>
         </div>

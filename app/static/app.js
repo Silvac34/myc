@@ -63,7 +63,7 @@ var app = angular.module('myApp', [
   'pascalprecht.translate'
 ]);
 
-app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', '$translateProvider', '$window', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider, $translateProvider, $window) {
+app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', '$translateProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider, $translateProvider) {
 
   if (!$httpProvider.defaults.headers.get) {
     $httpProvider.defaults.headers.common = {};
@@ -280,9 +280,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
   $translateProvider.translations('en', translationsEN);
   $translateProvider.translations('fr', translationsFR);
   $translateProvider.translations('es', translationsES);
-  var userLang = $window.navigator.language || $window.navigator.userLanguage; 
-  console.log(userLang);
-  $translateProvider.preferredLanguage(userLang);
+  $translateProvider.preferredLanguage('en');
   $translateProvider.fallbackLanguage('en');
 
 }]);
@@ -461,8 +459,14 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     isopen: false
   };
 
-  $scope.sloganText = "When was the last time you met someone new?";
-
+  var userLangDefault = $window.navigator.language || $window.navigator.userLanguage;
+  $translate.use(userLangDefault);
+  if (userLangDefault == 'fr') {
+    $scope.sloganText = "Envie de faire de nouvelles rencontres ?";
+  }
+  else {
+    $scope.sloganText = "When was the last time you met someone new?";
+  }
   $rootScope.changeLanguage = function(langKey) { // permet de changer la langue depuis index.html en cliquant sur un des drapeaux
     $translate.use(langKey);
   };
@@ -1269,8 +1273,8 @@ var translationsFR = {
     "LOGOUT": 'Logout',
     "CREATE_A_MEAL": 'Créer un repas',
     "BROWSE_A_MEAL": 'Choisir un repas',
-    "SLOGAN_1": 'Envie de faire de nouvelles rencontres ?',
-    "SLOGAN_2": 'Et de manger des repas faits maison ?',
+    "SLOGAN_1": 'Et de manger des repas faits maison ?',
+    "SLOGAN_2": 'Envie de faire de nouvelles rencontres ?',
     "FOOTER": {
       "INFORMATION": {
         "TITLE": 'Information',

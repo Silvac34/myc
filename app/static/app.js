@@ -63,7 +63,7 @@ var app = angular.module('myApp', [
   'pascalprecht.translate'
 ]);
 
-app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', '$translateProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider, $translateProvider) {
+app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvider', 'ENV', 'cfpLoadingBarProvider', 'ezfbProvider', '$translateProvider', '$window', function($stateProvider, $httpProvider, $urlRouterProvider, $authProvider, ENV, cfpLoadingBarProvider, ezfbProvider, $translateProvider, $window) {
 
   if (!$httpProvider.defaults.headers.get) {
     $httpProvider.defaults.headers.common = {};
@@ -280,7 +280,9 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
   $translateProvider.translations('en', translationsEN);
   $translateProvider.translations('fr', translationsFR);
   $translateProvider.translations('es', translationsES);
-  $translateProvider.preferredLanguage('en');
+  var userLang = $window.navigator.language || $window.navigator.userLanguage; 
+  console.log(userLang);
+  $translateProvider.preferredLanguage(userLang);
   $translateProvider.fallbackLanguage('en');
 
 }]);

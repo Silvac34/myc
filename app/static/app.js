@@ -571,7 +571,7 @@ var translationsEN = {
       "PARAGRAPH_2": 'You pay directly to the host who bought the groceries.',
       "PARAGRAPH_2_STRONG": 'THERE ARE NO WEBSITE FEES. Our service is completely free.'
     },
-    "START_NOW":{
+    "START_NOW": {
       "TITLE": 'Start now',
       "CREATE_A_MEAL": "@:INDEX.CREATE_A_MEAL",
       "BROWSE_A_MEAL": "@:INDEX.BROWSE_A_MEAL"
@@ -1344,7 +1344,7 @@ var translationsFR = {
       "PARAGRAPH_2": 'Vous payez directement l’hôte, puisqu’il est celui qui a acheté les courses.',
       "PARAGRAPH_2_STRONG": 'IL N’Y A PAS DE FRAIS DE SITE. Notre service est complètement gratuit.'
     },
-    "START_NOW":{
+    "START_NOW": {
       "TITLE": 'Commencez maintenant',
       "CREATE_A_MEAL": "@:INDEX.CREATE_A_MEAL",
       "BROWSE_A_MEAL": "@:INDEX.BROWSE_A_MEAL"
@@ -1373,7 +1373,7 @@ var translationsFR = {
         "DESCRIPTION": 'Des événements communs organisés, en plus des repas des membres'
       },
       "NEW": {
-        "NAME": 'NOUVEAU,
+        "NAME": 'NOUVEAU',
         "DESCRIPTION": 'Lancé en Avril 2017.'
       }
     }
@@ -1410,7 +1410,7 @@ var translationsFR = {
       },
       "SIMPLE_GUEST": {
         "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
-"TOOLTIP": 'Ces personnes ne vont pas vous aider directement, mais vont payer un petit surplus qui fera diminuer le prix de votre repas et de celui de vos convives aidant.'
+        "TOOLTIP": 'Ces personnes ne vont pas vous aider directement, mais vont payer un petit surplus qui fera diminuer le prix de votre repas et de celui de vos convives aidant.'
       },
       "TOTAL": 'Total',
       "GROCERIES_PRICE": 'Prix des courses',
@@ -1510,7 +1510,7 @@ var translationsFR = {
     "ATTENDED": 'J’y ai participé',
     "HOSTING": 'Je l’organise',
     "HOSTED": 'Je l’ai organisé',
-    "VEGETARIAN_MEAL": ‘Repas végétarien',
+    "VEGETARIAN_MEAL": 'Repas végétarien ',
     "VEGAN_MEAL": 'Repas végétalien',
     "HALAL_MEAL": 'Repas halal',
     "KOSHER_MEAL": 'Repas kasher',
@@ -1562,7 +1562,7 @@ var translationsFR = {
       },
       "SIMPLE_GUEST": {
         "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
-        "DESCRIPTION": 'Vous allez payer un petit surplus qui va être redistribué à l’hôte et aux convives aidant à cuisiner ou à nettoyer.’
+        "DESCRIPTION": 'Vous allez payer un petit surplus qui va être redistribué à l’hôte et aux convives aidant à cuisiner ou à nettoyer.'
       },
       "CELLPHONE": {
         "DESCRIPTION": 'Information requise',
@@ -1780,7 +1780,7 @@ var translationsFR = {
     "CONCEPT": {
       "TITLE": 'Envie de repas maison et de nouvelles rencontres?',
       "PARAGRAPH_1": 'myCommuneaty est là pour vous ! C’est un site internet qui permet aux amateurs de cuisine et convivialité de se rencontrer en toute simplicité.',
-      "PARAGRAPH_2": 'L'idée est simple : partager un repas ensemble, mais aussi cuisiner à plusieurs et diviser équitablement le prix des courses.',
+      "PARAGRAPH_2": 'L\'idée est simple: partager un repas ensemble, mais aussi cuisiner à plusieurs et diviser équitablement le prix des courses.',
       "DIFFERENT_ROLES": {
         "TITLE": "@: WELCOME.DIFFERENT_ROLES.TITLE",
         "HOST": {
@@ -1789,7 +1789,7 @@ var translationsFR = {
         },
         "HELP_COOKING": {
           "NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
-          "DESCRIPTION": ''Les Aide-Cuisine sont des convives qui vont arriver plus tôt pour aider l’hôte à cuisiner. Leur heure d’arrivée est spécifié par l’hôte dans la description de son repas.'
+          "DESCRIPTION": 'Les Aide - Cuisine sont des convives qui vont arriver plus tôt pour aider l’ hôte à cuisiner.Leur heure d’ arrivée est spécifié par l’ hôte dans la description de son repas.'
         },
         "HELP_CLEANING": {
           "NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",

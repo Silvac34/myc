@@ -876,6 +876,11 @@ var translationsEN = {
     'MEMBERSHIP': 'Member since {{member_since}}',
     "REVIEWS": {
       "TITLE": 'Reviews',
+      "PARAGRAPH_1": 'Get new reviews by',
+      "LINK_1": 'creating',
+      "OR": 'or',
+      "PARAGRAPH_2": 'a meal',
+      "LINK_2": 'browsing',
       "NO_REVIEWS_YET": '{{user_first_name}} does not have any reviews yet.',
       "NO_COMMENT": '{{review_fromUser_datas_first_name}} had a {{review_forUser_rating}} experience with {{user_first_name}}.'
     },
@@ -1277,7 +1282,7 @@ var translationsFR = {
     "SLOGAN_2": 'Envie de faire de nouvelles rencontres ?',
     "FOOTER": {
       "INFORMATION": {
-        "TITLE": 'Information',
+        "TITLE": 'A propos',
         "CONCEPT": 'Concept',
         "TEAM_HISTORY": 'Equipe & Histoire',
         "FAQ": 'FAQ'
@@ -1287,7 +1292,7 @@ var translationsFR = {
         "GUIDELINES": 'Les fondamentaux',
         "GENERAL_POLICIES": 'Politiques générales',
         "PRIVACY_POLICY": 'Politique de confidentialité',
-        "TERMS_OF_USE": 'Condition d’utilisation'
+        "TERMS_OF_USE": 'Conditions d’utilisation'
       },
       "MORE": {
         "TITLE": 'Autre',
@@ -1304,7 +1309,7 @@ var translationsFR = {
   "WELCOME": {
     "CREATE_A_MEAL": 'créer un repas',
     "BROWSE_A_MEAL": 'choisir un repas',
-    "HOW_IT_WORKS": 'Comment ça marche',
+    "HOW_IT_WORKS": 'Comment ça marche?',
     "PUBLICATION": {
       "TITLE": 'Publication',
       "PARAGRAPH": 'Un membre publie un repas, en choisissant le nombre de participants et leurs rôles.'
@@ -1315,13 +1320,13 @@ var translationsFR = {
     },
     "PARTICIPATION": {
       "TITLE": 'Rencontre',
-      "PARAGRAPH": 'Profitez, en préparant et partageant ensemble un bon repas.'
+      "PARAGRAPH": 'Cuisinez et savourez ensemble un bon repas fait maison.'
     },
     "DIFFERENT_ROLES": {
       "TITLE": '4 rôles possibles',
       "HOST": {
         "NAME": 'L’hôte',
-        "DESCRIPTION": 'L’hôte est celui qui organise le repas. Il est aussi chargé de faire les courses.'
+        "DESCRIPTION": 'L’hôte est celui qui organise le repas. Il est aussi chargé de faire les courses et accueillir ses convives.'
       },
       "HELP_COOKING": {
         "NAME": 'Les Aide-Cuisine',
@@ -1333,7 +1338,7 @@ var translationsFR = {
       },
       "SIMPLE_GUEST": {
         "NAME": 'Les invités',
-        "DESCRIPTION": 'Les invités sont des convives qui ne vont pas aider l’hôte directement, mais qui vont à la place, payer un petit surplus. Ce surplus sera ensuite reversé à l’hôte et aux convives aidant.'
+        "DESCRIPTION": 'Les invités sont des convives qui ne vont pas aider l’hôte directement, mais qui vont à la place, payer un petit surplus. Ce surplus sera ensuite reversé à l’hôte et aux convives aidants.'
       },
     },
     "WHAT_ABOUT_MONEY": {
@@ -1344,10 +1349,10 @@ var translationsFR = {
         "PARAGRAPH": 'Tout le monde paie la même chose.'
       },
       "WITH_SIMPLE_GUEST": {
-        "TITLE": 'Avec invité(s)',
-        "PARAGRAPH": 'Les invités paient un petit peu plus et ce surplus est reversé à l’hôte et aux convives aidant.'
+        "TITLE": 'Avec invités',
+        "PARAGRAPH": 'Les invités paient un surplus qui est reversé à l’hôte et aux convives aidants.'
       },
-      "PARAGRAPH_2": 'Vous payez directement l’hôte, puisqu’il est celui qui a acheté les courses.',
+      "PARAGRAPH_2": 'Vous payez directement l’hôte, puisque c’est lui qui a acheté les courses.',
       "PARAGRAPH_2_STRONG": 'IL N’Y A PAS DE FRAIS DE SITE. Notre service est complètement gratuit.'
     },
     "START_NOW": {
@@ -1356,10 +1361,10 @@ var translationsFR = {
       "BROWSE_A_MEAL": "@:INDEX.BROWSE_A_MEAL"
     },
     "VALUES": {
-      "TITLE": 'valeurs',
+      "TITLE": 'Valeurs',
       "MEETING": {
         "NAME": 'RENCONTRE',
-        "DESCRIPTION": 'Rencontrez des gens de tout horizon'
+        "DESCRIPTION": 'Rencontrez des gens de tous les horizons !'
       },
       "SHARING": {
         "NAME": 'PARTAGE',
@@ -1368,19 +1373,19 @@ var translationsFR = {
       "AUTHENTICITY_SIMPLICITY": {
         "NAME_1": 'AUTHENTICITÉ',
         "NAME_2": '& SIMPLICITÉ',
-        "DESCRIPTION": 'Des repas faits maison de tout genre.'
+        "DESCRIPTION": 'Des repas faits maison de tout genre !'
       },
       "FRIENDLINESS": {
         "NAME": 'CONVIVIALITÉ',
-        "DESCRIPTION": 'Des repas allant de 3 convives à bien plus.'
+        "DESCRIPTION": 'Des repas allant de 3 convives à bien plus !'
       },
       "COMMUNITY": {
         "NAME": 'COMMUNAUTÉ',
-        "DESCRIPTION": 'Des événements communs organisés, en plus des repas des membres'
+        "DESCRIPTION": 'Des événements communs organisés, en plus des repas des membres !'
       },
       "NEW": {
         "NAME": 'NOUVEAU',
-        "DESCRIPTION": 'Lancé en Avril 2017.'
+        "DESCRIPTION": 'Lancé en Avril 2017 !'
       }
     }
   },
@@ -1416,7 +1421,7 @@ var translationsFR = {
       },
       "SIMPLE_GUEST": {
         "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
-        "TOOLTIP": 'Ces personnes ne vont pas vous aider directement, mais vont payer un petit surplus qui fera diminuer le prix de votre repas et de celui de vos convives aidant.'
+        "TOOLTIP": 'Ces personnes ne vont pas vous aider directement, mais vont payer un petit surplus qui fera diminuer le prix de votre repas et de celui de vos convives aidants.'
       },
       "TOTAL": 'Total',
       "GROCERIES_PRICE": 'Prix des courses',
@@ -1568,7 +1573,7 @@ var translationsFR = {
       },
       "SIMPLE_GUEST": {
         "NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
-        "DESCRIPTION": 'Vous allez payer un petit surplus qui va être redistribué à l’hôte et aux convives aidant à cuisiner ou à nettoyer.'
+        "DESCRIPTION": 'Vous allez payer un surplus qui va être redistribué à l’hôte et aux convives aidants.'
       },
       "CELLPHONE": {
         "DESCRIPTION": 'Information requise',
@@ -1594,7 +1599,7 @@ var translationsFR = {
       "HOST": 'Vôtre hôte:',
       "HELP_COOKING": 'Aide-Cuisine:',
       "HELP_CLEANING": 'Aide-Nettoyage:',
-      "SIMPLE_GUEST": 'Invité(e/s):',
+      "SIMPLE_GUEST": 'Invités):',
     },
     "REQUEST_MESSAGE": {
       "PLACEHOLDER": 'Ecrire un message à l’hôte',
@@ -1602,7 +1607,7 @@ var translationsFR = {
     }
   },
   "PROFILE": {
-    "RECOMMENDATION": 'Nous vous recommandons de compléter votre profil. Une personne avec un profil complet a plus de réservations acceptées',
+    "RECOMMENDATION": 'Merci de compléter votre profil.',
     "ABOUT_ME": {
       "TITLE": 'Présentation',
       "BIRTHDATE": 'Date de naissance:',
@@ -1649,6 +1654,11 @@ var translationsFR = {
     'MEMBERSHIP': 'Membre depuis {{member_since}}',
     "REVIEWS": {
       "TITLE": 'Avis',
+      "PARAGRAPH_1": 'Obtenez de nouveaux avis en',
+      "LINK_1": 'créant',
+      "OR": 'ou',
+      "LINK_2": 'participant',
+      "PARAGRAPH_2": 'à un repas',
       "NO_REVIEWS_YET": '{{user_first_name}} n’a pas encore reçu d’avis.',
       "NO_COMMENT": '{{review_fromUser_datas_first_name}} a eu une {{review_forUser_rating}} experience avec {{user_first_name}}.'
     },
@@ -1791,19 +1801,19 @@ var translationsFR = {
         "TITLE": "@: WELCOME.DIFFERENT_ROLES.TITLE",
         "HOST": {
           "NAME": "@: WELCOME.DIFFERENT_ROLES.HOST.NAME",
-          "DESCRIPTION": 'L’hôte est la personne qui publie le repas. Il choisit le menu, le nombre de participants, les aides nécessaires, la date et l’endroit (chez lui, dans un parc,...). Il s’occupe de faire les courses, avant de préparer le repas avec ces convives aidant.'
+          "DESCRIPTION": 'L’hôte est la personne qui publie le repas. Il choisit le menu, le nombre de participants, les aides nécessaires, la date et l’endroit (chez lui, dans un parc,...). Il s’occupe de faire les courses, avant de préparer le repas avec ses convives aidants.'
         },
         "HELP_COOKING": {
           "NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
-          "DESCRIPTION": 'Les Aide - Cuisine sont des convives qui vont arriver plus tôt pour aider l’ hôte à cuisiner.Leur heure d’ arrivée est spécifié par l’ hôte dans la description de son repas.'
+          "DESCRIPTION": 'Les Aide-Cuisine sont des convives qui vont arriver plus tôt pour aider l’hôte à cuisiner. Leur heure d’arrivée est spécifiée par l’hôte dans la description de son repas.'
         },
         "HELP_CLEANING": {
           "NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
-          "DESCRIPTION": 'Les Aide-Nettoyage sont des convives qui vont aider l’hôte à nettoyer et ranger. Leur heure d’arrivée est spécifié par l’hôte dans la description de son repas.'
+          "DESCRIPTION": 'Les Aide-Nettoyage sont des convives qui vont aider l’hôte à nettoyer et ranger. Leur heure d’arrivée est spécifiée par l’hôte dans la description de son repas.'
         },
         "SIMPLE_GUEST": {
           "NAME": "@: WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
-          "DESCRIPTION": 'Les invités sont des convives qui ne vont pas aider l’hôte directement, mais qui vont à la place, payer un petit surplus. Ce surplus sera ensuite reversé à l’hôte et aux convives aidant selon les calculs ci-dessous. Ce rôle d’invité est utile lorsque par exemple, un hôte veut organiser un repas à plusieurs mais n’a pas besoin d’autant d’aide ou si quelqu’un souhaite venir à un repas mais n’est pas un grand adepte de la cuisine.'
+          "DESCRIPTION": 'Les invités sont des convives qui ne vont pas aider l’hôte directement mais qui à la place, vont payer un surplus. Ce surplus sera reversé à l’hôte et aux convives aidants selon les calculs ci-dessous. Ce rôle d’invité est utile lorsqu’un hôte veut organiser un repas à plusieurs mais n’a pas besoin d’autant d’aide ou si quelqu’un souhaite venir à un repas mais n’est pas un grand adepte de la cuisine.'
         }
       },
       "GROCERIES_PRICE": {
@@ -1814,7 +1824,7 @@ var translationsFR = {
         },
         "WITH_SIMPLE_GUEST": {
           "TITLE": 'Avec des invités',
-          "DESCRIPTION": 'Chaque invité paie 25% en plus. Ce surplus est reversé à 50% à l’hôte et à 50% aux convives aidant. Plus il y a d’invités et plus la part du montant des courses que devront payer l’hôte et des convives aidant diminue. S’il y a plus de 4 invités, alors l’hôte ne va pas payer et le surplus restant est encore redistribué entre les convives aidants.'
+          "DESCRIPTION": 'Chaque invité paie 25% en plus. Ce surplus est reversé à 50% à l’hôte et à 50% aux convives aidants. Plus il y a d’invités et plus la part du montant des courses que devront payer l’hôte et les convives aidants diminue. S’il y a plus de 4 invités, alors l’hôte ne va pas payer et le surplus restant est encore redistribué entre les convives aidants.'
         },
         "CONCLUSION_1": 'A la fin du repas, chaque convive paie directement à l’hôte sa participation pour les courses.',
         "CONCLUSION_2": 'Il n’y a pas de frais de site. Notre service est complètement gratuit.',
@@ -1826,7 +1836,7 @@ var translationsFR = {
       "PARAGRAPH_1": 'Tout a commencé avec l’envie de Dimitri de réaliser un entrepreneuriat en relation avec la nourriture. Cette envie est devenue une idée puis un projet grâce à Kevin et Maylis.',
       "PARAGRAPH_2": 'Nous nous sommes lancés dans cette aventure en octobre 2015 à Santiago du Chili, sous le nom de SharEat. Quarante repas ont été alors organisés en utilisant Facebook et Google Apps comme plateformes d’échanges. Au bout d’un moment, nous avons décidé qu’il était temps de créer un site internet dédié au projet. Comme le nom de domaine de SharEat était déjà utilisé, nous avons changé son nom par l’actuel myCommuneaty.',
       "PARAGRAPH_3": 'En janvier 2017, Kevin choisit de quitter le projet pour se focaliser exclusivement sur sa nouvelle carrière professionnelle. Nous poursuivons ainsi l’aventure à deux.',
-      "PARAGRAPH_4": 'En avril 2017, nous lançons la première version du site internet myCommuneaty. Nous serions ravis de recevoir vos avis, commentaires ou idées. Alors n’hésitez pas à nous contacter!'
+      "PARAGRAPH_4": 'En avril, nous lançons la première version du site internet myCommuneaty. Nous serions ravis de recevoir vos avis, commentaires ou idées,... alors n’hésitez pas à nous contacter!'
     },
     "GENERAL_POLICIES": {
       "TITLE": 'General policies',
@@ -1919,9 +1929,9 @@ var translationsFR = {
       "BULLET_9_3": 'please'
     },
     "CAREERS_FEEDBACKS": {
-      "TITLE": 'Careers & Feedbacks',
-      "PARAGRAPH_1": 'We are looking for volunteers who could widespread the concept of myCommuneaty or help for the development of our platform (angularJs, html & css, flask/python) and for its design.',
-      "PARAGRAPH_2": 'In addition, we are always happy to receive constructive feedbacks, comments or ideas. So, please feel free to contact us by',
+      "TITLE": 'Carrières & Feedbacks',
+      "PARAGRAPH_1": 'Nous recherchons d‘autres volontaires pour nous aider à développer le concept, coder (angularJs, html & css, flask/python) ou encore faire du design.',
+      "PARAGRAPH_2": 'Nous sommes aussi toujours ravis de recevoir vos feedbacks, avis, commentaires,...alors n’hésitez pas à nous contacter par',
     },
     "CONTACT_US": {
       "TITLE": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
@@ -2030,6 +2040,7 @@ var translationsFR = {
     }
   }
 };
+
 
 
 var translationsES = {

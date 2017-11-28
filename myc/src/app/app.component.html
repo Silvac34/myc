@@ -1,0 +1,99 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="bs-component">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="welcome" id="navbar-button-position">myCommuneaty</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="create_meal" translate>INDEX.CREATE_A_MEAL</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="view_meals" translate>INDEX.BROWSE_A_MEAL</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="my_meals" translate>INDEX.MY_MEALS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="profile" translate>INDEX.PROFILE</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+
+  <!--
+  <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="../" id="navbar-button-position">myCommuneaty</a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-button-position">
+          <li><a routerLink="create_meal" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.CREATE_A_MEAL</a></li>
+          <li><a routerLink="view_meals" routerLink-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.BROWSE_A_MEAL</a></li>
+          <li><a routerLink="my_meals" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.MY_MEALS</a></li>
+          <li><a [routerLink]="['profile', user._id]" class="pointer" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position"><span translate>INDEX.PROFILE</span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li *ngIf="isAuthenticated()" uib-dropdown class="dropdown" style="cursor:pointer">
+            <a uib-dropdown-toggle class="dropdown-toggle">
+                  <img class="img-circle profilePic" [src]="user.picture.data.url" alt="User profile picture" /> {{user.first_name}} <span class="caret" *ngIf="((user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)==0) || (!user.nbDifferentPendingRequest && !user.nbDifferentReviewsToLeave)"></span>
+                  <span class="badge" *ngIf="(user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)>0">{{user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave}}</span>
+                </a>
+            <ul uib-dropdown-menu class="dropdown-menu">
+              <li><a routerLink="manage_requests"><span translate>INDEX.MANAGE_REQUESTS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentPendingRequest>0">{{user.nbDifferentPendingRequest}}</span></a></li>
+              <li><a routerLink="leave_reviews"><span translate>INDEX.LEAVE_REVIEWS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentReviewsToLeave>0">{{user.nbDifferentReviewsToLeave}}</span></a></li>
+              <li class="divider"></li>
+              <li><a (click)="logout()" translate>INDEX.LOGOUT</a></li>
+            </ul>
+          </li>
+          <li *ngIf="!isAuthenticated() && inApp != true"><a (click)="auth('facebook', toState)" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> <span translate>INDEX.ACTION_BUTTON.SIGN_IN_1</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+    <a class="navbar-brand" routerLink="welcome">myCommuneaty</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="create_meal">Create a meal<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="view_meals">Browse a meal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="my_meals">My meals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="profile">Profile</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>-->
+</div>
+<router-outlet></router-outlet>

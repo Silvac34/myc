@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="bs-component">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="welcome" id="navbar-button-position">myCommuneaty</a>
+    <a class="navbar-brand" routerLink="welcome" id="navbar-button-position">myCommuneaty</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -106,42 +106,42 @@
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.INFORMATION.TITLE</strong></p>
 
         <a routerLink="footer_information_concept" translate>INDEX.FOOTER.INFORMATION.CONCEPT</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_information_team" translate>INDEX.FOOTER.INFORMATION.TEAM_HISTORY</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_information_FAQ" translate>INDEX.FOOTER.INFORMATION.FAQ</a><br>
       </div>
 
       <div class="col-sm-3">
-        <hr class="visible-xs-block">
+        <hr class="d-sm-none">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.SUPPORT.TITLE</strong></p>
         <a routerLink="footer_legal_guidelines" translate>INDEX.FOOTER.SUPPORT.GUIDELINES</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_legal_general_policies" translate>INDEX.FOOTER.SUPPORT.GENERAL_POLICIES</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_legal_privacy_policy" translate>INDEX.FOOTER.SUPPORT.PRIVACY_POLICY</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_legal_terms_and_conditions" translate>INDEX.FOOTER.SUPPORT.TERMS_OF_USE</a><br>
 
       </div>
 
       <div class="col-sm-3">
-        <hr class="visible-xs-block">
+        <hr class="d-sm-none">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.MORE.TITLE</strong></p>
 
         <a routerLink="footer_more_photo_gallery" translate>INDEX.FOOTER.MORE.PHOTO_GALLERY</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_more_careers" translate>INDEX.FOOTER.MORE.CAREERS_FEEDBACKS</a>
-        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
         <a routerLink="footer_more_contact" translate>INDEX.FOOTER.MORE.CONTACT_US</a><br>
       </div>
 
       <div class="col-sm-3">
-        <hr class="visible-xs-block">
+        <hr class="d-sm-none">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.LANGUAGE.TITLE</strong></p>
 
-        <a title="english" class="pointer" (click)="changeLanguage('en')"><img ng-src="assets/images/footer_language/english.png"></a> &nbsp;
-        <a title="français" class="pointer" (click)="changeLanguage('fr')"><img ng-src="assets/images/footer_language/french.png"></a> &nbsp;
+        <a title="english" class="pointer" (click)="switchLanguage('en')"><img ng-src="assets/images/footer_language/english.png"></a> &nbsp;
+        <a title="français" class="pointer" (click)="switchLanguage('fr')"><img ng-src="assets/images/footer_language/french.png"></a> &nbsp;
       </div>
 
     </div>

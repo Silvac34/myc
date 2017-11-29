@@ -16,7 +16,7 @@ export class AppComponent {
     translate.use(userLang);
   }
   
-  changeLanguage(language: string) {
+  switchLanguage(language: string) {
     this.translate.use(language);
   }
 

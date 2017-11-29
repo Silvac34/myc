@@ -8,6 +8,14 @@ header {
         height: 355px;
         filter: brightness(85%) saturate(190%);
     }
+    .small-visible-xs {
+        font-size: 13px;
+    }
+    h2.slogan {
+        font-size: 22px;
+        margin-top: -130px;
+        color: white;
+    }
 }
 
 @media (min-width: 768px) {
@@ -15,4 +23,429 @@ header {
         height: 560px;
         filter: brightness(70%) saturate(190%);
     }
+    .size-20-sm {
+        font-size: 20px;
+    }
+    h2.slogan {
+        font-size: 40px;
+        margin-top: -195px;
+        color: white;
+        font-weight: lighter;
+    }
+}
+
+#slogan-text {
+    display: inline-block;
+    border-top: solid 0.5px;
+    padding: 5px 10px;
+    border-bottom: solid 0.5px;
+}
+
+.well-text-position {
+    position: absolute;
+    z-index: 2;
+    top: 100px;
+    left: 0px;
+    right: 0px;
+    color: white;
+}
+
+.well-photo-format {
+    height: 250px;
+    filter: brightness(0.9);
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+    color: transparent;
+}
+
+.well-conviviality-background {
+    background: url("/assets/images/welcome/well/conviviality.jpg") no-repeat 0;
+    background-size: cover;
+}
+
+.well-conviviality-background:hover {
+    z-index: 3;
+    background: mediumvioletred;
+    color: white;
+    display: flex;
+}
+
+.well-meeting-background {
+    background: url("/assets/images/welcome/well/meeting.jpg") no-repeat 0;
+    background-size: cover;
+}
+
+.well-meeting-background:hover {
+    z-index: 3;
+    background: orange;
+    color: white;
+    display: flex;
+}
+
+.well-sharing-background {
+    background: url("/assets/images/welcome/well/sharing.jpg") no-repeat 0;
+    background-size: cover;
+    background-position: 0px 0px
+}
+
+.well-sharing-background:hover {
+    z-index: 3;
+    background: #73a839;
+    color: white;
+    display: flex;
+}
+
+.well-new-background {
+    background: url("/assets/images/welcome/well/new.jpg") no-repeat 0;
+    background-size: cover;
+    background-position: 0px 0px
+}
+
+.well-new-background:hover {
+    z-index: 3;
+    background: orangered;
+    color: white;
+    display: flex;
+}
+
+.well-community-background {
+    background: url("/assets/images/welcome/well/community.jpg") no-repeat 0;
+    background-size: cover;
+    background-position: 0px 0px
+}
+
+.well-community-background:hover {
+    z-index: 3;
+    background: #178acc;
+    color: white;
+    display: flex;
+}
+
+.well-authenticity-simplicity-background {
+    background: url("/assets/images/welcome/well/authenticity_simplicity.jpg") no-repeat 0;
+    background-size: cover;
+    background-position: 0px 0px
+}
+
+.well-authenticity-simplicity-background:hover {
+    z-index: 3;
+    background: #033c73;
+    color: white;
+    display: flex;
+}
+
+
+/* mise en page de welcomePage */
+
+.hero.mod-different-roles {
+    background-color: #287fb8;
+    text-align: center
+}
+
+.hero.mod-start-now {
+    background: #fff url("/assets/images/welcome/welcome_start_now.jpg") no-repeat center;
+    background-size: cover;
+}
+
+
+@media screen and (max-width: 767px) {
+    .hero.mod-start-now {
+        height: 355px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .hero.mod-different-roles,
+    .hero.mod-what-about-the-money,
+    .hero.mod-how-it-works {
+        padding-top: 50px;
+        padding-bottom: 85px;
+    }
+    .hero.mod-values {
+        padding-top: 50px
+    }
+    .hero.mod-start-now {
+        padding-top: 50px;
+        height: 560px;
+        margin: 20px 0px -20px 0px;
+    }
+}
+
+.hero.mod-values,
+.hero.mod-how-it-works {
+    background-color: white;
+    text-align: center;
+}
+
+.hero.mod-what-about-the-money {
+    background: #008b8b;
+    text-align: center;
+}
+
+.hero {
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 300px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.hero-content {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 1280px;
+}
+
+.hero-content .mod-margin-top {
+    margin-top: 1.5em
+}
+
+@media screen and (min-width: 768px) {
+    .hero-content {
+        padding: 30px
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .hero-content .mod-margin-top {
+        margin-top: 2em
+    }
+}
+
+div.mod-margin-top {
+    margin-top: 2em
+}
+
+@media screen and (min-width: 768px) {
+    .hero-content-title-how-it-works,
+    .hero-content-title-values,
+    .hero-content-title-what-about-the-money,
+    .hero-content-title-different-roles,
+    .hero-content-title-start-now {
+        font-size: 56px
+    }
+}
+
+.hero-content-title-values,
+.hero-content-title-how-it-works {
+    color: #003f5e;
+    font-size: 34px;
+    font-weight: lighter;
+    line-height: 1.1;
+    margin-bottom: 0.5em
+}
+
+.hero-content-title-what-about-the-money,
+.hero-content-title-start-now,
+.hero-content-title-different-roles {
+    color: white;
+    font-size: 34px;
+    font-weight: lighter;
+    line-height: 1.1;
+    margin-bottom: 0.5em
+}
+
+hr.mod-short {
+    background-color: #27374c;
+    border-width: 0;
+    color: #27374c;
+    height: 2px;
+    margin-bottom: 1em;
+    width: 50px
+}
+
+.info-box hr.mod-short {
+    width: 30px
+}
+
+.info-box.mod-white {
+    background-color: white;
+    color: #34495e
+}
+
+hr.mod-white {
+    background-color: white;
+    color: white
+}
+
+hr.mod-info {
+    background-color: #003f5e;
+    color: white
+}
+
+a.mod-white,
+h3.mod-white,
+p.mod-white {
+    color: white
+}
+
+a.mod-info {
+    color: #003f5e;
+}
+
+.info-box-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+@media screen and (min-width: 768px) {
+    .info-box-container {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row
+    }
+}
+
+.info-box-title-what-about-the-money,
+.info-box-title-different-roles {
+    line-height: 1.2;
+    color: white;
+}
+
+.info-box-title-how-it-works {
+    line-height: 1.2;
+    color: #34495e;
+}
+
+.info-box {
+    color: white;
+    margin-top: 10px;
+    padding: 30px;
+    width: 100%
+}
+
+.info-box.mod-blue {
+    background-color: #3e99d5;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
+}
+
+.info-box.mod-blue-light {
+    background-color: #53a4da;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
+}
+
+.info-box.mod-green {
+    background-color: #009f9f;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2)
+}
+
+.info-box.mod-white {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)
+}
+
+.mod-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.mod-margin-bottom {
+    margin-bottom: 1em
+}
+
+a.mod-underline {
+    text-decoration: underline
+}
+
+a.mod-underline:focus,
+a.mod-underline:hover {
+    text-decoration: none
+}
+
+.bluerow {
+    border-bottom: solid 1px #002E4E;
+    background: #0B4060;
+    -webkit-font-smoothing: antialiased;
+}
+
+.bluerow.unsticked {
+    top: -70px;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s
+}
+
+.btn-bluerow {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px 70px;
+    border: none;
+    border-right: solid 1px #002E4E;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background: #295E7E;
+}
+
+.btn-bluerow:first-child {
+    border-left: solid 1px #002E4E
+}
+
+.btn-bluerow:focus {
+    color: lightgrey;
+}
+
+@media screen and (min-width:768px) {
+    .btn-bluerow {
+        margin: 0 1px
+    }
+}
+
+.btn-bluerow:hover {
+    background: #287FB5;
+    color: #fff
+}
+
+@media screen and (max-width:1199px) {
+    .btn-bluerow {
+        padding: 15px 20px
+    }
+}
+
+@media screen and (max-width:767px) {
+    .btn-bluerow {
+        padding: 10px;
+    }
+    .bluerow .btn-group {
+        width: 100%
+    }
+    .btn-bluerow-text {
+        padding: 8px 5px;
+        display: block;
+        font-size: small;
+    }
+}
+
+.btn-start-now {
+    border: 1px solid #e6e6e6 !important;
+    color: white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+.btn-start-now:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
 }

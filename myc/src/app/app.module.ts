@@ -20,6 +20,16 @@ import { ViewMealsComponent } from './view-meals/view-meals.component';
 import { MyMealsComponent } from './my-meals/my-meals.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ConceptComponent } from './footer/information/concept/concept.component';
+import { FaqComponent } from './footer/information/faq/faq.component';
+import { TeamComponent } from './footer/information/team/team.component';
+import { GeneralPoliciesComponent } from './footer/legal/general-policies/general-policies.component';
+import { GuidelinesComponent } from './footer/legal/guidelines/guidelines.component';
+import { PrivacyPolicyComponent } from './footer/legal/privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './footer/legal/terms-and-conditions/terms-and-conditions.component';
+import { CareersComponent } from './footer/more/careers/careers.component';
+import { ContactComponent } from './footer/more/contact/contact.component';
+import { PhotoGalleryComponent } from './footer/more/photo-gallery/photo-gallery.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,7 +42,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     ViewMealsComponent,
     MyMealsComponent,
     WelcomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    ConceptComponent,
+    FaqComponent,
+    TeamComponent,
+    GeneralPoliciesComponent,
+    GuidelinesComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent,
+    CareersComponent,
+    ContactComponent,
+    PhotoGalleryComponent
   ],
   imports: [
     BrowserModule,

@@ -97,3 +97,62 @@
   </nav>-->
 </div>
 <router-outlet></router-outlet>
+<footer id="footer">
+  <div class="clear20"></div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="text-uppercase"><strong translate>INDEX.FOOTER.INFORMATION.TITLE</strong></p>
+
+        <a routerLink="footer_information_concept" translate>INDEX.FOOTER.INFORMATION.CONCEPT</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_information_team" translate>INDEX.FOOTER.INFORMATION.TEAM_HISTORY</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_information_FAQ" translate>INDEX.FOOTER.INFORMATION.FAQ</a><br>
+      </div>
+
+      <div class="col-sm-3">
+        <hr class="visible-xs-block">
+        <p class="text-uppercase"><strong translate>INDEX.FOOTER.SUPPORT.TITLE</strong></p>
+        <a routerLink="footer_legal_guidelines" translate>INDEX.FOOTER.SUPPORT.GUIDELINES</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_legal_general_policies" translate>INDEX.FOOTER.SUPPORT.GENERAL_POLICIES</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_legal_privacy_policy" translate>INDEX.FOOTER.SUPPORT.PRIVACY_POLICY</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_legal_terms_and_conditions" translate>INDEX.FOOTER.SUPPORT.TERMS_OF_USE</a><br>
+
+      </div>
+
+      <div class="col-sm-3">
+        <hr class="visible-xs-block">
+        <p class="text-uppercase"><strong translate>INDEX.FOOTER.MORE.TITLE</strong></p>
+
+        <a routerLink="footer_more_photo_gallery" translate>INDEX.FOOTER.MORE.PHOTO_GALLERY</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_more_careers" translate>INDEX.FOOTER.MORE.CAREERS_FEEDBACKS</a>
+        <div class="clear5 hidden-sm hidden-md hidden-lg"></div><br class="hidden-xs">
+        <a routerLink="footer_more_contact" translate>INDEX.FOOTER.MORE.CONTACT_US</a><br>
+      </div>
+
+      <div class="col-sm-3">
+        <hr class="visible-xs-block">
+        <p class="text-uppercase"><strong translate>INDEX.FOOTER.LANGUAGE.TITLE</strong></p>
+
+        <a title="english" class="pointer" (click)="changeLanguage('en')"><img ng-src="assets/images/footer_language/english.png"></a> &nbsp;
+        <a title="français" class="pointer" (click)="changeLanguage('fr')"><img ng-src="assets/images/footer_language/french.png"></a> &nbsp;
+      </div>
+
+    </div>
+  </div>
+  <div class="clear20"></div>
+
+  <div id="footer-bottom">
+    <div class="clear20"></div>
+    <div class="text-center">
+      <p class="h3"><span translate>INDEX.FOOTER.SHARE</span> <a href="https://www.facebook.com/MyCommuneaty-254569051671689/?fref=ts" target="_blank" class="social_circle"><i class="fa fa-facebook fa-2x"></i></a></p>
+    </div>
+    <div class="clear20"></div>
+  </div>
+</footer>

@@ -1,0 +1,18 @@
+header {
+    background: #fff url("/assets/images/welcome/photo_header.jpg") no-repeat center;
+    background-size: cover;
+}
+
+@media (max-width: 767px) {
+    header {
+        height: 355px;
+        filter: brightness(85%) saturate(190%);
+    }
+}
+
+@media (min-width: 768px) {
+    header {
+        height: 560px;
+        filter: brightness(70%) saturate(190%);
+    }
+}

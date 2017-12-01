@@ -1,10 +1,12 @@
-body {
-    padding-top: 70px;
-}
-
 @media (min-width: 768px) {
     #section {
         min-height: 365px
+    }
+    .size-20-sm {
+        font-size: 20px;
+    }
+    .fa-welcome {
+        font-size: 2em;
     }
 }
 
@@ -43,6 +45,26 @@ body {
     height: 120px;
 }
 
+.size-18 {
+    font-size: 18px;
+}
+
+.size-16 {
+    font-size: 16px;
+}
+
+.size-15 {
+    font-size: 15px;
+}
+
+.size-14 {
+    font-size: 14px;
+}
+
+.size-12 {
+    font-size: 12px;
+}
+
 /* footer -----------------------*/
 
 footer {
@@ -64,21 +86,14 @@ footer a:hover {
     footer a {
         font-size: 20px;
     }
-}
-
-footer .h3,
-footer p {
-    color: #fff;
-}
-
-@media (max-width: 767px) {
     footer p {
         font-size: 22px;
     }
 }
 
-.fa-2x {
-    font-size: 2em !important;
+footer .h3,
+footer p {
+    color: #fff;
 }
 
 .social_circle {
@@ -92,4 +107,8 @@ footer p {
     height: 35px;
     display: inline-block;
     font-size: 11px;
+}
+
+.pointer {
+    cursor: pointer;
 }

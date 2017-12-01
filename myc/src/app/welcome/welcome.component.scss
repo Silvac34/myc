@@ -3,6 +3,14 @@ header {
     background-size: cover;
 }
 
+.size-32 {
+    font-size: 32px;
+}
+
+.size-20 {
+    font-size: 20px;
+}
+
 @media (max-width: 767px) {
     header {
         height: 355px;
@@ -41,7 +49,7 @@ header {
     border-bottom: solid 0.5px;
 }
 
-.well-text-position {
+.card-text-position {
     position: absolute;
     z-index: 2;
     top: 100px;
@@ -50,7 +58,7 @@ header {
     color: white;
 }
 
-.well-photo-format {
+.card-photo-format {
     height: 250px;
     filter: brightness(0.9);
     position: relative;
@@ -59,76 +67,76 @@ header {
     color: transparent;
 }
 
-.well-conviviality-background {
-    background: url("/assets/images/welcome/well/conviviality.jpg") no-repeat 0;
+.card-conviviality-background {
+    background: url("/assets/images/welcome/card/conviviality.jpg") no-repeat 0;
     background-size: cover;
 }
 
-.well-conviviality-background:hover {
+.card-conviviality-background:hover {
     z-index: 3;
     background: mediumvioletred;
     color: white;
     display: flex;
 }
 
-.well-meeting-background {
-    background: url("/assets/images/welcome/well/meeting.jpg") no-repeat 0;
+.card-meeting-background {
+    background: url("/assets/images/welcome/card/meeting.jpg") no-repeat 0;
     background-size: cover;
 }
 
-.well-meeting-background:hover {
+.card-meeting-background:hover {
     z-index: 3;
     background: orange;
     color: white;
     display: flex;
 }
 
-.well-sharing-background {
-    background: url("/assets/images/welcome/well/sharing.jpg") no-repeat 0;
+.card-sharing-background {
+    background: url("/assets/images/welcome/card/sharing.jpg") no-repeat 0;
     background-size: cover;
     background-position: 0px 0px
 }
 
-.well-sharing-background:hover {
+.card-sharing-background:hover {
     z-index: 3;
     background: #73a839;
     color: white;
     display: flex;
 }
 
-.well-new-background {
-    background: url("/assets/images/welcome/well/new.jpg") no-repeat 0;
+.card-new-background {
+    background: url("/assets/images/welcome/card/new.jpg") no-repeat 0;
     background-size: cover;
     background-position: 0px 0px
 }
 
-.well-new-background:hover {
+.card-new-background:hover {
     z-index: 3;
     background: orangered;
     color: white;
     display: flex;
 }
 
-.well-community-background {
-    background: url("/assets/images/welcome/well/community.jpg") no-repeat 0;
+.card-community-background {
+    background: url("/assets/images/welcome/card/community.jpg") no-repeat 0;
     background-size: cover;
     background-position: 0px 0px
 }
 
-.well-community-background:hover {
+.card-community-background:hover {
     z-index: 3;
     background: #178acc;
     color: white;
     display: flex;
 }
 
-.well-authenticity-simplicity-background {
-    background: url("/assets/images/welcome/well/authenticity_simplicity.jpg") no-repeat 0;
+.card-authenticity-simplicity-background {
+    background: url("/assets/images/welcome/card/authenticity_simplicity.jpg") no-repeat 0;
     background-size: cover;
     background-position: 0px 0px
 }
 
-.well-authenticity-simplicity-background:hover {
+.card-authenticity-simplicity-background:hover {
     z-index: 3;
     background: #033c73;
     color: white;

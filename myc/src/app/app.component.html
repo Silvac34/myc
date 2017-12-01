@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="bs-component">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" routerLink="welcome" id="navbar-button-position">myCommuneaty</a>
+    <a class="navbar-brand" routerLink="/welcome" id="navbar-button-position">myCommuneaty</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,16 +9,16 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="create_meal" translate>INDEX.CREATE_A_MEAL</a>
+          <a class="nav-link" routerLink="/create_meal" translate>INDEX.CREATE_A_MEAL</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="view_meals" translate>INDEX.BROWSE_A_MEAL</a>
+          <a class="nav-link" routerLink="/view_meals" translate>INDEX.BROWSE_A_MEAL</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="my_meals" translate>INDEX.MY_MEALS</a>
+          <a class="nav-link" routerLink="/my_meals" translate>INDEX.MY_MEALS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="profile" translate>INDEX.PROFILE</a>
+          <a class="nav-link" routerLink="/profile" translate>INDEX.PROFILE</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -43,9 +43,9 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-button-position">
-          <li><a routerLink="create_meal" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.CREATE_A_MEAL</a></li>
-          <li><a routerLink="view_meals" routerLink-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.BROWSE_A_MEAL</a></li>
-          <li><a routerLink="my_meals" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.MY_MEALS</a></li>
+          <li><a routerLink="/create_meal" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.CREATE_A_MEAL</a></li>
+          <li><a routerLink="/view_meals" routerLink-opts="{reload: true}" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.BROWSE_A_MEAL</a></li>
+          <li><a routerLink="/my_meals" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position" translate>INDEX.MY_MEALS</a></li>
           <li><a [routerLink]="['profile', user._id]" class="pointer" data-toggle="collapse" data-target="navbar-collapse" id="navbar-button-position"><span translate>INDEX.PROFILE</span></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -55,8 +55,8 @@
                   <span class="badge" *ngIf="(user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)>0">{{user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave}}</span>
                 </a>
             <ul uib-dropdown-menu class="dropdown-menu">
-              <li><a routerLink="manage_requests"><span translate>INDEX.MANAGE_REQUESTS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentPendingRequest>0">{{user.nbDifferentPendingRequest}}</span></a></li>
-              <li><a routerLink="leave_reviews"><span translate>INDEX.LEAVE_REVIEWS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentReviewsToLeave>0">{{user.nbDifferentReviewsToLeave}}</span></a></li>
+              <li><a routerLink="/manage_requests"><span translate>INDEX.MANAGE_REQUESTS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentPendingRequest>0">{{user.nbDifferentPendingRequest}}</span></a></li>
+              <li><a routerLink="/leave_reviews"><span translate>INDEX.LEAVE_REVIEWS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentReviewsToLeave>0">{{user.nbDifferentReviewsToLeave}}</span></a></li>
               <li class="divider"></li>
               <li><a (click)="logout()" translate>INDEX.LOGOUT</a></li>
             </ul>
@@ -70,7 +70,7 @@
 
 
 
-    <a class="navbar-brand" routerLink="welcome">myCommuneaty</a>
+    <a class="navbar-brand" routerLink="/welcome">myCommuneaty</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -78,16 +78,16 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="create_meal">Create a meal<span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/create_meal">Create a meal<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="view_meals">Browse a meal</a>
+          <a class="nav-link" routerLink="/view_meals">Browse a meal</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="my_meals">My meals</a>
+          <a class="nav-link" routerLink="/my_meals">My meals</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="profile">Profile</a>
+          <a class="nav-link" routerLink="/profile">Profile</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -105,23 +105,23 @@
       <div class="col-sm-3">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.INFORMATION.TITLE</strong></p>
 
-        <a routerLink="footer_information_concept" translate>INDEX.FOOTER.INFORMATION.CONCEPT</a>
+        <a routerLink="/footer_information_concept" translate>INDEX.FOOTER.INFORMATION.CONCEPT</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_information_team" translate>INDEX.FOOTER.INFORMATION.TEAM_HISTORY</a>
+        <a routerLink="/footer_information_team" translate>INDEX.FOOTER.INFORMATION.TEAM_HISTORY</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_information_FAQ" translate>INDEX.FOOTER.INFORMATION.FAQ</a><br>
+        <a routerLink="/footer_information_FAQ" translate>INDEX.FOOTER.INFORMATION.FAQ</a><br>
       </div>
 
       <div class="col-sm-3">
         <hr class="d-sm-none">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.SUPPORT.TITLE</strong></p>
-        <a routerLink="footer_legal_guidelines" translate>INDEX.FOOTER.SUPPORT.GUIDELINES</a>
+        <a routerLink="/footer_legal_guidelines" translate>INDEX.FOOTER.SUPPORT.GUIDELINES</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_legal_general_policies" translate>INDEX.FOOTER.SUPPORT.GENERAL_POLICIES</a>
+        <a routerLink="/footer_legal_general_policies" translate>INDEX.FOOTER.SUPPORT.GENERAL_POLICIES</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_legal_privacy_policy" translate>INDEX.FOOTER.SUPPORT.PRIVACY_POLICY</a>
+        <a routerLink="/footer_legal_privacy_policy" translate>INDEX.FOOTER.SUPPORT.PRIVACY_POLICY</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_legal_terms_and_conditions" translate>INDEX.FOOTER.SUPPORT.TERMS_OF_USE</a><br>
+        <a routerLink="/footer_legal_terms_and_conditions" translate>INDEX.FOOTER.SUPPORT.TERMS_OF_USE</a><br>
 
       </div>
 
@@ -129,19 +129,19 @@
         <hr class="d-sm-none">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.MORE.TITLE</strong></p>
 
-        <a routerLink="footer_more_photo_gallery" translate>INDEX.FOOTER.MORE.PHOTO_GALLERY</a>
+        <a routerLink="/footer_more_photo_gallery" translate>INDEX.FOOTER.MORE.PHOTO_GALLERY</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_more_careers" translate>INDEX.FOOTER.MORE.CAREERS_FEEDBACKS</a>
+        <a routerLink="/footer_more_careers" translate>INDEX.FOOTER.MORE.CAREERS_FEEDBACKS</a>
         <div class="clear5 d-sm-none"></div><br class="d-none d-sm-block">
-        <a routerLink="footer_more_contact" translate>INDEX.FOOTER.MORE.CONTACT_US</a><br>
+        <a routerLink="/footer_more_contact" translate>INDEX.FOOTER.MORE.CONTACT_US</a><br>
       </div>
 
       <div class="col-sm-3">
         <hr class="d-sm-none">
         <p class="text-uppercase"><strong translate>INDEX.FOOTER.LANGUAGE.TITLE</strong></p>
 
-        <a title="english" class="pointer" (click)="switchLanguage('en')"><img ng-src="assets/images/footer_language/english.png"></a> &nbsp;
-        <a title="français" class="pointer" (click)="switchLanguage('fr')"><img ng-src="assets/images/footer_language/french.png"></a> &nbsp;
+        <a title="english" class="pointer" (click)="switchLanguage('en')"><img src="assets/images/footer_language/english.png"></a> &nbsp;
+        <a title="français" class="pointer" (click)="switchLanguage('fr')"><img src="assets/images/footer_language/french.png"></a> &nbsp;
       </div>
 
     </div>
@@ -151,7 +151,7 @@
   <div id="footer-bottom">
     <div class="clear20"></div>
     <div class="text-center">
-      <p class="h3"><span translate>INDEX.FOOTER.SHARE</span> <a href="https://www.facebook.com/MyCommuneaty-254569051671689/?fref=ts" target="_blank" class="social_circle"><i class="fa fa-facebook fa-2x"></i></a></p>
+      <p class="h3"><span translate>INDEX.FOOTER.SHARE</span> <a href="https://www.facebook.com/MyCommuneaty-254569051671689/?fref=ts" target="_blank" class="social_circle"><i class="fa fa-facebook fa-welcome"></i></a></p>
     </div>
     <div class="clear20"></div>
   </div>

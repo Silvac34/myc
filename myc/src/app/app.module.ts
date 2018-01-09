@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.router';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';

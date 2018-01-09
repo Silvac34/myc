@@ -1,4 +1,17 @@
 <header></header>
+<div class="container-fluid">
+    <h2 class="slogan text-center">
+        <div id="slogan-text" (mouseover)="sloganText = 'INDEX.SLOGAN_1'" (mouseout)="sloganText = 'INDEX.SLOGAN_2'">{{sloganText | translate}}</div>
+    </h2>
+</div>
+<div class="bluerow unsticked">
+    <div class="container text-center">
+        <div class="btn-group btn-group-justified" role="group">
+            <a routerLink="/create_meal" class="btn btn-bluerow"><span class="btn-bluerow-text" translate>WELCOME.CREATE_A_MEAL</span></a>
+            <a routerLink="/view_meals" class="btn btn-bluerow"><span class="btn-bluerow-text" translate>WELCOME.BROWSE_A_MEAL</span></a>
+        </div>
+    </div>
+</div>
 <section class="hero mod-how-it-works">
     <div class="hero-content">
         <h2 class="hero-content-title-how-it-works" translate>WELCOME.HOW_IT_WORKS</h2>

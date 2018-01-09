@@ -146,15 +146,15 @@
 				"NAME": "L’hôte (vous)"
 			},
 			"HELP_COOKING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+				"NAME": "Les Aide-Cuisine",
 				"TOOLTIP": "Ces personnes vont vous aider à cuisiner"
 			},
 			"HELP_CLEANING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+				"NAME": "Les Aide-Nettoyage",
 				"TOOLTIP": "Ces personnes vont vous aider à nettoyer et ranger."
 			},
 			"SIMPLE_GUEST": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+				"NAME": "Les invités",
 				"TOOLTIP": "Ces personnes ne vont pas vous aider directement, mais vont payer un petit surplus qui fera diminuer le prix de votre repas et de celui de vos convives aidants."
 			},
 			"TOTAL": "Total",
@@ -233,11 +233,11 @@
 			},
 			"HELP_TYPE": {
 				"TITLE": "Type d’aide",
-				"HELP_COOKING": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+				"HELP_COOKING": "Les Aide-Cuisine",
 				"HELP_COOKING_MOBILE": "Cooking",
-				"HELP_CLEANING": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+				"HELP_CLEANING": "Les Aide-Nettoyage",
 				"HELP_CLEANING_MOBILE": "Cleaning",
-				"SIMPLE_GUEST": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME"
+				"SIMPLE_GUEST": "Les invités"
 			},
 			"VALIDATE": "Valider",
 			"REINITIALIZE": "Initialiser"
@@ -282,7 +282,7 @@
 				"ARRIVAL_TIME": "@:CREATE_A_MEAL.ARRIVAL_TIME"
 			},
 			"HELP_COOKING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+				"NAME": "Les Aide-Cuisine",
 				"DESCRIPTION_TIME_1": "Vous devez arriver à",
 				"DESCRIPTION_TIME_2": "pour aider l’hôte à cuisiner.",
 				"DESCRIPTION_PRICE_1": "Le prix peut varier",
@@ -293,7 +293,7 @@
 				"DESCRIPTION_PRICE_6": "Vous serez informé(e) du prix final avant le repas."
 			},
 			"HELP_CLEANING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+				"NAME": "Les Aide-Nettoyage",
 				"DESCRIPTION_TIME_1": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_TIME_1",
 				"DESCRIPTION_TIME_2": "afin d’aider à",
 				"DESCRIPTION_TIME_3": "Vous allez aider",
@@ -306,7 +306,7 @@
 				"DESCRIPTION_PRICE_6": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_6"
 			},
 			"SIMPLE_GUEST": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+				"NAME": "Les invités",
 				"DESCRIPTION": "Vous allez payer un surplus qui va être redistribué à l’hôte et aux convives aidants."
 			},
 			"CELLPHONE": {
@@ -440,9 +440,9 @@
 		"PENDING_REQUEST": {
 			"TITLE": "Vous avez une réservation en attente",
 			"REQUESTED_ROLE": "Rôle:",
-			"HELP_COOKING": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
-			"HELP_CLEANING": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
-			"SIMPLE_GUEST": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+			"HELP_COOKING": "Les Aide-Cuisine",
+			"HELP_CLEANING": "Les Aide-Nettoyage",
+			"SIMPLE_GUEST": "Les invités",
 			"ACTION_BUTTON": {
 				"ACCEPT": "Accepter",
 				"REFUSE": "Refuser"
@@ -532,21 +532,21 @@
 			"PARAGRAPH_1": "myCommuneaty est là pour vous ! C’est un site internet qui permet aux amateurs de cuisine et convivialité de se rencontrer en toute simplicité.",
 			"PARAGRAPH_2": "L'idée est simple: partager un repas ensemble, mais aussi cuisiner à plusieurs et diviser équitablement le prix des courses.",
 			"DIFFERENT_ROLES": {
-				"TITLE": "@: WELCOME.DIFFERENT_ROLES.TITLE",
+				"TITLE": "4 rôles possibles",
 				"HOST": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.HOST.NAME",
+					"NAME": "L'hôte",
 					"DESCRIPTION": "L’hôte est la personne qui publie le repas. Il choisit le menu, le nombre de participants, les aides nécessaires, la date et l’endroit (chez lui, dans un parc,...). Il s’occupe de faire les courses, avant de préparer le repas avec ses convives aidants."
 				},
 				"HELP_COOKING": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+					"NAME": "Les Aide-Cuisine",
 					"DESCRIPTION": "Les Aide-Cuisine sont des convives qui vont arriver plus tôt pour aider l’hôte à cuisiner. Leur heure d’arrivée est spécifiée par l’hôte dans la description de son repas."
 				},
 				"HELP_CLEANING": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+					"NAME": "Les Aide-Nettoyage",
 					"DESCRIPTION": "Les Aide-Nettoyage sont des convives qui vont aider l’hôte à nettoyer et ranger. Leur heure d’arrivée est spécifiée par l’hôte dans la description de son repas."
 				},
 				"SIMPLE_GUEST": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+					"NAME": "Les invités",
 					"DESCRIPTION": "Les invités sont des convives qui ne vont pas aider l’hôte directement mais qui à la place, vont payer un surplus. Ce surplus sera reversé à l’hôte et aux convives aidants selon les calculs ci-dessous. Ce rôle d’invité est utile lorsqu’un hôte veut organiser un repas à plusieurs mais n’a pas besoin d’autant d’aide ou si quelqu’un souhaite venir à un repas mais n’est pas un grand adepte de la cuisine."
 				}
 			},

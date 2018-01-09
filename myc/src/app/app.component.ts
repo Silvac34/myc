@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,12 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AppComponent {
   
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private router: Router) {
     let userLang = navigator.language; 
     translate.setDefaultLang('en');
     translate.use(userLang);
   }
+  
   
   switchLanguage(language: string) {
     this.translate.use(language);

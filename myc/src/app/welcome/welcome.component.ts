@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
+  
+  sloganText: String;
 
   ngOnInit() {
+    this.sloganText = 'INDEX.SLOGAN_2';
   }
 
 }

@@ -3,6 +3,11 @@ header {
     background-size: cover;
 }
 
+h2.slogan {
+    position: relative;
+    color: white;
+}
+
 .size-32 {
     font-size: 32px;
 }
@@ -21,8 +26,8 @@ header {
     }
     h2.slogan {
         font-size: 22px;
-        margin-top: -130px;
-        color: white;
+        margin-top: -45px;
+        bottom: 83px;
     }
 }
 
@@ -36,9 +41,9 @@ header {
     }
     h2.slogan {
         font-size: 40px;
-        margin-top: -195px;
-        color: white;
         font-weight: lighter;
+        bottom: 130px;
+        margin-top: -67px;
     }
 }
 
@@ -456,4 +461,23 @@ a.mod-underline:hover {
 
 .btn-start-now:hover {
     background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.btn-group-justified {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    .btn,
+    .btn-group {
+        float: none;
+        display: table-cell;
+        width: 1%;
+        .btn {
+            width: 100%;
+        }
+        .dropdown-menu {
+            left: auto;
+        }
+    }
 }

@@ -24,16 +24,22 @@
     background-color: #eff8fd;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 769px) {
     .wrapper {
         margin-top: -19px;
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .wrapper {
         margin-top: -8px;
     }
+    
+    p em {
+        color: #555555;
+        font-size: 14px;
+    }
+
 }
 
 /* iPads (landscape) ----------- */
@@ -64,7 +70,7 @@
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 769px) {
     /*Text Reset For Smaller Devices*/
     p {
         font-size: 18px !important;
@@ -96,7 +102,7 @@
     border: inherit;
 }
 
-.well-team {
+.card-team {
     border: initial;
     border-radius: 0px;
     margin-bottom: 0px;
@@ -104,7 +110,7 @@
 }
 
 #bg-info-team {
-    background-color: #0b4060;
+    background-color: #0b4060 !important;
 }
 
 #bg-info-history {
@@ -134,15 +140,15 @@ caption {
     margin-top: -1px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 769px) {
     .caption1 {
-        height: 370px;
+        height: 390px;
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .caption1 {
-        height: 230px;
+        height: 240px;
     }
 }
 

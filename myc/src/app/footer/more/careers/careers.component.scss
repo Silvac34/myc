@@ -1,0 +1,28 @@
+.general-title {
+    font-family: Gill Sans, Verdana;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #317EAC;
+}
+
+div {
+    color: #555555;
+}
+
+.clear30 {
+    clear: both;
+    height: 30px;
+}
+
+@media (min-width: 768px) {
+    .footer-careers-align-photo-text-middle {
+        display: flex;
+        align-items: center
+    }
+}
+
+#footer-careers-photo {
+    width: 200px;
+    border-radius: 18px
+}

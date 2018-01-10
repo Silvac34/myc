@@ -1,5 +1,14 @@
 p {
     box-sizing: content-box;
+    color: #555555;
+}
+
+.text-color {
+    color: #555555;
+}
+
+h2, h3 {
+    color: #317EAC;
 }
 
 .footer-concept,
@@ -232,4 +241,14 @@ hr.mod-info {
 
 a.mod-info {
     color: #003f5e;
+}
+
+.mod-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.mod-margin-bottom {
+    margin-bottom: 1em
 }

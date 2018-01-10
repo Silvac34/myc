@@ -1,0 +1,184 @@
+/* footer_concept -----------------------------------------------*/
+
+.footer-team,
+#inner-body {
+    background: #ffffff;
+    width: 1000px;
+    border: 1px solid #c1bfb7;
+    margin: 0px auto -20px auto;
+    padding-bottom: 20px;
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.footer-team {
+    overflow: hidden;
+    height: 300px;
+}
+
+#inner-body {
+    background-position: -1px 0;
+}
+.wrapper {
+    background-color: #eff8fd;
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        margin-top: -19px;
+    }
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        margin-top: -8px;
+    }
+}
+
+/* iPads (landscape) ----------- */
+
+@media only screen and (max-width: 1024px) {
+    /*Main Width Params*/
+    .footer-team,
+    #inner-body {
+        width: 100%;
+    }
+    /*Flex Columns*/
+    #inner-body {
+        display: -webkit-flex;
+        display: flex;
+        background: #fff;
+    }
+
+    /*footer-team*/
+    .wrapper .footer-team {
+        height: auto !important;
+    }
+   
+    /*Images*/
+    .wrapper .footer-team img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /*Text Reset For Smaller Devices*/
+    p {
+        font-size: 18px !important;
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    .footer-team h1 {
+        font-size: 42px;
+    }
+}
+
+/* footer_who_we_are && footer_contact_us -----------------------*/
+
+#team-footer {
+    min-height: 296px;
+    background: url("/assets/images/footer_information_team/team_team.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+#history-footer {
+    min-height: 296px;
+    background: url("/assets/images/footer_information_team/team_history.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border: inherit;
+}
+
+.well-team {
+    border: initial;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+#bg-info-team {
+    background-color: #0b4060;
+}
+
+#bg-info-history {
+    margin-bottom: -20px;
+}
+
+caption {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #b2ad9d;
+    text-align: left;
+}
+
+.thumbnail-1 {
+    max-width: 465px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thumbnail-1 .caption {
+    background: #ffffff;
+    padding: 45px 5px 41px;
+}
+
+.thumbnail-1 .caption1 {
+    padding: 1px 27px 41px;
+    margin-top: -1px;
+}
+
+@media (max-width: 767px) {
+    .caption1 {
+        height: 370px;
+    }
+}
+
+@media (min-width: 768px) {
+    .caption1 {
+        height: 230px;
+    }
+}
+
+.bg-info .img-bl {
+    overflow: hidden;
+    position: relative;
+}
+
+.bg-info .img-bl:before {
+    content: '';
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 700px solid #55284e;
+    bottom: 25px;
+    left: 50%;
+    -moz-transform: translate(-50%, 50%);
+    -ms-transform: translate(-50%, 50%);
+    -o-transform: translate(-50%, 50%);
+    -webkit-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+    clip: rect(734px, auto, auto, 0px);
+    box-sizing: content-box;
+}
+
+.bg-info .img-bl img {
+    width: 100%;
+}
+
+.bg-info .img-bl-bg1:before {
+    border-color: #ffffff;
+}
+
+.bg-info .img-bl-bg1:before {
+    border-color: #ffffff;
+}

@@ -1,7 +1,7 @@
 {
 	"INDEX": {
 		"ACTION_BUTTON": {
-			"SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
+			"SIGN_IN_1": "Sign in",
 			"SIGN_IN_2": "with facebook"
 		},
 		"HELLO": "Hi",
@@ -146,15 +146,15 @@
 				"NAME": "Host (you)"
 			},
 			"HELP_COOKING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+				"NAME": "Help cooking",
 				"TOOLTIP": "People will help you for cooking"
 			},
 			"HELP_CLEANING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+				"NAME": "Help cleaning",
 				"TOOLTIP": "People will help you for cleaning"
 			},
 			"SIMPLE_GUEST": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+				"NAME": "Simple guest",
 				"TOOLTIP": "People won't help but will pay more to give you and your helpers a meal price discount"
 			},
 			"TOTAL": "Total",
@@ -226,18 +226,18 @@
 			"PREFERENCES": {
 				"TITLE": "Preferences",
 				"TITLE_MOBILE": "Meal preferences",
-				"VEGETARIAN": "@:CREATE_A_MEAL.FORM.VEGETARIAN",
-				"VEGAN": "@:CREATE_A_MEAL.FORM.VEGAN",
-				"KOSHER": "@:CREATE_A_MEAL.FORM.KOSHER",
-				"HALAL": "@:CREATE_A_MEAL.FORM.HALAL"
+				"VEGETARIAN": "Vegetarian",
+				"VEGAN": "Vegan",
+				"KOSHER": "Kosher",
+				"HALAL": "Halal"
 			},
 			"HELP_TYPE": {
 				"TITLE": "Type of help",
-				"HELP_COOKING": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+				"HELP_COOKING": "Help cooking",
 				"HELP_COOKING_MOBILE": "Cooking",
-				"HELP_CLEANING": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+				"HELP_CLEANING": "Help cleaning",
 				"HELP_CLEANING_MOBILE": "Cleaning",
-				"SIMPLE_GUEST": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME"
+				"SIMPLE_GUEST": "Simple guest"
 			},
 			"VALIDATE": "Validate",
 			"REINITIALIZE": "Reinitialize"
@@ -270,19 +270,19 @@
 	},
 	"VIEW_MEALS_DTLD": {
 		"DESCRIPTION": "Description",
-		"VEGETARIAN_MEAL": "@:VIEW_MEALS.VEGETARIAN_MEAL",
-		"VEGAN_MEAL": "@:VIEW_MEALS.VEGAN_MEAL",
-		"HALAL_MEAL": "@:VIEW_MEALS.HALAL_MEAL",
-		"KOSHER_MEAL": "@:VIEW_MEALS.KOSHER_MEAL",
+		"VEGETARIAN_MEAL": "Vegetarian meal",
+		"VEGAN_MEAL": "Vegan meal",
+		"HALAL_MEAL": "Halal meal",
+		"KOSHER_MEAL": "Kosher meal",
 		"INSCRIPTION": {
 			"TITLE": "Inscription as :",
 			"TOOLTIP": {
-				"PARTICIPANTS": "@:CREATE_A_MEAL.PARTICIPANTS",
-				"PRICE": "@:VIEW_MEALS.FILTERS.PRICE.TITLE",
-				"ARRIVAL_TIME": "@:CREATE_A_MEAL.ARRIVAL_TIME"
+				"PARTICIPANTS": "Participants",
+				"PRICE": "Price",
+				"ARRIVAL_TIME": "Arrival time"
 			},
 			"HELP_COOKING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+				"NAME": "Help cooking",
 				"DESCRIPTION_TIME_1": "You have to arrive at",
 				"DESCRIPTION_TIME_2": "in order to help the host to prepare the meal.",
 				"DESCRIPTION_PRICE_1": "The price can vary",
@@ -293,26 +293,26 @@
 				"DESCRIPTION_PRICE_6": "You will be informed before the dinner of the final price."
 			},
 			"HELP_CLEANING": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
-				"DESCRIPTION_TIME_1": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_TIME_1",
+				"NAME": "Help cleaning",
+				"DESCRIPTION_TIME_1": "You have to arrive at",
 				"DESCRIPTION_TIME_2": "in order to help for",
 				"DESCRIPTION_TIME_3": "You will help",
 				"DESCRIPTION_TIME_4": "ordering and cleaning what was used for the meal.",
-				"DESCRIPTION_PRICE_1": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_1",
-				"DESCRIPTION_PRICE_2": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_2",
-				"DESCRIPTION_PRICE_3": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_3",
-				"DESCRIPTION_PRICE_4": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_4",
-				"DESCRIPTION_PRICE_5": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_5",
-				"DESCRIPTION_PRICE_6": "@: VIEW_MEALS_DTLD.INSCRIPTION.HELP_COOKING.DESCRIPTION_PRICE_6"
+				"DESCRIPTION_PRICE_1": "The price can vary",
+				"DESCRIPTION_PRICE_2": "from",
+				"DESCRIPTION_PRICE_3": "to",
+				"DESCRIPTION_PRICE_4": "according to the inscriptions",
+				"DESCRIPTION_PRICE_5": "more info about pricing",
+				"DESCRIPTION_PRICE_6": "You will be informed before the dinner of the final price."
 			},
 			"SIMPLE_GUEST": {
-				"NAME": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+				"NAME": "Simple guest",
 				"DESCRIPTION": "You help by paying a little bit more : this money will be redistributed between those who helped to organize the event"
 			},
 			"CELLPHONE": {
 				"DESCRIPTION": "Info required",
 				"TOOLTIP": "Private information displayed only between participants and host",
-				"PLACEHOLDER": "@: CREATE_A_MEAL.FORM.CELLPHONE.NAME"
+				"PLACEHOLDER": "Cellphone"
 			}
 		},
 		"NOTIFICATIONS": "Do you want to receive updates about the meal on messenger? (recommended)",
@@ -320,15 +320,15 @@
 			"SUBSCRIBE_NOT_CONNECTED_1": "Sign In with facebook",
 			"SUBSCRIBE_NOT_CONNECTED_2": "to participate",
 			"SUBSCRIBE": "Participate",
-			"SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",
+			"SEE_MEAL": "See meal",
 			"CANCEL": "Cancel my request",
-			"MEAL_FULL": "@: VIEW_MEALS.ACTION_BUTTON.MEAL_FULL",
-			"SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1",
-			"SIGN_IN_2": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
-			"SIGN_IN_3": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3"
+			"MEAL_FULL": "The meal is already full!",
+			"SIGN_IN_1": "Please",
+			"SIGN_IN_2": "Sign in",
+			"SIGN_IN_3": "if you already subscribed."
 		},
 		"PARTICIPANTS": {
-			"AGE": "@: PROFILE.YEARS_OLD",
+			"AGE": "Years old",
 			"COUNTRY_OF_ORIGIN": "From {{country_of_origin_name}}",
 			"HOST": "Your host:",
 			"HELP_COOKING": "Help cooking:",
@@ -351,7 +351,7 @@
 				"FEMALE": "Female"
 			},
 			"EMAIL": "Email",
-			"CELLPHONE": "@:CREATE_A_MEAL.FORM.CELLPHONE.NAME",
+			"CELLPHONE": "Cellphone",
 			"COUNTRY_OF_ORIGIN": "Native country",
 			"SPOKEN_LANGUAGES": {
 				"NAME": "Spoken languages",
@@ -362,18 +362,18 @@
 		"NOTIFICATIONS": {
 			"TITLE": "Notifications",
 			"PARAGRAPH": "Do you want to receive notifications through messenger about new meals?",
-			"PARAGRAPH_1": "@:CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2",
+			"PARAGRAPH_1": "(highly recommended)",
 			"CITY_OF_INTEREST": {
 				"TITLE": "Select the cities of your interest:",
 				"WARNING": "Be aware that for some big cities (Melbourne, Santiago, ...) the name of the city refers only to the city center and not the neighbourhood suburbs.",
-				"PLACEHOLDER": "@:VIEW_MEALS.FILTERS.CITY.PLACEHOLDER",
-				"ADD": "@:PROFILE.ABOUT_ME.SPOKEN_LANGUAGES.ADD"
+				"PLACEHOLDER": "City, Suburb...",
+				"ADD": "Add"
 			},
 			"DIATERY_PREFERENCES": {
 				"TITLE": "Dietary preferences:",
 				"OMNIVOROUS": "Omnivorous",
-				"VEGETARIAN": "@:CREATE_A_MEAL.FORM.VEGETARIAN",
-				"VEGAN": "@:CREATE_A_MEAL.FORM.VEGAN"
+				"VEGETARIAN": "Vegetarian",
+				"VEGAN": "Vegan"
 			}
 		},
 		"ACTUALIZE": {
@@ -402,29 +402,29 @@
 	},
 	"LOGIN": {
 		"PARAGRAPH": "You need to sign in to keep going",
-		"SIGN_IN": "@: VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE_NOT_CONNECTED_1"
+		"SIGN_IN": "Sign In with facebook"
 	},
 	"VIEW_MY_MEALS": {
-		"INCOMING_MEALS": "@: VIEW_MEALS.TITLE",
+		"INCOMING_MEALS": "Incoming meals",
 		"PREVIOUS_MEALS": "Previous meals",
-		"VEGETARIAN_MEAL": "@: VIEW_MEALS.VEGETARIAN_MEAL",
-		"VEGAN_MEAL": "@: VIEW_MEALS.VEGAN_MEAL",
-		"HALAL_MEAL": "@: VIEW_MEALS.HALAL_MEAL",
-		"KOSHER_MEAL": "@: VIEW_MEALS.KOSHER_MEAL",
+		"VEGETARIAN_MEAL": "Vegetarian meal",
+		"VEGAN_MEAL": "Vegan meal",
+		"HALAL_MEAL": "Halal meal",
+		"KOSHER_MEAL": "Kosher meal",
 		"PENDING_REQUEST": "Pending request",
 		"PENDING_REQUESTS": "Pending requests",
-		"PRICE_FROM": "@: VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM",
+		"PRICE_FROM": "From",
 		"STATUS": {
-			"PENDING": "@: VIEW_MEALS.PENDING",
-			"ATTENDING": "@: VIEW_MEALS.ATTENDING",
-			"ATTENDED": "@: VIEW_MEALS.ATTENDED",
-			"HOSTING": "@: VIEW_MEALS.HOSTING",
-			"HOSTED": "@: VIEW_MEALS.HOSTED"
+			"ATTENDING": "Attending",
+			"PENDING": "Pending",
+			"ATTENDED": "Attended",
+			"HOSTING": "Hosting",
+			"HOSTED": "Hosted",
 		},
 		"NO_INCOMING_MEALS_1": "You do not have incoming meals but you can",
-		"NO_INCOMING_MEALS_2": "@: WELCOME.CREATE_A_MEAL",
+		"NO_INCOMING_MEALS_2": "create a meal",
 		"NO_INCOMING_MEALS_3": "or",
-		"NO_INCOMING_MEALS_4": "@: WELCOME.BROWSE_A_MEAL",
+		"NO_INCOMING_MEALS_4": "browse a meal",
 		"NO_PARTICIPATION_YET": "You didn't participate yet."
 	},
 	"VIEW_MY_MEALS_DTLD": {
@@ -440,9 +440,9 @@
 		"PENDING_REQUEST": {
 			"TITLE": "You have a pending request",
 			"REQUESTED_ROLE": "Requested role:",
-			"HELP_COOKING": "@:WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
-			"HELP_CLEANING": "@:WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
-			"SIMPLE_GUEST": "@:WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+			"HELP_COOKING": "Help cooking",
+			"HELP_CLEANING": "Help cleaning",
+			"SIMPLE_GUEST": "Simple guest",
 			"ACTION_BUTTON": {
 				"ACCEPT": "Accept",
 				"REFUSE": "Refuse"
@@ -465,17 +465,17 @@
 			"PRICE_MEAL": "Price of your meal:",
 			"PRICE_LEFT_TO_PAY": "left to pay to {{meal_admin_first_name}} {{meal_admin_last_name}}",
 			"SUBSCRIPTION_RECAPITULATORY": "Subscription recapitulatory:",
-			"VEGETARIAN_MEAL": "@: VIEW_MEALS.VEGETARIAN_MEAL",
-			"VEGAN_MEAL": "@: VIEW_MEALS.VEGAN_MEAL",
-			"HALAL_MEAL": "@: VIEW_MEALS.HALAL_MEAL",
-			"KOSHER_MEAL": "@: VIEW_MEALS.KOSHER_MEAL",
-			"HELP_COOKING": "@: VIEW_MEALS_DTLD.PARTICIPANTS.HELP_COOKING",
-			"HELP_CLEANING": "@: VIEW_MEALS_DTLD.PARTICIPANTS.HELP_CLEANING",
-			"SIMPLE_GUEST": "@: VIEW_MEALS_DTLD.PARTICIPANTS.SIMPLE_GUEST"
+			"VEGETARIAN_MEAL": "Vegetarian meal",
+			"VEGAN_MEAL": "Vegan meal",
+			"HALAL_MEAL": "Halal meal",
+			"KOSHER_MEAL": "Kosher meal",
+			"HELP_COOKING": "Help cooking",
+			"HELP_CLEANING": "Help cleaning",
+			"SIMPLE_GUEST": "Simple guest"
 		},
 		"PARTICIPANTS": {
-			"TITLE": "@: CREATE_A_MEAL.FORM.PARTICIPANTS",
-			"HOST": "@: VIEW_MEALS_DTLD.PARTICIPANTS.HOST",
+			"TITLE": "Participants",
+			"HOST": "Your host",
 			"LEAVE_REVIEWS": {
 				"TITLE": "How was your experience with {{participant_first_name}}?",
 				"POSITIVE": "Positive",
@@ -487,7 +487,7 @@
 			},
 			"PER_PERS": "per pers",
 			"REMAINING_PLACES": "Remaining places: {{nb_remaining_places}}",
-			"PENDING_REQUEST": "@: VIEW_MY_MEALS.PENDING_REQUEST"
+			"PENDING_REQUEST": "Pending request"
 		},
 		"BACK_TO_MY_MEALS": "Back to my meals",
 		"MODAL": {
@@ -520,7 +520,7 @@
 		"REVIEW_SENT": "Your review was sent"
 	},
 	"VIEW_MANAGE_REQUESTS": {
-		"LOADING": "@: VIEW_LEAVE_REVIEWS.LOADING",
+		"LOADING": "Loading, please wait...",
 		"NO_PENDING_REQUESTS": "You do not have pending request",
 		"TITLE_1": "You have {{nbDifferentPendingRequest}} pending request",
 		"TITLE_2": "You have {{nbDifferentPendingRequest}} pending requests",
@@ -532,21 +532,21 @@
 			"PARAGRAPH_1": "myCommuneaty is here for you! It is a social network that connects lovers of good cooking and friendliness so that they organize meals easily.",
 			"PARAGRAPH_2": "The idea is to share the meal together, but also the tasks and budget.",
 			"DIFFERENT_ROLES": {
-				"TITLE": "@: WELCOME.DIFFERENT_ROLES.TITLE",
+				"TITLE": "4 different roles",
 				"HOST": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.HOST.NAME",
+					"NAME": "Host",
 					"DESCRIPTION": "The Host is the person who publishes the meal. He chooses the menu, the number of participants, the help needed, the date and the place (could be at home or outside). He will do the groceries and prepare the meal with his helpers guests."
 				},
 				"HELP_COOKING": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME",
+					"NAME": "Help cooking",
 					"DESCRIPTION": "The Help cooking are helpers guests. They will arrive earlier in order to help the host to cook. The time of their arrival is specified by the host in the meal description."
 				},
 				"HELP_CLEANING": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME",
+					"NAME": "Help cleaning",
 					"DESCRIPTION": "The Help cleaning are helpers guests. They will help the host to clean the dishes and order. The time of their arrival is specified by the host in the meal description."
 				},
 				"SIMPLE_GUEST": {
-					"NAME": "@: WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME",
+					"NAME": "Simple guest",
 					"DESCRIPTION": "The Simple guests won’t help the host but they will pay a little bit more. This surplus will be redistributed between the host and the helpers, according to the calculations below. This extra role is particularly useful when a host wants to organize a meal with quite a lot of participants but do not need so many helpers, or in the case that someone wants to come to a meal and is not very fond of cooking or cleaning."
 				}
 			},
@@ -576,9 +576,9 @@
 			"TITLE": "General policies",
 			"PARAGRAPH_1_1": "The following policies are in place to ensure that myCommuneaty remains a fun and safe place for everyone.",
 			"PARAGRAPH_1_NOTE": "Note: the policies below are enforced under Terms of Use sections 4.1 and 4.2 and provided for further insight. Review the myCommuneaty",
-			"PARAGRAPH_1_TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
+			"PARAGRAPH_1_TERMS_OF_USE": "Terms of use",
 			"PARAGRAPH_1_2": "in its entirety for complete details. Please also see our",
-			"PARAGRAPH_1_PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+			"PARAGRAPH_1_PRIVACY_POLICY": "Privacy Policy",
 			"PARAGRAPH_1_3": "Violations of these policies may result in a range of actions including, but not limited to:",
 			"PARAGRAPH_1_LIST": {
 				"BULLET_1": "Removal of violating content",
@@ -634,10 +634,10 @@
 		},
 		"GUIDELINES": {
 			"TITLE": "Guidelines",
-			"GENERAL_POLICIES": "@: INDEX.FOOTER.SUPPORT.GENERAL_POLICIES",
-			"PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
-			"TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
-			"CONTACT_US": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+			"GENERAL_POLICIES": "General Policies",
+			"PRIVACY_POLICY": "Privacy Policy",
+			"TERMS_OF_USE": "Terms of use",
+			"CONTACT_US": "contact us",
 			"AND": "and",
 			"OR": "or",
 			"BULLET_1_1": "Be considerate and respectful",
@@ -668,12 +668,12 @@
 			"PARAGRAPH_2": "In addition, we are always happy to receive constructive feedbacks, comments or ideas. So, please feel free to contact us by"
 		},
 		"CONTACT_US": {
-			"TITLE": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+			"TITLE": "contact us",
 			"EMAIL": "By email",
 			"FACEBOOK": "On facebook"
 		},
 		"PRIVACY_POLICY": {
-			"TITLE": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+			"TITLE": "Privacy Policy",
 			"LAST_UPDATE": "Last updated : 30th of May, 2017",
 			"PARAGRAPH": "Please read our Privacy Policy carefully to get a clear understanding of how we collect, use, disclose, protect and otherwise handle information about you. By using myCommuneaty services, you consent to the collection and use of your data as described in this Privacy Policy.",
 			"SUBTITLE_1": {
@@ -766,9 +766,9 @@
 					"PARAGRAPH": "You may opt out of receiving promotional communications from myCommuneaty by following the instructions in those emails or by adjusting the appropriate settings in your profile. If you opt out, we may still send you transactional or relationship messages, such as emails about your account."
 				},
 				"PARAGRAPH_4": {
-					"TITLE": "@: INDEX.FOOTER.MORE.CONTACT_US",
+					"TITLE": "Contact us",
 					"PARAGRAPH": "If you have any questions about this Privacy Policy, please",
-					"CONTACT_US": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US"
+					"CONTACT_US": "contact us"
 				}
 			}
 		}

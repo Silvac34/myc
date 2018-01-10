@@ -419,7 +419,7 @@
 			"PENDING": "Pending",
 			"ATTENDED": "Attended",
 			"HOSTING": "Hosting",
-			"HOSTED": "Hosted",
+			"HOSTED": "Hosted"
 		},
 		"NO_INCOMING_MEALS_1": "You do not have incoming meals but you can",
 		"NO_INCOMING_MEALS_2": "create a meal",

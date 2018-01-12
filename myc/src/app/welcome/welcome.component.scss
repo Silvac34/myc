@@ -16,7 +16,7 @@ h2.slogan {
     font-size: 20px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 769px) {
     header {
         height: 355px;
         filter: brightness(85%) saturate(190%);
@@ -31,7 +31,7 @@ h2.slogan {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     header {
         height: 560px;
         filter: brightness(70%) saturate(190%);
@@ -162,13 +162,13 @@ h2.slogan {
 }
 
 
-@media screen and (max-width: 767px) {
+@media (max-width: 769px) {
     .hero.mod-start-now {
         height: 355px;
     }
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 769px) {
     .hero.mod-different-roles,
     .hero.mod-what-about-the-money,
     .hero.mod-how-it-works {
@@ -224,13 +224,13 @@ h2.slogan {
     margin-top: 1.5em
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 769px) {
     .hero-content {
         padding: 30px
     }
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 769px) {
     .hero-content .mod-margin-top {
         margin-top: 2em
     }
@@ -240,7 +240,7 @@ div.mod-margin-top {
     margin-top: 2em
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 769px) {
     .hero-content-title-how-it-works,
     .hero-content-title-values,
     .hero-content-title-what-about-the-money,
@@ -320,7 +320,7 @@ a.mod-info {
     justify-content: center
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 769px) {
     .info-box-container {
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
@@ -422,7 +422,7 @@ a.mod-underline:hover {
     color: lightgrey;
 }
 
-@media screen and (min-width:768px) {
+@media (min-width:768px) {
     .btn-bluerow {
         margin: 0 1px
     }
@@ -433,13 +433,13 @@ a.mod-underline:hover {
     color: #fff
 }
 
-@media screen and (max-width:1199px) {
+@media (max-width:1199px) {
     .btn-bluerow {
         padding: 15px 20px
     }
 }
 
-@media screen and (max-width:767px) {
+@media (max-width:767px) {
     .btn-bluerow {
         padding: 10px;
     }

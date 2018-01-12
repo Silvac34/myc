@@ -1,19 +1,5 @@
-.general-title {
-    font-family: Gill Sans, Verdana;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: bold;
-    color: #317EAC;
-}
-
-div {
-    color: #555555;
-}
-
-.clear30 {
-    clear: both;
-    height: 30px;
-}
+@import '~app/app.component.scss';
+@import '~app/footer/footer-style.scss';
 
 @media (min-width: 768px) {
     .footer-careers-align-photo-text-middle {

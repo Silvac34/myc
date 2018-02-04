@@ -1,1 +1,36 @@
 @import '~app/app.component.scss';
+
+.cutlery-menu {
+    background: url("/assets/images/create_meal/cutlery_menu.png") no-repeat 0;
+}
+
+#menuTitle {
+    background-size: 24px;
+    text-indent: 25px;
+    background-position: 6px;
+}
+
+.form-btn-center {
+    display: table;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.table-meal-border {
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+}
+
+.table-meal-border-bottom {
+    border-bottom: 1px solid #dddddd;
+}
+
+@media (max-width: 576px) {
+    .form-check-inline {
+        width: 100% !important;
+    }
+}
+
+.was-validated .form-control:active {
+    border-color: black;
+}

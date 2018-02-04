@@ -115,9 +115,21 @@ footer p {
 
 .general-title {
     font-family: Gill Sans, Verdana;
-    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
     color: #317EAC;
 }
+
+@media (min-width: 769px) {
+    .general-title {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 769px) {
+    .general-title {
+        font-size: 18px;
+    }
+}
+

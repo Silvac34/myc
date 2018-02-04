@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -8,6 +8,9 @@ import { routes } from './app.router';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+//services
+import { AgmCoreModule } from '@agm/core';
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -55,9 +58,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     PhotoGalleryComponent
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M",
+      libraries: ["places"]
+    }),
     BrowserModule,
     AngularFontAwesomeModule,
-    FormsModule,
+    ReactiveFormsModule,
     routes,
     NgbModule.forRoot(),
     HttpClientModule,

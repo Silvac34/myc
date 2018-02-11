@@ -78,7 +78,8 @@
                     </tr>
                     <tr class="table-meal-border table-meal-border-bottom">
                         <td class="text-left" translate>CREATE_A_MEAL.FORM.TOTAL</td>
-                        <td>{{ createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value + createMealForm.get('detailedInfo.requiredGuests.cleaners.nbRquCleaners').value + createMealForm.get('detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests').value + 1 }}
+                        <td>{{ createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value + createMealForm.get('detailedInfo.requiredGuests.cleaners.nbRquCleaners').value + createMealForm.get('detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests').value
+                            + 1 }}
                         </td>
                         <td></td>
                     </tr>
@@ -106,6 +107,9 @@
                 </div>
                 <input type="text" name="address" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS'|translate}}" autocorrect="off" autocapitalize="off" spellcheck="off" formControlName="address" #autocompleteAddress required>
                 <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.ADDRESS</div>
+                <!--<div class="input-group-prepend">
+                    <button class="btn" (click)="setCurrentPosition()" type="button">Me Localiser</button>
+                </div>-->
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" style="font-size:80%" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS_COMPLEMENT'|translate}}" formControlName="addressComplement" name="addressComplement">

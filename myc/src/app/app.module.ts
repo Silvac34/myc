@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //services
 import { AgmCoreModule } from '@agm/core';
+import { GoogleMapService } from './services/google-map.service';
+import { CurrencyService } from './services/currency.service';
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -76,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [],
+  providers: [GoogleMapService, CurrencyService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

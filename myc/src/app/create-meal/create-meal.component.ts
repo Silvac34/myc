@@ -47,6 +47,7 @@ export class CreateMealComponent {
     private currencyService: CurrencyService 
   ) { 
     this.createForm();
+    this.setCurrencySymbol();
   }
   
   createForm() {
@@ -81,94 +82,14 @@ export class CreateMealComponent {
       "currency_symbol": "$",
       "address": "",
       "addressComplement": ""
-      /*"address": this.formB.group({
-          "town": "",
-          "country": "",
-          "lng": null,
-          "postalCode": "",
-          "lat": null,
-          "complement": ""
-      }),
-      "privateInfo": this.formB.group({
-        "address": this.formB.group({
-            "lat": null,
-            "utc_offset": null,
-            "name": "",
-            "lng": null
-        })
-       
-      }),*/
     })
   }
-  /*menu: Menu = {
-     "title": "",
-     "description": ""
-  };
-  address: Address = {
-    "town": "",
-    "country": "",
-    "lng": null,
-    "postalCode": "",
-    "lat": null
-  };
-  addressPrivate: AddressPrivate = {
-    "lat": null,
-    "utc_offset": null,
-    "name": "",
-    "lng": null
-  };
-  privateInfo: PrivateInfo = {
-    "address": this.addressPrivate
-  };
-  cleaners: Cleaners = {
-    "nbRquCleaners": null,
-    "timeCleaning": new Date()
-  };
-  cooks: Cooks = {
-    "nbRquCooks": null,
-    "timeCooking": new Date()
-  };
-  simpleGuests: SimpleGuests = {
-    "nbRquSimpleGuests": null,
-  };
-  requiredGuests: RequiredGuests = {
-    "cleaners": this.cleaners,
-    "cooks": this.cooks,
-    "simpleGuests": this.simpleGuests
-  };
-  detailedInfo: DetailedInfo = {
-    "requiredGuests": this.requiredGuests
-  };
-  editedMeal : Meal = {
-      "menu": this.menu,
-      "price": null,
-      "address": this.address,
-      "privateInfo": this.privateInfo,
-      "detailedInfo": this.detailedInfo,
-      "automaticSubscription": false,
-      "vegan": false,
-      "kosher": false,
-      "hallal": false,
-      "veggies": false,
-      "time": new Date(),
-      "currency_symbol": ""
-  };
-  hour : Object = {
-    "hour": 20,
-    "minute": 30,
-    "second": 0
-  };
-  date : Object = {
-    "year": now.getFullYear(),
-    "month": now.getMonth() + 1,
-    "day": now.getDate()
-  };*/
 
   ngOnInit() {
     
     //on initialise l'endroit où on se trouve :
     //this.setCurrentPosition();
-    console.log(this.setCurrencySymbol());
+    
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -203,6 +124,9 @@ export class CreateMealComponent {
               if (place.address_components[i].types[0] == "country") {
                 this.addressPublicToUpdate.country = place.address_components[i].long_name;
                 this.addressPublicToUpdate.country_code = place.address_components[i].short_name;
+                this.currencyService.getCurrencyFromCountryCode(place.address_components[i].short_name).subscribe((symbol) =>{
+                  this.createMealForm.patchValue({"currency_symbol": symbol});
+                });
               }
             }
           }
@@ -211,33 +135,16 @@ export class CreateMealComponent {
     });
   }
   
-  setCurrencySymbol() {
+  setCurrencySymbol() { //à remplacer par les données du user.
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         let latlngInput = position.coords.latitude + "," + position.coords.longitude;
         this.currencyService.getCurrencyFromLatLng(latlngInput).subscribe((observable) => { 
           observable.subscribe((symbol) => { 
-            console.log(this.createMealForm.value.currency_symbol);
-            this.createMealForm.value.currency_symbol = symbol;
+            this.createMealForm.patchValue({"currency_symbol": symbol});
           });
         });
       })
-    }
-  }
-  
-  getCountryCode() {//on rentre latlng en input et on obtient le symbol associé
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.gMap.ReverseGeocoding(position.coords.latitude + "," + position.coords.longitude).subscribe(
-          (data) => {
-            let country_code = "";
-            for (var i = 0; i < data.results[0].address_components.length; i++) {
-              if (data.results[0].address_components[i].types[0] == "country") {
-                country_code = data.results[0].address_components[i].short_name;
-              }
-            }
-        });
-      });
     }
   }
 

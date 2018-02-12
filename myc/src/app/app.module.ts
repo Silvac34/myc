@@ -9,10 +9,20 @@ import { routes } from './app.router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// Connexion to database firestore
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+// Connexion to auth firebase
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 //services
-import { AgmCoreModule } from '@agm/core';
-import { GoogleMapService } from './services/google-map.service';
-import { CurrencyService } from './services/currency.service';
+import { AuthService } from './services/auth.service'; //authentification firebase
+import { AgmCoreModule } from '@agm/core'; //google-map 
+import { GoogleMapService } from './services/google-map.service'; //google-map créer par moi même
+import { CurrencyService } from './services/currency.service'; // pour obtenir le symbol de la monnaie selon le pays
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -35,6 +45,7 @@ import { TermsAndConditionsComponent } from './footer/legal/terms-and-conditions
 import { CareersComponent } from './footer/more/careers/careers.component';
 import { ContactComponent } from './footer/more/contact/contact.component';
 import { PhotoGalleryComponent } from './footer/more/photo-gallery/photo-gallery.component';
+import { LoginComponent } from './login/login.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -57,7 +68,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsAndConditionsComponent,
     CareersComponent,
     ContactComponent,
-    PhotoGalleryComponent
+    PhotoGalleryComponent,
+    LoginComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -68,6 +80,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     routes,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     NgbModule.forRoot(),
     HttpClientModule,
     TranslateModule.forRoot({
@@ -78,7 +95,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [GoogleMapService, CurrencyService],
+  providers: [GoogleMapService, CurrencyService, AuthService],
   bootstrap: [AppComponent]
 })
 

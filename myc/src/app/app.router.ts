@@ -7,6 +7,7 @@ import { CreateMealComponent } from './create-meal/create-meal.component';
 import { ViewMealsComponent } from './view-meals/view-meals.component';
 import { MyMealsComponent } from './my-meals/my-meals.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
 import { ConceptComponent } from './footer/information/concept/concept.component';
 import { FaqComponent } from './footer/information/faq/faq.component';
 import { TeamComponent } from './footer/information/team/team.component';
@@ -25,6 +26,7 @@ export const router: Routes = [
     { path: 'view_meals', component: ViewMealsComponent },
     { path: 'my_meals', component: MyMealsComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'footer_more_contact', component: ContactComponent },
     { path: 'footer_information_team', component: TeamComponent },
     { path: 'footer_information_concept', component: ConceptComponent },

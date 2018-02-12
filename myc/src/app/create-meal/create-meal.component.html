@@ -1,7 +1,7 @@
 <div class="clear20"></div>
 <div class="container">
     <h1 class="general-title" translate>CREATE_A_MEAL.TITLE</h1>
-    <form class="needs-validation" [formGroup]="createMealForm" novalidate>
+    <form class="needs-validation" [formGroup]="createMealForm" (ngSubmit)="createMeal()" novalidate>
         <fieldset>
             <h4 class="font-italic" translate>CREATE_A_MEAL.FORM.PUBLIC_INFO</h4>
             <div class="clear10"></div>

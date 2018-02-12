@@ -1,12 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="bs-component">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="router.url != '/welcome'">
-    <a class="navbar-brand" routerLink="/welcome" id="navbar-button-position">myCommuneaty</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" routerLink="/welcome">myCommuneaty</a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" routerLink="/create_meal" translate>INDEX.CREATE_A_MEAL</a>
@@ -21,9 +22,22 @@
           <a class="nav-link" routerLink="/profile" translate>INDEX.PROFILE</a>
         </li>
       </ul>
-      <span class="form-inline my-2 my-lg-0">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </span>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="auth.currentUser" uib-dropdown class="dropdown" style="cursor:pointer">
+          <a uib-dropdown-toggle class="dropdown-toggle">
+                  <img class="img-circle profilePic" [src]="user.picture.data.url" alt="User profile picture" /> {{user.first_name}} <span class="caret" *ngIf="((user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)==0) || (!user.nbDifferentPendingRequest && !user.nbDifferentReviewsToLeave)"></span>
+                  <span class="badge" *ngIf="(user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)>0">{{user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave}}</span>
+                </a>
+          <ul uib-dropdown-menu class="dropdown-menu">
+            <li><a routerLink="/manage_requests"><span translate>INDEX.MANAGE_REQUESTS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentPendingRequest>0">{{user.nbDifferentPendingRequest}}</span></a></li>
+            <li><a routerLink="/leave_reviews"><span translate>INDEX.LEAVE_REVIEWS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentReviewsToLeave>0">{{user.nbDifferentReviewsToLeave}}</span></a></li>
+            <li class="divider"></li>
+            <li><a (click)="logout()" translate>INDEX.LOGOUT</a></li>
+          </ul>
+        </li>
+        <button class="btn btn-outline-light" routerLink="/login" translate *ngIf="!auth.currentUser">INDEX.ACTION_BUTTON.SIGN_IN_1</button>
+        <button class="btn btn-outline-light" (click)="auth.signOut()">logout</button>
+      </ul>
     </div>
   </nav>
 

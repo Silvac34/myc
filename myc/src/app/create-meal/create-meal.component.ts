@@ -147,6 +147,10 @@ export class CreateMealComponent {
       })
     }
   }
+  
+  createMeal() {
+    console.log("publier le repas");
+  }
 
   /*setCurrentPosition() { //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form
     if ("geolocation" in navigator) {

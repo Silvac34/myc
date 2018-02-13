@@ -65,6 +65,11 @@
     font-size: 12px;
 }
 
+/* nav ---------------------------*/
+.dropdown a {
+    cursor: pointer;
+}
+
 /* footer -----------------------*/
 
 footer {
@@ -107,6 +112,13 @@ footer p {
     height: 35px;
     display: inline-block;
     font-size: 11px;
+}
+
+.profilePic {
+    margin-bottom: -9px;
+    margin-top: -9px;
+    width: 50px;
+    height: 50px;
 }
 
 .pointer {

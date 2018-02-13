@@ -9,7 +9,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/create_meal" translate>INDEX.CREATE_A_MEAL</a>
         </li>
         <li class="nav-item">
@@ -23,24 +23,21 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="auth.currentUser" uib-dropdown class="dropdown" style="cursor:pointer">
-          <a uib-dropdown-toggle class="dropdown-toggle">
-                  <img class="img-circle profilePic" [src]="user.picture.data.url" alt="User profile picture" /> {{user.first_name}} <span class="caret" *ngIf="((user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)==0) || (!user.nbDifferentPendingRequest && !user.nbDifferentReviewsToLeave)"></span>
-                  <span class="badge" *ngIf="(user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)>0">{{user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave}}</span>
-                </a>
-          <ul uib-dropdown-menu class="dropdown-menu">
-            <li><a routerLink="/manage_requests"><span translate>INDEX.MANAGE_REQUESTS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentPendingRequest>0">{{user.nbDifferentPendingRequest}}</span></a></li>
-            <li><a routerLink="/leave_reviews"><span translate>INDEX.LEAVE_REVIEWS</span>&nbsp; <span class="badge" *ngIf="user.nbDifferentReviewsToLeave>0">{{user.nbDifferentReviewsToLeave}}</span></a></li>
-            <li class="divider"></li>
-            <li><a (click)="logout()" translate>INDEX.LOGOUT</a></li>
-          </ul>
+        <li class="nav-item dropdown" *ngIf="auth.user | async; let user; else guest" ngbDropdown placement="bottom-right">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+             <img class="rounded-circle profilePic" [src]="user.picture" alt="User profile picture" /> {{user.first_name}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" ngbDropdownMenu>
+            <a class="dropdown-item" translate>INDEX.MANAGE_REQUESTS</a>
+            <a class="dropdown-item" translate>INDEX.LEAVE_REVIEWS</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="auth.signOut()" translate>INDEX.LOGOUT</a>
+          </div>
         </li>
-        <button class="btn btn-outline-light" routerLink="/login" translate *ngIf="!auth.currentUser">INDEX.ACTION_BUTTON.SIGN_IN_1</button>
-        <button class="btn btn-outline-light" (click)="auth.signOut()">logout</button>
+        <ng-template #guest><button class="btn btn-outline-light" routerLink="/login" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button></ng-template>
       </ul>
     </div>
   </nav>
-
   <!--
   <nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mobile" role="navigation">
     <div class="container-fluid">

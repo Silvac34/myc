@@ -125,7 +125,7 @@
 	},
 
 	"CREATE_A_MEAL": {
-		"TITLE": "- Create a new meal -",
+		"TITLE": "- Créer un repas -",
 		"FORM": {
 			"PUBLIC_INFO": "Information publique",
 			"MENU_TITLE": "Titre du menu",

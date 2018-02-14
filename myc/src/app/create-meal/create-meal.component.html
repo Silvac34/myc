@@ -1,21 +1,21 @@
 <div class="clear20"></div>
 <div class="container">
     <h1 class="general-title" translate>CREATE_A_MEAL.TITLE</h1>
-    <form class="needs-validation" [formGroup]="createMealForm" (ngSubmit)="createMeal()" novalidate>
+    <form class="needs-validation" [formGroup]="createMealForm" (ngSubmit)="onSubmit()" novalidate>
         <fieldset>
             <h4 class="font-italic" translate>CREATE_A_MEAL.FORM.PUBLIC_INFO</h4>
             <div class="clear10"></div>
             <div formGroupName="menu">
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'was-validated': createMealForm.get('menu.title').hasError('required') && (createMealForm.get('menu.title').dirty || createMealForm.get('menu.title').touched)}">
                     <input type="text" class="form-control cutlery-menu" placeholder="{{'CREATE_A_MEAL.FORM.MENU_TITLE'|translate}}" formControlName="title" id="menuTitle" required>
-                    <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.MENU</div>
+                    <div class="invalid-feedback" *ngIf="createMealForm.get('menu.title').hasError('required') && (createMealForm.get('menu.title').dirty || createMealForm.get('menu.title').touched)" translate>CREATE_A_MEAL.FORM.ERROR.MENU</div>
                 </div>
                 <div class="form-group">
                     <textarea type="text" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.MENU_DESCRIPTION'|translate}}" formControlName="description"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <div><em translate>CREATE_A_MEAL.FORM.SPECIAL_MEAL.TITLE</em> <i class="fa fa-info-circle" ngbTooltip="{{'CREATE_A_MEAL.FORM.SPECIAL_MEAL.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top" translate></i></div>
+                <div><em translate>CREATE_A_MEAL.FORM.SPECIAL_MEAL.TITLE</em> <i class="fa fa-info-circle" ngbTooltip="{{'CREATE_A_MEAL.FORM.SPECIAL_MEAL.TOOLTIP'|translate}}" placement="top" translate></i></div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label"><input type="checkbox" class="form-check-input" formControlName="veggies"><span translate>CREATE_A_MEAL.FORM.VEGETARIAN</span></label>
                 </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-row">
                 <div class="col-auto mb-2 mb-sm-0">
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('date').hasError('required') && (createMealForm.get('date').dirty || createMealForm.get('date').touched)}">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-light"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <div class="input-group">
+                    <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('hour').hasError('required') && (createMealForm.get('hour').dirty || createMealForm.get('hour').touched)}">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-light"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                         </div>
@@ -51,8 +51,8 @@
                 <thead>
                     <tr>
                         <th class="border-0"></th>
-                        <th class="border-0 pb-2" style="width:80px"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.PARTICIPANTS'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"><img src="/assets/images/create_meal/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                        <th class="border-0 pb-2" style="width:95px"><span class="fa fa-clock-o" style="font-size:18px" ngbTooltip="{{'CREATE_A_MEAL.FORM.ARRIVAL_TIME'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"></span></th>
+                        <th class="border-0 pb-2" style="width:80px"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.PARTICIPANTS'|translate}}" placement="top"><img src="/assets/images/create_meal/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
+                        <th class="border-0 pb-2" style="width:95px"><span class="fa fa-clock-o" style="font-size:18px" ngbTooltip="{{'CREATE_A_MEAL.FORM.ARRIVAL_TIME'|translate}}" placement="top"></span></th>
                     </tr>
                 </thead>
                 <tbody formGroupName="requiredGuests">
@@ -62,17 +62,17 @@
                         <td></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="cooks">
-                        <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_COOKING.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_COOKING.NAME</span></td>
+                        <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_COOKING.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_COOKING.NAME</span></td>
                         <td class="px-0"><input type="number" min="0" class="form-control text-center px" formControlName="nbRquCooks" name="nbRquCooks"></td>
                         <td><input type="time" name="timeCooking" class="form-control text-center" formControlName="timeCooking" [required]="createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value>0"></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="cleaners">
-                        <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_CLEANING.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_CLEANING.NAME</span></td>
+                        <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_CLEANING.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_CLEANING.NAME</span></td>
                         <td class="px-0"><input type="number" min="0" class="form-control text-center" formControlName="nbRquCleaners" name="nbRquCleaners"></td>
                         <td><input type="time" class="form-control text-center" formControlName="timeCleaning" name="timeCleaning"></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="simpleGuests">
-                        <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.SIMPLE_GUEST.TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top-left" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</span></td>
+                        <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.SIMPLE_GUEST.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</span></td>
                         <td class="px-0"><input type="number" min="0" class="form-control text-center" formControlName="nbRquSimpleGuests" name="nbRquSimpleGuests"></td>
                         <td class="align-middle"><span *ngIf="nbRquSimpleGuests">{{ createMealForm.get('hour').value }}</span></td>
                     </tr>
@@ -88,12 +88,12 @@
             <div class="form-row">
                 <div class="col-auto">
                     <div class="form-group">
-                        <div class="input-group">
+                        <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('price').hasError('required') && (createMealForm.get('price').dirty || createMealForm.get('price').touched)}">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-light">{{ createMealForm.get('currency_symbol').value }}</span>
                             </div>
                             <input type="number" name="price" class="form-control" formControlName="price" placeholder="{{'CREATE_A_MEAL.FORM.GROCERIES_PRICE' | translate}}" min="0" required/>
-                            <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.GROCERIES_PRICE</div>
+                            <div class="invalid-feedback" *ngIf="createMealForm.get('price').hasError('required') && (createMealForm.get('price').dirty || createMealForm.get('price').touched)" translate>CREATE_A_MEAL.FORM.ERROR.GROCERIES_PRICE</div>
                         </div>
                     </div>
                 </div>
@@ -114,17 +114,19 @@
             <div class="form-group">
                 <input type="text" class="form-control" style="font-size:80%" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS_COMPLEMENT'|translate}}" formControlName="addressComplement" name="addressComplement">
             </div>
-            <!--<div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group" ng-class="{'has-error': (createMealForm.cellphone.$invalid || createMealForm.cellphone.$error.required) && createMealForm.$submitted};">
-                        <div class="inner-addon left-addon">
-                            <i class="fa fa-earphone"></i>
-                            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" name="cellphone" placeholder="{{'CREATE_A_MEAL.FORM.CELLPHONE.NAME'|translate}}" [(ngModel)]="user.privateInfo.cellphone"
-                                ngbTooltip="{{'CREATE_A_MEAL.FORM.CELLPHONE.TOOLTIP'|translate}}" tooltip-trigger="outsideClick" tooltip-placement="bottom-left" required/>
+            <div class="form-row">
+                <div class="col-auto">
+                    <div class="form-group">
+                        <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('price').hasError('required') && (createMealForm.get('price').dirty || createMealForm.get('price').touched)}">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.CELLPHONE.NAME'|translate}}" formControlName="cellphone"
+                                ngbTooltip="{{'CREATE_A_MEAL.FORM.CELLPHONE.TOOLTIP'|translate}}" placement="bottom-left" required/>
                         </div>
                     </div>
                 </div>
-            </div>-->
+            </div>
             <div class="clear10"></div>
             <h4 class="font-italic" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.TITLE</h4>
             <div class="clear10"></div>
@@ -135,7 +137,7 @@
                         <div class="form-group">
                             <div class="radio">
                                 <label for="automaticSubscriptionFalse" class="radio-inline"><input type="radio" formControlName="automaticSubscription" name="automaticSubscription" id="automaticSubscriptionFalse" ng-value="false"><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO</span></label>
-                                <i class="fa fa-info-circle" ngbTooltip="{{'CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO_TOOLTIP'|translate}}" tooltip-trigger="mouseenter" tooltip-placement="top"></i>
+                                <i class="fa fa-info-circle" ngbTooltip="{{'CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO_TOOLTIP'|translate}}" placement="top"></i>
                                 <label for="automaticSubscriptionTrue" class="radio-inline" style="margin-left:10px"><input type="radio" formControlName="automaticSubscription" name="automaticSubscription" id="automaticSubscriptionTrue" ng-value="true"><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.YES</span></label>
                             </div>
                         </div>
@@ -157,7 +159,13 @@
             <div class="clear20"></div>
             <div class="form-row text-center">
                 <div class="col">
-                    <button type="submit" class="btn btn-md btn-primary"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></button>
+                    <button type="submit" class="btn btn-md btn-primary" *ngIf="auth.user | async; let user; else guest"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></button>
+                    <ng-template #guest>
+                        <div class="text-center">
+                            <button (click)="connectCreateMeal('facebook')" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Connect Facebook</button>
+                            <button (click)="connectCreateMeal('google')" class="btn btn-social btn-google"><i class="fa fa-google-plus"></i>Connect Google</button>
+                        </div>
+                    </ng-template>
                     <!--<a class="btn btn-md" ng-class="{'btn-facebook': !isAuthenticated(), 'btn-primary': isAuthenticated()}" ng-click="createMealForm.$setSubmitted(); createMeal()"><span translate ng-if="!isAuthenticated()">CREATE_A_MEAL.FORM.PUBLISH_NOT_CONNECTED</span><br ng-if="!isAuthenticated()"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></a>-->
                 </div>
             </div>

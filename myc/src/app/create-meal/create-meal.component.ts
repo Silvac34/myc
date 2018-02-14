@@ -6,6 +6,7 @@ import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 import { GoogleMapService } from '../services/google-map.service';
 import { CurrencyService } from '../services/currency.service';
+import { AuthService } from "../services/auth.service";
 
 const now = new Date();
 
@@ -35,6 +36,7 @@ export class CreateMealComponent {
     "name": "",
     "lng": null 
   };
+
   
   @ViewChild("autocompleteAddress")
   public searchElementRef: ElementRef;
@@ -44,10 +46,12 @@ export class CreateMealComponent {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private gMap: GoogleMapService,
-    private currencyService: CurrencyService 
+    private currencyService: CurrencyService,
+    public auth: AuthService
   ) { 
     this.createForm();
     this.setCurrencySymbol();
+    console.log(this.createMealForm);
   }
   
   createForm() {
@@ -81,12 +85,19 @@ export class CreateMealComponent {
       "automaticSubscription": false,
       "currency_symbol": "$",
       "address": "",
-      "addressComplement": ""
+      "addressComplement": "",
+      "cellphone": null
     })
   }
 
   ngOnInit() {
-    
+    this.auth.user.subscribe((data) => {
+      if(data){
+        if(data.privateInfo.cellphone){
+          this.createMealForm.patchValue({"cellphone": data.privateInfo.cellphone});
+        };
+      }
+    });
     //on initialise l'endroit où on se trouve :
     //this.setCurrentPosition();
     
@@ -148,10 +159,33 @@ export class CreateMealComponent {
     }
   }
   
+  onSubmit() {
+    if (this.createMealForm.valid) {
+      this.createMeal();
+    } 
+    else {
+      this.validateAllFormFields(this.createMealForm); //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
+    }
+  }
+  
+  validateAllFormFields(formGroup: FormGroup) { //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+  
   createMeal() {
-    console.log("publier le repas");
+    console.log("soumis")
   }
 
+  
+
+  
   /*setCurrentPosition() { //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {

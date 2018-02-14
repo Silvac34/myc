@@ -7,6 +7,7 @@ import { } from 'googlemaps';
 import { GoogleMapService } from '../services/google-map.service';
 import { CurrencyService } from '../services/currency.service';
 import { AuthService } from "../services/auth.service";
+import { environment } from "../../environments/environment";
 
 const now = new Date();
 
@@ -17,10 +18,12 @@ const now = new Date();
 })
 
 export class CreateMealComponent {
-  
-  createMealForm: FormGroup;
-
+  //définition des variabes
+  public createMealForm: FormGroup;
   public zoom: number;
+  public app_id: string = environment.app_id;
+  public page_id: string = environment.page_id;
+  public user_ref: string = Math.floor((Math.random() * 10000000000000) + 1).toString();
   public addressPublicToUpdate = {    
     "town": "",
     "country": "",
@@ -40,7 +43,7 @@ export class CreateMealComponent {
   
   @ViewChild("autocompleteAddress")
   public searchElementRef: ElementRef;
-
+  
   constructor(
     private formB: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
@@ -51,7 +54,6 @@ export class CreateMealComponent {
   ) { 
     this.createForm();
     this.setCurrencySymbol();
-    console.log(this.createMealForm);
   }
   
   createForm() {
@@ -64,29 +66,29 @@ export class CreateMealComponent {
       "kosher": false,
       "halal": false,
       "veggies": false,
-      "date": "",
-      "hour": "",
+      "date": [null, Validators.required],
+      "time": [null, Validators.required],
       "detailedInfo": this.formB.group({
         "requiredGuests": this.formB.group({
           "cooks": this.formB.group({
             "nbRquCooks": null,
-            "timeCooking": new Date()
+            "timeCooking": null
           }),
           "cleaners": this.formB.group({
             "nbRquCleaners": null,
-            "timeCleaning": new Date()
+            "timeCleaning": null
           }),
           "simpleGuests": this.formB.group({
             "nbRquSimpleGuests": null
           })
         })
       }),
-      "price": null,
+      "price": [null, Validators.required],
       "automaticSubscription": false,
       "currency_symbol": "$",
-      "address": "",
+      "address": ["", Validators.required],
       "addressComplement": "",
-      "cellphone": null
+      "cellphone": [null, Validators.required]
     })
   }
 
@@ -160,6 +162,7 @@ export class CreateMealComponent {
   }
   
   onSubmit() {
+    console.log(this.createMealForm);
     if (this.createMealForm.valid) {
       this.createMeal();
     } 
@@ -180,10 +183,17 @@ export class CreateMealComponent {
   }
   
   createMeal() {
-    console.log("soumis")
+    console.log(this.createMealForm.value.detailedInfo.requiredGuests.cooks.nbRquCooks);
   }
 
-  
+  timeCookingValidation() {
+    if(this.createMealForm.value.detailedInfo.requiredGuests.cooks.nbRquCooks > 0) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
 
   
   /*setCurrentPosition() { //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form

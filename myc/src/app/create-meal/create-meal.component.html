@@ -36,14 +36,16 @@
                             <span class="input-group-text bg-light"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
                         <input type="text" class="form-control" name="dated" ngbDatepicker #d="ngbDatepicker" popup-placement="bottom-left" (click)="d.toggle()" formControlName="date" placeholder="{{'CREATE_A_MEAL.FORM.DATE'|translate}}" required/>
+                        <div class="invalid-feedback" *ngIf="createMealForm.get('date').hasError('required') && (createMealForm.get('date').dirty || createMealForm.get('date').touched)" translate>CREATE_A_MEAL.FORM.ERROR.DATE</div>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('hour').hasError('required') && (createMealForm.get('hour').dirty || createMealForm.get('hour').touched)}">
+                    <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('time').hasError('required') && (createMealForm.get('time').dirty || createMealForm.get('time').touched)}">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-light"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                         </div>
-                        <input type="time" name="hour" class="form-control" formControlName="hour" required>
+                        <input type="time" class="form-control" formControlName="time" required>
+                        <div class="invalid-feedback" *ngIf="createMealForm.get('time').hasError('required') && (createMealForm.get('time').dirty || createMealForm.get('time').touched)" translate>CREATE_A_MEAL.FORM.ERROR.TIME</div>
                     </div>
                 </div>
             </div>
@@ -64,7 +66,7 @@
                     <tr class="table-meal-border" formGroupName="cooks">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_COOKING.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_COOKING.NAME</span></td>
                         <td class="px-0"><input type="number" min="0" class="form-control text-center px" formControlName="nbRquCooks" name="nbRquCooks"></td>
-                        <td><input type="time" name="timeCooking" class="form-control text-center" formControlName="timeCooking" [required]="createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value>0"></td>
+                        <td [ngClass]="{'was-validated': timeCookingValidation() && (createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').dirty || createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').touched)}"><input type="time" name="timeCooking" class="form-control text-center" formControlName="timeCooking" [required]="createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value>0"></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="cleaners">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_CLEANING.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_CLEANING.NAME</span></td>
@@ -74,7 +76,7 @@
                     <tr class="table-meal-border" formGroupName="simpleGuests">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.SIMPLE_GUEST.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</span></td>
                         <td class="px-0"><input type="number" min="0" class="form-control text-center" formControlName="nbRquSimpleGuests" name="nbRquSimpleGuests"></td>
-                        <td class="align-middle"><span *ngIf="nbRquSimpleGuests">{{ createMealForm.get('hour').value }}</span></td>
+                        <td class="align-middle"><span *ngIf="nbRquSimpleGuests">{{ createMealForm.get('time').value }}</span></td>
                     </tr>
                     <tr class="table-meal-border table-meal-border-bottom">
                         <td class="text-left" translate>CREATE_A_MEAL.FORM.TOTAL</td>
@@ -85,6 +87,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="was-validated" *ngIf="createMealForm.get('detailedInfo.requiredGuests.cooks.timeCooking').hasError('required') && (createMealForm.get('detailedInfo.requiredGuests.cooks.timeCooking').dirty || createMealForm.get('detailedInfo.requiredGuests.cooks.timeCooking').touched)">
+                <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.ARRIVAL_TIME_HELP_COOKING</div>
+            </div>
             <div class="form-row">
                 <div class="col-auto">
                     <div class="form-group">
@@ -133,28 +138,27 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.TITLE</div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <div class="radio">
-                                <label for="automaticSubscriptionFalse" class="radio-inline"><input type="radio" formControlName="automaticSubscription" name="automaticSubscription" id="automaticSubscriptionFalse" ng-value="false"><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO</span></label>
-                                <i class="fa fa-info-circle" ngbTooltip="{{'CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO_TOOLTIP'|translate}}" placement="top"></i>
-                                <label for="automaticSubscriptionTrue" class="radio-inline" style="margin-left:10px"><input type="radio" formControlName="automaticSubscription" name="automaticSubscription" id="automaticSubscriptionTrue" ng-value="true"><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.YES</span></label>
-                            </div>
-                        </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="automaticSubscriptionFalse" formControlName="automaticSubscription" [value]="false">
+                        <label class="form-check-label" for="automaticSubscriptionFalse" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO <i class="fa fa-info-circle" ngbTooltip="{{'CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.NO_TOOLTIP'|translate}}" placement="top"></i></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="automaticSubscriptionTrue" formControlName="automaticSubscription" [value]="true">
+                        <label class="form-check-label" for="automaticSubscriptionTrue" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.YES</label>
                     </div>
                 </div>
             </div>
-            <!--
             <div class="row">
-                <div ng-hide="$parent.$root.user.privateInfo.user_ref">
+                <div>
+                    <!-- ng-hide="$parent.$root.user.privateInfo.user_ref">-->
                     <div class="clear10"></div>
-                    <div><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_1</span> <span class="small" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2</span></div>-->
-            <!--<div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>-->
-            <!--</div>
+                    <div><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_1</span> <span class="small" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2</span></div>
+                    <div class="fb-messenger-checkbox" origin="https://myc-dimitrikohn.c9users.io/create_meal" page_id="page_id" messenger_app_id="app_id" user_ref="user_ref" prechecked="true" allow_login="true" size="large"></div>
+                </div>
                 <div class="small text-info" ng-show="$parent.$root.user.privateInfo.user_ref" translate>
                     {{' CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_ALREADY '}}
                 </div>
-            </div>-->
+            </div>
 
             <div class="clear20"></div>
             <div class="form-row text-center">

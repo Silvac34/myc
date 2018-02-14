@@ -171,10 +171,12 @@
 				"TITLE_2": "s",
 				"TITLE_3": "and try again: ",
 				"MENU": "Please choose a menu",
-				"GROCERIES_PRICE": "Please provide th price of the groceries",
+				"DATE": "Please indicate the date of the meal",
+				"TIME": "Please indicate the time of the meal",
+				"GROCERIES_PRICE": "Please provide the price of the groceries",
 				"ADDRESS": "Please provide a valid address",
-				"ARRIVAL_TIME_HELP_COOKING": "Please provide the arrival time for help cooking",
-				"CELLPHONE": "phone number",
+				"ARRIVAL_TIME_HELP_COOKING": "Please provide the arrival time for the help cooking",
+				"CELLPHONE": "Please provide your phone number",
 				"INCORRECT_CELLPHONE": "Your phone number is incorrect."
 			},
 			"NOTIFICATIONS": {

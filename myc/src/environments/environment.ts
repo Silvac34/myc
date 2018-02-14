@@ -12,5 +12,13 @@ export const environment = {
     projectId: "mycommuneaty-dev",
     storageBucket: "",
     messagingSenderId: "1029606336943"
-  }
+  },
+  facebookConfig: {
+    appId            : '1555866924706582',
+    autoLogAppEvents : true,
+    xfbml            : true,
+    version          : 'v2.12'
+  },
+  app_id: "1555866924706582",
+  page_id: "1838269003092391"
 };

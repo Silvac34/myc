@@ -171,10 +171,12 @@
 				"TITLE_2": "s",
 				"TITLE_3": "et réessayez: ",
 				"MENU": "Merci de nommer le menu",
+				"DATE": "Merci d'indiquer la date du repas",
+				"TIME": "Merci d'indiquer l'heure du repas",
 				"GROCERIES_PRICE": "Merci de renseigner le prix des courses",
 				"ADDRESS": "Merci de renseigner une adresse valide",
-				"ARRIVAL_TIME_HELP_COOKING": "Merci de donner l'heure d’arrivée de l’Aide-Cuisine",
-				"CELLPHONE": "N° de téléphone",
+ 				"ARRIVAL_TIME_HELP_COOKING": "Merci de donner l'heure d’arrivée de l’Aide-Cuisine",
+				"CELLPHONE": "Merci de renseigner votre numéro de téléphone",
 				"INCORRECT_CELLPHONE": "Votre numéro de téléphone est incorrect."
 			},
 			"NOTIFICATIONS": {

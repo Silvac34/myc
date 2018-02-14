@@ -18,6 +18,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+//Facebook SDK
+import { FacebookModule } from 'ngx-facebook';
+
 //services
 import { AuthService } from './services/auth.service'; //authentification firebase
 import { AgmCoreModule } from '@agm/core'; //google-map 
@@ -80,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     routes,
+    FacebookModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),

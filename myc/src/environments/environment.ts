@@ -19,6 +19,6 @@ export const environment = {
     xfbml            : true,
     version          : 'v2.12'
   },
-  app_id: "1555866924706582",
-  page_id: "1838269003092391"
+  pageId: "1838269003092391",
+  fbRedirectURI: "https://myc-dimitrikohn.c9users.io/"
 };

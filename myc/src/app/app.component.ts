@@ -19,7 +19,7 @@ export class AppComponent {
     translate.setDefaultLang('en');
     translate.use(userLang);
     let facebookConfig: InitParams = environment.facebookConfig;
-    fb.init(facebookConfig);
+    this.fb.init(facebookConfig);
   }
   
   public isCollapsed = true;

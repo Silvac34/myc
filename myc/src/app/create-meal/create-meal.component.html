@@ -110,7 +110,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text bg-light"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" name="address" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS'|translate}}" autocorrect="off" autocapitalize="off" spellcheck="off" formControlName="address" #autocompleteAddress required>
+                <input type="text" name="address" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.ADDRESS'|translate}}" autocorrect="off" autocapitalize="off" spellcheck="off" formControlName="address" #autocompleteAddress required novalidate>
                 <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.ADDRESS</div>
                 <!--<div class="input-group-prepend">
                     <button class="btn" (click)="setCurrentPosition()" type="button">Me Localiser</button>
@@ -122,7 +122,7 @@
             <div class="form-row">
                 <div class="col-auto">
                     <div class="form-group">
-                        <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('price').hasError('required') && (createMealForm.get('price').dirty || createMealForm.get('price').touched)}">
+                        <div class="input-group" [ngClass]="{'was-validated': createMealForm.get('cellphone').hasError('required') && (createMealForm.get('cellphone').dirty || createMealForm.get('cellphone').touched)}">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-light"><i class="fa fa-phone" aria-hidden="true"></i></span>
                             </div>
@@ -135,7 +135,7 @@
             <div class="clear10"></div>
             <h4 class="font-italic" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.TITLE</h4>
             <div class="clear10"></div>
-            <div class="row">
+            <div class="form-row">
                 <div class="col-sm-12">
                     <div translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.AUTOMATIC_BOOKING.TITLE</div>
                     <div class="form-check form-check-inline">
@@ -148,29 +148,28 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div>
-                    <!-- ng-hide="$parent.$root.user.privateInfo.user_ref">-->
+            <div class="form-row">
+                <div *ngIf="auth.user | async as user">
                     <div class="clear10"></div>
-                    <div><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_1</span> <span class="small" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2</span></div>
-                    <div class="fb-messenger-checkbox" origin="https://myc-dimitrikohn.c9users.io/create_meal" page_id="page_id" messenger_app_id="app_id" user_ref="user_ref" prechecked="true" allow_login="true" size="large"></div>
-                </div>
-                <div class="small text-info" ng-show="$parent.$root.user.privateInfo.user_ref" translate>
-                    {{' CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_ALREADY '}}
+                    <div *ngIf="!user.privateInfo.user_ref">
+                        <div><span translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_1</span> <span class="small" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_2</span></div>
+                        <div class="fb-messenger-checkbox" [attr.origin]="origin" [attr.page_id]="page_id" [attr.messenger_app_id]="app_id" [attr.user_ref]="user_ref" prechecked="true" allow_login="true" size="large"></div>
+                    </div>
+                    <div *ngIf="user.privateInfo.user_ref">
+                        <div class="small text-info" translate>{{'CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_ALREADY'}}</div>
+                    </div>
                 </div>
             </div>
-
             <div class="clear20"></div>
             <div class="form-row text-center">
                 <div class="col">
-                    <button type="submit" class="btn btn-md btn-primary" *ngIf="auth.user | async; let user; else guest"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></button>
+                    <button type="submit" class="btn btn-md btn-primary" *ngIf="auth.user | async; else guest"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></button>
                     <ng-template #guest>
                         <div class="text-center">
                             <button (click)="connectCreateMeal('facebook')" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Connect Facebook</button>
                             <button (click)="connectCreateMeal('google')" class="btn btn-social btn-google"><i class="fa fa-google-plus"></i>Connect Google</button>
                         </div>
                     </ng-template>
-                    <!--<a class="btn btn-md" ng-class="{'btn-facebook': !isAuthenticated(), 'btn-primary': isAuthenticated()}" ng-click="createMealForm.$setSubmitted(); createMeal()"><span translate ng-if="!isAuthenticated()">CREATE_A_MEAL.FORM.PUBLISH_NOT_CONNECTED</span><br ng-if="!isAuthenticated()"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></a>-->
                 </div>
             </div>
             <div class="clear20"></div>

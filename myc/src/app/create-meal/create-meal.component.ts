@@ -6,8 +6,11 @@ import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 import { GoogleMapService } from '../services/google-map.service';
 import { CurrencyService } from '../services/currency.service';
-import { AuthService } from "../services/auth.service";
-import { environment } from "../../environments/environment";
+import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Meal } from '../data-model/meal';
+import { User } from '../data-model/user';
 
 const now = new Date();
 
@@ -21,15 +24,17 @@ export class CreateMealComponent {
   //définition des variabes
   public createMealForm: FormGroup;
   public zoom: number;
-  public app_id: string = environment.app_id;
-  public page_id: string = environment.page_id;
+  public app_id: string = environment.facebookConfig.appId;
+  public page_id: string = environment.pageId;
+  public origin: string = environment.fbRedirectURI.concat("create_meal");
   public user_ref: string = Math.floor((Math.random() * 10000000000000) + 1).toString();
+  private userId: string;
   public addressPublicToUpdate = {    
     "town": "",
     "country": "",
     "country_code": "",
     "lng": null,
-    "postalCode": "",
+    "postal_code": "",
     "lat": null,
     "complement": ""
   };
@@ -39,6 +44,7 @@ export class CreateMealComponent {
     "name": "",
     "lng": null 
   };
+  public progress: number  = 0; //mesure le progrès de chargement de la page (permet de lancer le FB.XFBML.parse() après que la vue soit chargée
 
   
   @ViewChild("autocompleteAddress")
@@ -50,6 +56,7 @@ export class CreateMealComponent {
     private ngZone: NgZone,
     private gMap: GoogleMapService,
     private currencyService: CurrencyService,
+    private afs: AngularFirestore,
     public auth: AuthService
   ) { 
     this.createForm();
@@ -93,13 +100,32 @@ export class CreateMealComponent {
   }
 
   ngOnInit() {
+
     this.auth.user.subscribe((data) => {
       if(data){
         if(data.privateInfo.cellphone){
           this.createMealForm.patchValue({"cellphone": data.privateInfo.cellphone});
         };
-      }
+      };
     });
+    
+    this.auth.userMeta.subscribe(data => {
+      if(data){
+        this.userId = data.payload.id;
+      }
+    })
+    
+    //on initialise la valeur du téléphone selon si l'utilisateur a déjà rentré cette info dans le serveur
+    //permet d'attendre que la view soit chargée pour faire un parse de FB pour obtenir le fb-checkbox-plugin
+    this.ngZone.runOutsideAngular(() => {
+      this.increaseProgress(() => {
+        // reenter the Angular zone and display done
+        this.ngZone.run(() => {
+          console.log("ready to publish");
+        });
+      });
+    });
+    
     //on initialise l'endroit où on se trouve :
     //this.setCurrentPosition();
     
@@ -132,7 +158,7 @@ export class CreateMealComponent {
             this.addressPublicToUpdate.lng = Math.round(place.geometry.location.lng() * precision_needed_for_rounding_lat_lng) / precision_needed_for_rounding_lat_lng;
             for (var i = 0; i < place.address_components.length; i++) {
               if (place.address_components[i].types[0] == "postal_code") {
-                this.addressPublicToUpdate.postalCode = place.address_components[i].long_name;
+                this.addressPublicToUpdate.postal_code = place.address_components[i].long_name;
               }
               if (place.address_components[i].types[0] == "country") {
                 this.addressPublicToUpdate.country = place.address_components[i].long_name;
@@ -147,8 +173,9 @@ export class CreateMealComponent {
       });
     });
   }
-  
-  setCurrencySymbol() { //à remplacer par les données du user.
+    
+  //défini le symbole de monnaie selon la position de l'utilisateur
+  setCurrencySymbol() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         let latlngInput = position.coords.latitude + "," + position.coords.longitude;
@@ -161,17 +188,8 @@ export class CreateMealComponent {
     }
   }
   
-  onSubmit() {
-    console.log(this.createMealForm);
-    if (this.createMealForm.valid) {
-      this.createMeal();
-    } 
-    else {
-      this.validateAllFormFields(this.createMealForm); //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
-    }
-  }
-  
-  validateAllFormFields(formGroup: FormGroup) { //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
+  //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
       if (control instanceof FormControl) {
@@ -181,11 +199,8 @@ export class CreateMealComponent {
       }
     });
   }
-  
-  createMeal() {
-    console.log(this.createMealForm.value.detailedInfo.requiredGuests.cooks.nbRquCooks);
-  }
 
+  //fonction qui permet de valider l'heure d'arrivés des helps cooking dans le template
   timeCookingValidation() {
     if(this.createMealForm.value.detailedInfo.requiredGuests.cooks.nbRquCooks > 0) {
       return true
@@ -195,8 +210,30 @@ export class CreateMealComponent {
     }
   }
 
+  //fonction qui permet de mesurer (et d'augmenter) le progrès de chargement de la page
+  increaseProgress(doneCallback: () => void) {
+    this.progress += 1;
+    if (this.progress < 100) {
+      window.setTimeout(() => this.increaseProgress(doneCallback), 10);
+    } else {
+      if (window["FB"]) {
+        window["FB"]["XFBML"].parse(); //on parse le plugin checkbox pour qu'il apparaisse
+      };
+      doneCallback();
+    }
+  }
   
-  /*setCurrentPosition() { //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form
+  confirmOptIn() {
+    window["FB"]["AppEvents"].logEvent('MessengerCheckboxUserConfirmation', null, {
+      'app_id': this.app_id,
+      'page_id': this.page_id,
+      'ref': this.userId,
+      'user_ref': this.user_ref
+    });
+  }
+  
+  //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form
+  /*setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         let precision_needed_for_rounding_lat_lng = 100;
@@ -214,4 +251,58 @@ export class CreateMealComponent {
       });
     } 
   }*/
+  
+  connectCreateMeal(provider) {
+    if(provider === "facebook.com"){
+     this.auth.facebookLogin()
+      .then(() => this.onSubmit()); 
+    }
+    else if(provider === "google.com") {
+      this.auth.googleLogin()
+      .then(() => this.onSubmit());
+    }
+  }
+  
+  
+  onSubmit() {
+    if (this.createMealForm.valid) {
+      this.updateUser();
+      this.createMeal();
+    } 
+    else {
+      //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
+      this.validateAllFormFields(this.createMealForm);
+    }
+  }
+  
+  createMeal() {
+    let newMeal = Object.assign({}, this.createMealForm.value);
+    newMeal["address"] = this.addressPublicToUpdate;
+    newMeal["address"]["complement"] = this.createMealForm.value.addressComplement;
+    delete newMeal["addressComplement"];
+    newMeal["privateInfo"] = {
+      "address": this.addressPrivateToUpdate
+    };
+    delete newMeal["cellphone"];
+    this.afs.collection('meals').add(newMeal)
+    .then(function(docRef) {
+      //this.confirmOptIn(); //ne marche pas : pas de AppEvents dans window.FB
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  }
+  
+  updateUser() {
+    let data = {};
+    data = {"user_ref": this.user_ref, "privateInfo.cellphone": this.createMealForm.value.cellphone}//on ne met pas de if car de toute façon le téléphone est obligatoire
+    this.afs.doc<User>(`users/${this.userId}`).update(data)
+    .then(function(result){
+      console.log(result);
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  }
 }

@@ -10,7 +10,7 @@ export const environment = {
     authDomain: "mycommuneaty-dev.firebaseapp.com",
     databaseURL: "https://mycommuneaty-dev.firebaseio.com",
     projectId: "mycommuneaty-dev",
-    storageBucket: "",
+    storageBucket: "mycommuneaty-dev.appspot.com",
     messagingSenderId: "1029606336943"
   },
   facebookConfig: {

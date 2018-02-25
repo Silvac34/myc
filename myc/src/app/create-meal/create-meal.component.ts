@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Meal } from '../data-model/meal';
 import { User } from '../data-model/user';
+import { Router } from '@angular/router';
 
 const now = new Date();
 
@@ -288,6 +289,7 @@ export class CreateMealComponent {
     .then(function(docRef) {
       //this.confirmOptIn(); //ne marche pas : pas de AppEvents dans window.FB
       console.log("Document written with ID: ", docRef.id);
+      this.router.navigate(['/']);
     })
     .catch(function(error) {
       console.error(error);
@@ -296,7 +298,7 @@ export class CreateMealComponent {
   
   updateUser() {
     let data = {};
-    data = {"user_ref": this.user_ref, "privateInfo.cellphone": this.createMealForm.value.cellphone}//on ne met pas de if car de toute façon le téléphone est obligatoire
+    data = {"privateInfo.user_ref": this.user_ref, "privateInfo.cellphone": this.createMealForm.value.cellphone}//on ne met pas de if car de toute façon le téléphone est obligatoire
     this.afs.doc<User>(`users/${this.userId}`).update(data)
     .then(function(result){
       console.log(result);

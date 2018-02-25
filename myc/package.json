@@ -4,8 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --port 8080 --public https://myc-dimitrikohn.c9users.io/",
-    "build": "ng build",
+    "start": "firebase use dev && ng serve --host 0.0.0.0 --port 8080 --public https://myc-dimitrikohn.c9users.io/",
+    "stage": "firebase use stage && ng build --env=stage && firebase deploy",
+    "build": "firebase use prod && ng build --prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -34,6 +35,8 @@
     "bootswatch": "^4.0.0",
     "core-js": "^2.4.1",
     "firebase": "^4.9.1",
+    "firebase-admin": "^5.9.0",
+    "firebase-functions": "^0.8.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "ngx-facebook": "^2.4.0",

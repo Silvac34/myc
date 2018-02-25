@@ -5,7 +5,7 @@ export const environment = {
     authDomain: "mycommuneaty-165310.firebaseapp.com",
     databaseURL: "https://mycommuneaty-165310.firebaseio.com",
     projectId: "mycommuneaty-165310",
-    storageBucket: "",
+    storageBucket: "mycommuneaty-165310.appspot.com",
     messagingSenderId: "1089610132600"
   },
   facebookConfig: {
@@ -15,5 +15,5 @@ export const environment = {
     version          : 'v2.12'
   },
   pageId: "254569051671689",
-  fbRedirectURI: "https://myc-dimitrikohn.c9users.io/"//à changer avec l'adresse de production
+  fbRedirectURI: "https://mycommuneaty-165310.firebaseapp.com"//à changer avec l'adresse de production
 };

@@ -280,6 +280,11 @@ export class CreateMealComponent {
     let newMeal = Object.assign({}, this.createMealForm.value);
     newMeal["address"] = this.addressPublicToUpdate;
     newMeal["address"]["complement"] = this.createMealForm.value.addressComplement;
+    newMeal["users"] = [{
+      "status": "accepted",
+      "id": this.userId,
+      "role": "admin"
+    }]
     delete newMeal["addressComplement"];
     newMeal["privateInfo"] = {
       "address": this.addressPrivateToUpdate

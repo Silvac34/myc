@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "firebase use dev && ng serve --host 0.0.0.0 --port 8080 --public https://myc-dimitrikohn.c9users.io/",
-    "stage": "firebase use stage && ng build --env=stage && firebase deploy",
-    "build": "firebase use prod && ng build --prod && firebase deploy",
+    "stage": "ng build --env=stage && firebase use stage && firebase deploy",
+    "build": "ng build --prod && firebase use prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

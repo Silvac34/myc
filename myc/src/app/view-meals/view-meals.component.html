@@ -1,3 +1,67 @@
-<p>
-  view-meals works!
-</p>
+<div class="container-fluid">
+  <div class="clearfix px-3 pt-3 d-none d-md-block">
+    <h1 class="general-title float-left">- <span translate>VIEW_MEALS.TITLE</span> -</h1>
+    <h2 class="float-right">
+      <span class="general-title" translate>VIEW_MEALS.ORDER_BY.NAME</span>
+      <button type="button" class="btn btn-primary" ngbTooltip="{{'VIEW_MEALS.ORDER_BY.POPOVER'|translate}}" placement="top" (click)="changeArrow()"><i class="fa fa-clock-o" aria-hidden="true"></i> <i class="fa fa-arrow-{{arrowDirection}}" aria-hidden="true"></i></button>
+    </h2>
+  </div>
+
+
+  <div class="row">
+    <div class="col d-block d-md-none my-2">
+      <div class="float-left">
+        <a class="btn btn-primary btn-sm text-white" (click)="openModalFilter(modalContent)" translate>VIEW_MEALS.FILTERS.NAME</a>
+        <span (click)="displayMealList = !displayMealList">
+        <ng-template [ngIf]="displayMealList">
+          <span (click)="InitializeMealsMap()" class="text-center text-primary font-italic font-weight-bold pointer" translate>VIEW_MEALS.MAP</span>
+        </ng-template>
+        <ng-template [ngIf]="!displayMealList">
+          <span class="text-center text-primary font-italic font-weight-bold pointer" translate>VIEW_MEALS.LIST</span>
+        </ng-template>
+        </span>
+      </div>
+      <button type="button" class="btn btn-outline-primary btn-sm float-right" (click)="changeArrow()"><i class="fa fa-clock-o" aria-hidden="true"></i> <i class="fa fa-arrow-{{arrowDirection}}" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+  <div class="row" [ngSwitch]="displayMealList">
+    <div class="col-md-3 d-none d-md-block">
+      <div (click)="displayMealList = !displayMealList">
+        <ng-template [ngIf]="displayMealList">
+          <div (click)="InitializeMealsMap()" class="text-center text-primary font-italic font-weight-bold pointer" translate>VIEW_MEALS.CHANGE_VIEW_MAP</div>
+        </ng-template>
+        <ng-template [ngIf]="!displayMealList">
+          <div class="text-center text-primary font-italic font-weight-bold pointer" translate>VIEW_MEALS.CHANGE_VIEW_LIST</div>
+        </ng-template>
+      </div>
+      <form #filterForm="ngForm">
+        <div class="card my-2">
+          <div class="card-header text-white bg-info font-weight-bold" translate>VIEW_MEALS.FILTERS.FILTER_BY</div>
+          <app-filter-view-meals [filter]="selectedFilter"></app-filter-view-meals>
+          <ng-template #modalContent let-c="close" let-d="dismiss">
+            <div class="modal-header bg-info">
+              <h4 class="modal-title font-weight-bold text-white" translate>VIEW_MEALS.FILTERS.FILTER_BY</h4>
+              <button type="button" class="close text-white" aria-label="Close" (click)="d('Cross click')"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <app-filter-view-meals [filter]="selectedFilter"></app-filter-view-meals>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-info" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-9 col-12">
+      <!--<div class="row fade-out-success" ng-show="manualSubscriptionPending==true">
+        <div class="col-12">
+          <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button> <span translate>VIEW_MEALS.REQUEST_SUCCESS</span>
+          </div>
+        </div>
+      </div>-->
+      <meal-list *ngSwitchCase="true" [meals]="meals"></meal-list>
+      <meal-map *ngSwitchCase="false" [meals]="meals"></meal-map>
+    </div>
+  </div>
+</div>

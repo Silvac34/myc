@@ -211,7 +211,14 @@
 			},
 			"DAY": {
 				"TITLE": "Day",
-				"TITLE_MOBILE": "Chose the days of the week"
+				"TITLE_MOBILE": "Chose the days of the week",
+				"MONDAY": "Monday",
+				"TUESDAY": "Tuesday",
+				"WEDNESDAY": "Wednesday",
+				"THURSDAY": "Thursday",
+				"FRIDAY": "Friday",
+				"SATURDAY": "Saturday",
+				"SUNDAY": "Sunday"
 			},
 			"PERIOD": {
 				"TITLE": "Period",
@@ -236,9 +243,7 @@
 			"HELP_TYPE": {
 				"TITLE": "Type of help",
 				"HELP_COOKING": "Help cooking",
-				"HELP_COOKING_MOBILE": "Cooking",
 				"HELP_CLEANING": "Help cleaning",
-				"HELP_CLEANING_MOBILE": "Cleaning",
 				"SIMPLE_GUEST": "Simple guest"
 			},
 			"VALIDATE": "Validate",

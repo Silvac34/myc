@@ -203,7 +203,7 @@
 		},
 		"FILTERS": {
 			"NAME": "Filtres",
-			"FILTER_BY": "Filtré par",
+			"FILTER_BY": "Filtrer par",
 			"CITY": {
 				"TITLE": "Ville",
 				"PLACEHOLDER": "Ville, Arrondissement...",
@@ -211,7 +211,14 @@
 			},
 			"DAY": {
 				"TITLE": "Jour",
-				"TITLE_MOBILE": "Choisissez les jours de la semaine"
+				"TITLE_MOBILE": "Choisissez les jours de la semaine",
+				"MONDAY": "Lundi",
+				"TUESDAY": "Mardi",
+				"WEDNESDAY": "Mercredi",
+				"THURSDAY": "Jeudi",
+				"FRIDAY": "Vendredi",
+				"SATURDAY": "Samedi",
+				"SUNDAY": "Dimanche"
 			},
 			"PERIOD": {
 				"TITLE": "Période",
@@ -236,9 +243,7 @@
 			"HELP_TYPE": {
 				"TITLE": "Type d’aide",
 				"HELP_COOKING": "Les Aides-cuisine",
-				"HELP_COOKING_MOBILE": "Cooking",
 				"HELP_CLEANING": "Les Aides-nettoyage",
-				"HELP_CLEANING_MOBILE": "Cleaning",
 				"SIMPLE_GUEST": "Les invités"
 			},
 			"VALIDATE": "Valider",

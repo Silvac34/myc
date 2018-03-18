@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -26,6 +26,8 @@ import { AuthService } from './services/auth.service'; //authentification fireba
 import { AgmCoreModule } from '@agm/core'; //google-map 
 import { GoogleMapService } from './services/google-map.service'; //google-map créer par moi même
 import { CurrencyService } from './services/currency.service'; // pour obtenir le symbol de la monnaie selon le pays
+import { GetUserService } from './services/get-user.service'; // on obtient les données associés à un utilisateur
+import { MealsService } from './services/meals.service'; // fonctions relatives aux meals
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -50,6 +52,15 @@ import { ContactComponent } from './footer/more/contact/contact.component';
 import { PhotoGalleryComponent } from './footer/more/photo-gallery/photo-gallery.component';
 import { LoginComponent } from './login/login.component';
 
+//view-meals
+import { FilterComponent } from './view-meals/filter/filter.component';
+import { ListComponent } from './view-meals/container/list/list.component';
+import { MapComponent } from './view-meals/container/map/map.component';
+
+//Pipes
+import { LimitToPipe } from './pipes/limit-to.pipe';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -72,7 +83,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     CareersComponent,
     ContactComponent,
     PhotoGalleryComponent,
-    LoginComponent
+    LoginComponent,
+    FilterComponent,
+    ListComponent,
+    MapComponent,
+    LimitToPipe,
+    CapitalizePipe
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -82,6 +98,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule,
+    FormsModule,
     routes,
     FacebookModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -99,8 +116,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService],
-  bootstrap: [AppComponent]
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],
+  bootstrap: [AppComponent],
+  entryComponents: [FilterComponent]
 })
 
 export class AppModule { }

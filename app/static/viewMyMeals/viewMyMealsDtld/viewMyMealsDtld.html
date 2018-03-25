@@ -147,12 +147,12 @@
                         <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}}
                     </div>
                     <div class="meal-info-label">
-                        <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking "><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.HELP_COOKING</span>                        {{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}
+                        <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking "><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'" translate>WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME</span>                        {{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}
                         <span ng-if="userRole=='admin'"></br></span></span>
-                        <span ng-show="(userRole=='cleaner' || userRole=='admin') && meal.detailedInfo.requiredGuests.cleaners.timeCleaning"><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.HELP_CLEANING</span>                        {{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}
+                        <span ng-show="(userRole=='cleaner' || userRole=='admin') && meal.detailedInfo.requiredGuests.cleaners.timeCleaning"><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'" translate>WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME</span>                        {{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}
                         <span ng-if="userRole=='admin'"></br></span></span>
                         <span ng-show="userRole=='simpleGuest' || (userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests) || ((userRole=='admin' ||userRole=='cleaner') && !meal.detailedInfo.requiredGuests.cleaners.timeCleaning) || ((userRole=='admin' || userRole=='cook') && !meal.detailedInfo.requiredGuests.cooks.timeCooking)"><span class="glyphicon glyphicon-time"></span>
-                        <span ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.SIMPLE_GUEST</span> {{meal.time |date:'HH:mm'}}</span>
+                        <span ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests" translate>WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME</span> {{meal.time |date:'HH:mm'}}</span>
                     </div>
                     <div class="meal-info-label">
                         <span class="glyphicon glyphicon-map-marker"></span> <span>{{meal.privateInfo.address.name}}</span><span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span>
@@ -179,7 +179,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 my-meal-dtld-participant bold" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.TITLE</div>
+        <div class="col-xs-12 my-meal-dtld-participant bold" translate>CREATE_A_MEAL.FORM.PARTICIPANTS</div>
     </div>
     <div class="clear10"></div>
     <div class="row">
@@ -228,7 +228,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary size-20"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.HELP_COOKING</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}
+                        <div class="text-primary size-20"><span translate>WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}
                             <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> <span translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PER_PERS</span></span>
                         </div>
                     </div>
@@ -277,7 +277,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary size-20"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.HELP_CLEANING</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}
+                        <div class="text-primary size-20"><span translate>WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}
                             <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> <span translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PER_PERS</span></span>
                         </div>
                     </div>
@@ -327,7 +327,7 @@
             <div class="panel-body">
                 <div class="col-xs-8">
                     <div class="row">
-                        <div class="text-primary size-20"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.SIMPLE_GUEST</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}
+                        <div class="text-primary size-20"><span translate>WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}
                             <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> <span translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PER_PERS</span></span>
                         </div>
                     </div>

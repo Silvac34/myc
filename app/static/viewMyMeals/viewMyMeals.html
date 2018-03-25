@@ -2,7 +2,7 @@
 <uib-tabset type="pills">
   <uib-tab index="0" class="marginleft10">
     <uib-tab-heading>
-      <span translate>VIEW_MY_MEALS.INCOMING_MEALS</span> <span class="badge" ng-if="countMealWithPendingRequest() > 0">{{countMealWithPendingRequest()}}</span>
+      <span translate>VIEW_MEALS.TITLE</span> <span class="badge" ng-if="countMealWithPendingRequest() > 0">{{countMealWithPendingRequest()}}</span>
     </uib-tab-heading>
     <div class="clear20"></div>
     <div class="col-xs-12">
@@ -39,7 +39,7 @@
                     <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                   </div>
                   <div class="col-xs-4 col-sm-3 col-lg-2">
-                    <div class="pull-right text-success"><strong><span ng-if="datasUserForEachMeal(meal).role[0] == 'admin'" translate>VIEW_MY_MEALS.STATUS.HOSTING</span><span ng-if="datasUserForEachMeal(meal).role[0] != 'admin'" translate>VIEW_MY_MEALS.STATUS.ATTENDING</span></strong></div>
+                    <div class="pull-right text-success"><strong><span ng-if="datasUserForEachMeal(meal).role[0] == 'admin'" translate>VIEW_MEALS.HOSTING</span><span ng-if="datasUserForEachMeal(meal).role[0] != 'admin'" translate>VIEW_MEaAS.ATTENDING</span></strong></div>
                   </div>
                 </div>
                 <div class="row">
@@ -63,19 +63,19 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MY_MEALS.PRICE_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.VEGETARIAN_MEAL</span>
+                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.vegan == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.VEGAN_MEAL</span>
+                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.HALAL_MEAL</span>
+                  <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.KOSHER_MEAL</span>
+                  <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
                 </div>
                 <div class="row" ng-if="countPendingRequestsPerMeal(meal._id) > 0 && meal.admin._id == user._id" style="margin-top:7px">
                   <i class="fa fa-user-plus"></i> <strong class="text-warning">{{countPendingRequestsPerMeal(meal._id)}} <span ng-if="countPendingRequestsPerMeal(meal._id) == 1" translate>VIEW_MY_MEALS.PENDING_REQUEST</span><span ng-if="countPendingRequestsPerMeal(meal._id) > 1" translate>VIEW_MY_MEALS.PENDING_REQUESTS</span></strong>
@@ -116,7 +116,7 @@
                     <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                   </div>
                   <div class="col-xs-4 col-sm-3 col-lg-2">
-                    <div class="pull-right text-warning"><strong translate>VIEW_MY_MEALS.STATUS.PENDING</strong></div>
+                    <div class="pull-right text-warning"><strong translate>VIEW_MEALS.PENDING</strong></div>
                   </div>
                 </div>
                 <div class="row">
@@ -138,19 +138,19 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MY_MEALS.PRICE_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.VEGETARIAN_MEAL</span>
+                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.vegan == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.VEGAN_MEAL</span>
+                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.HALAL_MEAL</span>
+                  <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.KOSHER_MEAL</span>
+                  <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
                 </div>
               </div>
             </a>
@@ -160,7 +160,7 @@
       <div ng-hide="myFuturMealsFilter.length" class="text-center" style="font-size:medium;">
         <div class="text-info" translate>VIEW_MY_MEALS.NO_INCOMING_MEALS_1</div>
         <div class="clear20"></div>
-        <a ui-sref="create_meal" class="btn btn-primary" translate>VIEW_MY_MEALS.NO_INCOMING_MEALS_2</a><span class="hidden-sm hidden-md hidden-lg"></br></span> <span translate>VIEW_MY_MEALS.NO_INCOMING_MEALS_3</span> <span class="hidden-sm hidden-md hidden-lg"></br></span><a ui-sref="view_meals" class="btn btn-primary" translate>VIEW_MY_MEALS.NO_INCOMING_MEALS_4</a>
+        <a ui-sref="create_meal" class="btn btn-primary" translate>WELCOME.CREATE_A_MEAL</a><span class="hidden-sm hidden-md hidden-lg"></br></span> <span translate>VIEW_MY_MEALS.NO_INCOMING_MEALS_3</span> <span class="hidden-sm hidden-md hidden-lg"></br></span><a ui-sref="view_meals" class="btn btn-primary" translate>WELCOME.BROWSE_A_MEAL</a>
       </div>
     </div>
     </div>
@@ -201,7 +201,7 @@
                     <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
                   </div>
                   <div class="col-xs-4 col-sm-3 col-lg-2">
-                    <div class="pull-right text-info"><strong><span ng-if="datasUserForEachMeal(meal).role[0] == 'admin'" translate>VIEW_MY_MEALS.STATUS.HOSTED</span><span ng-if="datasUserForEachMeal(meal).role[0] != 'admin'" translate>VIEW_MY_MEALS.STATUS.ATTENDED</span></strong></div>
+                    <div class="pull-right text-info"><strong><span ng-if="datasUserForEachMeal(meal).role[0] == 'admin'" translate>VIEW_MEALS.HOSTED</span><span ng-if="datasUserForEachMeal(meal).role[0] != 'admin'" translate>VIEW_MEALS.ATTENDED</span></strong></div>
                   </div>
                 </div>
                 <div class="row">
@@ -225,19 +225,19 @@
                   </div>
                 </div>
                 <div class="row" style="margin-top:7px;">
-                  <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MY_MEALS.PRICE_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                  <span class="glyphicon glyphicon-piggy-bank"></span> <span><span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
                 </div>
                 <div class="row" ng-if="meal.veggies == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.VEGETARIAN_MEAL</span>
+                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.vegan == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.VEGAN_MEAL</span>
+                  <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.halal == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.HALAL_MEAL</span>
+                  <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
                 </div>
                 <div class="row" ng-if="meal.kosher == true" style="margin-top:7px">
-                  <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS.KOSHER_MEAL</span>
+                  <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
                 </div>
               </div>
             </a>

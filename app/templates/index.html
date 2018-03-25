@@ -77,7 +77,8 @@
       <div class="clear5"></div>
       <div class="pull-right" ng-if="!isAuthenticated() && inApp != true" ng-click="auth('facebook', toState)">
         <button class="btn btn-block btn-social btn-facebook welcome-buttons-auth-header" type="button">
-          <span class="fa fa-facebook"></span> <span translate>INDEX.ACTION_BUTTON.SIGN_IN_1</span><span class="hidden-xs"> <span translate>INDEX.ACTION_BUTTON.SIGN_IN_2</span></span>
+          <span class="fa fa-facebook"></span> <span translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2</span>
+          <span class="hidden-xs"> <span translate>INDEX.ACTION_BUTTON.SIGN_IN_2</span></span>
         </div>
         <div class="btn-group pull-right" uib-dropdown is-open="status.isopen" ng-if="isAuthenticated()">
       <button id="single-button" type="button" class="btn btn-default welcome-buttons-auth-header" uib-dropdown-toggle ng-disabled="disabled">
@@ -128,7 +129,7 @@
                   <li><a ng-click="logout()" translate>INDEX.LOGOUT</a></li>
                 </ul>
               </li>
-              <li ng-if="!isAuthenticated() && inApp != true"><a ng-click="auth('facebook', toState)" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> <span translate>INDEX.ACTION_BUTTON.SIGN_IN_1</span></a></li>
+              <li ng-if="!isAuthenticated() && inApp != true"><a ng-click="auth('facebook', toState)" class="btn btn-block btn-social btn-facebook" id="facebook-button-nav" type="button"><span class="fa fa-facebook" style="padding-top:7px"></span> <span translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2</span></a></li>
             </ul>
           </div>
         </div>
@@ -197,7 +198,7 @@
 
           <a title="english" class="pointer" ng-click="changeLanguage('en')"><img ng-src="static/sources/footer_language/english.png"></a> &nbsp;
           <a title="français" class="pointer" ng-click="changeLanguage('fr')"><img ng-src="static/sources/footer_language/french.png"></a> &nbsp;
-          <a title="español" class="pointer" ng-click="changeLanguage('es')"><img ng-src="static/sources/footer_language/spanish.png"></a> &nbsp;
+          <!--<a title="español" class="pointer" ng-click="changeLanguage('es')"><img ng-src="static/sources/footer_language/spanish.png"></a> &nbsp;-->
         </div>
 
       </div>

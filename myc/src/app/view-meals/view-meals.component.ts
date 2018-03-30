@@ -13,9 +13,11 @@ import { AuthService } from '../services/auth.service';
 export class ViewMealsComponent implements OnInit {
   
   public meals: any;
+  public oldMeals: any;
   public userId: string = null;
   public displayMealList: boolean = true;
   public arrowDirection: string = "down";
+  public reverseOrderMeal: number = 0;
   public selectedFilter = {
     weekDays: [{
       "label": "VIEW_MEALS.FILTERS.DAY.MONDAY",
@@ -99,11 +101,41 @@ export class ViewMealsComponent implements OnInit {
     else {
       this.arrowDirection = "down";
     }
+    this.reverseOrderMeal++;
   }
   
   getMeals() {
     let now = new Date;
     this.meals = this.afs.collection("meals", ref => ref.where('date','>=',now).orderBy('date')).snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        //on récupère les détails de chacun de utilisateurs
+        for (let i = 0; i < data.users.length; i++) {
+          this.getUserService.getUserFromId(data.users[i].id).subscribe(results => {
+            data.users[i]["detail"] = results ;
+          });
+          //on définit le prix à afficher par repas
+          if (data.users[i].role === "cooks") {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.cooks.price;
+          }
+          else if (data.users[i].role === "cleaners") {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.cleaners.price;
+          }
+          else if (data.users[i].role === "simpleGuests") {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.simpleGuests.price;
+          }
+          else  {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.hosts.price;
+          }
+          data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
+        }
+        
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+    });
+    
+    this.oldMeals = this.afs.collection("meals", ref => ref.where('date','<',now).orderBy('date', 'desc')).snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
         //on récupère les détails de chacun de utilisateurs

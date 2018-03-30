@@ -24,7 +24,6 @@
       <button type="button" class="btn btn-outline-primary btn-sm float-right" (click)="changeArrow()"><i class="fa fa-clock-o" aria-hidden="true"></i> <i class="fa fa-arrow-{{arrowDirection}}" aria-hidden="true"></i></button>
     </div>
   </div>
-
   <div class="row" [ngSwitch]="displayMealList">
     <div class="col-md-3 d-none d-md-block">
       <div (click)="displayMealList = !displayMealList">
@@ -60,7 +59,7 @@
           </div>
         </div>
       </div>-->
-      <meal-list *ngSwitchCase="true" [meals]="meals" [userId]="userId"></meal-list>
+      <meal-list *ngSwitchCase="true" [meals]="meals" [userId]="userId" [reverseOrderMeal]="reverseOrderMeal"></meal-list>
       <meal-map *ngSwitchCase="false" [meals]="meals" [userId]="userId"></meal-map>
     </div>
   </div>

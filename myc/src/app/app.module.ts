@@ -72,6 +72,8 @@ import { DateTranslatePipe } from './pipes/date-translate.pipe';
 
 //external modules
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ReversePipe } from './pipes/reverse.pipe';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -101,7 +103,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MapComponent,
     LimitToPipe,
     CapitalizePipe,
-    DateTranslatePipe
+    DateTranslatePipe,
+    ReversePipe
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -143,10 +146,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       animationDuration: 300,
       showSubtitle: false,
       showUnits: false,
-      titleFontSize: 14
+      titleFontSize: '14'
     })
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, ],
   bootstrap: [AppComponent],
   entryComponents: [FilterComponent]
 })

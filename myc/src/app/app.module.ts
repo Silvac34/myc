@@ -33,6 +33,14 @@ import { MealsService } from './services/meals.service'; // fonctions relatives 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { registerLocaleData } from '@angular/common';
+
+//rajout de langues en locale pour que fonctionne le pipe 'date'
+import localeFr from '@angular/common/locales/fr';
+import localeEn from '@angular/common/locales/en';
+
+registerLocaleData(localeEn, 'en-US');
+registerLocaleData(localeFr, 'fr-FR');
 
 //router
 import { CreateMealComponent } from './create-meal/create-meal.component';
@@ -60,6 +68,10 @@ import { MapComponent } from './view-meals/container/map/map.component';
 //Pipes
 import { LimitToPipe } from './pipes/limit-to.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { DateTranslatePipe } from './pipes/date-translate.pipe';
+
+//external modules
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -88,7 +100,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListComponent,
     MapComponent,
     LimitToPipe,
-    CapitalizePipe
+    CapitalizePipe,
+    DateTranslatePipe
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -114,6 +127,23 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+    }),
+    // Specify ng-circle-progress as an import
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 26,
+      outerStrokeWidth: 10,
+      innerStrokeWidth: 10,
+      space: -10,
+      outerStrokeColor: "#45ccce",
+      outerStrokeLinecap : "butt",
+      showInnerStroke: true,
+      innerStrokeColor: "#e7e8ea",
+      animation: true,
+      animationDuration: 300,
+      showSubtitle: false,
+      showUnits: false,
+      titleFontSize: 14
     })
   ],
   providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],

@@ -60,8 +60,8 @@
           </div>
         </div>
       </div>-->
-      <meal-list *ngSwitchCase="true" [meals]="meals"></meal-list>
-      <meal-map *ngSwitchCase="false" [meals]="meals"></meal-map>
+      <meal-list *ngSwitchCase="true" [meals]="meals" [userId]="userId"></meal-list>
+      <meal-map *ngSwitchCase="false" [meals]="meals" [userId]="userId"></meal-map>
     </div>
   </div>
 </div>

@@ -15,8 +15,14 @@ import { FacebookService, InitParams } from 'ngx-facebook';
 export class AppComponent {
 
   constructor(private translate: TranslateService, private router: Router, public auth: AuthService, private fb: FacebookService) {
-    let userLang = navigator.language; 
-    translate.setDefaultLang('en');
+    let userLang = navigator.language;
+    if(userLang === "fr") {
+      userLang = "fr-FR"
+    };
+    if(userLang === "en") {
+      userLang = "en-US"
+    };
+    translate.setDefaultLang('en-US');
     translate.use(userLang);
     let facebookConfig: InitParams = environment.facebookConfig;
     this.fb.init(facebookConfig);

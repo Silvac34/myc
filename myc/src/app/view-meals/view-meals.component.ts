@@ -3,15 +3,17 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FilterComponent } from './filter/filter.component';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from '../services/get-user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-view-meals',
   templateUrl: './view-meals.component.html',
   styleUrls: ['./view-meals.component.scss']
 })
-export class ViewMealsComponent {
+export class ViewMealsComponent implements OnInit {
   
   public meals: any;
+  public userId: string = null;
   public displayMealList: boolean = true;
   public arrowDirection: string = "down";
   public selectedFilter = {
@@ -77,9 +79,12 @@ export class ViewMealsComponent {
     }]
   };
   
-  constructor(private modalService: NgbModal, private afs: AngularFirestore, private getUserService: GetUserService) { }
+  constructor(private modalService: NgbModal, private afs: AngularFirestore, private getUserService: GetUserService, public auth: AuthService) { }
   
   ngOnInit() {
+    this.auth.userMeta.subscribe(results => {
+      this.userId = results.payload.id;
+    });
     this.getMeals();
   }
 
@@ -101,11 +106,27 @@ export class ViewMealsComponent {
     this.meals = this.afs.collection("meals", ref => ref.where('date','>=',now).orderBy('date')).snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
+        //on récupère les détails de chacun de utilisateurs
         for (let i = 0; i < data.users.length; i++) {
           this.getUserService.getUserFromId(data.users[i].id).subscribe(results => {
             data.users[i]["detail"] = results ;
           });
+          //on définit le prix à afficher par repas
+          if (data.users[i].role === "cooks") {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.cooks.price;
+          }
+          else if (data.users[i].role === "cleaners") {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.cleaners.price;
+          }
+          else if (data.users[i].role === "simpleGuests") {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.simpleGuests.price;
+          }
+          else  {
+            data["mealPrice"] = data.detailedInfo.requiredGuests.hosts.price;
+          }
+          data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
         }
+        
         const id = a.payload.doc.id;
         return { id, ...data };
       })

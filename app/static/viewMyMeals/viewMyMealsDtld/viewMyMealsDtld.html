@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="clear10"></div>
                                 <div style="position:relative">
-                                    <a ui-sref="profile({userId:participant._id})"><img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="User profile picture" /></a>
+                                    <a ui-sref="profile({userId:participant._id})"><img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /></a>
                                     <div style="position:relative; left:10px;">
                                         <a ui-sref="profile({userId:participant._id})">
                                             <div>
@@ -195,7 +195,7 @@
                     <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'admin'">
                         <div style="padding-top:10px">
                             <div class="pull-left">
-                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
                                 <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                 <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                 </span>
@@ -243,7 +243,7 @@
                     <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'cook'">
                         <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
                                 <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                 <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                 </span>
@@ -292,7 +292,7 @@
                     <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'cleaner' && participant.status == 'accepted'">
                         <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
                                 <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                 <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                 </span>
@@ -342,7 +342,7 @@
                     <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'accepted'">
                         <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
                             <div class="pull-left">
-                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{participant.picture.data.url}}" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
                                 <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
                                 <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
                                 </span>

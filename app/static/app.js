@@ -464,7 +464,7 @@ app.controller('AppCtrl', ['$scope', '$auth', '$state', 'userServicesFactory', '
     $scope.sloganText = "Envie de faire de nouvelles rencontres ?";
   }
   else {
-    $scope.sloganText = "When was the last time you met someone new?";
+    $scope.sloganText = "Wanna meet new people?";
   }
   $rootScope.changeLanguage = function(langKey) { // permet de changer la langue depuis index.html en cliquant sur un des drapeaux
     $translate.use(langKey);
@@ -499,8 +499,8 @@ var translationsEN = {
     "LOGOUT": 'Logout',
     "CREATE_A_MEAL": 'Create a meal',
     "BROWSE_A_MEAL": 'Browse a meal',
-    "SLOGAN_1": 'And the last time you ate with someone new ?',
-    "SLOGAN_2": 'When was the last time you met someone new ?',
+    "SLOGAN_1": 'And eat homemade food?',
+    "SLOGAN_2": 'Wanna meet new people?',
     "FOOTER": {
       "INFORMATION": {
         "TITLE": 'Information',
@@ -677,7 +677,7 @@ var translationsEN = {
         "MESSENGER_ALREADY": 'You already subscribed for receiving updates through messenger.',
       },
       "PUBLISH": 'Publish the meal',
-      "PUBLISH_NOT_CONNECTED": 'Sign In with facebook and',
+      "PUBLISH_NOT_CONNECTED": 'Sign in with facebook and',
     }
   },
   "VIEW_MEALS": {
@@ -751,7 +751,7 @@ var translationsEN = {
       "SEE_MEAL": 'See meal',
       "MEAL_FULL": 'The meal is already full!',
       "SIGN_IN_1": 'Please',
-      "SIGN_IN_2": 'Sign In',
+      "SIGN_IN_2": 'Sign in',
       "SIGN_IN_3": 'if you already subscribed.',
     }
   },
@@ -804,7 +804,7 @@ var translationsEN = {
     },
     "NOTIFICATIONS": 'Do you want to receive updates about the meal on messenger? (recommended)',
     "ACTION_BUTTON": {
-      "SUBSCRIBE_NOT_CONNECTED_1": 'Sign In with facebook',
+      "SUBSCRIBE_NOT_CONNECTED_1": 'Sign in with Facebook',
       "SUBSCRIBE_NOT_CONNECTED_2": 'to participate',
       "SUBSCRIBE": 'Participate',
       "SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",
@@ -2056,8 +2056,8 @@ var translationsES = {
     "LOGOUT": 'Logout',
     "CREATE_A_MEAL": 'Create a meal',
     "BROWSE_A_MEAL": 'Browse a meal',
-    "SLOGAN_1": 'And the last time you ate with someone new ?',
-    "SLOGAN_2": 'When was the last time you met someone new ?',
+    "SLOGAN_1": 'And eat homemade food?',
+    "SLOGAN_2": 'Wanna meet new people ?',
     "FOOTER": {
       "INFORMATION": {
         "TITLE": 'Information',
@@ -2234,7 +2234,7 @@ var translationsES = {
         "MESSENGER_ALREADY": 'You already subscribed for receiving updates through messenger.',
       },
       "PUBLISH": 'Publish the meal',
-      "PUBLISH_NOT_CONNECTED": 'Sign In with facebook and',
+      "PUBLISH_NOT_CONNECTED": 'Sign in with Facebook and',
     }
   },
   "VIEW_MEALS": {
@@ -2308,7 +2308,7 @@ var translationsES = {
       "SEE_MEAL": 'See meal',
       "MEAL_FULL": 'The meal is already full!',
       "SIGN_IN_1": 'Please',
-      "SIGN_IN_2": 'Sign In',
+      "SIGN_IN_2": 'Sign in',
       "SIGN_IN_3": 'if you already subscribed.',
     }
   },
@@ -2361,7 +2361,7 @@ var translationsES = {
     },
     "NOTIFICATIONS": 'Do you want to receive updates about the meal on messenger? (recommended)',
     "ACTION_BUTTON": {
-      "SUBSCRIBE_NOT_CONNECTED_1": 'Sign In with facebook',
+      "SUBSCRIBE_NOT_CONNECTED_1": 'Sign in with Facebook',
       "SUBSCRIBE_NOT_CONNECTED_2": 'to participate',
       "SUBSCRIBE": 'Participate',
       "SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",

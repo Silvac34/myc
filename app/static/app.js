@@ -279,7 +279,7 @@ app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$authProvi
 
   ezfbProvider.setInitParams({
     appId: ENV.appId,
-    version: 'v2.6'
+    version: 'v2.12'
   });
 
 }]);
@@ -1063,9 +1063,9 @@ var translationsEN = {
       "TITLE": 'General policies',
       "PARAGRAPH_1_1": 'The following policies are in place to ensure that myCommuneaty remains a fun and safe place for everyone.',
       "PARAGRAPH_1_NOTE": 'Note: the policies below are enforced under Terms of Use sections 4.1 and 4.2 and provided for further insight. Review the myCommuneaty',
-      "PARAGRAPH_1_TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
+      "PARAGRAPH_1_TERMS_OF_USE": "terMS OF USE",
       "PARAGRAPH_1_2": 'in its entirety for complete details. Please also see our',
-      "PARAGRAPH_1_PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "PARAGRAPH_1_PRIVACY_POLICY": "priVACY pOLICY",
       "PARAGRAPH_1_3": 'Violations of these policies may result in a range of actions including, but not limited to:',
       "PARAGRAPH_1_LIST": {
         "BULLET_1": 'Removal of violating content',
@@ -1121,9 +1121,9 @@ var translationsEN = {
     },
     "GUIDELINES": {
       "TITLE": 'Guidelines',
-      "GENERAL_POLICIES": "@: INDEX.FOOTER.SUPPORT.GENERAL_POLICIES",
-      "PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
-      "TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
+      "GENERAL_POLICIES": "General Policies",
+      "PRIVACY_POLICY": "priVACY pOLICY",
+      "TERMS_OF_USE": "terMS OF USE",
       "CONTACT_US": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
       "AND": 'and',
       "OR": 'or',
@@ -1160,7 +1160,7 @@ var translationsEN = {
       "FACEBOOK": 'On facebook'
     },
     "PRIVACY_POLICY": {
-      "TITLE": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "TITLE": "priVACY pOLICY",
       "LAST_UPDATE": 'Last updated : 30th of May, 2017',
       "PARAGRAPH": 'Please read our Privacy Policy carefully to get a clear understanding of how we collect, use, disclose, protect and otherwise handle information about you. By using myCommuneaty services, you consent to the collection and use of your data as described in this Privacy Policy.',
       "SUBTITLE_1": {
@@ -1841,9 +1841,9 @@ var translationsFR = {
       "TITLE": 'General policies',
       "PARAGRAPH_1_1": 'The following policies are in place to ensure that myCommuneaty remains a fun and safe place for everyone.',
       "PARAGRAPH_1_NOTE": 'Note: the policies below are enforced under Terms of Use sections 4.1 and 4.2 and provided for further insight. Review the myCommuneaty',
-      "PARAGRAPH_1_TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
+      "PARAGRAPH_1_TERMS_OF_USE": "terMS OF USE",
       "PARAGRAPH_1_2": 'in its entirety for complete details. Please also see our',
-      "PARAGRAPH_1_PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "PARAGRAPH_1_PRIVACY_POLICY": "priVACY pOLICY",
       "PARAGRAPH_1_3": 'Violations of these policies may result in a range of actions including, but not limited to:',
       "PARAGRAPH_1_LIST": {
         "BULLET_1": 'Removal of violating content',
@@ -1899,10 +1899,10 @@ var translationsFR = {
     },
     "GUIDELINES": {
       "TITLE": 'Guidelines',
-      "GENERAL_POLICIES": "@: INDEX.FOOTER.SUPPORT.GENERAL_POLICIES",
-      "PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
-      "TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
-      "CONTACT_US": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+      "GENERAL_POLICIES": "General policies",
+      "PRIVACY_POLICY": "Privacy policy",
+      "TERMS_OF_USE": "Terms of use",
+      "CONTACT_US": "Contact us",
       "AND": 'and',
       "OR": 'or',
       "BULLET_1_1": 'Be considerate and respectful',
@@ -1938,7 +1938,7 @@ var translationsFR = {
       "FACEBOOK": 'Sur facebook'
     },
     "PRIVACY_POLICY": {
-      "TITLE": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "TITLE": "priVACY pOLICY",
       "LAST_UPDATE": 'Last updated : 30th of May, 2017',
       "PARAGRAPH": 'Please read our Privacy Policy carefully to get a clear understanding of how we collect, use, disclose, protect and otherwise handle information about you. By using myCommuneaty services, you consent to the collection and use of your data as described in this Privacy Policy.',
       "SUBTITLE_1": {
@@ -2620,9 +2620,9 @@ var translationsES = {
       "TITLE": 'General policies',
       "PARAGRAPH_1_1": 'The following policies are in place to ensure that myCommuneaty remains a fun and safe place for everyone.',
       "PARAGRAPH_1_NOTE": 'Note: the policies below are enforced under Terms of Use sections 4.1 and 4.2 and provided for further insight. Review the myCommuneaty',
-      "PARAGRAPH_1_TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
+      "PARAGRAPH_1_TERMS_OF_USE": "terMS OF USE",
       "PARAGRAPH_1_2": 'in its entirety for complete details. Please also see our',
-      "PARAGRAPH_1_PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "PARAGRAPH_1_PRIVACY_POLICY": "priVACY pOLICY",
       "PARAGRAPH_1_3": 'Violations of these policies may result in a range of actions including, but not limited to:',
       "PARAGRAPH_1_LIST": {
         "BULLET_1": 'Removal of violating content',
@@ -2678,10 +2678,10 @@ var translationsES = {
     },
     "GUIDELINES": {
       "TITLE": 'Guidelines',
-      "GENERAL_POLICIES": "@: INDEX.FOOTER.SUPPORT.GENERAL_POLICIES",
-      "PRIVACY_POLICY": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
-      "TERMS_OF_USE": "@: INDEX.FOOTER.SUPPORT.TERMS_OF_USE",
-      "CONTACT_US": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+      "GENERAL_POLICIES": "General policies",
+      "PRIVACY_POLICY": "Privacy policy",
+      "TERMS_OF_USE": "Terms of use",
+      "CONTACT_US": "Contact us",
       "AND": 'and',
       "OR": 'or',
       "BULLET_1_1": 'Be considerate and respectful',
@@ -2712,12 +2712,12 @@ var translationsES = {
       "PARAGRAPH_2": 'In addition, we are always happy to receive constructive feedbacks, comments or ideas. So, please feel free to contact us by',
     },
     "CONTACT_US": {
-      "TITLE": "@: FOOTER.GENERAL_POLICIES.REPORTING_VIOLATIONS.CONTACT_US",
+      "TITLE": "Contact us",
       "EMAIL": 'By email',
       "FACEBOOK": 'On facebook'
     },
     "PRIVACY_POLICY": {
-      "TITLE": "@: INDEX.FOOTER.SUPPORT.PRIVACY_POLICY",
+      "TITLE": "priVACY pOLICY",
       "LAST_UPDATE": 'Last updated : 30th of May, 2017',
       "PARAGRAPH": 'Please read our Privacy Policy carefully to get a clear understanding of how we collect, use, disclose, protect and otherwise handle information about you. By using myCommuneaty services, you consent to the collection and use of your data as described in this Privacy Policy.',
       "SUBTITLE_1": {

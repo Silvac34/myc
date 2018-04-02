@@ -10,7 +10,7 @@
         <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-success':datasUserForEachMeal(meal).status == 'accepted','my-meal-dtld-panel-warning':datasUserForEachMeal(meal).status == 'pending'}" ng-click=openModalDtld(meal._id)>
                 <div class="meal-admin-container col-sm-2 hidden-xs" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
-                    <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                    <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                     <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                     <div class="well well-sm well-resume-rating" style="border:initial">
                         <table style="text-align:center">
@@ -89,7 +89,7 @@
                         </div>
                         <div class="clear10"></div>
                         <div>
-                            <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
+                            <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <strong class="text-info">{{meal.admin.first_name}} {{meal.admin.last_name}}</strong>
@@ -136,7 +136,7 @@
         <div class="list-group" style="cursor:pointer;">
             <a class="list-group-item list-group-meal" ng-class="{'my-meal-dtld-panel-info': datasUserForEachMeal(meal).status == 'accepted'}" ng-click=openModalDtld(meal._id)>
                 <div class="meal-admin-container col-sm-2 hidden-xs" ng-class="{'padding-top-10': meal.admin.reviews, 'padding-top-30': !meal.admin.reviews}">
-                    <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" />
+                    <img class="img-circle profilePic" ng-src="{{meal.admin.picture.data.url}}" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                     <div class="size-12 bold margintop15">{{meal.admin.first_name}} {{meal.admin.last_name | limitTo:1}}</div>
                     <div class="well well-sm well-resume-rating" style="border:initial">
                         <table style="text-align:center">
@@ -210,7 +210,7 @@
                         <div class="bold italic" translate>VIEW_MEALS.HOST</div>
                         <div class="clear10"></div>
                         <div>
-                            <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
+                            <img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <strong class="text-info">{{meal.admin.first_name}} {{meal.admin.last_name}}</strong>

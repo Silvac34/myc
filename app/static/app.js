@@ -488,8 +488,8 @@ app.filter('capitalizeFirstLetter', function() {
 var translationsEN = {
   "INDEX": {
     "ACTION_BUTTON": {
-      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
-      "SIGN_IN_2": 'with facebook',
+      "SIGN_IN_1": "Sign in",
+      "SIGN_IN_2": 'with Facebook',
     },
     "HELLO": 'Hi',
     "MY_MEALS": 'My meals',
@@ -582,7 +582,7 @@ var translationsEN = {
       "BROWSE_A_MEAL": "@:INDEX.BROWSE_A_MEAL"
     },
     "VALUES": {
-      "TITLE": 'values',
+      "TITLE": 'Values',
       "MEETING": {
         "NAME": 'MEETING',
         "DESCRIPTION": 'Meet gorgeous people from all over the world'
@@ -809,10 +809,10 @@ var translationsEN = {
       "SUBSCRIBE": 'Participate',
       "SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",
       "CANCEL": 'Cancel my request',
-      "MEAL_FULL": "@: VIEW_MEALS.ACTION_BUTTON.MEAL_FULL",
-      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1",
-      "SIGN_IN_2": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
-      "SIGN_IN_3": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3"
+      "MEAL_FULL": "The meal is already full!",
+      "SIGN_IN_1": 'Please',
+      "SIGN_IN_2": 'Sign in',
+      "SIGN_IN_3": 'if you already subscribed.'
     },
     "PARTICIPANTS": {
       "AGE": "@: PROFILE.YEARS_OLD",
@@ -1587,10 +1587,10 @@ var translationsFR = {
       "SUBSCRIBE": 'Participer',
       "SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",
       "CANCEL": 'Annuler ma réservation',
-      "MEAL_FULL": "@: VIEW_MEALS.ACTION_BUTTON.MEAL_FULL",
-      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1",
-      "SIGN_IN_2": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
-      "SIGN_IN_3": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3"
+      "MEAL_FULL": "The meal is already full!",
+      "SIGN_IN_1": 'Please',
+      "SIGN_IN_2": 'Sign in',
+      "SIGN_IN_3": 'if you already subscribed.'
     },
     "PARTICIPANTS": {
       "AGE": "@: PROFILE.YEARS_OLD",
@@ -2045,8 +2045,8 @@ var translationsFR = {
 var translationsES = {
   "INDEX": {
     "ACTION_BUTTON": {
-      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
-      "SIGN_IN_2": 'with facebook',
+      "SIGN_IN_1": "Sign in",
+      "SIGN_IN_2": 'with Facebook',
     },
     "HELLO": 'Hi',
     "MY_MEALS": 'My meals',
@@ -2139,7 +2139,7 @@ var translationsES = {
       "BROWSE_A_MEAL": "@:INDEX.BROWSE_A_MEAL"
     },
     "VALUES": {
-      "TITLE": 'values',
+      "TITLE": 'Values',
       "MEETING": {
         "NAME": 'MEETING',
         "DESCRIPTION": 'Meet gorgeous people from all over the world'
@@ -2366,10 +2366,10 @@ var translationsES = {
       "SUBSCRIBE": 'Participate',
       "SEE_MEAL": "@: VIEW_MEALS.ACTION_BUTTON.SEE_MEAL",
       "CANCEL": 'Cancel my request',
-      "MEAL_FULL": "@: VIEW_MEALS.ACTION_BUTTON.MEAL_FULL",
-      "SIGN_IN_1": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1",
-      "SIGN_IN_2": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2",
-      "SIGN_IN_3": "@: VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3"
+      "MEAL_FULL": "The meal is already full!",
+      "SIGN_IN_1": 'Please',
+      "SIGN_IN_2": 'Sign in',
+      "SIGN_IN_3": 'if you already subscribed.',
     },
     "PARTICIPANTS": {
       "AGE": "@: PROFILE.YEARS_OLD",

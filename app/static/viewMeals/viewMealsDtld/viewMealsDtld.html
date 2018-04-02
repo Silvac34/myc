@@ -128,7 +128,7 @@
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'admin'">
                     <div class="meal-dtld-list-user">
                         <div>
-                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" />
+                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
@@ -151,7 +151,7 @@
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'cook'">
                     <div class="meal-dtld-list-user">
                         <div>
-                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" />
+                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
@@ -174,7 +174,7 @@
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'cleaner'">
                     <div class="meal-dtld-list-user">
                         <div>
-                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" />
+                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>
@@ -197,7 +197,7 @@
                 <div ng-repeat="participant in meal.users" class="col-sm-6" ng-if="participant.status == 'accepted' && participant.role[0] == 'simpleGuest'">
                     <div class="meal-dtld-list-user">
                         <div>
-                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" />
+                            <img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:75px; height:75px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" />
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <a ui-sref="profile({userId: participant._id})" ng-click="cancel()"><strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong></a>

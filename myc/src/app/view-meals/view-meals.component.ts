@@ -22,24 +22,31 @@ export class ViewMealsComponent implements OnInit {
     weekDays: [{
       "label": "VIEW_MEALS.FILTERS.DAY.MONDAY",
       "selected": false,
+      "ind": 1
     }, {
       "label": "VIEW_MEALS.FILTERS.DAY.TUESDAY",
       "selected": false,
+      "ind": 2
     }, {
       "label": "VIEW_MEALS.FILTERS.DAY.WEDNESDAY",
       "selected": false,
+      "ind": 3
     }, {
       "label": "VIEW_MEALS.FILTERS.DAY.THURSDAY",
       "selected": false,
+      "ind": 4
     }, {
       "label": "VIEW_MEALS.FILTERS.DAY.FRIDAY",
       "selected": false,
+      "ind": 5
     }, {
       "label": "VIEW_MEALS.FILTERS.DAY.SATURDAY",
       "selected": false,
+      "ind": 6
     }, {
       "label": "VIEW_MEALS.FILTERS.DAY.SUNDAY",
       "selected" : false,
+      "ind": 0
     }],
     dateFilterMin: {
       opened: false,
@@ -57,7 +64,7 @@ export class ViewMealsComponent implements OnInit {
     },
     cityFilter: "",
     preferenceFilter: [{ 
-        "label": "VIEW_MEALS.FILTERS.PREFERENCES.VEGETARIAN",
+        "label": "VIEW_MEALS.FILTERS.PREFERENCES.VEGGIES",
         "selected": false 
       }, {
         "label": "VIEW_MEALS.FILTERS.PREFERENCES.VEGAN",
@@ -85,7 +92,9 @@ export class ViewMealsComponent implements OnInit {
   
   ngOnInit() {
     this.auth.userMeta.subscribe(results => {
-      this.userId = results.payload.id;
+      if(results){
+        this.userId = results.payload.id;
+      }
     });
     this.getMeals();
   }
@@ -106,7 +115,8 @@ export class ViewMealsComponent implements OnInit {
   
   getMeals() {
     let now = new Date;
-    this.meals = this.afs.collection("meals", ref => ref.where('date','>=',now).orderBy('date')).snapshotChanges().map(actions => {
+    //on définit par order desc par défaut puisque le filtre pour inverser l'ordre des repas s'initialise et le fait 1 fois par défaut. Il faut donc charger les meals à l'envers.
+    this.meals = this.afs.collection("meals", ref => ref.where('date','>=',now).orderBy('date','desc')).snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
         //on récupère les détails de chacun de utilisateurs
@@ -135,7 +145,7 @@ export class ViewMealsComponent implements OnInit {
       })
     });
     
-    this.oldMeals = this.afs.collection("meals", ref => ref.where('date','<',now).orderBy('date', 'desc')).snapshotChanges().map(actions => {
+    this.oldMeals = this.afs.collection("meals", ref => ref.where('date','<',now).orderBy('date', 'asc')).snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
         //on récupère les détails de chacun de utilisateurs

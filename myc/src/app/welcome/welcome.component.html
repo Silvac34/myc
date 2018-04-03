@@ -1,3 +1,26 @@
+<!-- Image and text -->
+<nav class="navbar">
+    <div class="d-flex align-items-center">
+        <img src="/assets/images/logo/logo_with_circle.jpg" width="50" height="50" alt="myCommuneaty">
+        <h1 class="float-right mt-2">myCommuneaty</h1>
+    </div>
+    <div class="float-right">
+        <div ngbDropdown class="d-inline-block" placement="bottom-right" *ngIf="auth.user | async; let user; else guest">
+            <button class="btn btn-outline-info dropdown-toggle btn-sm-xs" type="button" translate [translateParams]="{userName: user.first_name}" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">INDEX.HELLO</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-right">
+                <a routerLink="/my_meals" class="dropdown-item" translate>INDEX.MY_MEALS</a>
+                <a routerLink="/profile" class="dropdown-item" translate>INDEX.PROFILE</a>
+                <div class="dropdown-divider"></div>
+                <a routerLink="/create_meal" class="dropdown-item" translate>INDEX.MANAGE_REQUESTS</a>
+                <a routerLink="/create_meal" class="dropdown-item" translate>INDEX.LEAVE_REVIEWS</a>
+                <a routerLink="/create_meal" class="dropdown-item" (click)="auth.signOut()" translate>INDEX.LOGOUT</a>
+            </div>
+        </div>
+        <ng-template #guest>
+            <button class="btn btn-primary btn-sm-xs" (click)="openModalFilter(modalContent)" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button>
+        </ng-template>
+    </div>
+</nav>
 <header></header>
 <div class="container-fluid">
     <h2 class="slogan text-center">

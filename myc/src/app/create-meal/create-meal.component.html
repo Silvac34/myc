@@ -76,7 +76,7 @@
                     <tr class="table-meal-border" formGroupName="simpleGuests">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.SIMPLE_GUEST.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</span></td>
                         <td class="px-0"><input type="number" min="0" class="form-control text-center" formControlName="nbRquSimpleGuests" name="nbRquSimpleGuests"></td>
-                        <td class="align-middle"><span *ngIf="nbRquSimpleGuests">{{ createMealForm.get('time').value }}</span></td>
+                        <td class="align-middle"><span *ngIf="createMealForm.get('detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests').value > 0">{{ createMealForm.get('time').value }}</span></td>
                     </tr>
                     <tr class="table-meal-border table-meal-border-bottom">
                         <td class="text-left" translate>CREATE_A_MEAL.FORM.TOTAL</td>

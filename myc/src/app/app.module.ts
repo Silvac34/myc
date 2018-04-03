@@ -46,7 +46,7 @@ registerLocaleData(localeFr, 'fr-FR');
 import { CreateMealComponent } from './create-meal/create-meal.component';
 import { ViewMealsComponent } from './view-meals/view-meals.component';
 import { MyMealsComponent } from './my-meals/my-meals.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent, NgbdModalLoginContent } from './welcome/welcome.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ConceptComponent } from './footer/information/concept/concept.component';
 import { FaqComponent } from './footer/information/faq/faq.component';
@@ -65,14 +65,15 @@ import { FilterComponent } from './view-meals/filter/filter.component';
 import { ListComponent } from './view-meals/container/list/list.component';
 import { MapComponent } from './view-meals/container/map/map.component';
 
+//external modules
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
 //Pipes
 import { LimitToPipe } from './pipes/limit-to.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { DateTranslatePipe } from './pipes/date-translate.pipe';
-
-//external modules
-import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { DatePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe } from './pipes/meals.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -86,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ViewMealsComponent,
     MyMealsComponent,
     WelcomeComponent,
+    NgbdModalLoginContent,
     ProfileComponent,
     ConceptComponent,
     FaqComponent,
@@ -104,7 +106,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     LimitToPipe,
     CapitalizePipe,
     DateTranslatePipe,
-    ReversePipe
+    ReversePipe,
+    DaysPipe,
+    DatePipe,
+    PreferencePipe,
+    HelpingTypePipe,
+    PricePipe
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -149,9 +156,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       titleFontSize: '14'
     })
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, ],
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],
   bootstrap: [AppComponent],
-  entryComponents: [FilterComponent]
+  entryComponents: [FilterComponent, NgbdModalLoginContent]
 })
 
 export class AppModule { }

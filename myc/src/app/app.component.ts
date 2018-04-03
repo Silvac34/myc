@@ -14,7 +14,7 @@ import { FacebookService, InitParams } from 'ngx-facebook';
 
 export class AppComponent {
 
-  constructor(private translate: TranslateService, private router: Router, public auth: AuthService, private fb: FacebookService) {
+  constructor(private translate: TranslateService, public router: Router, public auth: AuthService, private fb: FacebookService) {
     let userLang = navigator.language;
     if(userLang === "fr") {
       userLang = "fr-FR"

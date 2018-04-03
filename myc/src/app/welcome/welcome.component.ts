@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'app-welcome',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { 
+  constructor(private modalService: NgbModal, public auth: AuthService) { 
   }
   
   sloganText: String;
@@ -15,5 +17,31 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     this.sloganText = 'INDEX.SLOGAN_2';
   }
+  
+  openModalFilter(content) {
+    this.modalService.open(NgbdModalLoginContent)
+  }
+  
 
+}
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title" translate>LOGIN.TITLE</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-login [isOpen]="true"></app-login>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')" translate>LOGIN.CLOSE</button>
+    </div>
+  `
+})
+export class NgbdModalLoginContent {
+  constructor(public activeModal: NgbActiveModal) {}
 }

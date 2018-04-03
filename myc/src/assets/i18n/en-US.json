@@ -2,14 +2,14 @@
 	"INDEX": {
 		"ACTION_BUTTON": {
 			"SIGN_IN_1": "Sign in",
-			"SIGN_IN_2": "with facebook"
+			"SIGN_IN_2": "with Facebook"
 		},
-		"HELLO": "Hi",
+		"HELLO": "Hi {{userName}}",
 		"MY_MEALS": "My meals",
 		"PROFILE": "My profile ",
 		"MANAGE_REQUESTS": "Manage requests",
 		"LEAVE_REVIEWS": "Leave reviews",
-		"LOGOUT": "Logout",
+		"LOGOUT": "Log out",
 		"CREATE_A_MEAL": "Create a meal",
 		"BROWSE_A_MEAL": "Browse a meal",
 		"SLOGAN_1": "And the last time you ate with someone new ?",
@@ -235,7 +235,7 @@
 			"PREFERENCES": {
 				"TITLE": "Preferences",
 				"TITLE_MOBILE": "Meal preferences",
-				"VEGETARIAN": "Vegetarian",
+				"VEGGIES": "Vegetarian",
 				"VEGAN": "Vegan",
 				"KOSHER": "Kosher",
 				"HALAL": "Halal"
@@ -409,8 +409,11 @@
 		}
 	},
 	"LOGIN": {
+		"TITLE": "Log in",
 		"PARAGRAPH": "You need to sign in to keep going",
-		"SIGN_IN": "Sign In with facebook"
+		"SIGN_IN_FACEBOOK": "Sign in with Facebook",
+		"SIGN_IN_GOOGLE": "Sign in with Google",
+		"CLOSE": "Close"
 	},
 	"VIEW_MY_MEALS": {
 		"INCOMING_MEALS": "Incoming meals",

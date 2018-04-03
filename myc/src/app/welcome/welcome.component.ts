@@ -35,7 +35,7 @@ export class WelcomeComponent implements OnInit {
       </button>
     </div>
     <div class="modal-body">
-      <app-login [isOpen]="true"></app-login>
+      <app-login></app-login>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')" translate>LOGIN.CLOSE</button>

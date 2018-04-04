@@ -18,7 +18,7 @@ export class WelcomeComponent implements OnInit {
     this.sloganText = 'INDEX.SLOGAN_2';
   }
   
-  openModalFilter(content) {
+  openModalLogin(content) {
     this.modalService.open(NgbdModalLoginContent)
   }
   

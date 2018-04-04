@@ -34,7 +34,7 @@
             <a class="dropdown-item" (click)="auth.signOut()" translate>INDEX.LOGOUT</a>
           </div>
         </li>
-        <ng-template #guest><button class="btn btn-outline-light" routerLink="/login" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button></ng-template>
+        <ng-template #guest><button class="btn btn-outline-light" (click)="openModalLogin(modalContent)" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button></ng-template>
       </ul>
     </div>
   </nav>

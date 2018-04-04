@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { environment } from '../environments/environment';
 import { FacebookService, InitParams } from 'ngx-facebook';
+import { NgbdModalLoginContent } from './welcome/welcome.component'
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ import { FacebookService, InitParams } from 'ngx-facebook';
 
 export class AppComponent {
 
-  constructor(private translate: TranslateService, public router: Router, public auth: AuthService, private fb: FacebookService) {
+  constructor(private translate: TranslateService, public router: Router, public auth: AuthService, private fb: FacebookService, private modalService: NgbModal) {
     let userLang = navigator.language;
     if(userLang === "fr") {
       userLang = "fr-FR"
@@ -31,6 +33,10 @@ export class AppComponent {
   public isCollapsed = true;
   switchLanguage(language: string) {
     this.translate.use(language);
+  }
+  
+  openModalLogin(content) {
+    this.modalService.open(NgbdModalLoginContent)
   }
   
 }

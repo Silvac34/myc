@@ -15,6 +15,7 @@ export class ViewMealsComponent implements OnInit {
   public meals: any;
   public oldMeals: any;
   public userId: string = null;
+  public incomingMeals: boolean;
   public displayMealList: boolean = true;
   public arrowDirection: string = "down";
   public reverseOrderMeal: number = 0;
@@ -96,7 +97,13 @@ export class ViewMealsComponent implements OnInit {
         this.userId = results.payload.id;
       }
     });
-    this.getMeals();
+    const now = new Date;
+    this.getMeals(now);
+    this.meals.subscribe(result => {
+      if(result.length === 0) { 
+        this.getOldMeals(now);
+      }
+    })
   }
 
   openModalFilter(content) {
@@ -113,68 +120,44 @@ export class ViewMealsComponent implements OnInit {
     this.reverseOrderMeal++;
   }
   
-  getMeals() {
-    let now = new Date;
-    //on définit par order desc par défaut puisque le filtre pour inverser l'ordre des repas s'initialise et le fait 1 fois par défaut. Il faut donc charger les meals à l'envers.
-    this.meals = this.afs.collection("meals", ref => ref.where('date','>=',now).orderBy('date','desc')).snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        //on récupère les détails de chacun de utilisateurs
-        for (let i = 0; i < data.users.length; i++) {
-          this.getUserService.getUserFromId(data.users[i].id).subscribe(results => {
-            data.users[i]["detail"] = results ;
-          });
-          //on définit le prix à afficher par repas
-          if (data.users[i].role === "cooks") {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.cooks.price;
-          }
-          else if (data.users[i].role === "cleaners") {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.cleaners.price;
-          }
-          else if (data.users[i].role === "simpleGuests") {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.simpleGuests.price;
-          }
-          else  {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.hosts.price;
-          }
-          data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
+  getMealDetailedFunction(actions) {
+    return actions.map(a => {
+      const data = a.payload.doc.data();
+      //on récupère les détails de chacun de utilisateurs
+      for (let i = 0; i < data.users.length; i++) {
+        this.getUserService.getUserFromId(data.users[i].id).subscribe(results => {
+          data.users[i]["detail"] = results ;
+        });
+        //on définit le prix à afficher par repas
+        if (data.users[i].role === "cooks") {
+          data["mealPrice"] = data.detailedInfo.requiredGuests.cooks.price;
         }
-        
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      })
-    });
-    
-    this.oldMeals = this.afs.collection("meals", ref => ref.where('date','<',now).orderBy('date', 'asc')).snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        //on récupère les détails de chacun de utilisateurs
-        for (let i = 0; i < data.users.length; i++) {
-          this.getUserService.getUserFromId(data.users[i].id).subscribe(results => {
-            data.users[i]["detail"] = results ;
-          });
-          //on définit le prix à afficher par repas
-          if (data.users[i].role === "cooks") {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.cooks.price;
-          }
-          else if (data.users[i].role === "cleaners") {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.cleaners.price;
-          }
-          else if (data.users[i].role === "simpleGuests") {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.simpleGuests.price;
-          }
-          else  {
-            data["mealPrice"] = data.detailedInfo.requiredGuests.hosts.price;
-          }
-          data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
+        else if (data.users[i].role === "cleaners") {
+          data["mealPrice"] = data.detailedInfo.requiredGuests.cleaners.price;
         }
-        
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      })
-    });
+        else if (data.users[i].role === "simpleGuests") {
+          data["mealPrice"] = data.detailedInfo.requiredGuests.simpleGuests.price;
+        }
+        else  {
+          data["mealPrice"] = data.detailedInfo.requiredGuests.hosts.price;
+        }
+        data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
+      }
+      
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    })
   }
-
+  
+  getMeals(now) {
+    //on définit par order desc par défaut puisque le filtre pour inverser l'ordre des repas s'initialise et le fait 1 fois par défaut. Il faut donc charger les meals à l'envers.
+    this.meals = this.afs.collection("meals", ref => ref.where('date','>=',now).orderBy('date','desc')).snapshotChanges().map(actions => this.getMealDetailedFunction(actions));
+  }
+  
+  getOldMeals(now) {
+    this.meals = this.afs.collection("meals", ref => ref.where('date','<',now).orderBy('date', 'asc')).snapshotChanges().map(actions => this.getMealDetailedFunction(actions));
+  }
+    
   InitializeMealsMap() {
     console.log("initializing");
   }

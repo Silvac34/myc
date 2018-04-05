@@ -4,6 +4,9 @@ import { FilterComponent } from './filter/filter.component';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from '../services/get-user.service';
 import { AuthService } from '../services/auth.service';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+    
+const now = new Date;
 
 @Component({
   selector: 'app-view-meals',
@@ -20,7 +23,7 @@ export class ViewMealsComponent implements OnInit {
   public arrowDirection: string = "down";
   public reverseOrderMeal: number = 0;
   public selectedFilter = {
-    weekDays: [{
+    "weekDays": [{
       "label": "VIEW_MEALS.FILTERS.DAY.MONDAY",
       "selected": false,
       "ind": 1
@@ -49,22 +52,15 @@ export class ViewMealsComponent implements OnInit {
       "selected" : false,
       "ind": 0
     }],
-    dateFilterMin: {
-      opened: false,
-      value: null
+    "dateFilterMin": null,
+    "dateFilterMax": null,
+    "priceFilterMin": null,
+    "priceFilterMax": null,
+    "cityFilter": {
+      "town": null,
+      "country_code": null
     },
-    dateFilterMax: {
-      opened: false,
-      value: null
-    },
-    priceFilterMin: {
-      value: null
-    },
-    priceFilterMax: {
-      value: null
-    },
-    cityFilter: "",
-    preferenceFilter: [{ 
+    "preferenceFilter": [{ 
         "label": "VIEW_MEALS.FILTERS.PREFERENCES.VEGGIES",
         "selected": false 
       }, {
@@ -77,7 +73,7 @@ export class ViewMealsComponent implements OnInit {
         "label": "VIEW_MEALS.FILTERS.PREFERENCES.KOSHER",
         "selected": false 
     }],
-    helpTypeFilter: [{ 
+    "helpTypeFilter": [{ 
         "label": "VIEW_MEALS.FILTERS.HELP_TYPE.HELP_COOKING",
         "selected": false 
       }, {
@@ -88,8 +84,13 @@ export class ViewMealsComponent implements OnInit {
         "selected": false 
     }]
   };
+  public hoveredDate: NgbDateStruct;
+  public fromDate: NgbDateStruct;
+  public toDate: NgbDateStruct;
   
-  constructor(private modalService: NgbModal, private afs: AngularFirestore, private getUserService: GetUserService, public auth: AuthService) { }
+  constructor(private modalService: NgbModal, private afs: AngularFirestore, private getUserService: GetUserService, public auth: AuthService) {
+
+  }
   
   ngOnInit() {
     this.auth.userMeta.subscribe(results => {
@@ -97,11 +98,13 @@ export class ViewMealsComponent implements OnInit {
         this.userId = results.payload.id;
       }
     });
-    const now = new Date;
     this.getMeals(now);
     this.meals.subscribe(result => {
       if(result.length === 0) { 
         this.getOldMeals(now);
+      }
+      else {
+        this.getMeals(now);
       }
     })
   }
@@ -162,5 +165,4 @@ export class ViewMealsComponent implements OnInit {
     console.log("initializing");
   }
   
-  //faire une fonction qui applique les filtres
 };

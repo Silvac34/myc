@@ -15,5 +15,6 @@ export const environment = {
     version          : 'v2.12'
   },
   pageId: "254569051671689",
-  fbRedirectURI: "https://mycommuneaty-165310.firebaseapp.com"//à changer avec l'adresse de production
+  fbRedirectURI: "https://mycommuneaty-165310.firebaseapp.com",
+  googleMapKey: "AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M"
 };

@@ -1,10 +1,8 @@
 <div class="container-fluid">
   <div class="clearfix px-3 pt-3 d-none d-md-block">
     <h1 class="general-title float-left">- <span translate>VIEW_MEALS.TITLE</span> -</h1>
-    <h2 class="float-right">
-      <span class="general-title" translate>VIEW_MEALS.ORDER_BY.NAME</span>
-      <button type="button" class="btn btn-primary" ngbTooltip="{{'VIEW_MEALS.ORDER_BY.POPOVER'|translate}}" placement="top" (click)="changeArrow()"><i class="fa fa-clock-o" aria-hidden="true"></i> <i class="fa fa-arrow-{{arrowDirection}}" aria-hidden="true"></i></button>
-    </h2>
+    <button type="button" class="btn btn-primary btn-sm float-right" ngbTooltip="{{'VIEW_MEALS.ORDER_BY.POPOVER'|translate}}" placement="top" (click)="changeArrow()"><i class="fa fa-clock-o" aria-hidden="true"></i> <i class="fa fa-arrow-{{arrowDirection}}" aria-hidden="true"></i></button>
+    <h6 class="float-right general-subtitle font-weight-bold pr-1 mt-1" translate>VIEW_MEALS.ORDER_BY.NAME</h6>
   </div>
 
 
@@ -51,7 +49,7 @@
         </div>
       </form>
     </div>
-    <div class="col-md-9 col-12">
+    <div class="col-md-9 col-12 mt-2">
       <!--<div class="row fade-out-success" ng-show="manualSubscriptionPending==true">
         <div class="col-12">
           <div class="alert alert-dismissible alert-warning">

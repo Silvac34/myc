@@ -73,7 +73,7 @@ import { LimitToPipe } from './pipes/limit-to.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { DateTranslatePipe } from './pipes/date-translate.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
-import { DatePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe } from './pipes/meals.pipe';
+import { DateRangePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe, CityPipe } from './pipes/meals.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -108,10 +108,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     DateTranslatePipe,
     ReversePipe,
     DaysPipe,
-    DatePipe,
+    DateRangePipe,
     PreferencePipe,
     HelpingTypePipe,
-    PricePipe
+    PricePipe,
+    CityPipe
   ],
   imports: [
     AgmCoreModule.forRoot({

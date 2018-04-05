@@ -23,7 +23,8 @@ import { FacebookModule } from 'ngx-facebook';
 
 //services
 import { AuthService } from './services/auth.service'; //authentification firebase
-import { AgmCoreModule } from '@agm/core'; //google-map 
+import { AgmCoreModule } from '@agm/core'; //google-map
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window'; //info windows for gmap
 import { GoogleMapService } from './services/google-map.service'; //google-map créer par moi même
 import { CurrencyService } from './services/currency.service'; // pour obtenir le symbol de la monnaie selon le pays
 import { GetUserService } from './services/get-user.service'; // on obtient les données associés à un utilisateur
@@ -116,9 +117,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M",
+      apiKey: environment.googleMapKey,
       libraries: ["places"]
     }),
+    AgmSnazzyInfoWindowModule,
     BrowserModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule,

@@ -1,0 +1,331 @@
+<div *ngFor="let meal of (meals | async | reverse: reverseOrderMeal | daysPipe: selectedFilter.weekDays | pricePipe: selectedFilter | dateRangePipe: selectedFilter | preferencePipe: selectedFilter.preferenceFilter | helpingTypePipe: selectedFilter.helpTypeFilter | cityPipe: selectedFilter.cityFilter); let first = first">
+    <div *ngIf="first && ms.datasUserForEachMeal(meal, userId).status == 'old'">
+        <div class="card text-center border-0">
+            <div class="card-body">
+                <h5 class="card-title" translate>VIEW_MEALS.NO_INCOMING_MEALS_1</h5>
+                <a routerLink="create_meal" class="btn btn-primary" href="#/create_meal" translate>VIEW_MEALS.CREATE_YOUR_MEAL</a>
+                <h5 class="card-title mt-2"><span translate>VIEW_MEALS.NO_INCOMING_MEALS_2</span><i class="fa fa-thumbs-up text-primary pl-2"></i></h5>
+            </div>
+        </div>
+        <hr class="col-6">
+        <h5 translate class="text-info">VIEW_MY_MEALS.PREVIOUS_MEALS</h5>
+    </div>
+    <div class="card mb-3 pointer" [ngClass]="{'border-success': ms.datasUserForEachMeal(meal, userId).status == 'accepted','border-warning':ms.datasUserForEachMeal(meal, userId).status == 'pending', 'border-info':ms.datasUserForEachMeal(meal, userId).status == 'old'}"
+        (click)=openModalDtld(meal._id)>
+        <div class="card-body">
+            <div class="row">
+                <div class="d-none d-md-block col-md-auto text-center">
+                    <img class="rounded-circle profilePic mt-2" src="{{meal.users[0].detail?.picture}}" alt="" onerror="this.src='/assets/images/view_meals/unknown_user.png'" />
+                    <div class="size-12 font-weight-bold mt-2 text-dark">{{meal.users[0].detail?.first_name}} {{meal.users[0].detail?.last_name[0]}}</div>
+                    <div class="card card-sm card-resume-rating" style="border:initial">
+                        <table class="text-center">
+                            <tbody>
+                                <tr>
+                                    <td *ngIf="meal.users[0].detail?.reviews.positive > 0" class="pr-2"><span class="fa fa-plus-circle text-success"></span></td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.neutral > 0"><span class="fa fa-dot-circle-o text-info"></span></td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.negative > 0" class="pl-2"><span class="fa fa-minus-circle text-danger"></span></td>
+                                </tr>
+                                <tr style="font-size:11px" *ngIf="meal.users[0].detail?.reviews.positive > 0|| meal.users[0].detail?.reviews.neutral > 0 || meal.users[0].detail?.reviews.negative > 0">
+                                    <td *ngIf="meal.users[0].detail?.reviews.positive > 0" class="pr-2">{{meal.users[0].detail?.reviews.positive}}</td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.neutral > 0">{{meal.users[0].detail?.reviews.neutral}}</td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.negative > 0" class="pl-2">{{meal.users[0].detail?.reviews.negative}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12 col-md text-dark mx-2">
+                    <div class="row mb-2">
+                        <div class="mr-auto p-0 size-20">
+                            <strong class="d-block d-sm-none">{{meal.menu.title | limitTo: 58}}{{meal.menu.title.length > 58 ? '...' : ''}}</strong>
+                            <strong class="d-none d-sm-block d-md-none">{{meal.menu.title | limitTo: 75}}{{meal.menu.title.length > 75 ? '...' : ''}}</strong>
+                            <strong class="d-none d-md-block d-lg-none">{{meal.menu.title | limitTo: 105}}{{meal.menu.title.length > 105 ? '...' : ''}}</strong>
+                            <strong class="d-none d-lg-block">{{meal.menu.title | limitTo: 150}}{{meal.menu.title.length > 150 ? '...' : ''}}</strong>
+                        </div>
+                        <div class="pr-3" *ngIf="ms.datasUserForEachMeal(meal, userId)">
+                            <div class="text-right font-weight-bold" [ngClass]="{'text-success': ms.datasUserForEachMeal(meal, userId).status == 'accepted', 'text-warning': ms.datasUserForEachMeal(meal, userId).status == 'pending', 'text-info': ms.datasUserForEachMeal(meal, userId).status == 'old'}">
+                                <span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='accepted' && ms.datasUserForEachMeal(meal, userId).role != 'admin'" translate>VIEW_MEALS.ATTENDING</span>
+                                <span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='accepted' && ms.datasUserForEachMeal(meal, userId).role == 'admin'" translate>VIEW_MEALS.HOSTING</span>
+                                <span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='old' && ms.datasUserForEachMeal(meal, userId).role != 'admin'" translate>VIEW_MEALS.ATTENDED</span>
+                                <span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='old' && ms.datasUserForEachMeal(meal, userId).role == 'admin'" translate>VIEW_MEALS.HOSTED</span>
+                                <span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='pending'" translate>VIEW_MEALS.PENDING</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto mr-auto">
+                            <div class="row align-items-center">
+                                <span class="fa fa-map-marker pr-1"></span>{{meal.address.town}}, {{meal.address.country}}<span class="d-block d-sm-none"><br /><span style="padding-left:15px" *ngIf="meal.address.postalCode">{{meal.address.postalCode}}</span></span>
+                                <span class="hidden-xs" *ngIf="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
+                            </div>
+                            <div class="row align-items-center">
+                                <span class="fa fa-calendar pr-1"></span>{{meal.date | date:'EEEE dd MMMM'}}<span class="d-none d-sm-block"> <span class="fa fa-clock-o pr-1 pl-3"></span>{{meal.date | date:'HH:mm'}}</span>
+                            </div>
+                            <div class="row align-items-center d-block d-sm-none">
+                                <span class="fa fa-clock-o pr-1"></span>{{meal.date | date:'HH:mm'}}
+                            </div>
+                            <div class="row align-items-center">
+                                <span class="fa fa-money pr-1"></span> <span><span translate>VIEW_MEALS.PRICE</span> <strong class="size-15 text-success"><span *ngIf="meal.currency_symbol !== '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span *ngIf="meal.currency_symbol === '€'"> {{meal.currency_symbol}}</span></strong></span>
+                            </div>
+                            <div class="row align-items-center" *ngIf="meal.veggies === true">
+                                <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:21px" class="pr-1"><span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+                            </div>
+                            <div class="row align-items-center" *ngIf="meal.vegan === true">
+                                <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:21px" class="pr-1"><span translate>VIEW_MEALS.VEGAN_MEAL</span>
+                            </div>
+                            <div class="row align-items-center" *ngIf="meal.halal === true">
+                                <img src="/assets/images/view_meals/halal-sign.png" class="pr-1"><span translate>VIEW_MEALS.HALAL_MEAL</span>
+                            </div>
+                            <div class="row align-items-center" *ngIf="meal.kosher === true">
+                                <img src="/assets/images/view_meals/kosher-sign.png" class="pr-1"><span translate>VIEW_MEALS.KOSHER_MEAL</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <circle-progress [percent]="(meal.nbGuests - meal.nbRemainingPlaces)*100/meal.nbGuests" [maxPercent]="meal.nbGuests" [title]="meal.nbGuests - meal.nbRemainingPlaces + ' / ' + meal.nbGuests"></circle-progress>
+                        </div>
+                    </div>
+                    <div class="row align-items-center" *ngIf="ms.datasUserForEachMeal(meal, userId).pendingRequests > 0">
+                        <i class="fa fa-user-plus pr-1"></i> <strong class="text-warning">{{ms.datasUserForEachMeal(meal, userId).pendingRequests}} <span translate>VIEW_MY_MEALS.PENDING_REQUEST</span><span *ngIf="ms.datasUserForEachMeal(meal, userId).pendingRequests > 1">s</span></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="card mb-3 pointer" *ngFor="let meal of meals | async">
+    <div class="row">
+        <a [ngClass]="{'border-success':ms.datasUserForEachMeal(meal, userId).status == 'accepted','border-warning':ms.datasUserForEachMeal(meal, userId).status == 'pending'}" (click)=openModalDtld(meal._id)>
+            <div class="meal-admin-container col-md-2 d-none d-sm-block" [ngClass]="{'pt-1': meal.users[0].detail?.reviews, 'pt-4': !meal.users[0].detail?.reviews}">
+                <img class="rounded-circle profilePic" src="{{meal.users[0].detail?.picture}}" alt="User profile picture" />
+                <div class="size-12 font-weight-bold mt-2">{{meal.users[0].detail?.first_name}} {{meal.users[0].detail?.last_name | limitTo:1}}</div>
+                <div class="card card-sm card-resume-rating" style="border:initial">
+                    <table style="text-align:center">
+                        <tbody>
+                            <tr>
+                                <td *ngIf="meal.users[0].detail?.reviews.neutral" style="padding:0px 4px"><span class="fa fa-record text-default"></span></td>
+                                <td *ngIf="meal.users[0].detail?.reviews.negative" style="padding-left:4px"><span class="fa fa-minus-sign text-danger"></span></td>
+                            </tr>
+                            <tr style="font-size:11px" *ngIf="meal.users[0].detail?.reviews.positive || meal.users[0].detail?.reviews.neutral || meal.users[0].detail?.reviews.negative">
+                                <td *ngIf="meal.users[0].detail?.reviews.positive" style="padding-right:4px">{{meal.users[0].detail?.reviews.positive}}</td>
+                                <td *ngIf="meal.users[0].detail?.reviews.neutral" style="padding:0px 4px">{{meal.users[0].detail?.reviews.neutral}}</td>
+                                <td *ngIf="meal.users[0].detail?.reviews.negative" style="padding-left:4px">{{meal.users[0].detail?.reviews.negative}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-md-10" style="display:table-cell">
+                <div class="row">
+                    <div class="meal-menu text-left" [ngClass]="{'col-8 col-md-9 col-lg-10':ms.datasUserForEachMeal(meal, userId),'col-12':!ms.datasUserForEachMeal(meal, userId)}">
+                        <strong class="d-block d-sm-none">{{meal.menu.title | limitTo: 58}}{{meal.menu.title.length > 58 ? '...' : ''}}</strong>
+                        <strong class="d-none d-sm-block d-md-none">{{meal.menu.title | limitTo: 75}}{{meal.menu.title.length > 75 ? '...' : ''}}</strong>
+                        <strong class="d-none d-md-block d-lg-none">{{meal.menu.title | limitTo: 105}}{{meal.menu.title.length > 105 ? '...' : ''}}</strong>
+                        <strong class="d-none d-lg-block">{{meal.menu.title | limitTo: 150}}{{meal.menu.title.length > 150 ? '...' : ''}}</strong>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 col-md-3 col-lg-2" *ngIf="ms.datasUserForEachMeal(meal, userId)">
+                            <div class="pull-right" [ngClass]="{'text-success': ms.datasUserForEachMeal(meal, userId).status == 'accepted', 'text-warning': ms.datasUserForEachMeal(meal, userId).status == 'pending'}"><strong><span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='accepted' && ms.datasUserForEachMeal(meal, userId).role != 'admin'" translate>VIEW_MEALS.ATTENDING</span><span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='accepted' && ms.datasUserForEachMeal(meal, userId).role == 'admin'" translate>VIEW_MEALS.HOSTING</span><span *ngIf="ms.datasUserForEachMeal(meal, userId).status =='pending'" translate>VIEW_MEALS.PENDING</span></strong></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <div class="row meal-info-label">
+                            <span class="fa fa-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span class="d-block d-sm-none"><br /><span style="padding-left:15px" *ngIf="meal.address.postalCode">{{meal.address.postalCode}}</span></span>
+                            <span class="hidden-xs" *ngIf="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
+                        </div>
+                        <div class="row meal-info-label">
+                            <span class="fa fa-calendar"></span> {{meal.date |date:'EEEE dd MMMM'}} <span class="d-block d-sm-none"><br /></span><span class="fa fa-clock-o meal-clock-display"></span> {{meal.date |date:'HH:mm'}}
+                        </div>
+                    </div>
+                    <div class="col-2" style="margin-top:-8px;">
+                        <div class="row">
+                            <div ng-style="getStyle()" style="float:right;width:51px;text-align:center">
+                                <div ng-style="getStyle()" class="" style="font-size: 11px;top:32px;position:relative;font-weight:font-weight-bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                                <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:7px;">
+                    <span class="fa fa-piggy-bank"></span> <span><span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                </div>
+                <div class="row" *ngIf="meal.veggies == true" style="margin-top:7px">
+                    <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+                </div>
+                <div class="row" *ngIf="meal.vegan == true" style="margin-top:7px">
+                    <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
+                </div>
+                <div class="row" *ngIf="meal.halal == true" style="margin-top:7px">
+                    <img src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
+                </div>
+                <div class="row" *ngIf="meal.kosher == true" style="margin-top:7px">
+                    <img src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
+                </div>
+                <div class="row" *ngIf="ms.datasUserForEachMeal(meal, userId).pendingRequests > 0 && meal.users[0].detail?._id == user._id" style="margin-top:7px">
+                    <i class="fa fa-user-plus"></i> <strong class="text-warning">{{ms.datasUserForEachMeal(meal, userId).pendingRequests}} pending request<span *ngIf="ms.datasUserForEachMeal(meal, userId).pendingRequests > 1">s</span></strong>
+                </div>
+                <!--<div class="row visible-xs">
+                        <div class="clear5"></div>
+                        <div class="clear5 list-meal-separation"></div>
+                        <div>
+                            <strong><em>The host</em></strong>
+                        </div>
+                        <div class="clear10"></div>
+                        <div>
+                            <img src="{{meal.users[0].detail?.picture}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
+                            <div style="position:relative; left:10px;">
+                                <div>
+                                    <strong class="text-info">{{meal.users[0].detail?.first_name}} {{meal.users[0].detail?.last_name}}</strong>
+                                </div>
+                                <div class="small" style="padding-top:4px">
+                                    <span *ngIf="meal.users[0].detail?.gender"><i class="fa fa-venus-mars"></i> {{meal.users[0].detail?.gender | capitalize}}<br /></span>
+                                    <span *ngIf="meal.users[0].detail?.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.users[0].detail?.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span><br /></span>
+                                    <span *ngIf="meal.users[0].detail?.country_of_origin"><i class="fa fa-globe"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{meal.users[0].detail?.country_of_origin.name}}'}"></span><br /></span>
+                                </div>
+                                <div class="clear5"></div>
+                                <div class="card card-sm card-resume-rating" style="border:initial; margin-left:-11px; margin-top:-20px" *ngIf="meal.users[0].detail?.reviews.positive || meal.users[0].detail?.reviews.neutral || meal.users[0].detail?.reviews.negative">
+                                    <table style="text-align:center">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.positive"><span class="fa fa-plus-sign text-success"></span></td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.neutral"><span class="fa fa-record text-default"></span></td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.negative"><span class="fa fa-minus-sign text-danger"></span></td>
+                                            </tr>
+                                            <tr style="font-size:11px">
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.positive">{{meal.users[0].detail?.reviews.positive}}</td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.neutral">{{meal.users[0].detail?.reviews.neutral}}</td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.negative">{{meal.users[0].detail?.reviews.negative}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </a>
+    </div>
+</div>-->
+<!--<div *ngIf="mealsFiltered.length == 0" class="row" *ngFor="let meal of mealsFilteredPast = (meals | filter: pastMealsFilter | filter: weekDaysFilter | filter: dateRangeFilter | filter: priceRangeFilter | filter: cityRangeFilter | filter : preferenceFilter | filter : helpingTypeFilter | orderBy:'-time')">
+    <div *ngIf="$first==true">
+        <div class="clear120"></div>
+        <div style="border:dashed 1px #3a87ad" class="col-4 col-offset-4"></div>
+        <div class="clear20"></div>
+        <div class="general-title text-info" style="font-size:small">Previous meals</div>
+        <div class="clear20"></div>
+    </div>
+    <div class="col-12">
+        <div class="list-group" style="cursor:pointer;">
+            <a class="list-group-item list-group-meal" [ngClass]="{'my-meal-dtld-panel-info': ms.datasUserForEachMeal(meal, userId).status == 'accepted'}" (click)=openModalDtld(meal._id)>
+                <div class="meal-admin-container col-md-2 hidden-xs" [ngClass]="{'padding-top-10': meal.users[0].detail?.reviews, 'padding-top-30': !meal.users[0].detail?.reviews}">
+                    <img class="rounded-circle profilePic" src="{{meal.users[0].detail?.picture}}" alt="User profile picture" />
+                    <div class="size-12 font-weight-bold margintop15">{{meal.users[0].detail?.first_name}} {{meal.users[0].detail?.last_name | limitTo:1}}</div>
+                    <div class="card card-sm card-resume-rating" style="border:initial">
+                        <table style="text-align:center">
+                            <tbody>
+                                <tr>
+                                    <td *ngIf="meal.users[0].detail?.reviews.positive" style="padding-right:4px"><span class="fa fa-plus-sign text-success"></span></td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.neutral" style="padding:0px 4px"><span class="fa fa-record text-default"></span></td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.negative" style="padding-left:4px"><span class="fa fa-minus-sign text-danger"></span></td>
+                                </tr>
+                                <tr style="font-size:11px" *ngIf="meal.users[0].detail?.reviews.positive || meal.users[0].detail?.reviews.neutral || meal.users[0].detail?.reviews.negative">
+                                    <td *ngIf="meal.users[0].detail?.reviews.positive" style="padding-right:4px">{{meal.users[0].detail?.reviews.positive}}</td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.neutral" style="padding:0px 4px">{{meal.users[0].detail?.reviews.neutral}}</td>
+                                    <td *ngIf="meal.users[0].detail?.reviews.negative" style="padding-left:4px">{{meal.users[0].detail?.reviews.negative}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12 col-md-10" style="display:table-cell">
+                    <div class="row">
+                        <div class="meal-menu text-left" [ngClass]="{'col-8 col-md-9 col-lg-10':ms.datasUserForEachMeal(meal, userId),'col-12':!ms.datasUserForEachMeal(meal, userId)}">
+                            <strong class="visible-xs">{{meal.menu.title | limitTo: 29}}{{meal.menu.title.length > 29 ? '...' : ''}}</strong>
+                            <strong class="d-none d-sm-block d-md-none">{{meal.menu.title | limitTo: 45}}{{meal.menu.title.length > 45 ? '...' : ''}}</strong>
+                            <strong class="hidden-xs hidden-sm hidden-lg">{{meal.menu.title | limitTo: 65}}{{meal.menu.title.length > 65 ? '...' : ''}}</strong>
+                            <strong class="hidden-xs hidden-sm hidden-md">{{meal.menu.title | limitTo: 85}}{{meal.menu.title.length > 85 ? '...' : ''}}</strong>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 col-md-3 col-lg-2" *ngIf="ms.datasUserForEachMeal(meal, userId)">
+                                <div class="pull-right" [ngClass]="{'text-info': ms.datasUserForEachMeal(meal, userId).status == 'accepted'}"><strong><span *ngIf="ms.datasUserForEachMeal(meal, userId).status == 'accepted' && ms.datasUserForEachMeal(meal, userId).role != 'admin'" translate>VIEW_MEALS.ATTENDED</span><span *ngIf="ms.datasUserForEachMeal(meal, userId).status == 'accepted' && ms.datasUserForEachMeal(meal, userId).role == 'admin'" translate>VIEW_MEALS.HOSTED</span></strong></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row meal-info-label">
+                                <span class="fa fa-map-marker"></span> {{meal.address.town}}, {{meal.address.country}}<span class="d-block d-sm-none"><br /><span style="padding-left:15px" *ngIf="meal.address.postalCode">{{meal.address.postalCode}}</span></span>
+                                <span class="hidden-xs" *ngIf="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
+                            </div>
+                            <div class="row meal-info-label">
+                                <span class="fa fa-calendar"></span> {{meal.date |date:'EEEE dd MMMM'}} <span class="d-block d-sm-none"><br /></span><span class="fa fa-clock-o meal-clock-display"></span> {{meal.date
+                                |date:'HH:mm'}}
+                            </div>
+                        </div>
+                        <div class="col-2" style="margin-top:-8px;">
+                            <div class="row">
+                                <div ng-style="getStyle()" style="float:right;width:51px;text-align:center">
+                                    <div ng-style="getStyle()" class="" style="font-size: 11px;top:32px;position:relative;font-weight:font-weight-bold; text-align:center">{{meal.nbGuests-meal.nbRemainingPlaces}} / {{meal.nbGuests}}</div>
+                                    <div round-progress responsive="true" max="meal.nbGuests" current="meal.nbGuests - meal.nbRemainingPlaces" color="#45ccce" bgcolor="#eaeaea" radius="30" stroke="10" rounded="true" duration="800" animation="easeInOutQuart" animation-delay="0"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:7px;">
+                        <span class="fa fa-piggy-bank"></span> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span><strong class="size-15 text-success"> <span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong>
+                    </div>
+                    <div class="row" *ngIf="meal.veggies == true" style="margin-top:7px">
+                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+                    </div>
+                    <div class="row" *ngIf="meal.vegan == true" style="margin-top:7px">
+                        <img src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
+                    </div>
+                    <div class="row" *ngIf="meal.halal == true" style="margin-top:7px">
+                        <img src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
+                    </div>
+                    <div class="row" *ngIf="meal.kosher == true" style="margin-top:7px">
+                        <img src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
+                    </div>
+                    <div class="row d-block d-sm-none">
+                        <div class="clear5"></div>
+                        <div class="clear5 list-meal-separation"></div>
+                        <div class="font-weight-bold italic" translate>VIEW_MEALS.HOST</div>
+                        <div class="clear10"></div>
+                        <div>
+                            <img src="{{meal.users[0].detail?.picture}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" />
+                            <div style="position:relative; left:10px;">
+                                <div>
+                                    <strong class="text-info">{{meal.users[0].detail?.first_name}} {{meal.users[0].detail?.last_name}}</strong>
+                                </div>
+                                <div class="small" style="padding-top:4px">
+                                    <span *ngIf="meal.users[0].detail?.gender"><i class="fa fa-venus-mars"></i> {{meal.users[0].detail?.gender | capitalize}}<br /></span>
+                                    <span *ngIf="meal.users[0].detail?.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.users[0].detail?.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span><br /></span>
+                                    <span *ngIf="meal.users[0].detail?.country_of_origin"><i class="fa fa-globe"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{meal.users[0].detail?.country_of_origin.name}}'}"></span><br /></span>
+                                </div>
+                                <div class="clear5"></div>
+                                <div class="card card-sm card-resume-rating" style="border:initial; margin-left:-11px; margin-top:-20px" *ngIf="meal.users[0].detail?.reviews.positive || meal.users[0].detail?.reviews.neutral || meal.users[0].detail?.reviews.negative">
+                                    <table style="text-align:center">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.positive"><span class="fa fa-plus-sign text-success"></span></td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.neutral"><span class="fa fa-record text-default"></span></td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.negative"><span class="fa fa-minus-sign text-danger"></span></td>
+                                            </tr>
+                                            <tr style="font-size:11px">
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.positive">{{meal.users[0].detail?.reviews.positive}}</td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.neutral">{{meal.users[0].detail?.reviews.neutral}}</td>
+                                                <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.negative">{{meal.users[0].detail?.reviews.negative}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>-->

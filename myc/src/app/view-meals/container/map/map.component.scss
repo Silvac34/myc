@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+    agm-map {
+        height: 577px;
+    }
+}
+
+@media (max-width: 767px) {
+    agm-map {
+        height: 340px;
+    }
+}

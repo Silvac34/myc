@@ -1,0 +1,89 @@
+<agm-map [latitude]="userLat" [longitude]="userLng" [zoom]="9">
+  <agm-marker *ngFor="let meal of (meals | async | daysPipe: selectedFilter.weekDays | pricePipe: selectedFilter | dateRangePipe: selectedFilter | preferencePipe: selectedFilter.preferenceFilter | helpingTypePipe: selectedFilter.helpTypeFilter | cityPipe: selectedFilter.cityFilter)"
+    [latitude]="meal.address.lat" [longitude]="meal.address.lng">
+    <agm-snazzy-info-window [maxWidth]="400" [closeWhenOthersOpen]="true">
+      <ng-template>
+        <!--<div class="container-fluid">
+          <div>
+            <img src="/assets/images/create_meal/cutlery_menu.png" style="position:static;margin-left:-15px">
+            <div style="padding-left:15px; margin-top:-20px">
+              <strong>{{meal.menu.title}}</strong>
+            </div>
+          </div>
+          <div class="clear20"></div>
+          <div>
+            <i class="fa fa-calendar"></i> {{meal.time |date:'EEEE dd MMMM'}}
+          </div>
+          <div class="clear5"></div>
+          <div>
+            <i class="fa fa-clock-o"></i> {{meal.time|date:'HH:mm'}}
+          </div>
+          <div class="clear5"></div>
+          <div>
+            <i class="fa fa-money"></i> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong>
+          </div>
+          <div *ngIf="meal.veggies === true">
+            <div class="clear5"></div>
+            <img src="/assets/images/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+          </div>
+          <div *ngIf="meal.vegan === true">
+            <div class="clear5"></div>
+            <img src="/assets/images/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
+          </div>
+          <div *ngIf="meal.halal === true">
+            <div class="clear5"></div>
+            <img src="/assets/images/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
+          </div>
+          <div *ngIf="meal.kosher === true">
+            <div class="clear5"></div>
+            <img src="/assets/images/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
+          </div>
+          <div class="row">
+            <div class="clear10"></div>
+            <div class="clear10 map-meal-separation"></div>
+            <div class="bold italic" translate>VIEW_MEALS.HOST</div>
+            <div class="clear10"></div>
+            <div>
+              <a routerLink="profile({userId:meal.users[0].id})"><img src="{{meal.users[0].detail?.picture}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="" onerror="this.src='/assets/images/viewMyMealDtld/unknown_user.png'" /></a>
+              <div style="position:relative; left:10px;">
+                <div>
+                  <a routerLink="profile({userId: meal.users[0].id})"><strong class="text-info">{{meal.users[0].detail?.first_name}} {{meal.users[0].detail?.last_name}}</strong></a>
+                </div>
+                <div class="small" style="padding-top:4px">
+                  <span *ngIf="meal.users[0].detail?.gender"><i class="fa fa-venus-mars"></i> {{meal.users[0].detail?.gender | capitalize}}<br /></span>
+                  <span *ngIf="meal.users[0].detail?.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.users[0].detail?.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span><br />
+                  </span>
+                  <span *ngIf="meal.users[0].detail?.country_of_origin"><i class="fa fa-globe"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{meal.users[0].detail?.country_of_origin.name}}'}"></span><br />
+                  </span>
+                </div>
+                <div class="clear5"></div>
+                <div class="well well-sm well-resume-rating" style="border:initial; margin-left:-11px; margin-top:-20px" *ngIf="meal.users[0].detail?.reviews.positive || meal.users[0].detail?.reviews.neutral || meal.users[0].detail?.reviews.negative">
+                  <table style="text-align:center">
+                    <tbody>
+                      <tr>
+                        <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.positive"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                        <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.neutral"><span class="glyphicon glyphicon-record text-default"></span></td>
+                        <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.negative"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                      </tr>
+                      <tr style="font-size:11px">
+                        <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.positive">{{meal.users[0].detail?.reviews.positive}}</td>
+                        <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.neutral">{{meal.users[0].detail?.reviews.neutral}}</td>
+                        <td style="padding:0px 4px" *ngIf="meal.users[0].detail?.reviews.negative">{{meal.users[0].detail?.reviews.negative}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a class="btn btn-xs" ng-class="{'btn-primary':!datasUserForEachMeal(meal),'btn-success':datasUserForEachMeal(meal)}" *ngIf="meal.nbRemainingPlaces>0 || meal.nbRemainingPlaces<=0 && datasUserForEachMeal(meal).status == 'accepted'" ng-click=openModalDtld(meal._id)
+              translate>VIEW_MEALS.ACTION_BUTTON.SEE_MEAL</a>
+            <span *ngIf="meal.nbRemainingPlaces<=0 && !datasUserForEachMeal(meal)"><strong class="text-danger" translate>VIEW_MEALS.ACTION_BUTTON.MEAL_FULL</strong><br><br><span translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1</span> <a class="btn btn-xs btn-facebook"
+              ng-click="auth('facebook', toState)" translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2</a> <span translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3</span></span>
+          </div>
+        </div>-->
+      </ng-template>
+    </agm-snazzy-info-window>
+  </agm-marker>
+</agm-map>

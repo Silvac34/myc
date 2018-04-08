@@ -1,0 +1,32 @@
+[debug] [2018-02-25T10:24:50.184Z] ----------------------------------------------------------------------
+[debug] [2018-02-25T10:24:50.188Z] Command:       /home/ubuntu/.nvm/versions/node/v6.11.2/bin/node /home/ubuntu/.nvm/versions/node/v6.11.2/bin/firebase experimental:functions:shell
+[debug] [2018-02-25T10:24:50.188Z] CLI Version:   3.17.4
+[debug] [2018-02-25T10:24:50.188Z] Platform:      linux
+[debug] [2018-02-25T10:24:50.188Z] Node Version:  v6.11.2
+[debug] [2018-02-25T10:24:50.188Z] Time:          Sun Feb 25 2018 10:24:50 GMT+0000 (UTC)
+[debug] [2018-02-25T10:24:50.189Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-25T10:24:50.204Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-25T10:24:50.204Z] > authorizing via signed-in user
+[debug] [2018-02-25T10:24:50.207Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/mycommuneaty-dev  
+  
+ Sun Feb 25 2018 10:24:50 GMT+0000 (UTC)
+[debug] [2018-02-25T10:24:50.808Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-25T10:24:50.810Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/mycommuneaty-dev/tokens  
+  
+ Sun Feb 25 2018 10:24:50 GMT+0000 (UTC)
+[debug] [2018-02-25T10:24:51.537Z] <<< HTTP RESPONSE 200
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-02-25T10:24:52.021Z] Fetching environment
+[debug] [2018-02-25T10:24:52.022Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/mycommuneaty-dev  
+  
+ Sun Feb 25 2018 10:24:52 GMT+0000 (UTC)
+[debug] [2018-02-25T10:24:52.023Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/mycommuneaty-dev/apiKeys  
+  
+ Sun Feb 25 2018 10:24:52 GMT+0000 (UTC)
+[debug] [2018-02-25T10:24:52.715Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-25T10:24:52.775Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-25T10:24:52.776Z] Starting @google-cloud/functions-emulator
+[debug] [2018-02-25T10:24:54.317Z] Parsing function triggers
+[debug] [2018-02-25T10:24:54.696Z] Deploying functions locally
+[info] ✔  functions: createMeal

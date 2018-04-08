@@ -1,0 +1,8 @@
+<div *ngIf="!(auth.user | async)" class="text-center">
+    <button (click)="signInWithFacebook()" class="btn btn-social btn-facebook" (click)="activeModal.close('Close click')" translate>
+  <i class="fa fa-facebook"></i>LOGIN.SIGN_IN_FACEBOOK
+</button>
+    <button (click)="signInWithGoogle()" class="btn btn-social btn-google" (click)="activeModal.close('Close click')" translate>
+  <i class="fa fa-google-plus"></i>LOGIN.SIGN_IN_GOOGLE
+</button>
+</div>

@@ -6,7 +6,7 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { routes } from './app.router';
 
-import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Connexion to database firestore

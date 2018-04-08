@@ -1,0 +1,110 @@
+<div class="card-body py-2">
+    <div class="card-title mb-1">
+        <span class="pointer" (click)="isCollapsed.place = !isCollapsed.place">
+            <i class="fa text-danger" [ngClass]="{'fa-caret-down': !isCollapsed.place, 'fa-caret-right': isCollapsed.place}"></i>
+            <span class="pl-1 font-weight-bold text-dark" translate>VIEW_MEALS.FILTERS.CITY.TITLE</span>
+        </span>
+        <i class="fa fa-times-circle text-warning pointer float-right" *ngIf="filter.cityFilter.country_code || filter.cityFilter.town" (click)="filter.cityFilter.country_code = null; filter.cityFilter.town = null; autocompleteCities.value = null "></i>
+    </div>
+    <div [ngbCollapse]="isCollapsed.place" class="collapsing-filter">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white pr-0"><i class="fa fa-map-marker"></i></span>
+                </div>
+                <input type="text" name="cityFilter" class="form-control border-left-0 pl-2 card-text" placeholder="{{'VIEW_MEALS.FILTERS.CITY.PLACEHOLDER'|translate}}" autocorrect="off" autocapitalize="off" spellcheck="off" #autocompleteCities novalidate>
+            </div>
+        </div>
+    </div>
+    <div class="card-title mb-1">
+        <span class="pointer" (click)="isCollapsed.weekDays = !isCollapsed.weekDays">
+            <i class="fa text-danger" [ngClass]="{'fa-caret-down': !isCollapsed.weekDays, 'fa-caret-right': isCollapsed.weekDays}"></i>
+            <span class="pl-1 text-dark font-weight-bold" translate>VIEW_MEALS.FILTERS.DAY.TITLE</span>
+        </span>
+        <i class="fa fa-times-circle text-warning pointer float-right" *ngIf="isFilterSelected('weekDays')" (click)="resetFilter('weekDays')"></i>
+    </div>
+    <div [ngbCollapse]="isCollapsed.weekDays" class="collapsing-filter">
+        <div *ngFor="let day of filter.weekDays; last as isLastDay">
+            <div class="form-check text-dark small" [ngClass]="{'mb-3': isLastDay}">
+                <input class="form-check-input mt-1" type="checkbox" [(ngModel)]="day.selected" name="dayFilter" id="day.label">
+                <label class="form-check-label" for="day.label" translate>{{day.label}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="card-title mb-1">
+        <span class="pointer" (click)="isCollapsed.period = !isCollapsed.period">
+            <i class="fa text-danger" [ngClass]="{'fa-caret-down': !isCollapsed.period, 'fa-caret-right': isCollapsed.period}"></i>
+            <span class="pl-1 text-dark font-weight-bold" translate>VIEW_MEALS.FILTERS.PERIOD.TITLE</span>
+        </span>
+        <i class="fa fa-times-circle text-warning pointer float-right" *ngIf="filter.dateFilterMin || filter.dateFilterMax" (click)="filter.dateFilterMin=null; filter.dateFilterMax=null; dateRangeSeparator=''"></i>
+    </div>
+    <div [ngbCollapse]="isCollapsed.period" class="collapsing-filter">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white pr-0"><i class="fa fa-calendar"></i></span>
+                </div>
+                <input class="form-control border-left-0" placeholder="{{'VIEW_MEALS.FILTERS.PERIOD.TITLE'|translate}}" name="dateFlter" value="{{filter.dateFilterMin | date:'dd MMM'}}{{dateRangeSeparator}}{{filter.dateFilterMax | date:'dd MMM'}}" (click)="d.toggle()"
+                    (dateSelect)="onDateSelection($event, d)" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" [autoClose]="false">
+                <ng-template #t let-date="date" let-focused="focused">
+                    <span id="ngbDateRangePicker" class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">{{ date.day }}</span>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="card-title mb-1">
+        <span class="pointer" (click)="isCollapsed.price = !isCollapsed.price">
+            <i class="fa text-danger" [ngClass]="{'fa-caret-down': !isCollapsed.price, 'fa-caret-right': isCollapsed.price}"></i>
+            <span class="pl-1 text-dark font-weight-bold" translate>VIEW_MEALS.FILTERS.PRICE.TITLE</span>
+        </span>
+        <i class="fa fa-times-circle text-warning pointer float-right" *ngIf="filter.priceFilterMin || filter.priceFilterMax" (click)="filter.priceFilterMin=null; filter.priceFilterMax=null"></i>
+    </div>
+    <div [ngbCollapse]="isCollapsed.price" class="collapsing-filter">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white pr-0"><i class="fa fa-money"></i></span>
+                </div>
+                <input type="number" class="form-control border-left-0 pl-2 card-text" [(ngModel)]="filter.priceFilterMin" name="priceFilterMax" placeholder="{{'VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM'|translate}}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white pr-0"><i class="fa fa-money"></i></span>
+                </div>
+                <input type="number" class="form-control border-left-0 pl-2 card-text" [(ngModel)]="filter.priceFilterMax" name="priceFilterMax" placeholder="{{'VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_TO'|translate}}" />
+            </div>
+        </div>
+    </div>
+    <div class="card-title mb-1">
+        <span class="pointer" (click)="isCollapsed.preference = !isCollapsed.preference">
+            <i class="fa text-danger" [ngClass]="{'fa-caret-down': !isCollapsed.preference, 'fa-caret-right': isCollapsed.preference}"></i>
+            <span class="pl-1 text-dark font-weight-bold" translate>VIEW_MEALS.FILTERS.PREFERENCES.TITLE</span>
+        </span>
+        <i class="fa fa-times-circle text-warning pointer float-right" *ngIf="isFilterSelected('preferenceFilter')" (click)="resetFilter('preferenceFilter')"></i>
+    </div>
+    <div [ngbCollapse]="isCollapsed.preference" class="collapsing-filter">
+        <div *ngFor="let preference of filter.preferenceFilter; last as isLastPreference">
+            <div class="form-check text-dark small" [ngClass]="{'mb-3': isLastPreference}">
+                <input class="form-check-input mt-1" type="checkbox" [(ngModel)]="preference.selected" name="preferenceFilter" id="preference.label">
+                <label class="form-check-label" for="preference.label" translate>{{preference.label}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="card-title mb-1">
+        <span class="pointer" (click)="isCollapsed.helpType = !isCollapsed.helpType">
+            <i class="fa text-danger" [ngClass]="{'fa-caret-down': !isCollapsed.helpType, 'fa-caret-right': isCollapsed.helpType}"></i>
+            <span class="pl-1 text-dark font-weight-bold" translate>VIEW_MEALS.FILTERS.HELP_TYPE.TITLE</span>
+        </span>
+        <i class="fa fa-times-circle text-warning pointer float-right" *ngIf="isFilterSelected('helpTypeFilter')" (click)="resetFilter('helpTypeFilter')"></i>
+    </div>
+    <div [ngbCollapse]="isCollapsed.helpType" class="collapsing-filter">
+        <div *ngFor="let helpType of filter.helpTypeFilter; last as isLastHelpType">
+            <div class="form-check text-dark small" [ngClass]="{'mb-3': isLastHelpType}">
+                <input class="form-check-input mt-1" type="checkbox" [(ngModel)]="helpType.selected" name="helpTypeFilter" id="helpType.label">
+                <label class="form-check-label" for="helpType.label" translate>{{helpType.label}}</label>
+            </div>
+        </div>
+    </div>
+</div>

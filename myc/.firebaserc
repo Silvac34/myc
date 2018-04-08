@@ -1,8 +1,7 @@
 {
   "projects": {
-    "default": "mycommuneaty-dev",
-    "prod": "mycommuneaty-165310",
     "dev": "mycommuneaty-dev",
+    "prod": "mycommuneaty-165310",
     "stage": "mycommuneaty-stage"
   }
 }

@@ -68,12 +68,15 @@ import { MapComponent } from './view-meals/container/map/map.component';
 
 //external modules
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressRouterModule } from '@ngx-progressbar/router';
 
 //Pipes
 import { LimitToPipe } from './pipes/limit-to.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { DateTranslatePipe } from './pipes/date-translate.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { AgePipe } from './pipes/age.pipe';
 import { DateRangePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe, CityPipe } from './pipes/meals.pipe';
 
 
@@ -113,7 +116,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PreferencePipe,
     HelpingTypePipe,
     PricePipe,
-    CityPipe
+    PricePipe,
+    CityPipe,
+    AgePipe
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -157,7 +162,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       showSubtitle: false,
       showUnits: false,
       titleFontSize: '14'
-    })
+    }),
+    NgProgressModule.forRoot(),
+    NgProgressRouterModule
   ],
   providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],
   bootstrap: [AppComponent],

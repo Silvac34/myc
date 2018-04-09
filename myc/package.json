@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "firebase use dev && ng serve --host 0.0.0.0 --port 8080 --public https://myc-dimitrikohn.c9users.io/",
+    "start": "firebase use dev && ng serve --host 0.0.0.0 --port 8080 --public https://mycommuneaty-dimitrikohn.c9users.io/",
     "stage": "ng build --env=stage && firebase use stage && firebase deploy",
     "build": "ng build --prod && firebase use prod && firebase deploy",
     "test": "ng test",
@@ -28,6 +28,8 @@
     "@angular/platform-server": "^5.2.4",
     "@angular/router": "^5.2.4",
     "@ng-bootstrap/ng-bootstrap": "^1.1.0",
+    "@ngx-progressbar/core": "^4.1.1",
+    "@ngx-progressbar/router": "^4.1.1",
     "@ngx-translate/core": "^8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "angular-font-awesome": "^3.1.2",

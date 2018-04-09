@@ -1,6 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<ng-progress [spinner]="false" [color]="'#033c73'"></ng-progress>
 <div class="bs-component">
-
+  
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="router.url != '/welcome'">
     <a class="navbar-brand" routerLink="/welcome">myCommuneaty</a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">

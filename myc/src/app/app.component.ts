@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { FacebookService, InitParams } from 'ngx-facebook';
 import { NgbdModalLoginContent } from './welcome/welcome.component'
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgProgress } from '@ngx-progressbar/core';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,14 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class AppComponent {
 
-  constructor(private translate: TranslateService, public router: Router, public auth: AuthService, private fb: FacebookService, private modalService: NgbModal) {
+  constructor(
+    private translate: TranslateService,
+    public router: Router,
+    public auth: AuthService,
+    private fb: FacebookService,
+    private modalService: NgbModal,
+    public progress: NgProgress
+    ) {
     let userLang = navigator.language;
     if(userLang === "fr") {
       userLang = "fr-FR"

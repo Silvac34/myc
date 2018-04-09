@@ -1,9 +1,9 @@
 <agm-map [latitude]="userLat" [longitude]="userLng" [zoom]="9">
   <agm-marker *ngFor="let meal of (meals | async | daysPipe: selectedFilter.weekDays | pricePipe: selectedFilter | dateRangePipe: selectedFilter | preferencePipe: selectedFilter.preferenceFilter | helpingTypePipe: selectedFilter.helpTypeFilter | cityPipe: selectedFilter.cityFilter)"
     [latitude]="meal.address.lat" [longitude]="meal.address.lng">
-    <agm-snazzy-info-window [maxWidth]="400" [closeWhenOthersOpen]="true">
+    <agm-snazzy-info-window [closeWhenOthersOpen]="true" [maxWidth]="1000" [maxHeight]="1000">
       <ng-template>
-        <!--<div class="container-fluid">
+        <div class="container-fluid">
           <div>
             <img src="/assets/images/create_meal/cutlery_menu.png" style="position:static;margin-left:-15px">
             <div style="padding-left:15px; margin-top:-20px">
@@ -24,19 +24,19 @@
           </div>
           <div *ngIf="meal.veggies === true">
             <div class="clear5"></div>
-            <img src="/assets/images/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+            <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
           </div>
           <div *ngIf="meal.vegan === true">
             <div class="clear5"></div>
-            <img src="/assets/images/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
+            <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
           </div>
           <div *ngIf="meal.halal === true">
             <div class="clear5"></div>
-            <img src="/assets/images/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
+            <img src="/assets/images/view_meals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
           </div>
           <div *ngIf="meal.kosher === true">
             <div class="clear5"></div>
-            <img src="/assets/images/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
+            <img src="/assets/images/view_meals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
           </div>
           <div class="row">
             <div class="clear10"></div>
@@ -51,9 +51,9 @@
                 </div>
                 <div class="small" style="padding-top:4px">
                   <span *ngIf="meal.users[0].detail?.gender"><i class="fa fa-venus-mars"></i> {{meal.users[0].detail?.gender | capitalize}}<br /></span>
-                  <span *ngIf="meal.users[0].detail?.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.users[0].detail?.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span><br />
+                  <span *ngIf="meal.users[0].detail?.birthdate"><i class="fa fa-birthday-cake"></i> {{meal.users[0].detail?.birthdate | age}} <span translate>PROFILE.YEARS_OLD</span><br />
                   </span>
-                  <span *ngIf="meal.users[0].detail?.country_of_origin"><i class="fa fa-globe"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{meal.users[0].detail?.country_of_origin.name}}'}"></span><br />
+                  <span *ngIf="meal.users[0].detail?.country_of_origin"><i class="fa fa-globe"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" [translateParams]="{ country_of_origin_name: meal.users[0].detail?.country_of_origin.name }"></span><br />
                   </span>
                 </div>
                 <div class="clear5"></div>
@@ -82,7 +82,8 @@
             <span *ngIf="meal.nbRemainingPlaces<=0 && !datasUserForEachMeal(meal)"><strong class="text-danger" translate>VIEW_MEALS.ACTION_BUTTON.MEAL_FULL</strong><br><br><span translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_1</span> <a class="btn btn-xs btn-facebook"
               ng-click="auth('facebook', toState)" translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_2</a> <span translate>VIEW_MEALS.ACTION_BUTTON.SIGN_IN_3</span></span>
           </div>
-        </div>-->
+        </div>
+
       </ng-template>
     </agm-snazzy-info-window>
   </agm-marker>

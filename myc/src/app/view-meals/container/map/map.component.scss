@@ -1,4 +1,4 @@
-@import '~app/view-meals/container/list/list.component.scss';
+@import '~app/app.component.scss';
 
 @media (min-width: 768px) {
     agm-map {
@@ -10,4 +10,13 @@
     agm-map {
         height: 340px;
     }
+}
+
+hr {
+    border-top: dashed 0.1rem #3a87ad;
+}
+
+#profilePicHost {
+    height: 55px;
+    width: 55px;
 }

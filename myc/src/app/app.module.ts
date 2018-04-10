@@ -73,7 +73,6 @@ import { NgProgressRouterModule } from '@ngx-progressbar/router';
 
 //Pipes
 import { LimitToPipe } from './pipes/limit-to.pipe';
-import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { DateTranslatePipe } from './pipes/date-translate.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { AgePipe } from './pipes/age.pipe';
@@ -108,7 +107,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListComponent,
     MapComponent,
     LimitToPipe,
-    CapitalizePipe,
     DateTranslatePipe,
     ReversePipe,
     DaysPipe,

@@ -59,7 +59,7 @@
                                 <span class="hidden-xs" *ngIf="meal.address.postalCode"> - {{meal.address.postalCode}}</span>
                             </div>
                             <div class="row align-items-center">
-                                <span class="fa fa-calendar pr-1"></span>{{meal.date | date:'EEEE dd MMMM'}}<span class="d-none d-sm-block"> <span class="fa fa-clock-o pr-1 pl-3"></span>{{meal.date | date:'HH:mm'}}</span>
+                                <span class="fa fa-calendar pr-1"></span><span class="text-capitalize">{{meal.date | date:'EEEE dd MMMM'}}</span><span class="d-none d-sm-block"> <span class="fa fa-clock-o pr-1 pl-3"></span>{{meal.date | date:'HH:mm'}}</span>
                             </div>
                             <div class="row align-items-center d-block d-sm-none">
                                 <span class="fa fa-clock-o pr-1"></span>{{meal.date | date:'HH:mm'}}

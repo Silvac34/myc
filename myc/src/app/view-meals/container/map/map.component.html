@@ -4,44 +4,34 @@
     <agm-snazzy-info-window [closeWhenOthersOpen]="true" [maxWidth]="1000" [maxHeight]="1000">
       <ng-template>
         <div class="container-fluid">
-          <div>
-            <img src="/assets/images/create_meal/cutlery_menu.png" style="position:static;margin-left:-15px">
-            <div style="padding-left:15px; margin-top:-20px">
-              <strong>{{meal.menu.title}}</strong>
-            </div>
+          <div class="row align-items-center">
+            <img src="/assets/images/create_meal/cutlery_menu.png">
+            <h6 class="ml-1 mb-0">{{meal.menu.title}}</h6>
           </div>
-          <div class="clear20"></div>
-          <div>
-            <i class="fa fa-calendar"></i> {{meal.time |date:'EEEE dd MMMM'}}
+          <div class="row align-items-center pt-3 text-capitalize">
+            <i class="fa fa-calendar pr-1"></i> {{meal.date | date:'EEEE dd MMMM'}}
           </div>
-          <div class="clear5"></div>
-          <div>
-            <i class="fa fa-clock-o"></i> {{meal.time|date:'HH:mm'}}
+          <div class="row align-items-center pt-2">
+            <i class="fa fa-clock-o pr-1"></i> {{meal.date| date:'HH:mm'}}
           </div>
-          <div class="clear5"></div>
-          <div>
-            <i class="fa fa-money"></i> <span translate>VIEW_MEALS.FILTERS.PRICE.PLACEHOLDER_FROM</span> <strong class="size-15 text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong>
+          <div class="row align-items-center pt-2">
+            <span class="fa fa-money pr-1"></span> <span><span translate>VIEW_MEALS.PRICE</span> <strong class="size-15 text-success"><span *ngIf="meal.currency_symbol !== '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span *ngIf="meal.currency_symbol === '€'"> {{meal.currency_symbol}}</span></strong></span>
           </div>
-          <div *ngIf="meal.veggies === true">
-            <div class="clear5"></div>
-            <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
+          <div *ngIf="meal.veggies === true" class="row align-items-center pt-2">
+            <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:16px; height:16px" class="pr-1"><span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>
           </div>
-          <div *ngIf="meal.vegan === true">
-            <div class="clear5"></div>
-            <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.VEGAN_MEAL</span>
+          <div *ngIf="meal.vegan === true" class="row align-items-center pt-2">
+            <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:16px; height:16px" class="pr-1"><span translate>VIEW_MEALS.VEGAN_MEAL</span>
           </div>
-          <div *ngIf="meal.halal === true">
-            <div class="clear5"></div>
-            <img src="/assets/images/view_meals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.HALAL_MEAL</span>
+          <div *ngIf="meal.halal === true" class="row align-items-center pt-2">
+            <img src="/assets/images/view_meals/halal-sign.png" style="width:16px; height:16px" class="pr-1"><span translate>VIEW_MEALS.HALAL_MEAL</span>
           </div>
-          <div *ngIf="meal.kosher === true">
-            <div class="clear5"></div>
-            <img src="/assets/images/view_meals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MEALS.KOSHER_MEAL</span>
+          <div *ngIf="meal.kosher === true" class="row align-items-center pt-2">
+            <img src="/assets/images/view_meals/kosher-sign.png" style="width:16px; height:16px" class="pr-1"><span translate>VIEW_MEALS.KOSHER_MEAL</span>
           </div>
           <div class="row">
-            <div class="clear10"></div>
-            <div class="clear10 map-meal-separation"></div>
-            <div class="bold italic" translate>VIEW_MEALS.HOST</div>
+            <hr class="col-6">
+            <div class="font-weight-bold font-italic" translate>VIEW_MEALS.HOST</div>
             <div class="clear10"></div>
             <div>
               <a routerLink="profile({userId:meal.users[0].id})"><img src="{{meal.users[0].detail?.picture}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="" onerror="this.src='/assets/images/viewMyMealDtld/unknown_user.png'" /></a>

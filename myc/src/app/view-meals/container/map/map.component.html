@@ -4,9 +4,11 @@
     <agm-snazzy-info-window [closeWhenOthersOpen]="true" [maxWidth]="1000" [maxHeight]="1000">
       <ng-template>
         <div class="container-fluid">
-          <div class="row align-items-center">
-            <img src="/assets/images/create_meal/cutlery_menu.png">
-            <h6 class="ml-1 mb-0">{{meal.menu.title}}</h6>
+          <div class="media row">
+            <img class="mr-1" src="/assets/images/create_meal/cutlery_menu.png">
+            <div class="media-body">
+              <h6 class="mt-0">{{meal.menu.title}}</h6>
+            </div>
           </div>
           <div class="row align-items-center pt-2 text-capitalize">
             <i class="fa fa-calendar pr-1"></i> {{meal.date | date:'EEEE dd MMMM'}}

@@ -31,7 +31,7 @@
           </div>
           <hr class="my-2">
           <div class="font-weight-bold font-italic text-dark row pb-1" translate>VIEW_MEALS.HOST</div>
-          <div class="media row mb-2">
+          <div class="media row mb-2" [ngClass]="{'align-items-center': meal.users[0].detail?.reviews.positive === 0 && meal.users[0].detail?.reviews.neutral === 0 && meal.users[0].detail?.reviews.negative === 0 }">
             <div class="align-self-auto mr-2">
               <img class="rounded border" id="profilePicHost" src="{{meal.users[0].detail?.picture}}" alt="" onerror="this.src='/assets/images/viewMyMealDtld/unknown_user.png'">
               <div class="card" style="border:initial">

@@ -274,7 +274,7 @@
 			"SIGN_IN_2": "connectez-vous",
 			"SIGN_IN_3": "si vous vous êtes déjà inscrit(e)."
 		},
-		"PRICE": "A partir de"
+		"PRICE": "A partir de <span class='font-weight-bold size-15 text-success'>{{price}}</span>"
 	},
 	"VIEW_MEALS_DTLD": {
 		"DESCRIPTION": "Description",
@@ -289,34 +289,12 @@
 				"PRICE": "Prix",
 				"ARRIVAL_TIME": "Heure d’arrivée"
 			},
-			"HELP_COOKING": {
-				"NAME": "Les Aides-cuisine",
-				"DESCRIPTION_TIME_1": "Vous devez arriver à",
-				"DESCRIPTION_TIME_2": "pour aider l’hôte à cuisiner.",
-				"DESCRIPTION_PRICE_1": "Le prix peut varier",
-				"DESCRIPTION_PRICE_2": "entre",
-				"DESCRIPTION_PRICE_3": "et",
-				"DESCRIPTION_PRICE_4": "selon les inscriptions",
-				"DESCRIPTION_PRICE_5": "plus d’information sur le calcul du prix",
-				"DESCRIPTION_PRICE_6": "Vous serez informé(e) du prix final avant le repas."
-			},
-			"HELP_CLEANING": {
-				"NAME": "Les Aides-nettoyage",
-				"DESCRIPTION_TIME_1": "Vous devez arriver à",
-				"DESCRIPTION_TIME_2": "afin d’aider à",
-				"DESCRIPTION_TIME_3": "Vous allez aider",
-				"DESCRIPTION_TIME_4": "à nettoyer et ranger.",
-				"DESCRIPTION_PRICE_1": "Le prix peut varier",
-				"DESCRIPTION_PRICE_2": "entre",
-				"DESCRIPTION_PRICE_3": "et",
-				"DESCRIPTION_PRICE_4": "selon les inscriptions",
-				"DESCRIPTION_PRICE_5": "plus d’information sur le calcul du prix",
-				"DESCRIPTION_PRICE_6": "Vous serez informé(e) du prix final avant le repas."
-			},
-			"SIMPLE_GUEST": {
-				"NAME": "Les invités",
-				"DESCRIPTION": "Vous allez payer un surplus qui va être redistribué à l’hôte et aux convives aidants."
-			},
+			"DESCRIPTION_COOK": "Vous devez arriver à <strong>{{arrivalTime}}</strong> pour aider l’hôte à cuisiner.",
+			"DESCRIPTION_CLEANER": "Vous devez arriver à <strong>{{arrivalTime}}</strong> afin d’aider à nettoyer et ranger.",
+			"DESCRIPTION_SIMPLE_GUEST": "Vous allez payer un surplus qui va être redistribué à l’hôte et aux convives aidants.",
+			"DESCRIPTION_PRICE": "Le prix peut varier <span class='size-15 text-success font-weight-bold'>entre {{helpPrice}} et {{priceUnit}}</span> selon les inscriptions.",
+			"DESCRIPTION_PRICE_2": "(plus d’information sur le calcul du prix).",
+			"DESCRIPTION_PRICE_3": "Vous serez informé(e) du prix final avant le repas.",
 			"CELLPHONE": {
 				"DESCRIPTION": "Information requise",
 				"TOOLTIP": "Information privée (transmise uniquement aux participants du repas).",

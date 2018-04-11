@@ -65,6 +65,7 @@ import { LoginComponent } from './login/login.component';
 import { FilterComponent } from './view-meals/filter/filter.component';
 import { ListComponent } from './view-meals/container/list/list.component';
 import { MapComponent } from './view-meals/container/map/map.component';
+import { ViewMealDtldComponent } from './view-meals/view-meal-dtld/view-meal-dtld.component';
 
 //external modules
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -77,7 +78,7 @@ import { DateTranslatePipe } from './pipes/date-translate.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { AgePipe } from './pipes/age.pipe';
 import { DateRangePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe, CityPipe } from './pipes/meals.pipe';
-
+import { CurrencySymbolPipe } from './pipes/currency.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -106,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FilterComponent,
     ListComponent,
     MapComponent,
+    ViewMealDtldComponent,
     LimitToPipe,
     DateTranslatePipe,
     ReversePipe,
@@ -116,7 +118,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PricePipe,
     PricePipe,
     CityPipe,
-    AgePipe
+    AgePipe,
+    CurrencySymbolPipe
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -166,7 +169,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],
   bootstrap: [AppComponent],
-  entryComponents: [FilterComponent, NgbdModalLoginContent]
+  entryComponents: [FilterComponent, NgbdModalLoginContent, ViewMealDtldComponent]
 })
 
 export class AppModule { }

@@ -16,7 +16,7 @@ import { NgProgress } from '@ngx-progressbar/core';
 })
 
 export class AppComponent {
-
+  
   constructor(
     private translate: TranslateService,
     public router: Router,

@@ -20,6 +20,6 @@ export const environment = {
     version          : 'v2.12'
   },
   pageId: "1838269003092391",
-  fbRedirectURI: "https://myc-dimitrikohn.c9users.io/",
+  fbRedirectURI: "https://mycommuneaty-dimitrikohn.c9users.io/",
   googleMapKey: "AIzaSyBwwM-TMFz42n8ZDaGHF-8rGt76cdoXN8M"
 };

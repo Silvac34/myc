@@ -274,7 +274,7 @@
 			"SIGN_IN_2": "Log in",
 			"SIGN_IN_3": "if you already subscribed."
 		},
-		"PRICE": "Starting from"
+		"PRICE": "Starting from <span class='font-weight-bold size-15 text-success'>{{price}}</span>"
 	},
 	"VIEW_MEALS_DTLD": {
 		"DESCRIPTION": "Description",
@@ -289,34 +289,12 @@
 				"PRICE": "Price",
 				"ARRIVAL_TIME": "Arrival time"
 			},
-			"HELP_COOKING": {
-				"NAME": "Help cooking",
-				"DESCRIPTION_TIME_1": "You have to arrive at",
-				"DESCRIPTION_TIME_2": "in order to help the host to prepare the meal.",
-				"DESCRIPTION_PRICE_1": "The price can vary",
-				"DESCRIPTION_PRICE_2": "from",
-				"DESCRIPTION_PRICE_3": "to",
-				"DESCRIPTION_PRICE_4": "according to the inscriptions",
-				"DESCRIPTION_PRICE_5": "more info about pricing",
-				"DESCRIPTION_PRICE_6": "You will be informed before the dinner of the final price."
-			},
-			"HELP_CLEANING": {
-				"NAME": "Help cleaning",
-				"DESCRIPTION_TIME_1": "You have to arrive at",
-				"DESCRIPTION_TIME_2": "in order to help for",
-				"DESCRIPTION_TIME_3": "You will help",
-				"DESCRIPTION_TIME_4": "ordering and cleaning what was used for the meal.",
-				"DESCRIPTION_PRICE_1": "The price can vary",
-				"DESCRIPTION_PRICE_2": "from",
-				"DESCRIPTION_PRICE_3": "to",
-				"DESCRIPTION_PRICE_4": "according to the inscriptions",
-				"DESCRIPTION_PRICE_5": "more info about pricing",
-				"DESCRIPTION_PRICE_6": "You will be informed before the dinner of the final price."
-			},
-			"SIMPLE_GUEST": {
-				"NAME": "Simple guest",
-				"DESCRIPTION": "You help by paying a little bit more : this money will be redistributed between those who helped to organize the event"
-			},
+			"DESCRIPTION_COOK": "You have to arrive at <strong>{{arrivalTime}}</strong> in order to help the host to prepare the meal.",
+			"DESCRIPTION_CLEANER": "You have to arrive at <strong>{{arrivalTime}}</strong> in order to help ordering and cleaning what was used for the meal.",
+			"DESCRIPTION_SIMPLE_GUEST": "You help by paying a little bit more : this money will be redistributed between those who helped to organize the event",
+			"DESCRIPTION_PRICE": "The price can vary <span class='size-15 text-success font-weight-bold'>from {{helpPrice}} to {{priceUnit}}</span> according to the inscriptions.",
+			"DESCRIPTION_PRICE_2": "(more info about pricing).",
+			"DESCRIPTION_PRICE_3": "You will be informed before the dinner of the final price.",
 			"CELLPHONE": {
 				"DESCRIPTION": "Info required",
 				"TOOLTIP": "Private information displayed only between participants and host",

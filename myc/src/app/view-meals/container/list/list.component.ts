@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MealsService } from '../../../services/meals.service';
+import { ViewMealDtldComponent } from '../../view-meal-dtld/view-meal-dtld.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'meal-list',
@@ -12,11 +14,17 @@ export class ListComponent implements OnInit {
   @Input() reverseOrderMeal: boolean;
   @Input() selectedFilter: any;
   
-  constructor(public ms: MealsService) {
+  constructor(public ms: MealsService, private modalService: NgbModal,) {
     
   }
 
   ngOnInit() {
   }
+  
+  openModalDtld(meal) {
+    const modalRef = this.modalService.open(ViewMealDtldComponent, { "centered": true });
+    modalRef.componentInstance.meal = meal;
+  }
+  
 
 }

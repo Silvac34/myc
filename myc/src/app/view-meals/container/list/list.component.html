@@ -11,7 +11,7 @@
         <h5 translate class="text-info">VIEW_MY_MEALS.PREVIOUS_MEALS</h5>
     </div>
     <div class="card mb-3 pointer" [ngClass]="{'border-success': ms.datasUserForEachMeal(meal, userId).status == 'accepted','border-warning':ms.datasUserForEachMeal(meal, userId).status == 'pending', 'border-info':ms.datasUserForEachMeal(meal, userId).status == 'old'}"
-        (click)=openModalDtld(meal)>
+        (click)="openModalDtld(meal)">
         <div class="card-body">
             <div class="row">
                 <div class="d-none d-md-block col-md-auto text-center">

@@ -29,6 +29,7 @@ import { GoogleMapService } from './services/google-map.service'; //google-map c
 import { CurrencyService } from './services/currency.service'; // pour obtenir le symbol de la monnaie selon le pays
 import { GetUserService } from './services/get-user.service'; // on obtient les données associés à un utilisateur
 import { MealsService } from './services/meals.service'; // fonctions relatives aux meals
+import { MessengerCheckboxService } from './services/messenger-checkbox.service'; // fonctions relatives aux meals
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -167,7 +168,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgProgressModule.forRoot(),
     NgProgressRouterModule
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService],
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, MessengerCheckboxService],
   bootstrap: [AppComponent],
   entryComponents: [FilterComponent, NgbdModalLoginContent, ViewMealDtldComponent]
 })

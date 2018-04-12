@@ -167,12 +167,7 @@
                     <div *ngIf="auth.user | async; else guest">
                         <button type="submit" class="btn btn-md btn-primary" translate>CREATE_A_MEAL.FORM.PUBLISH</button>
                     </div>
-                    <ng-template #guest>
-                        <div class="text-center">
-                            <button type="button" (click)="connectCreateMeal('facebook')" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Connect Facebook</button>
-                            <button type="button" (click)="connectCreateMeal('google')" class="btn btn-social btn-google"><i class="fa fa-google-plus"></i>Connect Google</button>
-                        </div>
-                    </ng-template>
+                    <ng-template #guest><button class="btn btn-primary" (click)="openModalLogin(modalContent)" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button></ng-template>
                 </div>
             </div>
             <div class="clear20"></div>

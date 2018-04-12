@@ -28,7 +28,7 @@
             <img src="/assets/images/view_meals/kosher-sign.png" style="width:16px; height:16px"> <span translate>VIEW_MEALS_DTLD.KOSHER_MEAL</span>
         </div>
         <hr>
-        <div class="font-weight-bold from-group" translate>VIEW_MEALS_DTLD.INSCRIPTION.TITLE</div>
+        <div class="font-weight-bold form-group" translate>VIEW_MEALS_DTLD.INSCRIPTION.TITLE</div>
         <!--<div ng-show="errorSubscribe.requestRole.status || (viewMealsDtldForm.requestRole.$error.required && viewMealsDtldForm.$submitted)">
         <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.requestRole.message || "You have to select a role to participate"}}</div>
     </div>-->
@@ -38,7 +38,7 @@
                 <span class="meal-dtld-helpers-position fa fa-money" ngbTooltip="{{'VIEW_MEALS_DTLD.INSCRIPTION.TOOLTIP.PRICE'|translate}}" placement="top" style="font-size:18px"></span>
                 <span class="meal-dtld-helpers-position fa fa-clock-o" ngbTooltip="{{'VIEW_MEALS_DTLD.INSCRIPTION.TOOLTIP.ARRIVAL_TIME'|translate}}" placement="top" style="font-size:18px"></span>
             </div>
-            <ngb-accordion [closeOthers]="true" activeIds="{{activePanel}}" #acc="ngbAccordion">
+            <ngb-accordion [closeOthers]="true" #acc="ngbAccordion">
                 <ngb-panel id="cookInput" [disabled]="availablePlaces('cooks') === 0" *ngIf="meal.detailedInfo.requiredGuests.cooks.nbRquCooks > 0">
                     <ng-template ngbPanelTitle>
                         <input type="radio" formControlName="requestRoleInput" id="requestRoleCook" value="cook" (click)="$event.stopPropagation();acc.toggle('cookInput')" required>
@@ -86,27 +86,57 @@
                     </ng-template>
                 </ngb-panel>
             </ngb-accordion>
-            <div class="was-validated" *ngIf="createRequestRoleForm.get('requestRoleInput').hasError('required')">
-                <div class="invalid-feedback" [translate]="VIEW_MEALS_DTLD.REQUEST_MESSAGE.ERROR" [translateParams]="{ admin_first_name: meal.users[0].detail?.first_name}"></div>
-            </div>
+            <!--<div class="was-validated" *ngIf="createRequestRoleForm.get('requestRoleInput').invalid">
+                <div class="invalid-feedback" [translate]="'VIEW_MEALS_DTLD.REQUEST_MESSAGE.ERROR'" [translateParams]="{ admin_first_name: meal.users[0].detail?.first_name}"></div>
+            </div>-->
         </div>
-        <div class="form-group" *ngIf="meal.automaticSubscription === false" [hidden]="userMealDatas.status === 'pending' || meal.date < now" [ngClass]="{'was-validated': createRequestRoleForm.get('requestMessage').hasError('required') && (createRequestRoleForm.get('requestMessage').dirty || createRequestRoleForm.get('requestMessage').touched)}">
-            <textarea type="text" class="form-control" rows="2" formControlName="requestMessage" placeholder="{{'VIEW_MEALS_DTLD.REQUEST_MESSAGE.PLACEHOLDER' | translate}}" ng-required="meal.automaticSubscription == false"></textarea>
+        <div class="form-group" *ngIf="meal.automaticSubscription === false" [hidden]="userMealDatas.status === 'pending' || meal.date < now" [ngClass]="{'was-validated': createRequestRoleForm.get('requestMessage').invalid && (createRequestRoleForm.get('requestMessage').dirty || createRequestRoleForm.get('requestMessage').touched)}">
+            <textarea type="text" class="form-control" rows="2" formControlName="requestMessage" placeholder="{{'VIEW_MEALS_DTLD.REQUEST_MESSAGE.PLACEHOLDER' | translate}}" required></textarea>
         </div>
-        <div class="clear10"></div>
         <div *ngIf="auth.user | async as user">
-            <div *ngIf="user.privateInfo.cellphone">
-                <div class="row meal-dtld-group">
-                    <div class="meal-label meal-dtld-group-label"><span translate>VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.DESCRIPTION</span> <i class="fa fa-info-circle" ngbTooltip="{{VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.TOOLTIP | translate}}" triggers="mouseenter" placement="right"></i></div>
+            <hr>
+            <div class="font-weight-bold form-group">
+                <span translate>VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.DESCRIPTION</span>
+                <i class="fa fa-info-circle ml-1" ngbTooltip="{{'VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.TOOLTIP' | translate}}" placement="right"></i></div>
+            <div *ngIf="!user.privateInfo.cellphone">
+                <div class="form-group">
+                    <div class="input-group" [ngClass]="{'was-validated': createRequestRoleForm.get('cellphone').hasError('required') && (createRequestRoleForm.get('cellphone').dirty || createRequestRoleForm.get('cellphone').touched)}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" placeholder="{{'CREATE_A_MEAL.FORM.CELLPHONE.NAME'|translate}}" formControlName="cellphone"
+                            required/>
+                        <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.CELLPHONE</div>
+                    </div>
                 </div>
                 <!--<div *ngIf="errorSubscribe.cellphone.status">
-                <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.cellphone.message}}</div>
-            </div>-->
-                <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="{{'VIEW_MEALS_DTLD.INSCRIPTION.CELLPHONE.PLACEHOLDER' | translate}}"
-                    [(ngModel)]="user.privateInfo.cellphone">
-                <div class="clear20"></div>
+                    <div uib-alert class="alert alert-dismissible alert-danger text-center" close="closeAlert()">{{errorSubscribe.cellphone.message}}</div>
+                </div>-->
+                <div class="small" translate>VIEW_MEALS_DTLD.NOTIFICATIONS</div>
+                <div *ngIf="!user.privateInfo.user_ref" class="fb-messenger-checkbox" [attr.origin]="origin" [attr.page_id]="page_id" [attr.messenger_app_id]="app_id" [attr.user_ref]="user_ref" prechecked="true" allow_login="true" size="large"></div>
+                <div *ngIf="user.privateInfo.user_ref" class="small text-info" translate>CREATE_A_MEAL.FORM.NOTIFICATIONS.MESSENGER_ALREADY</div>
             </div>
         </div>
+        <div class="form-row text-center">
+            <div class="col">
+                <div *ngIf="auth.user | async; else guest">
+                    <button type="submit" class="btn btn-md btn-primary" translate>CREATE_A_MEAL.FORM.PUBLISH</button>
+                </div>
+                 <ng-template #guest><button class="btn btn-primary" (click)="openModalLogin(modalContent)" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button></ng-template>
+            </div>
+        </div>
+
+        <div class="text-center row">
+            <a class="btn" [ngClass]="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated}" (click)="viewMealsDtldForm.$setSubmitted(); viewMealsDtldForm.$valid && subscribeMealAuth(meal._id, requestRole.name, request_message, 'facebook')" *ngIf="meal.nbRemainingPlaces>0 && !goToMeal"
+                ng-hide="datasUserForEachMeal(meal).status == 'pending'" ng-disabled="checkMealDate() == false"><span *ngIf="!isAuthenticated"><span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE_NOT_CONNECTED_1</span><br/><span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE_NOT_CONNECTED_2</span></span><span *ngIf="isAuthenticated" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE</span></a>
+            <a class="btn btn-success" *ngIf="goToMeal" (click)="cancel()" ui-sref="view_my_dtld_meals({myMealId: meal._id})" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SEE_MEAL</a>
+            <button class="btn btn-sm btn-danger" (click)="unsubscribe()" *ngIf="datasUserForEachMeal(meal).status == 'pending'"><strong><span class="fa fa-remove-sign"></span></strong> <span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.CANCEL</span></button>
+            <div *ngIf="meal.nbRemainingPlaces<=0  && goToMeal!=true"><strong class="text-danger" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.MEAL_FULL</strong><br><br><span><span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SIGN_IN_1</span> <a class="btn btn-xs btn-facebook" (click)="auth('facebook', toState)" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SIGN_IN_2</a>                <span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SIGN_IN_3</span></span>
+            </div>
+        </div>
+
+
+
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>

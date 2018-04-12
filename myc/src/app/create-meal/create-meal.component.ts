@@ -6,12 +6,15 @@ import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 import { GoogleMapService } from '../services/google-map.service';
 import { CurrencyService } from '../services/currency.service';
+import { MessengerCheckboxService } from '../services/messenger-checkbox.service';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Meal } from '../data-model/meal';
 import { User } from '../data-model/user';
 import { Router } from '@angular/router';
+import { NgbdModalLoginContent } from '../welcome/welcome.component'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 const now = new Date();
 
@@ -45,7 +48,7 @@ export class CreateMealComponent {
     "name": "",
     "lng": null 
   };
-  public progress: number  = 0; //mesure le progrès de chargement de la page (permet de lancer le FB.XFBML.parse() après que la vue soit chargée
+  private progress: number; //mesure le progrès de chargement de la page (permet de lancer le FB.XFBML.parse() après que la vue soit chargée
 
   
   @ViewChild("autocompleteAddress")
@@ -58,7 +61,9 @@ export class CreateMealComponent {
     private gMap: GoogleMapService,
     private currencyService: CurrencyService,
     private afs: AngularFirestore,
-    public auth: AuthService
+    public auth: AuthService,
+    private modalService: NgbModal,
+    private messengerCheckbox: MessengerCheckboxService
   ) { 
     this.createForm();
     this.setCurrencySymbol();
@@ -116,16 +121,8 @@ export class CreateMealComponent {
       }
     })
     
-    //on initialise la valeur du téléphone selon si l'utilisateur a déjà rentré cette info dans le serveur
     //permet d'attendre que la view soit chargée pour faire un parse de FB pour obtenir le fb-checkbox-plugin
-    this.ngZone.runOutsideAngular(() => {
-      this.increaseProgress(() => {
-        // reenter the Angular zone and display done
-        this.ngZone.run(() => {
-          console.log("ready to publish");
-        });
-      });
-    });
+    this.messengerCheckbox.initializeFbMessenger();
     
     //on initialise l'endroit où on se trouve :
     //this.setCurrentPosition();
@@ -174,7 +171,8 @@ export class CreateMealComponent {
       });
     });
   }
-    
+  
+  
   //défini le symbole de monnaie selon la position de l'utilisateur
   setCurrencySymbol() {
     if ("geolocation" in navigator) {
@@ -208,19 +206,6 @@ export class CreateMealComponent {
     }
     else {
       return false
-    }
-  }
-
-  //fonction qui permet de mesurer (et d'augmenter) le progrès de chargement de la page
-  increaseProgress(doneCallback: () => void) {
-    this.progress += 1;
-    if (this.progress < 100) {
-      window.setTimeout(() => this.increaseProgress(doneCallback), 10);
-    } else {
-      if (window["FB"]) {
-        window["FB"]["XFBML"].parse(); //on parse le plugin checkbox pour qu'il apparaisse
-      };
-      doneCallback();
     }
   }
   
@@ -319,5 +304,9 @@ export class CreateMealComponent {
     .catch(function(error) {
       console.error(error);
     });
+  }
+  
+  openModalLogin(content) {
+    this.modalService.open(NgbdModalLoginContent).result.then(result => this.user_ref = Math.floor((Math.random() * 10000000000000) + 1).toString());
   }
 }

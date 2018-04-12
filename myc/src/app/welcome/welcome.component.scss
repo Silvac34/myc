@@ -340,6 +340,24 @@ a.mod-info {
         -ms-flex-direction: row;
         flex-direction: row
     }
+
+    .bluerow.unsticked {
+        top: -70px;
+    }
+}
+
+@media (min-width: 460px) and (max-width: 769px) {
+    .bluerow.unsticked {
+        top: -1px;
+        position: relative;
+    }
+}
+
+@media (max-width: 460px) {
+    .bluerow.unsticked {
+        top: -27px;
+        position: relative;
+    }
 }
 
 .info-box-title-what-about-the-money,
@@ -405,7 +423,6 @@ a.mod-underline:hover {
 }
 
 .bluerow.unsticked {
-    top: -70px;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     -ms-transition: all .5s;

@@ -21,9 +21,10 @@ export class ListComponent implements OnInit {
   ngOnInit() {
   }
   
-  openModalDtld(meal) {
+  openModalDtld(meal, userCellphone) {
     const modalRef = this.modalService.open(ViewMealDtldComponent, { "centered": true });
     modalRef.componentInstance.meal = meal;
+    modalRef.componentInstance.userId = this.userId;
     modalRef.componentInstance.userMealDatas = this.ms.datasUserForEachMeal(meal, this.userId);
   }
   

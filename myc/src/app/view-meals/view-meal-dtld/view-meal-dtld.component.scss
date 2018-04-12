@@ -1,0 +1,42 @@
+.meal-dtld-helpers-label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.meal-dtld-col {
+    min-height: 17px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.meal-dtld-helpers-position {
+    min-width: 17%;
+    text-align: center;
+    float: right;
+}
+
+.meal-dtld-helpers {
+    width: 100%;
+}
+
+
+@media (min-width: 769px) {
+    input[type="radio"] {
+        margin-top: -6px;
+        vertical-align: middle;
+        margin-right: 0.25 rem;
+    }
+}
+
+@media (max-width: 769px) {
+    .small-xs {
+        font-size: 80%;
+        font-weight: 400;
+    }
+    .meal-dtld-helpers-position {
+        font-size: 80%;
+        font-weight: 400;
+        margin-top: 0.25 rem !important;
+    }
+}

@@ -143,18 +143,18 @@
 			"PARTICIPANTS": "Participants",
 			"ARRIVAL_TIME": "Heure d’arrivée",
 			"HOST": {
-				"NAME": "L’hôte (vous)"
+				"NAME": "Hôte (vous)"
 			},
 			"HELP_COOKING": {
-				"NAME": "Les Aides-cuisine",
+				"NAME": "Aides-cuisine",
 				"TOOLTIP": "Ces personnes vont vous aider à cuisiner"
 			},
 			"HELP_CLEANING": {
-				"NAME": "Les Aides-nettoyage",
+				"NAME": "Aides-nettoyage",
 				"TOOLTIP": "Ces personnes vont vous aider à nettoyer et ranger."
 			},
 			"SIMPLE_GUEST": {
-				"NAME": "Les invités",
+				"NAME": "Invités",
 				"TOOLTIP": "Ces personnes ne vont pas vous aider directement, mais vont payer un petit surplus qui fera diminuer le prix de votre repas et de celui de vos convives aidants."
 			},
 			"TOTAL": "Total",

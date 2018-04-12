@@ -164,11 +164,13 @@
             <div class="clear20"></div>
             <div class="form-row text-center">
                 <div class="col">
-                    <button type="submit" class="btn btn-md btn-primary" *ngIf="auth.user | async; else guest"><span translate>CREATE_A_MEAL.FORM.PUBLISH</span></button>
+                    <div *ngIf="auth.user | async; else guest">
+                        <button type="submit" class="btn btn-md btn-primary" translate>CREATE_A_MEAL.FORM.PUBLISH</button>
+                    </div>
                     <ng-template #guest>
                         <div class="text-center">
-                            <button (click)="connectCreateMeal('facebook')" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Connect Facebook</button>
-                            <button (click)="connectCreateMeal('google')" class="btn btn-social btn-google"><i class="fa fa-google-plus"></i>Connect Google</button>
+                            <button type="button" (click)="connectCreateMeal('facebook')" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Connect Facebook</button>
+                            <button type="button" (click)="connectCreateMeal('google')" class="btn btn-social btn-google"><i class="fa fa-google-plus"></i>Connect Google</button>
                         </div>
                     </ng-template>
                 </div>

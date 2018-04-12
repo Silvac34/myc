@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
   openModalDtld(meal) {
     const modalRef = this.modalService.open(ViewMealDtldComponent, { "centered": true });
     modalRef.componentInstance.meal = meal;
+    modalRef.componentInstance.userMealDatas = this.ms.datasUserForEachMeal(meal, this.userId);
   }
   
 

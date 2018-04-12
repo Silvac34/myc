@@ -39,12 +39,12 @@ export class AuthService {
     }
 
   facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
   }
   
   googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
   

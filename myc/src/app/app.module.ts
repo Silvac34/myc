@@ -78,7 +78,7 @@ import { DateTranslatePipe } from './pipes/date-translate.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { AgePipe } from './pipes/age.pipe';
 import { DateRangePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe, CityPipe } from './pipes/meals.pipe';
-import { CurrencySymbolPipe } from './pipes/currency.pipe';
+import { CurrencySymbolPipe } from './pipes/currencySymbol.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

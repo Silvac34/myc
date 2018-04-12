@@ -254,11 +254,11 @@ export class CreateMealComponent {
   }*/
   
   connectCreateMeal(provider) {
-    if(provider === "facebook.com"){
+    if(provider === "facebook"){
      this.auth.facebookLogin()
       .then(() => this.onSubmit()); 
     }
-    else if(provider === "google.com") {
+    else if(provider === "google") {
       this.auth.googleLogin()
       .then(() => this.onSubmit());
     }

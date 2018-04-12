@@ -209,15 +209,6 @@ export class CreateMealComponent {
     }
   }
   
-  confirmOptIn() {
-    window["FB"]["AppEvents"].logEvent('MessengerCheckboxUserConfirmation', null, {
-      'app_id': this.app_id,
-      'page_id': this.page_id,
-      'ref': this.userId,
-      'user_ref': this.user_ref
-    });
-  }
-  
   //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form
   /*setCurrentPosition() {
     if ("geolocation" in navigator) {
@@ -285,7 +276,7 @@ export class CreateMealComponent {
     delete newMeal["cellphone"];
     this.afs.collection('meals').add(newMeal)
     .then(function(docRef) {
-      //this.confirmOptIn(); //ne marche pas : pas de AppEvents dans window.FB
+      //this.messengerCheckbox.confirmOptIn(this.app_id, this.page_id, this.userId, this.user_ref) //ne marche pas : pas de AppEvents dans window.FB
       console.log("Document written with ID: ", docRef.id);
       this.router.navigate(['/']);
     })

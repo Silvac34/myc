@@ -4,8 +4,6 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { MessengerCheckboxService } from '../../services/messenger-checkbox.service';
 import { environment } from '../../../environments/environment';
-import { NgbdModalLoginContent } from '../../welcome/welcome.component'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { User } from '../../data-model/user';
 
@@ -32,7 +30,6 @@ export class ViewMealDtldComponent implements OnInit {
     private formB: FormBuilder,
     public auth: AuthService,
     private ngZone: NgZone,
-    private modalService: NgbModal,
     private afs: AngularFirestore,
     private messengerCheckbox: MessengerCheckboxService
     ) { }
@@ -47,15 +44,6 @@ export class ViewMealDtldComponent implements OnInit {
         }
       }
     })
-  }
-  
-  confirmOptIn() {
-    window["FB"]["AppEvents"].logEvent('MessengerCheckboxUserConfirmation', null, {
-      'app_id': this.app_id,
-      'page_id': this.page_id,
-      'ref': this.userId,
-      'user_ref': this.user_ref
-    });
   }
   
   availablePlaces(helpType) {
@@ -86,7 +74,6 @@ export class ViewMealDtldComponent implements OnInit {
       //this.validateAllFormFields(this.createRequestRoleForm);
     }
   }
-  
     
   updateUser() {
     let data = {};
@@ -98,9 +85,5 @@ export class ViewMealDtldComponent implements OnInit {
     .catch(function(error) {
       console.error(error);
     });
-  }
-  
-  openModalLogin(content) {
-    this.modalService.open(NgbdModalLoginContent).result.then(result => this.user_ref = Math.floor((Math.random() * 10000000000000) + 1).toString());
   }
 }

@@ -122,10 +122,12 @@
                 <div *ngIf="auth.user | async; else guest">
                     <button type="submit" class="btn btn-md btn-primary" translate>CREATE_A_MEAL.FORM.PUBLISH</button>
                 </div>
-                 <ng-template #guest><button class="btn btn-primary" (click)="openModalLogin(modalContent)" translate>INDEX.ACTION_BUTTON.SIGN_IN_1</button></ng-template>
+                 <ng-template #guest>
+                     <app-login id="fromMealDtld"></app-login>
+                </ng-template>
             </div>
         </div>
-
+<!--
         <div class="text-center row">
             <a class="btn" [ngClass]="{'btn-primary': isAuthenticated, 'btn-facebook': !isAuthenticated}" (click)="viewMealsDtldForm.$setSubmitted(); viewMealsDtldForm.$valid && subscribeMealAuth(meal._id, requestRole.name, request_message, 'facebook')" *ngIf="meal.nbRemainingPlaces>0 && !goToMeal"
                 ng-hide="datasUserForEachMeal(meal).status == 'pending'" ng-disabled="checkMealDate() == false"><span *ngIf="!isAuthenticated"><span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE_NOT_CONNECTED_1</span><br/><span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE_NOT_CONNECTED_2</span></span><span *ngIf="isAuthenticated" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE</span></a>
@@ -133,7 +135,7 @@
             <button class="btn btn-sm btn-danger" (click)="unsubscribe()" *ngIf="datasUserForEachMeal(meal).status == 'pending'"><strong><span class="fa fa-remove-sign"></span></strong> <span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.CANCEL</span></button>
             <div *ngIf="meal.nbRemainingPlaces<=0  && goToMeal!=true"><strong class="text-danger" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.MEAL_FULL</strong><br><br><span><span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SIGN_IN_1</span> <a class="btn btn-xs btn-facebook" (click)="auth('facebook', toState)" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SIGN_IN_2</a>                <span translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SIGN_IN_3</span></span>
             </div>
-        </div>
+        </div>-->
 
 
 

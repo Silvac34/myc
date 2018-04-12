@@ -31,4 +31,14 @@ export class MessengerCheckboxService {
           doneCallback();
         }
     }
+    
+      
+  confirmOptIn(app_id, page_id, userId, user_ref) {
+    window["FB"]["AppEvents"].logEvent('MessengerCheckboxUserConfirmation', null, {
+      'app_id': app_id,
+      'page_id': page_id,
+      'ref': userId,
+      'user_ref': user_ref
+    });
+  }
 }

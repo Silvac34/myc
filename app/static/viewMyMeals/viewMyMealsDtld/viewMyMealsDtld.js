@@ -29,7 +29,7 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
     $scope.data_href = ENV.fbRedirectURI + "#!/my_meals/" + $scope.meal._id;
 
     //modalDelete to delete a meal
-    $scope.openModalDelete = function() {
+    $scope.openModalDelete = function(modal) {
         if ($scope.isOldMeal() != true) {
             $uibModal.open({
                 animation: true,
@@ -299,7 +299,7 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
 
 }])
 
-.controller('modalDeleteInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
+.controller('modalDeleteInstanceCtrl', ['$scope', '$uibModalInstance', '$http', '$state', 'meal', function($scope, $uibModalInstance, $http,  $state, meal) {
 
     $scope.delete = function() {
         var config = {
@@ -325,9 +325,9 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
         $uibModalInstance.dismiss('cancel');
     }; //funcion to dismiss the modal
 
-})
+}])
 
-.controller('modalEditInstanceCtrl', function($scope, $http, $uibModalInstance, $state, editedMeal, $timeout, $parse, $filter) {
+.controller('modalEditInstanceCtrl',  ['$scope', '$http',  '$uibModalInstance', '$state', 'editedMeal', '$timeout', '$parse', '$filter', function($scope, $http, $uibModalInstance, $state, editedMeal, $timeout, $parse, $filter) {
     $scope.editedMeal = editedMeal;
     $scope.addressComplement = $scope.editedMeal.privateInfo.address.complement;
     $scope.editedMeal.time = new Date($scope.editedMeal.time);
@@ -543,9 +543,9 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
     $scope.cancel = function() {
         $uibModalInstance.dismiss('cancel');
     }; //funcion to dismiss the modal*/
-})
+}])
 
-.controller('modalUnsubscribeInstanceCtrl', function($scope, $http, $uibModalInstance, $state, meal) {
+.controller('modalUnsubscribeInstanceCtrl', ['$scope', '$http',  '$uibModalInstance', '$state', 'meal', function($scope, $http, $uibModalInstance, $state, meal) {
 
     $scope.unsubscribe = function() {
         $http.post('/api/meals/' + meal._id + '/unsubscription').then(function(response) {
@@ -563,7 +563,7 @@ export default angular.module('myApp.viewMyMealsDtld', ['ngMap'])
         $uibModalInstance.dismiss('cancel');
     }; //funcion to dismiss the modal
 
-})
+}])
 
 .filter('ageFilter', function() {
     function calculateAge(birthday) { // birthday is a date

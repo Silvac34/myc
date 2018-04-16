@@ -23,7 +23,7 @@ export class ViewMealDtldComponent implements OnInit {
   public page_id: string = environment.pageId;
   public origin: string = environment.fbRedirectURI.concat("view_meals");
   public user_ref: string = Math.floor((Math.random() * 10000000000000) + 1).toString();
-  public progress: number  = 0; //mesure le progrès de chargement de la page (permet de lancer le FB.XFBML.parse() après que la vue soit chargée
+  public listHelpType = ["admin"];
   
   constructor(
     public activeModal: NgbActiveModal,
@@ -39,21 +39,39 @@ export class ViewMealDtldComponent implements OnInit {
     this.auth.user.subscribe(data => {
       if(data) {
         this.userCellphone = data.privateInfo.cellphone;
-        if(data.privateInfo.user_ref) {
+        if(!data.privateInfo.user_ref) {
           this.messengerCheckbox.initializeFbMessenger();
         }
       }
-    })
+    });
+    if(this.meal.detailedInfo.requiredGuests.cooks.nbRquCooks > 0) {
+      this.listHelpType.push("cook");
+    }
+    if(this.meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners > 0) {
+      this.listHelpType.push("cleaner");
+    }
+    if(this.meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests > 0) {
+      this.listHelpType.push("simpleGuest");
+    }
   }
   
   availablePlaces(helpType) {
-    let placesOccupied = 0;
-    for(let i=0; i < this.meal.users.length; i++){
-      if(this.meal.users[i].role === helpType){
-        placesOccupied++;
+    if(helpType === "cooks" || helpType === "cleaners" || helpType === "simpleGuests"){
+      let placesOccupied = 0;
+      for(let i=0; i < this.meal.users.length; i++){
+        if(this.meal.users[i].role === helpType){
+          placesOccupied++;
+        }
       }
+      return this.meal["detailedInfo"]["requiredGuests"][helpType]["nbRqu" + helpType.replace(/\b\w/g, l => l.toUpperCase())] - placesOccupied;
     }
-    return this.meal["detailedInfo"]["requiredGuests"][helpType]["nbRqu" + helpType.replace(/\b\w/g, l => l.toUpperCase())] - placesOccupied;
+    else{
+      return null;
+    }
+  }
+  
+  isTypeOccupied(helpType) {
+    return this.meal.users.map(r=>r.role).indexOf(helpType) !== -1;
   }
   
   createForm() {
@@ -73,6 +91,10 @@ export class ViewMealDtldComponent implements OnInit {
       //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
       //this.validateAllFormFields(this.createRequestRoleForm);
     }
+  }
+  
+  unsubscribe() {
+    //fonction pour se désinscrire du repas si on est en pending
   }
     
   updateUser() {

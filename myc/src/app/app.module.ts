@@ -80,6 +80,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { AgePipe } from './pipes/age.pipe';
 import { DateRangePipe, PricePipe, DaysPipe, PreferencePipe, HelpingTypePipe, CityPipe } from './pipes/meals.pipe';
 import { CurrencySymbolPipe } from './pipes/currencySymbol.pipe';
+import { UsersSubscribedMealDtldPipe } from './pipes/users-subscribed-meal-dtld.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -120,7 +121,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PricePipe,
     CityPipe,
     AgePipe,
-    CurrencySymbolPipe
+    CurrencySymbolPipe,
+    UsersSubscribedMealDtldPipe
   ],
   imports: [
     AgmCoreModule.forRoot({

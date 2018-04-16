@@ -17,7 +17,7 @@
             <i class="fa fa-clock-o pr-1"></i> {{meal.date| date:'HH:mm'}}
           </div>
           <div class="row align-items-center pt-1">
-            <span class="fa fa-money pr-1"></span> <span><span translate>VIEW_MEALS.PRICE</span> <strong class="size-15 text-success"><span *ngIf="meal.currency_symbol !== '€'">{{meal.currency_symbol}} </span>{{meal.mealPrice}}<span *ngIf="meal.currency_symbol === '€'"> {{meal.currency_symbol}}</span></strong></span>
+            <span class="fa fa-money pr-1"></span><span [innerHTML]="'VIEW_MEALS.PRICE' | translate:{price: meal.mealPrice | currencySymbol:meal.currency_symbol}"></span>
           </div>
           <div *ngIf="meal.veggies === true" class="row align-items-center pt-1">
             <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:16px; height:16px" class="pr-1"><span translate>VIEW_MEALS.VEGETARIAN_MEAL</span>

@@ -84,12 +84,10 @@ export class CreateMealComponent {
       "detailedInfo": this.formB.group({
         "requiredGuests": this.formB.group({
           "cooks": this.formB.group({
-            "nbRquCooks": null,
-            "timeCooking": null
+            "nbRquCooks": null
           }),
           "cleaners": this.formB.group({
-            "nbRquCleaners": null,
-            "timeCleaning": null
+            "nbRquCleaners": null
           }),
           "simpleGuests": this.formB.group({
             "nbRquSimpleGuests": null
@@ -198,16 +196,6 @@ export class CreateMealComponent {
       }
     });
   }
-
-  //fonction qui permet de valider l'heure d'arrivés des helps cooking dans le template
-  timeCookingValidation() {
-    if(this.createMealForm.value.detailedInfo.requiredGuests.cooks.nbRquCooks > 0) {
-      return true
-    }
-    else {
-      return false
-    }
-  }
   
   //pour que cela fonctionne vraiment, il faut rajouter une conversion via google maps API des coordonnées en adresse et ensuite le rajouter dans les controls du form
   /*setCurrentPosition() {
@@ -261,12 +249,6 @@ export class CreateMealComponent {
       "id": this.userId,
       "role": "admin"
     }];
-    if(newMeal["detailedInfo"]["requiredGuests"]["cleaners"]["timeCleaning"]){
-      newMeal["detailedInfo"]["requiredGuests"]["cleaners"]["timeCleaning"] = new Date(newMeal["date"].year,newMeal["date"].month,newMeal["date"].day,newMeal["detailedInfo"]["requiredGuests"]["cleaners"]["timeCleaning"].substr(0,2),newMeal["detailedInfo"]["requiredGuests"]["cleaners"]["timeCleaning"].substr(3,5))
-    };
-    if(newMeal["detailedInfo"]["requiredGuests"]["cooks"]["timeCooking"]){
-      newMeal["detailedInfo"]["requiredGuests"]["cooks"]["timeCooking"] = new Date(newMeal["date"].year,newMeal["date"].month,newMeal["date"].day,newMeal["detailedInfo"]["requiredGuests"]["cooks"]["timeCooking"].substr(0,2),newMeal["detailedInfo"]["requiredGuests"]["cooks"]["timeCooking"].substr(3,5))
-    };
     newMeal["date"] = new Date(newMeal["date"].year,newMeal["date"].month,newMeal["date"].day,newMeal["time"].substr(0,2),newMeal["time"].substr(3,5))
     delete newMeal["time"];
     delete newMeal["addressComplement"];

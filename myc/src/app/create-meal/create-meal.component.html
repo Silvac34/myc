@@ -54,42 +54,33 @@
                     <tr>
                         <th class="border-0"></th>
                         <th class="border-0 pb-2" style="width:80px"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.PARTICIPANTS'|translate}}" placement="top"><img src="/assets/images/create_meal/multiple-users-silhouette.png" height="18px" width="18px"></span></th>
-                        <th class="border-0 pb-2" style="width:95px"><span class="fa fa-clock-o" style="font-size:18px" ngbTooltip="{{'CREATE_A_MEAL.FORM.ARRIVAL_TIME'|translate}}" placement="top"></span></th>
                     </tr>
                 </thead>
                 <tbody formGroupName="requiredGuests">
                     <tr class="table-meal-border">
                         <td translate class="text-left">CREATE_A_MEAL.FORM.HOST.NAME</td>
                         <td>1</td>
-                        <td></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="cooks">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_COOKING.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_COOKING.NAME</span></td>
-                        <td class="px-0"><input type="number" min="0" class="form-control text-center px" formControlName="nbRquCooks" name="nbRquCooks"></td>
-                        <td [ngClass]="{'was-validated': timeCookingValidation() && (createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').dirty || createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').touched)}"><input type="time" name="timeCooking" class="form-control text-center" formControlName="timeCooking" [required]="createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value>0"></td>
+                        <td><input type="number" min="0" class="form-control text-center px" formControlName="nbRquCooks" name="nbRquCooks"></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="cleaners">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.HELP_CLEANING.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.HELP_CLEANING.NAME</span></td>
-                        <td class="px-0"><input type="number" min="0" class="form-control text-center" formControlName="nbRquCleaners" name="nbRquCleaners"></td>
-                        <td><input type="time" class="form-control text-center" formControlName="timeCleaning" name="timeCleaning"></td>
+                        <td><input type="number" min="0" class="form-control text-center" formControlName="nbRquCleaners" name="nbRquCleaners"></td>
                     </tr>
                     <tr class="table-meal-border" formGroupName="simpleGuests">
                         <td class="text-left align-middle"><span ngbTooltip="{{'CREATE_A_MEAL.FORM.SIMPLE_GUEST.TOOLTIP'|translate}}" placement="top-left" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</span></td>
-                        <td class="px-0"><input type="number" min="0" class="form-control text-center" formControlName="nbRquSimpleGuests" name="nbRquSimpleGuests"></td>
-                        <td class="align-middle"><span *ngIf="createMealForm.get('detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests').value > 0">{{ createMealForm.get('time').value }}</span></td>
+                        <td><input type="number" min="0" class="form-control text-center" formControlName="nbRquSimpleGuests" name="nbRquSimpleGuests"></td>
                     </tr>
                     <tr class="table-meal-border table-meal-border-bottom">
                         <td class="text-left" translate>CREATE_A_MEAL.FORM.TOTAL</td>
                         <td>{{ createMealForm.get('detailedInfo.requiredGuests.cooks.nbRquCooks').value + createMealForm.get('detailedInfo.requiredGuests.cleaners.nbRquCleaners').value + createMealForm.get('detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests').value
                             + 1 }}
                         </td>
-                        <td></td>
                     </tr>
                 </tbody>
             </table>
-            <div class="was-validated" *ngIf="createMealForm.get('detailedInfo.requiredGuests.cooks.timeCooking').hasError('required') && (createMealForm.get('detailedInfo.requiredGuests.cooks.timeCooking').dirty || createMealForm.get('detailedInfo.requiredGuests.cooks.timeCooking').touched)">
-                <div class="invalid-feedback" translate>CREATE_A_MEAL.FORM.ERROR.ARRIVAL_TIME_HELP_COOKING</div>
-            </div>
             <div class="form-row">
                 <div class="col-auto">
                     <div class="form-group">

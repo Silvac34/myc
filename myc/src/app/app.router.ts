@@ -1,6 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuardService } from './services/auth-guard.service';
+
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CreateMealComponent } from './create-meal/create-meal.component';
@@ -24,7 +26,7 @@ export const router: Routes = [
     { path: 'welcome', component: WelcomeComponent },
     { path: 'create_meal', component: CreateMealComponent },
     { path: 'view_meals', component: ViewMealsComponent },
-    { path: 'my_meals', component: MyMealsComponent },
+    { path: 'my_meals', component: MyMealsComponent, canActivate: [AuthGuardService] },
     { path: 'my_meals/:id', component: MyMealDtldComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'footer_more_contact', component: ContactComponent },

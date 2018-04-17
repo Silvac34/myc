@@ -14,10 +14,11 @@ export class AuthService {
   userCol: AngularFirestoreDocument<any>;
   userId: string;
   authState: any = null;
+  // store the URL so we can redirect after logging in
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    public router: Router
     ){ 
       this.user = this.afAuth.authState
         .switchMap(user => {
@@ -100,7 +101,8 @@ export class AuthService {
   
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-        //this.router.navigate(['/welcome']);
+        this.userId = null;
+        this.router.navigate(['/welcome']);
     });
   }
 }

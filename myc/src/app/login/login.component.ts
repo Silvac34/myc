@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "../services/auth.service";
+import { AuthGuardService } from "../services/auth-guard.service";
 import { MessengerCheckboxService } from "../services/messenger-checkbox.service";
 import { Router } from "@angular/router";
 
@@ -12,15 +13,18 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: AuthService, public activeModal: NgbActiveModal, public router: Router, private messengerCheckbox: MessengerCheckboxService) { }
+  constructor(public auth: AuthService, public activeModal: NgbActiveModal, public router: Router, private messengerCheckbox: MessengerCheckboxService, private authGuard: AuthGuardService) { }
   
-  ngOnInit() {
-    
+  ngOnInit() {;
   }
 
   private afterSignIn(): void {
     if(this.router.url === "/create_meal"){
       this.messengerCheckbox.initializeFbMessenger();
+    }
+    if(this.authGuard.redirectUrl) {
+      this.router.navigate([this.authGuard.redirectUrl]);
+      this.authGuard.redirectUrl = null;
     }
   }
   

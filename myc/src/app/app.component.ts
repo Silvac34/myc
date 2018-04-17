@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { environment } from '../environments/environment';
 import { FacebookService, InitParams } from 'ngx-facebook';
@@ -36,6 +36,13 @@ export class AppComponent {
     translate.use(userLang);
     let facebookConfig: InitParams = environment.facebookConfig;
     this.fb.init(facebookConfig);
+    //à chaque fois qu'on change de route, on retourne en haut de la page
+    this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0)
+    });
   }
   
   public isCollapsed = true;

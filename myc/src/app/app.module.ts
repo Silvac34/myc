@@ -23,6 +23,7 @@ import { FacebookModule } from 'ngx-facebook';
 
 //services
 import { AuthService } from './services/auth.service'; //authentification firebase
+import { AuthGuardService } from './services/auth-guard.service'; //authentification firebase
 import { AgmCoreModule } from '@agm/core'; //google-map
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window'; //info windows for gmap
 import { GoogleMapService } from './services/google-map.service'; //google-map créer par moi même
@@ -172,7 +173,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgProgressModule.forRoot(),
     NgProgressRouterModule
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, MessengerCheckboxService],
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, MessengerCheckboxService, AuthGuardService],
   bootstrap: [AppComponent],
   entryComponents: [FilterComponent, NgbdModalLoginContent, ViewMealDtldComponent]
 })

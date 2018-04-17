@@ -63,7 +63,8 @@ export class CreateMealComponent {
     private afs: AngularFirestore,
     public auth: AuthService,
     private modalService: NgbModal,
-    private messengerCheckbox: MessengerCheckboxService
+    private messengerCheckbox: MessengerCheckboxService,
+    public router: Router
   ) { 
     this.createForm();
     this.setCurrencySymbol();

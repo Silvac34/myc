@@ -131,6 +131,4 @@ export class MyMealsComponent implements OnInit {
     return meals;
   }
   
-  filterDateMeal()
-  
 }

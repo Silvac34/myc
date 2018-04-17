@@ -65,9 +65,11 @@
             </div>
           </div>
           <div class="text-center" *ngIf="auth.user | async; let user; else guest">
-            <a class="btn btn-sm text-light btn-info" *ngIf="!ms.datasUserForEachMeal(meal, userId).status && meal.nbRemainingPlaces > 0" (click)=openModalDtld(meal._id) translate>VIEW_MEALS.ACTION_BUTTON.SEE_MEAL</a>
-            <!-- remplacer le routerLink par le bon chemin pour accéder au repas-->
-            <a class="btn btn-sm text-light btn-success" *ngIf="ms.datasUserForEachMeal(meal, userId).status === 'accepted'" routerLink="my_meals" translate>VIEW_MEALS.ACTION_BUTTON.SEE_MEAL</a>
+            <div (click)="openModalDtld(meal)">
+              <a class="btn btn-sm text-light btn-info" *ngIf="!ms.datasUserForEachMeal(meal, userId).status && meal.nbRemainingPlaces > 0" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.SUBSCRIBE</a>
+              <a class="btn btn-sm text-light" *ngIf="ms.datasUserForEachMeal(meal, userId).status" [ngClass]="{'btn-success': ms.datasUserForEachMeal(meal, userId).status === 'accepted', 'btn-warning':ms.datasUserForEachMeal(meal, userId).status === 'pending'}" translate>VIEW_MEALS.ACTION_BUTTON.SEE_MEAL</a>
+            </div>
+            <span *ngIf="meal.nbRemainingPlaces === 0  && !ms.datasUserForEachMeal(meal, userId).role && !ms.datasUserForEachMeal(meal, userId).status" class="font-weight-bold text-danger" translate>VIEW_MEALS_DTLD.ACTION_BUTTON.MEAL_FULL</span>
           </div>
           <ng-template #guest>
             <div class="text-center">

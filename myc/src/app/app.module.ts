@@ -61,6 +61,7 @@ import { CareersComponent } from './footer/more/careers/careers.component';
 import { ContactComponent } from './footer/more/contact/contact.component';
 import { PhotoGalleryComponent } from './footer/more/photo-gallery/photo-gallery.component';
 import { LoginComponent } from './login/login.component';
+import { MyMealDtldComponent } from './my-meal-dtld/my-meal-dtld.component';
 
 //view-meals
 import { FilterComponent } from './view-meals/filter/filter.component';
@@ -122,7 +123,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CityPipe,
     AgePipe,
     CurrencySymbolPipe,
-    UsersSubscribedMealDtldPipe
+    UsersSubscribedMealDtldPipe,
+    MyMealDtldComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

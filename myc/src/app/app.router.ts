@@ -17,6 +17,7 @@ import { TermsAndConditionsComponent } from './footer/legal/terms-and-conditions
 import { CareersComponent } from './footer/more/careers/careers.component';
 import { ContactComponent } from './footer/more/contact/contact.component';
 import { PhotoGalleryComponent } from './footer/more/photo-gallery/photo-gallery.component';
+import { MyMealDtldComponent } from './my-meal-dtld/my-meal-dtld.component';
 
 export const router: Routes = [
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -24,6 +25,7 @@ export const router: Routes = [
     { path: 'create_meal', component: CreateMealComponent },
     { path: 'view_meals', component: ViewMealsComponent },
     { path: 'my_meals', component: MyMealsComponent },
+    { path: 'my_meals/:id', component: MyMealDtldComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'footer_more_contact', component: ContactComponent },
     { path: 'footer_information_team', component: TeamComponent },

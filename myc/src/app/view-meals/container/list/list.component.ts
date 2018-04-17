@@ -22,11 +22,16 @@ export class ListComponent implements OnInit {
   ngOnInit() {
   }
   
-  openModalDtld(meal, userCellphone) {
-    const modalRef = this.modalService.open(ViewMealDtldComponent, { "centered": true, "size": "lg" });
-    modalRef.componentInstance.meal = meal;
-    modalRef.componentInstance.userId = this.userId;
-    modalRef.componentInstance.userMealDatas = this.ms.datasUserForEachMeal(meal, this.userId);
+  openModalDtld(meal) {
+    if(this.ms.datasUserForEachMeal(meal, this.userId).status === "accepted") {
+      this.router.navigate(["/my_meals/"+meal.id]);
+    }
+    else{
+      const modalRef = this.modalService.open(ViewMealDtldComponent, { "centered": true, "size": "lg" });
+      modalRef.componentInstance.meal = meal;
+      modalRef.componentInstance.userId = this.userId;
+      modalRef.componentInstance.userMealDatas = this.ms.datasUserForEachMeal(meal, this.userId);
+    }
   }
   
 

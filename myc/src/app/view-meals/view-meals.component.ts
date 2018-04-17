@@ -97,6 +97,9 @@ export class ViewMealsComponent implements OnInit {
       if(results){
         this.userId = results.payload.id;
       }
+      else {
+        this.userId = null;
+      }
     });
     this.getMeals(now);
     this.meals.subscribe(result => {

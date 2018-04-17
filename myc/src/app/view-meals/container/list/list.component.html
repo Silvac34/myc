@@ -1,5 +1,5 @@
 <div *ngFor="let meal of (meals | async | reverse: reverseOrderMeal | daysPipe: selectedFilter.weekDays | pricePipe: selectedFilter | dateRangePipe: selectedFilter | preferencePipe: selectedFilter.preferenceFilter | helpingTypePipe: selectedFilter.helpTypeFilter | cityPipe: selectedFilter.cityFilter); let first = first">
-    <div *ngIf="first && ms.datasUserForEachMeal(meal, userId).status == 'old'">
+    <div *ngIf="first && ms.datasUserForEachMeal(meal, userId).status === 'old' && router.url === '/view_meals'">
         <div class="card text-center border-0">
             <div class="card-body">
                 <h5 class="card-title" translate>VIEW_MEALS.NO_INCOMING_MEALS_1</h5>
@@ -10,7 +10,7 @@
         <hr class="col-6">
         <h5 translate class="text-info">VIEW_MY_MEALS.PREVIOUS_MEALS</h5>
     </div>
-    <div class="card mb-3 pointer" [ngClass]="{'border-success': ms.datasUserForEachMeal(meal, userId).status == 'accepted','border-warning':ms.datasUserForEachMeal(meal, userId).status == 'pending', 'border-info':ms.datasUserForEachMeal(meal, userId).status == 'old'}"
+    <div class="card mb-3 pointer" [ngClass]="{'border-success': ms.datasUserForEachMeal(meal, userId).status == 'accepted','border-warning':ms.datasUserForEachMeal(meal, userId).status == 'pending', 'border-info':ms.datasUserForEachMeal(meal, userId).status == 'old', 'mt-2': first && router.url === '/my_meals'}"
         (click)="openModalDtld(meal)">
         <div class="card-body">
             <div class="row">

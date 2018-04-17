@@ -1,3 +1,17 @@
-<p>
-  my-meals works!
-</p>
+<div class="container-fluid my-2">
+    <ngb-tabset type="pills">
+        <ngb-tab>
+            <ng-template ngbTabTitle>
+                <span translate>VIEW_MEALS.TITLE</span><span class="badge ml-1" *ngIf="countMealWithPendingRequest() > 0">{{countMealWithPendingRequest()}}</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+                 <meal-list [meals]="incomingMeals" [userId]="userId" [reverseOrderMeal]="false" [selectedFilter]="selectedFilter"></meal-list>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="{{'VIEW_MY_MEALS.PREVIOUS_MEALS'|translate}}">
+            <ng-template ngbTabContent>
+                <meal-list [meals]="oldMeals" [userId]="userId" [reverseOrderMeal]="false" [selectedFilter]="selectedFilter"></meal-list>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

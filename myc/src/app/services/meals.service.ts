@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 export class MealsService {
     constructor(private auth: AuthService) {}
     
-    datasUserForEachMeal(meal, userId) { //function qui retourne l'utilisateur s'il s'est inscrit --> récupérer l'utilisateur
+    datasUserForEachMeal(meal, userId) { //function qui retourne l'utilisateur s'il s'est inscrit
         let state = null;
         let role = null;
         let pendingRequests = 0;

@@ -22,13 +22,12 @@ import { PhotoGalleryComponent } from './footer/more/photo-gallery/photo-gallery
 import { MyMealDtldComponent } from './my-meal-dtld/my-meal-dtld.component';
 
 export const router: Routes = [
-    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     { path: 'welcome', component: WelcomeComponent },
     { path: 'create_meal', component: CreateMealComponent },
     { path: 'view_meals', component: ViewMealsComponent },
     { path: 'my_meals', component: MyMealsComponent, canActivate: [AuthGuardService] },
     { path: 'my_meals/:id', component: MyMealDtldComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService] },
     { path: 'footer_more_contact', component: ContactComponent },
     { path: 'footer_information_team', component: TeamComponent },
     { path: 'footer_information_concept', component: ConceptComponent },
@@ -38,7 +37,9 @@ export const router: Routes = [
     { path: 'footer_legal_general_policies', component: GeneralPoliciesComponent },
     { path: 'footer_legal_guidelines', component: GuidelinesComponent },
     { path: 'footer_more_careers', component: CareersComponent },
-    { path: 'footer_more_photo_gallery', component: PhotoGalleryComponent }
+    { path: 'footer_more_photo_gallery', component: PhotoGalleryComponent },
+    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

@@ -137,7 +137,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
-    routes,
+
     FacebookModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
@@ -171,7 +171,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       titleFontSize: '14'
     }),
     NgProgressModule.forRoot(),
-    NgProgressRouterModule
+    NgProgressRouterModule,
+    routes
   ],
   providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, MessengerCheckboxService, AuthGuardService],
   bootstrap: [AppComponent],

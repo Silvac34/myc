@@ -13,7 +13,6 @@ export class MessengerCheckboxService {
           this.increaseProgress(() => {
             // reenter the Angular zone and display done
             this.ngZone.run(() => {
-              console.log("ready to publish");
             });
           });
         });

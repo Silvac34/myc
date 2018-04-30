@@ -1,6 +1,6 @@
 export class Meal {
     "menu": Menu;
-    "price": Number;
+    "price": number;
     "address": Address;
     "privateInfo": PrivateInfo;
     "detailedInfo": DetailedInfo;
@@ -10,24 +10,24 @@ export class Meal {
     "hallal": Boolean;
     "veggies": Boolean;
     "time": Date;
-    "currency_symbol": String;
+    "currency_symbol": string;
     "users": Users[];
-    "nbGuests": Number;
+    "nbGuests": number;
 }
 
 export class Menu {
-    "title": String;
-    "description": String;
+    "title": string;
+    "description": string;
 }
 
 export class Address {
-    "town": String;
-    "country": String;
-    "country_code": String;
-    "lng": Number;
-    "postal_code": String;
-    "lat": Number;
-    "complement": String;
+    "town": string;
+    "country": string;
+    "country_code": string;
+    "lng": number;
+    "postal_code": string;
+    "lat": number;
+    "complement": string;
 }
 
 export class PrivateInfo {
@@ -35,10 +35,10 @@ export class PrivateInfo {
 }
 
 export class AddressPrivate {
-    "lat": Number;
-    "utc_offset": Number;
-    "name": String;
-    "lng": Number; 
+    "lat": number;
+    "utc_offset": number;
+    "name": string;
+    "lng": number; 
 }
 
 export class DetailedInfo {
@@ -53,29 +53,29 @@ export class RequiredGuests {
 }
 
 export class Cleaners {
-    "nbRquCleaners": Number;
+    "nbRquCleaners": number;
     "timeCleaning": Date;
-    "price": Number;
+    "price": number;
 }
 
 export class Cooks {
-    "nbRquCooks": Number;
+    "nbRquCooks": number;
     "timeCooking": Date;
-    "price": Number;
+    "price": number;
 }
 
 export class SimpleGuests {
-    "nbRquSimpleGuests": Number;
-    "price": Number;
+    "nbRquSimpleGuests": number;
+    "price": number;
 }
 
 export class Hosts {
-    "price": Number;
+    "price": number;
 }
 
 export class Users {
-    "status": String;
-    "id": String;
-    "role": String;
+    "status": string;
+    "id": string;
+    "role": string;
 }
 

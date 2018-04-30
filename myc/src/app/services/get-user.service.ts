@@ -19,5 +19,12 @@ export class GetUserService {
             return actions;
         });
     }
+    
+    getPrivateUserFromId(userId: string) {
+        this.userDoc = this.afs.doc<User>('users/' + userId);
+        return this.user = this.userDoc.valueChanges().map(actions => {
+            return actions;
+        });
+    }
        
 }

@@ -1,3 +1,183 @@
-<p>
-  my-meal-dtld works!
-</p>
+<div class="container-fluid">
+    <!--<div class="row fade-out-success" ng-hide="successSubscribedMessage==false">
+        <div class="col-12">
+            <div class="alert alert-dismissible alert-success text-justify">
+                <button type="button" class="close" data-dismiss="alert" (click)="successSubscribedMessage = !successSubscribedMessage ">&times;</button>
+                <span *ngIf="fromState.name != 'create_meal'"><strong translate>VIEW_MY_MEALS_DTLD.MESSAGE.WELL_DONE</strong> <span translate>VIEW_MY_MEALS_DTLD.MESSAGE.SUBSCRIBED</span></span>
+                <span *ngIf="fromState.name == 'create_meal'"><strong translate>VIEW_MY_MEALS_DTLD.MESSAGE.WELL_DONE</strong> <span translate>VIEW_MY_MEALS_DTLD.MESSAGE.PUBLISHED</span><span *ngIf="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages"><br><span translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_1</span>                <strong><span translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_2</span> <a routerLink="profile({userId:$parent.$root.user._id})" translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_3</a></strong> <span translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_4</span></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row fade-out-success" *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'" ng-hide="pendingRequest==false">
+        <div class="col-12">
+            <div class="card card-warning">
+                <div class="card-heading">
+                    <h3 class="card-title" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.TITLE</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-lg-4" *ngFor="participant of meal.users" *ngIf="participant.status == 'pending'">
+                            <div class="my-meal-dtld-list-pending-user">
+                                <div>
+                                    <strong translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.REQUESTED_ROLE</strong> <span *ngIf="participant.role[0] == 'cook'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_COOKING</span><span *ngIf="participant.role[0]== 'cleaner'"
+                                        translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_CLEANING</span><span *ngIf="participant.role[0]== 'simpleGuest'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SIMPLE_GUEST</span>
+                                    <span class="pull-right">
+                                    <a class="btn btn-success btn-xs" (click)="validateSubscription(participant._id)" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.ACTION_BUTTON.ACCEPT</a>
+                                    <a class="btn btn-danger btn-xs" (click)="refuseSubscription(participant._id)" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.ACTION_BUTTON.REFUSE</a>
+                                    </span>
+                                </div>
+                                <div class="clear10"></div>
+                                <div style="position:relative">
+                                    <a routerLink="profile({userId:participant._id})"><img src="{{participant.detail?.picture}}" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="" onerror="this.src='/assets/images/viewMyMealDtld/unknown_user.png'" /></a>
+                                    <div style="position:relative; left:10px;">
+                                        <a routerLink="profile({userId:participant._id})">
+                                            <div>
+                                                <strong class="text-info">{{participant.detail?.first_name}} {{participant.detail?.last_name}}</strong>
+                                            </div>
+                                        </a>
+                                        <div style="padding-top:4px">
+                                            <span *ngIf="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}<br /></span>
+                                            <span *ngIf="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span><br />
+                                            </span>
+                                            <span *ngIf="participant.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i><span translate="PROFILE.COUNTRY_OF_ORIGIN" [translateParams]="{ country_of_origin_name: '{{participant.country_of_origin.name}}'}"></span><br />
+                                            </span>
+                                            <span *ngIf="participant.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span *ngFor="spoken_language of user.spoken_languages">{{spoken_language}} </span>
+                                        </div>
+                                        <span class="d-block d-sm-none" *ngIf="!participant.reviews"><br /></span>
+                                        <div>
+                                            <div class="well well-sm well-resume-rating" *ngIf="participant.reviews.positive || participant.reviews.neutral || participant.reviews.negative">
+                                                <table style="text-align:center">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td *ngIf="participant.reviews.positive" style="padding-right:4px"><span class="fa fa-plus-sign text-success"></span></td>
+                                                            <td *ngIf="participant.reviews.neutral" style="padding:0px 4px"><span class="fa fa-record text-default"></span></td>
+                                                            <td *ngIf="participant.reviews.negative" style="padding-left:4px"><span class="fa fa-minus-sign text-danger"></span></td>
+                                                        </tr>
+                                                        <tr style="font-size:11px">
+                                                            <td *ngIf="participant.reviews.positive" style="padding-right:4px">{{participant.reviews.positive}}</td>
+                                                            <td *ngIf="participant.reviews.neutral" style="padding:0px 4px">{{participant.reviews.neutral}}</td>
+                                                            <td *ngIf="participant.reviews.negative" style="padding-left:4px">{{participant.reviews.negative}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a routerLink="['profile',participant.id]" class="italic underline" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SEE_REVIEWS</a>
+                                            </div>
+                                        </div>
+                                        <div class="clear5 d-none d-sm-block"></div>
+                                        <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:0px 10px 10px 0px;" *ngIf="participant.request_message">
+                                            "<em>{{participant.request_message}}</em>"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="media mt-2">
+        <div class="media-body">
+            <h4 class="mr-1 font-weight-bold text-center">{{meal.menu.title}}</h4>
+        </div>
+        <div *ngIf="meal.date > now" class="text-right">
+            <button class="btn btn-sm btn-danger" *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'">
+            <span (click)="openModalEdit()">
+                <i class="fa fa-edit font-weight-bold"></i>
+                <span class="d-none d-sm-inline" translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.EDIT</span>
+            </span>
+        </button>
+            <button class="btn btn-sm btn-danger">
+            <span (click)="openModalDeleteUnsubscribe()">
+                <i class="fa fa-times-circle font-weight-bold"></i>
+                <span class="d-none d-sm-inline" *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'" translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.DELETE</span>
+                <span class="d-none d-sm-inline" *ngIf="ms.datasUserForEachMeal(meal, userId).role !=='admin'" translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.UNSUBSCRIBE</span>
+            </span>
+        </button>
+        </div>
+    </div>
+    <div [ngClass]="{'row':ms.datasUserForEachMeal(meal, userId).role !=='admin'}">
+        <div class="text-justify font-italic mb-1" *ngIf="meal.menu.description" [ngClass]="{'col-12':ms.datasUserForEachMeal(meal, userId).role !=='admin'}">"{{meal.menu.description}}"</div>
+        <div class="my-2" [ngClass]="{'col-sm-7':ms.datasUserForEachMeal(meal, userId).role !=='admin'}">
+            <div class="card">
+                <div class="card-header text-white bg-info font-weight-bold" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.TITLE</div>
+                <div class="card-body text-dark">
+                    <!--<div *ngIf="meal.date > now">
+                        <i class="fa fa-share"></i> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.INVITE_FRIENDS</span>
+                        <fb-send href="https://github.com/zyra/ng2-facebook-sdk/"></fb-send>
+                    </div>-->
+                    <div *ngIf="ms.datasUserForEachMeal(meal, userId).role !=='admin'">
+                        <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.INSCRIBED_AS</span>
+                        <span class="font-weight-bold text-info">
+                        <span *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='cook'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_COOKING</span>
+                        <span *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='cleaner'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_CLEANING</span>
+                        <span *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='simpleGuest'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SIMPLE_GUEST</span>
+                        </span>
+                    </div>
+                    <div *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'">
+                        <i class="fa fa-shopping-cart"></i><span class="mx-2" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.TOTAL_GROCERIES</span><strong class="text-success">{{meal.price | currencySymbol:meal.currency_symbol}}</strong>
+                    </div>
+                    <div *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'">
+                        <i class="fa fa-thumbs-up mr-2"></i><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.TOTAL_PAYBACK</span>
+                        <br />
+                        <span class="mr-2 ml-4" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_MEAL_FULL</span><strong class="text-success">{{meal.pricePaybackIfFull | currencySymbol:meal.currency_symbol}}</strong>
+                        <br />
+                        <span class="mr-2 ml-4" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_CURRENT</span><strong class="text-success">{{meal.currentPricePayback | currencySymbol:meal.currency_symbol}}</strong>
+                    </div>
+                    <div>
+                        <i class="fa fa-money"></i>
+                        <span *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_MEAL</span><strong class="text-success ml-2">{{meal.detailedInfo.requiredGuests.hosts.price | currencySymbol:meal.currency_symbol}}</strong></span>
+                        <strong *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='cook'" class="text-success">{{meal.detailedInfo.requiredGuests.cooks.price | currencySymbol:meal.currency_symbol}}</strong>
+                        <strong *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='cleaner'" class="text-success">{{meal.detailedInfo.requiredGuests.cleaners.price | currencySymbol:meal.currency_symbol}}</strong>
+                        <strong *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='SimpleGuest'" class="text-success">{{meal.detailedInfo.requiredGuests.simpleGuests.price | currencySymbol:meal.currency_symbol}}</strong>
+                        <span *ngIf="ms.datasUserForEachMeal(meal, userId).role !=='admin'" translate="VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_LEFT_TO_PAY" [translateParams]="{ meal_admin_first_name: meal.users[0].detail?.first_name, meal_admin_last_name: meal.users[0].detail?.last_name}"></span>
+                    </div>
+                    <div *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'">
+                        <img src="/assets/images/view_meals/multiple-users-silhouette.png" style="width:14px; height:14px" class="mr-2"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.SUBSCRIPTION_RECAPITULATORY</span> <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
+                    </div>
+                    <div *ngIf="meal.veggies === true">
+                        <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:14px; height:14px" class="mr-2"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.VEGETARIAN_MEAL</span>
+                    </div>
+                    <div *ngIf="meal.vegan === true">
+                        <img src="/assets/images/view_meals/vegetarian-sign.png" style="width:14px; height:14px" class="mr-2"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.VEGAN_MEAL</span>
+                    </div>
+                    <div *ngIf="meal.halal === true">
+                        <img src="/assets/images/view_meals/halal-sign.png" style="width:14px; height:14px" class="mr-2"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.HALAL_MEAL</span>
+                    </div>
+                    <div *ngIf="meal.kosher === true">
+                        <img src="/assets/images/view_meals/kosher-sign.png" style="width:14px; height:14px" class="mr-2"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.KOSHER_MEAL</span>
+                    </div>
+                    <div class="text-capitalize">
+                        <i class="fa fa-calendar mr-2"></i>{{meal.date |date:'EEEE dd MMMM - HH:mm'}}
+                    </div>
+                    <div class="media">
+                        <i class="fa fa-map-marker mr-2 mt-1"></i>
+                        <span class="d-none d-sm-inline-block">
+                        {{meal.privateInfo.address.name}},<span class="mx-1" *ngIf="meal.privateInfo.address.complement">{{meal.privateInfo.address.complement}},</span>{{meal.address.town}}, {{meal.address.country}}
+                        </span>
+                        <span class="d-sm-none">
+                        {{meal.privateInfo.address.name}}<br /><span *ngIf="meal.privateInfo.address.complement">{{meal.privateInfo.address.complement}}<br /></span>{{meal.address.town}}, {{meal.address.country}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 my-2" *ngIf="ms.datasUserForEachMeal(meal, userId).role !=='admin'">
+            <agm-map [latitude]="meal.privateInfo.address.lat" [longitude]="meal.privateInfo.address.lng" [zoom]="14">
+                <agm-marker [latitude]="meal.privateInfo.address.lat" [longitude]="meal.privateInfo.address.lng"></agm-marker>
+            </agm-map>
+        </div>
+    </div>
+    <div class="font-weight-bold text-dark mt-4" translate>CREATE_A_MEAL.FORM.PARTICIPANTS</div>
+    <hr class="mt-1">
+    <app-participants [role]="'admin'" [meal]="meal" [datasUser]="ms.datasUserForEachMeal(meal, userId)"></app-participants>
+    <app-participants *ngIf="meal.detailedInfo.requiredGuests.cooks.nbRquCooks > 0" [role]="'cook'" [meal]="meal" [datasUser]="ms.datasUserForEachMeal(meal, userId)"></app-participants>
+    <app-participants *ngIf="meal.detailedInfo.requiredGuests.cleaners.nbRquCleaners > 0" [role]="'cleaner'" [meal]="meal" [datasUser]="ms.datasUserForEachMeal(meal, userId)"></app-participants>
+    <app-participants *ngIf="meal.detailedInfo.requiredGuests.simpleGuests.nbRquSimpleGuests > 0" [role]="'simpleGuest'" [meal]="meal" [datasUser]="ms.datasUserForEachMeal(meal, userId)"></app-participants>
+    <fb-comments width="100%"></fb-comments>
+    <div class="mb-3 text-center">
+        <a routerLink="/my_meals" class="btn btn-primary" translate>VIEW_MY_MEALS_DTLD.BACK_TO_MY_MEALS</a>
+    </div>
+</div>

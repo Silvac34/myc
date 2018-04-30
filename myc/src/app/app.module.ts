@@ -29,6 +29,7 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window'; //info wind
 import { GoogleMapService } from './services/google-map.service'; //google-map créer par moi même
 import { CurrencyService } from './services/currency.service'; // pour obtenir le symbol de la monnaie selon le pays
 import { GetUserService } from './services/get-user.service'; // on obtient les données associés à un utilisateur
+import { GetMealService } from './services/get-meal.service'; // on obtient les données associés à un repas
 import { MealsService } from './services/meals.service'; // fonctions relatives aux meals
 import { MessengerCheckboxService } from './services/messenger-checkbox.service'; // fonctions relatives aux meals
 
@@ -69,6 +70,9 @@ import { FilterComponent } from './view-meals/filter/filter.component';
 import { ListComponent } from './view-meals/container/list/list.component';
 import { MapComponent } from './view-meals/container/map/map.component';
 import { ViewMealDtldComponent } from './view-meals/view-meal-dtld/view-meal-dtld.component';
+
+//view-meal-dtld
+import { ParticipantsComponent } from './my-meal-dtld/participants/participants.component';
 
 //external modules
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -125,7 +129,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AgePipe,
     CurrencySymbolPipe,
     UsersSubscribedMealDtldPipe,
-    MyMealDtldComponent
+    MyMealDtldComponent,
+    ParticipantsComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -174,7 +179,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgProgressRouterModule,
     routes
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, MealsService, MessengerCheckboxService, AuthGuardService],
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, GetMealService, MealsService, MessengerCheckboxService, AuthGuardService],
   bootstrap: [AppComponent],
   entryComponents: [FilterComponent, NgbdModalLoginContent, ViewMealDtldComponent]
 })

@@ -429,9 +429,9 @@
 		"PENDING_REQUEST": {
 			"TITLE": "Vous avez une réservation en attente",
 			"REQUESTED_ROLE": "Rôle:",
-			"HELP_COOKING": "Les Aides-cuisine",
-			"HELP_CLEANING": "Les Aides-nettoyage",
-			"SIMPLE_GUEST": "Les invités",
+			"HELP_COOKING": "Aide-cuisine",
+			"HELP_CLEANING": "Aide-nettoyage",
+			"SIMPLE_GUEST": "Invité",
 			"ACTION_BUTTON": {
 				"ACCEPT": "Accepter",
 				"REFUSE": "Refuser"
@@ -444,7 +444,7 @@
 			"UNSUBSCRIBE": "Se désinscrire"
 		},
 		"MEAL_INFORMATIONS": {
-			"TITLE": "Information importante",
+			"TITLE": "Informations importantes",
 			"INVITE_FRIENDS": "Inviter des amis",
 			"INSCRIBED_AS": "Inscrit(e) en tant que:",
 			"TOTAL_GROCERIES": "Montant des courses:",
@@ -452,7 +452,7 @@
 			"PRICE_MEAL_FULL": "Si le repas est plein:",
 			"PRICE_CURRENT": "Actuellement:",
 			"PRICE_MEAL": "Prix de votre repas:",
-			"PRICE_LEFT_TO_PAY": "reste à payer à {{meal_admin_first_name}} {{meal_admin_last_name}}",
+			"PRICE_LEFT_TO_PAY": "à payer à {{meal_admin_first_name}} {{meal_admin_last_name}}",
 			"SUBSCRIPTION_RECAPITULATORY": "Récapitulatif des inscriptions:",
 			"VEGETARIAN_MEAL": "Repas végétarien",
 			"VEGAN_MEAL": "Repas végétalien",

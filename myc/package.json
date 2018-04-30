@@ -38,7 +38,7 @@
     "bootstrap-social": "^5.1.1",
     "bootswatch": "^4.0.0",
     "core-js": "^2.4.1",
-    "firebase": "^4.9.1",
+    "firebase": "^4.12.1",
     "firebase-admin": "^5.11.0",
     "firebase-functions": "^1.0.0",
     "font-awesome": "^4.7.0",

@@ -1,0 +1,45 @@
+<div class="card card-default mb-3" [ngClass]="{'border-success': datasUser.role === role, 'border-info': (role === 'admin' && datasUser.role !== 'admin') }">
+    <div class="card-body">
+        <div class="text-primary">
+            <ng-container *ngIf="role === 'admin'">
+                <h5 translate>VIEW_MEALS_DTLD.PARTICIPANTS.HOST</h5>
+            </ng-container>
+            <ng-container *ngIf="role === 'cook'">
+                <h5 class="d-inline" translate>WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME</h5>
+                <span class="small" *ngIf="datasUser.role === role || datasUser.role === 'admin'">({{meal.detailedInfo.requiredGuests.cooks.price | currencySymbol:meal.currency_symbol}})</span>
+            </ng-container>
+            <ng-container *ngIf="role === 'cleaner'">
+                <h5 class="d-inline" translate>WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME</h5>
+                <span class="small" *ngIf="datasUser.role === role || datasUser.role === 'admin'">({{meal.detailedInfo.requiredGuests.cleaners.price | currencySymbol:meal.currency_symbol}})</span>
+            </ng-container>
+            <ng-container *ngIf="role === 'simpleGuest'">
+                <h5 class="d-inline" translate>WELCOME.DIFFERENT_ROLES.SIMPLEGUEST.NAME</h5>
+                <span class="small" *ngIf="datasUser.role === role || datasUser.role === 'admin'">({{meal.detailedInfo.requiredGuests.simpleGuests.price | currencySymbol:meal.currency_symbol}})</span>
+            </ng-container>
+        </div>
+        <div class="media mt-1" *ngFor="let participant of meal.users">
+            <img class="mr-2 rounded border profilePicMealDtld pointer" *ngIf="participant.role === role" routerLink="['profile',participant.id]" src="{{participant.detail?.picture}}" alt="" onerror="this.src='/assets/images/view_meals/unknown_user.png'">
+            <div class="media-body align-self-center" *ngIf="participant.role === role">
+                <h6 class="mx-0 pointer" routerLink="['profile',participant.id]" [ngClass]="{'text-warning': participant.status === 'pending'}">{{participant.detail?.first_name}} {{participant.detail?.last_name}}</h6>
+                <p class="mb-0" *ngIf="participant.detail?.privateInfo.cellphone && meal.date > now && participant.status !== 'pending'">{{participant.detail?.privateInfo.cellphone}}</p>
+            </div>
+        </div>
+        <!--<div class="pull-right" *ngIf="meal.date <= now && user._id != participant._id" [ngClass]="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
+                <span class="form-group">
+                    <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true" class="italic" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.TITLE" [translateParams]="{ participant_first_name: participant.detail?.first_name}" ></span>
+                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="fa fa-plus-sign text-success" (click)="sendReview(participant._id, participant.role, 'rating', 'positive')"  [ngClass]="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-fa-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
+                        ngbTooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.POSITIVE'|translate}}" placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="fa fa-record text-default" (click)="sendReview(participant._id, participant.role, 'rating', 'neutral')" [ngClass]="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-fa-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
+                        ngbTooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEUTRAL'|translate}}" placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                <span class="fa fa-minus-sign text-danger" (click)="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true" [ngClass]="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-fa-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
+                    ngbTooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEGATIVE'|translate}}" placement="top" style="cursor:pointer"></span>
+                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.PLACEHOLDER'|translate:participant}}" ng-hide="checkAlreadyReviewed(participant._id) == true">
+                <span *ngIf="checkAlreadyReviewed(participant._id) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                <a (click)="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" ngbTooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.GRADE_FIRST'|translate:participant}}"
+                    placement="top" disableTooltip="!getDataForReview(participant._id, 'rating')" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.SEND</a>
+                </span>
+            </div>
+            <div *ngIf="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" src="/assets/images/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PENDING_REQUEST</span></div>
+            -->
+    </div>
+</div>

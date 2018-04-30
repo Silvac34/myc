@@ -260,7 +260,6 @@ export class CreateMealComponent {
     this.afs.collection('meals').add(newMeal)
     .then(function(docRef) {
       //this.messengerCheckbox.confirmOptIn(this.app_id, this.page_id, this.userId, this.user_ref) //ne marche pas : pas de AppEvents dans window.FB
-      console.log("Document written with ID: ", docRef.id);
       this.router.navigate(['/my_meals/'+docRef.id]);
     })
     .catch(function(error) {

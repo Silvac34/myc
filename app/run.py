@@ -235,10 +235,11 @@ def auth_facebook():
     #Store data from facebook
     userInfo = {}
     if hasattr(currentUser,"picture"):
-        if currentUser["picture"] != profile["picture"]:
-            userInfo["picture"] = profile["picture"]
+        
+        if currentUser["picture"] != "https://graph.facebook.com/"+profile['id']+"/picture":
+            userInfo["picture"] = "https://graph.facebook.com/"+profile['id']+"/picture"
     else:
-        userInfo["picture"] = profile["picture"]
+        userInfo["picture"] = "https://graph.facebook.com/"+profile['id']+"/picture"
     if hasattr(currentUser,"first_name"):
         if currentUser["first_name"] != profile["first_name"]:
             userInfo["first_name"]=profile["first_name"]
@@ -249,16 +250,22 @@ def auth_facebook():
             userInfo["last_name"]=profile["last_name"]
     else:
         userInfo["last_name"]=profile["last_name"]
-    if hasattr(currentUser,"gender"):  
-        if currentUser["gender"] != profile["gender"]:
-            userInfo["gender"]=profile["gender"]
+    if hasattr(profile, "gender"):
+        if hasattr(currentUser,"gender"):  
+            if currentUser["gender"] != profile["gender"]:
+                userInfo["gender"]=profile["gender"]
+        else:
+            userInfo["gender"]=profile["gender"]  
     else:
-        userInfo["gender"]=profile["gender"]  
-    if hasattr(currentUser,"link"):  
-        if currentUser["link"] != profile["link"]:
+       userInfo["gender"] = None
+    if hasattr(profile, "link"):
+        if hasattr(currentUser,"link"):  
+            if currentUser["link"] != profile["link"]:
+                userInfo["link"]=profile["link"]
+        else:
             userInfo["link"]=profile["link"]
     else:
-        userInfo["link"]=profile["link"]  
+        userInfo["link"]=None
     user.updateUser(userInfo)
     
     if profile.get("email", None) != None: #if email doesn't exist (in case, the user didn't validate his mail with fb), we doesn't add it to the database

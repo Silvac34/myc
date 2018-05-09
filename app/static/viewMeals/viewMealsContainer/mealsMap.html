@@ -45,7 +45,7 @@
                         <div class="bold italic" translate>VIEW_MEALS.HOST</div>
                         <div class="clear10"></div>
                         <div>
-                            <a ui-sref="profile({userId:meal.admin._id})"><img ng-src="{{meal.admin.picture.data.url}}" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /></a>
+                            <a ui-sref="profile({userId:meal.admin._id})"><img ng-src="https://graph.facebook.com/{{meal.admin.facebook_id}}/picture" style="border-radius:10px;width:50px; height:50px; margin-bottom:20px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /></a>
                             <div style="position:relative; left:10px;">
                                 <div>
                                     <a ui-sref="profile({userId: meal.admin._id})"><strong class="text-info">{{meal.admin.first_name}} {{meal.admin.last_name}}</strong></a>

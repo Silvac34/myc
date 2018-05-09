@@ -119,7 +119,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li ng-if="isAuthenticated()" uib-dropdown class="dropdown" style="cursor:pointer">
                 <a uib-dropdown-toggle class="dropdown-toggle">
-                  <img class="img-circle profilePic" ng-src="{{'{{user.picture.data.url}}'}}" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret" ng-if="((user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)==0) || (!user.nbDifferentPendingRequest && !user.nbDifferentReviewsToLeave)"></span>
+                  <img class="img-circle profilePic" ng-src="https://graph.facebook.com/{{'{{user.facebook_id}}'}}/picture" alt="User profile picture" /> {{'{{user.first_name}}'}} <span class="caret" ng-if="((user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)==0) || (!user.nbDifferentPendingRequest && !user.nbDifferentReviewsToLeave)"></span>
                   <span class="badge" ng-if="(user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave)>0">{{'{{user.nbDifferentPendingRequest + user.nbDifferentReviewsToLeave}}'}}</span>
                 </a>
                 <ul uib-dropdown-menu class="dropdown-menu">

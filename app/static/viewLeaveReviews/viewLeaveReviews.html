@@ -21,7 +21,7 @@
                                 <div class="text-info" ng-if="meal[0].mealTitle; $first"><img src="static/sources/createMeal/cutlery_menu.png" style="position:relative;bottom:3px"> <strong style="font-size:large">{{meal[0].mealTitle}}</strong></div>
                                 <div class="clear10"></div>
                                 <div class="col-sm-3">
-                                    <a ui-sref="profile({userId: review.forUser.datas._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="{{review.forUser.datas.picture.data.url}}" alt="User profile picture" /><span class="my-meal-dtld-guestList my-meal-dtld-guestList-old" style="padding-right:5px">{{review.forUser.datas.first_name}} {{review.forUser.datas.last_name}}</a>
+                                    <a ui-sref="profile({userId: review.forUser.datas._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="https://graph.facebook.com/{{review.forUser.datas.facebook_id}}/picture" alt="User profile picture" /><span class="my-meal-dtld-guestList my-meal-dtld-guestList-old" style="padding-right:5px">{{review.forUser.datas.first_name}} {{review.forUser.datas.last_name}}</a>
                                     </div>
                                     <div class="clear10 hidden-sm hidden-md hidden-lg"></div>
                                     <div class="col-sm-9" ng-class="{'margintop7': checkAlreadyReviewed(review.unique) == true}">

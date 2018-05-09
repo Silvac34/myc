@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="clear10"></div>
                                     <div style="position:relative">
-                                        <a ui-sref="profile({userId:participant._id})"><img ng-src="{{participant.picture.data.url}}" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="User profile picture" /></a>
+                                        <a ui-sref="profile({userId:participant._id})"><img ng-src="https://graph.facebook.com/{{participant.facebook_id}}/picture" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="User profile picture" /></a>
                                         <div style="position:relative; left:10px;">
                                             <a ui-sref="profile({userId:participant._id})">
                                                 <div>

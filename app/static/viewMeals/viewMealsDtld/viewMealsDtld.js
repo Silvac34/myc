@@ -11,7 +11,7 @@ export default angular.module('myApp.viewMealsDtld', [])
         element["first_name"] = response.first_name;
         element["last_name"] = response.last_name;
         element["gender"] = response.gender;
-        element["picture"] = response.picture;
+        element["facebook_id"] = response.facebook_id;
         if ("birthdate" in response) {
           element["birthdate"] = response.birthdate;
         }

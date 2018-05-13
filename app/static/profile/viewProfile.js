@@ -9,6 +9,7 @@ export default angular.module('myApp.viewProfile', ['dateDropdownService'])
         return undefined;
       }
       else {
+        console.log(variable);
         return variable.toString();
       }
     }

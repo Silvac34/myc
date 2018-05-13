@@ -13,7 +13,7 @@
     <div class="clear10 hidden-xs"></div>
     <div class="row" ng-if="$parent.user._id == user._id">
         <div class="col-sm-3 hidden-xs text-center" style="max-width:215px">
-            <div><img ng-src="{{user.picture.data.url}}" style="border-radius:10px" alt="User profile picture" /></div>
+            <div><img ng-src="https://graph.facebook.com/{{user.facebook_id}}/picture" style="border-radius:10px" alt="User profile picture" /></div>
             <div class="clear10"></div>
             <div class="text-info size-18"><strong>{{user.first_name}} {{user.last_name}}</strong></div>
             <div class="clear10"></div>
@@ -45,7 +45,7 @@
                             <div class="clear20"></div>
                             <div class="col-xs-12">
                                 <div class="hidden-sm hidden-md hidden-lg" style="position:relative">
-                                    <img ng-src="{{user.picture.data.url}}" style="border-radius:10px; width:150px; height:150px" class="pull-left" alt="User profile picture" />
+                                    <img ng-src="https://graph.facebook.com/{{user.facebook_id}}/picture" style="border-radius:10px; width:150px; height:150px" class="pull-left" alt="User profile picture" />
                                     <strong class="text-info size-16" style="position: relative;top: 58px;left: 14px;">{{user.first_name}} {{user.last_name}}</strong></br>
                                     <div class="well well-sm well-resume-rating" style="position: relative;top: 68px;left: 10px;" ng-if="user.reviews.positive || user.reviews.neutral || user.reviews.negative">
                                         <table style="text-align:center">
@@ -168,7 +168,7 @@
                                                 <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                                                 <div class="pull-left" style="padding-right:15px">
                                                     <a ui-sref="profile({userId: review.fromUser.datas._id})">
-                                                        <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                                        <img class="img-circle profilePic" ng-src="https://graph.facebook.com/{{review.fromuser.datas.facebook_id}}/picture" alt="User profile picture" />
                                                         <div class="size-12 bold margintop15">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
                                                     </a>
                                                 </div>
@@ -209,7 +209,7 @@
     <div ng-if="$parent.user._id != user._id">
         <div class="panel panel-default panel-profile-user">
             <div class="panel-body">
-                <img ng-src="{{user.picture.data.url}}" style="border-radius:10px;" class="pull-left inline-block-sm-md-lg profilePicProfile" alt="User profile picture" />
+                <img ng-src="https://graph.facebook.com/{{user.facebook_id}}/picture" style="border-radius:10px;" class="pull-left inline-block-sm-md-lg profilePicProfile" alt="User profile picture" />
                 <div style="position:relative; left:10px;" class="inline-block-sm-md-lg">
                     <div id="profile-full-name-other-user">
                         <strong class="text-info size-16">{{user.first_name}} {{user.last_name}}</strong>
@@ -272,7 +272,7 @@
                             <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
                             <div class="pull-left" style="padding-right:15px">
                                 <a ui-sref="profile({userId: review.fromUser.datas._id})">
-                                    <img class="img-circle profilePic" ng-src="{{review.fromUser.datas.picture.data.url}}" alt="User profile picture" />
+                                    <img class="img-circle profilePic" ng-src="https://graph.facebook.com/{{review.fromuser.datas.facebook_id}}/picture" alt="User profile picture" />
                                     <div class="size-12 bold margintop15">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
                                 </a>
                             </div>

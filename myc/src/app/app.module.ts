@@ -32,6 +32,7 @@ import { GetUserService } from './services/get-user.service'; // on obtient les 
 import { GetMealService } from './services/get-meal.service'; // on obtient les données associés à un repas
 import { MealsService } from './services/meals.service'; // fonctions relatives aux meals
 import { MessengerCheckboxService } from './services/messenger-checkbox.service'; // fonctions relatives aux meals
+import { GetCountryService } from './services/get-country.service'; // on obtient la liste des pays
 
 // translation with ngx-translate
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -73,6 +74,9 @@ import { ViewMealDtldComponent } from './view-meals/view-meal-dtld/view-meal-dtl
 
 //view-meal-dtld
 import { ParticipantsComponent } from './my-meal-dtld/participants/participants.component';
+import { DeleteComponent } from './my-meal-dtld/modal/delete/delete.component';
+import { UnsubscribeComponent } from './my-meal-dtld/modal/unsubscribe/unsubscribe.component';
+import { EditComponent } from './my-meal-dtld/modal/edit/edit.component';
 
 //external modules
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -130,7 +134,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     CurrencySymbolPipe,
     UsersSubscribedMealDtldPipe,
     MyMealDtldComponent,
-    ParticipantsComponent
+    ParticipantsComponent,
+    DeleteComponent,
+    UnsubscribeComponent,
+    EditComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -179,9 +186,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgProgressRouterModule,
     routes
   ],
-  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, GetMealService, MealsService, MessengerCheckboxService, AuthGuardService],
+  providers: [GoogleMapService, CurrencyService, AuthService, GetUserService, GetMealService, MealsService, MessengerCheckboxService, AuthGuardService, GetCountryService],
   bootstrap: [AppComponent],
-  entryComponents: [FilterComponent, NgbdModalLoginContent, ViewMealDtldComponent]
+  entryComponents: [FilterComponent, NgbdModalLoginContent, ViewMealDtldComponent, DeleteComponent, UnsubscribeComponent, EditComponent]
 })
 
 export class AppModule { }

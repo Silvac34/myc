@@ -14,11 +14,12 @@ export class GetMealService implements Resolve<Meal> {
 
     constructor(private afs: AngularFirestore, private getUserService: GetUserService, private router: Router) { }
     
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Meal> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
         let id = route.paramMap.get('id');
         return this.getMealFromId(id).take(1).map(meal => {
           if (meal) {
-            return meal;
+            console.log(this.mealDoc);
+            return this.mealDoc;
           } else { // id not found
             this.router.navigate(['/view_meals']);
             return null;
@@ -28,29 +29,6 @@ export class GetMealService implements Resolve<Meal> {
     
     getMealFromId(mealId: string) {
         this.mealDoc = this.afs.doc<Meal>('meals/' + mealId);
-        return this.meal = this.mealDoc.valueChanges().map(actions => {
-            if(actions) {
-                for (let i = 0; i < actions.users.length; i++) {
-                    this.getUserService.getPrivateUserFromId(actions.users[i].id).subscribe(results => {
-                      actions.users[i]["detail"] = results ;
-                    });
-                    //on définit le prix à afficher par repas
-                    if (actions.users[i].role === "cooks") {
-                      actions["mealPrice"] = actions.detailedInfo.requiredGuests.cooks.price;
-                    }
-                    else if (actions.users[i].role === "cleaners") {
-                      actions["mealPrice"] = actions.detailedInfo.requiredGuests.cleaners.price;
-                    }
-                    else if (actions.users[i].role === "simpleGuests") {
-                      actions["mealPrice"] = actions.detailedInfo.requiredGuests.simpleGuests.price;
-                    }
-                    else  {
-                      actions["mealPrice"] = actions.detailedInfo.requiredGuests.hosts.price;
-                    }
-                    actions["priceUnit"] = (Math.ceil(10 * actions.price / actions.nbGuests) / 10);
-                  }
-            }
-            return actions;
-        });
+        return this.meal = this.mealDoc.valueChanges();
     }
 }

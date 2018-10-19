@@ -330,7 +330,7 @@
 		"RECOMMENDATION": "Merci de compléter votre profil.",
 		"ABOUT_ME": {
 			"TITLE": "Présentation",
-			"BIRTHDATE": "Date de naissance:",
+			"BIRTHDATE": "Date de naissance",
 			"GENDER": {
 				"NAME": "Genre",
 				"MALE": "Homme",
@@ -457,10 +457,7 @@
 			"VEGETARIAN_MEAL": "Repas végétarien",
 			"VEGAN_MEAL": "Repas végétalien",
 			"HALAL_MEAL": "Repas halal",
-			"KOSHER_MEAL": "Repas kasher",
-			"HELP_COOKING": "Aides-Cuisine:",
-			"HELP_CLEANING": "Aides-Nettoyage:",
-			"SIMPLE_GUEST": "Invités:"
+			"KOSHER_MEAL": "Repas kasher"
 		},
 		"PARTICIPANTS": {
 			"TITLE": "Participants",

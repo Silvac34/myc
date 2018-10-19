@@ -143,10 +143,10 @@
                 <div *ngFor="let participant of (meal.users | usersSubscribedMealDtld: type); first as isFirst;" class="col-md-6">
                     <div class="media mb-2">
                         <div class="align-self-auto mr-2">
-                            <img class="rounded border profilePicMealDtld" src="{{participant.detail?.picture}}" alt="" onerror="this.src='/assets/images/view_meals/unknown_user.png'">
+                            <img class="rounded border profilePicMealDtld pointer" [routerLink]="auth.isLoggedIn() ? ['/profile', participant.id] : []" src="{{participant.detail?.picture}}" alt="" onerror="this.src='/assets/images/view_meals/unknown_user.png'">
                         </div>
                         <div class="media-body">
-                            <h6 class="my-0 text-info">{{participant.detail?.first_name}} {{participant.detail?.last_name[0]}}</h6>
+                            <h6 class="my-0 text-info poitner" [routerLink]="auth.isLoggedIn() ? ['/profile', participant.id] : []">{{participant.detail?.first_name}} {{participant.detail?.last_name[0]}}</h6>
                             <div class="small mb-0">
                                 <span *ngIf="participant.detail?.gender"><i class="fa fa-venus-mars"></i> <span class="text-capitalize">{{participant.detail?.gender}}</span><br /></span>
                                 <span *ngIf="participant.detail?.birthdate"><i class="fa fa-birthday-cake"></i> {{participant.detail?.birthdate | age}} <span translate>PROFILE.YEARS_OLD</span><br />

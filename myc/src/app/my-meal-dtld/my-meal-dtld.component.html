@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="mealObs | async; let meal">
     <!--<div class="row fade-out-success" ng-hide="successSubscribedMessage==false">
         <div class="col-12">
             <div class="alert alert-dismissible alert-success text-justify">
@@ -61,7 +61,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <a routerLink="['profile',participant.id]" class="italic underline" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SEE_REVIEWS</a>
+                                                <a [routerLink]="['profile',participant.id]" class="italic underline" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SEE_REVIEWS</a>
                                             </div>
                                         </div>
                                         <div class="clear5 d-none d-sm-block"></div>
@@ -90,7 +90,7 @@
             </span>
         </button>
             <button class="btn btn-sm btn-danger">
-            <span (click)="openModalDeleteUnsubscribe()">
+            <span (click)="openModalDeleteUnsubscribe(meal)">
                 <i class="fa fa-times-circle font-weight-bold"></i>
                 <span class="d-none d-sm-inline" *ngIf="ms.datasUserForEachMeal(meal, userId).role ==='admin'" translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.DELETE</span>
                 <span class="d-none d-sm-inline" *ngIf="ms.datasUserForEachMeal(meal, userId).role !=='admin'" translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.UNSUBSCRIBE</span>

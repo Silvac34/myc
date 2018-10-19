@@ -8,6 +8,7 @@ import { AuthService } from "../services/auth.service";
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
+  public userId: string;
 
   constructor(private modalService: NgbModal, public auth: AuthService) { 
   }
@@ -16,12 +17,18 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.sloganText = 'INDEX.SLOGAN_2';
+    this.auth.userMeta.subscribe(data => {
+      if(data){
+        this.userId = data.payload.id;
+      }
+    });
   }
   
   openModalLogin(content) {
     this.modalService.open(NgbdModalLoginContent)
   }
   
+
 
 }
 

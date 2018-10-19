@@ -19,7 +19,7 @@
           <a class="nav-link" routerLink="/my_meals" (click)="isCollapsed = !isCollapsed" translate>INDEX.MY_MEALS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" (click)="isCollapsed = !isCollapsed" translate>INDEX.PROFILE</a>
+          <a class="nav-link" [routerLink]="['/profile', userId]" (click)="isCollapsed = !isCollapsed" translate>INDEX.PROFILE</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

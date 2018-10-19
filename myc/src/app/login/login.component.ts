@@ -21,8 +21,10 @@ export class LoginComponent implements OnInit {
     if(this.router.url === "/create_meal"){
       this.messengerCheckbox.initializeFbMessenger();
     }
-    console.log(this.authGuard.redirectUrl);
     if(this.authGuard.redirectUrl) {
+      if(this.router.url === "/view_meals" && this.authGuard.redirectUrl.substring(0,8) === "/profile") { 
+        this.activeModal.close('Close click');
+      }
       this.router.navigate([this.authGuard.redirectUrl]);
     }
   }
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
   onClick(event){
     for (let i=0; i<event.path.length; i++){
       //on ne veut pas que le modal de viewMealDtld soit fermé, lorsqu'on se connecte depuis cet endroit. 
-      //On rajoute donc l'id au composant app-login et lorsuqe c'est différent de cet ID, on est dans un modal que l'on doit fermer
+      //On rajoute donc l'id au composant app-login et lorsque c'est différent de cet ID, on est dans un modal que l'on doit fermer
       if(event.path[i].localName === "app-login" && event.path[i].id !== "fromMealDtld") { 
          this.activeModal.close('Close click');
       }

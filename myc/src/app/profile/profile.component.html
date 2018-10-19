@@ -1,3 +1,317 @@
-<p>
-  profile works!
-</p>
+<div class="container-fluid" *ngIf="auth.user | async; let userMe; else guest">
+    <!--
+    <div class="fade-out-success" *ngIf="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages">
+            <div class="alert alert-dismissible alert-info text-justify font-weight-bold" translate>PROFILE.RECOMMENDATION</div>
+    </div>
+    
+    <script type="text/ng-template" id="customTemplate.html">
+        <a>
+            <img src="https://upload.wikimedia.org/wikipedia/{{match.model.flag_url}}.svg" width="16">
+            <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+        </a>
+    </script>-->
+    <div class="media mt-2" *ngIf="userMe.id === user.id">
+        <div class="text-center mr-3 d-none d-sm-block">
+            <img class="rounded" src="{{user.picture}}" alt="">
+            <div class="text-info font-weight-bold size-18">{{user.first_name}} {{user.last_name}}</div>
+            <div class="card card-sm" style="border:initial">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td *ngIf="user.reviews.positive > 0" class="pr-2"><span class="fa fa-plus-circle text-success"></span></td>
+                            <td *ngIf="user.reviews.neutral > 0"><span class="fa fa-dot-circle-o text-info"></span></td>
+                            <td *ngIf="user.reviews.negative > 0" class="pl-2"><span class="fa fa-minus-circle text-danger"></span></td>
+                        </tr>
+                        <tr style="font-size:11px" *ngIf="user.reviews.positive > 0|| user.reviews.neutral > 0 || user.reviews.negative > 0">
+                            <td *ngIf="user.reviews.positive > 0" class="pr-2">{{user.reviews.positive}}</td>
+                            <td *ngIf="user.reviews.neutral > 0">{{user.reviews.neutral}}</td>
+                            <td *ngIf="user.reviews.negative > 0" class="pl-2">{{user.reviews.negative}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="media-body">
+            <form class="needs-validation" [formGroup]="createProfileForm" (ngSubmit)="onSubmit()">
+                <ngb-tabset>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <span class="small-xs" translate>PROFILE.ABOUT_ME.TITLE</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="form-row mt-2">
+                                <div class="col-auto">
+                                    <div class="input-group pointer mb-3">
+                                        <input type="text" class="form-control" name="dated" [minDate]="minDate" ngbDatepicker #d="ngbDatepicker" popup-placement="bottom-left" formControlName="birthdate" (click)="d.toggle()" placeholder="{{'PROFILE.ABOUT_ME.BIRTHDATE'|translate}}"/>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-light" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupGender"><i class="fa fa-venus-mars"></i></label>
+                                </div>
+                                <select class="custom-select" id="inputGroupGender" formControlName="gender"><option value="" disabled translate>PROFILE.ABOUT_ME.GENDER.NAME</option><option value="male" translate>PROFILE.ABOUT_ME.GENDER.MALE</option><option value="female" translate>PROFILE.ABOUT_ME.GENDER.FEMALE</option></select>
+                            </div>
+                            
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                </div>
+                                <input type="text" class="form-control" formControlName="email" placeholder="{{'PROFILE.ABOUT_ME.EMAIL'|translate}}" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                </div>
+                                <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control" id="inputCellphone" placeholder="{{'PROFILE.ABOUT_ME.CELLPHONE'|translate}}" formControlName="cellphone">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                                </div>
+                                <input type="text" formControlName="country_of_origin" placeholder="{{'PROFILE.ABOUT_ME.COUNTRY_OF_ORIGIN'|translate}}" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)" (click)="click$.next($event.target.value)" #instance="ngbTypeahead" class="form-control">
+                            </div>
+                            <button type="submit">Show form</button>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <span class="small-xs" translate>PROFILE.NOTIFICATIONS.TITLE</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <div>{{now}}</div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <span class="small-xs" translate>PROFILE.REVIEWS.TITLE</span>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <div>hello</div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </form>
+        </div>
+    </div>
+    <!--
+        <div class="col-sm-9 col-xs-12">
+            <form class="form-horizontal" name="updateUserForm">
+                <fieldset>
+                    <uib-tabset active="activeForm">
+                        <uib-tab index="0">
+                            <uib-tab-heading>
+                                <span class="small-visible-xs" translate>PROFILE.ABOUT_ME.TITLE</span>
+                            </uib-tab-heading>
+                            <div class="clear20"></div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="user.country_of_origin" placeholder="{{'PROFILE.ABOUT_ME.COUNTRY_OF_ORIGIN'|translate}}" uib-typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo:8" typeahead-template-url="customTemplate.html"
+                                        class="form-control" typeahead-show-hint="true" typeahead-min-length="0" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group pull-left col-xs-12">
+                                        <input type="text" ng-model="userSpokenLanguage" placeholder="{{'PROFILE.ABOUT_ME.SPOKEN_LANGUAGES.NAME'|translate}}" uib-typeahead="language as language.name for language in languages | filter:{name:$viewValue} | limitTo:8" class="form-control" typeahead-show-hint="true"
+                                            typeahead-min-length="0" autocomplete="off" ng-keypress="addSpokenLanguage($event)">
+                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addSpokenLanguage()" translate>PROFILE.ABOUT_ME.SPOKEN_LANGUAGES.ADD</button></span>
+                                    </div>
+                                    <div class="clear10"></div>
+                                    <div ng-repeat="spoken_language in user.spoken_languages" class="well well-sm profile-city-notification-preference" style="background-color:inherit;border-color:#3eaae8">
+                                        <strong>&nbsp;&nbsp;{{spoken_language}}&nbsp;</strong><span class="fa fa-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeSpokenLanguage($event)"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" placeholder="{{'PROFILE.ABOUT_ME.PRESENTATION'|translate}}" ng-model="user.presentation" style="margin-top:-10px"></textarea>
+                                </div>
+                            </div>
+                        </uib-tab>
+                        <uib-tab index="1">
+                            <uib-tab-heading>
+                                <span class="small-visible-xs" translate>PROFILE.NOTIFICATIONS.TITLE</span>
+                            </uib-tab-heading>
+                            <div class="clear10"></div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <em translate>PROFILE.NOTIFICATIONS.PARAGRAPH</em> <span class="small" translate>PROFILE.NOTIFICATIONS.PARAGRAPH_1</span>
+                                </div>
+                                <div class="clear10"></div>
+                                <div class="row" ng-hide="user.privateInfo.preferences.city_notification.length == 0" style="margin-top:-10px">
+                                    <div class="fb-messenger-checkbox" origin="{{origin}}" page_id="{{page_id}}" messenger_app_id="{{app_id}}" user_ref="{{user_ref}}" prechecked="true" allow_login="true" size="large"></div>
+                                </div>
+                                <div class="row">
+                                    <div translate>PROFILE.NOTIFICATIONS.CITY_OF_INTEREST.TITLE</div>
+                                    <div class="pull-left small">
+                                        <i class="fa fa-alert"></i> <em translate>PROFILE.NOTIFICATIONS.CITY_OF_INTEREST.WARNING</em>
+                                    </div>
+                                    <div class="clear10"></div>
+                                    <div class="input-group pull-left" style="width:290px; margin-right:10px; margin-bottom:10px">
+                                        <span class="input-group-addon" style="background-color:white"><i class="fa fa-map-marker"></i></span>
+                                        <input ng-autocomplete type="text" ng-model="autocomplete" class="form-control pull-left" placeholder="City, suburb" options="{types:'(cities)'}" details="details" autocomplete="off" style="margin-right:20px" ng-keypress="addCityNotificationPreference($event)"
+                                        />
+                                        <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="addCityNotificationPreference()" translate>PROFILE.NOTIFICATIONS.CITY_OF_INTEREST.ADD</button></span>
+                                    </div>
+                                    <div ng-repeat="cities in user.privateInfo.preferences.city_notification" class="well well-sm profile-city-notification-preference" style="background-color:inherit;border-color:#3eaae8">
+                                        <strong>&nbsp;&nbsp;{{cities}}&nbsp;</strong><span class="fa fa-remove-circle" style="cursor:pointer;top:2px;left:2px;opacity:0.8" ng-click="removeCityNotificationPreference($event)"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.TITLE</div>
+                                    <div class="clear10"></div>
+                                    <div class="checkbox" style="bottom:10px">
+                                        <span uib-tooltip="Chose a city to receive notifications first" tooltip-placement="right" tooltip-enable="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification">
+                            <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.omnivorous_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/><span translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.OMNIVOROUS</span></label>
+                                        <label style="margin-right:20px"><input type="checkbox" ng-model="user.privateInfo.preferences.veggies_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"/><span translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.VEGETARIAN</span></label>
+                                        <label><input type="checkbox" ng-model="user.privateInfo.preferences.vegan_notification" ng-disabled="user.privateInfo.preferences.city_notification.length == 0 || !user.privateInfo.preferences.city_notification"><span translate>PROFILE.NOTIFICATIONS.DIATERY_PREFERENCES.VEGAN</span></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="clear10"></div>
+                            </div>
+                        </uib-tab>
+                        <uib-tab index="2">
+                            <uib-tab-heading>
+                                <span id="profileReviews" class="small-visible-xs" translate>PROFILE.REVIEWS.TITLE</span>
+                            </uib-tab-heading>
+                            <div class="clear20"></div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <span *ngIf="reviews.length == 0"><span translate>PROFILE.REVIEWS.PARAGRAPH_1</span> <a class="btn btn-primary btn-xs" ui-sref="create_meal" translate>PROFILE.REVIEWS.LINK_1</a> <span translate>PROFILE.REVIEWS.OR</span> 
+                                    <a class="btn btn-primary btn-xs" ui-sref="view_meals" translate>PROFILE.REVIEWS.LINK_2</a> <span translate>PROFILE.REVIEWS.PARAGRAPH_2</span>.</span>
+                                    <div *ngIf="reviews.length > 0">
+                                        <div class="panel panel-default" ng-repeat="review in reviews | orderBy:'-'">
+                                            <div class="panel-body">
+                                                <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
+                                                <div class="pull-left" style="padding-right:15px">
+                                                    <a ui-sref="profile({userId: review.fromUser.datas._id})">
+                                                        <img class="img-circle profilePic" src="{{review.fromUser.datas.picture}}" alt="User profile picture" />
+                                                        <div class="size-12 bold margintop15">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                                    </a>
+                                                </div>
+                                                <div style="padding-top:20px">
+                                                    <span class="fa" ng-class="{'fa-plus-sign text-success': review.forUser.rating == 'positive', 'fa-record text-default': review.forUser.rating == 'neutral', 'fa-minus-sign text-danger': review.forUser.rating == 'negative'}"
+                                                        style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span>
+                                                    <span *ngIf="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span><span *ngIf="!review.forUser.comment">&nbsp;<em translate="PROFILE.REVIEWS.NO_COMMENT" translate-values="{ review_fromUser_datas_first_name: '{{review.fromUser.datas.first_name}}', review_forUser_rating: '{{review.forUser.rating}}', user_first_name: '{{user.first_name}}' }"></em></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </fieldset>
+            </form>
+            <div ng-hide="activeForm == 2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" ng-click="updateUserForm.$setSubmitted(); actualizeUser(user._id,user._etag); confirmOptIn()" translate>PROFILE.ACTUALIZE.ACTION</button>
+                </div>
+                <div class="row">
+                    <div class="form-group fade-out-success" *ngIf="updateUserForm.$submitted" *ngIf="actualized != null">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="alert alert-dismissible" ng-class="{'alert-success': actualized == true, 'alert-danger': (actualized == false || actualized == 'error')}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span *ngIf="actualized == true" class="fade-out-success" translate>PROFILE.ACTUALIZE.MESSAGE_SUCCESS</span>
+                                <span *ngIf="actualized == false" class="fade-out-success"><span translate>PROFILE.ACTUALIZE.MESSAGE_ERROR</span> <a href="mailto:dimitri.kohn@centrale-marseille.fr?subject=myCommuneaty: error Actualizing profile">Dimitri</a></span>
+                                <span *ngIf="actualized == 'error'" class="fade-out-success" translate>PROFILE.ACTUALIZE.MESSAGE_ERROR_CELLPHONE_EMAIL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="$parent.user._id != user._id">
+        <div class="panel panel-default panel-profile-user">
+            <div class="panel-body">
+                <img src="{{user.picture}}" style="border-radius:10px;" class="pull-left inline-block-sm-md-lg profilePicProfile" alt="User profile picture" />
+                <div style="position:relative; left:10px;" class="inline-block-sm-md-lg">
+                    <div id="profile-full-name-other-user">
+                        <strong class="text-info size-16">{{user.first_name}} {{user.last_name}}</strong>
+                    </div>
+                    <div class="d-none d-sm-block" style="padding-top:10px">
+                        <span *ngIf="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i>  {{user.gender | capitalizeFirstLetter}}</br></span>
+                        <span *ngIf="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span></br>
+                        </span>
+                        <span *ngIf="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{user.country_of_origin.name}}'}"></span></br>
+                        </span>
+                        <span *ngIf="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
+                        </span>
+                        <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank" translate>PROFILE.PUBLIC_PROFILE</a></br><span class="hidden-sm hidden-md hidden-lg"></br></span>
+                        <em translate="PROFILE.MEMBERSHIP" translate-values="{ member_since: '{{user._created | date:'MM/yyyy'}}'}"></em>
+                    </div>
+                </div>
+                <div id="profile-list-information-other-user" class="hidden-sm hidden-md hidden-lg" style="padding-top:10px">
+                    <span *ngIf="user.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{user.gender | capitalizeFirstLetter}}</br></span>
+                    <span *ngIf="user.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{user.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span></br>
+                    </span>
+                    <span *ngIf="user.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i> <span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{user.country_of_origin.name}}'}"></span></br>
+                    </span>
+                    <span *ngIf="user.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span></br>
+                    </span>
+                    <i class="fa fa-facebook" style="width:14px;height:14px"></i> <a href="{{user.link}}" target="_blank" translate>PROFILE.PUBLIC_PROFILE</a></br>
+                    </span>
+                    <em translate="PROFILE.MEMBERSHIP" translate-values="{ member_since: '{{user._created | date:'MM/yyyy'}}'}"></em>
+                </div>
+                <div class="d-none d-sm-block pull-right text-justify inline-block-sm-md-lg" style="max-width:490px; padding: 42px 15px 0px 20px;" *ngIf="user.presentation">
+                    "<em>{{user.presentation}}</em>"
+                </div>
+            </div>
+            <div class="panel-footer hidden-sm hidden-md hidden-lg text-justify" *ngIf="user.presentation">"<em>{{user.presentation}}</em>"</div>
+        </div>
+        <uib-tabset active="active">
+            <uib-tab index="0">
+                <uib-tab-heading>
+                    <span class="small-visible-xs" translate>PROFILE.REVIEWS.TITLE</span>
+                </uib-tab-heading>
+                <div class="clear10"></div>
+                <div *ngIf="reviews.length > 0" style="position:relative">
+                    <div class="well well-sm well-resume-rating">
+                        <table style="text-align:center">
+                            <tbody>
+                                <tr>
+                                    <td><span class="fa fa-plus-sign text-success"></span></td>
+                                    <td style="padding:0px 8px"><span class="fa fa-record text-default"></span></td>
+                                    <td><span class="fa fa-minus-sign text-danger"></span></td>
+                                </tr>
+                                <tr style="font-size:11px">
+                                    <td>{{user.reviews.positive}}</td>
+                                    <td style="padding:0px 8px">{{user.reviews.neutral}}</td>
+                                    <td>{{user.reviews.negative}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel panel-default" ng-repeat="review in reviews | orderBy:'-'">
+                        <div class="panel-body">
+                            <div class="pull-right small"><em>{{getDateFromObjectId(review._id) | date:'dd MMMM yyyy'}}</em></div>
+                            <div class="pull-left" style="padding-right:15px">
+                                <a ui-sref="profile({userId: review.fromUser.datas._id})">
+                                    <img class="img-circle profilePic" src="{{review.fromUser.datas.picture}}" alt="User profile picture" />
+                                    <div class="size-12 bold margintop15">{{review.fromUser.datas.first_name}} {{review.fromUser.datas.last_name | limitTo:1}}</div>
+                                </a>
+                            </div>
+                            <div style="padding-top:20px">
+                                <span class="fa" ng-class="{'fa-plus-sign text-success': review.forUser.rating == 'positive', 'fa-record text-default': review.forUser.rating == 'neutral', 'fa-minus-sign text-danger': review.forUser.rating == 'negative'}"
+                                    style="vertical-align:text-top" uib-tooltip="{{capitalizeFirstLetter(review.forUser.rating)}}" tooltip-placement="top" style="cursor:pointer"></span> <span *ngIf="review.forUser.comment">&nbsp;"<em>{{review.forUser.comment}}</em>"</span>
+                                <span *ngIf="!review.forUser.comment">&nbsp;<em translate="PROFILE.REVIEWS.NO_COMMENT" translate-values="{ review_fromUser_datas_first_name: '{{review.fromUser.datas.first_name}}', review_forUser_rating: '{{review.forUser.rating}}', user_first_name: '{{user.first_name}}' }"></em></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="reviews.length == 0">
+                    <div translate="PROFILE.REVIEWS.NO_REVIEWS_YET" translate-values="{ user_first_name: '{{user.first_name}}'}"></div>
+                </div>
+            </uib-tab>
+            <uib-tab index="1">
+                <uib-tab-heading>
+                    <span class="small-visible-xs" translate>PROFILE.MEALS.TITLE</span>
+                </uib-tab-heading>
+                <div class="clear10"></div>
+                <div ui-view="mealsList"></div>
+            </uib-tab>
+        </uib-tabset>
+    </div>-->
+</div>

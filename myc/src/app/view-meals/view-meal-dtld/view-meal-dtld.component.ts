@@ -83,7 +83,6 @@ export class ViewMealDtldComponent implements OnInit {
   }
   
   onSubmit(){
-    console.log(this.createRequestRoleForm.get('requestRoleInput'))
     if (this.createRequestRoleForm.valid) {
       this.updateUser();
     } 
@@ -102,7 +101,6 @@ export class ViewMealDtldComponent implements OnInit {
     data = {"privateInfo.user_ref": this.user_ref, "privateInfo.cellphone": this.createRequestRoleForm.value.cellphone}//on ne met pas de if car de toute façon le téléphone est obligatoire
     this.afs.doc<User>(`users/${this.userId}`).update(data)
     .then(function(result){
-      console.log(result);
     })
     .catch(function(error) {
       console.error(error);

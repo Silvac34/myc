@@ -16,6 +16,7 @@ import { NgProgress } from '@ngx-progressbar/core';
 })
 
 export class AppComponent {
+  public userId: string;
   
   constructor(
     private translate: TranslateService,
@@ -23,7 +24,7 @@ export class AppComponent {
     public auth: AuthService,
     private fb: FacebookService,
     private modalService: NgbModal,
-    public progress: NgProgress
+    public progress: NgProgress,
     ) {
     let userLang = navigator.language;
     if(userLang === "fr") {
@@ -42,6 +43,11 @@ export class AppComponent {
             return;
         }
         window.scrollTo(0, 0)
+    });
+    this.auth.userMeta.subscribe(data => {
+      if(data){
+        this.userId = data.payload.id;
+      }
     });
   }
   

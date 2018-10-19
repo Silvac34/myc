@@ -330,7 +330,7 @@
 		"RECOMMENDATION": "We recommend you to complete your profile. Someone with a complete profile is more trustworthy than someone without.",
 		"ABOUT_ME": {
 			"TITLE": "About me",
-			"BIRTHDATE": "Birthdate:",
+			"BIRTHDATE": "Birthdate",
 			"GENDER": {
 				"NAME": "Gender",
 				"MALE": "Male",
@@ -457,10 +457,7 @@
 			"VEGETARIAN_MEAL": "Vegetarian meal",
 			"VEGAN_MEAL": "Vegan meal",
 			"HALAL_MEAL": "Halal meal",
-			"KOSHER_MEAL": "Kosher meal",
-			"HELP_COOKING": "Help cooking",
-			"HELP_CLEANING": "Help cleaning",
-			"SIMPLE_GUEST": "Simple guest"
+			"KOSHER_MEAL": "Kosher meal"
 		},
 		"PARTICIPANTS": {
 			"TITLE": "Participants",

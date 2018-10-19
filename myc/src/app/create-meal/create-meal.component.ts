@@ -237,6 +237,7 @@ export class CreateMealComponent {
     } 
     else {
       //si le form n'est pas valide, on marque tous les controls comme touched et donc les validations fonctionnent
+      console.log("pas valide");
       this.validateAllFormFields(this.createMealForm);
     }
   }
@@ -258,11 +259,11 @@ export class CreateMealComponent {
     };
     delete newMeal["cellphone"];
     this.afs.collection('meals').add(newMeal)
-    .then(function(docRef) {
+    .then(docRef => {
       //this.messengerCheckbox.confirmOptIn(this.app_id, this.page_id, this.userId, this.user_ref) //ne marche pas : pas de AppEvents dans window.FB
       this.router.navigate(['/my_meals/'+docRef.id]);
     })
-    .catch(function(error) {
+    .catch(error => {
       console.error(error);
     });
   }
@@ -271,10 +272,10 @@ export class CreateMealComponent {
     let data = {};
     data = {"privateInfo.user_ref": this.user_ref, "privateInfo.cellphone": this.createMealForm.value.cellphone}//on ne met pas de if car de toute façon le téléphone est obligatoire
     this.afs.doc<User>(`users/${this.userId}`).update(data)
-    .then(function(result){
+    .then(result => {
       console.log(result);
     })
-    .catch(function(error) {
+    .catch(error => {
       console.error(error);
     });
   }

@@ -9,7 +9,7 @@
             <button class="btn btn-outline-info dropdown-toggle btn-sm-xs" type="button" translate [translateParams]="{userName: user.first_name}" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">INDEX.HELLO</button>
             <div ngbDropdownMenu aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-right">
                 <a routerLink="/my_meals" class="dropdown-item" translate>INDEX.MY_MEALS</a>
-                <a routerLink="/profile" class="dropdown-item" translate>INDEX.PROFILE</a>
+                <a [routerLink]="['/profile', userId]" class="dropdown-item" translate>INDEX.PROFILE</a>{{user.id}}
                 <div class="dropdown-divider"></div>
                 <a routerLink="/create_meal" class="dropdown-item" translate>INDEX.MANAGE_REQUESTS</a>
                 <a routerLink="/create_meal" class="dropdown-item" translate>INDEX.LEAVE_REVIEWS</a>

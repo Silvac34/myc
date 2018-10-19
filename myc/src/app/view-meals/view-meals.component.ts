@@ -106,9 +106,9 @@ export class ViewMealsComponent implements OnInit {
       if(result.length === 0) { 
         this.getOldMeals(now);
       }
-      else {
+      /*else {
         this.getMeals(now);
-      }
+      }*/
     })
   }
 
@@ -135,6 +135,7 @@ export class ViewMealsComponent implements OnInit {
           data.users[i]["detail"] = results ;
         });
         //on définit le prix à afficher par repas
+        data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
         if (data.users[i].role === "cooks") {
           data["mealPrice"] = data.detailedInfo.requiredGuests.cooks.price;
         }
@@ -145,9 +146,8 @@ export class ViewMealsComponent implements OnInit {
           data["mealPrice"] = data.detailedInfo.requiredGuests.simpleGuests.price;
         }
         else  {
-          data["mealPrice"] = data.detailedInfo.requiredGuests.hosts.price;
+          data["mealPrice"] = data.detailedInfo.requiredGuests.hosts ? data.detailedInfo.requiredGuests.hosts.price : data["priceUnit"];
         }
-        data["priceUnit"] = Math.ceil(10 * data.price / data.nbGuests) / 10;
       }
       
       const id = a.payload.doc.id;

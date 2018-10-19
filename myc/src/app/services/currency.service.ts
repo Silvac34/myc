@@ -20,7 +20,7 @@ export class CurrencyService { //on prend un code_pays en entrée et on obtient 
     getCurrencyFromLatLng(latlng: string){
         return this.gMap.ReverseGeocoding(latlng).map((data) => {
           let country_code = "";
-          for (var i = 0; i < data.results[0].address_components.length; i++) {
+          for (let i = 0; i < data.results[0].address_components.length; i++) {
             if (data.results[0].address_components[i].types[0] == "country") {
               country_code = data.results[0].address_components[i].short_name;
               return this.getCurrencyFromCountryCode(country_code);

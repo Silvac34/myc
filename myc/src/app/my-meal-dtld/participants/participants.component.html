@@ -5,22 +5,22 @@
                 <h5 translate>VIEW_MEALS_DTLD.PARTICIPANTS.HOST</h5>
             </ng-container>
             <ng-container *ngIf="role === 'cook'">
-                <h5 class="d-inline" translate>WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME</h5>
+                <h5 class="d-inline" translate>CREATE_A_MEAL.FORM.HELP_COOKING.NAME</h5>
                 <span class="small" *ngIf="datasUser.role === role || datasUser.role === 'admin'">({{meal.detailedInfo.requiredGuests.cooks.price | currencySymbol:meal.currency_symbol}})</span>
             </ng-container>
             <ng-container *ngIf="role === 'cleaner'">
-                <h5 class="d-inline" translate>WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME</h5>
+                <h5 class="d-inline" translate>CREATE_A_MEAL.FORM.HELP_CLEANING.NAME</h5>
                 <span class="small" *ngIf="datasUser.role === role || datasUser.role === 'admin'">({{meal.detailedInfo.requiredGuests.cleaners.price | currencySymbol:meal.currency_symbol}})</span>
             </ng-container>
             <ng-container *ngIf="role === 'simpleGuest'">
-                <h5 class="d-inline" translate>WELCOME.DIFFERENT_ROLES.SIMPLEGUEST.NAME</h5>
+                <h5 class="d-inline" translate>CREATE_A_MEAL.FORM.SIMPLE_GUEST.NAME</h5>
                 <span class="small" *ngIf="datasUser.role === role || datasUser.role === 'admin'">({{meal.detailedInfo.requiredGuests.simpleGuests.price | currencySymbol:meal.currency_symbol}})</span>
             </ng-container>
         </div>
         <div class="media mt-1" *ngFor="let participant of meal.users">
-            <img class="mr-2 rounded border profilePicMealDtld pointer" *ngIf="participant.role === role" routerLink="['profile',participant.id]" src="{{participant.detail?.picture}}" alt="" onerror="this.src='/assets/images/view_meals/unknown_user.png'">
+            <img class="mr-2 rounded border profilePicMealDtld pointer" *ngIf="participant.role === role" [routerLink]="['/profile', participant.id]" src="{{participant.detail?.picture}}" alt="" onerror="this.src='/assets/images/view_meals/unknown_user.png'">
             <div class="media-body align-self-center" *ngIf="participant.role === role">
-                <h6 class="mx-0 pointer" routerLink="['profile',participant.id]" [ngClass]="{'text-warning': participant.status === 'pending'}">{{participant.detail?.first_name}} {{participant.detail?.last_name}}</h6>
+                <h6 class="mx-0 pointer" [routerLink]="['/profile',participant.id]" [ngClass]="{'text-warning': participant.status === 'pending'}">{{participant.detail?.first_name}} {{participant.detail?.last_name}}</h6>
                 <p class="mb-0" *ngIf="participant.detail?.privateInfo.cellphone && meal.date > now && participant.status !== 'pending'">{{participant.detail?.privateInfo.cellphone}}</p>
             </div>
         </div>

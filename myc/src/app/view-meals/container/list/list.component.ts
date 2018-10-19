@@ -23,7 +23,8 @@ export class ListComponent implements OnInit {
   }
   
   openModalDtld(meal) {
-    if(this.ms.datasUserForEachMeal(meal, this.userId).status === "accepted") {
+    console.log(this.ms.datasUserForEachMeal(meal, this.userId));
+    if(this.ms.datasUserForEachMeal(meal, this.userId).status === "accepted" || (this.ms.datasUserForEachMeal(meal, this.userId).status === "old" && this.router.url === "/my_meals")) {
       this.router.navigate(["/my_meals/"+meal.id]);
     }
     else{

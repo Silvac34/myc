@@ -41,3 +41,10 @@ exports.createMeal = functions.firestore
     //rajouter le modèle de donner à updater avec set
     return snap.ref.set(meal, {"merge": true});
   });
+  
+exports.Unsubscribe = functions.https.onCall((data, context) => {
+  //rajouter la fonction qui permet de se désinscrire d'un repas --> transformer ce qu'il y a dans my-meal-dtld/modal/delete a une fonction ici
+  console.log(data);
+  console.log(context);
+  //functions.firestore.document('meals/{'+data.mealId+'}').on
+});

@@ -1,0 +1,8 @@
+@import '~app/app.component.scss';
+
+@media (max-width: 576px) {
+    .small-xs {
+        font-size: 80%;
+        font-weight: 400;
+    }
+}

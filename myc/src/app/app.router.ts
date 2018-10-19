@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { GetMealService } from './services/get-meal.service';
+import { GetUserService } from './services/get-user.service';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -28,7 +29,7 @@ export const router: Routes = [
     { path: 'view_meals', component: ViewMealsComponent },
     { path: 'my_meals', component: MyMealsComponent, canActivate: [AuthGuardService] },
     { path: 'my_meals/:id', component: MyMealDtldComponent, canActivate: [AuthGuardService], resolve: {meal: GetMealService} },
-    { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService] },
+    { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService], resolve: {user: GetUserService} },
     { path: 'footer_more_contact', component: ContactComponent },
     { path: 'footer_information_team', component: TeamComponent },
     { path: 'footer_information_concept', component: ConceptComponent },

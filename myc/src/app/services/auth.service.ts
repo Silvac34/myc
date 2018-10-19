@@ -40,6 +40,15 @@ export class AuthService {
         });
     }
 
+  isLoggedIn() {
+    if (this.userId) {
+      return true;
+    } 
+    else {
+      return false;
+    }
+  }
+  
   facebookLogin() {
     const provider = new firebase.auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
@@ -65,31 +74,38 @@ export class AuthService {
       email: user.profile.email
     };
     let data: Object = {};
+    let userLang = navigator.language;
+    if(userLang === "fr") {
+      userLang = "fr-FR"
+    };
+    if(userLang === "en") {
+      userLang = "en-US"
+    };
     if(provider == "facebook.com") {
       data = {
         first_name: user.profile.first_name,
         last_name: user.profile.last_name,
-        gender: user.profile.gender,
         facebook_id: user.profile.id,
         google_id: null,
-        link: user.profile.link,
-        last_connexion_from: user.profile.locale,
-        picture: user.profile.picture.data.url,
+        last_connexion_from: userLang,
+        picture: "https://graph.facebook.com/" + user.profile.id + "/picture?width=200&height=200",
         privateInfo: privateInfoInput
       };
+      user.profile.gender ? data["gender"] = user.profile.gender : data["gender"] = null;
+      user.profile.link ? data["link"] = user.profile.link : data["link"] = null;
     }
     else if(provider == "google.com") {
       data = {
         first_name: user.profile.family_name,
         last_name: user.profile.given_name,
-        gender: user.profile.gender,
         facebook_id: null,
         google_id: user.profile.id,
-        link: user.profile.link,
-        last_connexion_from: user.profile.locale,
+        last_connexion_from: userLang,
         picture: user.profile.picture,
         privateInfo: privateInfoInput
       };
+      user.profile.gender ? data["gender"] = user.profile.gender : data["gender"] = null;
+      user.profile.link ? data["link"] = user.profile.link : data["link"] = null;
     }
     if(user.isNewUser === false) {
       return userRef.update(data);

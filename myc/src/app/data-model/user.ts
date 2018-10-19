@@ -10,6 +10,8 @@ export class User {
   "privateInfo": privateInfoInput;
   "reviews": reviews;
   "birthdate": Date;
+  "spoken_languages": Array<String>;
+  "presentation": String;
 }
 
 export class privateInfoInput {

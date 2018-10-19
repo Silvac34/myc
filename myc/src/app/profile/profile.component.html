@@ -42,7 +42,7 @@
                             <div class="form-row mt-2">
                                 <div class="col-auto">
                                     <div class="input-group pointer mb-3">
-                                        <input type="text" class="form-control" name="dated" [minDate]="minDate" ngbDatepicker #d="ngbDatepicker" popup-placement="bottom-left" formControlName="birthdate" (click)="d.toggle()" placeholder="{{'PROFILE.ABOUT_ME.BIRTHDATE'|translate}}"/>
+                                        <input type="text" class="form-control" name="dated" [minDate]="minDate" [maxDate]="maxDate" [startDate]="startDate" ngbDatepicker #d="ngbDatepicker" popup-placement="bottom-left" formControlName="birthdate" (click)="d.toggle()" placeholder="{{'PROFILE.ABOUT_ME.BIRTHDATE'|translate}}"/>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-light" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                         </div>
@@ -53,7 +53,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupGender"><i class="fa fa-venus-mars"></i></label>
                                 </div>
-                                <select class="custom-select" id="inputGroupGender" formControlName="gender"><option value="" disabled translate>PROFILE.ABOUT_ME.GENDER.NAME</option><option value="male" translate>PROFILE.ABOUT_ME.GENDER.MALE</option><option value="female" translate>PROFILE.ABOUT_ME.GENDER.FEMALE</option></select>
+                                <select class="custom-select" id="inputGroupGender" formControlName="gender"><option value="null" disabled translate>PROFILE.ABOUT_ME.GENDER.NAME</option><option value="male" translate>PROFILE.ABOUT_ME.GENDER.MALE</option><option value="female" translate>PROFILE.ABOUT_ME.GENDER.FEMALE</option></select>
                             </div>
                             
                             <div class="input-group mb-3">
@@ -72,12 +72,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-globe"></i></span>
                                 </div>
-                                <input type="text" formControlName="country_of_origin" placeholder="{{'PROFILE.ABOUT_ME.COUNTRY_OF_ORIGIN'|translate}}" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)" (click)="click$.next($event.target.value)" #instance="ngbTypeahead" class="form-control">
+                                <input type="text" formControlName="country_of_origin" placeholder="{{'PROFILE.ABOUT_ME.COUNTRY_OF_ORIGIN'|translate}}" [ngbTypeahead]="search" class="form-control">
                             </div>
-                            <button type="submit">Show form</button>
+                            <div class="input-group mb-3">
+                                <textarea type="text" class="form-control" formControlName="presentation" placeholder="{{'PROFILE.ABOUT_ME.PRESENTATION'|translate}}"></textarea>
+                            </div>                            
+                            <button type="submit" class="btn btn-primary mb-3" translate>PROFILE.ACTUALIZE.ACTION</button>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab>
+                    <!--<ngb-tab>
                         <ng-template ngbTabTitle>
                             <span class="small-xs" translate>PROFILE.NOTIFICATIONS.TITLE</span>
                         </ng-template>
@@ -92,7 +95,7 @@
                         <ng-template ngbTabContent>
                             <div>hello</div>
                         </ng-template>
-                    </ngb-tab>
+                    </ngb-tab>-->
                 </ngb-tabset>
             </form>
         </div>

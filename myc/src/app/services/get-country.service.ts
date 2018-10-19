@@ -14,9 +14,8 @@ export class GetCountryService {
     if (term === '') {
       return of([]);
     }
-   this.country_json.map((data: Array<Object>) => data.map(newdata => newdata["name"]).filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).subscribe(res=>console.log(res));
     return this.http.get('../../assets/countries/country_list.json')
       .map((data: Array<Object>) => data.map(newdata => newdata["name"])
-      .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1))
+      .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
   }
 }

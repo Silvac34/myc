@@ -48,3 +48,9 @@ exports.Unsubscribe = functions.https.onCall((data, context) => {
   console.log(context);
   //functions.firestore.document('meals/{'+data.mealId+'}').on
 });
+
+exports.subscribeMeal = functions.firestore
+  .document('meals/{mealId}')
+  .onCreate((snap, context) => {
+    
+  });

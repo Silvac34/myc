@@ -1,0 +1,383 @@
+<div class="container-fluid">
+    <div class="row fade-out-success" ng-hide="successSubscribedMessage==false">
+        <div class="col-xs-12">
+            <div class="alert alert-dismissible alert-success text-justify">
+                <button type="button" class="close" data-dismiss="alert" ng-click="successSubscribedMessage = !successSubscribedMessage ">&times;</button>
+                <span ng-if="fromState.name != 'create_meal'"><strong translate>VIEW_MY_MEALS_DTLD.MESSAGE.WELL_DONE</strong> <span translate>VIEW_MY_MEALS_DTLD.MESSAGE.SUBSCRIBED</span></span>
+                <span ng-if="fromState.name == 'create_meal'"><strong translate>VIEW_MY_MEALS_DTLD.MESSAGE.WELL_DONE</strong> <span translate>VIEW_MY_MEALS_DTLD.MESSAGE.PUBLISHED</span><span ng-if="!$parent.$root.user.birthdate && !$parent.$root.user.country_of_origin && !$parent.$root.user.presentation && !$parent.$root.user.spoken_languages"><br><span translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_1</span>                <strong><span translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_2</span> <a ui-sref="profile({userId:$parent.$root.user._id})" translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_3</a></strong> <span translate>VIEW_MY_MEALS_DTLD.MESSAGE.INCOMPLETE_PROFILE_4</span></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row fade-out-success" ng-if="userRole=='admin'" ng-hide="pendingRequest==false">
+        <div class="col-xs-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.TITLE</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="participant in meal.users" ng-if="participant.status == 'pending'">
+                            <div class="my-meal-dtld-list-pending-user">
+                                <div>
+                                    <strong translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.REQUESTED_ROLE</strong> <span ng-if="participant.role[0] == 'cook'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_COOKING</span><span ng-if="participant.role[0]== 'cleaner'"
+                                        translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_CLEANING</span><span ng-if="participant.role[0]== 'simpleGuest'" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SIMPLE_GUEST</span>
+                                    <span class="pull-right">
+                                    <a class="btn btn-success btn-xs" ng-click="validateSubscription(participant._id)" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.ACTION_BUTTON.ACCEPT</a>
+                                    <a class="btn btn-danger btn-xs" ng-click="refuseSubscription(participant._id)" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.ACTION_BUTTON.REFUSE</a>
+                                    </span>
+                                </div>
+                                <div class="clear10"></div>
+                                <div style="position:relative">
+                                    <a ui-sref="profile({userId:participant._id})"><img ng-src="https://graph.facebook.com/{{participant.facebook_id}}/picture?width=100&height=100" style="border-radius:10px;width:100px; height:100px; margin-bottom:5px" class="pull-left" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /></a>
+                                    <div style="position:relative; left:10px;">
+                                        <a ui-sref="profile({userId:participant._id})">
+                                            <div>
+                                                <strong class="text-info">{{participant.first_name}} {{participant.last_name}}</strong>
+                                            </div>
+                                        </a>
+                                        <div style="padding-top:4px">
+                                            <span ng-if="participant.gender"><i class="fa fa-venus-mars" style="width:14px;height:14px"></i> {{participant.gender | capitalizeFirstLetter}}</br></span>
+                                            <span ng-if="participant.birthdate"><i class="fa fa-birthday-cake" style="width:14px;height:14px"></i> {{participant.birthdate | ageFilter}} <span translate>PROFILE.YEARS_OLD</span></br>
+                                            </span>
+                                            <span ng-if="participant.country_of_origin"><i class="fa fa-globe" style="width:14px;height:14px"></i><span translate="PROFILE.COUNTRY_OF_ORIGIN" translate-values="{ country_of_origin_name: '{{participant.country_of_origin.name}}'}"></span></br>
+                                            </span>
+                                            <span ng-if="participant.spoken_languages"><i class="fa fa-comments-o" style="width:14px;height:14px"></i> <span ng-repeat="spoken_language in user.spoken_languages">{{spoken_language}} </span>
+                                        </div>
+                                        <span class="hidden-sm hidden-md hidden-lg" ng-if="!participant.reviews"></br></span>
+                                        <div>
+                                            <div class="well well-sm well-resume-rating" ng-if="participant.reviews.positive || participant.reviews.neutral || participant.reviews.negative">
+                                                <table style="text-align:center">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td ng-if="participant.reviews.positive" style="padding-right:4px"><span class="glyphicon glyphicon-plus-sign text-success"></span></td>
+                                                            <td ng-if="participant.reviews.neutral" style="padding:0px 4px"><span class="glyphicon glyphicon-record text-default"></span></td>
+                                                            <td ng-if="participant.reviews.negative" style="padding-left:4px"><span class="glyphicon glyphicon-minus-sign text-danger"></span></td>
+                                                        </tr>
+                                                        <tr style="font-size:11px">
+                                                            <td ng-if="participant.reviews.positive" style="padding-right:4px">{{participant.reviews.positive}}</td>
+                                                            <td ng-if="participant.reviews.neutral" style="padding:0px 4px">{{participant.reviews.neutral}}</td>
+                                                            <td ng-if="participant.reviews.negative" style="padding-left:4px">{{participant.reviews.negative}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a ui-sref="profile({userId: participant._id})" class="italic underline" translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SEE_REVIEWS</a>
+                                            </div>
+                                        </div>
+                                        <div class="clear5 hidden-xs"></div>
+                                        <div class="pull-right-sm-md-lg pull-left-xs" style="max-width:490px;padding-right:10px; padding:0px 10px 10px 0px;" ng-if="participant.request_message">
+                                            "<em>{{participant.request_message}}</em>"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="clear10"></div>
+    <div class="row">
+        <div class="col-xs-12 text-center meal-dtld-menu text-info">
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-button" ng-click="openModalDelete()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> <span translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.DELETE</span></button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-button my-meal-dtld-edit marginright10" ng-click="openModalEdit()" ng-if="userRole=='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-edit"></span></strong> <span translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.EDIT</span></button>
+            <button class="btn btn-xs btn-danger pull-right my-meal-dtld-button" ng-click="openModalUnsubscribe()" ng-if="userRole!='admin' && isOldMeal() != true"><strong><span class="glyphicon glyphicon-remove-sign"></span></strong> <span translate>VIEW_MY_MEALS_DTLD.ACTION_BUTTON.UNSUBSCRIBE</span></button>
+            <strong style="font-size:large">{{meal.menu.title}}</strong>
+        </div>
+    </div>
+    <div class="clear20"></div>
+    <div class="col-xs-12 pull-left" ng-class="{'col-sm-7':userRole!='admin'}">
+        <div class="row text-justify" ng-if="meal.menu.description">
+            "<em>{{meal.menu.description}}</em>"
+            <div class="clear10"></div>
+        </div>
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title" translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.TITLE</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-if="isOldMeal() == false">
+                        <i class="fa fa-share"></i> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.INVITE_FRIENDS</span>
+                        <div class="fb-send" data-href="{{data_href}}"></div>
+                    </div>
+                    <div class="meal-info-label">
+                        <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.INSCRIBED_AS</span>
+                        <strong class="text-success" ng-if="userRole=='cook'"> " <span translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_COOKING</span> "</strong>
+                        <strong class="text-success" ng-if="userRole=='cleaner'"> " <span translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.HELP_CLEANING</span> "</strong>
+                        <strong class="text-success" ng-if="userRole=='simpleGuest'"> " <span translate>VIEW_MY_MEALS_DTLD.PENDING_REQUEST.SIMPLE_GUEST</span> "</strong>
+                    </div>
+                    <div class="meal-info-label" ng-if="userRole=='admin'">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.TOTAL_GROCERIES</span> <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong>
+                    </div>
+                    <div class="meal-info-label" ng-if="userRole=='admin'">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.TOTAL_PAYBACK</span></br>
+                        <span style="padding-left:30px;"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_MEAL_FULL</span> <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{Meal.currency_symbol}} </span>{{meal.pricePaybackIfFull}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                        </br>
+                        <span style="padding-left:30px;"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_CURRENT</span> <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.currentPricePayback}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                    </div>
+                    <div class="meal-info-label">
+                        <span class="glyphicon glyphicon-piggy-bank"></span>
+                        <span ng-if="userRole=='admin'"><span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_MEAL</span> <strong class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.hosts.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span></strong></span>
+                        <strong ng-if="userRole=='cook'" class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> </strong>
+                        <strong ng-if="userRole=='cleaner'" class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> </strong>
+                        <strong ng-if="userRole=='simpleGuest'" class="text-success"><span ng-show="meal.currency_symbol != '€'">{{meal.currency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}<span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> </strong>
+                        <span ng-if="userRole!='admin'" translate="VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.PRICE_LEFT_TO_PAY" translate-values="{ meal_admin_first_name: '{{meal.admin.first_name}}', meal_admin_last_name: '{{meal.admin.last_name}}'}"></span>
+                    </div>
+                    <div class="meal-info-label" ng-if="userRole=='admin'">
+                        <img src="/static/sources/multiple-users-silhouette.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.SUBSCRIPTION_RECAPITULATORY</span> <strong>{{meal.nbGuests - meal.nbRemainingPlaces}}/{{meal.nbGuests}}</strong>
+                    </div>
+                    <div class="meal-info-label" ng-if="meal.veggies == true">
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.VEGETARIAN_MEAL</span>
+                    </div>
+                    <div class="meal-info-label" ng-if="meal.vegan == true">
+                        <img ng-src="/static/sources/vegetarian.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.VEGAN_MEAL</span>
+                    </div>
+                    <div class="meal-info-label" ng-if="meal.halal == true">
+                        <img ng-src="/static/sources/viewMeals/halal-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.HALAL_MEAL</span>
+                    </div>
+                    <div class="meal-info-label" ng-if="meal.kosher == true">
+                        <img ng-src="/static/sources/viewMeals/kosher-sign.png" style="width:14px; height:14px"> <span translate>VIEW_MY_MEALS_DTLD.MEAL_INFORMATIONS.KOSHER_MEAL</span>
+                    </div>
+                    <div class="meal-info-label">
+                        <span class="glyphicon glyphicon-calendar"></span> {{meal.time |date:'EEEE dd MMMM'}}
+                    </div>
+                    <div class="meal-info-label">
+                        <span ng-show="(userRole=='cook' || userRole=='admin') && meal.detailedInfo.requiredGuests.cooks.timeCooking "><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'" translate>WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME</span>                        {{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}
+                        <span ng-if="userRole=='admin'"></br></span></span>
+                        <span ng-show="(userRole=='cleaner' || userRole=='admin') && meal.detailedInfo.requiredGuests.cleaners.timeCleaning"><span class="glyphicon glyphicon-time"></span>&nbsp;<span ng-if="userRole=='admin'" translate>WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME</span>                        {{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}
+                        <span ng-if="userRole=='admin'"></br></span></span>
+                        <span ng-show="userRole=='simpleGuest' || (userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests) || ((userRole=='admin' ||userRole=='cleaner') && !meal.detailedInfo.requiredGuests.cleaners.timeCleaning) || ((userRole=='admin' || userRole=='cook') && !meal.detailedInfo.requiredGuests.cooks.timeCooking)"><span class="glyphicon glyphicon-time"></span>
+                        <span ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests" translate>WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME</span> {{meal.time |date:'HH:mm'}}</span>
+                    </div>
+                    <div class="meal-info-label">
+                        <span class="glyphicon glyphicon-map-marker"></span> <span>{{meal.privateInfo.address.name}}</span><span class="hidden-sm hidden-md hidden-lg" ng-if="meal.privateInfo.address.complement"></br><span style="padding-left:18px">{{meal.privateInfo.address.complement}}</span></span>
+                        <span class="hidden-xs" style="margin-left:-3px">, {{meal.address.town}}, {{meal.address.country}}</span><span class="hidden-sm hidden-md hidden-lg"></br><span style="padding-left:18px">{{meal.address.town}}, {{meal.address.country}}</span></span>
+                        <span ng-if="meal.privateInfo.address.complement"><span class="hidden-xs"> - {{meal.privateInfo.address.complement}}</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="userRole!='admin'">
+            <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}" class="hidden-sm hidden-md hidden-lg">
+                <ng-map id="map" center="{{meal.privateInfo.address.lat}},{{meal.privateInfo.address.lng}}" zoom="14" max style="display: block" class="my-meal-dtld-map-height" styles="[{'featureType':'landscape','stylers':[{'hue':'#FFBB00'},{'saturation':43.400000000000006},{'lightness':37.599999999999994},{'gamma':1}]},{'featureType':'road.highway','stylers':[{'hue':'#FFC200'},{'saturation':-61.8},{'lightness':45.599999999999994},{'gamma':1}]},{'featureType':'road.arterial','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':51.19999999999999},{'gamma':1}]},{'featureType':'road.local','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':52},{'gamma':1}]},{'featureType':'water','stylers':[{'hue':'#0078FF'},{'saturation':-13.200000000000003},{'lightness':2.4000000000000057},{'gamma':1}]},{'featureType':'poi','stylers':[{'hue':'#00FF6A'},{'saturation':-1.0989010989011234},{'lightness':11.200000000000017},{'gamma':1}]}]">
+                    <marker position="{{meal.privateInfo.address.lat}},{{meal.privateInfo.address.lng}}" id="{{meal._id}}"></marker>
+                </ng-map>
+            </div>
+            <div class="clear10"></div>
+        </div>
+    </div>
+    <div class="col-sm-5 hidden-xs" ng-if="userRole!='admin'">
+        <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}">
+            <ng-map id="map" center="{{meal.privateInfo.address.lat}},{{meal.privateInfo.address.lng}}" zoom="14" max style="display: block" class="my-meal-dtld-map-height" styles="[{'featureType':'landscape','stylers':[{'hue':'#FFBB00'},{'saturation':43.400000000000006},{'lightness':37.599999999999994},{'gamma':1}]},{'featureType':'road.highway','stylers':[{'hue':'#FFC200'},{'saturation':-61.8},{'lightness':45.599999999999994},{'gamma':1}]},{'featureType':'road.arterial','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':51.19999999999999},{'gamma':1}]},{'featureType':'road.local','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':52},{'gamma':1}]},{'featureType':'water','stylers':[{'hue':'#0078FF'},{'saturation':-13.200000000000003},{'lightness':2.4000000000000057},{'gamma':1}]},{'featureType':'poi','stylers':[{'hue':'#00FF6A'},{'saturation':-1.0989010989011234},{'lightness':11.200000000000017},{'gamma':1}]}]">
+                <marker position="{{meal.privateInfo.address.lat}},{{meal.privateInfo.address.lng}}" id="{{meal._id}}"></marker>
+            </ng-map>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 my-meal-dtld-participant bold" translate>CREATE_A_MEAL.FORM.PARTICIPANTS</div>
+    </div>
+    <div class="clear10"></div>
+    <div class="row">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='admin', 'my-meal-dtld-panel-info': userRole!='admin'}">
+            <div class="panel-body">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="text-primary size-20"><span translate>VIEW_MEALS_DTLD.PARTICIPANTS.HOST</span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin'"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.hosts.price}}
+                            <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'admin'">
+                        <div style="padding-top:10px">
+                            <div class="pull-left">
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="https://graph.facebook.com/{{participant.facebook_id}}/picture" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
+                            </div>
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true" class="italic" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.TITLE" translate-values="{ participant_first_name: '{{participant.first_name}}'}" ></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.POSITIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEUTRAL'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true"
+                                    ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEGATIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.PLACEHOLDER'|translate:participant}}" ng-hide="checkAlreadyReviewed(participant._id) == true">
+                                <span ng-show="checkAlreadyReviewed(participant._id) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.GRADE_FIRST'|translate:participant}}"
+                                    tooltip-placement="top" tooltip-enable="!getDataForReview(participant._id, 'rating')" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.SEND</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.cooks">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cook'}">
+            <div class="panel-body">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="text-primary size-20"><span translate>WELCOME.DIFFERENT_ROLES.HELP_COOKING.NAME</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cooks.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cooks.price}}
+                            <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> <span translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PER_PERS</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4" ng-if="isOldMeal() != true">
+                    <div class="row">
+                        <span class="glyphicon glyphicon-time"></span> {{meal.detailedInfo.requiredGuests.cooks.timeCooking |date:'HH:mm'}}
+                    </div>
+                    <div class="row" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.REMAINING_PLACES" translate-values="{ nb_remaining_places: '{{meal.detailedInfo.requiredGuests.cooks.nbRemainingPlaces}}'}"></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'cook'">
+                        <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
+                            <div class="pull-left">
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="https://graph.facebook.com/{{participant.facebook_id}}/picture" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
+                            </div>
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true" class="italic" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.TITLE" translate-values="{ participant_first_name: '{{participant.first_name}}'}" ></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.POSITIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEUTRAL'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true"
+                                    ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEGATIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.PLACEHOLDER'|translate:participant}}" ng-hide="checkAlreadyReviewed(participant._id) == true">
+                                <span ng-show="checkAlreadyReviewed(participant._id) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.GRADE_FIRST'|translate:participant}}"
+                                    tooltip-placement="top" tooltip-enable="!getDataForReview(participant._id, 'rating')" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.SEND</a>
+                                </span>
+                            </div>
+                        </div>
+                        <div ng-if="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PENDING_REQUEST</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.cleaners">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='cleaner'}">
+            <div class="panel-body">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="text-primary size-20"><span translate>WELCOME.DIFFERENT_ROLES.HELP_CLEANING.NAME</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.cleaners.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.cleaners.price}}
+                            <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> <span translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PER_PERS</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4" ng-if="isOldMeal() != true">
+                    <div class="row">
+                        <span class="glyphicon glyphicon-time"></span> <span ng-if="meal.detailedInfo.requiredGuests.cleaners.timeCleaning">{{meal.detailedInfo.requiredGuests.cleaners.timeCleaning |date:'HH:mm'}}</span><span ng-if="!meal.detailedInfo.requiredGuests.cleaners.timeCleaning">{{meal.time |date:'HH:mm'}}</span>
+                    </div>
+                    <div class="row" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.REMAINING_PLACES" translate-values="{ nb_remaining_places: '{{meal.detailedInfo.requiredGuests.cleaners.nbRemainingPlaces}}'}"></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'cleaner' && participant.status == 'accepted'">
+                        <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
+                            <div class="pull-left">
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="https://graph.facebook.com/{{participant.facebook_id}}/picture" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
+                            </div>
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true" class="italic" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.TITLE" translate-values="{ participant_first_name: '{{participant.first_name}}'}" ></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.POSITIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEUTRAL'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true"
+                                    ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEGATIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.PLACEHOLDER'|translate:participant}}" ng-hide="checkAlreadyReviewed(participant._id) == true">
+                                <span
+                                    ng-show="checkAlreadyReviewed(participant._id) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                    <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.GRADE_FIRST'|translate:participant}}"
+                                        tooltip-placement="top" tooltip-enable="!getDataForReview(participant._id, 'rating')" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.SEND</a>
+                                    </span>
+                            </div>
+                        </div>
+                        <div ng-if="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PENDING_REQUEST</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="meal.detailedInfo.requiredGuests.simpleGuests">
+        <div class="panel panel-default my-meal-dtld-panel" ng-class="{'my-meal-dtld-panel-success': userRole=='simpleGuest'}">
+            <div class="panel-body">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="text-primary size-20"><span translate>WELCOME.DIFFERENT_ROLES.SIMPLE_GUEST.NAME</span><span class="hidden-sm hidden-md hidden-lg"></br></span><span class="my-meal-dtld-price" style="font-size:14px" ng-if="userRole=='admin' && meal.detailedInfo.requiredGuests.simpleGuests.price != undefined"><span ng-show="meal.currency_symbol != '€'">{{meal.cuRrency_symbol}} </span>{{meal.detailedInfo.requiredGuests.simpleGuests.price}}
+                            <span ng-hide="meal.currency_symbol != '€'"> {{meal.currency_symbol}}</span> <span translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PER_PERS</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4" ng-if="isOldMeal() != true">
+                    <div class="row">
+                        <span class="glyphicon glyphicon-time"></span> {{meal.time |date:'HH:mm'}}
+                    </div>
+                    <div class="row" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.REMAINING_PLACES" translate-values="{ nb_remaining_places: '{{meal.detailedInfo.requiredGuests.simpleGuests.nbRemainingPlaces}}'}"></div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row" ng-repeat="participant in meal.users" ng-if="participant.role[0] == 'simpleGuest' && participant.status == 'accepted'">
+                        <div ng-if="participant.status == 'accepted'" style="padding-top:10px">
+                            <div class="pull-left">
+                                <a ui-sref="profile({userId: participant._id})"><img class="img-circle my-meal-dtld-profilePic" ng-src="https://graph.facebook.com/{{participant.facebook_id}}/picture" alt="User profile picture" onerror="this.src='/static/sources/viewMyMealDtld/unknown_user.png'" /><span class="my-meal-dtld-guestList" style="padding-right:5px" ng-class="{'my-meal-dtld-guestList-old': isOldMeal() == true}">{{participant.first_name}} {{participant.last_name}}</a>
+                                <span ng-if="participant.privateInfo.cellphone && isOldMeal() == false"><span class="hidden-xs my-meal-dtld-cellphone-position">- {{participant.privateInfo.cellphone}}</span>
+                                <span class="hidden-sm hidden-md hidden-lg my-meal-dtld-cellphone-position"></br>{{participant.privateInfo.cellphone}}</span>
+                                </span>
+                                </span>
+                            </div>
+                            <div class="pull-right" ng-if="isOldMeal()==true && user._id != participant._id" ng-class="{'margintop7': checkAlreadyReviewed(participant._id) == true}">
+                                <span class="form-group">
+                                <span style="padding-right:10px" ng-hide="checkAlreadyReviewed(participant._id) == true" class="italic" translate="VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.TITLE" translate-values="{ participant_first_name: '{{participant.first_name}}'}" ></span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'positive' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-plus-sign text-success" ng-click="sendReview(participant._id, participant.role, 'rating', 'positive')"  ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'positive' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.POSITIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span ng-hide="getDataForReview(participant._id, 'rating') != 'neutral' && checkAlreadyReviewed(participant._id) == true"><span class="glyphicon glyphicon-record text-default" ng-click="sendReview(participant._id, participant.role, 'rating', 'neutral')" ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'neutral' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEUTRAL'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>&nbsp;&nbsp;</span>
+                                <span class="glyphicon glyphicon-minus-sign text-danger" ng-click="sendReview(participant._id, participant.role, 'rating', 'negative')" ng-hide="getDataForReview(participant._id, 'rating') != 'negative' && checkAlreadyReviewed(participant._id) == true"
+                                    ng-class="{'size-18': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) != true, 'my-meal-dtld-glyphicon-position': getDataForReview(participant._id, 'rating') == 'negative' && checkAlreadyReviewed(participant._id) == true}"
+                                    uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.NEGATIVE'|translate}}" tooltip-placement="top" style="cursor:pointer"></span>
+                                <input type="text" ng-model="participant.comment" class="form-control my-meal-dtld-input-review" placeholder="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.PLACEHOLDER'|translate:participant}}" ng-hide="checkAlreadyReviewed(participant._id) == true">
+                                <span
+                                    ng-show="checkAlreadyReviewed(participant._id) == true" class="my-meal-dtld-text-review">"<em>{{getDataForReview(participant._id, 'comment')}}</em>"</span>
+                                    <a ng-click="sendReview(participant._id, participant.role, 'comment', participant.comment)" ng-hide="checkAlreadyReviewed(participant._id) == true" class="btn btn-default" ng-disabled="!getDataForReview(participant._id, 'rating')" uib-tooltip="{{'VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.GRADE_FIRST'|translate:participant}}"
+                                        tooltip-placement="top" tooltip-enable="!getDataForReview(participant._id, 'rating')" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.LEAVE_REVIEWS.SEND</a>
+                                    </span>
+                            </div>
+                        </div>
+                        <div ng-if="participant.status == 'pending'"><img class="img-circle my-meal-dtld-profilePic" ng-src="/static/sources/viewMyMealDtld/unknown_user.png" /><span class="text-muted my-meal-dtld-guestList" translate>VIEW_MY_MEALS_DTLD.PARTICIPANTS.PENDING_REQUEST</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="fb-comments" data-href="{{data_href}}" data-width="100%" data-numposts="5"></div>
+        </div>
+    </div>
+    <div class="row my-meal-btn-center">
+        <a ui-sref="my_meals" class="btn btn-primary" translate>VIEW_MY_MEALS_DTLD.BACK_TO_MY_MEALS</a>
+    </div>
+</div>

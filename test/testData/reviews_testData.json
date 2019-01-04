@@ -1,0 +1,45 @@
+[{
+    "_id": {
+        "$oid": "592e1cc33187971a43701a44"
+    },
+    "forUser": {
+        "comment": "Mec sympa",
+        "rating": "positive",
+        "_id": {
+            "$oid": "577946eb4403f92b93425e6a"
+        },
+        "role": "admin"
+    },
+    "mealAssociated": {
+        "$oid": "58f4183e3187971673aa4cb4"
+    },
+    "fromUser": {
+        "_id": {
+            "$oid": "5776d0824403f974b97caf89"
+        },
+        "role": "cleaner"
+    },
+    "unique": "577946eb4403f92b93425e6a5776d0824403f974b97caf8958f4183e3187971673aa4cb4"
+}, {
+    "_id": {
+        "$oid": "592e1d0d3187971a43701a45"
+    },
+    "forUser": {
+        "comment": "je l'aime plus",
+        "rating": "negative",
+        "_id": {
+            "$oid": "577946eb4403f92b93425e6a"
+        },
+        "role": "admin"
+    },
+    "mealAssociated": {
+        "$oid": "58f4183e3187971673aa4cb4"
+    },
+    "fromUser": {
+        "_id": {
+            "$oid": "111111111111111111111112"
+        },
+        "role": "cleaner"
+    },
+    "unique": "577946eb4403f92b93425e6a11111111111111111111111258f4183e3187971673aa4cb4"
+}]

@@ -1,0 +1,85 @@
+[{
+    "_id": {
+        "$oid": "111111111111111111111111"
+    },
+    "privateInfo": {
+        "email": "jennifer_pqiuuez_testosuser@tfbnw.net",
+        "cellphone": "0601020304",
+        "user_ref": "a9759552920598"
+    },
+    "picture": {
+        "data": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.0-1/c118.328.304.304/s50x50/13876126_103197600128021_307111277992761230_n.jpg?oh=334ce0ee3ef6001a6c984fb21531d364&oe=58568A30",
+            "is_silhouette": false
+        }
+    },
+    "first_name": "Jennifer",
+    "last_name": "TestosUser",
+    "gender": "female",
+    "facebook_id": "103194673461647",
+    "link": "https://www.facebook.com/app_scoped_user_id/103194673461647/"
+}, {
+    "_id": {
+        "$oid": "111111111111111111111112"
+    },
+    "privateInfo": {
+        "email": "dorothy_wdwyhuo_testuser@tfbnw.net",
+        "cellphone": "042685687",
+        "user_ref": "a9759552920599"
+    },
+    "picture": {
+        "data": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.0-1/c8.0.50.50/p50x50/14203198_138331519950308_2376614838371002464_n.jpg?oh=466312d02a6f5cd78bbe664e7831e17d&oe=58487B54",
+            "is_silhouette": false
+        }
+    },
+    "first_name": "Dorothy",
+    "last_name": "TestUser",
+    "gender": "female",
+    "facebook_id": "114780772305383",
+    "link": "https://www.facebook.com/app_scoped_user_id/114780772305383/"
+}, {
+    "_id": {
+        "$oid": "5776d0824403f974b97caf89"
+    },
+    "privateInfo": {
+        "email": "maillet.kevin91@gmail.com",
+        "cellphone": "0123456789",
+        "user_ref": "a9759552920595"
+    },
+    "picture": {
+        "data": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12932942_10153478145582267_4139960179322221986_n.jpg?oh=c9e7b5856401d3dc61641aaf02dfb422&oe=5812FF92",
+            "is_silhouette": false
+        }
+    },
+    "first_name": "Kevin",
+    "last_name": "Marteau",
+    "gender": "male",
+    "facebook_id": "10153280539797267",
+    "link": "https://www.facebook.com/app_scoped_user_id/10153280539797267/"
+}, {
+    "_id": {
+        "$oid": "577946eb4403f92b93425e6a"
+    },
+    "privateInfo": {
+        "email": "dimitri.kohn@centrale-marseille.fr",
+        "cellphone": "0669686766",
+        "user_ref": "a9759552920594"
+    },
+    "picture": {
+        "data": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13332901_10154321873833395_6680161709234031030_n.jpg?oh=e3da9fafdddf30f7abf36775f09a1f5c&oe=58149DA0",
+            "is_silhouette": false
+        }
+    },
+    "first_name": "Dimitri",
+    "last_name": "Odyssound",
+    "gender": "male",
+    "facebook_id": "10153917348848395",
+    "link": "https://www.facebook.com/app_scoped_user_id/10153917348848395/",
+    "reviews": {
+        "positive": 1,
+        "negative": 1
+    }
+}]
